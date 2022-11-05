@@ -203,7 +203,7 @@
                             >
                         </li>
                         <li class="submenu-item">
-                            <a href="#"
+                            <a href="/log-roster"
                                 >Log Roster</a
                             >
                         </li>

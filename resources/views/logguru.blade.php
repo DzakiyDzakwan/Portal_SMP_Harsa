@@ -8,7 +8,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>History Log Siswa</h3>
+            <h3>History Log Guru</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav
@@ -20,7 +20,7 @@
                         <a href="/">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item Aktif" aria-current="page">
-                        Log-Siswa
+                        Log-Guru
                     </li>
                 </ol>
             </nav>
@@ -34,20 +34,20 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>NISN</th>
-                        <th>Kelas</th>
+                        <th>NIP</th>
+                        <th>Status Perkawinan</th>
                         <th>Tanggal Masuk</th>
                         <th>Created at</th>
                         <th>Updated at</th>
-                        <th>Status Keaktifan</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
                         <td>211402018</td>
-                        <td>Graiden</td>
-                        <td>6/7/2020</td>
+                        <td>Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -57,8 +57,8 @@
                     <tr>
                         <td>2</td>
                         <td>211402018</td>
-                        <td>Dale</td>
-                        <td>6/7/2020</td>
+                        <td>Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -68,8 +68,8 @@
                     <tr>
                         <td>3</td>
                         <td>211402018</td>
-                        <td>Nathaniel</td>
-                        <td>6/7/2020</td>
+                        <td>Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -79,8 +79,8 @@
                     <tr>
                         <td>4</td>
                         <td>211402018</td>
-                        <td>Darius</td>
-                        <td>6/7/2020</td>
+                        <td>Belum Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -90,8 +90,8 @@
                     <tr>
                         <td>5</td>
                         <td>211402018</td>
-                        <td>Oleg</td>
-                        <td>6/7/2020</td>
+                        <td>Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -101,8 +101,8 @@
                     <tr>
                         <td>6</td>
                         <td>211402018</td>
-                        <td>Kermit</td>
-                        <td>6/7/2020</td>
+                        <td>Belum Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -112,8 +112,8 @@
                     <tr>
                         <td>7</td>
                         <td>211402018</td>
-                        <td>Jermaine</td>
-                        <td>6/7/2020</td>
+                        <td>Belum Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -123,8 +123,8 @@
                     <tr>
                         <td>8</td>
                         <td>211402018</td>
-                        <td>Ferdinand</td>
-                        <td>6/7/2020</td>
+                        <td>Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -134,8 +134,8 @@
                     <tr>
                         <td>9</td>
                         <td>211402018</td>
-                        <td>Kuame</td>
-                        <td>6/7/2020</td>
+                        <td>Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -145,8 +145,8 @@
                     <tr>
                         <td>10</td>
                         <td>211402018</td>
-                        <td>Deacon</td>
-                        <td>6/7/2020</td>
+                        <td>Belum Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -156,8 +156,8 @@
                     <tr>
                         <td>11</td>
                         <td>211402018</td>
-                        <td>Channing</td>
-                        <td>6/7/2020</td>
+                        <td>Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -167,8 +167,8 @@
                     <tr>
                         <td>12</td>
                         <td>211402018</td>
-                        <td>Aladdin</td>
-                        <td>6/7/2020</td>
+                        <td>Belum Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -178,8 +178,8 @@
                     <tr>
                         <td>13</td>
                         <td>211402018</td>
-                        <td>Cruz</td>
-                        <td>6/7/2020</td>
+                        <td>Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -189,8 +189,8 @@
                     <tr>
                         <td>14</td>
                         <td>211402018</td>
-                        <td>Keegan</td>
-                        <td>6/7/2020</td>
+                        <td>Kawin</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
@@ -199,9 +199,9 @@
                     </tr>
                     <tr>
                         <td>15</td>
-                        <td>211402018</td>
+                        <td>Belum Kawin</td>
                         <td>Ray</td>
-                        <td>6/7/2020</td>
+                        <td>20/8/2010</td>
                         <td>10/10/2022</td>
                         <td>05/11/2022</td>
                         <td>
