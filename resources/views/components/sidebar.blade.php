@@ -123,19 +123,19 @@
                 </li>
 
                 {{-- Kelas --}}
-                <li class="sidebar-item has-sub">
+                <li class="sidebar-item has-sub @if($pages === 'manajemenKelas') active  @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Manajemen Kelas</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                            <a href="#"
+                            <a href="/mapel"
                                 >Mata Pelajaran</a
                             >
                         </li>
                         <li class="submenu-item">
-                            <a href="#"
+                            <a href="/roster"
                                 >Roster Pelajaran</a
                             >
                         </li>
