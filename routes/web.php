@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\ManajemenKelasController;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,12 @@ Route::get('/users',[UserController::class,'index'])->name('users');
 
 //Dashboard/Mapel
 Route::get('/mapel',[ManajemenKelasController::class,'mapel'])->name('mapel');
+
+//Dashboard/Siswa
+Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
+
+//Dashboard/Guru
+Route::get('/guru', [GuruController::class,'index'])->name('guru');
 
 //Dashboard/Log-Users
 Route::get('/log-users',[LogController::class,'user'])->name('log-user');
