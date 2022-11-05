@@ -25,6 +25,9 @@ Route::get('/users',[UserController::class,'index'])->name('users');
 //Dashboard/Log-Users
 Route::get('/log-users',[LogController::class,'user'])->name('log-user');
 
+//Dashboard/Log-Siswa
+Route::get('/log-siswa',[LogController::class,'siswa'])->name('log-siswa');
+
 Route::get('/test', function () {
     return view('test');
 });

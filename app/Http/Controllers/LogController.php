@@ -14,4 +14,11 @@ class LogController extends Controller
         ]);
     }
 
+    public function siswa() {
+        $pages = 'history';
+        return  view('logsiswa', [
+            'pages' => $pages,
+        ]);
+    }
+
 }
