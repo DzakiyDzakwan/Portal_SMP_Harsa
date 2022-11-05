@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\ManajemenKelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,9 @@ Route::get('/', [DashboardController::class,'index'])->name('home');
 
 //Dashboard/User
 Route::get('/users',[UserController::class,'index'])->name('users');
+
+//Dashboard/Mapel
+Route::get('/mapel',[ManajemenKelasController::class,'mapel'])->name('mapel');
 
 //Dashboard/Log-Users
 Route::get('/log-users',[LogController::class,'user'])->name('log-user');
