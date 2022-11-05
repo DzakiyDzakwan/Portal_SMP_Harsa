@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,12 @@ Route::get('/', [DashboardController::class,'index'])->name('home');
 
 //Dashboard/User
 Route::get('/users',[UserController::class,'index'])->name('users');
+
+//Dashboard/Siswa
+Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
+
+//Dashboard/Guru
+Route::get('/guru', [GuruController::class,'index'])->name('guru');
 
 //Dashboard/Log-Users
 Route::get('/log-users',[LogController::class,'user'])->name('log-user');
