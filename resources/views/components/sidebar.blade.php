@@ -101,10 +101,10 @@
                 <li class="sidebar-title">Sekolah</li>
 
                 {{-- User --}}
-                <li class="sidebar-item has-sub @if($pages === 'users') active  @endif">
+                <li class="sidebar-item has-sub @if($pages === 'user') active  @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-people-fill"></i>
-                        <span>User</span>
+                        <span>Manajemen User</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
@@ -126,7 +126,7 @@
                 <li class="sidebar-item has-sub">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-grid-1x2-fill"></i>
-                        <span>Kelas</span>
+                        <span>Manajemen Kelas</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
@@ -147,72 +147,58 @@
                 <li class="sidebar-item has-sub">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-hexagon-fill"></i>
-                        <span>Form Elements</span>
+                        <span>Manajemen Berkas</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
                             <a href="form-element-input.html"
-                                >Input</a
+                                >Jenis Berkas</a
                             >
                         </li>
                         <li class="submenu-item">
-                            <a href="form-element-input-group.html"
-                                >Input Group</a
+                            <a href="form-element-input.html"
+                                >Berkas Masuk</a
                             >
                         </li>
                         <li class="submenu-item">
-                            <a href="form-element-select.html"
-                                >Select</a
-                            >
-                        </li>
-                        <li class="submenu-item">
-                            <a href="form-element-radio.html"
-                                >Radio</a
-                            >
-                        </li>
-                        <li class="submenu-item">
-                            <a href="form-element-checkbox.html"
-                                >Checkbox</a
-                            >
-                        </li>
-                        <li class="submenu-item">
-                            <a href="form-element-textarea.html"
-                                >Textarea</a
+                            <a href="form-element-input.html"
+                                >Berkas Keluar</a
                             >
                         </li>
                     </ul>
                 </li>
 
+                {{-- Log History --}}
                 <li class="sidebar-title">History</li>
 
-                <li class="sidebar-item has-sub">
+                <li class="sidebar-item has-sub @if($pages == 'history') active @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-clock-history"></i>
-                        <span>Log</span>
+                        <span>History Log</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                            <a href="#"
+                            <a href="/log-users"
                                 >Log User</a
                             >
                         </li>
                         <li class="submenu-item">
-                            <a href="#"
+                            <a href="/log-siswa"
                                 >Log Siswa</a
                             >
                         </li>
                         <li class="submenu-item">
-                            <a href="#"
+                            <a href="/log-guru"
                                 >Log Guru</a
                             >
                         </li>
                         <li class="submenu-item">
-                            <a href="#"
+                            <a href="/log-kelas"
                                 >Log Kelas</a
                             >
                         </li>
                         <li class="submenu-item">
-                            <a href="#"
+                            <a href="/log-mapel"
                                 >Log Mata-Pelajaran</a
                             >
                         </li>
