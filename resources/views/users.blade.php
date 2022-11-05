@@ -1,4 +1,4 @@
-@extends('master.main');
+@extends('master.main')
 
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
@@ -8,22 +8,22 @@
 @section('content')
 <div class="row">
     <div class="col-12 col-md-6 order-md-1 order-last">
-      <h3>Data Users</h3>
+        <h3>Data Users</h3>
     </div>
     <div class="col-12 col-md-6 order-md-2 order-first">
-      <nav
-        aria-label="breadcrumb"
-        class="breadcrumb-header float-start float-lg-end"
-      >
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="index.html">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Users
-          </li>
-        </ol>
-      </nav>
+        <nav
+            aria-label="breadcrumb"
+            class="breadcrumb-header float-start float-lg-end"
+        >
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Users
+                </li>
+            </ol>
+        </nav>
     </div>
 </div>
 <div class="row">
@@ -35,8 +35,12 @@
                         class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
                     >
                         <div class="stats-icon purple mb-2">
-                            <a href="" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Add User">
+                            <a
+                                href=""
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title="Add User"
+                            >
                                 <i class="iconly-boldAdd-User"></i>
                             </a>
                         </div>
