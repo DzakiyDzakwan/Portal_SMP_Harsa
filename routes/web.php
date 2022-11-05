@@ -25,6 +25,18 @@ Route::get('/users',[UserController::class,'index'])->name('users');
 //Dashboard/Log-Users
 Route::get('/log-users',[LogController::class,'user'])->name('log-user');
 
+//Dashboard/Log-Siswa
+Route::get('/log-siswa',[LogController::class,'siswa'])->name('log-siswa');
+
+//Dashboard/Log-Guru
+Route::get('/log-guru',[LogController::class,'guru'])->name('log-guru');
+
+//Dashboard/Log-Kelas
+Route::get('/log-kelas',[LogController::class,'kelas'])->name('log-kelas');
+
+//Dashboard/Log-Mapel
+Route::get('/log-mapel',[LogController::class,'mapel'])->name('log-mapel');
+
 Route::get('/test', function () {
     return view('test');
 });
