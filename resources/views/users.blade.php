@@ -35,14 +35,10 @@
                         class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
                     >
                         <div class="stats-icon purple mb-2">
-                            <a
-                                href=""
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Add User"
-                            >
-                                <i class="iconly-boldAdd-User"></i>
-                            </a>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Users">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
@@ -61,7 +57,9 @@
                         class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
                     >
                         <div class="stats-icon green mb-2">
-                            <i class="iconly-boldUser"></i>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="User Aktif">
+                                <i class="bi bi-people-fill"></i>
+                            </div>                            
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
@@ -80,7 +78,9 @@
                         class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
                     >
                         <div class="stats-icon red mb-2">
-                            <i class="iconly-boldUser"></i>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="User Inaktif">
+                                <i class="bi bi-people-fill"></i>
+                            </div>   
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
@@ -93,255 +93,285 @@
     </div>
 </div>
 <div class="card">
-    <div class="card-header">Simple Datatable</div>
+    <div class="card-header">
+        <div class="form-group">
+
+            {{-- Button Tambah User --}}
+            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                data-bs-target="#inlineForm">
+                <i class="bi bi-plus-circle"></i> Tambah Admin 
+            </button>
+
+        </div>
+    </div>
     <div class="card-body">
-        <table class="table table-striped" id="table1">
+        <table class="table table-bordered" id="table1">
             <thead>
                 <tr>
+                    <th>username</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Jenis Kelamin</th>
                     <th>Phone</th>
-                    <th>City</th>
+                    <th>Alamat</th>
+                    <th>Agama</th>
+                    <th>Test</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Graiden</td>
-                    <td>vehicula.aliquet@semconsequat.co.uk</td>
-                    <td>076 4820 8838</td>
-                    <td>Offenburg</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Dale</td>
-                    <td>fringilla.euismod.enim@quam.ca</td>
-                    <td>0500 527693</td>
-                    <td>New Quay</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nathaniel</td>
-                    <td>mi.Duis@diam.edu</td>
-                    <td>(012165) 76278</td>
-                    <td>Grumo Appula</td>
-                    <td>
-                        <span class="badge bg-danger">Inactive</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Darius</td>
-                    <td>velit@nec.com</td>
-                    <td>0309 690 7871</td>
-                    <td>Ways</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Oleg</td>
-                    <td>rhoncus.id@Aliquamauctorvelit.net</td>
-                    <td>0500 441046</td>
-                    <td>Rossignol</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kermit</td>
-                    <td>diam.Sed.diam@anteVivamusnon.org</td>
-                    <td>(01653) 27844</td>
-                    <td>Patna</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Jermaine</td>
-                    <td>sodales@nuncsit.org</td>
-                    <td>0800 528324</td>
-                    <td>Mold</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Ferdinand</td>
-                    <td>gravida.molestie@tinciduntadipiscing.org</td>
-                    <td>(016977) 4107</td>
-                    <td>Marlborough</td>
-                    <td>
-                        <span class="badge bg-danger">Inactive</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kuame</td>
-                    <td>Quisque.purus@mauris.org</td>
-                    <td>(0151) 561 8896</td>
-                    <td>Tresigallo</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Deacon</td>
-                    <td>Duis.a.mi@sociisnatoquepenatibus.com</td>
-                    <td>07740 599321</td>
-                    <td>Karapınar</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Channing</td>
-                    <td>tempor.bibendum.Donec@ornarelectusante.ca</td>
-                    <td>0845 46 49</td>
-                    <td>Warrnambool</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Aladdin</td>
-                    <td>sem.ut@pellentesqueafacilisis.ca</td>
-                    <td>0800 1111</td>
-                    <td>Bothey</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cruz</td>
-                    <td>non@quisturpisvitae.ca</td>
-                    <td>07624 944915</td>
-                    <td>Shikarpur</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Keegan</td>
-                    <td>molestie.dapibus@condimentumDonecat.edu</td>
-                    <td>0800 200103</td>
-                    <td>Assen</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Ray</td>
-                    <td>placerat.eget@sagittislobortis.edu</td>
-                    <td>(0112) 896 6829</td>
-                    <td>Hofors</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Maxwell</td>
-                    <td>diam@dapibus.org</td>
-                    <td>0334 836 4028</td>
-                    <td>Thane</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Carter</td>
+                    <td>Carter12</td>
+                    <td>Carter Johnson</td>
                     <td>urna.justo.faucibus@orci.com</td>
+                    <td>Male</td>
                     <td>07079 826350</td>
+                    <td>Mangrove Street</td>
                     <td>Biez</td>
+                    <td>Test</td>
                     <td>
                         <span class="badge bg-success">Active</span>
                     </td>
-                </tr>
-                <tr>
-                    <td>Stone</td>
-                    <td>velit.Aliquam.nisl@sitametrisus.com</td>
-                    <td>0800 1111</td>
-                    <td>Olivar</td>
                     <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Berk</td>
-                    <td>fringilla.porttitor.vulputate@taciti.edu</td>
-                    <td>(0101) 043 2822</td>
-                    <td>Sanquhar</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Philip</td>
-                    <td>turpis@euenimEtiam.org</td>
-                    <td>0500 571108</td>
-                    <td>Okara</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kibo</td>
-                    <td>feugiat@urnajustofaucibus.co.uk</td>
-                    <td>07624 682306</td>
-                    <td>La Cisterna</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bruno</td>
-                    <td>elit.Etiam.laoreet@luctuslobortisClass.edu</td>
-                    <td>07624 869434</td>
-                    <td>Rocca d"Arce</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Leonard</td>
-                    <td>blandit.enim.consequat@mollislectuspede.net</td>
-                    <td>0800 1111</td>
-                    <td>Lobbes</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Hamilton</td>
-                    <td>mauris@diam.org</td>
-                    <td>0800 256 8788</td>
-                    <td>Sanzeno</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Harding</td>
-                    <td>Lorem.ipsum.dolor@etnetuset.com</td>
-                    <td>0800 1111</td>
-                    <td>Obaix</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Emmanuel</td>
-                    <td>eget.lacus.Mauris@feugiatSednec.org</td>
-                    <td>(016977) 8208</td>
-                    <td>Saint-Remy-Geest</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
+                        {{-- Update Button --}}
+                        <div class="modal-success me-1 mb-1 d-inline-block">
+                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                data-bs-target="#primary">
+                                <i class="bi bi-pencil"></i></a>
+                            </button>
+                        </div>
+                        {{-- Delete Button --}}
+                        <div class="modal-danger me-1 mb-1 d-inline-block">
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#danger">
+                                <i class="bi bi-trash"></i></a>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+
+<!--Modal Tambah User -->
+<div
+    class="modal fade text-left"
+    id="inlineForm"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel33"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h4 class="modal-title white" id="myModalLabel33">Tambah Admin</h4>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <form action="#">
+                <div class="modal-body">
+                    <label>Mata Pelajaran: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Mata Pelajaran"
+                            class="form-control"
+                        />
+                    </div>
+                    <label>Kelas: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Kelas"
+                            class="form-control"
+                        />
+                    </div>
+                    <label>Guru: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Guru"
+                            class="form-control"
+                        />
+                    </div>
+                    <label>Hari: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Hari"
+                            class="form-control"
+                        />
+                    </div>
+                    <label>Jam Masuk: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Jam Masuk"
+                            class="form-control"
+                        />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-light-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Tutup</span>
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-success ml-1"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Simpan</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Update --}}
+<div
+    class="modal fade text-left"
+    id="primary"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel130"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title white" id="myModalLabel130">
+                    Ubah Mata Pelajaran
+                </h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#">
+                    <div class="modal-body">
+                        <label>Mata Pelajaran: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Kelas: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Guru: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Hari: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Jam Masuk: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Jam Keluar: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-success ml-1"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Simpan</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Delete --}}
+<div
+    class="modal fade text-left"
+    id="danger"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel130"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title white" id="myModalLabel130">
+                    Hapus Mata Pelajaran
+                </h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">Apakah yakin menghapus data ini?</div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-danger ml-1"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Hapus</span>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
