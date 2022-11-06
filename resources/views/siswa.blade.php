@@ -183,7 +183,7 @@
     id="inlineForm"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="myModalLabel33"
+    aria-labelledby="myModalLabel130"
     aria-hidden="true"
 >
     <div
@@ -192,7 +192,9 @@
     >
         <div class="modal-content">
             <div class="modal-header bg-success">
-                <h4 class="modal-title white" id="myModalLabel33">Tambah Siswa</h4>
+                <h5 class="modal-title white" id="myModalLabel130">
+                    Tambah Siswa
+                </h5>
                 <button
                     type="button"
                     class="close"
@@ -202,68 +204,72 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form action="#">
-                <div class="modal-body">
-                    <label>Mata Pelajaran: </label>
-                    <div class="form-group">
-                        <input
-                            type="text"
-                            placeholder="Mata Pelajaran"
-                            class="form-control"
-                        />
+            <div class="modal-body">
+                <form action="#">
+                    <div class="modal-body">
+                        <label>Nama: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nama"/>
+                        </div>
+                        <label>Kelas: </label>
+                        <div class="form-group">
+                            <select class="choices form-select">
+                                <option value="7A">7-A</option>
+                                <option value="7B">7-B</option>
+                                <option value="8A">8-A</option>
+                                <option value="8B">8-B</option>
+                                <option value="9A">9-A</option>
+                                <option value="9B">9-C</option>
+                            </select>
+                        </div>
+                        <label>E-mail: </label>
+                        <small class="text-muted">eg.<i>someone@example.com</i></small>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="E-mail"/>
+                        </div>
+                        <label>Jenis Kelamin: </label>
+                        <div class="form-group">
+                            <select class="choices form-select">
+                                <option value="lk">Laki-laki</option>
+                                <option value="pr">Perempuan</option>
+                            </select>
+                        </div>
+                        <label>Phone: </label>
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="+62"/>
+                        </div>
+                        <label>Alamat: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Alamat"/>
+                        </div>
+                        <label>Agama: </label>
+                        <div class="form-group">
+                            <select class="choices form-select">
+                                <option value="is">Islam</option>
+                                <option value="krs">Kristen</option>
+                            </select>
+                        </div>
                     </div>
-                    <label>Kelas: </label>
-                    <div class="form-group">
-                        <input
-                            type="text"
-                            placeholder="Kelas"
-                            class="form-control"
-                        />
-                    </div>
-                    <label>Guru: </label>
-                    <div class="form-group">
-                        <input
-                            type="text"
-                            placeholder="Guru"
-                            class="form-control"
-                        />
-                    </div>
-                    <label>Hari: </label>
-                    <div class="form-group">
-                        <input
-                            type="text"
-                            placeholder="Hari"
-                            class="form-control"
-                        />
-                    </div>
-                    <label>Jam Masuk: </label>
-                    <div class="form-group">
-                        <input
-                            type="text"
-                            placeholder="Jam Masuk"
-                            class="form-control"
-                        />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-light-secondary"
-                        data-bs-dismiss="modal"
-                    >
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Tutup</span>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-success ml-1"
-                        data-bs-dismiss="modal"
-                    >
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Simpan</span>
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-success ml-1"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Simpan</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>
