@@ -17235,7 +17235,7 @@ body .bi:before {
 .sidebar-wrapper .sidebar-header {
     font-size: 2rem;
     font-weight: 700;
-    padding: 2rem 2rem 1rem;
+    padding: 1rem;
 }
 .sidebar-wrapper .sidebar-header img {
     height: 1.2rem;

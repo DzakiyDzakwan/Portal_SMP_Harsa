@@ -2,7 +2,7 @@
     <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
             <div
-                class="d-flex justify-content-between align-items-center"
+                class="d-flex flex-column align-items-center"
             >
                 <div class="logo">
                     <a href="index.html"
@@ -98,6 +98,47 @@
                     </a>
                 </li>
 
+                {{-- Administrasi --}}
+                <li class="sidebar-title">Administrasi</li>
+
+                <li class="sidebar-item has-sub">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-hexagon-fill"></i>
+                        <span>SPP</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="form-element-input.html"
+                                >SPP</a
+                            >
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item has-sub">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-hexagon-fill"></i>
+                        <span>Manajemen Laporan</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="#"
+                                >Jenis Laporan</a
+                            >
+                        </li>
+                        <li class="submenu-item">
+                            <a href="#"
+                                >Laporan Masuk</a
+                            >
+                        </li>
+                        <li class="submenu-item">
+                            <a href="#"
+                                >Laporan Keluar</a
+                            >
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="sidebar-title">Sekolah</li>
 
                 {{-- User --}}
@@ -118,6 +159,9 @@
                         </li>
                         <li class="submenu-item">
                             <a href="/alumni">Alumni</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/alumni">Prestasi</a>
                         </li>
                     </ul>
                 </li>
@@ -142,32 +186,6 @@
                         <li class="submenu-item">
                             <a href="/roster"
                                 >Roster Pelajaran</a
-                            >
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-title">Berkas</li>
-
-                <li class="sidebar-item has-sub">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-hexagon-fill"></i>
-                        <span>Manajemen Berkas</span>
-                    </a>
-                    <ul class="submenu">
-                        <li class="submenu-item">
-                            <a href="form-element-input.html"
-                                >Jenis Berkas</a
-                            >
-                        </li>
-                        <li class="submenu-item">
-                            <a href="form-element-input.html"
-                                >Berkas Masuk</a
-                            >
-                        </li>
-                        <li class="submenu-item">
-                            <a href="form-element-input.html"
-                                >Berkas Keluar</a
                             >
                         </li>
                     </ul>

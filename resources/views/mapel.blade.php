@@ -190,7 +190,7 @@
                         <td>
                             {{-- Preview Button --}}
                             <div class="modal-primary me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#primary">
                                     <i class="bi bi-eye"></i>
                                 </button>
@@ -256,7 +256,7 @@
                             </div>
                             {{-- Update Button --}}
                             <div class="modal-success me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#success">
                                     <i class="bi bi-pencil"></i></a>
                                 </button>
@@ -327,7 +327,7 @@
                             </div>
                             {{-- Delete Button --}}
                             <div class="modal-danger me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#danger">
                                     <i class="bi bi-trash"></i></a>
                                 </button>
@@ -373,7 +373,7 @@
                         <td>
                             {{-- Preview Button --}}
                             <div class="modal-primary me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#primary">
                                     <i class="bi bi-eye"></i>
                                 </button>
@@ -439,7 +439,7 @@
                             </div>
                             {{-- Update Button --}}
                             <div class="modal-success me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                     data-bs-target="#success">
                                     <i class="bi bi-pencil"></i></a>
                                 </button>
@@ -510,7 +510,7 @@
                             </div>
                             {{-- Delete Button --}}
                             <div class="modal-danger me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#danger">
                                     <i class="bi bi-trash"></i></a>
                                 </button>
