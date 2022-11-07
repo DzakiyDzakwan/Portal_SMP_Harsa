@@ -20,37 +20,38 @@ use App\Http\Controllers\SiswaController;
 */
 
 //Dashboard
-Route::get('/', [DashboardController::class, 'index'])->name('home');
-
-//Dashboard/User
-Route::get('/users', [UserController::class, 'index'])->name('users');
-
-//Dashboard/Mapel
-Route::get('/mapel', [ManajemenKelasController::class, 'mapel'])->name('mapel');
 
 //Dashboard/Kelas
 Route::get('/kelas', [ManajemenKelasController::class, 'kelas'])->name('kelas');
 
+Route::get('/', [DashboardController::class,'index'])->name('home');
+
+//Dashboard/User
+Route::get('/users',[UserController::class,'index'])->name('users');
+
+//Dashboard/Mapel
+Route::get('/mapel',[ManajemenKelasController::class,'mapel'])->name('mapel');
+
 //Dashboard/Siswa
-Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa');
+Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
 
 //Dashboard/Guru
-Route::get('/guru', [GuruController::class, 'index'])->name('guru');
+Route::get('/guru', [GuruController::class,'index'])->name('guru');
 
 //Dashboard/Log-Users
-Route::get('/log-users', [LogController::class, 'user'])->name('log-user');
+Route::get('/log-users',[LogController::class,'user'])->name('log-user');
 
 //Dashboard/Log-Siswa
-Route::get('/log-siswa', [LogController::class, 'siswa'])->name('log-siswa');
+Route::get('/log-siswa',[LogController::class,'siswa'])->name('log-siswa');
 
 //Dashboard/Log-Guru
-Route::get('/log-guru', [LogController::class, 'guru'])->name('log-guru');
+Route::get('/log-guru',[LogController::class,'guru'])->name('log-guru');
 
 //Dashboard/Log-Kelas
-Route::get('/log-kelas', [LogController::class, 'kelas'])->name('log-kelas');
+Route::get('/log-kelas',[LogController::class,'kelas'])->name('log-kelas');
 
 //Dashboard/Log-Mapel
-Route::get('/log-mapel', [LogController::class, 'mapel'])->name('log-mapel');
+Route::get('/log-mapel',[LogController::class,'mapel'])->name('log-mapel');
 
 Route::get('/test', function () {
     return view('test');
