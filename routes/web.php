@@ -20,6 +20,10 @@ use App\Http\Controllers\SiswaController;
 */
 
 //Dashboard
+
+//Dashboard/Kelas
+Route::get('/kelas', [ManajemenKelasController::class, 'kelas'])->name('kelas');
+
 Route::get('/', [DashboardController::class,'index'])->name('home');
 
 //Dashboard/User

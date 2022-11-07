@@ -130,6 +130,11 @@
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
+                            <a href="/kelas"
+                                >Kelas</a
+                            >
+                        </li>
+                        <li class="submenu-item">
                             <a href="/mapel"
                                 >Mata Pelajaran</a
                             >

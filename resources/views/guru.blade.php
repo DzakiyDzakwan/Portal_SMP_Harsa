@@ -189,7 +189,7 @@
     id="inlineForm"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="myModalLabel130"
+    aria-labelledby="myModalLabel33"
     aria-hidden="true"
 >
     <div
@@ -197,10 +197,8 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Tambah Guru
-                </h5>
+            <div class="modal-header bg-success">=
+                <h4 class="modal-title white" id="myModalLabel33">Tambah Guru</h4>
                 <button
                     type="button"
                     class="close"

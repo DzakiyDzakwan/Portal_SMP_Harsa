@@ -192,9 +192,7 @@
     >
         <div class="modal-content">
             <div class="modal-header bg-success">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Tambah Siswa
-                </h5>
+                <h4 class="modal-title white" id="myModalLabel33">Tambah Siswa</h4>
                 <button
                     type="button"
                     class="close"

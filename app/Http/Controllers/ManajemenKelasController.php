@@ -12,4 +12,12 @@ class ManajemenKelasController extends Controller
             'pages' => $pages,
         ]);
     }
+
+    public function kelas()
+    {
+        $pages = 'manajemenKelas';
+        return  view('kelas', [
+            'pages' => $pages,
+        ]);
+    }
 }
