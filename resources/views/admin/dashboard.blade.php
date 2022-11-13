@@ -1,4 +1,4 @@
-@extends('master.main')
+@extends('admin.main')
 
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/css/shared/iconly.css')}}">  

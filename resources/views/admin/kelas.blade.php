@@ -1,4 +1,4 @@
-@extends('master.main')
+@extends('admin.main')
 
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">

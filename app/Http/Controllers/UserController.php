@@ -8,7 +8,7 @@ class UserController extends Controller
 {
     public function index() {
         $pages = 'user';
-        return view('users', [
+        return view('admin.users', [
             'pages' => $pages
         ]);
     }

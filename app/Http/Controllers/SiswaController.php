@@ -14,7 +14,7 @@ class SiswaController extends Controller
     public function index()
     {
         $pages = 'user';
-        return view('siswa', [
+        return view('admin.siswa', [
             'pages' => $pages
         ]);
     }

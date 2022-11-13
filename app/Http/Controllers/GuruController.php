@@ -14,7 +14,7 @@ class GuruController extends Controller
     public function index()
     {
         $pages = 'user';
-        return view('guru',[
+        return view('admin.guru',[
             'pages' => $pages
         ]);
     }

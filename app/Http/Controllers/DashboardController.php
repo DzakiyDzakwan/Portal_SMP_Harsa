@@ -8,7 +8,14 @@ class DashboardController extends Controller
 {
     public function index() {
         $pages = 'dashboard';
-        return view('dashboard', [
+        return view('admin.dashboard', [
+            'pages'=>$pages
+        ]);
+    }
+
+    public function siswa() {
+        $pages = 'dashboardSiswa';
+        return view('siswa.dashboardSiswa', [
             'pages'=>$pages
         ]);
     }
