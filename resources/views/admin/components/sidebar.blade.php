@@ -101,18 +101,11 @@
                 {{-- Administrasi --}}
                 <li class="sidebar-title">Administrasi</li>
 
-                <li class="sidebar-item has-sub">
-                    <a href="#" class="sidebar-link">
+                <li class="sidebar-item @if($pages === 'spp') active @endif ">
+                    <a href="/spp" class="sidebar-link">
                         <i class="bi bi-hexagon-fill"></i>
-                        <span>SPP</span>
+                        <span>Manajemen SPP</span>
                     </a>
-                    <ul class="submenu">
-                        <li class="submenu-item">
-                            <a href="form-element-input.html"
-                                >SPP</a
-                            >
-                        </li>
-                    </ul>
                 </li>
 
                 <li class="sidebar-item has-sub">
@@ -157,11 +150,11 @@
                         <li class="submenu-item">
                             <a href="/siswa">Siswa</a>
                         </li>
-                        <li class="submenu-item">
+                        {{-- <li class="submenu-item">
                             <a href="/alumni">Alumni</a>
-                        </li>
+                        </li> --}}
                         <li class="submenu-item">
-                            <a href="/alumni">Prestasi</a>
+                            <a href="/prestasi">Prestasi</a>
                         </li>
                     </ul>
                 </li>

@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends('admin.master.main')
 
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
@@ -135,16 +135,16 @@
                     </td>
                     <td>
                         {{-- Update Button --}}
-                        <div class="modal-success me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                data-bs-target="#primary">
+                        <div class="modal-warning me-1 mb-1 d-inline-block">
+                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#update">
                                 <i class="bi bi-pencil"></i></a>
                             </button>
                         </div>
                         {{-- Delete Button --}}
                         <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#danger">
+                                data-bs-target="#delete">
                                 <i class="bi bi-trash"></i></a>
                             </button>
                         </div>
@@ -246,7 +246,7 @@
 {{-- Modal Update --}}
 <div
     class="modal fade text-left"
-    id="primary"
+    id="update"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -257,7 +257,7 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-success">
+            <div class="modal-header bg-warning">
                 <h5 class="modal-title white" id="myModalLabel130">
                     Ubah Mata Pelajaran
                 </h5>

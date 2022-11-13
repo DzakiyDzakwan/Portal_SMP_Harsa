@@ -15,7 +15,7 @@ class DashboardController extends Controller
 
     public function siswa() {
         $pages = 'dashboardSiswa';
-        return view('siswa.dashboardSiswa', [
+        return view('siswa.dashboard', [
             'pages'=>$pages
         ]);
     }
