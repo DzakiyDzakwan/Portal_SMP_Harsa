@@ -1,4 +1,4 @@
-@extends('master.main')
+@extends('admin.main')
 
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
     <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>Data Siswa</h3>
+        <h3>Data Guru</h3>
     </div>
     <div class="col-12 col-md-6 order-md-2 order-first">
         <nav
@@ -20,7 +20,7 @@
                     <a href="/">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    Siswa
+                    Guru
                 </li>
             </ol>
         </nav>
@@ -35,11 +35,13 @@
                         class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
                     >
                         <div class="stats-icon purple mb-2">
-                                <i class="iconly-boldAdd-User"></i>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Guru">
+                                <i class="bi bi-people-fill"></i>
+                            </div>   
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-muted font-semibold">Total Siswa</h6>
+                        <h6 class="text-muted font-semibold">Total Guru</h6>
                         <h6 class="font-extrabold mb-0">26</h6>
                     </div>
                 </div>
@@ -54,7 +56,9 @@
                         class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
                     >
                         <div class="stats-icon green mb-2">
-                            <i class="iconly-boldUser"></i>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Guru Aktif">
+                                <i class="bi bi-people-fill"></i>
+                            </div>   
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
@@ -73,7 +77,9 @@
                         class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
                     >
                         <div class="stats-icon red mb-2">
-                            <i class="iconly-boldUser"></i>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Guru Inaktif">
+                                <i class="bi bi-people-fill"></i>
+                            </div>   
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
@@ -91,7 +97,7 @@
             {{-- Button Tambah User --}}
             <button type="button" class="btn btn-success" data-bs-toggle="modal"
                 data-bs-target="#inlineForm">
-                <i class="bi bi-plus-circle"></i> Tambah Siswa 
+                <i class="bi bi-plus-circle"></i> Tambah Guru 
             </button>
         </div>
     </div>
@@ -177,13 +183,13 @@
     </div>
 </div>
 
-<!--Modal Tambah Siswa -->
+<!--Modal Tambah Guru -->
 <div
     class="modal fade text-left"
     id="inlineForm"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="myModalLabel130"
+    aria-labelledby="myModalLabel33"
     aria-hidden="true"
 >
     <div
@@ -191,8 +197,8 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h4 class="modal-title white" id="myModalLabel33">Tambah Siswa</h4>
+            <div class="modal-header bg-success">=
+                <h4 class="modal-title white" id="myModalLabel33">Tambah Guru</h4>
                 <button
                     type="button"
                     class="close"
@@ -208,17 +214,6 @@
                         <label>Nama: </label>
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Nama"/>
-                        </div>
-                        <label>Kelas: </label>
-                        <div class="form-group">
-                            <select class="choices form-select">
-                                <option value="7A">7-A</option>
-                                <option value="7B">7-B</option>
-                                <option value="8A">8-A</option>
-                                <option value="8B">8-B</option>
-                                <option value="9A">9-A</option>
-                                <option value="9B">9-C</option>
-                            </select>
                         </div>
                         <label>E-mail: </label>
                         <small class="text-muted">eg.<i>someone@example.com</i></small>
@@ -247,6 +242,18 @@
                                 <option value="krs">Kristen</option>
                             </select>
                         </div>
+                        <label>Mata Pelajaran: </label>
+                        <div class="form-group">
+                            <select class="choices form-select">
+                                <option value="ag">Agama</option>
+                                <option value="bi">Bahasa Indonesia</option>
+                                <option value="bing">Bahasa Inggris</option>
+                                <option value="mtk">Matematika</option>
+                                <option value="pjs">Pendidikan Jasmani</option>
+                                <option value="pkn">Pendidikan Kewarganegaraan</option>
+                                <option value="ipa">Ilmu Pengetahuan Alam</option>
+                            </select>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -271,7 +278,6 @@
         </div>
     </div>
 </div>
-
 
 {{-- Modal Preview Guru --}}
 <div
@@ -472,6 +478,7 @@
         </div>
     </div>
 </div>
+
 
 @endsection
 

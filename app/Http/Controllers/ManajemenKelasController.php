@@ -8,7 +8,7 @@ class ManajemenKelasController extends Controller
 {
     public function mapel() {
         $pages = 'manajemenKelas';
-        return  view('mapel', [
+        return  view('admin.mapel', [
             'pages' => $pages,
         ]);
     }
@@ -16,7 +16,7 @@ class ManajemenKelasController extends Controller
     public function kelas()
     {
         $pages = 'manajemenKelas';
-        return  view('kelas', [
+        return  view('admin.kelas', [
             'pages' => $pages,
         ]);
     }

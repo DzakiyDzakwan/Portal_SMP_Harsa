@@ -1,4 +1,4 @@
-@extends('master.main')
+@extends('admin.main')
 
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
@@ -30,7 +30,7 @@
     {{-- Table --}}
     <div class="card">
         <div class="card-body">
-            <table class="table table-striped" id="table1">
+            <table class="table table-bordered" id="table1">
                 <thead>
                     <tr>
                         <th>No</th>

@@ -53,6 +53,9 @@ Route::get('/log-kelas',[LogController::class,'kelas'])->name('log-kelas');
 //Dashboard/Log-Mapel
 Route::get('/log-mapel',[LogController::class,'mapel'])->name('log-mapel');
 
+//Dashboard-Siswa
+Route::get('/dashboard-siswa', [DashboardController::class,'siswa'])->name('dashboardSiswa');
+
 Route::get('/test', function () {
     return view('test');
 });
