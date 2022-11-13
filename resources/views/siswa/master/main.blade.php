@@ -15,10 +15,10 @@
     <body>
         <div id="app">
             {{-- Sidebar --}}
-            @include('components.sidebar')
+            @include('siswa.components.sidebar')
             <div id="main">
                 {{-- Navbar --}}
-                @include('components.navbar')
+                @include('siswa.components.navbar')
 
                 @yield('content')
             </div>

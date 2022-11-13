@@ -1,4 +1,4 @@
-@extends('siswa.main')
+@extends('siswa.master.main')
 
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/css/shared/iconly.css')}}">  

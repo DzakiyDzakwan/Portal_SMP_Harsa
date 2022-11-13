@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends('admin.master.main')
 
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
@@ -124,23 +124,23 @@
                     </td>
                     <td>
                         {{-- Preview Button --}}
-                        <div class="modal-primary me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                        <div class="modal-info me-1 mb-1 d-inline-block">
+                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
                                 data-bs-target="#info">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </div>
                         {{-- Update Button --}}
                         <div class="modal-success me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                data-bs-target="#primary">
+                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#update">
                                 <i class="bi bi-pencil"></i></a>
                             </button>
                         </div>
                         {{-- Delete Button --}}
                         <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#danger">
+                                data-bs-target="#delete">
                                 <i class="bi bi-trash"></i></a>
                             </button>
                         </div>
@@ -156,23 +156,23 @@
                     </td>
                     <td>
                         {{-- Preview Button --}}
-                        <div class="modal-primary me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                        <div class="modal-info me-1 mb-1 d-inline-block">
+                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
                                 data-bs-target="#info">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </div>
                         {{-- Update Button --}}
-                        <div class="modal-success me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                data-bs-target="#primary">
+                        <div class="modal-warning me-1 mb-1 d-inline-block">
+                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#update">
                                 <i class="bi bi-pencil"></i></a>
                             </button>
                         </div>
                         {{-- Delete Button --}}
                         <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#danger">
+                                data-bs-target="#delete">
                                 <i class="bi bi-trash"></i></a>
                             </button>
                         </div>
@@ -279,7 +279,7 @@
     </div>
 </div>
 
-{{-- Modal Preview Guru --}}
+{{-- Modal Preview--}}
 <div
     class="modal fade text-left"
     id="info"
@@ -293,7 +293,7 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-primary">
+            <div class="modal-header bg-info">
                 <h5 class="modal-title white" id="myModalLabel130">
                     Detail Guru
                 </h5>
@@ -353,7 +353,7 @@
 {{-- Modal Update --}}
 <div
     class="modal fade text-left"
-    id="primary"
+    id="update"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -364,7 +364,7 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-success">
+            <div class="modal-header bg-warning">
                 <h5 class="modal-title white" id="myModalLabel130">
                     Ubah Mata Pelajaran
                 </h5>
@@ -432,7 +432,7 @@
 {{-- Modal Delete --}}
 <div
     class="modal fade text-left"
-    id="danger"
+    id="delete"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"

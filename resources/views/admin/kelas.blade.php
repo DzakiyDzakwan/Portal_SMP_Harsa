@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends('admin.master.main')
 
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
@@ -110,64 +110,6 @@
                 data-bs-target="#inlineForm">
                 <i class="bi bi-plus-circle"></i> Tambah Kelas
             </button>
-
-            <!--login form Modal -->
-            <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
-                aria-labelledby="myModalLabel33" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                    role="document">
-                    <div class="modal-content">
-                        <div class="modal-header bg-success">
-                            <h4 class="modal-title white" id="myModalLabel33">Tambah Kelas</h4>
-                            <button type="button" class="close" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <i data-feather="x"></i>
-                            </button>
-                        </div>
-                        <form action="#">
-                            <div class="modal-body">
-                                <label>Nama Kelas: </label>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Nama Kelas"
-                                        class="form-control">
-                                </div>
-                                <label>Nomor Kelas: </label>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Nomor Kelas"
-                                        class="form-control">
-                                </div>
-                                <label>Ruangan: </label>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Ruangan"
-                                        class="form-control">
-                                </div>
-                                <label>Wali Kelas: </label>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Wali Kelas"
-                                        class="form-control">
-                                </div>
-                                <label>Jumlah Siswa: </label>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Jumlah Siswa"
-                                        class="form-control">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light-secondary"
-                                    data-bs-dismiss="modal">
-                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Tutup</span>
-                                </button>
-                                <button type="button" class="btn btn-success ml-1"
-                                    data-bs-dismiss="modal">
-                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Simpan</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="card-body">
@@ -192,170 +134,21 @@
                         <td>Nur Hayati</td>
                         <td>29</td>
                         <td>
-                            {{-- Preview Button --}}
-                            <div class="modal-primary me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#primary">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-
-                                <div class="modal fade text-left" id="primary" tabindex="-1" role="dialog"
-                                    aria-labelledby="myModalLabel130" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                        role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-primary">
-                                                <h5 class="modal-title white" id="myModalLabel130">Detail Kelas</h5>
-                                                <button type="button" class="close" data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <i data-feather="x"></i>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="#">
-                                                    <div class="modal-body">
-                                                        <label>Nama Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Nomor Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Ruangan: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Wali Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Jumlah Siswa: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light-secondary"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Close</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             {{-- Update Button --}}
-                            <div class="modal-success me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#success">
+                            <div class="modal-warning me-1 mb-1 d-inline-block">
+                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#update">
                                     <i class="bi bi-pencil"></i></a>
                                 </button>
-
-                                <div class="modal fade text-left" id="success" tabindex="-1" role="dialog"
-                                    aria-labelledby="myModalLabel130" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                        role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-success">
-                                                <h5 class="modal-title white" id="myModalLabel130">Ubah Kelas</h5>
-                                                <button type="button" class="close" data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <i data-feather="x"></i>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="#">
-                                                    <div class="modal-body">
-                                                        <label>Nama Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Nomor Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Ruangan: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Wali Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Jumlah Siswa: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light-secondary"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Close</span>
-                                                </button>
-                                                <button type="button" class="btn btn-success ml-1"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Simpan</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             {{-- Delete Button --}}
                             <div class="modal-danger me-1 mb-1 d-inline-block">
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#danger">
+                                    data-bs-target="#delete">
                                     <i class="bi bi-trash"></i></a>
                                 </button>
 
-                                <div class="modal fade text-left" id="danger" tabindex="-1" role="dialog"
-                                    aria-labelledby="myModalLabel130" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                        role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-danger">
-                                                <h5 class="modal-title white" id="myModalLabel130">Hapus Mata Pelajaran</h5>
-                                                <button type="button" class="close" data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <i data-feather="x"></i>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Apakah yakin menghapus data ini?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light-secondary"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Close</span>
-                                                </button>
-                                                <button type="button" class="btn btn-danger ml-1"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Hapus</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </td>
                     </tr>
@@ -367,170 +160,19 @@
                         <td>Nur Hayati</td>
                         <td>29</td>
                         <td>
-                            {{-- Preview Button --}}
-                            <div class="modal-primary me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#primary">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-
-                                <div class="modal fade text-left" id="primary" tabindex="-1" role="dialog"
-                                    aria-labelledby="myModalLabel130" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                        role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-primary">
-                                                <h5 class="modal-title white" id="myModalLabel130">Detail Kelas</h5>
-                                                <button type="button" class="close" data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <i data-feather="x"></i>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="#">
-                                                    <div class="modal-body">
-                                                        <label>Nama Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Nomor Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Ruangan: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Wali Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Jumlah Siswa: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light-secondary"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Close</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             {{-- Update Button --}}
-                            <div class="modal-success me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#success">
+                            <div class="modal-warning me-1 mb-1 d-inline-block">
+                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#update">
                                     <i class="bi bi-pencil"></i></a>
                                 </button>
-
-                                <div class="modal fade text-left" id="success" tabindex="-1" role="dialog"
-                                    aria-labelledby="myModalLabel130" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                        role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-success">
-                                                <h5 class="modal-title white" id="myModalLabel130">Ubah Kelas</h5>
-                                                <button type="button" class="close" data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <i data-feather="x"></i>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="#">
-                                                    <div class="modal-body">
-                                                        <label>Nama Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Nomor Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Ruangan: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Wali Kelas: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                        <label>Jumlah Siswa: </label>
-                                                        <div class="form-group">
-                                                            <input type="text"
-                                                                class="form-control" readonly>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light-secondary"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Close</span>
-                                                </button>
-                                                <button type="button" class="btn btn-success ml-1"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Simpan</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             {{-- Delete Button --}}
                             <div class="modal-danger me-1 mb-1 d-inline-block">
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#danger">
+                                    data-bs-target="#delete">
                                     <i class="bi bi-trash"></i></a>
                                 </button>
-
-                                <div class="modal fade text-left" id="danger" tabindex="-1" role="dialog"
-                                    aria-labelledby="myModalLabel130" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                        role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-danger">
-                                                <h5 class="modal-title white" id="myModalLabel130">Hapus Mata Pelajaran</h5>
-                                                <button type="button" class="close" data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <i data-feather="x"></i>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Apakah yakin menghapus data ini?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light-secondary"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Close</span>
-                                                </button>
-                                                <button type="button" class="btn btn-danger ml-1"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Hapus</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </td>
                     </tr>
@@ -538,6 +180,225 @@
             </table>
     </div>
 </div>
+
+<!--Modal tambah kelasl -->
+<div
+    class="modal fade text-left"
+    id="inlineForm"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel33"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h4 class="modal-title white" id="myModalLabel33">
+                    Tambah Kelas
+                </h4>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <form action="#">
+                <div class="modal-body">
+                    <label>Nama Kelas: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Nama Kelas"
+                            class="form-control"
+                        />
+                    </div>
+                    <label>Nomor Kelas: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Nomor Kelas"
+                            class="form-control"
+                        />
+                    </div>
+                    <label>Ruangan: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Ruangan"
+                            class="form-control"
+                        />
+                    </div>
+                    <label>Wali Kelas: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Wali Kelas"
+                            class="form-control"
+                        />
+                    </div>
+                    <label>Jumlah Siswa: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Jumlah Siswa"
+                            class="form-control"
+                        />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-light-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Tutup</span>
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-success ml-1"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Simpan</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Edit --}}
+<div
+    class="modal fade text-left"
+    id="update"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel130"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title white" id="myModalLabel130">
+                    Ubah Kelas
+                </h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#">
+                    <div class="modal-body">
+                        <label>Nama Kelas: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" readonly />
+                        </div>
+                        <label>Nomor Kelas: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" readonly />
+                        </div>
+                        <label>Ruangan: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" readonly />
+                        </div>
+                        <label>Wali Kelas: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" readonly />
+                        </div>
+                        <label>Jumlah Siswa: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" readonly />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-success ml-1"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Simpan</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Delete --}}
+<div
+    class="modal fade text-left"
+    id="delete"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel130"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title white" id="myModalLabel130">
+                    Hapus Mata Pelajaran
+                </h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">Apakah yakin menghapus data ini?</div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-danger ml-1"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Hapus</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
 
