@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SPPController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\ManajemenKelasController;
 use App\Http\Controllers\SiswaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +22,13 @@ use App\Http\Controllers\SiswaController;
 */
 
 //Dashboard
+Route::get('/', [DashboardController::class,'index'])->name('home');
+
+//Dashboard/SPP
+Route::get('/spp',[SPPController::class,'index'])->name('spp');
 
 //Dashboard/Kelas
 Route::get('/kelas', [ManajemenKelasController::class, 'kelas'])->name('kelas');
-
-Route::get('/', [DashboardController::class,'index'])->name('home');
 
 //Dashboard/User
 Route::get('/users',[UserController::class,'index'])->name('users');
