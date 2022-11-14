@@ -153,9 +153,6 @@
                         {{-- <li class="submenu-item">
                             <a href="/alumni">Alumni</a>
                         </li> --}}
-                        <li class="submenu-item">
-                            <a href="/prestasi">Prestasi</a>
-                        </li>
                     </ul>
                 </li>
 
@@ -180,6 +177,12 @@
                             <a href="/roster"
                                 >Roster Pelajaran</a
                             >
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/prestasi">Prestasi</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/ekstrakulikuler">Ekstrakulikuler</a>
                         </li>
                     </ul>
                 </li>

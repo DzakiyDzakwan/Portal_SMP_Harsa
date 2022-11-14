@@ -1,5 +1,9 @@
 @extends('admin.master.main')
 
+@section('title')
+    <title>Kelas</title>
+@endsection
+
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/pages/simple-datatables.css')}}">

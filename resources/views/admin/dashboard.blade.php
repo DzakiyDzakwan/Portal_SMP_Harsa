@@ -1,5 +1,9 @@
 @extends('admin.master.main')
 
+@section('title')
+    <title>Dashboard</title>
+@endsection
+
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/css/shared/iconly.css')}}">  
 @endsection
