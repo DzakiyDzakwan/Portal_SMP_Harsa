@@ -226,6 +226,11 @@
                                 >Log Roster</a
                             >
                         </li>
+                        <li class="submenu-item">
+                            <a href="/log-tagihan"
+                                >Log Tagihan</a
+                            >
+                        </li>
                     </ul>
                 </li>
             </ul>

@@ -36,7 +36,7 @@
             <div class="card-body px-4 py-4-5">
                 <div class="row">
                     <div
-                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
+                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
                     >
                         <div class="stats-icon purple mb-2">
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Guru">
@@ -44,9 +44,9 @@
                             </div>   
                         </div>
                     </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Total Guru</h6>
-                        <h6 class="font-extrabold mb-0">26</h6>
+                        <h6 class="font-extrabold mb-0">2</h6>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
             <div class="card-body px-4 py-4-5">
                 <div class="row">
                     <div
-                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
+                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
                     >
                         <div class="stats-icon green mb-2">
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Guru Aktif">
@@ -65,9 +65,9 @@
                             </div>   
                         </div>
                     </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Active</h6>
-                        <h6 class="font-extrabold mb-0">24</h6>
+                        <h6 class="font-extrabold mb-0">2</h6>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
             <div class="card-body px-4 py-4-5">
                 <div class="row">
                     <div
-                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
+                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
                     >
                         <div class="stats-icon red mb-2">
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Guru Inaktif">
@@ -86,7 +86,7 @@
                             </div>   
                         </div>
                     </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Inactive</h6>
                         <h6 class="font-extrabold mb-0">2</h6>
                     </div>
@@ -96,10 +96,11 @@
     </div>
 </div>
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+        <h5>List Guru</h5>
         <div class="form-group">
-            {{-- Button Tambah User --}}
-            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+            {{-- Button Tambah Guru --}}
+            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                 data-bs-target="#inlineForm">
                 <i class="bi bi-plus-circle"></i> Tambah Guru 
             </button>

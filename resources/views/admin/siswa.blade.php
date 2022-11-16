@@ -96,10 +96,11 @@
     </div>
 </div>
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+        <h5>List Siswa</h5>
         <div class="form-group">
             {{-- Button Tambah User --}}
-            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                 data-bs-target="#inlineForm">
                 <i class="bi bi-plus-circle"></i> Tambah Siswa 
             </button>
