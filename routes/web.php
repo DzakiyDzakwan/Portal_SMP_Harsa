@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\ManajemenKelasController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\guru;
+
 
 
 /*
@@ -62,6 +64,17 @@ Route::get('/log-tagihan',[LogController::class,'tagihanSpp'])->name('log-tagiha
 
 //Dashboard-Siswa
 Route::get('/dashboard-siswa', [DashboardController::class,'siswa'])->name('dashboardSiswa');
+
+
+//Guru
+//Dashboard-Guru
+Route::get('/dashboard-guru', [DashboardController::class, 'guru'])->name('dashboardGuru');
+//List-Kelas
+Route::get('/list-kelas', [guru\ListkelasController::class, 'index'])->name('listKelas');
+//Input
+Route::get('/input-nilai', [guru\InputController::class, 'inputNilai'])->name('inputNilai');
+Route::get('/input-absen', [guru\InputController::class, 'inputAbsen'])->name('inputAbsen');
+
 
 Route::get('/test', function () {
     return view('test');
