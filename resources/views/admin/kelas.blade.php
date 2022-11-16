@@ -36,21 +36,17 @@
             <div class="card-body px-4 py-4-5">
                 <div class="row">
                     <div
-                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
+                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
                     >
                         <div class="stats-icon purple mb-2">
-                            <div
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Total Mata Pelajaran"
-                            >
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Kelas">
                                 <i class="bi bi-person-workspace"></i>
-                        </div>
+                            </div>   
                         </div>
                     </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Total Kelas</h6>
-                        <h6 class="font-extrabold mb-0">13</h6>
+                        <h6 class="font-extrabold mb-0">2</h6>
                     </div>
                 </div>
             </div>
@@ -61,21 +57,17 @@
             <div class="card-body px-4 py-4-5">
                 <div class="row">
                     <div
-                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
+                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
                     >
                         <div class="stats-icon green mb-2">
-                            <div
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Total Kelas"
-                            >
-                            <i class="bi bi-house-door-fill"></i>
-                        </div>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Ruangan">
+                                <i class="bi bi-house-door-fill"></i>
+                            </div>   
                         </div>
                     </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-muted font-semibold">Total Ruangan</h6>
-                        <h6 class="font-extrabold mb-0">20</h6>
+                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                        <h6 class="text-muted font-semibold">Ruangan Kelas</h6>
+                        <h6 class="font-extrabold mb-0">2</h6>
                     </div>
                 </div>
             </div>
@@ -86,21 +78,17 @@
             <div class="card-body px-4 py-4-5">
                 <div class="row">
                     <div
-                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
+                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
                     >
-                        <div class="stats-icon red mb-2">
-                            <div
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Total Guru"
-                            >
+                        <div class="stats-icon blue mb-2">
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Wali Kelas">
                                 <i class="bi bi-people-fill"></i>
-                            </div>
+                            </div>   
                         </div>
                     </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-muted font-semibold">Total Wali Kelas</h6>
-                        <h6 class="font-extrabold mb-0">21</h6>
+                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                        <h6 class="text-muted font-semibold">Wali Kelas</h6>
+                        <h6 class="font-extrabold mb-0">2</h6>
                     </div>
                 </div>
             </div>
@@ -108,9 +96,10 @@
     </div>
 </div>
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+        <h5>List Kelas</h5>
         <div class="form-group">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                 data-bs-target="#inlineForm">
                 <i class="bi bi-plus-circle"></i> Tambah Kelas
             </button>

@@ -12,7 +12,7 @@
 @section('content')
 <div class="row">
     <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>Data Siswa</h3>
+        <h3>Tagihan SPP</h3>
     </div>
     <div class="col-12 col-md-6 order-md-2 order-first">
         <nav
@@ -75,10 +75,11 @@
     </div>
 </div>
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+        <h5>List Tunggakan</h5>
         <div class="form-group">
             {{-- Button Tambah User --}}
-            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
                 data-bs-target="#inlineForm">
                 <i class="bi bi-plus-circle"></i> Tambah Siswa 
             </button>
@@ -166,16 +167,16 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h4 class="modal-title white" id="myModalLabel33">Tambah Siswa</h4>
-                <button
+            <div class="modal-header bg-success justify-content-center">
+                <h4 class="modal-title white" id="myModalLabel33">Tambah Tagihan Siswa</h4>
+                {{-- <button
                     type="button"
                     class="close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                 >
                     <i data-feather="x"></i>
-                </button>
+                </button> --}}
             </div>
             <div class="modal-body">
                 <form action="#">

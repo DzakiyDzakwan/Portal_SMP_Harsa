@@ -42,4 +42,9 @@ class LogController extends Controller
         ]);
     }
 
+    public function tagihanSpp() {
+        $pages = 'history';
+        return view('admin.logspp', compact('pages'));
+    }
+
 }

@@ -57,6 +57,9 @@ Route::get('/log-kelas',[LogController::class,'kelas'])->name('log-kelas');
 //Dashboard/Log-Mapel
 Route::get('/log-mapel',[LogController::class,'mapel'])->name('log-mapel');
 
+//Dashboard/Log-SPP
+Route::get('/log-tagihan',[LogController::class,'tagihanSpp'])->name('log-tagihan');
+
 //Dashboard-Siswa
 Route::get('/dashboard-siswa', [DashboardController::class,'siswa'])->name('dashboardSiswa');
 
