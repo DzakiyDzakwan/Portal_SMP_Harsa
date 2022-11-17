@@ -19,4 +19,12 @@ class DashboardController extends Controller
             'pages'=>$pages
         ]);
     }
+
+    public function guru()
+    {
+        $pages = 'dashboardGuru';
+        return view('guru.dashboard', [
+            'pages'=>$pages
+        ]);
+    }
 }
