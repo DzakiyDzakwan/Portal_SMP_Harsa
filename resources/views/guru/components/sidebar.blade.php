@@ -97,6 +97,12 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-item @if($pages === 'direktoriGuru') active @endif">
+                    <a href="/direktori-guru" class="sidebar-link">
+                        <i class="bi bi-person-rolodex"></i>
+                        <span>Direktori</span>
+                    </a>
+                </li>
 
                 {{-- Sekolah --}}
                 <li class="sidebar-title">Sekolah</li>
