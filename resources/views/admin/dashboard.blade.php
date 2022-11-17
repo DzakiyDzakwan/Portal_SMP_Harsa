@@ -169,8 +169,9 @@
                     </div>
                 </div>
 
+                {{-- Graph --}}
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4>Jumlah Siswa</h4>
@@ -180,10 +181,75 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Bar Chart</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="bar"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                {{-- Info Detail --}}
                 <div class="row">
-                    <div class="col-6">
+                    {{-- Table Detail Kelas --}}
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Detail Kelas</h4>
+                                <table class="table table-bordered text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>no</th>
+                                            <th>Kelas</th>
+                                            <th>Laki-Laki</th>
+                                            <th>Perempuan</th>
+                                            <th colspan="2">Jumlah</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>7A Zaid bin Haritsah</td>
+                                            <td>20</td>
+                                            <td>10</td>
+                                            <td>30</td>
+                                            <td rowspan="4">120</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>7B Ubay bin Ka'ab</td>
+                                            <td>20</td>
+                                            <td>10</td>
+                                            <td>30</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>7C Mus'ab bin Umair</td>
+                                            <td>20</td>
+                                            <td>10</td>
+                                            <td>30</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot class="table-group-divider">
+                                        <tr>
+                                            <td colspan="2">Jumlah</td>
+                                            <td>60</td>
+                                            <td>30</td>
+                                            <td>90</td>
+                                            <td>120</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Table Detail Siswa --}}
+                    <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4>Detail Siswa</h4>
@@ -193,8 +259,8 @@
                                     <thead>
                                         <tr>
                                             <th>Keterangan</th>
-                                            <th>Laki-laki</th>
-                                            <th>Perempuan</th>
+                                            <th>L</th>
+                                            <th>P</th>
                                             <th>Jumlah</th>
                                         </tr>
                                     </thead>
@@ -216,7 +282,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    {{-- Table Detail Guru --}}
+                    <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4>Detail Guru</h4>
@@ -226,8 +293,8 @@
                                     <thead>
                                         <tr>
                                             <th>Keterangan</th>
-                                            <th>Laki-laki</th>
-                                            <th>Perempuan</th>
+                                            <th>L</th>
+                                            <th>P</th>
                                             <th>Jumlah</th>
                                         </tr>
                                     </thead>
@@ -246,26 +313,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Detail Kelas</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Bar Chart</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="bar"></div>
                             </div>
                         </div>
                     </div>
