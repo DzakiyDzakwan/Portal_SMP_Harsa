@@ -92,30 +92,33 @@
 
                 {{-- Dashboard --}}
                 <li class="sidebar-item @if($pages === 'dashboardSiswa') active @endif">
-                    <a href="/" class="sidebar-link">
+                    <a href="/dashboard-siswa" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item @if($pages === 'dashboard') active @endif">
-                    <a href="/" class="sidebar-link">
+                    <a href="/profil" class="sidebar-link">
                         <i class="bi bi-person-fill"></i>
                         <span>Profil</span>
                     </a>
                 </li>
 
                 <li class="sidebar-title">Akademik</li>
-
-                {{-- User --}}
-                <li class="sidebar-item has-sub @if($pages === 'user') active  @endif">
-
-                    <li class="sidebar-item @if($pages === 'dashboard') active @endif">
-                        <a href="/" class="sidebar-link">
-                            <i class="bi bi-file-ruled-fill"></i>
-                            <span>Rapor Hasil Pembelajaran</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item has-sub @if($pages === 'rapor-bulanan' || $pages === 'rapor-semester') active  @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-file-ruled-fill"></i>
+                        <span>Rapor</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item @if($pages === 'rapor-bulanan') active  @endif">
+                            <a href="/rapor-bulanan">Rapor Bulanan</a>
+                        </li>
+                        <li class="submenu-item @if($pages === 'rapor-semester') active  @endif">
+                            <a href="/rapor-semester">Rapor Semester</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
