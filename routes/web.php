@@ -9,6 +9,7 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\ManajemenKelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\guru;
+use App\Http\Controllers\siswa;
 
 
 
@@ -62,9 +63,11 @@ Route::get('/log-mapel',[LogController::class,'mapel'])->name('log-mapel');
 //Dashboard/Log-SPP
 Route::get('/log-tagihan',[LogController::class,'tagihanSpp'])->name('log-tagihan');
 
+//Siswa
 //Dashboard-Siswa
 Route::get('/dashboard-siswa', [DashboardController::class,'siswa'])->name('dashboardSiswa');
-
+Route::get('/rapor-bulanan', [siswa\RaporController::class, 'bulanan'])->name('rapor-bulanan');
+Route::get('/rapor-semester', [siswa\RaporController::class, 'semester'])->name('rapor-semester');
 
 //Guru
 //Dashboard-Guru
