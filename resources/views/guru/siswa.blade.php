@@ -98,13 +98,6 @@
 <div class="card">
     <div class="card-header d-flex gap-2 align-items-center justify-content-between">
         <h5>List Siswa</h5>
-        <div class="form-group">
-            {{-- Button Tambah User --}}
-            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                data-bs-target="#inlineForm">
-                <i class="bi bi-plus-circle"></i> Tambah Siswa 
-            </button>
-        </div>
     </div>
     <div class="card-body">
         <table class="table table-bordered" id="table1">
@@ -114,7 +107,7 @@
                     <th>Kelas</th>
                     <th>Jenis Kelamin</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Prestasi</th>
                 </tr>
             </thead>
             <tbody>
@@ -126,25 +119,18 @@
                         <span class="badge bg-success">Active</span>
                     </td>
                     <td>
+                        {{-- Add Button --}}
+                        <div class="modal-info me-1 mb-1 d-inline-block">
+                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                data-bs-target="#add">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
+                        </div>
                         {{-- Preview Button --}}
                         <div class="modal-info me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
                                 data-bs-target="#info">
                                 <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
-                        {{-- Update Button --}}
-                        <div class="modal-warning me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#update">
-                                <i class="bi bi-pencil"></i></a>
-                            </button>
-                        </div>
-                        {{-- Delete Button --}}
-                        <div class="modal-danger me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#delete">
-                                <i class="bi bi-trash"></i></a>
                             </button>
                         </div>
                     </td>
@@ -157,25 +143,18 @@
                         <span class="badge bg-success">Active</span>
                     </td>
                     <td>
+                        {{-- Add Button --}}
+                        <div class="modal-info me-1 mb-1 d-inline-block">
+                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                data-bs-target="#add">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
+                        </div>
                         {{-- Preview Button --}}
                         <div class="modal-info me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
                                 data-bs-target="#info">
                                 <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
-                        {{-- Update Button --}}
-                        <div class="modal-warning me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="update">
-                                <i class="bi bi-pencil"></i></a>
-                            </button>
-                        </div>
-                        {{-- Delete Button --}}
-                        <div class="modal-danger me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#delete">
-                                <i class="bi bi-trash"></i></a>
                             </button>
                         </div>
                     </td>
@@ -185,10 +164,11 @@
     </div>
 </div>
 
-<!--Modal Tambah Siswa -->
+
+{{-- Modal Add --}}
 <div
     class="modal fade text-left"
-    id="inlineForm"
+    id="add"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -199,8 +179,10 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h4 class="modal-title white" id="myModalLabel33">Tambah Siswa</h4>
+            <div class="modal-header bg-info">
+                <h5 class="modal-title white" id="myModalLabel130">
+                    Input Prestasi
+                </h5>
                 <button
                     type="button"
                     class="close"
@@ -213,51 +195,24 @@
             <div class="modal-body">
                 <form action="#">
                     <div class="modal-body">
-                        <label>Nama: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nama"/>
-                        </div>
-                        <label>Kelas: </label>
+                        <label>Jenis Prestasi: </label>
                         <div class="form-group">
                             <select class="choices form-select">
-                                <option value="7A">7-A</option>
-                                <option value="7B">7-B</option>
-                                <option value="8A">8-A</option>
-                                <option value="8B">8-B</option>
-                                <option value="9A">9-A</option>
-                                <option value="9B">9-C</option>
+                                <option value="akademil">Akademik</option>
+                                <option value="nonakademik">Non Akademik</option>
                             </select>
                         </div>
-                        <label>E-mail: </label>
-                        <small class="text-muted">eg.<i>someone@example.com</i></small>
+                        <label>Keterangan: </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="E-mail"/>
+                            <input type="text" class="form-control" readonly />
                         </div>
-                        <label>Jenis Kelamin: </label>
+                        <label>Tanggal Prestasi: </label>
                         <div class="form-group">
-                            <select class="choices form-select">
-                                <option value="lk">Laki-laki</option>
-                                <option value="pr">Perempuan</option>
-                            </select>
+                            <input type="date" class="form-control" readonly />
                         </div>
-                        <label>Phone: </label>
+                        <label>Semester: </label>
                         <div class="form-group">
-                            <input type="number" class="form-control" placeholder="+62"/>
-                        </div>
-                        <label>Alamat: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Alamat"/>
-                        </div>
-                        <label>Agama: </label>
-                        <div class="form-group">
-                            <select class="choices form-select">
-                                <option value="is">Islam</option>
-                                <option value="krs">Kristen</option>
-                            </select>
-                        </div>
-                        <label>Prestasi: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Prestasi"/>
+                            <input type="text" class="form-control" readonly />
                         </div>
                     </div>
                 </form>
@@ -271,19 +226,10 @@
                     <i class="bx bx-x d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Close</span>
                 </button>
-                <button
-                    type="button"
-                    class="btn btn-success ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Simpan</span>
-                </button>
             </div>
         </div>
     </div>
 </div>
-
 
 {{-- Modal Preview --}}
 <div
@@ -301,7 +247,7 @@
         <div class="modal-content">
             <div class="modal-header bg-info">
                 <h5 class="modal-title white" id="myModalLabel130">
-                    Detail Siswa
+                    Detail Prestasi
                 </h5>
                 <button
                     type="button"
@@ -318,17 +264,58 @@
                         <div class="text-center">
                             <img src="..." class="rounded" alt="...">
                           </div>
-                        <label>Nama: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Kelas: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Prestasi: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
+                          <label>Nama: </label>
+                          <div class="form-group">
+                              <input type="text" class="form-control" placeholder="Nama"/>
+                          </div>
+                          <label>Kelas: </label>
+                          <div class="form-group">
+                              <input type="text" class="form-control" placeholder="Kelas"/>
+                          </div>
+                          <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Prestasi 1</h4>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Click the buttons below to show and hide another element via class changes:
+                                </p>
+                                <p>
+                                    {{-- Update Button --}}
+                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#update" aria-expanded="false" aria-controls="update">
+                                        <i class="bi bi-pencil"></i></a>
+                                    </button>
+                                    {{-- Delete Button --}}
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
+                                        <i class="bi bi-trash"></i></a>
+                                    </button>
+                                    </p>
+                                    <div class="collapse" id="update">
+                                        <label>Jenis Prestasi: </label>
+                                        <div class="form-group">
+                                            <select class="choices form-select">
+                                                <option value="akademil">Akademik</option>
+                                                <option value="nonakademik">Non Akademik</option>
+                                            </select>
+                                        </div>
+                                        <label>Keterangan: </label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" readonly />
+                                        </div>
+                                        <label>Tanggal Prestasi: </label>
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" readonly />
+                                        </div>
+                                        <label>Semester: </label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" readonly />
+                                        </div>
+                                        <button type="button" class="btn btn-success ml-1">
+                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Simpan</span>
+                                        </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -347,7 +334,8 @@
     </div>
 </div>
 
-{{-- Modal Update --}}
+
+{{-- Modal Update
 <div
     class="modal fade text-left"
     id="update"
@@ -385,13 +373,32 @@
                         <div class="form-group">
                             <input type="text" class="form-control" />
                         </div>
-                        <label>Kelas: </label>
+                        <label>E-mail: </label>
+                        <small class="text-muted">eg.<i>someone@example.com</i></small>
                         <div class="form-group">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" placeholder="E-mail"/>
                         </div>
-                        <label>Prestasi: </label>
+                        <label>Jenis Kelamin: </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" />
+                            <select class="choices form-select">
+                                <option value="lk">Laki-laki</option>
+                                <option value="pr">Perempuan</option>
+                            </select>
+                        </div>
+                        <label>Phone: </label>
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="+62"/>
+                        </div>
+                        <label>Alamat: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Alamat"/>
+                        </div>
+                        <label>Agama: </label>
+                        <div class="form-group">
+                            <select class="choices form-select">
+                                <option value="is">Islam</option>
+                                <option value="krs">Kristen</option>
+                            </select>
                         </div>
                     </div>
                 </form>
@@ -408,7 +415,6 @@
                 <button
                     type="button"
                     class="btn btn-success ml-1"
-                    data-bs-dismiss="modal"
                 >
                     <i class="bx bx-check d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Simpan</span>
@@ -416,7 +422,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 {{-- Modal Delete --}}
 <div
