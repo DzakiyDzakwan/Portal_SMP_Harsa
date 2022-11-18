@@ -22,256 +22,228 @@
     <div class="page-content">
         <section class="row">
             <div class="col-12">
-                <div class="row">
-                    {{-- Info User --}}
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <a href="/users">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                            class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
-                                        >
-                                            <div class="stats-icon green mb-2">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="User">
-                                                    <i class="bi bi-people-fill"></i>
-                                                </div>   
-                                            </div>
+                <div class="row mb-3">
+                    {{-- Profil Singkat --}}
+                    <div class="col-lg-8 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Profil Singkat</h4>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-12">
+                                        <div class="pt-3">
+                                            <img src="assets/images/Abby.jpg" class="rounded mx-auto d-block" alt="..." width="130">
                                         </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                                            <h6 class="text-muted font-semibold">User</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
+                                    </div>
+
+                                    <div class="col-lg-9 col-md-12">
+                                        <div class="pt-3">
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Nama</td>
+                                                        <td>:</td>
+                                                        <td>Abby Syafiyah</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NIS</td>
+                                                        <td>:</td>
+                                                        <td>211402018</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jenis Kelamin</td>
+                                                        <td>:</td>
+                                                        <td>Perempuan</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal Lahir</td>
+                                                        <td>:</td>
+                                                        <td>11/12/2003</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tempat Lahir</td>
+                                                        <td>:</td>
+                                                        <td>Medan</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
-                    {{-- Info Siswa --}}
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <a href="/siswa">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                            class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
-                                        >
-                                            <div class="stats-icon green mb-2">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Siswa">
-                                                    <i class="bi bi-people-fill"></i>
-                                                </div>   
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                                            <h6 class="text-muted font-semibold">Siswa</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
-                                        </div>
-                                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Prestasi</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Mata Pelajaran</th>
+                                                <th>Kelas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Olimpiade Matematika</td>
+                                                <td>Medali Perak</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Olimpiade Fisika</td>
+                                                <td>Medali Emas</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Olimpiade Kimia</td>
+                                                <td>Medali Perunggu</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-                    {{-- Info Guru --}}
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <a href="/guru">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                            class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
-                                        >
-                                            <div class="stats-icon green mb-2">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Guru">
-                                                    <i class="bi bi-people-fill"></i>
-                                                </div>   
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                                            <h6 class="text-muted font-semibold">Guru</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {{-- Info Kelas --}}
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <a href="/kelas">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                            class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
-                                        >
-                                            <div class="stats-icon green mb-2">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Kelas">
-                                                    <i class="bi bi-house-door-fill"></i>
-                                                </div>   
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                                            <h6 class="text-muted font-semibold">Total Kelas</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {{-- Info Mata Pelajaran --}}
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <a href="/mapel">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                            class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
-                                        >
-                                            <div class="stats-icon blue mb-2">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Pelajaran">
-                                                    <i class="bi bi-people-fill"></i>
-                                                </div>   
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                                            <h6 class="text-muted font-semibold">Mata Pelajaran</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {{-- Info Ekstrakulikuler --}}
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <a href="/ekskull">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                            class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
-                                        >
-                                            <div class="stats-icon blue mb-2">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Ekstrakulikuler">
-                                                    <i class="bi bi-people-fill"></i>
-                                                </div>   
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                                            <h6 class="text-muted font-semibold">Ekstrakulikuler</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Jumlah Siswa</h4>
+                                <h4>Roster Pelajaran</h4>
+                                <h6>Kelas VII</h6>
                             </div>
                             <div class="card-body">
-                                <div id="chart-profile-visit"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Detail Siswa</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Keterangan</th>
-                                            <th>Laki-laki</th>
-                                            <th>Perempuan</th>
-                                            <th>Jumlah</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Siswa Aktif</td>
-                                            <td>19</td>
-                                            <td>5</td>
-                                            <td>24</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Alumni</td>
-                                            <td>129</td>
-                                            <td>50</td>
-                                            <td>179</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Detail Guru</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Keterangan</th>
-                                            <th>Laki-laki</th>
-                                            <th>Perempuan</th>
-                                            <th>Jumlah</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Guru Aktif</td>
-                                            <td>19</td>
-                                            <td>5</td>
-                                            <td>24</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Wali-Kelas</td>
-                                            <td>129</td>
-                                            <td>50</td>
-                                            <td>179</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Detail Kelas</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Bar Chart</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="bar"></div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Hari</th>
+                                                <th>Jam Ke-</th>
+                                                <th>Mata Pelajaran</th>
+                                                <th>Jam Masuk</th>
+                                                <th>Jam Keluar</th>
+                                                <th>Nama Guru</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="8">Senin</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Kimia</td>
+                                                <td>07.15</td>
+                                                <td>08.00</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Matematika</td>
+                                                <td>08.15</td>
+                                                <td>08.55</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Fisika</td>
+                                                <td>08.55</td>
+                                                <td>09.35</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Sejarah</td>
+                                                <td>09.35</td>
+                                                <td>10.15</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Sosiologi</td>
+                                                <td>10.15</td>
+                                                <td>10.35</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>Seni Budaya</td>
+                                                <td>10.35</td>
+                                                <td>11.15</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>Ekonomi</td>
+                                                <td>11.15</td>
+                                                <td>11.55</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            {{-- Selasa --}}
+                                            <tr>
+                                                <td rowspan="8">Selasa</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Kimia</td>
+                                                <td>07.15</td>
+                                                <td>08.00</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Matematika</td>
+                                                <td>08.15</td>
+                                                <td>08.55</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Fisika</td>
+                                                <td>08.55</td>
+                                                <td>09.35</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Sejarah</td>
+                                                <td>09.35</td>
+                                                <td>10.15</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Sosiologi</td>
+                                                <td>10.15</td>
+                                                <td>10.35</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>Seni Budaya</td>
+                                                <td>10.35</td>
+                                                <td>11.15</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>Ekonomi</td>
+                                                <td>11.15</td>
+                                                <td>11.55</td>
+                                                <td>Ali Akbar Sikumbang</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </section>
     </div>
 </div>
