@@ -72,6 +72,8 @@ Route::get('/rapor-semester', [siswa\RaporController::class, 'semester'])->name(
 //Guru
 //Dashboard-Guru
 Route::get('/dashboard-guru', [DashboardController::class, 'guru'])->name('dashboardGuru');
+//Direktori-Guru
+Route::get('/direktori-guru', [guru\direktoriController::class, 'direktori'])->name('direktoriGuru');
 //List-Kelas
 Route::get('/list-kelas', [guru\ListkelasController::class, 'index'])->name('listKelas');
 //Input
