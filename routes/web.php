@@ -61,14 +61,16 @@ Route::get('/log-kelas',[LogController::class,'kelas'])->name('log-kelas');
 Route::get('/log-mapel',[LogController::class,'mapel'])->name('log-mapel');
 
 //Dashboard/Log-SPP
-Route::get('/log-tagihan',[LogController::class,'tagihanSpp'])->name('log-tagihan');
+Route::get('/log-tagihan', [LogController::class, 'tagihanSpp'])->name('log-tagihan');
 
 //Siswa
 //Dashboard-Siswa
-Route::get('/dashboard-siswa', [DashboardController::class,'siswa'])->name('dashboardSiswa');
+Route::get('/dashboard-siswa', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
 Route::get('/rapor-bulanan', [siswa\RaporController::class, 'bulanan'])->name('rapor-bulanan');
 Route::get('/rapor-semester', [siswa\RaporController::class, 'semester'])->name('rapor-semester');
-
+Route::get('/tagihan-spp', [SPPController::class, 'tagihanSPP'])->name('tagihanSPP');
+Route::get('/profil-siswa', [siswa\ProfilController::class, 'profilSiswa'])->name('profilSiswa');
+Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
 //Guru
 //Dashboard-Guru
 Route::get('/dashboard-guru', [DashboardController::class, 'guru'])->name('dashboardGuru');
