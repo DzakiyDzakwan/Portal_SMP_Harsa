@@ -138,7 +138,7 @@
                         {{-- Update Button --}}
                         <div class="modal-warning me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="update">
+                                data-bs-target="#update">
                                 <i class="bi bi-pencil"></i></a>
                             </button>
                         </div>
@@ -170,7 +170,7 @@
                         {{-- Update Button --}}
                         <div class="modal-warning me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="update">
+                                data-bs-target="#update">
                                 <i class="bi bi-pencil"></i></a>
                             </button>
                         </div>
@@ -298,9 +298,9 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-info">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Detail Guru
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel130">
+                    Profil Siswa
                 </h5>
                 <button
                     type="button"
@@ -312,34 +312,70 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
-                    <div class="modal-body">
-                        <label>Mata Pelajaran: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Kelas: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Guru: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Hari: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Jam Masuk: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Jam Keluar: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
+                {{-- Navigation --}}
+                <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Profile</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#prestasi" role="tab"
+                            aria-controls="prestasi" aria-selected="false">Prestasi</a>
+                    </li>
+                </ul>
+
+                {{-- Image --}}
+                <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
+
+                {{-- Navigasi Content --}}
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td class="fw-bold p-0">Nama</td>
+                                <td class="p-0">Dzakiy Dzakwan</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold p-0">Nama</td>
+                                <td class="p-0">Dzakiy Dzakwan</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold p-0">Nama</td>
+                                <td class="p-0">Dzakiy Dzakwan</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold p-0">Nama</td>
+                                <td class="p-0">Dzakiy Dzakwan</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold p-0">Nama</td>
+                                <td class="p-0">Dzakiy Dzakwan</td>
+                            </tr>
+                        </table>
                     </div>
-                </form>
+                    <div class="tab-pane fade" id="prestasi" role="tabpanel" aria-labelledby="data-prestasis">
+                       <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Keterangan</th>
+                                <th>Jenis</th>
+                                <th>Tanggal</th>
+                                <th>Semester</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Juara 1 Mewarnai Tingkat Desa</td>
+                                <td>Seni</td>
+                                <td>30 Februari 2021</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                       </table>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button

@@ -18128,3 +18128,7 @@ a {
         text-align: center !important;
     }
 }
+
+.pointer {
+    cursor: pointer;
+}
