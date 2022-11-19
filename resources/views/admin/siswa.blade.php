@@ -330,32 +330,32 @@
                 {{-- Navigasi Content --}}
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <table class="table mb-0">
+                        <table class="table table-borderless mb-0">
                             <tbody>
                                 <tr>
-                                    <td>Nama</td>
-                                    <td>:</td>
-                                    <td>Dzakiy Dzakwan</td>
+                                    <td class="p-1">Nama</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">Dzakiy Dzakwan</td>
                                 </tr>
                                 <tr>
-                                    <td>NIS</td>
-                                    <td>:</td>
-                                    <td>211402017</td>
+                                    <td class="p-1">NIS</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">211402017</td>
                                 </tr>
                                 <tr>
-                                    <td>Jenis Kelamin</td>
-                                    <td>:</td>
-                                    <td>Laki-Laki</td>
+                                    <td class="p-1">Jenis Kelamin</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">Laki-Laki</td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Lahir</td>
-                                    <td>:</td>
-                                    <td>01/12/2003</td>
+                                    <td class="p-1">Tanggal Lahir</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">01/12/2003</td>
                                 </tr>
                                 <tr>
-                                    <td>Tempat Lahir</td>
-                                    <td>:</td>
-                                    <td>Medan</td>
+                                    <td class="p-1">Tempat Lahir</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">Medan</td>
                                 </tr>
                             </tbody>
                         </table>
