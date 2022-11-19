@@ -330,27 +330,34 @@
                 {{-- Navigasi Content --}}
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <table class="table table-borderless">
-                            <tr>
-                                <td class="fw-bold p-0">Nama</td>
-                                <td class="p-0">Dzakiy Dzakwan</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold p-0">Nama</td>
-                                <td class="p-0">Dzakiy Dzakwan</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold p-0">Nama</td>
-                                <td class="p-0">Dzakiy Dzakwan</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold p-0">Nama</td>
-                                <td class="p-0">Dzakiy Dzakwan</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold p-0">Nama</td>
-                                <td class="p-0">Dzakiy Dzakwan</td>
-                            </tr>
+                        <table class="table mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>Nama</td>
+                                    <td>:</td>
+                                    <td>Dzakiy Dzakwan</td>
+                                </tr>
+                                <tr>
+                                    <td>NIS</td>
+                                    <td>:</td>
+                                    <td>211402017</td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Kelamin</td>
+                                    <td>:</td>
+                                    <td>Laki-Laki</td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Lahir</td>
+                                    <td>:</td>
+                                    <td>01/12/2003</td>
+                                </tr>
+                                <tr>
+                                    <td>Tempat Lahir</td>
+                                    <td>:</td>
+                                    <td>Medan</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div class="tab-pane fade" id="prestasi" role="tabpanel" aria-labelledby="data-prestasis">
