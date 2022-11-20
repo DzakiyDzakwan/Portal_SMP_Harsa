@@ -223,10 +223,10 @@
                                                 value="-" placeholder="Telepon Wali">
                                         </div>
                                         <div class="form-group  px-3 pt-2 modal-footer">
-                                            <a href="#" class="btn icon icon-left btn-secondary m-3 px-5"><i
+                                            <a href="#" class="btn icon icon-left btn-danger m-3 px-3"><i
                                                     data-feather="x"></i>
                                                 Cancel</a>
-                                            <a href="#" class="btn icon icon-left btn-success px-5"><i
+                                            <a href="#" class="btn icon icon-left btn-success px-3"><i
                                                     data-feather="check-circle"></i>
                                                 Submit</a>
                                         </div>
