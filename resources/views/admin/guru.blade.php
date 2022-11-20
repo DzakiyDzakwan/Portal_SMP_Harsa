@@ -298,9 +298,9 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-info">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Detail Guru
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel130">
+                    Profil Guru
                 </h5>
                 <button
                     type="button"
@@ -312,34 +312,37 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
-                    <div class="modal-body">
-                        <label>Mata Pelajaran: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Kelas: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Guru: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Hari: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Jam Masuk: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Jam Keluar: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                    </div>
-                </form>
+                {{-- Image --}}
+                <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
+                <table class="table table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <td class="p-1">Nama</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">Dzakiy Dzakwan</td>
+                        </tr>
+                        <tr>
+                            <td class="p-1">NIP</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">211402017</td>
+                        </tr>
+                        <tr>
+                            <td class="p-1">Jenis Kelamin</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">Laki-Laki</td>
+                        </tr>
+                        <tr>
+                            <td class="p-1">Tanggal Lahir</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">01/12/2003</td>
+                        </tr>
+                        <tr>
+                            <td class="p-1">Tempat Lahir</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">Medan</td>
+                        </tr>
+                    </tbody>
+                </table> 
             </div>
             <div class="modal-footer">
                 <button
