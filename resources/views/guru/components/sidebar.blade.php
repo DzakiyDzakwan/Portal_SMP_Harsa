@@ -103,7 +103,6 @@
                         <span>Direktori</span>
                     </a>
                 </li>
-
                 {{-- Sekolah --}}
                 <li class="sidebar-title">Sekolah</li>
 

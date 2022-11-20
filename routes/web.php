@@ -76,6 +76,9 @@ Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSisw
 Route::get('/dashboard-guru', [DashboardController::class, 'guru'])->name('dashboardGuru');
 //Direktori-Guru
 Route::get('/direktori-guru', [guru\direktoriController::class, 'direktori'])->name('direktoriGuru');
+//Profil-Guru
+Route::get('/profil-guru', [guru\ProfilController::class, 'profilGuru'])->name('profilGuru');
+Route::get('/edit-profil-guru', [guru\ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
 //List-Kelas
 Route::get('/list-kelas', [guru\ListkelasController::class, 'index'])->name('listKelas');
 //Input
