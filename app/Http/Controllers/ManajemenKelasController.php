@@ -20,4 +20,11 @@ class ManajemenKelasController extends Controller
             'pages' => $pages,
         ]);
     }
+    public function ekskul()
+    {
+        $pages = 'manajemenEkskul';
+        return  view('admin.ekskul', [
+            'pages' => $pages,
+        ]);
+    }
 }

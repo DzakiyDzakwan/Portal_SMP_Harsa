@@ -231,6 +231,11 @@
                                 >Log Tagihan</a
                             >
                         </li>
+                        <li class="submenu-item">
+                            <a href="/log-ekstrakulikuler"
+                                >Log Ekstrakulikuler</a
+                            >
+                        </li>
                     </ul>
                 </li>
             </ul>

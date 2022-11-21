@@ -38,6 +38,8 @@ Route::get('/users',[UserController::class,'index'])->name('users');
 
 //Dashboard/Mapel
 Route::get('/mapel',[ManajemenKelasController::class,'mapel'])->name('mapel');
+//Dashboard/eskul
+Route::get('/ekstrakulikuler',[ManajemenKelasController::class,'ekskul'])->name('mapel');
 
 //Dashboard/Siswa
 Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
@@ -62,6 +64,9 @@ Route::get('/log-mapel',[LogController::class,'mapel'])->name('log-mapel');
 
 //Dashboard/Log-SPP
 Route::get('/log-tagihan', [LogController::class, 'tagihanSpp'])->name('log-tagihan');
+
+//Dashboard/Log-SPP
+Route::get('/log-ekstrakulikuler', [LogController::class, 'ekskul'])->name('log-ekskul');
 
 //Siswa
 //Dashboard-Siswa

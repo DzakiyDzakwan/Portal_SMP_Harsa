@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
-    
+
     public function user() {
         $pages = 'history';
         return  view('admin.logusers', [
@@ -45,6 +45,10 @@ class LogController extends Controller
     public function tagihanSpp() {
         $pages = 'history';
         return view('admin.logspp', compact('pages'));
+    }
+    public function ekskul() {
+        $pages = 'history';
+        return view('admin.logeskul', compact('pages'));
     }
 
 }
