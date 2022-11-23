@@ -39,7 +39,7 @@ Route::get('/users',[UserController::class,'index'])->name('users');
 //Dashboard/Mapel
 Route::get('/mapel',[ManajemenKelasController::class,'mapel'])->name('mapel');
 //Dashboard/eskul
-Route::get('/ekstrakulikuler',[ManajemenKelasController::class,'ekskul'])->name('mapel');
+Route::get('/ekstrakulikuler',[ManajemenKelasController::class,'ekskul'])->name('ekskul');
 
 //Dashboard/Siswa
 Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
