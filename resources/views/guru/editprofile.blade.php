@@ -121,17 +121,9 @@
                                     <div class="col-md-3">
                                         <label>Jabatan</label>
                                     </div>
-                                    <div class="col-md-9 mb-1 form-group">
-                                        <fieldset class="form-group">
-                                            <select class="form-select" id="basicSelect">
-                                              <option>Kepala Sekolah</option>
-                                              <option selected>Wakil Kepala Sekolah</option>
-                                              <option>Wali Kelas 7</option>
-                                              <option>Wali Kelas 8</option>
-                                              <option>Wali Kelas 9</option>
-                                              <option>Guru</option>
-                                            </select>
-                                        </fieldset>
+                                    <div class="col-md-9 form-group">
+                                        <input type="text" id="jabatan" class="form-control" name="jabatan"
+                                            value="Wakil Kepala Sekolah" placeholder="Jabatan" disabled>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Tanggal Masuk</label>
