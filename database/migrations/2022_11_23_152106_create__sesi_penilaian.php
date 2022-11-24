@@ -17,8 +17,8 @@ return new class extends Migration
             $table->bigInteger('sesi_penilaian')->nullable(false)->primary();
             $table->char('kategori_nilai', 3)->nullable(false);
             $table->foreign('kategori_nilai')->nullable(false)->references('kategori_nilai_id')->on('kategori_nilai');
-            $table->timestamp('waktu_mulai')->nullable(false);
-            $table->timestamp('waktu_akhir')->nullable(false);
+            $table->time('waktu_mulai');
+            $table->timestamp('waktu_akhir');
             $table->timestamps();
         });
     }
