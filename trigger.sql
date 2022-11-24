@@ -48,3 +48,58 @@ INSERT INTO log_update_roster_kelas (roster_id, Mapel_guru, ruang_kelas, jam_mas
 VALUES (OLD.roster_id, OLD.Mapel_guru, OLD.ruang_kelas, NEW.jam_masuk, NEW.jam_keluar, NEW.hari);
 END;
 !
+
+-- Log  Update Nilai
+DELIMITER!
+CREATE TRIGGER log_insert_nilai
+AFTER UPDATE on nilai
+FOR EACH ROW
+BEGIN
+INSERT INTO log_insert_nilai (nilai_id, semester, tahun_pelajaran, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, kategori_nilai, siswa, mata_pelajaran, created_at, updated_at)
+VALUES (OLD.nilai_id, OLD.semester, OLD.tahun_pelajaran, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.kategori_nilai, NEW.siswa, NEW.mata_pelajaran, NOW(), NOW());
+END;
+!
+
+-- Log  Delete Nilai
+DELIMITER!
+CREATE TRIGGER log_delete_nilai
+AFTER DELETE on nilai
+FOR EACH ROW
+BEGIN
+INSERT INTO log_insert_nilai (nilai_id, semester, tahun_pelajaran, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, kategori_nilai, siswa, mata_pelajaran, created_at, updated_at)
+VALUES (OLD.nilai_id, OLD.semester, OLD.tahun_pelajaran, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, OLD.kategori_nilai, OLD.siswa, OLD.mata_pelajaran, NOW(), NOW());
+END;
+!
+
+-- Log Insert User
+DELIMITER//
+CREATE TRIGGER log_insert_user
+AFTER INSERT on user
+FOR EACH ROW
+BEGIN
+INSERT INTO log_insert_user (uuid, username, password, role, created_at, updated_at)
+VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, NOW(), NOW());
+END;
+//
+
+-- Log Update User
+DELIMITER//
+CREATE TRIGGER log_update_user
+AFTER UPDATE on user
+FOR EACH ROW
+BEGIN
+INSERT INTO log_update_user (uuid, username, password, role, created_at, updated_at)
+VALUES (OLD.uuid, NEW.username, NEW.password, OLD.role, NOW(), NOW());
+END;
+//
+
+-- Log Delete User
+DELIMITER//
+CREATE TRIGGER log_delete_user
+AFTER DELETE on user
+FOR EACH ROW
+BEGIN
+INSERT INTO log_update_user (uuid, username, password, role, created_at, updated_at)
+VALUES (OLD.uuid, OLD.username, OLD.password, OLD.role, NOW(), NOW());
+END;
+//
