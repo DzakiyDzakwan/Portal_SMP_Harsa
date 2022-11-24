@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('kategori_nilai')->nullable(false)->references('kategori_nilai_id')->on('kategori_nilai');
             $table->timestamp('waktu_mulai')->nullable(false);
             $table->timestamp('waktu_akhir')->nullable(false);
-            $table->timestamp()->nullable(false);
+            $table->timestamps();
         });
     }
 

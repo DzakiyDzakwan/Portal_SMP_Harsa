@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('waktu_akhir');
             $table->string('tempat', 50);
             $table->string('kelas', 20);
-            $table->timestamp();
+            $table->timestamps();
 
 
         });
