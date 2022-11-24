@@ -89,22 +89,6 @@
                               role="tab"
                               >Prestasi</a
                             >
-                            <a
-                              class="list-group-item list-group-item-action"
-                              id="list-settings-list"
-                              data-bs-toggle="list"
-                              href="#list-settings"
-                              role="tab"
-                              >Jadwal</a
-                            >
-                            <a
-                              class="list-group-item list-group-item-action"
-                              id="list-settings-list"
-                              data-bs-toggle="list"
-                              href="#list-absens"
-                              role="tab"
-                              >Absensi</a
-                            >
                           </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-8 mt-1">
@@ -165,32 +149,6 @@
                               eiusmod deserunt. Consectetur et fugiat anim do
                               eiusmod aliquip nulla laborum elit adipisicing
                               pariatur cillum.
-                            </div>
-                            <div
-                              class="tab-pane"
-                              id="list-settings"
-                              role="tabpanel"
-                              aria-labelledby="list-settings-list"
-                            >
-                              Irure enim occaecat labore sit qui aliquip
-                              reprehenderit amet velit. Deserunt ullamco ex elit
-                              nostrud ut dolore nisi officia magna sit occaecat
-                              laboris sunt dolor. Nisi eu minim cillum occaecat
-                              aute est cupidatat aliqua labore aute occaecat ea
-                              aliquip sunt amet. Aute mollit dolor ut
-                              exercitation irure commodo non amet consectetur
-                              quis amet culpa. Quis ullamco nisi amet qui aute
-                              irure eu. Magna labore dolor quis ex labore id
-                              nostrud deserunt dolor eiusmod eu pariatur culpa
-                              mollit in irure
-                            </div>
-                            <div
-                              class="tab-pane"
-                              id="list-absens"
-                              role="tabpanel"
-                              aria-labelledby="list-settings-list"
-                            >
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis natus dolores dolorum, officiis consectetur consequuntur at itaque optio aperiam beatae impedit alias exercitationem consequatur tempore dicta odit commodi animi aspernatur?
                             </div>
                           </div>
                         </div>
