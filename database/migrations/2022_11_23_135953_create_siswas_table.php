@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('tanggal_masuk');
             $table->string('kelas_awal');
             $table->enum('semester', ['1', '2', '3', '4', '5', '6']);
-            $table->integer('anak_ke', 2)->nullable();
+            $table->integer('anak_ke')->nullable();
             $table->string('nama_ayah')->nullable();
             $table->string('pekerjaan_ayah')->nullable();
             $table->string('nama_ibu')->nullable();

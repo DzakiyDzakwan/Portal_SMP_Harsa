@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['LK', 'PR']);
             $table->string('email')->nullable();
             $table->string('foto')->nullable();
-            $table->foreign('user_id')->references('uuid')->on('users');
+            $table->foreign('user')->references('uuid')->on('users');
             $table->timestamps();
         });
     }
