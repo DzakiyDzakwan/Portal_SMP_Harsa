@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kategori_nilai', function (Blueprint $table) {
-            $table->char('kategori_nilai_id', 3)->nullable(false)->primary();
-            $table->enum('nama' ,['harian', 'uts', 'uas']);
+        Schema::create('sesi_penilaians', function (Blueprint $table) {
+            $table->bigInteger('sesi_id')->primary();
+            $table->enum('kategori_nilai', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
+            $table->year('tahun_ajaran');
+            $table->time('waktu_mulai');
+            $table->time('waktu_akhir');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori_nilai');
+        Schema::dropIfExists('sesi_penilaians');
     }
 };
