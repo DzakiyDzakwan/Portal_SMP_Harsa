@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('_sesi_penilaian', function (Blueprint $table) {
-            $table->bigInteger('sesi_penilaian')->nullable(false)->primary();
-            $table->char('kategori_nilai', 3)->nullable(false);
-            $table->foreign('kategori_nilai')->nullable(false)->references('kategori_nilai_id')->on('kategori_nilai');
+        Schema::create('ekskuls', function (Blueprint $table) {
+            $table->char('ekskul_id', 5)->primary();
+            $table->string('nama');
+            $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->time('waktu_mulai');
-            $table->timestamp('waktu_akhir');
+            $table->time('waktu_akhir');
+            $table->string('tempat');
+            $table->char('kelas', 1);
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_sesi_penilaian');
+        Schema::dropIfExists('ekskuls');
     }
 };

@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mata_pelajaran', function (Blueprint $table) {
-            $table->integer('mapel_id')->primary();
-            $table->string('nama_mapel', 255)->nullable(false);
-            $table->enum('kelompok_mapel' ,['A', 'B'])->nullable(false);
-            $table->enum('KKM', ['81', '82', '83', '84'])->nullable(false);
+        Schema::create('konfirmasis', function (Blueprint $table) {
+            $table->bigInteger('konfirmasi_id')->primary();
+            $table->bigInteger('pelunasan');
+            $table->text('keterangan')->nullable();
+            $table->enum('status', ['pending', 'accepted', 'rejected']);
+            $table->foreign('pelunasan')->references('pelunasan_id')->on('pelunasans');
             $table->timestamps();
-
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_mata__pelajaran');
+        Schema::dropIfExists('konfirmasis');
     }
 };
