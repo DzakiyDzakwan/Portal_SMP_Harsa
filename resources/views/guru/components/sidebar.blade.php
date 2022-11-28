@@ -115,7 +115,7 @@
         
                 <li class="sidebar-item has-sub @if($pages === 'inputNilai') active  @endif">
                     <a href="#" class="sidebar-link">
-                        <i class="bi bi-grid-1x2-fill"></i>
+                        <i class="bi bi-clipboard-heart-fill"></i>
                         <span>Manajemen Nilai</span>
                     </a>
                     <ul class="submenu  @if($pages === 'inputNilai') active  @endif">
@@ -125,12 +125,25 @@
                         <li class="submenu-item @if($pages === 'inputNilai' && $semester === 'Semester') active  @endif">
                             <a href="/pilih-kelas2">Nilai Semester</a>
                         </li>
-                        <li class="submenu-item">
-                            <a href="/input-absen">Absen</a>
-                        </li>
                     </ul>
                 </li>
 
+
+                <li class="sidebar-item has-sub @if($pages === 'inputAbsen') active  @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-calendar-heart-fill"></i>
+                        <span>Manajemen Absen</span>
+                    </a>
+                    <ul class="submenu  @if($pages === 'inputAbsen') active  @endif">
+                        {{-- if login as wk --}}
+                        <li class="submenu-item @if($pages === 'inputAbsen' && $ganjil === 'ganjil') active  @endif">
+                            <a href="/input-absen">Semester Ganjil</a>
+                        </li>
+                        <li class="submenu-item @if($pages === 'inputAbsen' && $genap === 'genap') active  @endif">
+                            <a href="/input-absen2">Semester Genap</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

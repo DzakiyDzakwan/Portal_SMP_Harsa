@@ -24,7 +24,7 @@
                     <a href="/dashboard-guru">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    Absen
+                    Rekapitulasi Absen
                 </li>
             </ol>
         </nav>
@@ -87,8 +87,8 @@
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                        <h6 class="text-muted font-semibold">Jumlah Kelas</h6>
-                        <h6 class="font-extrabold mb-0">2</h6>
+                        <h6 class="text-muted font-semibold">Nama Kelas</h6>
+                        <h6 class="font-extrabold mb-0">Abdullah</h6>
                     </div>
                 </div>
             </div>
@@ -97,46 +97,33 @@
 </div>
 <div class="card">
     <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-        <h5>List Siswa</h5>
+        <h5>Rekapitulasi Absen</h5>
     </div>
     <div class="card-body">
-        <table class="table table-bordered" id="table1">
+        <table class="table table-bordered mb-0">
             <thead>
                 <tr>
                     <th rowspan="2">Nama</th>
-                    <th rowspan="2">Kelas</th>
-                    <th colspan="3">Keterangan</th>
-                    <th rowspan="2">Action</th>
+                    <th rowspan="2">NISN</th>
+                    <td colspan="4">Semester 1</td>
+                    <th rowspan="2">Persentase</th>
                 </tr>
                 <tr>
-                    <th>Absen</th>
-                    <th>Izin</th>
-                    <th>Sakit</th>
+                    <th>A</th>
+                    <th>I</th>
+                    <th>S</th>
+                    <th>Jumlah</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Graiden</td>
                     <td>7A</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>
-                        {{-- Add Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add">
-                                <i class="bi bi-plus-circle"></i>
-                            </button>
-                        </div>
-                        {{-- Update Button --}}
-                        <div class="modal-warning me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#update">
-                                <i class="bi bi-pencil"></i></a>
-                            </button>
-                        </div>
-                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Dale</td>
@@ -144,27 +131,83 @@
                     <td>1</td>
                     <td>2</td>
                     <td>3</td>
-                    <td>
-                        {{-- Add Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add">
-                                <i class="bi bi-plus-circle"></i>
-                            </button>
-                        </div>
-                        {{-- Update Button --}}
-                        <div class="modal-warning me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#update">
-                                <i class="bi bi-pencil"></i></a>
-                            </button>
-                        </div>
-                    </td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <div class="form-group  px-3 pt-2 modal-footer">
+        <a href="#" class="btn icon icon-left btn-success px-3"><i
+                data-feather="printer"></i>
+            Cetak</a>
+    </div>
 </div>
+
+
+{{-- Modal Preview --}}
+<div
+    class="modal fade text-left"
+    id="info"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel130"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title white" id="myModalLabel130">
+                    Detail Absensi Semester Ganjil
+                </h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#">
+                    <div class="modal-body">
+                        <form action="#">
+                            <div class="modal-body">
+                                <label>Total Absen: </label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" readonly />
+                                </div>
+                                <label>Total Izin: </label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" readonly />
+                                </div>
+                                <label>Total Sakit: </label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {{-- Modal Add --}}
 <div

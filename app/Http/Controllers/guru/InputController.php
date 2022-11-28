@@ -52,9 +52,30 @@ class InputController extends Controller
     }
 
 
-    public function inputAbsen(){
-        $pages = 'inputNilai';
-        return view('guru.absen', [
+    public function inputAbsen1(){
+        $pages = 'inputAbsen';
+        $ganjil = 'ganjil';
+        $genap = 'g';
+        return view('guru.absen1', [
+            'pages' => $pages,
+            'ganjil' => $ganjil,
+            'genap' => $genap
+        ]);
+    }
+    public function inputAbsen2(){
+        $pages = 'inputAbsen';
+        $genap = 'genap';
+        $ganjil = 'g';
+        return view('guru.absen2', [
+            'pages' => $pages,
+            'genap' => $genap,
+            'ganjil' => $ganjil
+        ]);
+    }
+    
+    public function rekapAbsen(){
+        $pages = 'rekapAbsen';
+        return view('guru.absen3', [
             'pages' => $pages
         ]);
     }
