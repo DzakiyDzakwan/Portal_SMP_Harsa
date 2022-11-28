@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('gurus', function (Blueprint $table) {
             $table->char('NIP', 18)->primary();
-            $table->char('user', 36);
+            $table->uuid('user');
             $table->enum('jabatan', ['wks', 'bk', 'guru']);
             $table->string('pendidikan')->nullable();
             $table->year('tahun_ijazah')->nullable();
@@ -37,4 +37,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('gurus');
     }
+    
 };

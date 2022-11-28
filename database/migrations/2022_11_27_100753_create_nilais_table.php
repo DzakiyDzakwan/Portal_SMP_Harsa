@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nilais', function (Blueprint $table) {
-            $table->bigInteger('nilai_id')->primary();
+            $table->id("nilai_id");
             $table->char('siswa', 10);
-            $table->char('mata_pelajaran', 3);
+            $table->char('mapel', 3);
             $table->enum('kategori', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
             $table->enum('semester', ['1', '2', '3', '4', '5', '6']);
             $table->year('tahun_ajaran');

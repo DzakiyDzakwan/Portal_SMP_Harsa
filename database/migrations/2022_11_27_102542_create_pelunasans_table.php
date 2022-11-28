@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pelunasans', function (Blueprint $table) {
-            $table->bigInteger('pelunasan_id')->primary();
-            $table->bigInteger('tagihan_id');
+            $table->id('pelunasan_id');
+            $table->bigInteger('tagihan')->unsigned();
             $table->text('keterangan');
             $table->string('bukti');
-            $table->foreign('tagihan_id')->references('tagihan_id')->on('tagihan_spps');
+            $table->foreign('tagihan')->references('tagihan_id')->on('tagihan_spps');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tagihan_spps', function (Blueprint $table) {
-            $table->bigInteger('tagihan_id')->primary();
+            $table->id('tagihan_id');
             $table->char('siswa', 10);
             $table->enum('bulan', ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
             $table->year('tahun_ajaran');
