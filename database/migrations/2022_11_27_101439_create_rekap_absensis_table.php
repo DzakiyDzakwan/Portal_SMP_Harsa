@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('rekap_absensis', function (Blueprint $table) {
-            $table->char('absensi_id', 5)->primary();
+            $table->id('absensi_id');
             $table->char('siswa', 10);
             $table->integer('sakit');
             $table->integer('izin');

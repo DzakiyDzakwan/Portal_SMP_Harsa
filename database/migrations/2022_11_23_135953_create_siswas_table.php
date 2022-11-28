@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('siswas', function (Blueprint $table) {
             $table->char('NISN', 10)->primary();
             $table->char('ruang_kelas', 3);
-            $table->char('user', 36);
+            $table->uuid('user');
             $table->char('NIS', 4);
             $table->date('tanggal_masuk');
             $table->string('kelas_awal');
