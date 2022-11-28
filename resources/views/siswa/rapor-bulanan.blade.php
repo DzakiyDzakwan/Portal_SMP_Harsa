@@ -12,10 +12,17 @@
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-right">
+                    <li class="breadcrumb-item"><a href="/rapor">Rapor</a></li>
+                    <li class="breadcrumb-item"><a href="/pilih-rapor-ganjil-7">Pilih-rapor</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Rapor-bulanan</li>
+                </ol>
+            </nav>
             <div
                 class="col-12 col-md-6 order-md-1 order-last"
             >
-                <h3>Rapor Bulanan</h3>
+                <h3>Rapor Bulanan Semester Ganjil</h3>
             </div>
         </div>
     </div>

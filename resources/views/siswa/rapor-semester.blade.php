@@ -12,34 +12,26 @@
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-right">
+                    <li class="breadcrumb-item"><a href="/rapor">Rapor</a></li>
+                    <li class="breadcrumb-item"><a href="/pilih-rapor-ganjil-7">Pilih-rapor</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Rapor-semester</li>
+                </ol>
+            </nav>
             <div
-                class="col-12 col-md-6 order-md-1 order-last"
+                class="col-12 col-lg-12 col-md-6 order-md-1 order-last"
             >
                 <h3>Rapor Semester</h3>
             </div>
         </div>
     </div>
     <div class="page-content">
-        <section class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <p>Pilih rapor semester berapa yang ingin dilihat.</p>
-                        <fieldset class="form-group">
-                            <select class="form-select" id="basicSelect">
-                                <option>3</option>
-                                <option>2</option>
-                                <option>1</option>
-                            </select>
-                        </fieldset>
-                    </div>
-                </div>
-            </div>
-
+        <section class="row mt-3">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Rapor Semester 2 (Kelas VII Semester Genap)</h5>
+                        <h5>Rapor Semester Ganjil</h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

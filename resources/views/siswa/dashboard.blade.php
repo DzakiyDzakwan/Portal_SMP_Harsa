@@ -20,8 +20,8 @@
         <div class="page-content">
             <section class="row">
                 <div class="col-12">
-                    <div class="row mb-3">
-                        <div class="col-lg-4 col-md-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
                             <div class="card bg-danger">
                                 <div class="card-body">
                                     <div class="row">
@@ -29,13 +29,13 @@
                                         <h6 class="alert-heading mb-3 text-light">Rp 2.250.000</h6>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-12 mt-2">
+                                        {{-- <div class="col-lg-6 col-md-12 mt-2">
                                             <a href="/tagihan-spp" class="btn btn-primary btn-sm"><i
                                                     class="bi bi-card-list"></i>
                                                 &nbspDaftar Tagihan</a>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-lg-6 col-md-12 mt-2">
-                                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#inlineForm">
                                                 <i class="bi bi-file-check"></i> &nbspKonfirmasi SPP
                                             </button>
@@ -45,7 +45,7 @@
                                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                     role="document">
                                                     <div class="modal-content">
-                                                        <div class="modal-header bg-success">
+                                                        <div class="modal-header bg-primary">
                                                             <h4 class="modal-title white" id="myModalLabel33">Konfirmasi SPP
                                                             </h4>
                                                             <button type="button" class="close" data-bs-dismiss="modal"
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         {{-- Profil Singkat --}}
-                        <div class="col-lg-8 col-md-12">
+                        <div class="col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <h4>Profil Singkat</h4>
