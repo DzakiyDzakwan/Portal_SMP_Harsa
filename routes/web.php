@@ -86,13 +86,17 @@ Route::get('/profil-guru', [guru\ProfilController::class, 'profilGuru'])->name('
 Route::get('/edit-profil-guru', [guru\ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
 //List-Kelas
 Route::get('/list-kelas', [guru\ListkelasController::class, 'index'])->name('listKelas');
-//Input
+//Input-NilaiBulanan
 Route::get('/pilih-kelas', [guru\InputController::class, 'pilihKelas1'])->name('pilihKelas');
 Route::get('/input-nilai', [guru\InputController::class, 'inputNilai1'])->name('inputNilai');
+//Input-NilaiSemester
 Route::get('/pilih-kelas2', [guru\InputController::class, 'pilihKelas2'])->name('pilihKelas2');
 Route::get('/input-nilai2', [guru\InputController::class, 'inputNilai2'])->name('inputNiai2');
-Route::get('/input-absen', [guru\InputController::class, 'inputAbsen'])->name('inputAbsen');
-
+//Input-Absen
+Route::get('/input-absen', [guru\InputController::class, 'inputAbsen1'])->name('inputAbsen');
+Route::get('/input-absen2', [guru\InputController::class, 'inputAbsen2'])->name('inputAbsen2');
+//Rekapitulasi-Absen
+Route::get('/rekap-absen', [guru\InputController::class, 'rekapAbsen'])->name('rekapAbsen');
 
 Route::get('/test', function () {
     return view('test');
