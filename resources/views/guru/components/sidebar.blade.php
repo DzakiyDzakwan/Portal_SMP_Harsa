@@ -118,9 +118,12 @@
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Manajemen Nilai</span>
                     </a>
-                    <ul class="submenu">
-                        <li class="submenu-item">
-                            <a href="/input-nilai">Nilai</a>
+                    <ul class="submenu  @if($pages === 'inputNilai') active  @endif">
+                        <li class="submenu-item @if($pages === 'inputNilai' && $bulan == 'Bulanan') active  @endif">
+                            <a href="/pilih-kelas">Nilai Bulanan</a>
+                        </li>
+                        <li class="submenu-item @if($pages === 'inputNilai' && $semester === 'Semester') active  @endif">
+                            <a href="/pilih-kelas2">Nilai Semester</a>
                         </li>
                         <li class="submenu-item">
                             <a href="/input-absen">Absen</a>

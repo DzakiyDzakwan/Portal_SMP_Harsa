@@ -87,7 +87,10 @@ Route::get('/edit-profil-guru', [guru\ProfilController::class, 'editProfilGuru']
 //List-Kelas
 Route::get('/list-kelas', [guru\ListkelasController::class, 'index'])->name('listKelas');
 //Input
-Route::get('/input-nilai', [guru\InputController::class, 'inputNilai'])->name('inputNilai');
+Route::get('/pilih-kelas', [guru\InputController::class, 'pilihKelas1'])->name('pilihKelas');
+Route::get('/input-nilai', [guru\InputController::class, 'inputNilai1'])->name('inputNilai');
+Route::get('/pilih-kelas2', [guru\InputController::class, 'pilihKelas2'])->name('pilihKelas2');
+Route::get('/input-nilai2', [guru\InputController::class, 'inputNilai2'])->name('inputNiai2');
 Route::get('/input-absen', [guru\InputController::class, 'inputAbsen'])->name('inputAbsen');
 
 
