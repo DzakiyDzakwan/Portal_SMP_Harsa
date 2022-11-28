@@ -179,7 +179,7 @@
                         style="min-width: 11rem"
                     >
                         <li>
-                            <a class="dropdown-item" href="#"
+                            <a class="dropdown-item" href="/profil-siswa"
                                 ><i
                                     class="icon-mid bi bi-person me-2"
                                 ></i>

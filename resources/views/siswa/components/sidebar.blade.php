@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex flex-column align-items-center">
                 <div class="logo">
-                    <a href="index.html"><img src="assets/images/logo/logo.svg" alt="Logo" srcset="" /></a>
+                    <a href="/dashboard-siswa"><img src="assets/images/logo/logo-harapan.png" alt="Logo" srcset=""/></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -49,28 +49,21 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-
-                <li class="sidebar-item @if ($pages === 'dashboard') active @endif">
-                    <a href="/profil-siswa" class="sidebar-link">
-                        <i class="bi bi-person-fill"></i>
-                        <span>Profil</span>
+                {{-- SPP --}}
+                <li class="sidebar-title">SPP</li>
+                <li class="sidebar-item @if ($pages === 'tagihanSPP') active @endif">
+                    <a href="/tagihan-spp" class="sidebar-link">
+                        <i class="bi bi-hexagon-fill"></i>
+                        <span>Daftar Tagihan SPP</span>
                     </a>
                 </li>
-
-                <li class="sidebar-title">Akademik</li>
-                <li class="sidebar-item has-sub @if ($pages === 'rapor-bulanan' || $pages === 'rapor-semester') active @endif">
-                    <a href="#" class="sidebar-link">
+                {{-- Rapor --}}
+                <li class="sidebar-title">Hasil Pembelajaran</li>
+                <li class="sidebar-item @if ($pages === 'rapor' || $pages === 'pilih-rapor-ganjil-7' || $pages === 'pilih-rapor-genap-7' || $pages === 'rapor-bulanan' || $pages === 'rapor-semester') active @endif">
+                    <a href="/rapor" class="sidebar-link">
                         <i class="bi bi-file-ruled-fill"></i>
                         <span>Rapor</span>
                     </a>
-                    <ul class="submenu">
-                        <li class="submenu-item @if ($pages === 'rapor-bulanan') active @endif">
-                            <a href="/rapor-bulanan">Rapor Bulanan</a>
-                        </li>
-                        <li class="submenu-item @if ($pages === 'rapor-semester') active @endif">
-                            <a href="/rapor-semester">Rapor Semester</a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </div>
