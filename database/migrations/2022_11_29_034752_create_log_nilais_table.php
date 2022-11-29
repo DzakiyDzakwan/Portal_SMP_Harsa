@@ -17,10 +17,9 @@ return new class extends Migration
             $table->BIGINT('id')->primary();
             $table->BIGINT('nilai_id');
             $table->CHAR('siswa', 10);
-            $table->CHAR('mata_pelajaran', 3);
+            $table->CHAR('mapel', 3);
             $table->ENUM('kategori', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
-            $table->ENUM('n_semester', ['1', '2', '3', '4', '5', '6'])->nullable();
-            $table->ENUM('o_semester', ['1', '2', '3', '4', '5', '6'])->nullable();
+            $table->ENUM('semester', ['1', '2', '3', '4', '5', '6']);
             $table->integer('tahun_ajaran');
             $table->integer('n_kkm')->nullable();
             $table->integer('o_kkm')->nullable();

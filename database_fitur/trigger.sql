@@ -328,37 +328,95 @@ VALUES (OLD.prestasi_id, OLD.siswa, OLD.jenis_prestasi, OLD.keterangan, OLD.tang
 END?
 DELIMITER ;
 
+--Nilai--
+--Log Insert Nilai
+DELIMITER ?
+CREATE TRIGGER log_insert_nilai
+AFTER INSERT ON nilais
+FOR EACH ROW
+BEGIN
+INSERT INTO log_nilais(nilai_id, siswa, mapel, kategori, semester, tahun_ajaran, n_kkm, n_nilai_pengetahuan, n_deskripsi_pengetahuan, n_nilai_keterampilan, n_deskripsi_keterampilan, keterangan, created_at)
+VALUES (NEW.nilai_id, NEW.siswa, NEW.mapel, NEW.kategori, NEW.semester, NEW.tahun_ajaran, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, "insert", NOW());
+END?
+DELIMITER;
 
------------------------------------------------------------
+--Log Update Nilai
+DELIMITER ?
+CREATE TRIGGER log_insert_nilai
+AFTER UPDATE ON nilais
+FOR EACH ROW
+BEGIN
+INSERT INTO log_nilais(nilai_id, siswa, mapel, kategori, semester, tahun_ajaran, n_kkm, o_kkm, n_nilai_pengetahuan, o_nilai_pengetahuan, n_deskripsi_pengetahuan, o_deskripsi_pengetahuan, n_nilai_keterampilan, o_nilai_keterampilan, n_deskripsi_keterampilan, o_deskripsi_keterampilan, keterangan, created_at)
+VALUES (OLD.nilai_id, OLD.siswa, OLD.mapel, OLD.kategori, OLD.semester, OLD.tahun_ajaran, NEW.kkm, OLD.kkm. NEW.nilai_pengetahuan, OLD.nilai_pengetahuan, NEW.deskripsi_pengetahuan, OLD.deskripsi_pengetahuan, NEW.nilai_keterampilan, OLD.nilai_keterampilan, NEW.deskripsi_keterampilan, OLD.deskripsi_keterampilan, "update", NOW());
+END?
+DELIMITER;
+
+--Log Delete Nilai
+DELIMITER ?
+CREATE TRIGGER log_insert_nilai
+AFTER DELETE ON nilais
+FOR EACH ROW
+BEGIN
+INSERT INTO log_nilais(nilai_id, siswa, mapel, kategori, semester, tahun_ajaran, o_kkm, o_nilai_pengetahuan, o_deskripsi_pengetahuan, o_nilai_keterampilan, o_deskripsi_keterampilan, keterangan, created_at)
+VALUES (OLD.nilai_id, OLD.siswa, OLD.mapel, OLD.kategori, OLD.semester, OLD.tahun_ajaran, OLD.kkm, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, "delete", NOW());
+END?
+DELIMITER;
+
+--Rekap Absensi--
+-- Log Insert Rekap Absensi
+DELIMITER ?
+CREATE TRIGGER log_insert_rekap_absensi
+AFTER INSERT on rekap_absensis
+FOR EACH ROW
+BEGIN
+INSERT INTO log_insert_rekap_absensis (absensi_id, siswa, n_sakit, n_izin, n_tanpa_keterangan, semester, tahun_ajaran, keterangan, created_at)
+VALUES (NEW.absensi_id, NEW.siswa, NEW.sakit, NEW.izin, NEW.tanpa_keterangan, NEW.semester, NEW.tahun_ajaran, "insert", NOW());
+END?
+DELIMITER ;
 
 -- Log Update Rekap Absensi
-DELIMITER//
-CREATE TRIGGER log_update_rekap_absensi
-BEFORE UPDATE on rekap_absensi
+DELIMITER?
+CREATE TRIGGER log_update_rekap_absensis
+AFTER UPDATE on rekap_absensis
 FOR EACH ROW
 BEGIN
-INSERT INTO log_update_rekap_absensi (absensi_id, siswa, sakit, izin, tanpa_keterangan, semester, created_at)
-VALUES (OLD.absensi_id, OLD.siswa, NEW.sakit, NEW.izin, NEW.tanpa_keterangan, OLD.semester, NOW());
+INSERT INTO log_rekap_absensis (absensi_id, siswa, n_sakit, o_sakit, n_izin, o_izin, n_tanpa_keterangan, o_tanpa_keterangan, semester, tahun_ajaran, keterangan, created_at)
+VALUES (OLD.absensi_id, OLD.siswa, NEW.sakit, OLD.sakit, NEW.izin, OLD.izin, NEW.tanpa_keterangan, OLD.tanpa_keterangan, OLD.semester, OLD.tahun_ajaran, "update", NOW());
 END?
-
--- Log Insert Rekap Absensi
-CREATE TRIGGER log_insert_rekap_absensi
-AFTER INSERT on rekap_absensi
-FOR EACH ROW
-BEGIN
-INSERT INTO log_insert_rekap_absensi (absensi_id, siswa, sakit, izin, tanpa_keterangan, semester, created_at)
-VALUES (NEW.absensi_id, NEW.siswa, NEW.sakit, NEW.izin, NEW.tanpa_keterangan, NEW.semester, NOW());
-END?
+DELIMITER;
 
 -- Log Delete Rekap Absensi
-CREATE TRIGGER log_delete_rekap_absensi
-BEFORE DELETE on rekap_absensi
+CREATE TRIGGER log_delete_rekap_absensis
+AFTER DELETE on rekap_absensis
 FOR EACH ROW
 BEGIN
-INSERT INTO log_insert_rekap_absensi (absensi_id, siswa, sakit, izin, tanpa_keterangan, semester, created_at)
-VALUES (OLD.absensi_id, OLD.siswa, OLD.sakit, OLD.izin, OLD.tanpa_keterangan, OLD.semester, NOW());
+INSERT INTO log_rekap_absensis (absensi_id, siswa, o_sakit, o_izin, o_tanpa_keterangan, semester, tahun_ajaran, keterangan, created_at)
+VALUES (OLD.absensi_id, OLD.siswa, OLD.sakit, OLD.izin, OLD.tanpa_keterangan, OLD.semester, OLD.tahun_ajaran, "delete", NOW());
 END?
-//
+
+--Ekstrakulikuler--
+-- Log Insert Rekap Absensi
+DELIMITER ?
+CREATE TRIGGER log_insert_ekskul
+AFTER INSERT on ekskuls
+FOR EACH ROW
+BEGIN
+INSERT INTO log_ekskuls (n_ekskul_id, n_nama, n_hari, n_waktu_mulai, n_waktu_akhir, n_tempat, n_kelas, keterangan, created_at)
+VALUES (NEW.ekskul_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.waktu_akhir, NEW.tempat, NEW.kelasn, "insert", NOW());
+END?
+DELIMITER ;
+
+-- Log Delete Rekap Ekskul
+DELIMITER ?
+CREATE TRIGGER log_delete_ekskul
+AFTER DELETE on ekskuls
+FOR EACH ROW
+BEGIN
+INSERT INTO log_ekskuls (o_ekskul_id, o_nama, o_hari, o_waktu_mulai, o_waktu_akhir, o_tempat, o_kelas, keterangan, created_at)
+VALUES (OLD.ekskul_id, OLD.nama, OLD.hari, OLD.waktu_mulai, OLD.waktu_akhir, OLD.tempat, OLD.kelasn, "delete", NOW());
+END?
+DELIMITER ;
+
 
 -- Log Update Konfirmasi Pelunasan
 DELIMITER?
@@ -369,37 +427,4 @@ BEGIN
 INSERT INTO log_update_konfirmasi_pelunasan (konfirmasi_id, pelunasan, keterangan, status)
 VALUES (OLD.konfirmasi_id, OLD.pelunasan, NEW.keterangan, 'LUNAS');
 END?
-?
-
--- Log Update Roster Kelas
-DELIMITER!
-CREATE TRIGGER log_update_roster_kelas
-AFTER UPDATE on Roster_kelas
-FOR EACH ROW
-BEGIN
-INSERT INTO log_update_roster_kelas (roster_id, Mapel_guru, ruang_kelas, jam_masuk, jam_keluar, hari)
-VALUES (OLD.roster_id, OLD.Mapel_guru, OLD.ruang_kelas, NEW.jam_masuk, NEW.jam_keluar, NEW.hari);
-END;
-!
-
--- Log  Update Nilai
-DELIMITER!
-CREATE TRIGGER log_insert_nilai
-AFTER UPDATE on nilai
-FOR EACH ROW
-BEGIN
-INSERT INTO log_insert_nilai (nilai_id, semester, tahun_pelajaran, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, kategori_nilai, siswa, mata_pelajaran, created_at, updated_at)
-VALUES (OLD.nilai_id, OLD.semester, OLD.tahun_pelajaran, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.kategori_nilai, NEW.siswa, NEW.mata_pelajaran, NOW(), NOW());
-END;
-!
-
--- Log  Delete Nilai
-DELIMITER!
-CREATE TRIGGER log_delete_nilai
-AFTER DELETE on nilai
-FOR EACH ROW
-BEGIN
-INSERT INTO log_insert_nilai (nilai_id, semester, tahun_pelajaran, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, kategori_nilai, siswa, mata_pelajaran, created_at, updated_at)
-VALUES (OLD.nilai_id, OLD.semester, OLD.tahun_pelajaran, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, OLD.kategori_nilai, OLD.siswa, OLD.mata_pelajaran, NOW(), NOW());
-END;
-!
+DELIMITER ;
