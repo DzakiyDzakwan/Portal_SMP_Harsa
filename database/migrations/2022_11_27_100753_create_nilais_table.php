@@ -26,7 +26,7 @@ return new class extends Migration
             $table->float('nilai_keterampilan');
             $table->text('deskripsi_keterampilan');
             $table->foreign('siswa')->references('NISN')->on('siswas');
-            $table->foreign('mata_pelajaran')->references('mapel_id')->on('mapels');
+            $table->foreign('mapel')->references('mapel_id')->on('mapels');
             $table->timestamps();
         });
     }
