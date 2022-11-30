@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->char('user', 36);
             $table->enum('transaksi', ['insert', 'update', 'delete']);
-            $table->string('table', 255);
+            $table->string('at', 255);
             $table->timestamp('created_at');
         });
     }
