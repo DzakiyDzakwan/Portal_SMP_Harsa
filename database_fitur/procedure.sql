@@ -101,6 +101,40 @@ DELIMITER ;
 /* Registrasi Guru End */
 
 
+/* Registrasi Admin */
+DELIMITER ?
+CREATE PROCEDURE registrasi_admin(
+    IN nama VARCHAR(255),
+    IN pass VARCHAR(255),
+    IN jk CHAR(2),
+    IN admin CHAR(36)
+)
+BEGIN
+
+    DECLARE errno INT;
+    DECLARE uuid CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    DECLARE exit handler for sqlwarning
+    BEGIN
+        ROLLBACK;
+    END;
+
+    SET uuid = UUID();
+
+    START TRANSACTION;
+    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
+    VALUES (uuid, nip, pass, "admin", NOW(), NOW());
+
+    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
+    VALUES (uuid, nama, jk, NOW(), NOW());
+    COMMIT;
+END?
+DELIMITER ;
+/* Registrasi Admin End */
+
 /* Input Nilai */
 DELIMITER ?
 CREATE PROCEDURE input_nilai(

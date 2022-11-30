@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('log_tagihan_spps', function (Blueprint $table) {
-            $table->BIGINT('id')->primary();
-            $table->BIGINT('tagihan_id');
-            $table->CHAR('siswa', 10);
-            $table->ENUM('n_bulan', ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
-            $table->ENUM('o_bulan', ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
-            $table->year('n_tahun_ajaran');
-            $table->year('o_tahun_ajaran');
-            $table->ENUM('n_semester', ['1', '2', '3', '4', '5', '6']);
-            $table->ENUM('o_semester', ['1', '2', '3', '4', '5', '6']);
+            $table->id();
+            $table->bigInteger('tagihan_id');
+            $table->char('siswa', 10);
+            $table->enum('n_bulan', ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
+            $table->enum('o_bulan', ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
+            $table->string('n_tahun_ajaran');
+            $table->string('o_tahun_ajaran');
+            $table->enum('n_semester', ['1', '2', '3', '4', '5', '6']);
+            $table->enum('o_semester', ['1', '2', '3', '4', '5', '6']);
             $table->enum('keterangan', ['insert', 'update', 'delete']);
             $table->time('created_at');
         });

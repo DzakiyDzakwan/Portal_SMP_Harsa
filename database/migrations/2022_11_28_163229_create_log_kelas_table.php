@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('n_nama_kelas')->nullable();
             $table->string('o_nama_kelas')->nullable();
             $table->enum('keterangan', ['insert', 'update', 'delete']);
-            $table->time('created_at');
+            $table->timestamp('created_at');
         });
     }
 

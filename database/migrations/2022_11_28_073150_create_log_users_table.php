@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('o_password', 255)->nullable();
             $table->enum('role', ['Admin', 'Guru', 'Siswa']);
             $table->enum('keterangan', ['Insert', 'Update', 'Delete']);
-            $table->time('created_at');
+            $table->timestamp('created_at');
         });
     }
 

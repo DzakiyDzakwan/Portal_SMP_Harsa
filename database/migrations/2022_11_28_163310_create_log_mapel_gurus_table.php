@@ -19,7 +19,7 @@ return new class extends Migration
             $table->char('mapel',3);
             $table->char('guru', 18);
             $table->enum('keterangan', ['insert','delete']);
-            $table->time('created_at');
+            $table->timestamp('created_at');
         });
     }
 

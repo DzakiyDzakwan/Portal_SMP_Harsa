@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('log_pelunasan_tagihans', function (Blueprint $table) {
-            $table->BIGINT('id')->primary();
-            $table->BIGINT('pelunasan_id');
-            $table->BIGINT('tagihan_id');
-            $table->TEXT('n_keterangan');
-            $table->TEXT('o_keterangan');
-            $table->VARCHAR('n_bukti', 255);
-            $table->VARCHAR('o_bukti', 255);
+            $table->id();
+            $table->bigInteger('pelunasan_id');
+            $table->bigInteger('tagihan_id');
+            $table->text('n_keterangan');
+            $table->text('o_keterangan');
+            $table->string('n_bukti', 255);
+            $table->string('o_bukti', 255);
             $table->enum('keterangan', ['insert', 'update', 'delete']);
-            $table->time('created_at');
+            $table->timestamp('created_at');
         });
     }
 
