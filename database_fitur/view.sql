@@ -10,6 +10,7 @@ FROM kelas
     LEFT JOIN siswa ON siswa.ruang_kelas = kelas.kelas_id;
 
 
+
 /* Detail Siswa */
 CREATE VIEW detail_siswa AS
 SELECT user_profile.foto, user_profile.nama, s.nis, user_profile.jenis_kelamin, user_profile.tgl_lahir, user_profile.tempat_lahir
@@ -57,3 +58,13 @@ FROM user_profile
         FROM mapel
         LEFT JOIN mapel_guru ON mapel_guru.mapel = mapel.mapel_id
     ) AS m ON m.Guru = g.nip;
+
+--Detail Siswa Dashboard Admin--
+CREATE VIEW informasi_siswa AS
+SELECT s.status_keaktifan as Keterangan FROM siswas AS s JOIN users AS u ON s.user = u.uuid JOIN user_profiles AS p ON p.user = u.uuid GROUP BY s.status_keaktifan;
+
+SELECT COUNT(*) as Laki_Laki FROM siswas AS s JOIN users AS u ON s.user = u.uuid JOIN user_profiles AS p ON p.user = u.uuid WHERE p.jenis_kelamin = 'L';
+
+SELECT COUNT(*) as Laki_Laki FROM siswas AS s JOIN users AS u ON s.user = u.uuid JOIN user_profiles AS p ON p.user = u.uuid WHERE p.jenis_kelamin = 'P';
+
+--Detail Guru Dashboard Admin--
