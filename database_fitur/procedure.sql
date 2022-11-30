@@ -1,41 +1,14 @@
 /* Registrasi Siswa */
 DELIMITER ?
 CREATE PROCEDURE registrasi_siswa(
-    IN uuid CHAR(36),
     IN nama VARCHAR(255),
-    IN nisn CHAR(10)
+    IN nisn CHAR(10),
     IN nis CHAR(4),
     IN pass VARCHAR(255),
     IN tgl_masuk DATE,
     IN kelas_id CHAR(3),
-    IN jk CHAR(2)
-)
-BEGIN
-DECLACRE kls_awal VARCHAR;
-SELECT kelompok_kelas FROM kelas INTO kls_awal WHERE kelas_id = kelas_id;
-
-INSERT INTO user(uuid, username, password, role) 
-VALUES (uuid, nisn, pass, "siswa");
-
-INSERT INTO siswa(nisn, nis, ruang_kelas, kelas_awal, semester, status_keaktifan, user)
-VALUES(nisn, nis, kelas_id, kls_awal, '1', 'aktif', uuid);
-
-INSERT INTO user_profile(user, nama, jenis_kelamin)
-VALUES (uuid, nama, jk);
-
-END?
-DELIMITER ;
-/* Registrasi Siswa End */
-
-/* Registrasi Guru */
-DELIMITER ?
-CREATE PROCEDURE registrasi_guru(
-    IN nama VARCHAR(255),
-    IN nip CHAR(18),
-    IN jabatan CHAR(4),
-    IN pass VARCHAR(255),
-    IN tgl_masuk DATE,
-    IN jk CHAR(2)
+    IN jk CHAR(2),
+    IN admin CHAR(36)
 )
 BEGIN
 
@@ -53,14 +26,75 @@ BEGIN
     SET uuid = UUID();
 
     START TRANSACTION;
-    INSERT INTO users(uuid, username, password, role) 
-    VALUES (uuid, nip, pass, "guru");
 
-    INSERT INTO gurus(nip, jabatan, tanggal_masuk, status_keaktifan, is_wali_kelas, user)
-    VALUES(nip, jabatan, tgl_masuk, 'aktif', 'tidak', uuid);
+    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
+    VALUES (uuid, nisn, pass, "siswa", NOW(), NOW());
 
-    INSERT INTO user_profiles(user, nama, jenis_kelamin)
-    VALUES (uuid, nama, jk);
+    INSERT INTO log_activities(user, transaksi, table, created_at)
+    VALUES(admin, 'insert', "users", NOW());
+
+    INSERT INTO siswas(nisn, nis, ruang_kelas, kelas_awal, semester, status_keaktifan, user, created_at, updated_at)
+    VALUES(nisn, nis, kelas_id, kelas_id, '1', 'aktif', uuid, NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, table, created_at)
+    VALUES(admin, 'insert', "user_profiles", NOW());
+
+    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at ,updated_at)
+    VALUES (uuid, nama, jk, NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, table, created_at)
+    VALUES(admin, 'insert', "user_profiles", NOW());
+
+    COMMIT;
+
+END?
+DELIMITER ;
+/* Registrasi Siswa End */
+
+/* Registrasi Guru */
+DELIMITER ?
+CREATE PROCEDURE registrasi_guru(
+    IN nama VARCHAR(255),
+    IN nip CHAR(18),
+    IN jabatan CHAR(4),
+    IN pass VARCHAR(255),
+    IN tgl_masuk DATE,
+    IN jk CHAR(2),
+    IN admin CHAR(36)
+)
+BEGIN
+
+    DECLARE errno INT;
+    DECLARE uuid CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    DECLARE exit handler for sqlwarning
+    BEGIN
+        ROLLBACK;
+    END;
+
+    SET uuid = UUID();
+
+    START TRANSACTION;
+    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
+    VALUES (uuid, nip, pass, "guru", NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, table, created_at) 
+    VALUES(admin,'insert', "users", NOW());
+
+    INSERT INTO gurus(nip, jabatan, tanggal_masuk, status_keaktifan, is_wali_kelas, user, created_at, updated_at)
+    VALUES(nip, jabatan, tgl_masuk, 'aktif', 'tidak', uuid, NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, table, created_at) 
+    VALUES(admin,'insert', "gurus", NOW());
+
+    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
+    VALUES (uuid, nama, jk, NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, table, created_at) 
+    VALUES(admin,'insert', "user_profiles", NOW());
     COMMIT;
 END?
 DELIMITER ;

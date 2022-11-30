@@ -362,6 +362,25 @@ VALUES (OLD.nilai_id, OLD.siswa, OLD.mapel, OLD.kategori, OLD.semester, OLD.tahu
 END?
 DELIMITER;
 
+--Cek sesi penilaian
+DELIMITER ?
+CREATE TRIGGER validasi_nilai
+BEFORE INSERT ON nilais
+FOR EACH ROW
+BEGIN
+    IF (NEW.nilai_pengetahuan < 0 ) THEN
+        NEW.nilai_pengetahuan = 0;
+    ELSE IF (NEW.nilai_keterampilan < 0) THEN
+        NEW.nilai_keterampilan = 0;
+    ELSE IF (NEW.nilai_keterampilan < 0 AND NEW.nilai_pengetahuan < 0 ) THEN
+        NEW.nilai_keterampilan = 0;
+        NEW.nilai_pengetahuan = 0;
+    ELSE IF (NEW.nilai_pengetahuan > 100 OR NEW.nilai_keterampilan > 100) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT ="Error Nilai tidak dapat lebih dari 100";
+    END IF
+END?
+DELIMITER;
+
 --Rekap Absensi--
 -- Log Insert Rekap Absensi
 DELIMITER ?
