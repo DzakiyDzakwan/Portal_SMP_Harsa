@@ -1,70 +1,72 @@
 /* Table Kelas */
 CREATE VIEW table_kelas AS
-SELECT kelas.nama_kelas, kelas.nomor_kelas, kelas.ruangan, wk.wali_kelas, COUNT(siswa.nisn) AS Jumlah_Siswa
+SELECT kelas.nama_kelas, kelas.kelompok_kelas, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS Jumlah_Siswa
 FROM kelas
-    LEFT JOIN (
-        SELECT guru.nip AS id, user_profile.nama AS wali_kelas
-        FROM guru
-        LEFT JOIN user_profile ON guru.user = user_profile.user;
-    ) AS wk ON kelas.wali_kelas = wk.id,
-    LEFT JOIN siswa ON siswa.ruang_kelas = kelas.kelas_id;
-
+LEFT JOIN gurus ON kelas.wali_kelas = gurus.NIP 
+LEFT JOIN users ON gurus.user = users.uuid
+RIGHT JOIN user_profiles ON users.uuid = user_profiles.user
+RIGHT JOIN siswas ON siswas.ruang_kelas = kelas.kelas_id;
 
 
 /* Detail Siswa */
 CREATE VIEW detail_siswa AS
-SELECT user_profile.foto, user_profile.nama, s.nis, user_profile.jenis_kelamin, user_profile.tgl_lahir, user_profile.tempat_lahir
-FROM user_profile
-    LEFT JOIN(
-        SELECT siswa.user AS id, siswa.nis AS nip
-        FROM siswa
-        LEFT JOIN user ON id = user.uuid;
-    ) AS s ON user_profile.user = s.id;
-
+SELECT user_profiles.nama, siswas.NIS, user_profiles.jenis_kelamin, user_profiles.tgl_lahir
+FROM user_profiles 
+LEFT JOIN users ON user_profiles.user = users.uuid
+RIGHT JOIN siswas ON siswas.user = user_profiles.user;
 
 /* Detail Guru */
 CREATE VIEW detail_guru AS
 SELECT user_profile.foto, user_profile.nama, g.nip, user_profile.jenis_kelamin, user_profile.tgl_lahir, user_profile.tempat_lahir
-FROM user_profile
-    LEFT JOIN(
-        SELECT guru.user AS id, guru.nip AS nip 
-        FROM siswa
-        LEFT JOIN user ON id = user.uuid;
-    ) AS g ON user_profile.user = g.id;
-
+SELECT user_profiles.nama, gurus.NIP, user_profiles.jenis_kelamin, user_profiles.tgl_lahir
+FROM user_profiles 
+LEFT JOIN users ON user_profiles.user = users.uuid
+RIGHT JOIN gurus ON gurus.user = user_profiles.user;
 
 /* Table Siswa */
 CREATE VIEW table_siswa AS
-SELECT user_profile.nama, s.nis, user_profile.jenis_kelamin, user_profile.agama, s.status_aktif
-FROM user_profile
-    LEFT JOIN(
-        SELECT siswa.user AS id, siswa.nis AS nis, siswa.status_keaktifan AS status_aktif
-        FROM siswa
-        LEFT JOIN user ON id = user.uuid;
-    ) AS s ON user_profile.user = s.id;
-
+SELECT users.username, user_profiles.nama, siswas.NIS, user_profiles.jenis_kelamin, siswas.status_keaktifan
+FROM user_profiles
+LEFT JOIN users ON user_profiles.user = users.uuid
+RIGHT JOIN siswas ON siswas.user = user_profiles.user;
 
 /* Table Guru */
-CREATE VIEW table_siswa AS
-SELECT user_profile.nama, g.nip, m.mapel, user_profile.jenis_kelamin, user_profile.agama, g.status_aktif
-FROM user_profile
-    LEFT JOIN(
-        SELECT guru.user AS id, guru.nip AS nip, guru.status_keaktifan AS status_aktif
-        FROM guru
-        LEFT JOIN user ON id = user.uuid;
-    ) AS g ON user_profile.user = g.id;
-    JOIN (
-        SELECT mapel.nama_mapel AS mapel
-        FROM mapel
-        LEFT JOIN mapel_guru ON mapel_guru.mapel = mapel.mapel_id
-    ) AS m ON m.Guru = g.nip;
+CREATE VIEW table_guru AS
+SELECT users.username, user_profiles.nama, gurus.NIP, user_profiles.jenis_kelamin, gurus.status_keaktifan
+FROM user_profiles
+LEFT JOIN users ON user_profiles.user = users.uuid
+RIGHT JOIN gurus ON gurus.user = user_profiles.user;
 
---Detail Siswa Dashboard Admin--
-CREATE VIEW informasi_siswa AS
-SELECT s.status_keaktifan as Keterangan FROM siswas AS s JOIN users AS u ON s.user = u.uuid JOIN user_profiles AS p ON p.user = u.uuid GROUP BY s.status_keaktifan;
+/* Table Mapel */
+CREATE VIEW table_mapel AS
+SELECT mapels.nama_mapel, mapels.kelompok_mapel, user_profiles.nama
+FROM mapels
+LEFT JOIN mapel_gurus ON mapels.mapel_id = mapel_gurus.mapel_guru_id
+LEFT JOIN gurus ON gurus.nip = mapel_gurus.guru
+LEFT JOIN users ON users.uuid = gurus.user
+RIGHT JOIN user_profiles ON user_profiles.user = users.uuid;
 
-SELECT COUNT(*) as Laki_Laki FROM siswas AS s JOIN users AS u ON s.user = u.uuid JOIN user_profiles AS p ON p.user = u.uuid WHERE p.jenis_kelamin = 'L';
+/* Table Ekskul */
+CREATE VIEW table_ekskul AS
+SELECT nama, hari, waktu_mulai, waktu_akhir, tempat FROM ekskuls;
 
-SELECT COUNT(*) as Laki_Laki FROM siswas AS s JOIN users AS u ON s.user = u.uuid JOIN user_profiles AS p ON p.user = u.uuid WHERE p.jenis_kelamin = 'P';
+/* Table Prestasi */
+CREATE VIEW table_prestasi AS
+SELECT user_profiles.nama, prestasis.jenis_prestasi, prestasis.keterangan, 
+prestasis.tanggal_prestasi, prestasis.semester
+FROM prestasis
+LEFT JOIN siswas ON siswas.nisn = prestasis.siswa
+LEFT JOIN users ON users.uuid = siswas.user
+RIGHT JOIN user_profiles ON user_profiles.user = users.uuid;
 
---Detail Guru Dashboard Admin--
+/* Table Roster */
+CREATE VIEW table_roster AS
+SELECT mapels.nama_mapel, kelas.kelompok_kelas AS kelas, roster_kelas.jam_masuk,
+roster_kelas.jam_keluar, roster_kelas.hari, user_profiles.nama
+FROM roster_kelas
+LEFT JOIN mapel_gurus ON mapel_gurus.mapel_guru_id = roster_kelas.mapel_guru_id
+LEFT JOIN mapels ON mapels.mapel_id = mapel_gurus.mapel_guru_id
+LEFT JOIN kelas ON kelas.kelas_id = roster_kelas.ruang_kelas
+LEFT JOIN gurus ON gurus.nip = roster_kelas.guru
+LEFT JOIN users ON users.uuid = gurus.user
+RIGHT JOIN user_profiles ON user_profiles.user = users.uuid;
