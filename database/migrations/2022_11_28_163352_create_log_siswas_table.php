@@ -28,7 +28,7 @@ return new class extends Migration
             $table->enum('n_status_keaktifan',['Aktif', 'Lulus', 'Pindah', 'Drop Out'])->nullable();
             $table->enum('o_status_keaktifan',['Aktif', 'Lulus', 'Pindah', 'Drop Out'])->nullable();
             $table->enum('keterangan', ['insert','update','delete']);
-            $table->time('created_at');
+            $table->timestamp('created_at');
         });
     }
 

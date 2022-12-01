@@ -1,27 +1,51 @@
 /* Registrasi Siswa */
 DELIMITER ?
 CREATE PROCEDURE registrasi_siswa(
-    IN uuid CHAR(36),
     IN nama VARCHAR(255),
-    IN nisn CHAR(10)
+    IN nisn CHAR(10),
     IN nis CHAR(4),
     IN pass VARCHAR(255),
     IN tgl_masuk DATE,
     IN kelas_id CHAR(3),
-    IN jk CHAR(2)
+    IN jk CHAR(2),
+    IN admin CHAR(36)
 )
 BEGIN
-DECLACRE kls_awal VARCHAR;
-SELECT kelompok_kelas FROM kelas INTO kls_awal WHERE kelas_id = kelas_id;
 
-INSERT INTO user(uuid, username, password, role) 
-VALUES (uuid, nisn, pass, "siswa");
+    DECLARE errno INT;
+    DECLARE uuid CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    DECLARE exit handler for sqlwarning
+    BEGIN
+        ROLLBACK;
+    END;
 
-INSERT INTO siswa(nisn, nis, ruang_kelas, kelas_awal, semester, status_keaktifan, user)
-VALUES(nisn, nis, kelas_id, kls_awal, '1', 'aktif', uuid);
+    SET uuid = UUID();
 
-INSERT INTO user_profile(user, nama, jenis_kelamin)
-VALUES (uuid, nama, jk);
+    START TRANSACTION;
+
+    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
+    VALUES (uuid, nisn, pass, "siswa", NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, at, created_at)
+    VALUES(admin, 'insert', "users", NOW());
+
+    INSERT INTO siswas(nisn, nis, ruang_kelas, kelas_awal, semester, status_keaktifan, user, created_at, updated_at)
+    VALUES(nisn, nis, kelas_id, kelas_id, '1', 'aktif', uuid, NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, at, created_at)
+    VALUES(admin, 'insert', "user_profiles", NOW());
+
+    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at ,updated_at)
+    VALUES (uuid, nama, jk, NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, at, created_at)
+    VALUES(admin, 'insert', "user_profiles", NOW());
+
+    COMMIT;
 
 END?
 DELIMITER ;
@@ -30,31 +54,80 @@ DELIMITER ;
 /* Registrasi Guru */
 DELIMITER ?
 CREATE PROCEDURE registrasi_guru(
-    IN uuid CHAR(36),
     IN nama VARCHAR(255),
     IN nip CHAR(18),
     IN jabatan CHAR(4),
     IN pass VARCHAR(255),
     IN tgl_masuk DATE,
-    IN jk CHAR(2)
+    IN jk CHAR(2),
+    IN admin CHAR(36)
 )
 BEGIN
-DECLACRE kls_awal VARCHAR;
-SELECT kelompok_kelas FROM kelas INTO kls_awal WHERE kelas_id = kelas_id;
 
-INSERT INTO user(uuid, username, password, role) 
-VALUES (uuid, nip, pass, "guru");
+    DECLARE errno INT;
+    DECLARE uuid CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    DECLARE exit handler for sqlwarning
+    BEGIN
+        ROLLBACK;
+    END;
 
-INSERT INTO guru(nip, jabatan, tanggal_masuk, status_keaktifan, is_wali_kelas, user)
-VALUES(nisn, jabatan, tgl_masuk, 'aktif', 'tidak', uuid);
+    SET uuid = UUID();
 
-INSERT INTO user_profile(user, nama, jenis_kelamin)
-VALUES (uuid, nama, jk);
+    START TRANSACTION;
+    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
+    VALUES (uuid, nip, pass, "guru", NOW(), NOW());
 
+    INSERT INTO log_activities(user, transaksi, at, created_at) 
+    VALUES(admin,'insert', "users", NOW());
+
+    INSERT INTO gurus(nip, jabatan, tanggal_masuk, status_keaktifan, is_wali_kelas, user, created_at, updated_at)
+    VALUES(nip, jabatan, tgl_masuk, 'aktif', 'tidak', uuid, NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, at, created_at) 
+    VALUES(admin,'insert', "gurus", NOW());
+
+    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
+    VALUES (uuid, nama, jk, NOW(), NOW());
+
+    INSERT INTO log_activities(user, transaksi, at, created_at) 
+    VALUES(admin,'insert', "user_profiles", NOW());
+    COMMIT;
 END?
 DELIMITER ;
 /* Registrasi Guru End */
 
+
+/* Registrasi Admin */
+DELIMITER ?
+CREATE PROCEDURE registrasi_admin(
+    IN uname VARCHAR(255),
+    IN pass VARCHAR(255),
+)
+BEGIN
+
+    DECLARE errno INT;
+    DECLARE uuid CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    DECLARE exit handler for sqlwarning
+    BEGIN
+        ROLLBACK;
+    END;
+
+    SET uuid = UUID();
+
+    START TRANSACTION;
+    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
+    VALUES (uuid, uname, pass, "admin", NOW(), NOW());
+END?
+DELIMITER ;
+/* Registrasi Admin End */
 
 /* Input Nilai */
 DELIMITER ?
@@ -84,6 +157,28 @@ END?
 DELIMITER ;
 /* Input Nilai END */
 
+--Prestasi Siswa Akademik--
+/* Prosedur mencari prestasi siswa tertentu secara nonAkademik */
+DELIMITER ?
+CREATE PROCEDURE prestasi_akademik(
+IN NIS CHAR(10)
+)
+BEGIN
+SELECT * FROM prestasi WHERE siswa = NIS AND jenis_prestasi = "akademik";
+END?
+DELIMITER ;
+
+--Prestasi Siswa nonAkademik--
+/* Prosedur mencari prestasi siswa tertentu secara akademik */
+DELIMITER ?
+CREATE PROCEDURE prestasi_nonAkademik(
+IN NIS CHAR(10)
+)
+BEGIN
+SELECT * FROM prestasi WHERE siswa = NIS AND jenis_prestasi = "nonAkademik";
+END?
+DELIMITER ;
+
 /* Konfirmasi Pembayaran */
 DELIMITER ?
 CREATE PROCEDURE konfirmasi_pelunasan(
@@ -103,90 +198,5 @@ BEGIN
     INSERT INTO konfirmasi (pelunasan, status)
     VALUES (pelunasan, "pending");
 
-END?
-DELIMITER ;
-
-/* Prestasi Siswa Akademik*/
-DELIMITER ?
-CREATE PROCEDURE prestasi_siswa_akademik(
-IN NIS CHAR(10)
-)
-BEGIN
-SELECT * FROM prestasi WHERE siswa = NIS AND jenis_prestasi = "akademik";
-END?
-DELIMITER ;
-/* Prestasi Siswa Akademik End */
-
-/* Prestasi Siswa nonAkademik*/
-DELIMITER ?
-CREATE PROCEDURE prestasi_siswa_akademik(
-IN NIS CHAR(10)
-)
-BEGIN
-SELECT * FROM prestasi WHERE siswa = NIS AND jenis_prestasi = "nonAkademik";
-END?
-DELIMITER ;
-/* Prestasi Siswa nonAkademik End */
-
-/* FUNCTION */
-
-DELIMITER ?
-CREATE function indeks(
-    kkm INT,
-    nilai FLOAT
-)
-RETURNS CHAR(1)
-BEGIN
-DECLARE i CHAR(1);
-    IF kkm = 81 THEN
-        IF nilai >= 0 AND nilai < 81 THEN
-        SET i = "D";
-        ELSEIF nilai >= 81 AND nilai <= 86 THEN
-        SET i = "C";
-        ELSEIF nilai > 86 AND nilai <= 92 THEN
-        SET i = "B";
-        ELSEIF nilai > 92 AND nilai <= 100 THEN
-        SET i = "A";
-        ELSE
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "indeks Error";
-        END IF;
-    ELSEIF kkm = 82 THEN
-        IF nilai >= 0 AND nilai < 82 THEN
-        SET i = "D";
-        ELSEIF nilai >= 82 AND nilai <= 87 THEN
-        SET i = "C";
-        ELSEIF nilai > 87 AND nilai <= 93 THEN
-        SET i = "B";
-        ELSEIF nilai > 93 AND nilai <= 100 THEN
-        SET i = "A";
-        ELSE
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "indeks Error";
-        END IF;
-    ELSEIF kkm = 83 THEN
-        IF nilai >= 0 AND nilai < 83 THEN
-        SET i = "D";
-        ELSEIF nilai >= 83 AND nilai <= 88 THEN
-        SET i = "C";
-        ELSEIF nilai > 88 AND nilai <= 94 THEN
-        SET i = "B";
-        ELSEIF nilai > 94 AND nilai <= 100 THEN
-        SET i = "A";
-        ELSE
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "indeks Error";
-        END IF;
-    ELSEIF kkm = 84 THEN
-        IF nilai >= 0 AND nilai < 84 THEN
-        SET i = "D";
-        ELSEIF nilai >= 84 AND nilai <= 89 THEN
-        SET i = "C";
-        ELSEIF nilai > 89 AND nilai <= 95 THEN
-        SET i = "B";
-        ELSEIF nilai > 95 AND nilai <= 100 THEN
-        SET i = "A";
-        ELSE
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "indeks Error";
-        END IF;
-    END IF;
-    RETURN (i);
 END?
 DELIMITER ;

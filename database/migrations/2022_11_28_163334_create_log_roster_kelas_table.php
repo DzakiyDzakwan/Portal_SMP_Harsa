@@ -25,7 +25,7 @@ return new class extends Migration
             $table->enum('n_hari',['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->enum('o_hari',['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->enum('keterangan', ['insert','update','delete']);
-            $table->time('created_at');
+            $table->timestamp('created_at');
         });
     }
 

@@ -5,12 +5,7 @@
                 class="d-flex flex-column align-items-center"
             >
                 <div class="logo">
-                    <a href="index.html"
-                        ><img
-                            src="assets/images/logo/logo.svg"
-                            alt="Logo"
-                            srcset=""
-                    /></a>
+                    <a href="/dashboard-siswa"><img src="assets/images/logo/logo-harapan.png" alt="Logo" srcset=""/></a>
                 </div>
                 <div
                     class="theme-toggle d-flex gap-2 align-items-center mt-2"

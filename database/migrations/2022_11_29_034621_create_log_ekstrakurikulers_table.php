@@ -14,22 +14,22 @@ return new class extends Migration
     public function up()
     {
         Schema::create('log_ekstrakurikulers', function (Blueprint $table) {
-            $table->BIGINT('id')->primary();
-            $table->CHAR('ekskul_id', 5);
-            $table->VARCHAR('n_nama', 255)->nullable();
-            $table->VARCHAR('o_nama', 255)->nullable();
-            $table->ENUM('n_hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'])->nullable();
-            $table->ENUM('o_hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'])->nullable();
+            $table->id();
+            $table->char('ekskul_id', 5);
+            $table->string('n_nama', 255)->nullable();
+            $table->string('o_nama', 255)->nullable();
+            $table->enum('n_hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'])->nullable();
+            $table->enum('o_hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'])->nullable();
             $table->time('n_jam_masuk')->nullable();
             $table->time('o_jam_masuk')->nullable();
             $table->time('n_jam_keluar')->nullable();
             $table->time('o_jam_keluar')->nullable();
-            $table->VARCHAR('n_tempat', 255)->nullable();
-            $table->VARCHAR('o_tempat', 255)->nullable();
-            $table->CHAR('n_kelas', 1)->nullable();
-            $table->CHAR('o_kelas', 1)->nullable();
+            $table->string('n_tempat', 255)->nullable();
+            $table->string('o_tempat', 255)->nullable();
+            $table->char('n_kelas', 1)->nullable();
+            $table->char('o_kelas', 1)->nullable();
             $table->enum('keterangan', ['insert', 'update', 'delete']);
-            $table->time('created_at');
+            $table->timestamp('created_at');
         });
     }
 

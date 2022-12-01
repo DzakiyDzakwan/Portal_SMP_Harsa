@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id('sesi_id');
             $table->enum('kategori_nilai', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
             $table->year('tahun_ajaran');
-            $table->time('waktu_mulai');
-            $table->time('waktu_akhir');
+            $table->dateTime('waktu_mulai');
+            $table->dateTime('waktu_akhir');
             $table->timestamps();
         });
     }

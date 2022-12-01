@@ -85,7 +85,7 @@ AFTER UPDATE ON gurus
 FOR EACH ROW
 BEGIN
 INSERT INTO log_gurus(user, n_NIP, o_nip, n_jabatan, o_jabatan, n_pendidikan, o_pendidikan, n_tahun_ijazah, o_tahun_ijazah, n_status_perkawinan, o_status_perkawinan, tanggal_masuk, n_status_keaktifan, o_status_keaktifan, n_is_wali_kelas, o_is_wali_kelas, keterangan, created_at)
-VALUES (OLD.user, NEW.NIP, OLD.NIP, NEW.jabatan, OLD.jabatan, NEW.pendidikan, OLD.pendidikan, NEW.tahun_ijazah, OLD.tahun_ijazah, NEW.status_perkawinan, OLD.status_perkawinan, OLD.tanggal_masuk, NEW.status_keaktifan, OLD.status_keaktifan, NEW.n_is_wali_kelas, OLD.is_wali_kelas, "update", NOW());
+VALUES (OLD.user, NEW.NIP, OLD.NIP, NEW.jabatan, OLD.jabatan, NEW.pendidikan, OLD.pendidikan, NEW.tahun_ijazah, OLD.tahun_ijazah, NEW.status_perkawinan, OLD.status_perkawinan, OLD.tanggal_masuk, NEW.status_keaktifan, OLD.status_keaktifan, NEW.is_wali_kelas, OLD.is_wali_kelas, "update", NOW());
 END?
 DELIMITER ;
 
@@ -97,7 +97,6 @@ FOR EACH ROW
 BEGIN
 INSERT INTO log_gurus(user, o_nip, o_jabatan, o_pendidikan, o_tahun_ijazah, o_status_perkawinan, tanggal_masuk, o_status_keaktifan, o_is_wali_kelas, keterangan, created_at)
 VALUES (OLD.user, OLD.NIP, OLD.jabatan, OLD.pendidikan, OLD.tahun_ijazah, OLD.status_perkawinan, OLD.tanggal_masuk, OLD.status_keaktifan, OLD.is_wali_kelas, "delete", NOW());
-END?
 END?
 DELIMITER ;
 
@@ -165,7 +164,7 @@ AFTER DELETE ON kelas
 FOR EACH ROW
 BEGIN
 INSERT INTO log_kelas(o_kelas_id, o_nama_kelas, o_kelompok_kelas, keterangan, created_at)
-VALUES (OLD.kelas_id, OLD.nama_kelas, OLD.kelompok_kelas "delete", NOW());
+VALUES (OLD.kelas_id, OLD.nama_kelas, OLD.kelompok_kelas, "delete", NOW());
 END?
 DELIMITER ;
 
@@ -210,7 +209,7 @@ CREATE TRIGGER log_update_roster_kelas
 AFTER UPDATE ON roster_kelas
 FOR EACH ROW
 BEGIN
-INSERT INTO log_roster_kelas(roster_id, mapel_guru, kelas, n_jam_masuk, o_jam_masuk n_jam_keluar, o_jam_keluar,  n_hari, o_hari, keterangan, created_at)
+INSERT INTO log_roster_kelas(roster_id, mapel_guru, kelas, n_jam_masuk, o_jam_masuk, n_jam_keluar, o_jam_keluar,  n_hari, o_hari, keterangan, created_at)
 VALUES (OLD.roster_id, OLD.mapel_guru, OLD.kelas, NEW.jam_masuk, OLD.jam_masuk, NEW.jam_keluar, OLD.jam_keluar, NEW.hari, OLD.hari, "update", NOW());
 END?
 DELIMITER ;
@@ -233,8 +232,8 @@ CREATE TRIGGER log_insert_siswa
 AFTER INSERT ON siswas
 FOR EACH ROW
 BEGIN
-INSERT INTO log_siswas(o_NISN, o_kelas, user, NIS, tanggal_masuk, kelas_awal, o_semester, o_status_keaktifan, keterangan, created_at)
-VALUES (OLD.NISN, OLD.kelas, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, OLD.semester, OLD.status_keaktifan, "insert", NOW());
+INSERT INTO log_siswas(n_NISN, user, NIS, tanggal_masuk, kelas_awal, n_semester, n_status_keaktifan, keterangan, created_at)
+VALUES (NEW.NISN, NEW.user, NEW.NIS, NEW.tanggal_masuk, NEW.kelas_awal, NEW.semester, NEW.status_keaktifan, "insert", NOW());
 END?
 DELIMITER ;
 
@@ -244,19 +243,19 @@ CREATE TRIGGER log_update_siswa
 AFTER UPDATE ON siswas
 FOR EACH ROW
 BEGIN
-INSERT INTO log_siswas(n_NISN, o_NISN, n_kelas, o_kelas, user, NIS, tanggal_masuk, kelas_awal, n_semester, o_semester, n_status_keaktifan, o_status_keaktifan, keterangan, created_at)
-VALUES (NEW.NISN, OLD.NISN, NEW.kelas, OLD.kelas, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, NEW.senester, OLD.semester, NEW.status_keaktifan, OLD.status_keaktifan, "update", NOW());
+INSERT INTO log_siswas(n_NISN, o_NISN, user, NIS, tanggal_masuk, kelas_awal, n_semester, o_semester, n_status_keaktifan, o_status_keaktifan, keterangan, created_at)
+VALUES (NEW.NISN, OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, NEW.semester, OLD.semester, NEW.status_keaktifan, OLD.status_keaktifan, "update", NOW());
 END?
 DELIMITER ;
 
--- Log Delete kelas
+-- Log Delete siswa
 DELIMTER ?
-CREATE TRIGGER log_delete_kelas
-AFTER DELETE ON kelas
+CREATE TRIGGER log_delete_siswa
+AFTER DELETE ON siswas
 FOR EACH ROW
 BEGIN
-INSERT INTO log_kelas(roster_id, mapel_guru, kelas, o_jam_masuk, o_jam_keluar, o_hari, keterangan, created_at)
-VALUES (OLD.roster_id, OLD.mapel_guru, OLD.kelas, OLD.jam_masuk, OLD.jam_keluar, OLD.hari, "delete", NOW());
+INSERT INTO log_siswas(o_NISN, user, NIS, tanggal_masuk, kelas_awal, o_semester, o_status_keaktifan, keterangan, created_at)
+VALUES (OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, OLD.semester, OLD.status_keaktifan, "insert", NOW());
 END?
 DELIMITER ;
 
@@ -359,6 +358,25 @@ FOR EACH ROW
 BEGIN
 INSERT INTO log_nilais(nilai_id, siswa, mapel, kategori, semester, tahun_ajaran, o_kkm, o_nilai_pengetahuan, o_deskripsi_pengetahuan, o_nilai_keterampilan, o_deskripsi_keterampilan, keterangan, created_at)
 VALUES (OLD.nilai_id, OLD.siswa, OLD.mapel, OLD.kategori, OLD.semester, OLD.tahun_ajaran, OLD.kkm, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, "delete", NOW());
+END?
+DELIMITER;
+
+--Cek sesi penilaian
+DELIMITER ?
+CREATE TRIGGER validasi_nilai
+BEFORE INSERT ON nilais
+FOR EACH ROW
+BEGIN
+    IF (NEW.nilai_pengetahuan < 0 ) THEN
+        NEW.nilai_pengetahuan = 0;
+    ELSE IF (NEW.nilai_keterampilan < 0) THEN
+        NEW.nilai_keterampilan = 0;
+    ELSE IF (NEW.nilai_keterampilan < 0 AND NEW.nilai_pengetahuan < 0 ) THEN
+        NEW.nilai_keterampilan = 0;
+        NEW.nilai_pengetahuan = 0;
+    ELSE IF (NEW.nilai_pengetahuan > 100 OR NEW.nilai_keterampilan > 100) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT ="Error Nilai tidak dapat lebih dari 100";
+    END IF
 END?
 DELIMITER;
 

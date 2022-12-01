@@ -5,12 +5,7 @@
                 class="d-flex flex-column align-items-center"
             >
                 <div class="logo">
-                    <a href="index.html"
-                        ><img
-                            src="assets/images/logo/logo.svg"
-                            alt="Logo"
-                            srcset=""
-                    /></a>
+                    <a href="/dashboard-siswa"><img src="assets/images/logo/logo-harapan.png" alt="Logo" srcset=""/></a>
                 </div>
                 <div
                     class="theme-toggle d-flex gap-2 align-items-center mt-2"
@@ -99,16 +94,16 @@
                 </li>
 
                 {{-- Administrasi --}}
-                <li class="sidebar-title">Administrasi</li>
+                {{-- <li class="sidebar-title">Administrasi</li>
 
                 <li class="sidebar-item @if($pages === 'spp') active @endif ">
                     <a href="/spp" class="sidebar-link">
                         <i class="bi bi-hexagon-fill"></i>
                         <span>Manajemen SPP</span>
                     </a>
-                </li>
+                </li> --}}
 
-                <li class="sidebar-item has-sub">
+                {{-- <li class="sidebar-item has-sub">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-hexagon-fill"></i>
                         <span>Manajemen Laporan</span>
@@ -130,7 +125,7 @@
                             >
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li class="sidebar-title">Sekolah</li>
 
@@ -160,7 +155,7 @@
                 <li class="sidebar-item has-sub @if($pages === 'manajemenKelas') active  @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-grid-1x2-fill"></i>
-                        <span>Manajemen Kelas</span>
+                        <span>Manajemen Sekolah</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
@@ -196,6 +191,11 @@
                         <span>History Log</span>
                     </a>
                     <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="/log-users"
+                                >Log Aktivitas</a
+                            >
+                        </li>
                         <li class="submenu-item">
                             <a href="/log-users"
                                 >Log User</a

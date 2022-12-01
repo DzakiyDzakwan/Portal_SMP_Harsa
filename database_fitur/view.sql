@@ -7,6 +7,7 @@ LEFT JOIN users ON gurus.user = users.uuid
 RIGHT JOIN user_profiles ON users.uuid = user_profiles.user
 RIGHT JOIN siswas ON siswas.ruang_kelas = kelas.kelas_id;
 
+
 /* Detail Siswa */
 CREATE VIEW detail_siswa AS
 SELECT user_profiles.nama, siswas.NIS, user_profiles.jenis_kelamin, user_profiles.tgl_lahir
