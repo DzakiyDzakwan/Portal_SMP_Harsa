@@ -27,4 +27,12 @@ class DashboardController extends Controller
             'pages'=>$pages
         ]);
     }
+
+    public function login()
+    {
+        $pages = 'login';
+        return view('auth.login', [
+            'pages'=>$pages
+        ]);
+    }
 }
