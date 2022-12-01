@@ -17,7 +17,7 @@ return new class extends Migration
         DB::unprepared(
             'CREATE PROCEDURE registrasi_admin(
                 IN uname VARCHAR(255),
-                IN pass VARCHAR(255),
+                IN pass VARCHAR(255)
             )
             BEGIN
             
@@ -25,10 +25,12 @@ return new class extends Migration
                 DECLARE uuid CHAR(36);
                 DECLARE EXIT HANDLER FOR SQLEXCEPTION
                 BEGIN
+                    SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Error";
                     ROLLBACK;
                 END;
                 DECLARE exit handler for sqlwarning
                 BEGIN
+                    SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Warning";
                     ROLLBACK;
                 END;
             
@@ -37,6 +39,7 @@ return new class extends Migration
                 START TRANSACTION;
                 INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
                 VALUES (uuid, uname, pass, "admin", NOW(), NOW());
+                COMMIT;
             END'
         );
 
@@ -56,10 +59,12 @@ return new class extends Migration
             DECLARE uuid CHAR(36);
             DECLARE EXIT HANDLER FOR SQLEXCEPTION
             BEGIN
+                SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Error";
                 ROLLBACK;
             END;
             DECLARE exit handler for sqlwarning
             BEGIN
+                SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Warning";
                 ROLLBACK;
             END;
         
@@ -70,19 +75,19 @@ return new class extends Migration
             VALUES (uuid, nip, pass, "guru", NOW(), NOW());
         
             INSERT INTO log_activities(user, transaksi, at, created_at) 
-            VALUES(admin,`insert`, "users", NOW());
+            VALUES(admin, "insert", "users", NOW());
         
             INSERT INTO gurus(nip, jabatan, tanggal_masuk, status_keaktifan, is_wali_kelas, user, created_at, updated_at)
-            VALUES(nip, jabatan, tgl_masuk, `aktif`, `tidak`, uuid, NOW(), NOW());
+            VALUES(nip, jabatan, tgl_masuk, "aktif", "tidak", uuid, NOW(), NOW());
         
             INSERT INTO log_activities(user, transaksi, at, created_at) 
-            VALUES(admin,`insert`, "gurus", NOW());
+            VALUES(admin,"insert", "gurus", NOW());
         
             INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
             VALUES (uuid, nama, jk, NOW(), NOW());
         
             INSERT INTO log_activities(user, transaksi, at, created_at) 
-            VALUES(admin,`insert`, "user_profiles", NOW());
+            VALUES(admin,"insert", "user_profiles", NOW());
             COMMIT;
         END
         ');
@@ -104,10 +109,12 @@ return new class extends Migration
             DECLARE uuid CHAR(36);
             DECLARE EXIT HANDLER FOR SQLEXCEPTION
             BEGIN
+                SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Error";
                 ROLLBACK;
             END;
             DECLARE exit handler for sqlwarning
             BEGIN
+                SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Warning";
                 ROLLBACK;
             END;
         
@@ -119,19 +126,19 @@ return new class extends Migration
             VALUES (uuid, nisn, pass, "siswa", NOW(), NOW());
         
             INSERT INTO log_activities(user, transaksi, at, created_at)
-            VALUES(admin, `insert`, "users", NOW());
+            VALUES(admin, "insert", "users", NOW());
         
             INSERT INTO siswas(nisn, nis, ruang_kelas, kelas_awal, semester, status_keaktifan, user, created_at, updated_at)
-            VALUES(nisn, nis, kelas_id, kelas_id, `1`, `aktif`, uuid, NOW(), NOW());
+            VALUES(nisn, nis, kelas_id, kelas_id, "1", "aktif", uuid, NOW(), NOW());
         
             INSERT INTO log_activities(user, transaksi, at, created_at)
-            VALUES(admin, `insert`, "user_profiles", NOW());
+            VALUES(admin, "insert", "user_profiles", NOW());
         
             INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at ,updated_at)
             VALUES (uuid, nama, jk, NOW(), NOW());
         
             INSERT INTO log_activities(user, transaksi, at, created_at)
-            VALUES(admin, `insert`, "user_profiles", NOW());
+            VALUES(admin, "insert", "user_profiles", NOW());
         
             COMMIT;
         

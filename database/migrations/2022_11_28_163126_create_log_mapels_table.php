@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('o_nama_mapel');
             $table->enum('n_kelompok_mapel', ['A', 'B']);
             $table->enum('o_kelompok_mapel', ['A', 'B']);
+            $table->enum('keterangan', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');
         });
     }

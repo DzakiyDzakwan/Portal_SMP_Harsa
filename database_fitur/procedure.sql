@@ -1,3 +1,32 @@
+/* Registrasi Admin */
+DELIMITER ?
+CREATE PROCEDURE registrasi_admin(
+    IN uname VARCHAR(255),
+    IN pass VARCHAR(255)
+)
+BEGIN
+
+    DECLARE errno INT;
+    DECLARE uuid CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    DECLARE exit handler for sqlwarning
+    BEGIN
+        ROLLBACK;
+    END;
+
+    SET uuid = UUID();
+
+    START TRANSACTION;
+    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
+    VALUES (uuid, uname, pass, "admin", NOW(), NOW());
+    COMMIT;
+END?
+DELIMITER ;
+/* Registrasi Admin End */
+
 /* Registrasi Siswa */
 DELIMITER ?
 CREATE PROCEDURE registrasi_siswa(
@@ -99,35 +128,6 @@ BEGIN
 END?
 DELIMITER ;
 /* Registrasi Guru End */
-
-
-/* Registrasi Admin */
-DELIMITER ?
-CREATE PROCEDURE registrasi_admin(
-    IN uname VARCHAR(255),
-    IN pass VARCHAR(255),
-)
-BEGIN
-
-    DECLARE errno INT;
-    DECLARE uuid CHAR(36);
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-        ROLLBACK;
-    END;
-    DECLARE exit handler for sqlwarning
-    BEGIN
-        ROLLBACK;
-    END;
-
-    SET uuid = UUID();
-
-    START TRANSACTION;
-    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
-    VALUES (uuid, uname, pass, "admin", NOW(), NOW());
-END?
-DELIMITER ;
-/* Registrasi Admin End */
 
 /* Input Nilai */
 DELIMITER ?

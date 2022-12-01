@@ -30,6 +30,7 @@ return new class extends Migration
             $table->enum('o_status_keaktifan', ['Aktif', 'Tidak Aktif']);
             $table->enum('n_is_wali_kelas', ['iya', 'tidak']);
             $table->enum('o_is_wali_kelas', ['iya', 'tidak']);
+            $table->enum('keterangan', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');
         });
     }

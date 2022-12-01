@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['LK', 'PR']);
             $table->string('n_foto')->nullable();
             $table->string('o_foto')->nullable();
+            $table->enum('keterangan', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');
         });
     }
