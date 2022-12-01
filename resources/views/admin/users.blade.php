@@ -102,7 +102,7 @@
             {{-- Button Tambah User --}}
             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                 data-bs-target="#inlineForm">
-                <i class="bi bi-plus-circle"></i> Tambah Admin 
+                <i class="bi bi-plus-circle"></i> Create Admin 
             </button>
 
         </div>
@@ -111,28 +111,20 @@
         <table class="table table-bordered" id="table1">
             <thead>
                 <tr>
-                    <th>username</th>
-                    <th>Nama</th>
-                    <th>E-mail</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Phone</th>
-                    <th>Alamat</th>
-                    <th>Agama</th>
-                    <th>Test</th>
+                    <th>No</th>
+                    <th>Uuid</th>
+                    <th>Username</th>
+                    <th>Role</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Carter12</td>
-                    <td>Carter Johnson</td>
-                    <td>urna.justo.faucibus@orci.com</td>
-                    <td>Male</td>
-                    <td>07079 826350</td>
-                    <td>Mangrove Street</td>
-                    <td>Biez</td>
-                    <td>Test</td>
+                    <td>1</td>
+                    <td>abcde-fghij-klmno-pqrst</td>
+                    <td>admin1</td>
+                    <td>admin</td>
                     <td>
                         <span class="badge bg-success">Active</span>
                     </td>
@@ -172,76 +164,73 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h4 class="modal-title white" id="myModalLabel33">Tambah Admin</h4>
-                <button
+            <div class="modal-header bg-success justify-content-center">
+                <h4 class="modal-title white " id="myModalLabel33">Tambah Admin</h4>
+                {{-- <button
                     type="button"
                     class="close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                 >
                     <i data-feather="x"></i>
-                </button>
+                </button> --}}
             </div>
-            <div class="modal-body">
-                <form action="#">
-                    <div class="modal-body">
-                        <label>Username: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username"/>
+            <form class="form form-vertical">
+                <div class="form-body modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Username</label>
+                                <div class="position-relative">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Input with icon left"
+                                        id="first-name-icon"
+                                    />
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        This is invalid state.
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
-                        <label>Nama: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nama"/>
+                        <div class="col-12">
+                            <div class="form-group has-icon-left">
+                                <label for="password-id-icon">Password</label>
+                                <div class="position-relative">
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        placeholder="Password"
+                                        id="password-id-icon"
+                                    />
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-lock"></i>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        This is invalid state.
+                                    </div>
+                                </div>
+                            </div>                          
                         </div>
-                        <label>E-mail: </label>
-                        <small class="text-muted">eg.<i>someone@example.com</i></small>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="E-mail"/>
-                        </div>
-                        <label>Jenis Kelamin: </label>
-                        <div class="form-group">
-                            <select class="choices form-select">
-                                <option value="lk">Laki-laki</option>
-                                <option value="pr">Perempuan</option>
-                            </select>
-                        </div>
-                        <label>Phone: </label>
-                        <div class="form-group">
-                            <input type="number" class="form-control" placeholder="+62"/>
-                        </div>
-                        <label>Alamat: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Alamat"/>
-                        </div>
-                        <label>Agama: </label>
-                        <div class="form-group">
-                            <select class="choices form-select">
-                                <option value="is">Islam</option>
-                                <option value="krs">Kristen</option>
-                            </select>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="button" class="btn btn-light-secondary me-1 mb-1" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Close</span>
+                            </button>
+                            <button type="submit" class="btn btn-success me-1 mb-1">
+                                Simpan
+                            </button>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-success ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Simpan</span>
-                </button>
-            </div>
+                </div>
+            </form>            
         </div>
     </div>
 </div>

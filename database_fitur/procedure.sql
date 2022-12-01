@@ -104,10 +104,8 @@ DELIMITER ;
 /* Registrasi Admin */
 DELIMITER ?
 CREATE PROCEDURE registrasi_admin(
-    IN nama VARCHAR(255),
+    IN uname VARCHAR(255),
     IN pass VARCHAR(255),
-    IN jk CHAR(2),
-    IN admin CHAR(36)
 )
 BEGIN
 
@@ -126,11 +124,7 @@ BEGIN
 
     START TRANSACTION;
     INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
-    VALUES (uuid, nip, pass, "admin", NOW(), NOW());
-
-    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
-    VALUES (uuid, nama, jk, NOW(), NOW());
-    COMMIT;
+    VALUES (uuid, uname, pass, "admin", NOW(), NOW());
 END?
 DELIMITER ;
 /* Registrasi Admin End */
