@@ -47,7 +47,6 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $validatedData = $request->validate([
             'fullname' => 'required|min:5|max:255',
             'nip' => 'required|min:18|max:18',
@@ -55,6 +54,11 @@ class GuruController extends Controller
         ]);
 
         $password = Hash::make($validatedData['nip']);
+
+       /*  dd($password); */
+
+        \DB::select('CALL registrasi_guru(?, ?, ?, ?, ?, ?, ?)', [$validatedData["fullname"], $validatedData["nip"], $request->jabatan, $password, $validatedData["tanggal_masuk"], $request->jenis_kelamin, auth()->user()->uuid]);
+        return back()->with('success', "Guru berhasil dibuat");
     }
 
     /**
