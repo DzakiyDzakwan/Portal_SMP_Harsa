@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('log_gurus', function (Blueprint $table) {
             $table->id();
             $table->char('user', 36);
-            $table->char('n_NIP', 18);
-            $table->char('o_NIP', 18);
+            $table->char('n_NIP', 18)->nullable();
+            $table->char('o_NIP', 18)->nullable();
             $table->enum('n_jabatan', ['wks', 'bk', 'guru']);
             $table->enum('o_jabatan', ['wks', 'bk', 'guru']);
             $table->string('n_pendidikan')->nullable();
