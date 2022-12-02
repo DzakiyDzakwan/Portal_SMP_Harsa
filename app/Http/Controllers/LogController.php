@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LogUser;
 
 class LogController extends Controller
 {
 
     public function user() {
         $pages = 'history';
-        return  view('admin.logusers', [
-            'pages' => $pages,
-        ]);
+        $logUser = LogUser::latest()->get();
+        return  view('admin.logusers',compact('pages', 'logUser'));
     }
 
     public function siswa() {

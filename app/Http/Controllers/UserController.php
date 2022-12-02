@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
         return view('admin.users', compact('pages', 'activeUser', 'users'));
     }
 
-    public function store($request) {
+    public function store(Request $request) {
         $validatedData = $request->validate([
             'username' => 'required|min:5|max:255',
             'password' => 'required|min:5|max:255',

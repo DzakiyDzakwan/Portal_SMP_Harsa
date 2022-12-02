@@ -17,10 +17,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div
-                class="collapse navbar-collapse"
+                class="collapse navbar-collapse justify-content-end"
                 id="navbarSupportedContent"
             >
-                <ul class="navbar-nav ms-auto mb-lg-0">
+                {{-- <ul class="navbar-nav ms-auto mb-lg-0">
                     <li class="nav-item dropdown me-1">
                         <a
                             class="nav-link active dropdown-toggle text-gray-600"
@@ -142,7 +142,7 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
+                </ul> --}}
                 <div class="dropdown">
                     <a
                         href="#"
@@ -154,7 +154,7 @@
                                 class="user-name text-end me-3"
                             >
                                 <h6 class="mb-0 text-gray-600">
-                                    Udin Kecap
+                                    {{Auth::user()->username}}
                                 </h6>
                                 <p
                                     class="mb-0 text-sm text-gray-600"
@@ -178,7 +178,7 @@
                         aria-labelledby="dropdownMenuButton"
                         style="min-width: 11rem"
                     >
-                        <li>
+                        {{-- <li>
                             <a class="dropdown-item" href="#"
                                 ><i
                                     class="icon-mid bi bi-person me-2"
@@ -193,7 +193,7 @@
                                 ></i>
                                 Settings</a
                             >
-                        </li>
+                        </li> --}}
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
