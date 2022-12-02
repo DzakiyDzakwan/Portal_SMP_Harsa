@@ -128,17 +128,19 @@
                     <td>{{$item->role}}</td>
                     <td>{{$item->created_at}}</td>
                     <td>
-                        {{-- Update Button --}}
-                        {{-- <div class="modal-warning me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#update">
-                                <i class="bi bi-pencil"></i></a>
-                            </button>
-                        </div> --}}
+                        {{-- @if ($item->role == 'admin')
+                            <!-- Update Button -->
+                            <div class="modal-warning me-1 mb-1 d-inline-block">
+                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal{{$loop->iteration}}"
+                                    data-bs-target="#update">
+                                    <i class="bi bi-pencil"></i></a>
+                                </button>
+                            </div>
+                        @endif --}}
                         {{-- Delete Button --}}
                         <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#delete">
+                                data-bs-target="#delete{{$loop->iteration}}">
                                 <i class="bi bi-trash"></i></a>
                             </button>
                         </div>
@@ -238,134 +240,137 @@
     </div>
 </div>
 
-{{-- Modal Update --}}
-<div
-    class="modal fade text-left"
-    id="update"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel130"
-    aria-hidden="true"
->
-    <div
-        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-        role="document"
+@foreach ($users as $item)
+    {{-- Modal Update --}}
+    {{-- <div
+        class="modal fade text-left"
+        id="update"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel130"
+        aria-hidden="true"
     >
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Ubah Mata Pelajaran
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="#">
-                    <div class="modal-body">
-                        <label>Mata Pelajaran: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
+        <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            role="document"
+        >
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title white" id="myModalLabel130">
+                        Ubah Mata Pelajaran
+                    </h5>
+                    <button
+                        type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#">
+                        <div class="modal-body">
+                            <label>Mata Pelajaran: </label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <label>Kelas: </label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <label>Guru: </label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <label>Hari: </label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <label>Jam Masuk: </label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <label>Jam Keluar: </label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" />
+                            </div>
                         </div>
-                        <label>Kelas: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Guru: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Hari: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Jam Masuk: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Jam Keluar: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-success ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Simpan</span>
-                </button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-light-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-success ml-1"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Simpan</span>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div> --}}
 
-{{-- Modal Delete --}}
-<div
-    class="modal fade text-left"
-    id="danger"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel130"
-    aria-hidden="true"
->
+    {{-- Modal Delete --}}
     <div
-        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-        role="document"
+        class="modal fade text-left"
+        id="delete{{$loop->iteration}}"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel130"
+        aria-hidden="true"
     >
-        <div class="modal-content">
-            <div class="modal-header bg-danger">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Hapus Mata Pelajaran
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">Apakah yakin menghapus data ini?</div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-danger ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Hapus</span>
-                </button>
+        <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            role="document"
+        >
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title white" id="myModalLabel130">
+                        Hapus {{$item->uuid}}
+                    </h5>
+                    <button
+                        type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">Apakah yakin menghapus data ini?</div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-light-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                    <form action="users/deleteAdmin/{{$item->uuid}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger ml-1" data-bs-dismiss="modal">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Hapus</span>
+                        </button>                        
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    @endforeach
+
 
 @endsection
 

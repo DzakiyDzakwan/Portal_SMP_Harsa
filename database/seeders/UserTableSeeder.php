@@ -18,8 +18,8 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'username'=>"admin1",
-            "password"=>Hash::make("admin1")
+            'username'=>"admin",
+            "password"=>Hash::make("admin")
         ]);
     }
 }

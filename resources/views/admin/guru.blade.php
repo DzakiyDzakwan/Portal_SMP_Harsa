@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Total Guru</h6>
-                        <h6 class="font-extrabold mb-0">2</h6>
+                        <h6 class="font-extrabold mb-0">{{$totalGuru}}</h6>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Active</h6>
-                        <h6 class="font-extrabold mb-0">2</h6>
+                        <h6 class="font-extrabold mb-0">{{$guruActive}}</h6>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Inactive</h6>
-                        <h6 class="font-extrabold mb-0">2</h6>
+                        <h6 class="font-extrabold mb-0">{{$guruInactive}}</h6>
                     </div>
                 </div>
             </div>
@@ -119,6 +119,7 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($gurus as $item)
                 <tr>
                     <td>Graiden</td>
                     <td>vehicula.aliquet@semconsequat.co.uk</td>
@@ -151,38 +152,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>Dale</td>
-                    <td>fringilla.euismod.enim@quam.ca</td>
-                    <td>0500 527693</td>
-                    <td>New Quay</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                    <td>
-                        {{-- Preview Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#info">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
-                        {{-- Update Button --}}
-                        <div class="modal-warning me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#update">
-                                <i class="bi bi-pencil"></i></a>
-                            </button>
-                        </div>
-                        {{-- Delete Button --}}
-                        <div class="modal-danger me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#delete">
-                                <i class="bi bi-trash"></i></a>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -194,7 +164,7 @@
     id="inlineForm"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="myModalLabel33"
+    aria-labelledby="myModalLabel130"
     aria-hidden="true"
 >
     <div
@@ -202,22 +172,24 @@
         role="document"
     >
         <div class="modal-content">
-            <div class="modal-header bg-success justify-content-center">=
-                <h4 class="modal-title white" id="myModalLabel33">Tambah Guru</h4>
+            <div class="modal-header bg-success justify-content-center">
+                <h4 class="modal-title white " id="myModalLabel33">Tambah Guru</h4>
             </div>
-            <form class="form form-vertical">
+            <form class="form form-vertical" action="users/addGuru" method="POST">
+                @csrf
                 <div class="form-body modal-body">
                     <div class="row">
+                        {{-- Nama Lengkap --}}
                         <div class="col-12">
                             <div class="form-group has-icon-left">
-                                <label for="nama">Nama</label>
+                                <label for="fullname">Nama Lengkap</label>
                                 <div class="position-relative">
                                     <input
-                                        name="nama"
+                                        name="fullname"
                                         type="text"
-                                        class="form-control {{-- is-invalid --}}"
-                                        placeholder="Input with icon left"
-                                        id="nama"
+                                        class="form-control"
+                                        placeholder="Masukkan nama lengkap"
+                                        id="fullname"
                                     />
                                     <div class="form-control-icon">
                                         <i class="bi bi-person"></i>
@@ -230,23 +202,97 @@
                             </div>
                             
                         </div>
+
+                        {{-- Jenis Kelamin --}}
+                        <div class="col-12">
+                            <div class="form-group has-icon-left">
+                                <label for="fullname">Nama Lengkap</label>
+                                <div class="position-relative">
+                                        <select name="jenis_kelamin" class="form-select form-control" id="basicSelect">
+                                            <option value="LK">Laki-Laki</option>
+                                            <option value="PR">Perempuan</option>
+                                        </select>
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        This is invalid state.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        {{-- NIP --}}
                         <div class="col-12">
                             <div class="form-group has-icon-left">
                                 <label for="nip">NIP</label>
                                 <div class="position-relative">
                                     <input
-                                        name ="nip"
+                                        name="nip"
                                         type="text"
                                         class="form-control"
-                                        placeholder="Input with icon left"
+                                        placeholder="Masukkan NIP guru"
                                         id="nip"
                                     />
                                     <div class="form-control-icon">
                                         <i class="bi bi-person"></i>
                                     </div>
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        This is invalid state.
+                                    </div>
                                 </div>
                             </div>
+                            
                         </div>
+
+                        {{-- Jabatan --}}
+                        <div class="col-12">
+                            <div class="form-group has-icon-left">
+                                <label for="jabatan">Jabatan</label>
+                                <div class="position-relative">
+                                    <select name="jabatan" class="form-select form-control" id="basicSelect">
+                                        <option value="wks">Wakil Kepala Sekolah</option>
+                                        <option value="bk">Bimbingan Konseling</option>
+                                        <option value="guru">Guru</option>
+                                    </select>
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        This is invalid state.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        {{-- Tanggal Masuk --}}
+                        <div class="col-12">
+                            <div class="form-group has-icon-left">
+                                <label for="tanggal_masuk">Tanggal Masuk</label>
+                                <div class="position-relative">
+                                    <input
+                                        name="tanggal_masuk"
+                                        type="date"
+                                        class="form-control"
+                                        placeholder="tanggal_masuk"
+                                        id="tanggal_masuk"
+                                    />
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-calendar"></i>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        This is invalid state.
+                                    </div>
+                                </div>
+                            </div>                          
+                        </div>
+                        
                         <div class="col-12 d-flex justify-content-end">
                             <button type="button" class="btn btn-light-secondary me-1 mb-1" data-bs-dismiss="modal">
                                 <i class="bx bx-x d-block d-sm-none"></i>
@@ -258,7 +304,7 @@
                         </div>
                     </div>
                 </div>
-            </form>         
+            </form>            
         </div>
     </div>
 </div>

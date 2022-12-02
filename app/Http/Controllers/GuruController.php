@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Guru;
+use App\Models\User;
+use App\Models\UserProfile;
+use App\Models\LogActivity;
+
 class GuruController extends Controller
 {
     /**
@@ -14,9 +22,11 @@ class GuruController extends Controller
     public function index()
     {
         $pages = 'user';
-        return view('admin.guru',[
-            'pages' => $pages
-        ]);
+        $totalGuru = Guru::count();
+        $guruActive = Guru::where('status_keaktifan', 'Aktif')->count();
+        $guruInactive = Guru::where('status_keaktifan', 'Tidak Aktif')->count();
+        $gurus = Guru::all();
+        return view('admin.guru', compact('pages', 'totalGuru', 'guruActive', 'guruInactive', 'gurus'));
     }
 
     /**
@@ -37,7 +47,14 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+        $validatedData = $request->validate([
+            'fullname' => 'required|min:5|max:255',
+            'nip' => 'required|min:18|max:18',
+            'tanggal_masuk' => 'required'
+        ]);
+
+        $password = Hash::make($validatedData['nip']);
     }
 
     /**
