@@ -20,7 +20,7 @@
                 <h2 class="mb-4">{{ __('Login') }}</h2>
                 <form method="POST" action="{{ route('postlogin') }}">
                     @csrf
-                    @if(session()->has('success'))
+                    {{-- @if(session()->has('success'))
 					<div class="alert alert-warning alert-dismissible fade show" role="alert">
 						{{session('success')}}
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -32,28 +32,28 @@
 						{{session('loginError')}}
 						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
-					@endif
-                    <div class="form-group position-relative has-icon-left validate-input mb-4" data-validate = "Valid email is: a@b.c">
+					@endif --}}
+                    <div class="form-group position-relative has-icon-left mb-4">
                         <input id="username" type="text" name="username" class="form-control form-control-md @error('username') is-invalid @enderror" placeholder="Username" required autocomplete="username" autofocus>
                         <div class="form-control-icon">
                             <i class="bi bi-person"></i>
-                            @error('username')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
+                        @error('username')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                        @enderror
                     </div>
-                    <div class="form-group position-relative has-icon-left" data-validate="Enter password">
-                        <input id="password" type="password" name="password" class="form-control form-control-md @error('password') is-invalid @enderror" placeholder="Password" required autocomplete="current-password">
+                    <div class="form-group position-relative has-icon-left">
+                        <input id="password" type="password" name="password" class="form-control form-control-md @error('password') is-invalid @enderror" placeholder="Password" required autocomplete="current-password" autofocus>
                         <div class="form-control-icon">
                             <i class="bi bi-shield-lock"></i>
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
+                        @error('password')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                        @enderror
                     </div>
                     <button class="btn btn-primary btn-block btn-md shadow-lg mt-3">Log in</button>
                 </form>

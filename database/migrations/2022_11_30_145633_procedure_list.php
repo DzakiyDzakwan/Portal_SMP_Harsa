@@ -17,7 +17,7 @@ return new class extends Migration
         DB::unprepared(
             'CREATE PROCEDURE registrasi_admin(
                 IN uname VARCHAR(255),
-                IN pass VARCHAR(255),
+                IN pass VARCHAR(255)
             )
             BEGIN
             
