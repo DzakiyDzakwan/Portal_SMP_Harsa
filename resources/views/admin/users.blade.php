@@ -115,27 +115,26 @@
                     <th>Uuid</th>
                     <th>Username</th>
                     <th>Role</th>
-                    <th>Status</th>
+                    <th>Created_at</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($users as $item)
                 <tr>
-                    <td>1</td>
-                    <td>abcde-fghij-klmno-pqrst</td>
-                    <td>admin1</td>
-                    <td>admin</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$item->uuid}}</td>
+                    <td>{{$item->username}}</td>
+                    <td>{{$item->role}}</td>
+                    <td>{{$item->created_at}}</td>
                     <td>
                         {{-- Update Button --}}
-                        <div class="modal-warning me-1 mb-1 d-inline-block">
+                        {{-- <div class="modal-warning me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                 data-bs-target="#update">
                                 <i class="bi bi-pencil"></i></a>
                             </button>
-                        </div>
+                        </div> --}}
                         {{-- Delete Button --}}
                         <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
@@ -145,6 +144,7 @@
                         </div>
                     </td>
                 </tr>
+                @endforeach          
             </tbody>
         </table>
     </div>
@@ -175,7 +175,8 @@
                     <i data-feather="x"></i>
                 </button> --}}
             </div>
-            <form class="form form-vertical">
+            <form class="form form-vertical" action="users/addAdmin" method="POST">
+                @csrf
                 <div class="form-body modal-body">
                     <div class="row">
                         <div class="col-12">
@@ -183,6 +184,7 @@
                                 <label for="first-name-icon">Username</label>
                                 <div class="position-relative">
                                     <input
+                                        name="username"
                                         type="text"
                                         class="form-control"
                                         placeholder="Input with icon left"
@@ -204,6 +206,7 @@
                                 <label for="password-id-icon">Password</label>
                                 <div class="position-relative">
                                     <input
+                                        name="password"
                                         type="password"
                                         class="form-control"
                                         placeholder="Password"

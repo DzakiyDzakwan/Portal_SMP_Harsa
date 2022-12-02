@@ -1,6 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+use App\Models\Siswa;
+use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\Mapel;
+use App\Models\Ekskul;
+
 
 use Illuminate\Http\Request;
 
@@ -8,9 +15,22 @@ class DashboardController extends Controller
 {
     public function index() {
         $pages = 'dashboard';
-        return view('admin.dashboard', [
-            'pages'=>$pages
-        ]);
+        $user = User::count();
+        $siswa = Siswa::count();
+        $guru = Guru::count();
+        $kelas = Kelas::count();
+        $mapel = Mapel::count();
+        $ekskul = Ekskul::count();
+
+        return view('admin.dashboard',compact(
+            'pages',
+            'user',
+            'siswa',
+            'guru',
+            'kelas',
+            'mapel',
+            'ekskul'
+        ));
     }
 
     public function siswa() {

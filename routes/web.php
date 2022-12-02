@@ -30,39 +30,38 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/', [DashboardController::class,'index'])->name('home');
-//Dashboard/SPP
-Route::get('/spp',[SPPController::class,'index'])->name('spp');
-//Dashboard/Kelas
-Route::get('/kelas', [ManajemenKelasController::class, 'kelas'])->name('kelas');
-//Dashboard/User
-Route::get('/users',[UserController::class,'index'])->name('users');
-//Dashboard/Mapel
-Route::get('/mapel',[ManajemenKelasController::class,'mapel'])->name('mapel');
-//Dashboard/eskul
-Route::get('/ekstrakulikuler',[ManajemenKelasController::class,'ekskul'])->name('ekskul');
-//Dashboard/Siswa
-Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
-//Dashboard/Guru
-Route::get('/guru', [GuruController::class,'index'])->name('guru');
-//Dashboard/Log-Users
-Route::get('/log-users',[LogController::class,'user'])->name('log-user');
-//Dashboard/Log-Siswa
-Route::get('/log-siswa',[LogController::class,'siswa'])->name('log-siswa');
-//Dashboard/Log-Guru
-Route::get('/log-guru',[LogController::class,'guru'])->name('log-guru');
-//Dashboard/Log-Kelas
-Route::get('/log-kelas',[LogController::class,'kelas'])->name('log-kelas');
-//Dashboard/Log-Mapel
-Route::get('/log-mapel',[LogController::class,'mapel'])->name('log-mapel');
-//Dashboard/Log-SPP
-Route::get('/log-tagihan', [LogController::class, 'tagihanSpp'])->name('log-tagihan');
-//Dashboard/Log-SPP
-Route::get('/log-ekstrakulikuler', [LogController::class, 'ekskul'])->name('log-ekskul');
-
 //Dashboard
 Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
-   
+    Route::get('/', [DashboardController::class,'index'])->name('home');
+    //Dashboard/SPP
+    Route::get('/spp',[SPPController::class,'index'])->name('spp');
+    //Dashboard/Kelas
+    Route::get('/kelas', [ManajemenKelasController::class, 'kelas'])->name('kelas');
+    //Dashboard/User
+    Route::get('/users',[UserController::class,'index'])->name('users');
+    Route::post('/users/addAdmin',[UserController::class,'store'])->name('addAdmin');
+    //Dashboard/Mapel
+    Route::get('/mapel',[ManajemenKelasController::class,'mapel'])->name('mapel');
+    //Dashboard/eskul
+    Route::get('/ekstrakulikuler',[ManajemenKelasController::class,'ekskul'])->name('ekskul');
+    //Dashboard/Siswa
+    Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
+    //Dashboard/Guru
+    Route::get('/guru', [GuruController::class,'index'])->name('guru');
+    //Dashboard/Log-Users
+    Route::get('/log-users',[LogController::class,'user'])->name('log-user');
+    //Dashboard/Log-Siswa
+    Route::get('/log-siswa',[LogController::class,'siswa'])->name('log-siswa');
+    //Dashboard/Log-Guru
+    Route::get('/log-guru',[LogController::class,'guru'])->name('log-guru');
+    //Dashboard/Log-Kelas
+    Route::get('/log-kelas',[LogController::class,'kelas'])->name('log-kelas');
+    //Dashboard/Log-Mapel
+    Route::get('/log-mapel',[LogController::class,'mapel'])->name('log-mapel');
+    //Dashboard/Log-SPP
+    Route::get('/log-tagihan', [LogController::class, 'tagihanSpp'])->name('log-tagihan');
+    //Dashboard/Log-SPP
+    Route::get('/log-ekstrakulikuler', [LogController::class, 'ekskul'])->name('log-ekskul');
 });
 
 //Siswa

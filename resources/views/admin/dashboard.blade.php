@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                                             <h6 class="text-muted font-semibold">User</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
+                                            <h6 class="font-extrabold mb-0">{{$user}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                                             <h6 class="text-muted font-semibold">Siswa</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
+                                            <h6 class="font-extrabold mb-0">{{$siswa}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                                             <h6 class="text-muted font-semibold">Guru</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
+                                            <h6 class="font-extrabold mb-0">{{$guru}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                                             <h6 class="text-muted font-semibold">Total Kelas</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
+                                            <h6 class="font-extrabold mb-0">{{$kelas}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                                             <h6 class="text-muted font-semibold">Mata Pelajaran</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
+                                            <h6 class="font-extrabold mb-0">{{$mapel}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                                         </div>
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                                             <h6 class="text-muted font-semibold">Ekstrakulikuler</h6>
-                                            <h6 class="font-extrabold mb-0">2</h6>
+                                            <h6 class="font-extrabold mb-0">{{$ekskul}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                 </div>
 
                 {{-- Graph --}}
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-header">
@@ -192,7 +192,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- Info Detail --}}
                 <div class="row">
