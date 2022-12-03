@@ -424,7 +424,7 @@ VALUES (NEW.ekskul_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.waktu_akhir, NEW
 END?
 DELIMITER ;
 
--- Log Delete Rekap Ekskul
+-- Log Delete Ekskul
 DELIMITER ?
 CREATE TRIGGER log_delete_ekskul
 AFTER DELETE on ekskuls
