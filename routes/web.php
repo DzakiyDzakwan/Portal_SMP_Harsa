@@ -10,9 +10,9 @@ use App\Http\Controllers\ManajemenKelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\guru;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\siswa;
-
-
+use App\Models\Kelas;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +36,11 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
     //Dashboard/SPP
     Route::get('/spp',[SPPController::class,'index'])->name('spp');
     //Dashboard/Kelas
-    Route::get('/kelas', [ManajemenKelasController::class, 'kelas'])->name('kelas');
+    Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
+    Route::get('/kelas/addKelas', [KelasController::class, 'create'])->name('addKelas');
+    Route::post('/kelas/addKelas', [KelasController::class, 'store'])->name('addKelas');
+    Route::get('/kelas/update-{id}', [KelasController::class, 'edit'])->name('updateKelas');
+    //Route::post('/kelas/update/{id}', [KelasController::class, 'update'])->name('updateKelas');
     //Dashboard/User
     Route::get('/users',[UserController::class,'index'])->name('users');
     Route::post('/users/addAdmin',[UserController::class,'store'])->name('addAdmin');

@@ -112,63 +112,39 @@
                         <th>No</th>
                         <th>Nama Kelas</th>
                         <th>Nomor Kelas</th>
-                        <th>Ruangan</th>
                         <th>Wali Kelas</th>
                         <th>Jumlah Siswa</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($kelas as $k)
                     <tr>
-                        <td>1</td>
-                        <td>Al-Khawarizmi</td>
-                        <td>VIII-A</td>
-                        <td>5</td>
-                        <td>Nur Hayati</td>
-                        <td>29</td>
+                        <td>{{ $k->kelas_id }}</td>
+                        <td>{{ $k->nama_kelas }}</td>
+                        <td>{{ $k->kelompok_kelas }}</td>
+                        <td>{{ $k->Wali_Kelas }}</td>
+                        <td>{{ $k->Jumlah_Siswa}}</td>
                         <td>
                             {{-- Update Button --}}
                             <div class="modal-warning me-1 mb-1 d-inline-block">
                                 <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#update">
-                                    <i class="bi bi-pencil"></i></a>
+                                    data-bs-target="#update" data-modal="{{ $k->kelas_id }}">
+                                    <i class="bi bi-pencil"></i>
                                 </button>
                             </div>
                             {{-- Delete Button --}}
                             <div class="modal-danger me-1 mb-1 d-inline-block">
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete">
-                                    <i class="bi bi-trash"></i></a>
+                                    <i class="bi bi-trash"></i>
                                 </button>
 
                                 
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Al-Khawarizmi</td>
-                        <td>VIII-A</td>
-                        <td>5</td>
-                        <td>Nur Hayati</td>
-                        <td>29</td>
-                        <td>
-                            {{-- Update Button --}}
-                            <div class="modal-warning me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#update">
-                                    <i class="bi bi-pencil"></i></a>
-                                </button>
-                            </div>
-                            {{-- Delete Button --}}
-                            <div class="modal-danger me-1 mb-1 d-inline-block">
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#delete">
-                                    <i class="bi bi-trash"></i></a>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
     </div>
@@ -201,47 +177,38 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form action="#">
+            <form action="{{ route('addKelas') }}" method="post">
+                @csrf
                 <div class="modal-body">
-                    <label>Nama Kelas: </label>
-                    <div class="form-group">
-                        <input
-                            type="text"
-                            placeholder="Nama Kelas"
-                            class="form-control"
-                        />
-                    </div>
-                    <label>Nomor Kelas: </label>
+                    <label for="nomor">Nomor Kelas: </label>
                     <div class="form-group">
                         <input
                             type="text"
                             placeholder="Nomor Kelas"
                             class="form-control"
+                            name="nomor"
+                            id="nomor"
+                            value="{{ old('nomor') }}"
                         />
                     </div>
-                    <label>Ruangan: </label>
+                    <label for="nama">Nama Kelas: </label>
                     <div class="form-group">
                         <input
                             type="text"
-                            placeholder="Ruangan"
+                            placeholder="Nama Kelas"
                             class="form-control"
+                            name="nama"
+                            id="nama"
+                            value="{{ old('nama') }}"
                         />
                     </div>
-                    <label>Wali Kelas: </label>
+                    <label for="guru">Wali Kelas: </label>
                     <div class="form-group">
-                        <input
-                            type="text"
-                            placeholder="Wali Kelas"
-                            class="form-control"
-                        />
-                    </div>
-                    <label>Jumlah Siswa: </label>
-                    <div class="form-group">
-                        <input
-                            type="text"
-                            placeholder="Jumlah Siswa"
-                            class="form-control"
-                        />
+                        <select class="choices form-select" id="guru" name="guru">
+                            @foreach ($guru as $g )
+                            <option value="{{ $g->NIP }}">{{ $g->profiles->nama}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -254,9 +221,9 @@
                         <span class="d-none d-sm-block">Tutup</span>
                     </button>
                     <button
-                        type="button"
                         class="btn btn-success ml-1"
                         data-bs-dismiss="modal"
+                        name="submit"
                     >
                         <i class="bx bx-check d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Simpan</span>
@@ -273,7 +240,7 @@
     id="update"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="myModalLabel130"
+    aria-labelledby="update"
     aria-hidden="true"
 >
     <div
@@ -295,27 +262,23 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
+                <form action="{{ route('updateKelas', $k->kelas_id) }}">
                     <div class="modal-body">
-                        <label>Nama Kelas: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
                         <label>Nomor Kelas: </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" readonly />
+                            <input type="text" class="form-control" value="{{ $k->kelompok_kelas }}" />
                         </div>
-                        <label>Ruangan: </label>
+                        <label>Nama Kelas: </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" readonly />
+                            <input type="text" class="form-control" value="{{ $k->nama_kelas }}" />
                         </div>
-                        <label>Wali Kelas: </label>
+                        <label for="guru">Wali Kelas: </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Jumlah Siswa: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
+                            <select class="choices form-select" id="guru" name="guru">
+                                @foreach ($guru as $g )
+                                <option value="{{ $g->NIP }}">{{ $g->profiles->nama}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </form>
