@@ -15,24 +15,24 @@ return new class extends Migration
     {
         /* log insert kelas */
         DB::unprepared('
-            CREATE TRIGGER log_insert_siswa
-            AFTER INSERT ON siswas
-            FOR EACH ROW
-            BEGIN
-            INSERT INTO log_siswas(n_NISN, user, NIS, tanggal_masuk, kelas_awal, n_semester, n_status_keaktifan, keterangan, created_at)
-            VALUES (NEW.NISN, NEW.user, NEW.NIS, NEW.tanggal_masuk, NEW.kelas_awal, NEW.semester, NEW.status_keaktifan, "insert", NOW());
-            END
+        CREATE TRIGGER log_insert_siswa
+        AFTER INSERT ON siswas
+        FOR EACH ROW
+        BEGIN
+        INSERT INTO log_siswas(n_NISN, user, NIS, tanggal_masuk, kelas_awal, n_semester, n_status_keaktifan, keterangan, created_at)
+        VALUES (NEW.NISN, NEW.user, NEW.NIS, NEW.tanggal_masuk, NEW.kelas_awal, NEW.semester, NEW.status_keaktifan, "insert", NOW());
+        END
         ');
 
         /* log update kelas */
         DB::unprepared('
-            CREATE TRIGGER log_update_siswa
-            AFTER UPDATE ON siswas
-            FOR EACH ROW
-            BEGIN
-            INSERT INTO log_siswas(n_NISN, o_NISN, user, NIS, tanggal_masuk, kelas_awal, n_semester, o_semester, n_status_keaktifan, o_status_keaktifan, keterangan, created_at)
-            VALUES (NEW.NISN, OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, NEW.semester, OLD.semester, NEW.status_keaktifan, OLD.status_keaktifan, "update", NOW());
-            END
+        CREATE TRIGGER log_update_siswa
+        AFTER UPDATE ON siswas
+        FOR EACH ROW
+        BEGIN
+        INSERT INTO log_siswas(n_NISN, o_NISN, user, NIS, tanggal_masuk, kelas_awal, n_semester, o_semester, n_status_keaktifan, o_status_keaktifan, keterangan, created_at)
+        VALUES (NEW.NISN, OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, NEW.semester, OLD.semester, NEW.status_keaktifan, OLD.status_keaktifan, "update", NOW());
+        END
         ');
 
         /* log delete kelas */
