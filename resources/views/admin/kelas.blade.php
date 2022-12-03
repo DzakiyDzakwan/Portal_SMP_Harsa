@@ -129,14 +129,14 @@
                             {{-- Update Button --}}
                             <div class="modal-warning me-1 mb-1 d-inline-block">
                                 <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#update" data-modal="{{ $k->kelas_id }}">
+                                    data-bs-target="#update{{ $k->kelas_id }}" data-order=>
                                     <i class="bi bi-pencil"></i>
                                 </button>
                             </div>
                             {{-- Delete Button --}}
                             <div class="modal-danger me-1 mb-1 d-inline-block">
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#delete">
+                                    data-bs-target="#delete{{ $k->kelas_id }}">
                                     <i class="bi bi-trash"></i>
                                 </button>
 
@@ -234,13 +234,14 @@
     </div>
 </div>
 
+@foreach ($kelas as $k)
 {{-- Modal Edit --}}
 <div
     class="modal fade text-left"
-    id="update"
+    id="update{{ $k->kelas_id }}"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="update"
+    aria-labelledby="myModalLabel130"
     aria-hidden="true"
 >
     <div
@@ -262,16 +263,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('updateKelas', $k->kelas_id) }}">
+                <form action="/kelas/updateKelas/{{ $k->kelas_id }}" method="post">
+                    @csrf
                     <div class="modal-body">
-                        <label>Nomor Kelas: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" value="{{ $k->kelompok_kelas }}" />
-                        </div>
-                        <label>Nama Kelas: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" value="{{ $k->nama_kelas }}" />
-                        </div>
+                        <label for="nomor">Nomor Kelas: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Nomor Kelas"
+                            class="form-control"
+                            name="nomor"
+                            id="nomor"
+                            value="{{ $k->kelompok_kelas }}"
+                        />
+                    </div>
+                    <label for="nama">Nama Kelas: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Nama Kelas"
+                            class="form-control"
+                            name="nama"
+                            id="nama"
+                            value="{{ $k->nama_kelas }}"
+                        />
+                    </div>
                         <label for="guru">Wali Kelas: </label>
                         <div class="form-group">
                             <select class="choices form-select" id="guru" name="guru">
@@ -281,25 +297,25 @@
                             </select>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-light-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Close</span>
+                        </button>
+                        <button
+                            class="btn btn-success ml-1"
+                            data-bs-dismiss="modal"
+                            type="submit"
+                        >
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Simpan</span>
+                        </button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-success ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Simpan</span>
-                </button>
             </div>
         </div>
     </div>
@@ -308,7 +324,7 @@
 {{-- Modal Delete --}}
 <div
     class="modal fade text-left"
-    id="delete"
+    id="delete{{ $k->kelas_id }}"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -342,19 +358,22 @@
                     <i class="bx bx-x d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Close</span>
                 </button>
-                <button
-                    type="button"
-                    class="btn btn-danger ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Hapus</span>
-                </button>
+                <form action="/kelas/deleteKelas/{{ $k->kelas_id }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button
+                        class="btn btn-danger ml-1"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Yes</span>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
+@endforeach
 
 @endsection
 

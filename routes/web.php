@@ -37,10 +37,10 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
     Route::get('/spp',[SPPController::class,'index'])->name('spp');
     //Dashboard/Kelas
     Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
-    Route::get('/kelas/addKelas', [KelasController::class, 'create'])->name('addKelas');
     Route::post('/kelas/addKelas', [KelasController::class, 'store'])->name('addKelas');
-    Route::get('/kelas/update-{id}', [KelasController::class, 'edit'])->name('updateKelas');
-    //Route::post('/kelas/update/{id}', [KelasController::class, 'update'])->name('updateKelas');
+    Route::post('/kelas/updateKelas/{id}', [KelasController::class, 'update'])->name('updateKelas');
+    Route::delete('/kelas/deleteKelas/{id}', [KelasController::class, 'destroy'])->name('deleteKelas');
+
     //Dashboard/User
     Route::get('/users',[UserController::class,'index'])->name('users');
     Route::post('/users/addAdmin',[UserController::class,'store'])->name('addAdmin');

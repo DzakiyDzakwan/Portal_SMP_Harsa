@@ -41,7 +41,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        return view('admin.kelas');
+        //
     }
 
     /**
@@ -70,7 +70,7 @@ class KelasController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -81,13 +81,7 @@ class KelasController extends Controller
      */
     public function edit($id)
     {
-        $k = DB::table('table_kelas')
-        ->where('kelas.kelas_id', $id)
-        ->get();
-
-        return view('admin.kelas.#update', [
-            'k' => $k
-        ]);
+        //
     }
 
     /**
@@ -99,7 +93,14 @@ class KelasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $kls = Kelas::where('kelas_id', $id);
+        $kls->update([
+            'kelompok_kelas' => $request->nomor,
+            'nama_kelas'=> $request->nama,
+            'wali_kelas'=> $request->guru
+        ]);
         
+        return redirect()->route('kelas');
     }
 
     /**
@@ -110,6 +111,7 @@ class KelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Kelas::where('kelas_id', $id)->delete();
+        return redirect()->route('kelas');
     }
 }
