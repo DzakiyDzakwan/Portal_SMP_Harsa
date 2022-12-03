@@ -55,7 +55,10 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
     Route::get('/guru', [GuruController::class,'index'])->name('guru');
     Route::post('/guru/addGuru',[GuruController::class,'store'])->name('addGuru');
     Route::patch('/guru/inactiveGuru/{uuid}',[GuruController::class,'delete'])->name('inactiveGuru');
-    Route::post('/guru/updateGuru/{id}', [GuruController::class, 'edit'])->name('updateGuru');
+    Route::patch('/guru/updateGuru/{id}', [GuruController::class, 'edit'])->name('updateGuru');
+
+     //Dashboard/Log-Users
+     Route::get('/log-activities',[LogController::class,'activity'])->name('log-activities');
     //Dashboard/Log-Users
     Route::get('/log-users',[LogController::class,'user'])->name('log-user');
     //Dashboard/Log-Siswa

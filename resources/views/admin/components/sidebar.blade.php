@@ -192,7 +192,7 @@
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                            <a href="/log-users"
+                            <a href="/log-activities"
                                 >Log Aktivitas</a
                             >
                         </li>

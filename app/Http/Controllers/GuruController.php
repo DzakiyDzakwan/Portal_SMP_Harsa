@@ -78,9 +78,19 @@ class GuruController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $nip)
     {
-        dd($request->all());
+        DB::beginTransaction();
+        try {
+            Guru::where('NIP', $nip)->update([
+                'NIP'=>$request->nip,
+                'jabatan' => $request->jabatan
+            ]);
+            DB::commit();
+            return back()->with('success', "Berhasil mengubah data");
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
     }
 
     /**
