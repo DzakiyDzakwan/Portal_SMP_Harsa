@@ -18,20 +18,9 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
-            [
-                'username'=>"021203",
-                "password"=>Hash::make("admin1"),
-                'uuid'=>Str::uuid('admin'),
-                'role'=>'admin'
-            ],
-            [
-                'username'=>"031202",
-                "password"=>Hash::make("guru"),
-                'uuid'=>Str::uuid('guru'),
-                'role'=>'guru'
-            ] 
-            ];
-            \DB::table('users')->insert($users);
+        User::create([
+            'username'=>"admin",
+            "password"=>Hash::make("admin")
+        ]);
     }
 }

@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
     //Dashboard/User
     Route::get('/users',[UserController::class,'index'])->name('users');
     Route::post('/users/addAdmin',[UserController::class,'store'])->name('addAdmin');
+    Route::delete('/users/deleteAdmin/{uuid}',[UserController::class,'delete'])->name('deleteAdmin');
     //Dashboard/Mapel
     Route::get('/mapel',[ManajemenKelasController::class,'mapel'])->name('mapel');
     //Dashboard/eskul
@@ -52,6 +53,8 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
     Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
     //Dashboard/Guru
     Route::get('/guru', [GuruController::class,'index'])->name('guru');
+    Route::post('/users/addGuru',[GuruController::class,'store'])->name('addGuru');
+    Route::patch('/users/inactiveGuru/{uuid}',[GuruController::class,'delete'])->name('inactiveGuru');
     //Dashboard/Log-Users
     Route::get('/log-users',[LogController::class,'user'])->name('log-user');
     //Dashboard/Log-Siswa

@@ -20,7 +20,7 @@ class Guru extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    public function users()
     {
         return $this->belongsTo(User::class, 'user', 'uuid');
     }
@@ -30,7 +30,7 @@ class Guru extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function mapel(): BelongsToMany
+    public function mapel()
     {
         return $this->belongsToMany(Mapel::class, 'mapel_gurus', 'NIP', 'mapel_id');
     }
@@ -40,7 +40,7 @@ class Guru extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function kelas(): HasOne
+    public function kelas()
     {
         return $this->hasOne(Kelas::class, 'wali_kelas', 'NIP');
     }

@@ -1,14 +1,204 @@
-<div class="form-group has-icon-left">
-    <label for="password-id-icon">Password</label>
-    <div class="position-relative">
-        <input
-            type="password"
-            class="form-control"
-            placeholder="Password"
-            id="password-id-icon"
-        />
-        <div class="form-control-icon">
-            <i class="bi bi-lock"></i>
+{{-- Modal Preview--}}
+<div
+    class="modal fade text-left"
+    id="info"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel130"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel130">Profil Guru</h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{-- Image --}}
+                <img
+                    src="assets/images/test.jpg"
+                    class="mx-auto d-block w-50 my-3"
+                    alt="..."
+                />
+                <table class="table table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <td class="p-1">Nama</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">Dzakiy Dzakwan</td>
+                        </tr>
+                        <tr>
+                            <td class="p-1">NIP</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">211402017</td>
+                        </tr>
+                        <tr>
+                            <td class="p-1">Jenis Kelamin</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">Laki-Laki</td>
+                        </tr>
+                        <tr>
+                            <td class="p-1">Tanggal Lahir</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">01/12/2003</td>
+                        </tr>
+                        <tr>
+                            <td class="p-1">Tempat Lahir</td>
+                            <td class="p-1">:</td>
+                            <td class="p-1">Medan</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Update --}}
+<div
+    class="modal fade text-left"
+    id="update"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel130"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title white" id="myModalLabel130">
+                    Ubah Mata Pelajaran
+                </h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#">
+                    <div class="modal-body">
+                        <label>Mata Pelajaran: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Kelas: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Guru: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Hari: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Jam Masuk: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <label>Jam Keluar: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-success ml-1"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Simpan</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Delete --}}
+<div
+    class="modal fade text-left"
+    id="delete"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel130"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title white" id="myModalLabel130">
+                    Hapus Mata Pelajaran
+                </h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">Apakah yakin menghapus data ini?</div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-danger ml-1"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Hapus</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>
