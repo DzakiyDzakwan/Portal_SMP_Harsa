@@ -413,7 +413,7 @@ VALUES (OLD.absensi_id, OLD.siswa, OLD.sakit, OLD.izin, OLD.tanpa_keterangan, OL
 END?
 
 --Ekstrakulikuler--
--- Log Insert Rekap Absensi
+-- Log Insert Ekskull
 DELIMITER ?
 CREATE TRIGGER log_insert_ekskul
 AFTER INSERT on ekskuls

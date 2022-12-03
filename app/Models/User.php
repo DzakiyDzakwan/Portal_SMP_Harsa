@@ -50,17 +50,17 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user_profile(): HasOne
+    public function user_profiles()
     {
         return $this->hasOne(UserProfile::class, 'user', 'uuid');
     }
     
-    public function guru(): HasOne
+    public function gurus()
     {
         return $this->hasOne(Guru::class, 'user', 'uuid');
     }
 
-    public function siswa(): HasOne
+    public function siswas()
     {
         return $this->hasOne(Siswa::class, 'user', 'uuid');
     }
