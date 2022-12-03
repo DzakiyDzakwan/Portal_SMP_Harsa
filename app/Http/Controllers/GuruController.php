@@ -25,7 +25,7 @@ class GuruController extends Controller
         $totalGuru = Guru::count();
         $guruActive = Guru::where('status_keaktifan', 'Aktif')->count();
         $guruInactive = Guru::where('status_keaktifan', 'Tidak Aktif')->count();
-        $gurus = Guru::all();
+        $gurus = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get();
         return view('admin.guru', compact('pages', 'totalGuru', 'guruActive', 'guruInactive', 'gurus'));
     }
 
@@ -104,5 +104,13 @@ class GuruController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete($nip) {
+        Guru::where('NIP', $nip)->update([
+            'status_keaktifan' => "Tidak Aktif"
+        ]);
+
+        return back()->with('succes', 'dosen berhasil di non-aktif kan');
     }
 }

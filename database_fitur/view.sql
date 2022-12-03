@@ -5,7 +5,8 @@ FROM kelas
 LEFT JOIN gurus ON kelas.wali_kelas = gurus.NIP 
 LEFT JOIN users ON gurus.user = users.uuid
 RIGHT JOIN user_profiles ON users.uuid = user_profiles.user
-RIGHT JOIN siswas ON siswas.ruang_kelas = kelas.kelas_id;
+LEFT JOIN siswas ON kelas.kelas_id = siswas.ruang_kelas
+GROUP BY kelas.nama_kelas, kelas.kelompok_kelas, user_profiles.nama, siswas.NIS;
 
 
 /* Detail Siswa */

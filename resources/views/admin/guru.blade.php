@@ -110,10 +110,9 @@
         <table class="table table-bordered" id="table1">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Mata Pelajaran</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Agama</th>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Jabatan</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -121,33 +120,44 @@
             <tbody>
                 @foreach ($gurus as $item)
                 <tr>
-                    <td>Graiden</td>
-                    <td>vehicula.aliquet@semconsequat.co.uk</td>
-                    <td>076 4820 8838</td>
-                    <td>Offenburg</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$item->users->user_profiles->nama}}</td>
+                    @if ($item->jabatan == 'wks')
+                        <td>Wakil Kepala sekolah</td>
+                    @elseif($item->jabatan == 'bk')
+                        <td>Bimbingan Konseling</td>
+                    @else
+                        <td>Guru</td>
+                    @endif
+                    @if ($item->status_keaktifan == 'Aktif')
+                        <td>
+                            <span class="badge bg-success">Active</span>
+                        </td> 
+                    @else
+                        <td>
+                            <span class="badge bg-danger">Inactive</span> 
+                        </td>
+                    @endif
                     <td>
                         {{-- Preview Button --}}
                         <div class="modal-info me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#info">
+                                data-bs-target="#info{{$item->user}}">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </div>
                         {{-- Update Button --}}
                         <div class="modal-success me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#update">
+                                data-bs-target="#update{{$item->user}}">
                                 <i class="bi bi-pencil"></i></a>
                             </button>
                         </div>
                         {{-- Delete Button --}}
                         <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#delete">
-                                <i class="bi bi-trash"></i></a>
+                                data-bs-target="#delete{{$item->user}}">
+                                <i class="bi  bi-person-x-fill"></i></a>
                             </button>
                         </div>
                     </td>
@@ -206,7 +216,7 @@
                         {{-- Jenis Kelamin --}}
                         <div class="col-12">
                             <div class="form-group has-icon-left">
-                                <label for="fullname">Nama Lengkap</label>
+                                <label for="fullname">Jenis Kelamin</label>
                                 <div class="position-relative">
                                         <select name="jenis_kelamin" class="form-select form-control" id="basicSelect">
                                             <option value="LK">Laki-Laki</option>
@@ -309,209 +319,220 @@
     </div>
 </div>
 
-{{-- Modal Preview--}}
-<div
-    class="modal fade text-left"
-    id="info"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel130"
-    aria-hidden="true"
->
+@foreach ($gurus as $item)
+    {{-- Modal Preview--}}
     <div
-        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-        role="document"
+        class="modal fade text-left"
+        id="info{{$item->user}}"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel130"
+        aria-hidden="true"
     >
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel130">
-                    Profil Guru
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                {{-- Image --}}
-                <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
-                <table class="table table-borderless mb-0">
-                    <tbody>
-                        <tr>
-                            <td class="p-1">Nama</td>
-                            <td class="p-1">:</td>
-                            <td class="p-1">Dzakiy Dzakwan</td>
-                        </tr>
-                        <tr>
-                            <td class="p-1">NIP</td>
-                            <td class="p-1">:</td>
-                            <td class="p-1">211402017</td>
-                        </tr>
-                        <tr>
-                            <td class="p-1">Jenis Kelamin</td>
-                            <td class="p-1">:</td>
-                            <td class="p-1">Laki-Laki</td>
-                        </tr>
-                        <tr>
-                            <td class="p-1">Tanggal Lahir</td>
-                            <td class="p-1">:</td>
-                            <td class="p-1">01/12/2003</td>
-                        </tr>
-                        <tr>
-                            <td class="p-1">Tempat Lahir</td>
-                            <td class="p-1">:</td>
-                            <td class="p-1">Medan</td>
-                        </tr>
-                    </tbody>
-                </table> 
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
+        <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            role="document"
+        >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel130">Profil Guru</h5>
+                </div>
+                <div class="modal-body">
+                    {{-- Image --}}
+                    <img
+                        src="assets/images/test.jpg"
+                        class="mx-auto d-block w-50 my-3"
+                        alt="..."
+                    />
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                            <tr>
+                                <td class="p-1">Nama</td>
+                                <td class="p-1">:</td>
+                                <td class="p-1">{{$item->users->user_profiles->nama}}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-1">NIP</td>
+                                <td class="p-1">:</td>
+                                <td class="p-1">{{$item->NIP}}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-1">Jenis Kelamin</td>
+                                <td class="p-1">:</td>
+                                @if ($item->users->user_profiles->jenis_kelamin == 'LK')
+                                    <td class="p-1">Pria</td>
+                                @else
+                                    <td class="p-1">Wanita</td>
+                                @endif
+                            </tr>
+                            <tr>
+                                <td class="p-1">Tanggal Lahir</td>
+                                <td class="p-1">:</td>
+                                <td class="p-1">{{$item->users->user_profiles->tanggal_lahir}}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-1">Tempat Lahir</td>
+                                <td class="p-1">:</td>
+                                <td class="p-1">{{$item->users->user_profiles->tempat_lahir}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-light-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-{{-- Modal Update --}}
-<div
-    class="modal fade text-left"
-    id="update"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel130"
-    aria-hidden="true"
->
+    {{-- Modal Update --}}
     <div
-        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-        role="document"
+        class="modal fade text-left"
+        id="update{{$item->user}}"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel130"
+        aria-hidden="true"
     >
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Ubah Mata Pelajaran
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="#">
-                    <div class="modal-body">
-                        <label>Mata Pelajaran: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
+        <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            role="document"
+        >
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title white" id="myModalLabel130">
+                        Ubah Data guru
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <form class="form form-vertical" action="users/editGuru/{{$item->NIP}}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <div class="form-body modal-body">
+                            <div class="row">
+                                {{-- NIP --}}
+                                <div class="col-12">
+                                    <div class="form-group has-icon-left">
+                                        <label for="nip">NIP</label>
+                                        <div class="position-relative">
+                                            <input
+                                                value="{{$item->NIP}}"
+                                                name="nip"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Masukkan NIP guru"
+                                                id="nip"
+                                            />
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-person"></i>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                This is invalid state.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Jabatan --}}
+                                <div class="col-12">
+                                    <div class="form-group has-icon-left">
+                                        <label for="jabatan">Jabatan</label>
+                                        <div class="position-relative">
+                                            <select name="jabatan" class="form-select form-control" id="basicSelect">
+                                                <option value="wks">Wakil Kepala Sekolah</option>
+                                                <option value="bk">Bimbingan Konseling</option>
+                                                <option value="guru">Guru</option>
+                                            </select>
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-person"></i>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                This is invalid state.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="button" class="btn btn-light-secondary me-1 mb-1" data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Close</span>
+                                    </button>
+                                    <button type="submit" class="btn btn-success me-1 mb-1">
+                                        Simpan
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <label>Kelas: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Guru: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Hari: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Jam Masuk: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Jam Keluar: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-success ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Simpan</span>
-                </button>
+                    </form>       
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-{{-- Modal Delete --}}
-<div
-    class="modal fade text-left"
-    id="delete"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel130"
-    aria-hidden="true"
->
+    {{-- Modal Inactive --}}
     <div
-        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-        role="document"
+        class="modal fade text-left"
+        id="delete{{$item->user}}"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel130"
+        aria-hidden="true"
     >
-        <div class="modal-content">
-            <div class="modal-header bg-danger">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Hapus Mata Pelajaran
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">Apakah yakin menghapus data ini?</div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-danger ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Hapus</span>
-                </button>
+        <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            role="document"
+        >
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title white" id="myModalLabel130">
+                        Non Aktifkan Guru
+                    </h5>
+                    <button
+                        type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">Apakah yakin ingin menonaktifkan {{$item->users->user_profiles->nama}}?</div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-light-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                    <form action="users/inactiveGuru/{{$item->NIP}}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <button
+                            class="btn btn-danger ml-1"
+                            data-bs-dismiss="modal"
+                        >
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Yes</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+@endforeach
 
 @endsection
 
