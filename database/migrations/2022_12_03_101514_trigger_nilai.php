@@ -21,7 +21,7 @@ return new class extends Migration
         BEGIN
         INSERT INTO log_nilais(nilai_id, siswa, mapel, kategori, semester, tahun_ajaran, n_kkm, n_nilai_pengetahuan, n_deskripsi_pengetahuan, n_nilai_keterampilan, n_deskripsi_keterampilan, keterangan, created_at)
         VALUES (NEW.nilai_id, NEW.siswa, NEW.mapel, NEW.kategori, NEW.semester, NEW.tahun_ajaran, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, "insert", NOW());
-        END;
+        END
         ');
 
         /* log update nilai */
@@ -32,7 +32,11 @@ return new class extends Migration
         BEGIN
         INSERT INTO log_nilais(nilai_id, siswa, mapel, kategori, semester, tahun_ajaran, n_kkm, o_kkm, n_nilai_pengetahuan, o_nilai_pengetahuan, n_deskripsi_pengetahuan, o_deskripsi_pengetahuan, n_nilai_keterampilan, o_nilai_keterampilan, n_deskripsi_keterampilan, o_deskripsi_keterampilan, keterangan, created_at)
         VALUES (OLD.nilai_id, OLD.siswa, OLD.mapel, OLD.kategori, OLD.semester, OLD.tahun_ajaran, NEW.kkm, OLD.kkm, NEW.nilai_pengetahuan, OLD.nilai_pengetahuan, NEW.deskripsi_pengetahuan, OLD.deskripsi_pengetahuan, NEW.nilai_keterampilan, OLD.nilai_keterampilan, NEW.deskripsi_keterampilan, OLD.deskripsi_keterampilan, "update", NOW());
+<<<<<<< HEAD
         END;
+=======
+        END
+>>>>>>> f08e942c9761112ee0719b3ed12a50c1839515ae
         ');
 
         /* log delete nilai */
@@ -43,7 +47,7 @@ return new class extends Migration
         BEGIN
         INSERT INTO log_nilais(nilai_id, siswa, mapel, kategori, semester, tahun_ajaran, o_kkm, o_nilai_pengetahuan, o_deskripsi_pengetahuan, o_nilai_keterampilan, o_deskripsi_keterampilan, keterangan, created_at)
         VALUES (OLD.nilai_id, OLD.siswa, OLD.mapel, OLD.kategori, OLD.semester, OLD.tahun_ajaran, OLD.kkm, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, "delete", NOW());
-        END;
+        END
         ');
 
         /* validasi inputan nilai*/

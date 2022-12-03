@@ -1,12 +1,12 @@
 /* Table Kelas */
 CREATE VIEW table_kelas AS
-SELECT kelas.nama_kelas, kelas.kelompok_kelas, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS Jumlah_Siswa
+SELECT kelas.kelas_id, kelas.nama_kelas, kelas.kelompok_kelas, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS Jumlah_Siswa
 FROM kelas
 LEFT JOIN gurus ON kelas.wali_kelas = gurus.NIP 
 LEFT JOIN users ON gurus.user = users.uuid
-RIGHT JOIN user_profiles ON users.uuid = user_profiles.user
+INNER JOIN user_profiles ON users.uuid = user_profiles.user
 LEFT JOIN siswas ON kelas.kelas_id = siswas.ruang_kelas
-GROUP BY kelas.nama_kelas, kelas.kelompok_kelas, user_profiles.nama, siswas.NIS;
+GROUP BY kelas.kelas_id, kelas.nama_kelas, kelas.kelompok_kelas, user_profiles.nama, siswas.NIS
 
 
 /* Detail Siswa */

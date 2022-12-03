@@ -21,7 +21,7 @@ return new class extends Migration
         BEGIN
         INSERT INTO log_prestasis(prestasi_id, siswa, n_jenis_prestasi, n_keterangan, n_tanggal_prestasi, n_semester, keterangan, created_at)
         VALUES (NEW.prestasi_id, NEW.siswa, NEW.jenis_prestasi, NEW.keterangan, NEW.tanggal_prestasi, NEW.semester, "insert", NOW());
-        END;
+        END
         ');
 
         /* log update prestasi */
@@ -32,7 +32,7 @@ return new class extends Migration
         BEGIN
         INSERT INTO log_prestasis(prestasi_id, siswa, n_jenis_prestasi, o_jenis_prestasi, n_keterangan, o_keterangan,  n_tanggal_prestasi, o_tanggal_prestasi, n_semester, o_semester, keterangan, created_at)
         VALUES (OLD.prestasi_id, OLD.siswa, NEW.jenis_prestasi, OLD.jenis_prestasi, NEW.keterangan, OLD.keterangan, NEW.tanggal_prestasi, OLD.tanggal_prestasi, NEW.semester, OLD.semester, "update", NOW());
-        END;
+        END
         ');
 
         /* log delete prestasi */
@@ -43,7 +43,7 @@ return new class extends Migration
         BEGIN
         INSERT INTO log_prestasis(prestasi_id, siswa, o_jenis_prestasi, o_keterangan, o_tanggal_prestasi, o_semester, keterangan, created_at)
         VALUES (OLD.prestasi_id, OLD.siswa, OLD.jenis_prestasi, OLD.keterangan, OLD.tanggal_prestasi, OLD.semester, "delete", NOW());
-        END;
+        END
         ');
     }
 
