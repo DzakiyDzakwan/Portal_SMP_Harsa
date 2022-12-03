@@ -13,13 +13,6 @@ class ManajemenKelasController extends Controller
         ]);
     }
 
-    public function kelas()
-    {
-        $pages = 'manajemenKelas';
-        return  view('admin.kelas', [
-            'pages' => $pages,
-        ]);
-    }
     public function ekskul()
     {
         $pages = 'manajemenEkskul';

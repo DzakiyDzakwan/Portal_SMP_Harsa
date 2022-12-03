@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Guru extends Model
 {
@@ -44,4 +45,7 @@ class Guru extends Model
         return $this->hasOne(Kelas::class, 'wali_kelas', 'NIP');
     }
 
+    public function profiles(){
+        return $this->belongsTo('App\Models\UserProfile', 'user', 'user');
+    }
 }
