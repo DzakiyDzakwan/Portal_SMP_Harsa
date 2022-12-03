@@ -413,7 +413,7 @@ VALUES (OLD.absensi_id, OLD.siswa, OLD.sakit, OLD.izin, OLD.tanpa_keterangan, OL
 END?
 
 --Ekstrakulikuler--
--- Log Insert Rekap Absensi
+-- Log Insert Ekskull
 DELIMITER ?
 CREATE TRIGGER log_insert_ekskul
 AFTER INSERT on ekskuls
@@ -424,7 +424,7 @@ VALUES (NEW.ekskul_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.waktu_akhir, NEW
 END?
 DELIMITER ;
 
--- Log Delete Rekap Ekskul
+-- Log Delete Ekskul
 DELIMITER ?
 CREATE TRIGGER log_delete_ekskul
 AFTER DELETE on ekskuls
