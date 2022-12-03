@@ -15,7 +15,6 @@ return new class extends Migration
     {
         /* log insert rekap_absensi */
         DB::unprepared('
-        DELIMITER ;
         CREATE TRIGGER log_insert_rekap_absensi
         AFTER INSERT on rekap_absensis
         FOR EACH ROW
@@ -27,8 +26,7 @@ return new class extends Migration
 
         /* log update rekap_absensi */
         DB::unprepared('
-        DELIMITER ;
-        CREATE TRIGGER log_update_rekap_absensis
+        CREATE TRIGGER log_update_rekap_absensi
         AFTER UPDATE on rekap_absensis
         FOR EACH ROW
         BEGIN
@@ -39,7 +37,7 @@ return new class extends Migration
 
         /* log delete rekap_absensi */
         DB::unprepared('
-        CREATE TRIGGER log_delete_rekap_absensis
+        CREATE TRIGGER log_delete_rekap_absensi
         AFTER DELETE on rekap_absensis
         FOR EACH ROW
         BEGIN
@@ -57,9 +55,9 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_roster_kelas');
-        DB::unprepared('DROP TRIGGER log_update_roster_kelas');
-        DB::unprepared('DROP TRIGGER log_delete_roster_kelas');
+        DB::unprepared('DROP TRIGGER log_insert_rekap_absensi');
+        DB::unprepared('DROP TRIGGER log_update_rekap_absensi');
+        DB::unprepared('DROP TRIGGER log_delete_rekap_absensi');
 
     }
 };

@@ -412,7 +412,7 @@
                     </h5>
                 </div>
                 <div class="modal-body">
-                    <form class="form form-vertical" action="users/editGuru/{{$item->NIP}}" method="POST">
+                    <form class="form form-vertical" action="guru/updateGuru/{{$item->NIP}}" method="POST">
                         @csrf
                         @method('PATCH')
                         <div class="form-body modal-body">

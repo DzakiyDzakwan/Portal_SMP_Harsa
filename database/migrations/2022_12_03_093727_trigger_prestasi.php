@@ -15,7 +15,6 @@ return new class extends Migration
     {
         /* log insert prestasi */
         DB::unprepared('
-        DELIMTER ;
         CREATE TRIGGER log_insert_prestasi
         AFTER INSERT ON prestasis
         FOR EACH ROW
@@ -27,7 +26,6 @@ return new class extends Migration
 
         /* log update prestasi */
         DB::unprepared('
-        DELIMTER ;
         CREATE TRIGGER log_update_prestasi
         AFTER UPDATE ON prestasis
         FOR EACH ROW
@@ -39,7 +37,6 @@ return new class extends Migration
 
         /* log delete prestasi */
         DB::unprepared('
-        DELIMTER ;
         CREATE TRIGGER log_delete_prestasi
         AFTER DELETE ON prestasis
         FOR EACH ROW
