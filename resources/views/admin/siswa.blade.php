@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Total Siswa</h6>
-                        <h6 class="font-extrabold mb-0">2</h6>
+                        <h6 class="font-extrabold mb-0">{{$totalSiswa}}</h6>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Active</h6>
-                        <h6 class="font-extrabold mb-0">2</h6>
+                        <h6 class="font-extrabold mb-0">{{$siswaActive}}</h6>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Inactive</h6>
-                        <h6 class="font-extrabold mb-0">2</h6>
+                        <h6 class="font-extrabold mb-0">{{$siswaInactive}}</h6>
                     </div>
                 </div>
             </div>
@@ -110,28 +110,29 @@
         <table class="table table-bordered" id="table1">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Mata Pelajaran</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Agama</th>
-                    <th>Status</th>
+                    <th>No</th>
+                    <th>NISN</th>
+                    <th>Nama</th>
+                    <th>Tanggal Masuk</th>
+                    <th>Status Keaktifan</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Graiden</td>
-                    <td>vehicula.aliquet@semconsequat.co.uk</td>
-                    <td>076 4820 8838</td>
-                    <td>Offenburg</td>
+                    @foreach ($siswas as $siswa) 
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$siswa->NISN}}</td>
+                    <td>{{$siswa->nama}}</td>
+                    <td>{{$siswa->tanggal_masuk}}</td>
                     <td>
-                        <span class="badge bg-success">Active</span>
+                        <span class="badge bg-success">{{$siswa->status_keaktifan}}</span>
                     </td>
                     <td>
                         {{-- Preview Button --}}
                         <div class="modal-info me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#info">
+                                data-bs-target="#info{{$siswa->user}}">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </div>
@@ -151,38 +152,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>Dale</td>
-                    <td>fringilla.euismod.enim@quam.ca</td>
-                    <td>0500 527693</td>
-                    <td>New Quay</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                    <td>
-                        {{-- Preview Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#info">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
-                        {{-- Update Button --}}
-                        <div class="modal-warning me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#update">
-                                <i class="bi bi-pencil"></i></a>
-                            </button>
-                        </div>
-                        {{-- Delete Button --}}
-                        <div class="modal-danger me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#delete">
-                                <i class="bi bi-trash"></i></a>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -214,70 +184,57 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
+                <form action="{{ route('add-siswa') }}" method="POST">
+                    @csrf
                     <div class="modal-body">
                         <label>Nama: </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nama"/>
+                            <input type="text" class="form-control" placeholder="Nama" name="nama"/>
                         </div>
-                        <label>Kelas: </label>
+                        <label>NISN: </label>
                         <div class="form-group">
-                            <select class="choices form-select">
-                                <option value="7A">7-A</option>
-                                <option value="7B">7-B</option>
-                                <option value="8A">8-A</option>
-                                <option value="8B">8-B</option>
-                                <option value="9A">9-A</option>
-                                <option value="9B">9-C</option>
-                            </select>
+                            <input type="text" class="form-control" placeholder="NISN" name="nisn"/>
                         </div>
-                        <label>E-mail: </label>
-                        <small class="text-muted">eg.<i>someone@example.com</i></small>
+                        <label>NIS: </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="E-mail"/>
+                            <input type="text" class="form-control" placeholder="NIS" name="nis"/>
+                        </div>
+                        <label>Tanggal Masuk: </label>
+                        <div class="form-group">
+                            <input type="date" class="form-control" placeholder="Tanggal Masuk" name="tgl_masuk"/>
+                        </div>
+                        <label>Ruang Kelas: </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Ruang Kelas" name="kelas_id"/>
                         </div>
                         <label>Jenis Kelamin: </label>
                         <div class="form-group">
-                            <select class="choices form-select">
-                                <option value="lk">Laki-laki</option>
-                                <option value="pr">Perempuan</option>
+                            <select name="jk" class="form-select form-control" id="basicSelect">
+                                <option value="LK">Laki-Laki</option>
+                                <option value="PR">Perempuan</option>
                             </select>
                         </div>
-                        <label>Phone: </label>
-                        <div class="form-group">
-                            <input type="number" class="form-control" placeholder="+62"/>
-                        </div>
-                        <label>Alamat: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Alamat"/>
-                        </div>
-                        <label>Agama: </label>
-                        <div class="form-group">
-                            <select class="choices form-select">
-                                <option value="is">Islam</option>
-                                <option value="krs">Kristen</option>
-                            </select>
-                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-light-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Close</span>
+                        </button>
+                        <button
+                            type="submit"
+                            class="btn btn-success ml-1"
+                            data-bs-dismiss="modal"
+                        >
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Simpan</span>
+                        </button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-success ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Simpan</span>
-                </button>
             </div>
         </div>
     </div>
@@ -285,9 +242,10 @@
 
 
 {{-- Modal Preview --}}
+@foreach ($siswas as $siswa)
 <div
     class="modal fade text-left"
-    id="info"
+    id="info{{$siswa->user}}"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -316,10 +274,14 @@
                 <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
-                            aria-controls="profile" aria-selected="false">Profile</a>
+                            aria-controls="profile" aria-selected="false">Profil</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#prestasi" role="tab"
+                        <a class="nav-link" id="profilePribadi-tab" data-bs-toggle="tab" href="#profilePribadi" role="tab"
+                            aria-controls="profilePribadi" aria-selected="false">Profil Pribadi</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="prestasi-tab" data-bs-toggle="tab" href="#prestasi" role="tab"
                             aria-controls="prestasi" aria-selected="false">Prestasi</a>
                     </li>
                 </ul>
@@ -335,27 +297,98 @@
                                 <tr>
                                     <td class="p-1">Nama</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">Dzakiy Dzakwan</td>
+                                    <td class="p-1">{{ $siswa->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">NISN</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->NISN }}</td>
                                 </tr>
                                 <tr>
                                     <td class="p-1">NIS</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">211402017</td>
+                                    <td class="p-1">{{ $siswa->NIS }}</td>
                                 </tr>
                                 <tr>
                                     <td class="p-1">Jenis Kelamin</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">Laki-Laki</td>
+                                    <td class="p-1">{{ $siswa->jenis_kelamin }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Tanggal Lahir</td>
+                                    <td class="p-1">Kelas Awal</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">01/12/2003</td>
+                                    <td class="p-1">{{ $siswa->kelas_awal }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Tempat Lahir</td>
+                                    <td class="p-1">Semester</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">Medan</td>
+                                    <td class="p-1">{{ $siswa->semester }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Status Keaktifan</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->status_keaktifan }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="profilePribadi" role="tabpanel" aria-labelledby="profilePribadi-tab">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="p-1">Nama</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Anak Ke</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->anak_ke }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Nama Ayah</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->nama_ayah }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Pekerjan Ayah</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->nama_ayah }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Nama Ibu</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->nama_ibu }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Pekerjaan Ibu</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->pekerjaan_ibu }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Alamat Orangtua</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->alamat_orangtua }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Telepon Orangtua</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->telepon_orangtua }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Nama Wali</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->nama_wali }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Pekerjaan Wali</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->pekerjaan_wali }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Telepon Wali</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $siswa->telepon_wali }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -373,11 +406,11 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>Juara 1 Mewarnai Tingkat Desa</td>
-                                <td>Seni</td>
-                                <td>30 Februari 2021</td>
-                                <td>5</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $siswa->keterangan }}</td>
+                                <td>{{ $siswa->jenis_prestasi }}</td>
+                                <td>{{ $siswa->tanggal_prestasi }}</td>
+                                <td>{{ $siswa->semester }}</td>
                             </tr>
                         </tbody>
                        </table>
@@ -397,6 +430,7 @@
         </div>
     </div>
 </div>
+@endforeach
 
 {{-- Modal Update --}}
 <div

@@ -128,8 +128,8 @@ return new class extends Migration
             INSERT INTO log_activities(user, transaksi, at, created_at)
             VALUES(admin, "insert", "users", NOW());
         
-            INSERT INTO siswas(nisn, nis, ruang_kelas, kelas_awal, semester, status_keaktifan, user, created_at, updated_at)
-            VALUES(nisn, nis, kelas_id, kelas_id, "1", "aktif", uuid, NOW(), NOW());
+            INSERT INTO siswas(nisn, nis, ruang_kelas, kelas_awal, tanggal_masuk, semester, status_keaktifan, user, created_at, updated_at)
+            VALUES(nisn, nis, kelas_id, kelas_id, tanggal_masuk, "1", "aktif", uuid, NOW(), NOW());
         
             INSERT INTO log_activities(user, transaksi, at, created_at)
             VALUES(admin, "insert", "user_profiles", NOW());

@@ -16,6 +16,11 @@ class UserProfile extends Model
         'updated_at'
     ];
 
+    protected $fillable = [
+        'user',
+        'nama',
+        'jenis_kelamin',
+    ];
     /**
      * Get the user that owns the UserProfile
      *
