@@ -27,10 +27,13 @@ class KelasController extends Controller
         $kelas = DB::table('table_kelas')
         ->get();
 
+        $total = Kelas::count();
+
         return  view('admin.kelas', [
             'pages' => $pages,
             'guru' => $guru,
-            'kelas' => $kelas
+            'kelas' => $kelas,
+            'total' => $total
         ]);
     }
 
@@ -53,7 +56,7 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $kelas = new Kelas;
-        $kelas->kelas_id = Str::random(3);
+        $kelas->kelas_id = $request->id;
         $kelas->kelompok_kelas = $request->nomor;
         $kelas->nama_kelas = $request->nama;
         $kelas->wali_kelas = $request->guru;
@@ -95,6 +98,7 @@ class KelasController extends Controller
     {
         $kls = Kelas::where('kelas_id', $id);
         $kls->update([
+            'kelas_id' => $request->id,
             'kelompok_kelas' => $request->nomor,
             'nama_kelas'=> $request->nama,
             'wali_kelas'=> $request->guru
