@@ -126,7 +126,11 @@
                     <td>{{$siswa->nama}}</td>
                     <td>{{$siswa->tanggal_masuk}}</td>
                     <td>
-                        <span class="badge bg-success">{{$siswa->status_keaktifan}}</span>
+                        @if ($siswa->status_keaktifan == 'Aktif')
+                            <span class="badge bg-success">{{$siswa->status_keaktifan}}</span>   
+                        @else
+                            <span class="badge bg-danger">{{$siswa->status_keaktifan}}</span>   
+                        @endif
                     </td>
                     <td>
                         {{-- Preview Button --}}
@@ -139,14 +143,14 @@
                         {{-- Update Button --}}
                         <div class="modal-warning me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#update">
+                                data-bs-target="#update{{$siswa->user}}">
                                 <i class="bi bi-pencil"></i></a>
                             </button>
                         </div>
                         {{-- Delete Button --}}
                         <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#delete">
+                                data-bs-target="#delete{{$loop->iteration}}">
                                 <i class="bi bi-trash"></i></a>
                             </button>
                         </div>
@@ -197,11 +201,11 @@
                         </div>
                         <label>NIS: </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="NIS" name="nis"/>
+                            <input type="text" class="form-control" placeholder="NIS" name="NIS"/>
                         </div>
                         <label>Tanggal Masuk: </label>
                         <div class="form-group">
-                            <input type="date" class="form-control" placeholder="Tanggal Masuk" name="tgl_masuk"/>
+                            <input type="date" class="form-control" placeholder="Tanggal Masuk" name="tanggal_masuk"/>
                         </div>
                         <label>Ruang Kelas: </label>
                         <div class="form-group">
@@ -209,7 +213,7 @@
                         </div>
                         <label>Jenis Kelamin: </label>
                         <div class="form-group">
-                            <select name="jk" class="form-select form-control" id="basicSelect">
+                            <select name="jenis_kelamin" class="form-select form-control" id="basicSelect">
                                 <option value="LK">Laki-Laki</option>
                                 <option value="PR">Perempuan</option>
                             </select>
@@ -430,12 +434,11 @@
         </div>
     </div>
 </div>
-@endforeach
 
 {{-- Modal Update --}}
 <div
     class="modal fade text-left"
-    id="update"
+    id="update{{$siswa->user}}"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -448,7 +451,7 @@
         <div class="modal-content">
             <div class="modal-header bg-warning">
                 <h5 class="modal-title white" id="myModalLabel130">
-                    Ubah Mata Pelajaran
+                    Ubah Data Siswa
                 </h5>
                 <button
                     type="button"
@@ -460,34 +463,30 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
-                    <div class="modal-body">
-                        <label>Mata Pelajaran: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Kelas: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Guru: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Hari: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Jam Masuk: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
-                        <label>Jam Keluar: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div>
+            <form action="/siswa/update-siswa{{ $siswa->NISN }}}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <label>NISN: </label>
+                    <div class="form-group">
+                        <input
+                            value="{{$siswa->NISN}}"
+                            name="nisn"
+                            type="text"
+                            class="form-control"
+                            id="nisn"
+                        />
                     </div>
-                </form>
+                    <label>Nama: </label>
+                    <div class="form-group">
+                        <input
+                            value="{{$siswa->nama}}"
+                            name="nama"
+                            type="text"
+                            class="form-control"
+                            id="nama"
+                        />
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button
@@ -506,6 +505,7 @@
                     <i class="bx bx-check d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Simpan</span>
                 </button>
+            </form>
             </div>
         </div>
     </div>
@@ -514,7 +514,7 @@
 {{-- Modal Delete --}}
 <div
     class="modal fade text-left"
-    id="delete"
+    id="delete{{$loop->iteration}}"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -527,7 +527,7 @@
         <div class="modal-content">
             <div class="modal-header bg-danger">
                 <h5 class="modal-title white" id="myModalLabel130">
-                    Hapus Mata Pelajaran
+                    Non-Aktifkan {{$siswa->nama}}
                 </h5>
                 <button
                     type="button"
@@ -538,7 +538,17 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <div class="modal-body">Apakah yakin menghapus data ini?</div>
+            <form action="/siswa/delete-siswa/{{$siswa->NISN}}" method="post">
+            <div class="modal-body">
+                <label>Opsi: </label>
+                <div class="form-group">
+                    <select name="status_keaktifan" class="form-select form-control" id="basicSelect">
+                        <option value="Lulus">Lulus</option>
+                        <option value="Pindah">Pindah</option>
+                        <option value="Drop Out">Drop Out</option>
+                    </select>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button
                     type="button"
@@ -548,18 +558,18 @@
                     <i class="bx bx-x d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Close</span>
                 </button>
-                <button
-                    type="button"
-                    class="btn btn-danger ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Hapus</span>
-                </button>
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger ml-1" data-bs-dismiss="modal">
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Simpan</span>
+                    </button>                        
+                </form>
             </div>
         </div>
     </div>
 </div>
+@endforeach
 
 @endsection
 

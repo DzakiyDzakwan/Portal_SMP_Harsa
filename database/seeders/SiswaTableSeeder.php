@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
 
 class SiswaTableSeeder extends Seeder
 {
@@ -23,7 +22,7 @@ class SiswaTableSeeder extends Seeder
                 "NISN" => '211402018',
                 "NIS" => "1234",
                 "ruang_kelas" => 'A01',
-                "tanggal_masuk" => Carbon::create('2019-01-01'),
+                "tanggal_masuk" => '2019-01-01',
                 "kelas_awal" => '7A',
                 "semester" => '2',
                 "status_keaktifan" => 'Aktif',
@@ -33,7 +32,7 @@ class SiswaTableSeeder extends Seeder
                 "NISN" => '211402009',
                 "NIS" => "4321",
                 "ruang_kelas" => 'A01',
-                "tanggal_masuk" => Carbon::create('2019-01-01'),
+                "tanggal_masuk" => '2019-01-01',
                 "kelas_awal" => '7A',
                 "semester" => '2',
                 "status_keaktifan" => 'Aktif',

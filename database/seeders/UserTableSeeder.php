@@ -43,12 +43,6 @@ class UserTableSeeder extends Seeder
                 "uuid" => 'guru1',
                 "role" => 'guru'
             ],
-            [
-                'username'=>"1111111111",
-                "password"=>Hash::make("1111111111"),
-                "uuid" => 'siswa3',
-                "role" => 'siswa'
-            ],
         ]);
     }
 }
