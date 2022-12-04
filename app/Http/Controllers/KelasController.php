@@ -27,10 +27,13 @@ class KelasController extends Controller
         $kelas = DB::table('table_kelas')
         ->get();
 
+        $total = Kelas::count();
+
         return  view('admin.kelas', [
             'pages' => $pages,
             'guru' => $guru,
-            'kelas' => $kelas
+            'kelas' => $kelas,
+            'total' => $total
         ]);
     }
 
