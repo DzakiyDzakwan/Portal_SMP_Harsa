@@ -180,6 +180,17 @@
             <form action="{{ route('addKelas') }}" method="post">
                 @csrf
                 <div class="modal-body">
+                    <label for="id">Id Kelas: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Id Kelas"
+                            class="form-control"
+                            name="id"
+                            id="id"
+                            value="{{ old('id') }}"
+                        />
+                    </div>
                     <label for="nomor">Nomor Kelas: </label>
                     <div class="form-group">
                         <input
@@ -266,6 +277,17 @@
                 <form action="/kelas/updateKelas/{{ $k->kelas_id }}" method="post">
                     @csrf
                     <div class="modal-body">
+                        <label for="id">Id Kelas: </label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Id Kelas"
+                            class="form-control"
+                            name="id"
+                            id="id"
+                            value="{{ $k->kelas_id }}"
+                        />
+                    </div>
                         <label for="nomor">Nomor Kelas: </label>
                     <div class="form-group">
                         <input
