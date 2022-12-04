@@ -2,40 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Guru;
-use App\Models\Kelas;
-use App\Models\User;
-use App\Models\UserProfile;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Models\Mapel;
+use App\Models\LogActivity;
 
-class KelasController extends Controller
+class MapelController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $pages = 'manajemenKelas';
-        $guru = Guru::join('users', 'users.uuid', '=', 'gurus.user')
-        ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
-        ->get(['gurus.*', 'user_profiles.nama']);
-
-        $kelas = DB::table('table_kelas')
-        ->get();
-
-        $total = Kelas::count();
-
-        return  view('admin.kelas', [
-            'pages' => $pages,
-            'guru' => $guru,
-            'kelas' => $kelas,
-            'total' => $total
-        ]);
+        $pages = 'mapel';
+        $mapel = Mapel::all();
+        return view('admin.mapel', compact('pages', 'mapel'));
     }
+    // public function mapel()
+    // {
+    //     $pages = 'manajemenKelas';
+    //     return  view('admin.mapel', [
+    //         'pages' => $pages,
+    //     ]);
+    // }
+
+    // public function index()
+    // {
+    //     $pages = 'mapel';
+    //     $mapel = Mapel::all();
+    //     return view('admin.mapel', compact('pages', 'mapel'));
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -55,14 +55,15 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        $kelas = new Kelas;
-        $kelas->kelas_id = Str::random(3);
-        $kelas->kelompok_kelas = $request->nomor;
-        $kelas->nama_kelas = $request->nama;
-        $kelas->wali_kelas = $request->guru;
-        $kelas->save();
 
-        return redirect()->route('kelas');
+        $mapel = new Mapel;
+        $mapel->mapel_id = $request->mapel_id;
+        $mapel->nama_mapel = $request->nama_mapel;
+        $mapel->kelompok_mapel = $request->kelompok_mapel;
+        $mapel->kurikulum = $request->kurikulum;
+        $mapel->save();
+
+        return redirect()->route('mapel');
     }
 
     /**
@@ -96,14 +97,15 @@ class KelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kls = Kelas::where('kelas_id', $id);
-        $kls->update([
-            'kelompok_kelas' => $request->nomor,
-            'nama_kelas'=> $request->nama,
-            'wali_kelas'=> $request->guru
+        $mpl = Mapel::where('mapel_id', $id);
+        $mpl->update([
+            'mapel_id' => $request->mapel_id,
+            'nama_mapel' => $request->nama_mapel,
+            'kelompok_mapel' => $request->kelompok_mapel,
+            'kurikulum' => $request->kurikulum
         ]);
-        
-        return redirect()->route('kelas');
+
+        return redirect()->route('mapel');
     }
 
     /**
@@ -112,9 +114,9 @@ class KelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($mapel_id)
     {
-        Kelas::where('kelas_id', $id)->delete();
-        return redirect()->route('kelas');
+        Mapel::where('mapel_id', $mapel_id)->delete();
+        return back()->with('success', "mapel berhasil dihapus");
     }
 }

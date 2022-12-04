@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('log_siswas', function (Blueprint $table) {
             $table->id();
             $table->char('n_NISN',10);
-            $table->char('o_NISN',10);
+            $table->char('o_NISN',10)->nullable();
             $table->char('n_kelas',3)->nullable();
             $table->char('o_kelas',3)->nullable();
             $table->char('user',36);

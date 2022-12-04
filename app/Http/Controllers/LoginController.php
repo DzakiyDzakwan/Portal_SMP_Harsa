@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function postlogin (Request $request)
     {
         $credentials = $request->validate([
-            'username' => ['required', 'integer'],
+            'username' => 'required',
             'password' => 'required'
         ]);
 

@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LogActivity;
 use App\Models\LogUser;
+use App\Models\LogGuru;
+use App\Models\LogSiswa;
 
 class LogController extends Controller
 {
+
+    public function activity() {
+        $pages = 'history';
+        $logActivities = LogActivity::latest()->get();
+        return view('admin.logactivity', compact('pages', 'logActivities'));
+    }
 
     public function user() {
         $pages = 'history';
@@ -16,16 +25,14 @@ class LogController extends Controller
 
     public function siswa() {
         $pages = 'history';
-        return  view('admin.logsiswa', [
-            'pages' => $pages,
-        ]);
+        $logSiswa = LogSiswa::latest()->get();
+        return  view('admin.logsiswa', compact('pages', 'logSiswa'));
     }
 
     public function guru() {
         $pages = 'history';
-        return  view('admin.logguru', [
-            'pages' => $pages,
-        ]);
+        $logGuru = LogGuru::latest()->get();
+        return  view('admin.logguru', compact('pages', 'logGuru'));
     }
 
     public function kelas() {

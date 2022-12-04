@@ -38,180 +38,37 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>NISN</th>
-                        <th>Kelas</th>
-                        <th>Tanggal Masuk</th>
-                        <th>Created at</th>
-                        <th>Updated at</th>
-                        <th>Status Keaktifan</th>
+                        <th>User_id</th>
+                        <th>NIS</th>
+                        <th>New_NISN</th>
+                        <th>Old_NISN</th>
+                        <th>New_Kelas</th>
+                        <th>Old_Kelas</th>
+                        <th>New_Semester</th>
+                        <th>Old_Semester</th>
+                        <th>New_Status</th>
+                        <th>Old_Status</th>
+                        <th>Keterangan</th>
+                        <th>Created_at</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>211402018</td>
-                        <td>Graiden</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>211402018</td>
-                        <td>Dale</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>211402018</td>
-                        <td>Nathaniel</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-danger">Tidak Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>211402018</td>
-                        <td>Darius</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>211402018</td>
-                        <td>Oleg</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>211402018</td>
-                        <td>Kermit</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>211402018</td>
-                        <td>Jermaine</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>211402018</td>
-                        <td>Ferdinand</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-danger">Tidak Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>211402018</td>
-                        <td>Kuame</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>211402018</td>
-                        <td>Deacon</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>211402018</td>
-                        <td>Channing</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>211402018</td>
-                        <td>Aladdin</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td>211402018</td>
-                        <td>Cruz</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td>211402018</td>
-                        <td>Keegan</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>211402018</td>
-                        <td>Ray</td>
-                        <td>6/7/2020</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
+                    @foreach ($logSiswa as $item)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$item->user}}</td>
+                            <td>{{$item->NIS}}</td>
+                            <td>{{$item->n_nisn}}</td>
+                            <td>{{$item->o_nisn}}</td>
+                            <td>{{$item->n_kelas}}</td>
+                            <td>{{$item->o_kelas}}</td>
+                            <td>{{$item->n_semester}}</td>
+                            <td>{{$item->o_semester}}</td>
+                            <td>{{$item->n_status}}</td>
+                            <td>{{$item->o_status}}</td>
+                            <td>{{$item->Keterangan}}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -38,180 +38,36 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>NIP</th>
-                        <th>Status Perkawinan</th>
-                        <th>Tanggal Masuk</th>
+                        <th>User_id</th>
+                        <th>New_NIP</th>
+                        <th>Old_NIP</th>
+                        <th>New_Jabatan</th>
+                        <th>Old_Jabatan</th>
+                        <th>New_status</th>
+                        <th>Old_status</th>
+                        <th>New_WaliKelas</th>
+                        <th>Old_WaliKelas</th>
+                        <th>Keterangan</th>
                         <th>Created at</th>
-                        <th>Updated at</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>211402018</td>
-                        <td>Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>211402018</td>
-                        <td>Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>211402018</td>
-                        <td>Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-danger">Tidak Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>211402018</td>
-                        <td>Belum Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>211402018</td>
-                        <td>Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>211402018</td>
-                        <td>Belum Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>211402018</td>
-                        <td>Belum Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>211402018</td>
-                        <td>Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-danger">Tidak Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>211402018</td>
-                        <td>Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>211402018</td>
-                        <td>Belum Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>211402018</td>
-                        <td>Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>211402018</td>
-                        <td>Belum Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td>211402018</td>
-                        <td>Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td>211402018</td>
-                        <td>Kawin</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>Belum Kawin</td>
-                        <td>Ray</td>
-                        <td>20/8/2010</td>
-                        <td>10/10/2022</td>
-                        <td>05/11/2022</td>
-                        <td>
-                            <span class="badge bg-success">Aktif</span>
-                        </td>
-                    </tr>
+                    @foreach ($logGuru as $item)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$item->user}}</td>
+                            <td>{{$item->n_NIP}}</td>
+                            <td>{{$item->o_NIP}}</td>
+                            <td>{{$item->n_jabatan}}</td>
+                            <td>{{$item->o_jabatan}}</td>
+                            <td>{{$item->n_status_keaktifan}}</td>
+                            <td>{{$item->o_status_keaktifan}}</td>
+                            <td>{{$item->n_is_wali_kelas}}</td>
+                            <td>{{$item->o_is_wali_kelas}}</td>
+                            <td>{{$item->keterangan}}</td>
+                            <td>{{$item->created_at}}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

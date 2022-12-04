@@ -37,7 +37,7 @@ return new class extends Migration
 
         /* log delete rekap_absensi */
         DB::unprepared('
-        CREATE TRIGGER log_delete_rekap_absensis
+        CREATE TRIGGER log_delete_rekap_absensi
         AFTER DELETE on rekap_absensis
         FOR EACH ROW
         BEGIN
@@ -45,7 +45,6 @@ return new class extends Migration
         VALUES (OLD.absensi_id, OLD.siswa, OLD.sakit, OLD.izin, OLD.tanpa_keterangan, OLD.semester, OLD.tahun_ajaran, "delete", NOW());
         END
         ');
-
     }
 
     /**
@@ -55,9 +54,8 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_roster_kelas');
-        DB::unprepared('DROP TRIGGER log_update_roster_kelas');
-        DB::unprepared('DROP TRIGGER log_delete_roster_kelas');
-
+        DB::unprepared('DROP TRIGGER log_insert_rekap_absensi');
+        DB::unprepared('DROP TRIGGER log_update_rekap_absensi');
+        DB::unprepared('DROP TRIGGER log_delete_rekap_absensi');
     }
 };

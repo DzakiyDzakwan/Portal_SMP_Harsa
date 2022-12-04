@@ -185,7 +185,7 @@
             <div class="modal-header bg-success justify-content-center">
                 <h4 class="modal-title white " id="myModalLabel33">Tambah Guru</h4>
             </div>
-            <form class="form form-vertical" action="users/addGuru" method="POST">
+            <form class="form form-vertical" action="guru/addGuru" method="POST">
                 @csrf
                 <div class="form-body modal-body">
                     <div class="row">
@@ -412,7 +412,7 @@
                     </h5>
                 </div>
                 <div class="modal-body">
-                    <form class="form form-vertical" action="users/editGuru/{{$item->NIP}}" method="POST">
+                    <form class="form form-vertical" action="guru/updateGuru/{{$item->NIP}}" method="POST">
                         @csrf
                         @method('PATCH')
                         <div class="form-body modal-body">

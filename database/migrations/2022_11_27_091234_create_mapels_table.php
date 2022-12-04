@@ -17,6 +17,7 @@ return new class extends Migration
             $table->char('mapel_id', 3)->primary();
             $table->string('nama_mapel');
             $table->enum('kelompok_mapel', ['A', 'B']);
+            $table->year('kurikulum');
             $table->timestamps();
         });
     }

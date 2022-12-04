@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        /* log insert ekskul */
-        DB::unprepared('
+        /**
+         * Run the migrations.
+         *
+         * @return void
+         */
+        public function up()
+        {
+                /* log insert ekskul */
+                DB::unprepared('
         CREATE TRIGGER log_insert_ekskul
         AFTER INSERT on ekskuls
         FOR EACH ROW
@@ -24,8 +24,8 @@ return new class extends Migration
         END
         ');
 
-        /* log delete ekskul */
-        DB::unprepared('
+                /* log delete ekskul */
+                DB::unprepared('
         CREATE TRIGGER log_delete_ekskul
         AFTER DELETE on ekskuls
         FOR EACH ROW
@@ -34,18 +34,16 @@ return new class extends Migration
         VALUES (OLD.ekskul_id, OLD.nama, OLD.hari, OLD.waktu_mulai, OLD.waktu_akhir, OLD.tempat, OLD.kelas, "delete", NOW());
         END
         ');
-
-
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        DB::unprepared('DROP TRIGGER log_ekskul');
-        DB::unprepared('DROP TRIGGER log_delete_ekskul');
-    }
+        }
+        
+        /**
+         * Reverse the migrations.
+         *
+         * @return void
+         */
+        public function down()
+        {
+                DB::unprepared('DROP TRIGGER log_ekskul');
+                DB::unprepared('DROP TRIGGER log_delete_ekskul');
+        }
 };

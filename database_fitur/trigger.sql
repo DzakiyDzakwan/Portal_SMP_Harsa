@@ -341,7 +341,7 @@ DELIMITER;
 
 --Log Update Nilai
 DELIMITER ?
-CREATE TRIGGER log_insert_nilai
+CREATE TRIGGER log_update_nilai
 AFTER UPDATE ON nilais
 FOR EACH ROW
 BEGIN
@@ -352,7 +352,7 @@ DELIMITER;
 
 --Log Delete Nilai
 DELIMITER ?
-CREATE TRIGGER log_insert_nilai
+CREATE TRIGGER log_delete_nilai
 AFTER DELETE ON nilais
 FOR EACH ROW
 BEGIN
@@ -361,7 +361,7 @@ VALUES (OLD.nilai_id, OLD.siswa, OLD.mapel, OLD.kategori, OLD.semester, OLD.tahu
 END?
 DELIMITER;
 
---Cek sesi penilaian
+--Validasi Inputan nilai
 DELIMITER ?
 CREATE TRIGGER validasi_nilai
 BEFORE INSERT ON nilais
@@ -376,7 +376,7 @@ BEGIN
         NEW.nilai_pengetahuan = 0;
     ELSE IF (NEW.nilai_pengetahuan > 100 OR NEW.nilai_keterampilan > 100) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT ="Error Nilai tidak dapat lebih dari 100";
-    END IF
+    END IF;
 END?
 DELIMITER;
 
