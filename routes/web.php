@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth','ceklevel:admin']], function() {
     //Dashboard/Mapel
     Route::get('/mapel',[ManajemenKelasController::class,'mapel'])->name('mapel');
     //Dashboard/eskul
-    Route::get('/ekstrakulikuler',[ManajemenKelasController::class,'ekskul'])->name('ekskul');
+    Route::get('/ekstrakulikuler',[EkskulController::class,'index'])->name('ekskul');
     Route::post('/users/addEkskul',[EkskulController::class,'store'])->name('addEkskul');
     //Dashboard/Siswa
     Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');

@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Total Ekstrakulikuler</h6>
-                        <h6 class="font-extrabold mb-0">5</h6>
+                        <h6 class="font-extrabold mb-0">{{$totalEkskul}}</h6>
                     </div>
                 </div>
             </div>

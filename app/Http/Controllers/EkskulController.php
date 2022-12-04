@@ -17,7 +17,8 @@ class EkskulController extends Controller
     {
         $pages = 'user';
         $totalEkskul = Ekskul::count();
-        return view('admin.ekskul');
+        $ekskuls = Ekskul::get();
+        return view('admin.ekskul', compact('pages', 'totalEkskul','ekskuls'));
     }
 
     /**
