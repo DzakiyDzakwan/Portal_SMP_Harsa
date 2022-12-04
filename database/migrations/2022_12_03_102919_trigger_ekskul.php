@@ -35,7 +35,7 @@ return new class extends Migration
         END
         ');
         }
-
+        
         /**
          * Reverse the migrations.
          *

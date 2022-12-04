@@ -53,7 +53,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     //Dashboard/eskul
     Route::get('/ekstrakulikuler', [ManajemenKelasController::class, 'ekskul'])->name('ekskul');
     //Dashboard/Siswa
-    Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa');
+    Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
+    Route::post('/siswa/add-siswa',[SiswaController::class,'store'])->name('add-siswa');
     //Dashboard/Guru
     Route::get('/guru', [GuruController::class, 'index'])->name('guru');
     Route::post('/guru/addGuru', [GuruController::class, 'store'])->name('addGuru');
