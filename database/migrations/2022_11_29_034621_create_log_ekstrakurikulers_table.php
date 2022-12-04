@@ -15,15 +15,16 @@ return new class extends Migration
     {
         Schema::create('log_ekstrakurikulers', function (Blueprint $table) {
             $table->id();
-            $table->char('ekskul_id', 5);
+            $table->char('n_ekskul_id',5)->nullable();
+            $table->char('o_ekskul_id',5)->nullable();
             $table->string('n_nama', 255)->nullable();
             $table->string('o_nama', 255)->nullable();
             $table->enum('n_hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'])->nullable();
             $table->enum('o_hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'])->nullable();
-            $table->time('n_jam_masuk')->nullable();
-            $table->time('o_jam_masuk')->nullable();
-            $table->time('n_jam_keluar')->nullable();
-            $table->time('o_jam_keluar')->nullable();
+            $table->time('n_waktu_mulai')->nullable();
+            $table->time('o_waktu_mulai')->nullable();
+            $table->time('n_waktu_akhir')->nullable();
+            $table->time('o_waktu_akhir')->nullable();
             $table->string('n_tempat', 255)->nullable();
             $table->string('o_tempat', 255)->nullable();
             $table->char('n_kelas', 1)->nullable();

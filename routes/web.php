@@ -11,6 +11,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\guru;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\siswa;
 use App\Models\Kelas;
@@ -51,7 +52,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::post('/mapel/updateMapel/{mapel_id}', [MapelController::class, 'update'])->name('updateMapel');
     Route::delete('/mapel/deleteMapel/{mapel_id}', [MapelController::class, 'destroy'])->name('deleteMapel');
     //Dashboard/eskul
-    Route::get('/ekstrakulikuler', [ManajemenKelasController::class, 'ekskul'])->name('ekskul');
+    Route::get('/ekstrakulikuler',[EkskulController::class,'index'])->name('ekskul');
+    Route::post('/users/addEkskul',[EkskulController::class,'store'])->name('addEkskul');
     //Dashboard/Siswa
     Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
     Route::post('/siswa/add-siswa',[SiswaController::class,'store'])->name('add-siswa');
