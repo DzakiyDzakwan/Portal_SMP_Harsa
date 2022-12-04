@@ -33,11 +33,6 @@ class UserProfileTableSeeder extends Seeder
                 "nama" => "Dzakiy Dzakwan",
                 "jenis_kelamin" => 'LK',
             ],
-            [
-                "user" => 'siswa3',
-                "nama" => "Donny Adithya",
-                "jenis_kelamin" => 'LK',
-            ],
         ]);
 
     }

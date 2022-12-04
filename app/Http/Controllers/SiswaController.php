@@ -20,12 +20,16 @@ class SiswaController extends Controller
         $pages = 'user';
         $totalSiswa = Siswa::count();
         $siswaActive = Siswa::where('status_keaktifan', 'Aktif')->count();
-        $siswaInactive = Siswa::where('status_keaktifan', 'Lulus')->count();
-        $siswas = DB::table('siswas')
-                    ->join('users', 'users.uuid', '=', 'siswas.user')
-                    ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
-                    ->join('prestasis', 'prestasis.siswa', '=', 'siswas.NISN')
-                    ->get();
+        $siswaLulus = Siswa::where('status_keaktifan', 'Lulus')->count();
+        $siswaPindah = Siswa::where('status_keaktifan', 'Pindah')->count();
+        $siswaDO = Siswa::where('status_keaktifan', 'Drop Out')->count();
+        $siswaInactive = $siswaLulus + $siswaPindah + $siswaDO;
+        // $siswas = DB::table('siswas')
+        //             ->join('users', 'users.uuid', '=', 'siswas.user')
+        //             ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
+        //             ->join('prestasis', 'prestasis.siswa', '=', 'siswas.NISN')
+        //             ->get();
+        $siswas = Siswa::join('users', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
         return view('admin.siswa', compact('totalSiswa', 'pages', 'siswas', 'siswaActive', 'siswaInactive'));
     }
 
@@ -56,7 +60,7 @@ class SiswaController extends Controller
 
         $password = Hash::make($validatedData['nisn']);
 
-        DB::select('CALL registrasi_siswa(?, ?, ?, ?, ?, ?, ?, ?)', [$validatedData["nama"], $validatedData["nisn"], $request->nis, $password, $request->tgl_masuk, $request->kelas_id, $request->jk, auth()->user()->uuid]);
+        \DB::select('CALL registrasi_siswa(?, ?, ?, ?, ?, ?, ?, ?)', [$validatedData["nama"], $validatedData["nisn"], $request->NIS, $password, $request->tanggal_masuk, $request->kelas_id, $request->jenis_kelamin, auth()->user()->uuid]);
         return back()->with('success', "Siswa berhasil dibuat");
     }
 
@@ -77,9 +81,19 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $nisn)
     {
-        //
+        DB::beginTransaction();
+        try {
+            Siswa::where('NISN', $nisn)->update([
+                'NISN'=>$request->nisn,
+                'nama' => $request->nama
+            ]);
+            DB::commit();
+            return back()->with('success', "Berhasil mengubah data");
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
     }
 
     /**
@@ -100,8 +114,12 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request, $nisn)
     {
-        //
+        Siswa::where('NISN', $nisn)->update([
+            'status_keaktifan' => $request->status_keaktifan
+        ]);
+
+        return back()->with('succes', 'Siswa berhasil di non-aktif kan');
     }
 }

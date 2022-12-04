@@ -14,17 +14,6 @@ class Siswa extends Model
         'updated_at'
     ];
 
-    protected $fillable = [
-        'user',
-        'NISN',
-        'NIS',
-        'ruang_kelas',
-        'kelas_awal',
-        'tanggal_masuk',
-        'semester',
-        'status_keaktifan',
-    ];
-
     /**
      * Get the user that owns the Siswa
      *

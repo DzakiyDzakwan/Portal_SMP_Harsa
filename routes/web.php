@@ -55,12 +55,15 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     //Dashboard/Siswa
     Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
     Route::post('/siswa/add-siswa',[SiswaController::class,'store'])->name('add-siswa');
+    Route::post('/siswa/update-siswa/{id}', [SiswaController::class, 'edit'])->name('edit-siswa');
+    Route::delete('/siswa/delete-siswa/{uuid}',[SiswaController::class,'delete'])->name('delete-siswa');
     //Dashboard/Guru
     Route::get('/guru', [GuruController::class, 'index'])->name('guru');
     Route::post('/guru/addGuru', [GuruController::class, 'store'])->name('addGuru');
     Route::patch('/guru/inactiveGuru/{uuid}', [GuruController::class, 'delete'])->name('inactiveGuru');
     Route::patch('/guru/updateGuru/{id}', [GuruController::class, 'edit'])->name('updateGuru');
-
+    //Dashboard/Log-Users
+    Route::get('/log-activities',[LogController::class,'activity'])->name('log-activities');
     //Dashboard/Log-Users
     Route::get('/log-activities', [LogController::class, 'activity'])->name('log-activities');
     //Dashboard/Log-Users
