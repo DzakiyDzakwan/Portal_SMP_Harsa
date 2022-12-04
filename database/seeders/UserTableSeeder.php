@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -18,39 +18,37 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
+        DB::table('users')->insert([
             [
-                'username' => '12345',
-                'password' => Hash::make("admin"),
-                'uuid' => Str::uuid('admin'),
-                'role' => 'admin'
+                'username'=>"12345",
+                "password"=>Hash::make("12345"),
+                "uuid" => 'admin1',
+                "role" => 'admin'
             ],
             [
-                'username' => '123456',
-                'password' => Hash::make("guru1"),
-                'uuid' => Str::uuid('guru1'),
-                'role' => 'guru'
+                'username'=>"211402018",
+                "password"=>Hash::make("211402018"),
+                "uuid" => 'siswa1',
+                "role" => 'siswa'
             ],
             [
-                'username' => '12345678',
-                'password' => Hash::make("guru2"),
-                'uuid' => Str::uuid('guru2'),
-                'role' => 'guru'
+                'username'=>"211402009",
+                "password"=>Hash::make("211402009"),
+                "uuid" => 'siswa2',
+                "role" => 'siswa'
             ],
             [
-                'username' => '123456789',
-                'password' => Hash::make("siswa1"),
-                'uuid' => Str::uuid('siswa1'),
-                'role' => 'siswa'
+                'username'=>"123456789123456789",
+                "password"=>Hash::make("123456789123456789"),
+                "uuid" => 'guru1',
+                "role" => 'guru'
             ],
             [
-                'username' => '123457890',
-                'password' => Hash::make("siswa2"),
-                'uuid' => Str::uuid('siswa2'),
-                'role' => 'siswa'
-            ]
-
-        ];
-        \DB::table('users')->insert($users);
+                'username'=>"1111111111",
+                "password"=>Hash::make("1111111111"),
+                "uuid" => 'siswa3',
+                "role" => 'siswa'
+            ],
+        ]);
     }
 }

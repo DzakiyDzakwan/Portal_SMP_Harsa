@@ -26,11 +26,7 @@ return new class extends Migration
 
         /* log update rekap_absensi */
         DB::unprepared('
-<<<<<<< HEAD
-        CREATE TRIGGER log_update_rekap_absensi
-=======
         CREATE TRIGGER log_update_rekap_absensis
->>>>>>> f08e942c9761112ee0719b3ed12a50c1839515ae
         AFTER UPDATE on rekap_absensis
         FOR EACH ROW
         BEGIN
