@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ekskul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Ekskul;
+use App\Models\LogActivity;
 
 class EkskulController extends Controller
 {
@@ -39,13 +40,42 @@ class EkskulController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validateData = $request->validate([
+            'ekskul_id' => 'required|min:3|max:3',
             'fullname' => 'required|min:5|max:255',
             'tempat' => 'required',
             'kelas' => 'required',
         ]);
 
-        $ekskul = new Ekskul;
+        DB::beginTransaction();
+
+        try {
+            Ekskul::create([
+                'ekskul_id' => $validateData['ekskul_id'],
+                'nama' => $validateData['fullname'],
+                'hari' => $request->hari,
+                'waktu_mulai' => $request->start,
+                'waktu_akhir' => $request->end,
+                'tempat' => $validateData['tempat'],
+                'kelas' => $validateData['kelas']
+            ]);
+    
+            LogActivity::create([
+                'user' => auth()->user()->uuid,
+                'transaksi' => 'insert',
+                'at' => 'users'
+            ]);
+
+            DB::commit();
+    
+            return back()->with('success', 'Data Berhasil di input');
+        } catch (\Throwable $e) {
+            return back()->with('error', 'Ada masalah');
+            DB::rollback();
+        }
+
+
+        /* $ekskul = new Ekskul;
         $ekskul->ekskul_id = Str::random(5);
         $ekskul->nama = $request->fullname;
         $ekskul->hari = $request->hari;
@@ -53,7 +83,7 @@ class EkskulController extends Controller
         $ekskul->waktu_akhir = $request->end;
         $ekskul->tempat = $request->tempat;
         $ekskul->kelas = $request->kelas;
-        $ekskul->save();
+        $ekskul->save(); */
 
         return redirect()->route('ekskul');
     }
