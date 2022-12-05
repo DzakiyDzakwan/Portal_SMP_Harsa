@@ -23,7 +23,14 @@ return new class extends Migration
         LEFT JOIN siswas ON kelas.kelas_id = siswas.ruang_kelas
         GROUP BY kelas.kelas_id, kelas.nama_kelas, kelas.kelompok_kelas, user_profiles.nama, siswas.NIS;
         ');
+
+        DB::unprepared('
+        CREATE VIEW table_ekskul AS
+        SELECT *
+        FROM ekskuls
+        ');
     }
+
 
     /**
      * Reverse the migrations.

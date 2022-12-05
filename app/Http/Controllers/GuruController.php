@@ -57,7 +57,7 @@ class GuruController extends Controller
 
        /*  dd($password); */
 
-        \DB::select('CALL registrasi_guru(?, ?, ?, ?, ?, ?, ?)', [$validatedData["fullname"], $validatedData["nip"], $request->jabatan, $password, $validatedData["tanggal_masuk"], $request->jenis_kelamin, auth()->user()->uuid]);
+        DB::select('CALL registrasi_guru(?, ?, ?, ?, ?, ?, ?)', [$validatedData["fullname"], $validatedData["nip"], $request->jabatan, $password, $validatedData["tanggal_masuk"], $request->jenis_kelamin, auth()->user()->uuid]);
         return back()->with('success', "Guru berhasil dibuat");
     }
 
