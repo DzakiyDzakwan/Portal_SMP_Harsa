@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('log_mapels', function (Blueprint $table) {
             $table->id();
-            $table->char('mapel_id', 3)->primary();
+            $table->char('mapel_id', 3);
             $table->string('nama_mapel');
             $table->enum('kelompok_mapel', ['A', 'B']);
             $table->string('kurikulum');

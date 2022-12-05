@@ -42,7 +42,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_users(uuid, username,password, role, action, created_at)
-        VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, "update", NOW());
+        VALUES (OLD.uuid, OLD.username, OLD.password, OLD.role, "delete", NOW());
         END
         ');
 
