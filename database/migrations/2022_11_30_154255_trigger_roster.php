@@ -19,8 +19,8 @@ return new class extends Migration
         AFTER INSERT ON roster_kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_roster_kelas(roster_id, mapel_guru, kelas, n_jam_masuk, n_jam_keluar, n_hari, keterangan, created_at)
-        VALUES (NEW.roster_id, NEW.mapel_guru, NEW.kelas, NEW.jam_masuk, NEW.jam_keluar, NEW.hari, "insert", NOW());
+        INSERT INTO log_roster_kelas(roster_id, mapel, kelas, n_waktu_mulai, n_durasi, n_hari, keterangan, created_at)
+        VALUES (NEW.roster_id, NEW.mapel, NEW.kelas, NEW.waktu_mulai, NEW.durasi, NEW.hari, "insert", NOW());
         END
         ');
 
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON roster_kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_roster_kelas(roster_id, mapel_guru, kelas, n_jam_masuk, o_jam_masuk, n_jam_keluar, o_jam_keluar,  n_hari, o_hari, keterangan, created_at)
-        VALUES (OLD.roster_id, OLD.mapel_guru, OLD.kelas, NEW.jam_masuk, OLD.jam_masuk, NEW.jam_keluar, OLD.jam_keluar, NEW.hari, OLD.hari, "update", NOW());
+        INSERT INTO log_roster_kelas(roster_id, mapel, kelas, n_waktu_mulai, o_waktu_mulai, n_durasi, o_durasi,  n_hari, o_hari, keterangan, created_at)
+        VALUES (OLD.roster_id, OLD.mapel, OLD.kelas, NEW.waktu_mulai, OLD.waktu_mulai, NEW.durasi, OLD.durasi, NEW.hari, OLD.hari, "update", NOW());
         END
         ');
 
@@ -41,8 +41,8 @@ return new class extends Migration
         AFTER DELETE ON roster_kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_roster_kelas(roster_id, mapel_guru, kelas, o_jam_masuk, o_jam_keluar, o_hari, keterangan, created_at)
-        VALUES (OLD.roster_id, OLD.mapel_guru, OLD.kelas, OLD.jam_masuk, OLD.jam_keluar, OLD.hari, "delete", NOW());
+        INSERT INTO log_roster_kelas(roster_id, mapel, kelas, o_waktu_mulai, o_durasi, o_hari, keterangan, created_at)
+        VALUES (OLD.roster_id, OLD.mapel, OLD.kelas, OLD.waktu_mulai, OLD.durasi, OLD.hari, "delete", NOW());
         END
         ');
     }

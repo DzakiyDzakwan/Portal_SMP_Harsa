@@ -19,8 +19,8 @@ return new class extends Migration
         AFTER INSERT ON siswas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_siswas(n_NISN, user, NIS, tanggal_masuk, kelas_awal, n_semester, n_status_keaktifan, keterangan, created_at)
-        VALUES (NEW.NISN, NEW.user, NEW.NIS, NEW.tanggal_masuk, NEW.kelas_awal, NEW.semester, NEW.status_keaktifan, "insert", NOW());
+        INSERT INTO log_siswas(n_NISN, user, NIS, tanggal_masuk, kelas_awal, n_status, keterangan, created_at)
+        VALUES (NEW.NISN, NEW.user, NEW.NIS, NEW.tanggal_masuk, NEW.kelas_awal, NEW.status, "insert", NOW());
         END
         ');
 
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON siswas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_siswas(n_NISN, o_NISN, user, NIS, tanggal_masuk, kelas_awal, n_semester, o_semester, n_status_keaktifan, o_status_keaktifan, keterangan, created_at)
-        VALUES (NEW.NISN, OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, NEW.semester, OLD.semester, NEW.status_keaktifan, OLD.status_keaktifan, "update", NOW());
+        INSERT INTO log_siswas(n_NISN, o_NISN, user, NIS, tanggal_masuk, kelas_awal, o_semester, n_status, o_status, keterangan, created_at)
+        VALUES (NEW.NISN, OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, OLD.semester, NEW.status, OLD.status, "update", NOW());
         END
         ');
 
@@ -41,8 +41,8 @@ return new class extends Migration
         AFTER DELETE ON siswas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_siswas(o_NISN, user, NIS, tanggal_masuk, kelas_awal, o_semester, o_status_keaktifan, keterangan, created_at)
-        VALUES (OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, OLD.semester, OLD.status_keaktifan, "insert", NOW());
+        INSERT INTO log_siswas(o_NISN, user, NIS, tanggal_masuk, kelas_awal, o_semester, o_status, keterangan, created_at)
+        VALUES (OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, OLD.semester, OLD.status, "insert", NOW());
         END
         ');
     }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->year('tahun_ijazah')->nullable();
             $table->enum('status_perkawinan', ['Kawin', 'Tidak Kawin'])->nullable();
             $table->date('tanggal_masuk');
-            $table->enum('status_keaktifan', ['Aktif', 'Tidak Aktif']);
+            $table->enum('status', ['Aktif', 'Tidak Aktif']);
             $table->enum('is_wali_kelas', ['iya', 'tidak']);
             $table->foreign('user')->references('uuid')->on('users');
             $table->timestamps();

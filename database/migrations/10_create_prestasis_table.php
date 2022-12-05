@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mapels', function (Blueprint $table) {
-            $table->char('mapel_id', 3)->primary();
-            $table->string('nama_mapel');
-            $table->enum('kelompok_mapel', ['A', 'B']);
-            $table->year('kurikulum');
+        Schema::create('prestasis', function (Blueprint $table) {
+            $table->id('prestasi_id');
+            $table->char('siswa', 10);
+            $table->enum('jenis_prestasi', ['Akademik', 'NonAkademik']);
+            $table->string('keterangan');
+            $table->date('tanggal_prestasi');
+            $table->foreign('siswa')->references('NISN')->on('siswas');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mapels');
+        Schema::dropIfExists('prestasis');
     }
 };

@@ -14,19 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nilais', function (Blueprint $table) {
-            $table->id("nilai_id");
-            $table->char('siswa', 10);
+            $table->id('nilai_id');
+            $table->unsignedBigInteger('sesi');
             $table->char('mapel', 3);
-            $table->enum('kategori', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
-            $table->enum('semester', ['1', '2', '3', '4', '5', '6']);
-            $table->year('tahun_ajaran');
+            $table->unsignedBigInteger('kontrak_siswa');
             $table->integer('kkm');
+            $table->enum('jenis_nilai', ['pengetahuan', 'keterampilan']);
             $table->float('nilai_pengetahuan');
             $table->text('deskripsi_pengetahuan');
             $table->float('nilai_keterampilan');
             $table->text('deskripsi_keterampilan');
-            $table->foreign('siswa')->references('NISN')->on('siswas');
+            $table->enum('status', ['pending', 'confirmed', 'rejected']);
+            $table->foreign('sesi')->references('id')->on('sesi_penilaians');
             $table->foreign('mapel')->references('mapel_id')->on('mapels');
+            $table->foreign('kontrak_siswa')->references('kontrak_semester_id')->on('kontrak_semesters');
             $table->timestamps();
         });
     }
