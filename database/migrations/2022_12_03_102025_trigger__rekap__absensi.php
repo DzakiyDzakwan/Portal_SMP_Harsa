@@ -15,7 +15,7 @@ return new class extends Migration
     {
         /* log insert rekap_absensi */
         DB::unprepared('
-        CREATE TRIGGER log_insert_rekap_absensi
+        CREATE TRIGGER log_insert_rekap_absensis
         AFTER INSERT on rekap_absensis
         FOR EACH ROW
         BEGIN
@@ -54,8 +54,8 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_rekap_absensi');
-        DB::unprepared('DROP TRIGGER log_update_rekap_absensi');
-        DB::unprepared('DROP TRIGGER log_delete_rekap_absensi');
+        DB::unprepared('DROP TRIGGER log_insert_rekap_absensis');
+        DB::unprepared('DROP TRIGGER log_update_rekap_absensis');
+        DB::unprepared('DROP TRIGGER log_delete_rekap_absensis');
     }
 };

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('log_activities', function (Blueprint $table) {
             $table->id();
-            $table->char('user', 36);
-            $table->enum('transaksi', ['insert', 'update', 'delete']);
+            $table->char('actor', 36);
+            $table->enum('action', ['insert', 'update', 'delete']);
             $table->string('at', 255);
             $table->timestamp('created_at');
         });

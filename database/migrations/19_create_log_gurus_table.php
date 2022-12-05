@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gurus', function (Blueprint $table) {
-            $table->char('NIP', 18)->primary();
-            $table->uuid('user');
+        Schema::create('log_gurus', function (Blueprint $table) {
+            $table->id();
+            $table->char('user', 36);
+            $table->char('NIP', 18);
             $table->enum('jabatan', ['wks', 'bk', 'guru']);
             $table->string('pendidikan')->nullable();
             $table->year('tahun_ijazah')->nullable();
@@ -23,8 +24,8 @@ return new class extends Migration
             $table->date('tanggal_masuk');
             $table->enum('status', ['Aktif', 'Inaktif']);
             $table->enum('is_wali_kelas', ['iya', 'tidak']);
-            $table->foreign('user')->references('uuid')->on('users');
-            $table->timestamps();
+            $table->enum('action', ['insert', 'update', 'delete']);
+            $table->timestamp('created_at');
         });
     }
 
@@ -35,7 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gurus');
+        Schema::dropIfExists('log_gurus');
     }
-    
 };
