@@ -15,19 +15,24 @@ return new class extends Migration
     {
         Schema::create('log_siswas', function (Blueprint $table) {
             $table->id();
-            $table->char('n_NISN',10);
-            $table->char('o_NISN',10)->nullable();
-            $table->char('n_kelas',3)->nullable();
-            $table->char('o_kelas',3)->nullable();
-            $table->char('user',36);
+            $table->char('NISN',10);
             $table->char('NIS',4);
+            $table->char('kelas',3);
+            $table->char('user',36);
             $table->date('tanggal_masuk');
             $table->string('kelas_awal');
-            $table->enum('n_semester',['1', '2', '3', '4', '5', '6'])->nullable();
-            $table->enum('o_semester',['1', '2', '3', '4', '5', '6'])->nullable();
-            $table->enum('n_status_keaktifan',['Aktif', 'Lulus', 'Pindah', 'Drop Out'])->nullable();
-            $table->enum('o_status_keaktifan',['Aktif', 'Lulus', 'Pindah', 'Drop Out'])->nullable();
-            $table->enum('keterangan', ['insert','update','delete']);
+            $table->integer('anak-ke');
+            $table->string('nama_ayah');
+            $table->string('pekerjaan_ayah');
+            $table->string('nama_ibu');
+            $table->string('pekerjaan_ibu');
+            $table->string('alamat_orangtua');
+            $table->char('telepon_orangtua',13);
+            $table->string('nama_wali');
+            $table->string('pekerjaan_wali');
+            $table->char('telepon_wali',13);
+            $table->enum('status_keaktifan',['Aktif', 'Lulus', 'Pindah', 'Drop Out']);
+            $table->enum('action', ['insert','update','delete']);
             $table->timestamp('created_at');
         });
     }
