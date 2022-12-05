@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('kontrak_siswa');
             $table->float('nilai');
             $table->string('keterangan', 255);
+            $table->enum('action', ['insert', 'update', 'delete']);
             $table->timestamps();
         });
     }
