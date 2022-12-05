@@ -19,7 +19,7 @@ return new class extends Migration
         AFTER INSERT ON users
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_users(uuid, n_username, n_password, role, keterangan, created_at)
+        INSERT INTO log_users(uuid, username,password, role, action, created_at)
         VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, "insert", NOW());
         END
         ');
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON users
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_users(uuid, n_username, o_username, n_password, o_password, role, keterangan, created_at)
-        VALUES (OLD.uuid, NEW.username, OLD.username, NEW.password, OLD.password, OLD.role, "update", NOW());
+        INSERT INTO log_users(uuid, username,password, role, action, created_at)
+        VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, "update", NOW());
         END
         ');
 
@@ -41,8 +41,8 @@ return new class extends Migration
         AFTER DELETE ON users
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_users(uuid, o_username, o_password, role, keterangan, created_at)
-        VALUES (OLD.uuid, OLD.username, OLD.password, OLD.role, "delete", NOW());
+        INSERT INTO log_users(uuid, username,password, role, action, created_at)
+        VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, "update", NOW());
         END
         ');
 

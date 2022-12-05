@@ -19,8 +19,8 @@ return new class extends Migration
         AFTER INSERT ON kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kelas(n_kelas_id, n_wali_kelas, n_kelompok_kelas, n_nama_kelas, keterangan, created_at)
-        VALUES (NEW.kelas_id, NEW.wali_kelas, NEW.kelompok_kelas, NEW.nama_kelas, "insert", NOW());
+        INSERT INTO log_kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, action, created_at)
+        VALUES (NEW.kelas_id, NEW.wali_kelas, NEW.grade, NEW.kelompok_kelas, NEW.nama_kelas, "insert", NOW());
         END
         ');
 
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kelas(n_kelas_id, o_kelas_id, n_kelompok_kelas, o_kelompok_kelas, n_nama_kelas, o_nama_kelas, keterangan, created_at)
-        VALUES (NEW.kelas_id, OLD.kelas_id, NEW.kelompok_kelas, OLD.kelompok_kelas, NEW.nama_kelas, OLD.nama_kelas,  "update", NOW());
+        INSERT INTO log_kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, action, created_at)
+        VALUES (NEW.kelas_id, NEW.wali_kelas, NEW.grade, NEW.kelompok_kelas, NEW.nama_kelas, "update", NOW());
         END
         ');
 
@@ -41,8 +41,8 @@ return new class extends Migration
         AFTER DELETE ON kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kelas(o_kelas_id, o_nama_kelas, o_kelompok_kelas, keterangan, created_at)
-        VALUES (OLD.kelas_id, OLD.nama_kelas, OLD.kelompok_kelas, "delete", NOW());
+        INSERT INTO log_kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, action, created_at)
+        VALUES (NEW.kelas_id, NEW.wali_kelas, NEW.grade, NEW.kelompok_kelas, NEW.nama_kelas, "delete", NOW());
         END
         ');
     }

@@ -19,7 +19,7 @@ return new class extends Migration
         AFTER INSERT ON roster_kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_roster_kelas(roster_id, mapel, kelas, n_waktu_mulai, n_durasi, n_hari, keterangan, created_at)
+        INSERT INTO log_roster_kelas(roster_id, mapel, kelas, waktu_mulai, durasi, hari, action, created_at)
         VALUES (NEW.roster_id, NEW.mapel, NEW.kelas, NEW.waktu_mulai, NEW.durasi, NEW.hari, "insert", NOW());
         END
         ');
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON roster_kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_roster_kelas(roster_id, mapel, kelas, n_waktu_mulai, o_waktu_mulai, n_durasi, o_durasi,  n_hari, o_hari, keterangan, created_at)
-        VALUES (OLD.roster_id, OLD.mapel, OLD.kelas, NEW.waktu_mulai, OLD.waktu_mulai, NEW.durasi, OLD.durasi, NEW.hari, OLD.hari, "update", NOW());
+        INSERT INTO log_roster_kelas(roster_id, mapel, kelas, waktu_mulai, durasi, hari, action, created_at)
+        VALUES (NEW.roster_id, NEW.mapel, NEW.kelas, NEW.waktu_mulai, NEW.durasi, NEW.hari, "update", NOW());
         END
         ');
 
@@ -41,8 +41,8 @@ return new class extends Migration
         AFTER DELETE ON roster_kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_roster_kelas(roster_id, mapel, kelas, o_waktu_mulai, o_durasi, o_hari, keterangan, created_at)
-        VALUES (OLD.roster_id, OLD.mapel, OLD.kelas, OLD.waktu_mulai, OLD.durasi, OLD.hari, "delete", NOW());
+        INSERT INTO log_roster_kelas(roster_id, mapel, kelas, waktu_mulai, durasi, hari, action, created_at)
+        VALUES (NEW.roster_id, NEW.mapel, NEW.kelas, NEW.waktu_mulai, NEW.durasi, NEW.hari, "delete", NOW());
         END
         ');
     }

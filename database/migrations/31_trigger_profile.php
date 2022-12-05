@@ -19,8 +19,8 @@ return new class extends Migration
         AFTER INSERT ON user_profiles
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_profiles(user_profile_id, n_email, n_nama, n_alamat_tinggal, jenis_kelamin, n_foto, keterangan, created_at)
-        VALUES (NEW.user_profile_id, NEW.email, NEW.nama, NEW.alamat_tinggal, NEW.jenis_kelamin, NEW.foto, "insert", NOW());
+        INSERT INTO log_profiles(user, email, nama, alamat_tinggal, alamat_domisili, tempat_lahir, tgl_lahir, jenis_kelamin, foto, action, created_at)
+        VALUES (NEW.user, NEW.email, NEW.nama, NEW.alamat_tinggal, NEW.alamat_domisili, NEW.tempat_lahir, NEW.tgl_lahir, NEW.jenis_kelamin, NEW.foto, "insert", NOW());
         END
         ');
 
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON user_profiles
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_profiles(user_profile_id, n_email, o_email, n_nama, o_nama, n_alamat_tinggal, o_alamat_tinggal, jenis_kelamin, n_foto, o_foto, keterangan, created_at)
-        VALUES (OLD.user_profile_id, NEW.email, OLD.email, NEW.nama, OLD.nama, NEW.alamat_tinggal, OLD.alamat_tinggal, OLD.jenis_kelamin, NEW.foto, OLD.foto, "update", NOW());
+        INSERT INTO log_profiles(user, email, nama, alamat_tinggal, alamat_domisili, tempat_lahir, tgl_lahir, jenis_kelamin, foto, action, created_at)
+        VALUES (NEW.user, NEW.email, NEW.nama, NEW.alamat_tinggal, NEW.alamat_domisili, NEW.tempat_lahir, NEW.tgl_lahir, NEW.jenis_kelamin, NEW.foto, "update", NOW());
         END
         ');
         
@@ -41,8 +41,8 @@ return new class extends Migration
         AFTER DELETE ON user_profiles
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_profiles(user_profile_id, o_email, o_nama, o_alamat_tinggal, jenis_kelamin, o_foto, keterangan, created_at)
-        VALUES (OLD.user_profile_id, OLD.email, OLD.nama, OLD.alamat_tinggal, OLD.jenis_kelamin, OLD.foto, "delete", NOW());
+        INSERT INTO log_profiles(user, email, nama, alamat_tinggal, alamat_domisili, tempat_lahir, tgl_lahir, jenis_kelamin, foto, action, created_at)
+        VALUES (NEW.user, NEW.email, NEW.nama, NEW.alamat_tinggal, NEW.alamat_domisili, NEW.tempat_lahir, NEW.tgl_lahir, NEW.jenis_kelamin, NEW.foto, "delete", NOW());
         END
         ');
     }
