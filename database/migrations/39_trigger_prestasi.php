@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -19,8 +20,8 @@ return new class extends Migration
         AFTER INSERT ON prestasis
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_prestasis(prestasi_id, siswa, n_jenis_prestasi, n_keterangan, n_tanggal_prestasi, n_semester, keterangan, created_at)
-        VALUES (NEW.prestasi_id, NEW.siswa, NEW.jenis_prestasi, NEW.keterangan, NEW.tanggal_prestasi, NEW.semester, "insert", NOW());
+        INSERT INTO log_prestasis(prestasi_id, siswa, jenis_prestasi, keterangan, tanggal_prestasi, action, created_at)
+        VALUES (NEW.prestasi_id, NEW.siswa, NEW.jenis_prestasi, NEW.keterangan, NEW.tanggal_prestasi, "insert", NOW());
         END
         ');
 
@@ -30,8 +31,8 @@ return new class extends Migration
         AFTER UPDATE ON prestasis
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_prestasis(prestasi_id, siswa, n_jenis_prestasi, o_jenis_prestasi, n_keterangan, o_keterangan,  n_tanggal_prestasi, o_tanggal_prestasi, n_semester, o_semester, keterangan, created_at)
-        VALUES (OLD.prestasi_id, OLD.siswa, NEW.jenis_prestasi, OLD.jenis_prestasi, NEW.keterangan, OLD.keterangan, NEW.tanggal_prestasi, OLD.tanggal_prestasi, NEW.semester, OLD.semester, "update", NOW());
+        INSERT INTO log_prestasis(prestasi_id, siswa, jenis_prestasi, keterangan, tanggal_prestasi, action, created_at)
+        VALUES (NEW.prestasi_id, NEW.siswa, NEW.jenis_prestasi, NEW.keterangan, NEW.tanggal_prestasi, "update", NOW());
         END
         ');
 
@@ -41,8 +42,8 @@ return new class extends Migration
         AFTER DELETE ON prestasis
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_prestasis(prestasi_id, siswa, o_jenis_prestasi, o_keterangan, o_tanggal_prestasi, o_semester, keterangan, created_at)
-        VALUES (OLD.prestasi_id, OLD.siswa, OLD.jenis_prestasi, OLD.keterangan, OLD.tanggal_prestasi, OLD.semester, "delete", NOW());
+        INSERT INTO log_prestasis(prestasi_id, siswa, jenis_prestasi, keterangan, tanggal_prestasi, action, created_at)
+        VALUES (NEW.prestasi_id, NEW.siswa, NEW.jenis_prestasi, NEW.keterangan, NEW.tanggal_prestasi, "delete", NOW());
         END
         ');
     }

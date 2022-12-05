@@ -21,7 +21,7 @@ return new class extends Migration
             $table->char('user',36);
             $table->date('tanggal_masuk');
             $table->string('kelas_awal');
-            $table->integer('anak-ke');
+            $table->integer('anak_ke');
             $table->string('nama_ayah');
             $table->string('pekerjaan_ayah');
             $table->string('nama_ibu');
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('nama_wali');
             $table->string('pekerjaan_wali');
             $table->char('telepon_wali',13);
-            $table->enum('status_keaktifan',['Aktif', 'Lulus', 'Pindah', 'Drop Out']);
+            $table->enum('status',['Aktif', 'Lulus', 'Pindah', 'Drop Out']);
             $table->enum('action', ['insert','update','delete']);
             $table->timestamp('created_at');
         });

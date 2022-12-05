@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -19,8 +20,8 @@ return new class extends Migration
         AFTER INSERT ON siswas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_siswas(n_NISN, user, NIS, tanggal_masuk, kelas_awal, n_status, keterangan, created_at)
-        VALUES (NEW.NISN, NEW.user, NEW.NIS, NEW.tanggal_masuk, NEW.kelas_awal, NEW.status, "insert", NOW());
+        INSERT INTO log_siswas(NISN, NIS, kelas, user, tanggal_masuk, kelas_awal, anak_ke, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, alamat_orangtua, telepon_orangtua, nama_wali, pekerjaan_wali, telepon_wali, status, action, created_at)
+        VALUES (NEW.NISN, NEW.NIS, NEW.kelas, NEW.user, NEW.tanggal_masuk, NEW.kelas_awal, NEW.anak_ke, NEW.nama_ayah, NEW.pekerjaan_ayah, NEW.nama_ibu, NEW.pekerjaan_ibu, NEW.alamat_orangtua, NEW.telepon_orangtua, NEW.nama_wali, NEW.pekerjaan_wali, NEW.telepon_wali, NEW.status, "insert", NOW());
         END
         ');
 
@@ -30,8 +31,8 @@ return new class extends Migration
         AFTER UPDATE ON siswas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_siswas(n_NISN, o_NISN, user, NIS, tanggal_masuk, kelas_awal, o_semester, n_status, o_status, keterangan, created_at)
-        VALUES (NEW.NISN, OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, OLD.semester, NEW.status, OLD.status, "update", NOW());
+        INSERT INTO log_siswas(NISN, NIS, kelas, user, tanggal_masuk, kelas_awal, anak_ke, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, alamat_orangtua, telepon_orangtua, nama_wali, pekerjaan_wali, telepon_wali, status, action, created_at)
+        VALUES (NEW.NISN, NEW.NIS, NEW.kelas, NEW.user, NEW.tanggal_masuk, NEW.kelas_awal, NEW.anak_ke, NEW.nama_ayah, NEW.pekerjaan_ayah, NEW.nama_ibu, NEW.pekerjaan_ibu, NEW.alamat_orangtua, NEW.telepon_orangtua, NEW.nama_wali, NEW.pekerjaan_wali, NEW.telepon_wali, NEW.status, "update", NOW());
         END
         ');
 
@@ -41,8 +42,8 @@ return new class extends Migration
         AFTER DELETE ON siswas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_siswas(o_NISN, user, NIS, tanggal_masuk, kelas_awal, o_semester, o_status, keterangan, created_at)
-        VALUES (OLD.NISN, OLD.user, OLD.NIS, OLD.tanggal_masuk, OLD.kelas_awal, OLD.semester, OLD.status, "insert", NOW());
+        INSERT INTO log_siswas(NISN, NIS, kelas, user, tanggal_masuk, kelas_awal, anak_ke, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, alamat_orangtua, telepon_orangtua, nama_wali, pekerjaan_wali, telepon_wali, status, action, created_at)
+        VALUES (NEW.NISN, NEW.NIS, NEW.kelas, NEW.user, NEW.tanggal_masuk, NEW.kelas_awal, NEW.anak_ke, NEW.nama_ayah, NEW.pekerjaan_ayah, NEW.nama_ibu, NEW.pekerjaan_ibu, NEW.alamat_orangtua, NEW.telepon_orangtua, NEW.nama_wali, NEW.pekerjaan_wali, NEW.telepon_wali, NEW.status, "delete", NOW());
         END
         ');
     }
