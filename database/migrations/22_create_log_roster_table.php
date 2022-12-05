@@ -13,18 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('log_roster_kelas', function (Blueprint $table) {
+        Schema::create('log_rosters', function (Blueprint $table) {
             $table->id();
             $table->integer('roster_id');
-            $table->integer('mapel_guru');
-            $table->char('kelas',3);
-            $table->time('n_jam_masuk');
-            $table->time('o_jam_masuk');
-            $table->time('n_jam_keluar');
-            $table->time('o_jam_keluar');
-            $table->enum('n_hari',['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
-            $table->enum('o_hari',['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
-            $table->enum('keterangan', ['insert','update','delete']);
+            $table->integer('mapel');
+            $table->char('kelas', 3);
+            $table->time('waktu_mulai');
+            $table->integer('durasi');
+            $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
+            $table->enum('action', ['insert','update','delete']);
             $table->timestamp('created_at');
         });
     }

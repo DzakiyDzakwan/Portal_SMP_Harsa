@@ -43,7 +43,7 @@ return new class extends Migration
          */
         public function down()
         {
-                DB::unprepared('DROP TRIGGER log_ekskul');
+                DB::unprepared('DROP TRIGGER log_insert_ekskul');
                 DB::unprepared('DROP TRIGGER log_delete_ekskul');
         }
 };
