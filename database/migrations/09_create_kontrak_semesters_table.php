@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rekap_absensis', function (Blueprint $table) {
-            $table->id('absensi_id');
+        Schema::create('kontrak_semesters', function (Blueprint $table) {
+            $table->id('kontrak_semester_id');
             $table->char('siswa', 10);
-            $table->integer('sakit');
-            $table->integer('izin');
-            $table->integer('tanpa_keterangan');
-            $table->enum('semester', ['1', '2', '3', '4', '5', '6']);
+            $table->char('grade', 1);
+            $table->enum('semester', ['Ganjil', 'Genap']);
             $table->year('tahun_ajaran');
+            $table->enum('status', ['Lulus', 'Gagal', 'On Going']);
             $table->foreign('siswa')->references('NISN')->on('siswas');
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rekap_absensis');
+        Schema::dropIfExists('kontrak_semesters');
     }
 };

@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roster_kelas', function (Blueprint $table) {
-            $table->integer('roster_id')->primary();
-            $table->integer('mapel_guru');
-            $table->char('kelas', 3);
-            $table->time('jam_masuk');
-            $table->time('jam_keluar');
+        Schema::create('ekskuls', function (Blueprint $table) {
+            $table->char('ekskul_id', 5)->primary();
+            $table->string('nama');
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
-            $table->foreign('mapel_guru')->references('mapel_guru_id')->on('mapel_gurus');
-            $table->foreign('kelas')->references('kelas_id')->on('kelas');
+            $table->time('waktu_mulai');
+            $table->integer('durasi');
+            $table->string('tempat');
+            $table->char('kelas', 1);
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roster_kelas');
+        Schema::dropIfExists('ekskuls');
     }
 };

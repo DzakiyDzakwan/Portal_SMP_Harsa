@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->char('kelas_id', 3)->primary();
-            $table->char('kelompok_kelas', 2);
-            $table->string('nama_kelas');
             $table->char('wali_kelas', 18);
+            $table->char('grade', 1);
+            $table->char('kelompok_kelas', 1);
+            $table->string('nama_kelas')->unique();
             $table->foreign('wali_kelas')->references('NIP')->on('gurus');
             $table->timestamps();
         });

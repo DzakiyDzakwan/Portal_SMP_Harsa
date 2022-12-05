@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ekskuls', function (Blueprint $table) {
-            $table->char('ekskul_id', 5)->primary();
-            $table->string('nama');
-            $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
-            $table->time('waktu_mulai');
-            $table->time('waktu_akhir');
-            $table->string('tempat');
-            $table->char('kelas', 1);
+        Schema::create('rekap_absensis', function (Blueprint $table) {
+            $table->id('rekap_absensi_id');
+            $table->unsignedBigInteger('kontrak');
+            $table->integer('sakit');
+            $table->integer('izin');
+            $table->integer('alpa');
+            $table->foreign('kontrak')->references('kontrak_semester_id')->on('kontrak_semesters');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ekskuls');
+        Schema::dropIfExists('rekap_absensis');
     }
 };
