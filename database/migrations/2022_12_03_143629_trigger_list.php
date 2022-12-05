@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP VIEW trigger_list');
+        DB::unprepared('DROP VIEW table_kelas');
     }
 };

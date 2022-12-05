@@ -16,12 +16,10 @@ return new class extends Migration
         Schema::create('log_users', function (Blueprint $table) {
             $table->id();
             $table->char('uuid', 36);
-            $table->string('n_username', 255)->nullable();
-            $table->string('o_username', 255)->nullable();
-            $table->string('n_password', 255)->nullable();
-            $table->string('o_password', 255)->nullable();
-            $table->enum('role', ['Admin', 'Guru', 'Siswa']);
-            $table->enum('keterangan', ['Insert', 'Update', 'Delete']);
+            $table->string('username', 255)->nullable();
+            $table->string('password', 255)->nullable();
+            $table->enum('role', ['admin', 'guru', 'siswa']);
+            $table->enum('action', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');
         });
     }

@@ -15,15 +15,12 @@ return new class extends Migration
     {
         Schema::create('log_kelas', function (Blueprint $table) {
             $table->id();
-            $table->char('n_kelas_id', 3)->nullable();
-            $table->char('o_kelas_id', 3)->nullable();
-            $table->char('n_wali_kelas', 18)->nullable();
-            $table->char('o_wali_kelas', 18)->nullable();
-            $table->char('n_kelompok_kelas', 2)->nullable();
-            $table->char('o_kelompok_kelas', 2)->nullable();
-            $table->string('n_nama_kelas')->nullable();
-            $table->string('o_nama_kelas')->nullable();
-            $table->enum('keterangan', ['insert', 'update', 'delete']);
+            $table->char('kelas_id', 3);
+            $table->char('wali_kelas', 18);
+            $table->char('grade', 1);
+            $table->char('kelompok_kelas', 1);
+            $table->string('nama_kelas');
+            $table->enum('action', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');
         });
     }
