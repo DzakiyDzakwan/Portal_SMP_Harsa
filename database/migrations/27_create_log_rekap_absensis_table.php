@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('log_rekap_absensis', function (Blueprint $table) {
             $table->id();
             $table->char('absensi_id', 5);
-            $table->unsignedBigInteger('kontrak');
+            $table->unsignedBigInteger('kontrak_siswa');
             $table->integer('sakit')->unsigned();
             $table->integer('izin')->unsigned();
             $table->integer('alpa')->unsigned();

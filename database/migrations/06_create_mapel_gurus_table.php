@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('mapel')->references('mapel_id')->on('mapels');
             $table->foreign('guru')->references('NIP')->on('gurus');
             $table->timestamp('created_at');
+            $table->softDeletes();
         });
     }
 

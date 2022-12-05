@@ -42,7 +42,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_roster_kelas(roster_id, mapel, kelas, waktu_mulai, durasi, hari, action, created_at)
-        VALUES (NEW.roster_id, NEW.mapel, NEW.kelas, NEW.waktu_mulai, NEW.durasi, NEW.hari, "delete", NOW());
+        VALUES (OLD.roster_id, OLD.mapel, OLD.kelas, OLD.waktu_mulai, OLD.durasi, OLD.hari, "delete", NOW());
         END
         ');
     }

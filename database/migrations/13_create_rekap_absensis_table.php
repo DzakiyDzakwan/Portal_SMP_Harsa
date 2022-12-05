@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('rekap_absensis', function (Blueprint $table) {
             $table->id('rekap_absensi_id');
-            $table->unsignedBigInteger('kontrak');
+            $table->unsignedBigInteger('kontrak_siswa');
             $table->integer('sakit');
             $table->integer('izin');
             $table->integer('alpa');
-            $table->foreign('kontrak')->references('kontrak_semester_id')->on('kontrak_semesters');
+            $table->foreign('kontrak_siswa')->references('kontrak_semester_id')->on('kontrak_semesters');
             $table->timestamps();
         });
     }

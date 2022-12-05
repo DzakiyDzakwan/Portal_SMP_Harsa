@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('nilai_id');
             $table->unsignedBigInteger('sesi');
             $table->char('mapel', 3);
-            $table->char('siswa', 10);
+            $table->char('kontrak_siswa', 10);
             $table->integer('kkm');
             $table->enum('jenis_nilai', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
             $table->float('nilai_pengetahuan', 8, 2);

@@ -43,7 +43,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_kontraks(kontrak_semester_id, siswa, grade, semester, tahun_ajaran, status, action, created_at)
-        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.grade, NEW.semester, NEW.tahun_ajaran, NEW.status, "delete", NOW());
+        VALUES (OLD.kontrak_semester_id, OLD.siswa, OLD.grade, OLD.semester, OLD.tahun_ajaran, OLD.status, "delete", NOW());
         END
         ');
     }

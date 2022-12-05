@@ -42,7 +42,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_profiles(user, email, nama, alamat_tinggal, alamat_domisili, tempat_lahir, tgl_lahir, jenis_kelamin, foto, action, created_at)
-        VALUES (NEW.user, NEW.email, NEW.nama, NEW.alamat_tinggal, NEW.alamat_domisili, NEW.tempat_lahir, NEW.tgl_lahir, NEW.jenis_kelamin, NEW.foto, "delete", NOW());
+        VALUES (OLD.user, OLD.email, OLD.nama, OLD.alamat_tinggal, OLD.alamat_domisili, OLD.tempat_lahir, OLD.tgl_lahir, OLD.jenis_kelamin, OLD.foto, "delete", NOW());
         END
         ');
     }

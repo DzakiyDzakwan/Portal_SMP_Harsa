@@ -43,7 +43,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_siswas(NISN, NIS, kelas, user, tanggal_masuk, kelas_awal, anak_ke, nama_ayah, pekerjaan_ayah, nama_ibu, pekerjaan_ibu, alamat_orangtua, telepon_orangtua, nama_wali, pekerjaan_wali, telepon_wali, status, action, created_at)
-        VALUES (NEW.NISN, NEW.NIS, NEW.kelas, NEW.user, NEW.tanggal_masuk, NEW.kelas_awal, NEW.anak_ke, NEW.nama_ayah, NEW.pekerjaan_ayah, NEW.nama_ibu, NEW.pekerjaan_ibu, NEW.alamat_orangtua, NEW.telepon_orangtua, NEW.nama_wali, NEW.pekerjaan_wali, NEW.telepon_wali, NEW.status, "delete", NOW());
+        VALUES (OLD.NISN, OLD.NIS, OLD.kelas, OLD.user, OLD.tanggal_masuk, OLD.kelas_awal, OLD.anak_ke, OLD.nama_ayah, OLD.pekerjaan_ayah, OLD.nama_ibu, OLD.pekerjaan_ibu, OLD.alamat_orangtua, OLD.telepon_orangtua, OLD.nama_wali, OLD.pekerjaan_wali, OLD.telepon_wali, OLD.status, "delete", NOW());
         END
         ');
     }

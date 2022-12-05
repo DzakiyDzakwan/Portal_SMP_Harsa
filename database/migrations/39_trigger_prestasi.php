@@ -43,7 +43,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_prestasis(prestasi_id, siswa, jenis_prestasi, keterangan, tanggal_prestasi, action, created_at)
-        VALUES (NEW.prestasi_id, NEW.siswa, NEW.jenis_prestasi, NEW.keterangan, NEW.tanggal_prestasi, "delete", NOW());
+        VALUES (OLD.prestasi_id, OLD.siswa, OLD.jenis_prestasi, OLD.keterangan, OLD.tanggal_prestasi, "delete", NOW());
         END
         ');
     }

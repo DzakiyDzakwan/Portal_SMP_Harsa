@@ -16,7 +16,7 @@ return new class extends Migration
         /* log insert ekskul */
         DB::unprepared('
         CREATE TRIGGER log_insert_ekskul_siswa
-        AFTER INSERT on ekskuls
+        AFTER INSERT on ekskul_siswas
         FOR EACH ROW
         BEGIN
         INSERT INTO log_ekstrakulikuler_siswas (ekskul_siswa_id, ekskul, kontrak_siswa, nilai, keterangan, action, created_at)
@@ -24,14 +24,14 @@ return new class extends Migration
         END
         ');
 
-                /* log delete ekskul */
-                DB::unprepared('
+        /* log delete ekskul */
+        DB::unprepared('
         CREATE TRIGGER log_delete_ekskul_siswa
-        AFTER DELETE on ekskuls
+        AFTER DELETE on ekskul_siswas
         FOR EACH ROW
         BEGIN
         INSERT INTO log_ekstrakurikuler_siswas (ekskul_siswa_id, ekskul, kontrak_siswa, nilai, keterangan, action, created_at)
-        VALUES (NEW.ekskul_siswa_id, NEW.ekskul, NEW.kontrak_siswa, NEW.nilai, NEW.keterangan, "delete", NOW());
+        VALUES (OLD.ekskul_siswa_id, OLD.ekskul, OLD.kontrak_siswa, OLD.nilai, OLD.keterangan, "delete", NOW());
         END
         ');
         }

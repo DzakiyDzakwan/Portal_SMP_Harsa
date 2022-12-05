@@ -19,7 +19,7 @@ return new class extends Migration
         AFTER INSERT ON mapels
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kurikulum action, created_at)
+        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kurikulum, action, created_at)
         VALUES (NEW.mapel_id, NEW.nama_mapel, NEW.kelompok_mapel, NEW.kurikulum, "insert", NOW());
         END
         ');
@@ -30,7 +30,7 @@ return new class extends Migration
         AFTER UPDATE ON mapels
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kurikulum action, created_at)
+        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kurikulum, action, created_at)
         VALUES (NEW.mapel_id, NEW.nama_mapel, NEW.kelompok_mapel, NEW.kurikulum, "update", NOW());
         END
         ');
@@ -41,8 +41,8 @@ return new class extends Migration
         AFTER DELETE ON mapels
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kurikulum action, created_at)
-        VALUES (NEW.mapel_id, NEW.nama_mapel, NEW.kelompok_mapel, NEW.kurikulum, "delete", NOW());
+        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kurikulum, action, created_at)
+        VALUES (OLD.mapel_id, OLD.nama_mapel, OLD.kelompok_mapel, OLD.kurikulum, "delete", NOW());
         END
         ');
     }

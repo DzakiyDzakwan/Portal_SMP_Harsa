@@ -42,7 +42,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, action, created_at)
-        VALUES (NEW.kelas_id, NEW.wali_kelas, NEW.grade, NEW.kelompok_kelas, NEW.nama_kelas, "delete", NOW());
+        VALUES (OLD.kelas_id, OLD.wali_kelas, OLD.grade, OLD.kelompok_kelas, OLD.nama_kelas, "delete", NOW());
         END
         ');
     }

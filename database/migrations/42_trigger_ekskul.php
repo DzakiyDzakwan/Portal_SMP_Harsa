@@ -31,7 +31,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_ekstrakurikulers (ekskul_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
-        VALUES (NEW.ekskul_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.durasi, NEW.tempat, NEW.kelas, "delete", NOW());
+        VALUES (OLD.ekskul_id, OLD.nama, OLD.hari, OLD.waktu_mulai, OLD.durasi, OLD.tempat, OLD.kelas, "delete", NOW());
         END
         ');
         }

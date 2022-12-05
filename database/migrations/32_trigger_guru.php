@@ -42,7 +42,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_gurus(user, NIP, jabatan, pendidikan, tahun_ijazah, status_perkawinan, tanggal_masuk, status, is_wali_kelas, action, created_at)
-        VALUES (NEW.user, NEW.NIP, NEW.jabatan, NEW.pendidikan, NEW.tahun_ijazah, NEW.status_perkawinan, NEW.tanggal_masuk, NEW.status, NEW.is_wali_kelas, "delete", NOW());
+        VALUES (OLD.user, OLD.NIP, OLD.jabatan, OLD.pendidikan, OLD.tahun_ijazah, OLD.status_perkawinan, OLD.tanggal_masuk, OLD.status, OLD.is_wali_kelas, "delete", NOW());
         END
         ');
     }

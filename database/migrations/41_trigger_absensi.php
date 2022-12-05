@@ -15,23 +15,23 @@ return new class extends Migration
     {
         /* log insert rekap_absensi */
         DB::unprepared('
-        CREATE TRIGGER log_insert_rekap_absensis
+        CREATE TRIGGER log_insert_rekap_absensi
         AFTER INSERT on rekap_absensis
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_insert_rekap_absensis (absensi_id, kontrak, sakit, izin, alpa, action, created_at)
-        VALUES (NEW.absensi_id, NEW.kontrak, NEW.sakit, NEW.izin, NEW.alpa, "insert", NOW());
+        INSERT INTO log_insert_rekap_absensis (absensi_id, kontrak_siswa, sakit, izin, alpa, action, created_at)
+        VALUES (NEW.rekap_absensi_id, NEW.kontrak_siswa, NEW.sakit, NEW.izin, NEW.alpa, "insert", NOW());
         END
         ');
 
         /* log update rekap_absensi */
         DB::unprepared('
-        CREATE TRIGGER log_update_rekap_absensis
+        CREATE TRIGGER log_update_rekap_absensi
         AFTER UPDATE on rekap_absensis
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_rekap_absensis (absensi_id, kontrak, sakit, izin, alpa, action, created_at)
-        VALUES (NEW.absensi_id, NEW.kontrak, NEW.sakit, NEW.izin, NEW.alpa, "update", NOW());
+        INSERT INTO log_rekap_absensis (absensi_id, kontrak_siswa, sakit, izin, alpa, action, created_at)
+        VALUES (NEW.rekap_absensi_id, NEW.kontrak_siswa, NEW.sakit, NEW.izin, NEW.alpa, "update", NOW());
         END
         ');
 
@@ -41,8 +41,8 @@ return new class extends Migration
         AFTER DELETE on rekap_absensis
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_rekap_absensis (absensi_id, kontrak, sakit, izin, alpa, action, created_at)
-        VALUES (NEW.absensi_id, NEW.kontrak, NEW.sakit, NEW.izin, NEW.alpa, "delete", NOW());
+        INSERT INTO log_rekap_absensis (absensi_id, kontrak_siswa, sakit, izin, alpa, action, created_at)
+        VALUES (OLD.rekap_absensi_id, OLD.kontrak_siswa, OLD.sakit, OLD.izin, OLD.alpa, "delete", NOW());
         END
         ');
     }
@@ -54,8 +54,8 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_rekap_absensis');
-        DB::unprepared('DROP TRIGGER log_update_rekap_absensis');
-        DB::unprepared('DROP TRIGGER log_delete_rekap_absensis');
+        DB::unprepared('DROP TRIGGER log_insert_rekap_absensi');
+        DB::unprepared('DROP TRIGGER log_update_rekap_absensi');
+        DB::unprepared('DROP TRIGGER log_delete_rekap_absensi');
     }
 };
