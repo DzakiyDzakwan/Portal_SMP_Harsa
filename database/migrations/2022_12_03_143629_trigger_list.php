@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW table_kelas AS
         SELECT kelas.kelas_id, kelas.nama_kelas, kelas.kelompok_kelas, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS Jumlah_Siswa
         FROM kelas
@@ -28,7 +28,7 @@ return new class extends Migration
         CREATE VIEW table_ekskul AS
         SELECT *
         FROM ekskuls
-        ');
+        '); */
     }
 
 
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP VIEW table_kelas');
+        //DB::unprepared('DROP VIEW table_kelas');
     }
 };
