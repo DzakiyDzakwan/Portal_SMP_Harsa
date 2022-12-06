@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nama_kelas')->unique();
             $table->foreign('wali_kelas')->references('NIP')->on('gurus');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'uuid',
         'created_at',
         'updated_at',
+        'deleted_at'
     ];
 
     /**

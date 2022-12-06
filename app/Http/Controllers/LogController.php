@@ -48,11 +48,7 @@ class LogController extends Controller
             'pages' => $pages,
         ]);
     }
-
-    public function tagihanSpp() {
-        $pages = 'history';
-        return view('admin.logspp', compact('pages'));
-    }
+    
     public function ekskul() {
         $pages = 'history';
         return view('admin.logeskul', compact('pages'));

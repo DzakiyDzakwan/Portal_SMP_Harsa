@@ -1,7 +1,7 @@
 /* Admin */
---Registrasi Admin
+--Add Admin (✅)
 DELIMITER ?
-CREATE PROCEDURE registrasi_admin(
+CREATE PROCEDURE add_admin(
     IN uname VARCHAR(255),
     IN pass VARCHAR(255)
 )
@@ -23,10 +23,10 @@ BEGIN
 END?
 DELIMITER ;
 
---Non Aktifkan Admin Sementara
+--Non Aktifkan Admin Sementara (✅)
 DELIMITER ?
 CREATE PROCEDURE inactive_admin (
-    IN uuid CHAR(36) COLLATE utf8mb4_general_ci
+    IN admin CHAR(36) COLLATE utf8mb4_general_ci
 )
 BEGIN
     DECLARE errno INT;
@@ -35,15 +35,16 @@ BEGIN
         ROLLBACK;
     END;
     START TRANSACTION;
-    UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
+    UPDATE users SET deleted_at = NOW() WHERE uuid = admin; 
     COMMIT;
 END?
 DELIMITER;
 
+
 /* Guru */
---Registrasi Guru
+--Add Guru (✅)
 DELIMITER ?
-CREATE PROCEDURE registrasi_guru(
+CREATE PROCEDURE add_guru(
     IN nama VARCHAR(255),
     IN nip CHAR(18),
     IN jabatan CHAR(4),
@@ -72,28 +73,29 @@ BEGIN
     VALUES (uuid, nip, pass, "guru", NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, 'insert', "users", NOW());
+    VALUES(admin, "insert", "users", NOW());
 
     INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
     VALUES (uuid, nama, jk, NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, 'insert', "user_profiles", NOW());
+    VALUES(admin, "insert", "user_profiles", NOW());
 
     INSERT INTO gurus(nip, user, jabatan, tanggal_masuk, status, is_wali_kelas, created_at, updated_at)
     VALUES(nip, uuid, jabatan, tgl_masuk, 'aktif', 'tidak', NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, 'insert', "gurus", NOW());
+    VALUES(admin, "insert", "gurus", NOW());
     COMMIT;
 
 END?
 DELIMITER ;
 
---Non Aktifkan Guru
+--Non Aktifkan Guru (✅)
 DELIMITER ?
 CREATE PROCEDURE inactive_guru (
-    IN uuid CHAR(36) COLLATE utf8mb4_general_ci
+    IN guru CHAR(36) COLLATE utf8mb4_general_ci,
+    IN admin CHAR(36)
 )
 BEGIN
     DECLARE errno INT;
@@ -102,12 +104,120 @@ BEGIN
         ROLLBACK;
     END;
     START TRANSACTION;
-    UPDATE gurus SET status = "Inaktif" WHERE user = uuid;
+    UPDATE gurus SET status = "Inaktif", updated_at = NOW()  WHERE user = guru;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "gurus", NOW());
     
-    UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
+    UPDATE users SET deleted_at = NOW() WHERE uuid = guru; 
     COMMIT;
 END?
 DELIMITER;
+
+
+/* Mapel */
+--Insert Mapel (❌)
+DELIMITER ?
+CREATE PROCEDURE add_mapel(
+IN mapel CHAR(3),
+IN nama VARCHAR(255),
+IN kelompok CHAR(1),
+IN krklm VARCHAR(255),
+IN admin CHAR(36)
+)
+BEGIN
+
+    INSERT INTO mapels(mapel_id, nama_mapel, kelompok_mapel, kurikulum, created_at, updated_at)
+    VALUES (mapel, nama, kelompok, krklm, NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "mapels", NOW());
+
+END?
+DELIMITER ;
+
+--Nonaktifkan Mapel (❌)
+DELIMITER ?
+CREATE PROCEDURE inactive_mapel(
+    IN mapel CHAR(3) COLLATE utf8mb4_general_ci,
+    admin CHAR(36)
+)
+    UPDATE mapels SET deleted_at = NOW() WHERE mapel_id = mapel;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "mapels", NOW());
+
+    UPDATE mapel_gurus SET deleted_at = NOW() WHERE mapel = mapel;
+    
+BEGIN
+
+END?
+DELIMITER ;
+
+--Hapus Mapel (x)
+DELIMITER ?
+CREATE PROCEDURE delete_mapel(
+    IN mapel CHAR(3) COLLATE utf8mb4_general_ci,
+    IN admin CHAR(36)
+)
+BEGIN
+    DELETE FROM mapels WHERE mapel_id = mapel;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "mapels", NOW());
+END?
+DELIMITER ;
+
+/* Kelas */
+--Insert Kelas
+DELIMITER ?
+CREATE PROCEDURE add_kelas(
+    IN kelas CHAR(3),
+    IN wali CHAR(18),
+    IN urutan CHAR(1),
+    IN kelompok CHAR(1),
+    IN nama VARCHAR(255),
+    admin CHAR(36)
+)
+BEGIN
+
+    INSERT INTO kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, created_at, updated_at)
+    VALUES(kelas, wali, urutan, kelompok, nama, NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "kelas", NOW());
+
+    UPDATE gurus SET is_wali_kelas = "iya" WHERE NIP = wali;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "gurus", NOW());
+
+END?
+DELIMITER ;
+
+--Nonaktifkan Kelas
+DELIMITER ?
+CREATE PROCEDURE inacitve_kelas(
+    IN kelas CHAR(3),
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE wali CHAR(18);
+
+    SELECT wali_kelas FROM kelas INTO wali WHERE kelas_id = kelas ;
+    UPDATE kelas SET wali_kelas = NULL, deleted_at = NOW() WHERE kelas_id = kelas;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "kelas", NOW());
+    
+    UPDATE gurus SET is_wali_kelas = "tidak" WHERE NIP = wali;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "gurus", NOW());
+
+END?
+DELIMITER ;
+
 
 /* Siswa */
 --Registrasi Siswa
@@ -143,19 +253,19 @@ BEGIN
     VALUES (uuid, nis, pass, "siswa", NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, 'insert', "users", NOW());
+    VALUES(admin, "insert", "users", NOW());
 
      INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at ,updated_at)
     VALUES (uuid, nama, jk, NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, 'insert', "user_profiles", NOW());
+    VALUES(admin, "insert", "user_profiles", NOW());
 
     INSERT INTO siswas(nisn, kelas, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
     VALUES(nisn, kelas_id, uuid, nis, tgl_masuk, kelas_id, 'aktif', uuid, NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, 'insert', "siswas", NOW());
+    VALUES(admin, "insert", "siswas", NOW());
 
     COMMIT;
 
