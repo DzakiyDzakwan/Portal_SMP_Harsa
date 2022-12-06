@@ -15,7 +15,7 @@ return new class extends Migration
     {
 
         DB::unprepared('
-            CREATE PROCEDURE registrasi_admin(
+            CREATE PROCEDURE add_admin(
                 IN uname VARCHAR(255),
                 IN pass VARCHAR(255)
             )
@@ -40,6 +40,7 @@ return new class extends Migration
         DB::unprepared('
             CREATE PROCEDURE inactive_admin (
                 IN uuid CHAR(36) COLLATE utf8mb4_general_ci
+
             )
             BEGIN
                 DECLARE errno INT;
@@ -48,13 +49,13 @@ return new class extends Migration
                     ROLLBACK;
                 END;
                 START TRANSACTION;
-                UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
+                UPDATE users SET deleted_at = NOW() WHERE uuid = uuid COLLATE utf8mb4_general_ci;
                 COMMIT;
             END
         ');
 
         DB::unprepared('
-            CREATE PROCEDURE registrasi_guru(
+            CREATE PROCEDURE add_guru(
                 IN nama VARCHAR(255),
                 IN nip CHAR(18),
                 IN jabatan CHAR(4),
@@ -91,7 +92,8 @@ return new class extends Migration
 
         DB::unprepared('
             CREATE PROCEDURE inactive_guru (
-                IN uuid CHAR(36) COLLATE utf8mb4_general_ci
+                IN guru CHAR(36),
+                IN admin CHAR(36)
             )
             BEGIN
                 DECLARE errno INT;
@@ -100,15 +102,18 @@ return new class extends Migration
                     ROLLBACK;
                 END;
                 START TRANSACTION;
-                UPDATE gurus SET status = "Inaktif" WHERE user = uuid;
+                UPDATE gurus SET status = "Inaktif" WHERE user = guru COLLATE utf8mb4_general_ci;
                 
-                UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "update", "gurus", NOW());
+
+                UPDATE users SET deleted_at = NOW() WHERE uuid = guru; 
                 COMMIT;
             END
         ');
 
         DB::unprepared('
-        CREATE PROCEDURE registrasi_siswa(
+        CREATE PROCEDURE add_siswa(
             IN nama VARCHAR(255),
             IN nisn CHAR(10),
             IN nis CHAR(4),
@@ -164,10 +169,10 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared("DROP PROCEDURE registrasi_admin");
+        DB::unprepared("DROP PROCEDURE add_admin");
         DB::unprepared("DROP PROCEDURE inactive_admin");
-        DB::unprepared("DROP PROCEDURE registrasi_guru");
+        DB::unprepared("DROP PROCEDURE add_guru");
         DB::unprepared("DROP PROCEDURE inactive_siswa");
-        DB::unprepared("DROP PROCEDURE registrasi_siswa");
+        DB::unprepared("DROP PROCEDURE add_siswa");
     }
 };

@@ -75,6 +75,11 @@ BEGIN
 END?
 DELIMITER;
 
+/* Mapel */
+
+
+/* Kelas */
+
 /* Siswa */
 --Registrasi Siswa
 DELIMITER ?

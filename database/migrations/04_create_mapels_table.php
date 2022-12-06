@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('kelompok_mapel', ['A', 'B']);
             $table->string('kurikulum');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -12,7 +12,8 @@ class MapelGuru extends Model
 
     protected $guarded = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'deleted_at'
     ];
 
     public function setUpdatedAtAttribute($value)
