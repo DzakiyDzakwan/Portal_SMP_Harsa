@@ -20,7 +20,7 @@ return new class extends Migration
         LEFT JOIN gurus ON kelas.wali_kelas = gurus.NIP 
         LEFT JOIN users ON gurus.user = users.uuid
         INNER JOIN user_profiles ON users.uuid = user_profiles.user
-        LEFT JOIN siswas ON kelas.kelas_id = siswas.ruang_kelas
+        LEFT JOIN siswas ON kelas.kelas_id = siswas.kelas
         GROUP BY kelas.kelas_id, kelas.nama_kelas, kelas.kelompok_kelas, user_profiles.nama, siswas.NIS;
         ');
 
@@ -40,5 +40,6 @@ return new class extends Migration
     public function down()
     {
         DB::unprepared('DROP VIEW table_kelas');
+        DB::unprepared('DROP VIEW table_ekskul');
     }
 };
