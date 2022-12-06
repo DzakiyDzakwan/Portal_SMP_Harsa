@@ -17,7 +17,7 @@ DELIMITER ;
 --Non Aktifkan Admin
 DELIMITER ?
 CREATE PROCEDURE inactive_admin (
-    IN uuid CHAR(36)
+    IN uuid CHAR(36) COLLATE utf8mb4_general_ci
 )
 BEGIN
     UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
@@ -64,14 +64,14 @@ DELIMITER ;
 
 --Non Aktifkan Guru
 DELIMITER ?
-CREATE PROCEDURE inactive_admin (
-    IN uuid CHAR(36)
+CREATE PROCEDURE inactive_guru (
+    IN uuid CHAR(36) COLLATE utf8mb4_general_ci
 )
 BEGIN
 
-    UPDATE gurus SET status = "Inaktif" WHERE user = uuid;
-
+    UPDATE gurus SET status = 'Inaktif' WHERE user = uuid;
     UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
+    
 END?
 DELIMITER;
 
@@ -117,7 +117,7 @@ DELIMITER ;
 --Non Aktifkan Siswa
 DELIMITER ?
 CREATE PROCEDURE inactive_siswa (
-    IN uuid CHAR(36),
+    IN uuid CHAR(36) COLLATE utf8mb4_general_ci,
     IN status VARCHAR(10)
 )
 BEGIN
