@@ -26,7 +26,7 @@ DELIMITER ;
 --Non Aktifkan Admin Sementara
 DELIMITER ?
 CREATE PROCEDURE inactive_admin (
-    IN uuid CHAR(36)
+    IN uuid CHAR(36) COLLATE utf8mb4_general_ci
 )
 BEGIN
     DECLARE errno INT;
@@ -63,7 +63,7 @@ BEGIN
     DECLARE exit handler for sqlwarning
     BEGIN
         ROLLBACK;
-    END;
+    END?
 
     SET uuid = UUID();
 
@@ -93,7 +93,7 @@ DELIMITER ;
 --Non Aktifkan Guru
 DELIMITER ?
 CREATE PROCEDURE inactive_guru (
-    IN uuid CHAR(36)
+    IN uuid CHAR(36) COLLATE utf8mb4_general_ci
 )
 BEGIN
     DECLARE errno INT;
@@ -165,7 +165,7 @@ DELIMITER ;
 --Non Aktifkan Siswa
 DELIMITER ?
 CREATE PROCEDURE inactive_siswa (
-    IN uuid CHAR(36),
+    IN uuid CHAR(36) COLLATE utf8mb4_general_ci,
     IN status VARCHAR(10)
 )
 BEGIN
@@ -229,27 +229,5 @@ IN NIS CHAR(10)
 )
 BEGIN
 SELECT * FROM prestasi WHERE siswa = NIS AND jenis_prestasi = "nonAkademik";
-END?
-DELIMITER ;
-
-/* Konfirmasi Pembayaran */
-DELIMITER ?
-CREATE PROCEDURE konfirmasi_pelunasan(
-IN tagihan BIGINT,
-IN ket TEXT,
-IN bukti VARCHAR(255),
-)
-BEGIN
-
-    DECLACRE pelunasan INT;
-
-    INSERT INTO pelunasan_tagihan(tagihan_id, keterangan, bukti)
-    VALUES (tagihan, ket,bukti );
-
-    SELECT pelunasan_id INTO pelunasan FROM pelunasan_tagihan WHERE tagihan_id = tagihan;
-
-    INSERT INTO konfirmasi (pelunasan, status)
-    VALUES (pelunasan, "pending");
-
 END?
 DELIMITER ;
