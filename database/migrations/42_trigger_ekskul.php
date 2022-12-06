@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -15,25 +16,36 @@ return new class extends Migration
         {
                 /* log insert ekskul */
                 DB::unprepared('
-        CREATE TRIGGER log_insert_ekskul
-        AFTER INSERT on ekskuls
-        FOR EACH ROW
-        BEGIN
-        INSERT INTO log_ekstrakurikulers (ekskul_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
-        VALUES (NEW.ekskul_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.durasi, NEW.tempat, NEW.kelas, "insert", NOW());
-        END
-        ');
+                CREATE TRIGGER log_insert_ekskul
+                AFTER INSERT on ekskuls
+                FOR EACH ROW
+                BEGIN
+                INSERT INTO log_ekstrakurikulers (ekskul_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
+                VALUES (NEW.ekskul_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.durasi, NEW.tempat, NEW.kelas, "insert", NOW());
+                END
+                ');
+
+                /* log update ekskul */
+                DB::unprepared('
+                CREATE TRIGGER log_update_ekskul
+                AFTER UPDATE on ekskuls
+                FOR EACH ROW
+                BEGIN
+                INSERT INTO log_ekstrakurikulers (ekskul_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
+                VALUES (NEW.ekskul_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.durasi, NEW.tempat, NEW.kelas, "update", NOW());
+                END
+                ');
 
                 /* log delete ekskul */
                 DB::unprepared('
-        CREATE TRIGGER log_delete_ekskul
-        AFTER DELETE on ekskuls
-        FOR EACH ROW
-        BEGIN
-        INSERT INTO log_ekstrakurikulers (ekskul_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
-        VALUES (OLD.ekskul_id, OLD.nama, OLD.hari, OLD.waktu_mulai, OLD.durasi, OLD.tempat, OLD.kelas, "delete", NOW());
-        END
-        ');
+                CREATE TRIGGER log_delete_ekskul
+                AFTER DELETE on ekskuls
+                FOR EACH ROW
+                BEGIN
+                INSERT INTO log_ekstrakurikulers (ekskul_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
+                VALUES (OLD.ekskul_id, OLD.nama, OLD.hari, OLD.waktu_mulai, OLD.durasi, OLD.tempat, OLD.kelas, "delete", NOW());
+                END
+                ');
         }
         
         /**
