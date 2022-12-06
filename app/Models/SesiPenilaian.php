@@ -11,7 +11,10 @@ class SesiPenilaian extends Model
 
     protected $guarded = [
         "sesi_id",
-        "created_at",
-        "updated_at"
+        "created_at"
     ];
+
+    const updated_at = 'null';
+
+
 }

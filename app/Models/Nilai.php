@@ -20,13 +20,19 @@ class Nilai extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function siswa(): BelongsTo
+    public function kontrak_siswas(): BelongsTo
     {
-        return $this->belongsTo(Siswa::class, 'siswa', 'NISN');
+        return $this->belongsTo(KontrakSemester::class, 'kontrak_siswa', 'kontrak_semester_id');
     }
 
     public function mapel(): BelongsTo
     {
         return $this->belongsTo(Mapel::class, 'mapel', 'mapel_id');
     }
+
+    public function sesi()
+    {
+        return $this->belongsTo(SesiPenilaian::class, 'sesi', 'sesi_id');
+    }
+    
 }

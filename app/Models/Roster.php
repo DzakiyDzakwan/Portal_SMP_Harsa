@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RekapAbsensi extends Model
+class Roster extends Model
 {
     use HasFactory;
 
@@ -15,12 +15,17 @@ class RekapAbsensi extends Model
     ];
 
     /**
-     * Get the siswa that owns the RekapAbsensi
+     * Get the mapel_gurus that owns the Roster
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function kontrak_semesters(): BelongsTo
+    public function mapel_gurus()
     {
-        return $this->belongsTo(KontrakSemester::class, 'kontrak_siswa', 'kontrak_semester_id');
+        return $this->belongsTo(MapelGuru::class, 'mapel', 'mapel_guru_id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas', 'kelas_id');
     }
 }

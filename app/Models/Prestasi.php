@@ -20,7 +20,7 @@ class Prestasi extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function siswa(): BelongsTo
+    public function siswas(): BelongsTo
     {
         return $this->belongsTo(Siswa::class, 'siswa', 'NISN');
     }

@@ -19,7 +19,7 @@ class Kelas extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function guru(): BelongsTo
+    public function gurus(): BelongsTo
     {
         return $this->belongsTo(Guru::class, 'wali_kelas', 'NIP');
     }
@@ -29,12 +29,12 @@ class Kelas extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function siswa(): HasMany
+    public function siswas(): HasMany
     {
         return $this->hasMany(Siswa::class, 'ruang_kelas', 'kelas_id');
     }
 
-    public function roster(): HasMany
+    public function rosters(): HasMany
     {
         return $this->hasMany(RosterKelas::class, 'ruang_kelas', 'kelas_id');
     }

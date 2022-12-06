@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('sesi_penilaians', function (Blueprint $table) {
-            $table->id('id');
+            $table->id('sesi_id');
             $table->enum('nama_sesi', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
             $table->year('tahun_ajaran');
             $table->dateTime('tanggal_mulai');

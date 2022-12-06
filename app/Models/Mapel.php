@@ -19,7 +19,7 @@ class Mapel extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function nilai(): HasMany
+    public function nilais(): HasMany
     {
         return $this->hasMany(Nilai::class, 'mapel', 'mapel_id');
     }
@@ -29,7 +29,7 @@ class Mapel extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function guru(): BelongsToMany
+    public function gurus(): BelongsToMany
     {
         return $this->belongsToMany(Guru::class, 'mapel_gurus', 'mapel_id', 'NIP');
     }

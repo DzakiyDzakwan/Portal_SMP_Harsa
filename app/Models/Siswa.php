@@ -19,7 +19,7 @@ class Siswa extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user', 'uuid');
     }
@@ -34,23 +34,13 @@ class Siswa extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function prestasi(): HasMany
+    public function prestasis()
     {
         return $this->hasMany(Prestasi::class, 'siswa', 'NISN');
     }
 
-    public function nilai(): HasMany
+    public function kontrak_semesters()
     {
-        return $this->hasMany(Nilai::class, 'siswa', 'NISN');
-    }
-
-    public function absensi(): HasMany
-    {
-        return $this->hasMany(RekapAbsensi::class, 'siswa', 'NISN');
-    }
-
-    public function tagihan(): HasMany
-    {
-        return $this->hasMany(Tagihan::class, 'siswa', 'NISN');
+        return $this->hasMany(KontrakSemester::class, 'siswa', 'NISN');
     }
 }
