@@ -1,4 +1,5 @@
-/* Registrasi Admin */
+/* Admin */
+--Registrasi Admin
 DELIMITER ?
 CREATE PROCEDURE registrasi_admin(
     IN uname VARCHAR(255),
@@ -12,10 +13,6 @@ BEGIN
     BEGIN
         ROLLBACK;
     END;
-    DECLARE exit handler for sqlwarning
-    BEGIN
-        ROLLBACK;
-    END;
 
     SET uuid = UUID();
 
@@ -25,62 +22,26 @@ BEGIN
     COMMIT;
 END?
 DELIMITER ;
-/* Registrasi Admin End */
 
-/* Registrasi Siswa */
+--Non Aktifkan Admin Sementara
 DELIMITER ?
-CREATE PROCEDURE registrasi_siswa(
-    IN nama VARCHAR(255),
-    IN nisn CHAR(10),
-    IN nis CHAR(4),
-    IN pass VARCHAR(255),
-    IN tgl_masuk DATE,
-    IN kelas_id CHAR(3),
-    IN jk CHAR(2),
-    IN admin CHAR(36)
+CREATE PROCEDURE inactive_admin (
+    IN uuid CHAR(36)
 )
 BEGIN
-
     DECLARE errno INT;
-    DECLARE uuid CHAR(36);
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
     END;
-    DECLARE exit handler for sqlwarning
-    BEGIN
-        ROLLBACK;
-    END;
-
-    SET uuid = UUID();
-
     START TRANSACTION;
-
-    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
-    VALUES (uuid, nisn, pass, "siswa", NOW(), NOW());
-
-    INSERT INTO log_activities(user, transaksi, at, created_at)
-    VALUES(admin, 'insert', "users", NOW());
-
-    INSERT INTO siswas(nisn, nis, ruang_kelas, kelas_awal, semester, status_keaktifan, user, created_at, updated_at)
-    VALUES(nisn, nis, kelas_id, kelas_id, '1', 'aktif', uuid, NOW(), NOW());
-
-    INSERT INTO log_activities(user, transaksi, at, created_at)
-    VALUES(admin, 'insert', "user_profiles", NOW());
-
-    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at ,updated_at)
-    VALUES (uuid, nama, jk, NOW(), NOW());
-
-    INSERT INTO log_activities(user, transaksi, at, created_at)
-    VALUES(admin, 'insert', "user_profiles", NOW());
-
+    UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
     COMMIT;
-
 END?
-DELIMITER ;
-/* Registrasi Siswa End */
+DELIMITER;
 
-/* Registrasi Guru */
+/* Guru */
+--Registrasi Guru
 DELIMITER ?
 CREATE PROCEDURE registrasi_guru(
     IN nama VARCHAR(255),
@@ -110,24 +71,116 @@ BEGIN
     INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
     VALUES (uuid, nip, pass, "guru", NOW(), NOW());
 
-    INSERT INTO log_activities(user, transaksi, at, created_at) 
-    VALUES(admin,'insert', "users", NOW());
-
-    INSERT INTO gurus(nip, jabatan, tanggal_masuk, status_keaktifan, is_wali_kelas, user, created_at, updated_at)
-    VALUES(nip, jabatan, tgl_masuk, 'aktif', 'tidak', uuid, NOW(), NOW());
-
-    INSERT INTO log_activities(user, transaksi, at, created_at) 
-    VALUES(admin,'insert', "gurus", NOW());
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, 'insert', "users", NOW());
 
     INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
     VALUES (uuid, nama, jk, NOW(), NOW());
 
-    INSERT INTO log_activities(user, transaksi, at, created_at) 
-    VALUES(admin,'insert', "user_profiles", NOW());
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, 'insert', "user_profiles", NOW());
+
+    INSERT INTO gurus(nip, user, jabatan, tanggal_masuk, status, is_wali_kelas, created_at, updated_at)
+    VALUES(nip, uuid, jabatan, tgl_masuk, 'aktif', 'tidak', NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, 'insert', "gurus", NOW());
     COMMIT;
+
 END?
 DELIMITER ;
-/* Registrasi Guru End */
+
+--Non Aktifkan Guru
+DELIMITER ?
+CREATE PROCEDURE inactive_guru (
+    IN uuid CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    START TRANSACTION;
+    UPDATE gurus SET status = "Inaktif" WHERE user = uuid;
+    
+    UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
+    COMMIT;
+END?
+DELIMITER;
+
+/* Siswa */
+--Registrasi Siswa
+DELIMITER ?
+CREATE PROCEDURE registrasi_siswa(
+    IN nama VARCHAR(255),
+    IN nisn CHAR(10),
+    IN nis CHAR(4),
+    IN pass VARCHAR(255),
+    IN tgl_masuk DATE,
+    IN kelas_id CHAR(3),
+    IN jk CHAR(2),
+    IN admin CHAR(36)
+)
+BEGIN
+
+    DECLARE errno INT;
+    DECLARE uuid CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    DECLARE exit handler for sqlwarning
+    BEGIN
+        ROLLBACK;
+    END;
+
+    SET uuid = UUID();
+
+    START TRANSACTION;
+
+    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
+    VALUES (uuid, nis, pass, "siswa", NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, 'insert', "users", NOW());
+
+     INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at ,updated_at)
+    VALUES (uuid, nama, jk, NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, 'insert', "user_profiles", NOW());
+
+    INSERT INTO siswas(nisn, kelas, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
+    VALUES(nisn, kelas_id, uuid, nis, tgl_masuk, kelas_id, 'aktif', uuid, NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, 'insert', "siswas", NOW());
+
+    COMMIT;
+
+END?
+DELIMITER ;
+
+--Non Aktifkan Siswa
+DELIMITER ?
+CREATE PROCEDURE inactive_siswa (
+    IN uuid CHAR(36),
+    IN status VARCHAR(10)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    START TRANSACTION;
+    UPDATE siswas SET status = status WHERE user = uuid;
+    
+    UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
+    COMMIT;
+END?
+DELIMITER;
 
 /* Input Nilai */
 DELIMITER ?

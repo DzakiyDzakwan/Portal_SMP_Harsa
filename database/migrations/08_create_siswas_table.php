@@ -32,7 +32,7 @@ return new class extends Migration
             $table->char('telepon_wali', 13)->nullable();
             $table->enum('status', ['Aktif', 'Lulus', 'Pindah', 'Drop Out'])->default('Aktif');
             $table->foreign('kelas')->references('kelas_id')->on('kelas');
-            $table->foreign('user')->references('uuid')->on('users');
+            $table->foreign('user')->references('uuid')->on('users')->onUpdate('cascade');
             $table->timestamps();
         });
     }

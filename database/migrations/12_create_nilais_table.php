@@ -25,7 +25,7 @@ return new class extends Migration
             $table->float('nilai_keterampilan');
             $table->text('deskripsi_keterampilan');
             $table->enum('status', ['pending', 'confirmed', 'rejected']);
-            $table->foreign('sesi')->references('id')->on('sesi_penilaians');
+            $table->foreign('sesi')->references('sesi_id')->on('sesi_penilaians');
             $table->foreign('mapel')->references('mapel_id')->on('mapels');
             $table->foreign('kontrak_siswa')->references('kontrak_semester_id')->on('kontrak_semesters');
             $table->timestamps();
