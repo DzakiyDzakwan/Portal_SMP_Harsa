@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -21,6 +22,17 @@ return new class extends Migration
         BEGIN
         INSERT INTO log_ekstrakulikuler_siswas (ekstrakurikuler_siswa_id, ekstrakurikuler, kontrak_siswa, nilai, keterangan, action, created_at)
         VALUES (NEW.ekstrakurikuler_siswa_id, NEW.ekstrakurikuler, NEW.kontrak_siswa, NEW.nilai, NEW.keterangan, "insert", NOW());
+        END
+        ');
+
+        /* log update ekskul */
+        DB::unprepared('
+        CREATE TRIGGER log_update_ekskul_siswa
+        AFTER UPDATE on ekskul_siswas
+        FOR EACH ROW
+        BEGIN
+        INSERT INTO log_ekstrakurikuler_siswas (ekskul_siswa_id, ekskul, kontrak_siswa, nilai, keterangan, action, created_at)
+        VALUES (NEW.ekskul_siswa_id, NEW.ekskul, NEW.kontrak_siswa, NEW.nilai, NEW.keterangan, "update", NOW());
         END
         ');
 
