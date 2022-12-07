@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EkskulSiswa extends Model
+class EkstrakurikulerSiswa extends Model
 {
     use HasFactory;
 
@@ -20,7 +20,7 @@ class EkskulSiswa extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function ekskuls()
+    public function ekstrakurikulers()
     {
         return $this->belongsTo(Ekskul::class, 'ekskul', 'ekskul_id');
     }

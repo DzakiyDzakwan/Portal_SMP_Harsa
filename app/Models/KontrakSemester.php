@@ -40,7 +40,7 @@ class KontrakSemester extends Model
         return $this->hasMany(RekapAbsensi::class, 'kontrak_siswa', 'kontrak_semester_id');
     }
 
-    public function ekskul_siswas()
+    public function ekstrakurikuler_siswas()
     {
         return $this->hasMany(EkskulSiswa::class, 'kontrak_siswa', 'kontrak_semester_id');
     }

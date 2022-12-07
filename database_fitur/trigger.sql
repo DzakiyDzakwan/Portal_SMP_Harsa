@@ -1,35 +1,35 @@
 --User--
 --Log Insert User
-DELIMTER ?
-CREATE TRIGGER log_insert_user
-AFTER INSERT ON users
-FOR EACH ROW
-BEGIN
-INSERT INTO log_users(uuid, n_username, n_password, role, keterangan, created_at)
-VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, "insert", NOW());
-END?
+DELIMITER ?
+    CREATE TRIGGER log_insert_user
+    AFTER INSERT ON users
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO log_users(uuid, username,password, role, action, created_at)
+        VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, "insert", NOW());
+    END?
 DELIMITER ;
 
 --Log Update User
-DELIMTER ?
-CREATE TRIGGER log_update_user
-AFTER UPDATE ON users
-FOR EACH ROW
-BEGIN
-INSERT INTO log_users(uuid, n_username, o_username, n_password, o_password, role, keterangan, created_at)
-VALUES (OLD.uuid, NEW.username, OLD.username, NEW.password, OLD.password, OLD.role, "update", NOW());
-END?
+DELIMITER ?
+    CREATE TRIGGER log_update_user
+    AFTER UPDATE ON users
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO log_users(uuid, username,password, role, action, created_at)
+        VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, "update", NOW());
+    END?
 DELIMITER ;
 
 -- Log Delete User
-DELIMTER ?
+DELIMITER ?
 CREATE TRIGGER log_delete_user
-AFTER DELETE ON users
-FOR EACH ROW
-BEGIN
-INSERT INTO log_users(uuid, o_username, o_password, role, keterangan, created_at)
-VALUES (OLD.uuid, OLD.username, OLD.password, OLD.role, "delete", NOW());
-END?
+    AFTER DELETE ON users
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO log_users(uuid, username,password, role, action, created_at)
+        VALUES (OLD.uuid, OLD.username, OLD.password, OLD.role, "delete", NOW());
+    END ?
 DELIMITER ;
 
 --Profile--

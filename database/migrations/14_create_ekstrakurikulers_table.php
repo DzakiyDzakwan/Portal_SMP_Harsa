@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ekskuls', function (Blueprint $table) {
-            $table->char('ekskul_id', 5)->primary();
+        Schema::create('ekstrakurikulers', function (Blueprint $table) {
+            $table->char('ektrakurikuler_id', 5)->primary();
             $table->string('nama');
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->time('waktu_mulai');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ekskuls');
+        Schema::dropIfExists('ekstrakurikulers');
     }
 };

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('log_ekstrakurikulers', function (Blueprint $table) {
             $table->id();
-            $table->char('ekskul_id',5);
+            $table->char('ekstrakurikuler_id',5);
             $table->string('nama', 255);
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->time('waktu_mulai');

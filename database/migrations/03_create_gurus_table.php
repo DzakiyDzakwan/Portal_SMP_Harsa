@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('gurus', function (Blueprint $table) {
-            $table->char('NIP', 18)->primary();
+            $table->char('NIP', 18)->nullable()->primary();
             $table->uuid('user');
             $table->enum('jabatan', ['wks', 'bk', 'guru']);
             $table->string('pendidikan')->nullable();

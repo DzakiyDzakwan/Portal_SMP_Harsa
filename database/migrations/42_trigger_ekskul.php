@@ -16,22 +16,22 @@ return new class extends Migration
                 /* log insert ekskul */
                 DB::unprepared('
         CREATE TRIGGER log_insert_ekskul
-        AFTER INSERT on ekskuls
+        AFTER INSERT on ekstrakurikuler
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_ekstrakurikulers (ekskul_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
-        VALUES (NEW.ekskul_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.durasi, NEW.tempat, NEW.kelas, "insert", NOW());
+        INSERT INTO log_ekstrakurikulers (ekstrakurikuler_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
+        VALUES (NEW.ekstrakurikuler_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.durasi, NEW.tempat, NEW.kelas, "insert", NOW());
         END
         ');
 
                 /* log delete ekskul */
                 DB::unprepared('
         CREATE TRIGGER log_delete_ekskul
-        AFTER DELETE on ekskuls
+        AFTER DELETE on ekstrakurikuler
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_ekstrakurikulers (ekskul_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
-        VALUES (OLD.ekskul_id, OLD.nama, OLD.hari, OLD.waktu_mulai, OLD.durasi, OLD.tempat, OLD.kelas, "delete", NOW());
+        INSERT INTO log_ekstrakurikulers (ekstrakurikuler_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
+        VALUES (OLD.ekstrakurikuler_id, OLD.nama, OLD.hari, OLD.waktu_mulai, OLD.durasi, OLD.tempat, OLD.kelas, "delete", NOW());
         END
         ');
         }

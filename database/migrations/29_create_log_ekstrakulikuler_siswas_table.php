@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('log_ekstrakulikuler_siswas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ekskul_siswa_id');
-            $table->char('ekskul', 5);
+            $table->unsignedBigInteger('ekstrakurikuler_siswa_id');
+            $table->char('ekstrakurikuler', 5);
             $table->unsignedBigInteger('kontrak_siswa');
             $table->float('nilai');
             $table->string('keterangan', 255);

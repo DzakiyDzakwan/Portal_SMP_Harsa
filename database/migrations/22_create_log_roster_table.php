@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_roster');
+        Schema::dropIfExists('log_rosters');
     }
 };
