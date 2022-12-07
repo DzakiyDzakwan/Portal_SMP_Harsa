@@ -39,17 +39,24 @@
                     <tr>
                         <th>No</th>
                         <th>User_id</th>
+                        <th>NISN</th>
                         <th>NIS</th>
-                        <th>New_NISN</th>
-                        <th>Old_NISN</th>
-                        <th>New_Kelas</th>
-                        <th>Old_Kelas</th>
-                        <th>New_Semester</th>
-                        <th>Old_Semester</th>
-                        <th>New_Status</th>
-                        <th>Old_Status</th>
+                        <th>Kelas</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Kelas Awal</th>
+                        <th>Anak Ke</th>
+                        <th>Nama Ayah</th>
+                        <th>Pekerjaan</th>
+                        <th>Nama Ibu</th>
+                        <th>Pekerjaan</th>
+                        <th>Alamat</th>
+                        <th>Telepon</th>
+                        <th>Nama Wali</th>
+                        <th>Pekerjaan</th>
+                        <th>Telepon</th>
+                        <th>Status</th>
                         <th>Keterangan</th>
-                        <th>Created_at</th>
+                        <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,16 +64,24 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$item->user}}</td>
-                            <td>{{$item->NIS}}</td>
-                            <td>{{$item->n_nisn}}</td>
-                            <td>{{$item->o_nisn}}</td>
-                            <td>{{$item->n_kelas}}</td>
-                            <td>{{$item->o_kelas}}</td>
-                            <td>{{$item->n_semester}}</td>
-                            <td>{{$item->o_semester}}</td>
-                            <td>{{$item->n_status}}</td>
-                            <td>{{$item->o_status}}</td>
-                            <td>{{$item->Keterangan}}</td>
+                            <td>{{$item->NISN}}</td>
+                            <td>{{$item->NIS }}</td>
+                            <td>{{$item->kelas}}</td>
+                            <td>{{$item->tanggal_masuk}}</td>
+                            <td>{{$item->kelas_awal}}</td>
+                            <td>{{$item->anak_ke}}</td>
+                            <td>{{$item->nama_ayah}}</td>
+                            <td>{{$item->pekerjaan_ayah}}</td>
+                            <td>{{$item->nama_ibu}}</td>
+                            <td>{{$item->pekerjaan_ibu}}</td>
+                            <td>{{$item->alamat_orangtua}}</td>
+                            <td>{{$item->telepon_orangtua}}</td>
+                            <td>{{$item->nama_wali}}</td>
+                            <td>{{$item->pekerjaan_wali}}</td>
+                            <td>{{$item->telepon_wali}}</td>
+                            <td>{{$item->status}}</td>
+                            <td>{{$item->action}}</td>
+                            <td>{{$item->created_at}}</td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -38,16 +38,16 @@
                 <thead>
                     <tr>
                         <th>User</th>
-                        <th>Kegiatan</th>
-                        <th>Tabel</th>
-                        <th>Tanggal_kegiatan</th>
+                        <th>Keterangan</th>
+                        <th>Table</th>
+                        <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($logActivities as $item)
                     <tr>
-                        <td>{{$item->user}}</td>
-                        <td>{{$item->transaksi}}</td>
+                        <td>{{$item->actor}}</td>
+                        <td>{{$item->action}}</td>
                         <td>{{$item->at}}</td>
                         <td>{{$item->created_at}}</td>
                     </tr> 

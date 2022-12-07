@@ -190,7 +190,7 @@
                         <i class="bi bi-clock-history"></i>
                         <span>History Log</span>
                     </a>
-                    <ul class="submenu">
+                    <ul class="submenu @if($pages == 'history') active @endif">
                         <li class="submenu-item">
                             <a href="/log-activities"
                                 >Log Aktivitas</a
