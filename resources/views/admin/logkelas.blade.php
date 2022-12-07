@@ -38,118 +38,28 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Kelas</th>
-                        <th>Nomor Kelas</th>
-                        <th>Ruangan</th>
+                        <th>Kelas Id</th>
                         <th>Wali Kelas</th>
+                        <th>Nomor Kelas</th>
+                        <th>Kelompok Kelas</th>
+                        <th>Nama Kelas</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($logKelas as $item)
                     <tr>
-                        <td>1</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$item->kelas_id}}</td>
+                        <td>{{$item->wali_kelas}}</td>
+                        <td>{{$item->grade}}</td>
+                        <td>{{$item->kelompok_kelas}}</td>
+                        <td>{{$item->nama_kelas}}</td>
+                        <td>{{$item->action}}</td>
+                        <td>{{$item->created_at}}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>Al-Farabi</td>
-                        <td>VII-B</td>
-                        <td>1</td>
-                        <td>Ali Akbar Sikumbang</td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

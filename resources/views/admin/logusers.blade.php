@@ -39,10 +39,10 @@
                     <tr>
                         <th>No</th>
                         <th>uuid</th>
-                        <th>n_username</th>
-                        <th>o_username</th>
+                        <th>username</th>
+                        <th>role</th>
                         <th>keterangan</th>
-                        <th>created_at</th>
+                        <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,9 +50,9 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->uuid}}</td>
-                        <td>{{$item->n_username}}</td>
-                        <td>{{$item->o_username}}</td>
-                        <td>{{$item->keterangan}}</td>
+                        <td>{{$item->username}}</td>
+                        <td>{{$item->role}}</td>
+                        <td>{{$item->action}}</td>
                         <td>{{$item->created_at}}</td>
                     </tr> 
                     @endforeach

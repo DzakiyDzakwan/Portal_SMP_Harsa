@@ -38,150 +38,26 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Kelas</th>
-                        <th>Guru</th>
-                        <th>Hari</th>
-                        <th>Jam Masuk</th>
-                        <th>Jam Keluar</th>
+                        <th>Mapel Id</th>
+                        <th>Nama</th>
+                        <th>Kelompok</th>
+                        <th>Kurikulum</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($logMapel as $item)
                     <tr>
-                        <td>1</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-A</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$item->mapel_id}}</td>
+                        <td>{{$item->nama_mapel}}</td>
+                        <td>{{$item->kelompok_mapel}}</td>
+                        <td>{{$item->kurikulum}}</td>
+                        <td>{{$item->action}}</td>
+                        <td>{{$item->created_at}}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-A</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-A</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-B</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-A</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-B</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-B</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-A</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-A</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-B</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-A</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-B</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-A</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td>Seni Budaya</td>
-                        <td>VII-A</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>VII-B</td>
-                        <td>Ray</td>
-                        <td>Suharyanto</td>
-                        <td>Rabu</td>
-                        <td>09.00</td>
-                        <td>10.00</td>
-                    </tr>
+                    @endforeach                    
                 </tbody>
             </table>
         </div>

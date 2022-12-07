@@ -122,7 +122,7 @@
                     <tr>
                         <td>{{ $k->kelas_id }}</td>
                         <td>{{ $k->nama_kelas }}</td>
-                        <td>{{ $k->kelompok_kelas }}</td>
+                        <td>{{ $k->grade }}-{{ $k->kelompok_kelas }}</td>
                         <td>{{ $k->Wali_Kelas }}</td>
                         <td>{{ $k->Jumlah_Siswa}}</td>
                         <td>
@@ -191,15 +191,23 @@
                             value="{{ old('id') }}"
                         />
                     </div>
-                    <label for="nomor">Nomor Kelas: </label>
+                    <label for="grade">Grade: </label>
+                    <div class="form-group">
+                        <select class="choices form-select" id="grade" name="grade">
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </div>
+                    <label for="group">Kelompok Kelas: </label>
                     <div class="form-group">
                         <input
                             type="text"
-                            placeholder="Nomor Kelas"
+                            placeholder="kelompok Kelas"
                             class="form-control"
-                            name="nomor"
-                            id="nomor"
-                            value="{{ old('nomor') }}"
+                            name="group"
+                            id="group"
+                            value="{{ old('group') }}"
                         />
                     </div>
                     <label for="nama">Nama Kelas: </label>
@@ -288,14 +296,22 @@
                             value="{{ $k->kelas_id }}"
                         />
                     </div>
-                        <label for="nomor">Nomor Kelas: </label>
+                    <label for="grade">Grade: </label>
+                    <div class="form-group">
+                        <select class="choices form-select" id="grade" name="grade">
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </div>
+                    <label for="group">Kelompok Kelas: </label>
                     <div class="form-group">
                         <input
                             type="text"
-                            placeholder="Nomor Kelas"
+                            placeholder="kelompok Kelas"
                             class="form-control"
-                            name="nomor"
-                            id="nomor"
+                            name="group"
+                            id="group"
                             value="{{ $k->kelompok_kelas }}"
                         />
                     </div>

@@ -38,41 +38,33 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Ekskul Id</th>
                         <th>Nama Ekskul</th>
-                        <th>Penanggung Jawab</th>
-                        <th>Tanggal</th>
+                        <th>Hari</th>
+                        <th>Waktu Mulai</th>
+                        <th>Durasi</th>
+                        <th>Tempat</th>
+                        <th>Kelas</th>
                         <th>Action</th>
+                        <th>Tanggal Kegiatan</th>
                     
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($logEkskul as $item)
                     <tr>
-                        <td>1</td>
-                        <td>Basket</td>
-                        <td>Deni Sumargo</td>
-                        <td>20/8/2010</td>
-                        <td>
-                            <span class="badge bg-success">Ditambahkan</span>
-                        </td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$item->ekstrakurikuler_id}}</td>
+                        <td>{{$item->nama}}</td>
+                        <td>{{$item->hari}}</td>
+                        <td>{{$item->waktu_mulai}}</td>
+                        <td>{{$item->durasi}}</td>
+                        <td>{{$item->tempat}}</td>
+                        <td>{{$item->kelas}}</td>
+                        <td>{{$item->action}}</td>
+                        <td>{{$item->created_at}}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Futsal</td>
-                        <td>Deni Putra</td>
-                        <td>20/8/2010</td>
-                        <td>
-                            <span class="badge bg-warning">Update</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Futsal</td>
-                        <td>Deni Putra</td>
-                        <td>20/8/2010</td>
-                        <td>
-                            <span class="badge bg-danger">Dihapus</span>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

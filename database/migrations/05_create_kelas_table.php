@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->char('kelas_id', 3)->primary();
             $table->char('wali_kelas', 18)->nullable();
-            $table->char('grade', 1);
+            $table->enum('grade', ['7', '8', '9']);
             $table->char('kelompok_kelas', 1);
             $table->string('nama_kelas')->unique();
             $table->foreign('wali_kelas')->references('NIP')->on('gurus');

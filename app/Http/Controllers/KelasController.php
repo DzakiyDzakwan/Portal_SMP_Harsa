@@ -57,7 +57,8 @@ class KelasController extends Controller
     {
         $kelas = new Kelas;
         $kelas->kelas_id = $request->id;
-        $kelas->kelompok_kelas = $request->nomor;
+        $kelas->grade = $request->group;
+        $kelas->kelompok_kelas = $request->group;
         $kelas->nama_kelas = $request->nama;
         $kelas->wali_kelas = $request->guru;
         $kelas->save();
@@ -99,7 +100,8 @@ class KelasController extends Controller
         $kls = Kelas::where('kelas_id', $id);
         $kls->update([
             'kelas_id' => $request->id,
-            'kelompok_kelas' => $request->nomor,
+            'grade'=> $request->grade,
+            'kelompok_kelas' => $request->group,
             'nama_kelas'=> $request->nama,
             'wali_kelas'=> $request->guru
         ]);

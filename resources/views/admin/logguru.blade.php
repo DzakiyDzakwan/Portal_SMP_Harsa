@@ -39,16 +39,16 @@
                     <tr>
                         <th>No</th>
                         <th>User_id</th>
-                        <th>New_NIP</th>
-                        <th>Old_NIP</th>
-                        <th>New_Jabatan</th>
-                        <th>Old_Jabatan</th>
-                        <th>New_status</th>
-                        <th>Old_status</th>
-                        <th>New_WaliKelas</th>
-                        <th>Old_WaliKelas</th>
+                        <th>NIP</th>
+                        <th>Jabatan</th>
+                        <th>Pendidikan</th>
+                        <th>Tahun Ijazah</th>
+                        <th>Status Perkawinan</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Status</th>
+                        <th>Wali Kelas</th>
                         <th>Keterangan</th>
-                        <th>Created at</th>
+                        <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,15 +56,15 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$item->user}}</td>
-                            <td>{{$item->n_NIP}}</td>
-                            <td>{{$item->o_NIP}}</td>
-                            <td>{{$item->n_jabatan}}</td>
-                            <td>{{$item->o_jabatan}}</td>
-                            <td>{{$item->n_status_keaktifan}}</td>
-                            <td>{{$item->o_status_keaktifan}}</td>
-                            <td>{{$item->n_is_wali_kelas}}</td>
-                            <td>{{$item->o_is_wali_kelas}}</td>
-                            <td>{{$item->keterangan}}</td>
+                            <td>{{$item->NIP}}</td>
+                            <td>{{$item->jabatan}}</td>
+                            <td>{{$item->pendidikan}}</td>
+                            <td>{{$item->tahun_ijazah}}</td>
+                            <td>{{$item->status_perkawinan}}</td>
+                            <td>{{$item->tanggal_masuk}}</td>
+                            <td>{{$item->status}}</td>
+                            <td>{{$item->is_wali_kelas}}</td>
+                            <td>{{$item->action}}</td>
                             <td>{{$item->created_at}}</td>
                         </tr>
                     @endforeach
