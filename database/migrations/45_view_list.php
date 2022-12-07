@@ -27,7 +27,7 @@ return new class extends Migration
         DB::unprepared('
         CREATE VIEW table_ekskul AS
         SELECT *
-        FROM ekskuls
+        FROM ekstrakurikulers
         ');
     }
 

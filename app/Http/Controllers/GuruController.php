@@ -55,9 +55,7 @@ class GuruController extends Controller
 
         $password = Hash::make($validatedData['nip']);
 
-       /*  dd($password); */
-
-        DB::select('CALL registrasi_guru(?, ?, ?, ?, ?, ?, ?)', [$validatedData["fullname"], $validatedData["nip"], $request->jabatan, $password, $validatedData["tanggal_masuk"], $request->jenis_kelamin, auth()->user()->uuid]);
+        DB::select('CALL add_guru(?, ?, ?, ?, ?, ?, ?)', [$validatedData["fullname"], $validatedData["nip"], $request->jabatan, $password, $validatedData["tanggal_masuk"], $request->jenis_kelamin, auth()->user()->uuid]);
         return back()->with('success', "Guru berhasil dibuat");
     }
 
@@ -117,10 +115,8 @@ class GuruController extends Controller
     }
 
     public function delete($nip) {
-        Guru::where('NIP', $nip)->update([
-            'status_keaktifan' => "Tidak Aktif"
-        ]);
 
+        DB::select('CALL inactive_guru(?, ?)',[$nip, auth()->user()->uuid]);
         return back()->with('succes', 'dosen berhasil di non-aktif kan');
     }
 }

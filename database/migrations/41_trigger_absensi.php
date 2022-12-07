@@ -20,7 +20,7 @@ return new class extends Migration
         AFTER INSERT on rekap_absensis
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_insert_rekap_absensis (absensi_id, kontrak_siswa, sakit, izin, alpa, action, created_at)
+        INSERT INTO log_absensis (absensi_id, kontrak_siswa, sakit, izin, alpa, action, created_at)
         VALUES (NEW.rekap_absensi_id, NEW.kontrak_siswa, NEW.sakit, NEW.izin, NEW.alpa, "insert", NOW());
         END
         ');
@@ -31,7 +31,7 @@ return new class extends Migration
         AFTER UPDATE on rekap_absensis
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_rekap_absensis (absensi_id, kontrak_siswa, sakit, izin, alpa, action, created_at)
+        INSERT INTO log_absensis (absensi_id, kontrak_siswa, sakit, izin, alpa, action, created_at)
         VALUES (NEW.rekap_absensi_id, NEW.kontrak_siswa, NEW.sakit, NEW.izin, NEW.alpa, "update", NOW());
         END
         ');
@@ -42,7 +42,7 @@ return new class extends Migration
         AFTER DELETE on rekap_absensis
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_rekap_absensis (absensi_id, kontrak_siswa, sakit, izin, alpa, action, created_at)
+        INSERT INTO log_absensis (absensi_id, kontrak_siswa, sakit, izin, alpa, action, created_at)
         VALUES (OLD.rekap_absensi_id, OLD.kontrak_siswa, OLD.sakit, OLD.izin, OLD.alpa, "delete", NOW());
         END
         ');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Ekskul;
+use App\Models\Ekstrakurikuler;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +18,7 @@ class EkskulController extends Controller
     public function index()
     {
         $pages = 'user';
-        $totalEkskul = Ekskul::count();
+        $totalEkskul = Ekstrakurikuler::count();
         $ekskuls = DB::table('table_ekskul')
         ->get();
         return view('admin.ekskul', compact('pages', 'totalEkskul','ekskuls'));
@@ -52,7 +52,7 @@ class EkskulController extends Controller
         DB::beginTransaction();
 
         try {
-            Ekskul::create([
+            Ekstrakurikuler::create([
                 'ekskul_id' => $validateData['ekskul_id'],
                 'nama' => $validateData['fullname'],
                 'hari' => $request->hari,
@@ -121,7 +121,7 @@ class EkskulController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $eks = Ekskul::where('ekskul_id', $id);
+        $eks = Ekstrakurikuler::where('ekskul_id', $id);
         $eks->update([
                 'ekskul_id' => $request->ekskul_id,
                 'nama' => $request->fullname,
@@ -143,7 +143,7 @@ class EkskulController extends Controller
      */
     public function destroy($id)
     {
-        Ekskul::where('ekskul_id', $id)->delete();
+        Ekstrakurikuler::where('ekskul_id', $id)->delete();
         return redirect()->route('ekskul');
     }
 }

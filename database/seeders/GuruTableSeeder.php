@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
 
 class GuruTableSeeder extends Seeder
@@ -18,7 +19,9 @@ class GuruTableSeeder extends Seeder
     //         VALUES(nip, jabatan, tgl_masuk, "aktif", "tidak", uuid, NOW(), NOW());
     public function run()
     {
-        DB::table('gurus')->insert([
+        DB::select('CALL add_guru(?, ?, ?, ?, ?, ?, ?)', ["Guru Dummy Satu", '111111111111111111', 'wks', Hash::make('111111111111111111'), '2022-01-12', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_guru(?, ?, ?, ?, ?, ?, ?)', ["Guru Dummy Dua", '222222222222222222', 'guru', Hash::make('222222222222222222'), '2022-01-12', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        /* DB::table('gurus')->insert([
             [
                 "nip" => '123456789123456789',
                 "jabatan" => "guru",
@@ -27,6 +30,6 @@ class GuruTableSeeder extends Seeder
                 "is_wali_kelas" => "tidak",
                 "user" => "guru1"
             ],
-        ]);
+        ]); */
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
                 /* log insert ekskul */
                 DB::unprepared('
                         CREATE TRIGGER log_insert_ekskul
-                        AFTER INSERT on ekstrakurikuler
+                        AFTER INSERT on ekstrakurikulers
                         FOR EACH ROW
                         BEGIN
                                 INSERT INTO log_ekstrakurikulers (ekstrakurikuler_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
@@ -28,18 +28,18 @@ return new class extends Migration
                 /* log update ekskul */
                 DB::unprepared('
                         CREATE TRIGGER log_update_ekskul
-                        AFTER UPDATE on ekskuls
+                        AFTER UPDATE on ekstrakurikulers
                         FOR EACH ROW
                         BEGIN
-                                INSERT INTO log_ekstrakurikulers (ekskul_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
-                                VALUES (NEW.ekskul_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.durasi, NEW.tempat, NEW.kelas, "update", NOW());
+                                INSERT INTO log_ekstrakurikulers (ekstrakurikuler_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
+                                VALUES (NEW.ekstrakurikuler_id, NEW.nama, NEW.hari, NEW.waktu_mulai, NEW.durasi, NEW.tempat, NEW.kelas, "update", NOW());
                         END
                 ');
 
                 /* log delete ekskul */
                 DB::unprepared('
                 CREATE TRIGGER log_delete_ekskul
-                AFTER DELETE on ekstrakurikuler
+                AFTER DELETE on ekstrakurikulers
                 FOR EACH ROW
                 BEGIN
                         INSERT INTO log_ekstrakurikulers (ekstrakurikuler_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)

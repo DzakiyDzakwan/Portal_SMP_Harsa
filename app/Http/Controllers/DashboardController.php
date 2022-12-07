@@ -6,7 +6,7 @@ use App\Models\Siswa;
 use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Mapel;
-use App\Models\Ekskul;
+use App\Models\Ekstrakurikuler;
 
 
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $guru = Guru::count();
         $kelas = Kelas::count();
         $mapel = Mapel::count();
-        $ekskul = Ekskul::count();
+        $ekskul = Ekstrakurikuler::count();
 
         return view('admin.dashboard',compact(
             'pages',

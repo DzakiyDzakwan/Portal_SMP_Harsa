@@ -63,6 +63,8 @@ class MapelController extends Controller
         $mapel->kurikulum = $request->kurikulum;
         $mapel->save();
 
+        DB::select('CALL add_mapel(?, ?, ?, ?, ?)', [$request->mapel_id, $request->nama_mapel, $request->kelompok_mapel, $request->kurikulum, auth()->user()->uuid]);
+
         return redirect()->route('mapel');
     }
 
@@ -105,7 +107,7 @@ class MapelController extends Controller
             'kurikulum' => $request->kurikulum
         ]);
 
-        return redirect()->route('mapel');
+        return back()->with('success', 'Berhasil update data');
     }
 
     /**

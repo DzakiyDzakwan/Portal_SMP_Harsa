@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ekstrakurikulers', function (Blueprint $table) {
-            $table->char('ektrakurikuler_id', 5)->primary();
+            $table->char('ekstrakurikuler_id', 5)->primary();
             $table->string('nama');
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->time('waktu_mulai');

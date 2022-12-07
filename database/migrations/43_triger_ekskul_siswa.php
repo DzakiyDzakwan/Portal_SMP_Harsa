@@ -28,11 +28,11 @@ return new class extends Migration
         /* log update ekskul */
         DB::unprepared('
         CREATE TRIGGER log_update_ekskul_siswa
-        AFTER UPDATE on ekskul_siswas
+        AFTER UPDATE on ekstrakurikuler_siswas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_ekstrakurikuler_siswas (ekskul_siswa_id, ekskul, kontrak_siswa, nilai, keterangan, action, created_at)
-        VALUES (NEW.ekskul_siswa_id, NEW.ekskul, NEW.kontrak_siswa, NEW.nilai, NEW.keterangan, "update", NOW());
+        INSERT INTO log_ekstrakurikuler_siswas (ekstrakurikuler_siswa_id, ekstrakurikuler, kontrak_siswa, nilai, keterangan, action, created_at)
+        VALUES (NEW.ekstrakurikuler_siswa_id, NEW.ekstrakurikuler, NEW.kontrak_siswa, NEW.nilai, NEW.keterangan, "update", NOW());
         END
         ');
 
