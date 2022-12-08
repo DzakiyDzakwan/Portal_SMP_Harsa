@@ -236,7 +236,7 @@ BEGIN
 END?
 DELIMITER ;
 
---Nonaktifkan Kelas (❌) //Wali_kelas Cannot NULL
+--Nonaktifkan Kelas (✅)
 DELIMITER ?
 CREATE PROCEDURE inacitve_kelas(
     IN kelas CHAR(3),
@@ -324,7 +324,7 @@ BEGIN
     VALUES(admin, "insert", "user_profiles", NOW());
 
     INSERT INTO siswas(nisn, kelas, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
-    VALUES(nisn, kelas_id, uuid, nis, tgl_masuk, kelas_id, 'aktif',  NOW(), NOW());
+    VALUES(nisn, kelas_id, uuid, nis, tgl_masuk, kelas_id, 'Aktif',  NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "insert", "siswas", NOW());
