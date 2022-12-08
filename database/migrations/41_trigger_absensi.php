@@ -46,6 +46,19 @@ return new class extends Migration
         VALUES (OLD.rekap_absensi_id, OLD.kontrak_siswa, OLD.sakit, OLD.izin, OLD.alpa, "delete", NOW());
         END
         ');
+
+        /* cant_update_rekap_absensi */
+        DB::unprepared('
+        CREATE TRIGGER cant_update_rekap_absensi
+        BEFORE UPDATE ON rekap_absensis
+        FOR EACH ROW
+        BEGIN
+            IF (OLD.kontrak_siswa <> NEW.kontrak_siswa) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
+            END IF;
+        END
+        ');
     }
 
     /**
@@ -58,5 +71,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_rekap_absensi');
         DB::unprepared('DROP TRIGGER log_update_rekap_absensi');
         DB::unprepared('DROP TRIGGER log_delete_rekap_absensi');
+        DB::unprepared('DROP TRIGGER cant_update_rekap_absensi');
     }
 };

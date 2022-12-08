@@ -46,6 +46,19 @@ return new class extends Migration
         VALUES (OLD.kelas_id, OLD.wali_kelas, OLD.grade, OLD.kelompok_kelas, OLD.nama_kelas, "delete", NOW());
         END
         ');
+
+        /* cant_update_kelas */
+        DB::unprepared('
+        CREATE TRIGGER cant_update_kelas
+        BEFORE UPDATE ON kelas
+        FOR EACH ROW
+        BEGIN
+            IF (OLD.grade <> NEW.grade OR OLD.kelompok_kelas <> NEW.kelompok_kelas) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
+            END IF;
+        END
+        ');
     }
 
     /**
@@ -58,5 +71,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_kelas');
         DB::unprepared('DROP TRIGGER log_update_kelas');
         DB::unprepared('DROP TRIGGER log_delete_kelas');
+        DB::unprepared('DROP TRIGGER cant_update_kelas');
     }
 };

@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        /* log insert kelas */
+        /* log insert kontrak */
         DB::unprepared('
         CREATE TRIGGER log_insert_kontrak
         AFTER INSERT ON kontrak_semesters
@@ -25,7 +25,7 @@ return new class extends Migration
         END
         ');
 
-        /* log update kelas */
+        /* log update kontrak */
         DB::unprepared('
         CREATE TRIGGER log_update_kontrak
         AFTER UPDATE ON kontrak_semesters
@@ -36,7 +36,7 @@ return new class extends Migration
         END
         ');
 
-        /* log delete kelas */
+        /* log delete kontrak */
         DB::unprepared('
         CREATE TRIGGER log_delete_kontrak
         AFTER DELETE ON kontrak_semesters

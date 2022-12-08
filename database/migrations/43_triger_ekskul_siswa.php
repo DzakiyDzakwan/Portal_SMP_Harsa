@@ -46,6 +46,18 @@ return new class extends Migration
         VALUES (OLD.ekstrakurikuler_siswa_id, OLD.ekstrakurikuler, OLD.kontrak_siswa, OLD.nilai, OLD.keterangan, "delete", NOW());
         END
         ');
+
+        DB::unprepared('
+        CREATE TRIGGER cant_update_ekskul_siswa
+        BEFORE UPDATE ON ekstrakurikuler_siswas
+        FOR EACH ROW
+        BEGIN
+            IF (OLD.ekstrakurikuler <> NEW.ekstrakurikuler OR OLD.kontrak_siswa <> NEW.kontrak_siswa) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
+            END IF;
+        END
+        ');
         }
         
         /**
@@ -57,5 +69,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('log_ekstrakurikuler_siswas');
+        DB::unprepared('DROP TRIGGER cant_update_ekskul_siswa');
     }
 };
