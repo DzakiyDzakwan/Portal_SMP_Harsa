@@ -17,7 +17,8 @@ return new class extends Migration
         DB::unprepared('
             CREATE PROCEDURE add_admin(
                 IN uname VARCHAR(255),
-                IN pass VARCHAR(255)
+                IN pass VARCHAR(255),
+                IN admin CHAR(36)
             )
             BEGIN
             
@@ -33,6 +34,10 @@ return new class extends Migration
                 START TRANSACTION;
                 INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
                 VALUES (uuid, uname, pass, "admin", NOW(), NOW());
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "insert", "users", NOW());
+                
                 COMMIT;
             END
         ');
