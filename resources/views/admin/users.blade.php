@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                             <h6 class="text-muted font-semibold">Total User</h6>
-                            <h6 class="font-extrabold mb-0">2</h6>
+                            <h6 class="font-extrabold mb-0">{{$totalUser}}</h6>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                             <h6 class="text-muted font-semibold">Active</h6>
-                            <h6 class="font-extrabold mb-0">2</h6>
+                            <h6 class="font-extrabold mb-0">{{$activeUser}}</h6>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                         </div>
                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                             <h6 class="text-muted font-semibold">Inactive</h6>
-                            <h6 class="font-extrabold mb-0">2</h6>
+                            <h6 class="font-extrabold mb-0">{{$inactiveUser}}</h6>
                         </div>
                     </div>
                 </div>
@@ -92,12 +92,19 @@
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
             <h5>List User</h5>
-            <div class="form-group">
-                {{-- Button Tambah User --}}
-                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#inlineForm">
-                    <i class="bi bi-plus-circle"></i> Create Admin
-                </button>
-
+            <div class="d-flex align-items-center justify-content-between gap-2" >
+                <div class="form-group">
+                    {{-- Button Tambah User --}}
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                        <i class="bi bi-plus-circle"></i> Create Admin
+                    </button>
+                </div>
+                <div class="form-group">
+                    {{-- Button Inactive Admin --}}
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#trashedUser">
+                        <i class="bi bi-person-x-fill"></i> Inactive Admin
+                    </button>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -130,13 +137,27 @@
                                 </button>
                             </div>
                         @endif --}}
+                                @if ($item->role == 'admin')
+                                <!-- Update Button -->
+                                <div class="modal-warning me-1 mb-1 d-inline-block">
+                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal{{$loop->iteration}}"
+                                        data-bs-target="#update">
+                                        <div data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Admin">
+                                            <i class="bi bi-pencil"></i></a>
+                                        </div>
+                                    </button>
+                                </div>
+                                
                                 {{-- Delete Button --}}
                                 <div class="modal-danger me-1 mb-1 d-inline-block">
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#delete{{ $loop->iteration }}">
-                                        <i class="bi bi-trash"></i></a>
+                                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="NonAktif Admin">
+                                                <i class="bi bi-person-x-fill"></i>
+                                            </div>
                                     </button>
                                 </div>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -145,7 +166,7 @@
         </div>
     </div>
 
-    <!--Modal Tambah User -->
+    <!--Modal Tambah Admin -->
     <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -210,6 +231,27 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Inactive Admin -->
+    <div class="modal fade text-left" id="trashedUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document" style="max-width: 50%">
+            <div class="modal-content">
+                <div class="modal-header bg-danger justify-content-center">
+                    <h4 class="modal-title white " id="myModalLabel33">Inactive Admin</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
