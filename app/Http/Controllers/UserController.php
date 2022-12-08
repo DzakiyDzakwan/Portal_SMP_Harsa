@@ -12,9 +12,11 @@ class UserController extends Controller
 {
     public function index() {
         $pages = 'user';
-        $activeUser = User::count();
+        $totalUser = User::withTrashed()->count();
+        $activeUser = User::withoutTrashed()->count();
+        $inactiveUser = User::onlyTrashed()->count();
         $users = User::all();
-        return view('admin.users', compact('pages', 'activeUser', 'users'));
+        return view('admin.users', compact('pages', 'totalUser', 'activeUser', 'inactiveUser', 'users'));
     }
 
     public function store(Request $request) {
@@ -31,8 +33,8 @@ class UserController extends Controller
         try {
             User::create($validatedData);
             LogActivity::create([
-                'user' => auth()->user()->uuid,
-                'transaksi' => 'insert',
+                'actor' => auth()->user()->uuid,
+                'action' => 'insert',
                 'at' => 'users'
             ]);
 
