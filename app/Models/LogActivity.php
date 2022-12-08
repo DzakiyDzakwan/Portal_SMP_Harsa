@@ -10,7 +10,8 @@ class LogActivity extends Model
     use HasFactory;
 
     protected $guarded = [
-        'id'
+        'id',
+        'created_at',
     ];
 
         public function setUpdatedAtAttribute($value)

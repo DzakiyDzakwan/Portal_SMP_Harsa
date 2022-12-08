@@ -125,5 +125,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
 });
 
 Route::get('/test', function () {
-    return view('test');
+    $pages = 'test';
+    $users = auth()->user()->username;
+    return view('admin.test', compact('users', 'pages'));
 });
