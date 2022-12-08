@@ -129,7 +129,7 @@
                     @else
                         <td>Guru</td>
                     @endif
-                    @if ($item->status_keaktifan == 'Aktif')
+                    @if ($item->status == 'Aktif')
                         <td>
                             <span class="badge bg-success">Active</span>
                         </td> 
@@ -516,7 +516,7 @@
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Close</span>
                     </button>
-                    <form action="users/inactiveGuru/{{$item->NIP}}" method="POST">
+                    <form action="guru/inactiveGuru/{{$item->NIP}}" method="POST">
                         @csrf
                         @method('PATCH')
                         <button

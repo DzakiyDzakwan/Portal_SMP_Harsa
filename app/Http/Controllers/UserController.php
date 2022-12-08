@@ -13,10 +13,12 @@ class UserController extends Controller
     public function index() {
         $pages = 'user';
         $totalUser = User::withTrashed()->count();
-        $activeUser = User::withoutTrashed()->count();
-        $inactiveUser = User::onlyTrashed()->count();
+        $totalActiveUser = User::withoutTrashed()->count();
+        $totalInactiveUser = User::onlyTrashed()->count();
         $users = User::all();
-        return view('admin.users', compact('pages', 'totalUser', 'activeUser', 'inactiveUser', 'users'));
+        $inactiveUsers = User::onlyTrashed()->get();
+
+        return view('admin.users', compact('pages', 'totalUser', 'totalActiveUser', 'totalInactiveUser', 'users', 'inactiveUsers'));
     }
 
     public function store(Request $request) {
@@ -52,6 +54,11 @@ class UserController extends Controller
 
     public function delete($uuid) {
         User::where('uuid', $uuid)->delete();
+        LogActivity::create([
+            'actor' => auth()->user()->uuid,
+            'action' => 'insert',
+            'at' => 'users'
+        ]);
         return back()->with('success', "user berhasil dihapus");
         /* DB::beginTransaction();
 

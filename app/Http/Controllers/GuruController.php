@@ -14,37 +14,17 @@ use App\Models\LogActivity;
 
 class GuruController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $pages = 'user';
         $totalGuru = Guru::count();
-        $guruActive = Guru::where('status_keaktifan', 'Aktif')->count();
-        $guruInactive = Guru::where('status_keaktifan', 'Tidak Aktif')->count();
+        $guruActive = Guru::where('status', 'Aktif')->count();
+        $guruInactive = Guru::where('status', 'Inaktif')->count();
         $gurus = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get();
         return view('admin.guru', compact('pages', 'totalGuru', 'guruActive', 'guruInactive', 'gurus'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -59,23 +39,6 @@ class GuruController extends Controller
         return back()->with('success', "Guru berhasil dibuat");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request, $nip)
     {
         DB::beginTransaction();
@@ -89,29 +52,6 @@ class GuruController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
         }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function delete($nip) {

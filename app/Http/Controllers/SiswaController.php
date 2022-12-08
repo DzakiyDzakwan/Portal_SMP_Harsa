@@ -19,10 +19,10 @@ class SiswaController extends Controller
     {
         $pages = 'user';
         $totalSiswa = Siswa::count();
-        $siswaActive = Siswa::where('status_keaktifan', 'Aktif')->count();
-        $siswaLulus = Siswa::where('status_keaktifan', 'Lulus')->count();
-        $siswaPindah = Siswa::where('status_keaktifan', 'Pindah')->count();
-        $siswaDO = Siswa::where('status_keaktifan', 'Drop Out')->count();
+        $siswaActive = Siswa::where('status', 'Aktif')->count();
+        $siswaLulus = Siswa::where('status', 'Lulus')->count();
+        $siswaPindah = Siswa::where('status', 'Pindah')->count();
+        $siswaDO = Siswa::where('status', 'Drop Out')->count();
         $siswaInactive = $siswaLulus + $siswaPindah + $siswaDO;
         // $siswas = DB::table('siswas')
         //             ->join('users', 'users.uuid', '=', 'siswas.user')
