@@ -56,12 +56,12 @@ class MapelController extends Controller
     public function store(Request $request)
     {
 
-        $mapel = new Mapel;
+        /* $mapel = new Mapel;
         $mapel->mapel_id = $request->mapel_id;
         $mapel->nama_mapel = $request->nama_mapel;
         $mapel->kelompok_mapel = $request->kelompok_mapel;
         $mapel->kurikulum = $request->kurikulum;
-        $mapel->save();
+        $mapel->save(); */
 
         DB::select('CALL add_mapel(?, ?, ?, ?, ?)', [$request->mapel_id, $request->nama_mapel, $request->kelompok_mapel, $request->kurikulum, auth()->user()->uuid]);
 
