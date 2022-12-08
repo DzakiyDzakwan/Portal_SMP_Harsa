@@ -21,7 +21,9 @@ class GuruController extends Controller
         $totalGuru = Guru::count();
         $guruActive = Guru::where('status', 'Aktif')->count();
         $guruInactive = Guru::where('status', 'Inaktif')->count();
-        $gurus = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get();
+        $gurus = User::withTrashed()->join('gurus', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get();
+        /* $guru = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get(); */
+        /* dd($gurus); */
         return view('admin.guru', compact('pages', 'totalGuru', 'guruActive', 'guruInactive', 'gurus'));
     }
 

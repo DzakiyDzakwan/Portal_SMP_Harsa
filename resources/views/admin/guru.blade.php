@@ -121,7 +121,7 @@
                 @foreach ($gurus as $item)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$item->users->user_profiles->nama}}</td>
+                    <td>{{$item->nama}}</td>
                     @if ($item->jabatan == 'wks')
                         <td>Wakil Kepala sekolah</td>
                     @elseif($item->jabatan == 'bk')
@@ -349,7 +349,7 @@
                             <tr>
                                 <td class="p-1">Nama</td>
                                 <td class="p-1">:</td>
-                                <td class="p-1">{{$item->users->user_profiles->nama}}</td>
+                                <td class="p-1">{{$item->nama}}</td>
                             </tr>
                             <tr>
                                 <td class="p-1">NIP</td>
@@ -359,7 +359,7 @@
                             <tr>
                                 <td class="p-1">Jenis Kelamin</td>
                                 <td class="p-1">:</td>
-                                @if ($item->users->user_profiles->jenis_kelamin == 'LK')
+                                @if ($item->jenis_kelamin == 'LK')
                                     <td class="p-1">Pria</td>
                                 @else
                                     <td class="p-1">Wanita</td>
@@ -368,12 +368,12 @@
                             <tr>
                                 <td class="p-1">Tanggal Lahir</td>
                                 <td class="p-1">:</td>
-                                <td class="p-1">{{$item->users->user_profiles->tanggal_lahir}}</td>
+                                <td class="p-1">{{$item->tanggal_lahir}}</td>
                             </tr>
                             <tr>
                                 <td class="p-1">Tempat Lahir</td>
                                 <td class="p-1">:</td>
-                                <td class="p-1">{{$item->users->user_profiles->tempat_lahir}}</td>
+                                <td class="p-1">{{$item->tempat_lahir}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -506,7 +506,7 @@
                         <i data-feather="x"></i>
                     </button>
                 </div>
-                <div class="modal-body">Apakah yakin ingin menonaktifkan {{$item->users->user_profiles->nama}}?</div>
+                <div class="modal-body">Apakah yakin ingin menonaktifkan {{$item->nama}}?</div>
                 <div class="modal-footer">
                     <button
                         type="button"
@@ -516,7 +516,7 @@
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Close</span>
                     </button>
-                    <form action="guru/inactiveGuru/{{$item->NIP}}" method="POST">
+                    <form action="guru/inactiveGuru/{{$item->user}}" method="POST">
                         @csrf
                         @method('PATCH')
                         <button
