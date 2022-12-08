@@ -106,10 +106,7 @@ CREATE function masa_mengajar(
 )
 RETURNS INT
 BEGIN
-    DECLARE tahun_sekarang, tahun_masuk INT
-    SET tahun_sekarang = YEAR(now());
-    SET tahun_masuk = YEAR(tanggal_masuk);
-    RETURN(tahun_sekarang-tahun_masuk);
+    RETURN(DATEDIFF(NOW(), tanggal_masuk));
 END?
 DELIMITER ;
 
@@ -121,9 +118,8 @@ CREATE function umur(
 )
 RETURNS INT
 BEGIN
-    DECLARE tahun_sekarang, tahun_lahir INT
-    SET tahun_sekarang = YEAR(now());
-    SET tahun_lahir = YEAR(tanggal_lahir);
-    RETURN(tahun_sekarang - tahun_lahir);
+    DECLARE umur INT;
+    SET umur = YEAR(curdate())-YEAR(tgl_lahir) - (RIGHT(curdate(),5) < RIGHT(tgl_lahir,5));
+    RETURN(umur);
 END?
 DELIMITER ;
