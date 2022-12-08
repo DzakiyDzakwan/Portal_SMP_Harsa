@@ -46,6 +46,19 @@ return new class extends Migration
         VALUES (OLD.prestasi_id, OLD.siswa, OLD.jenis_prestasi, OLD.keterangan, OLD.tanggal_prestasi, "delete", NOW());
         END
         ');
+
+        /* cant_update_prestasi */
+        DB::unprepared('
+        CREATE TRIGGER cant_update_prestasi
+        BEFORE UPDATE ON prestasis
+        FOR EACH ROW
+        BEGIN
+            IF (OLD.siswa <> NEW.siswa) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
+            END IF;
+        END
+        ');
     }
 
     /**
@@ -58,5 +71,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_prestasi');
         DB::unprepared('DROP TRIGGER log_update_prestasi');
         DB::unprepared('DROP TRIGGER log_delete_prestasi');
+        DB::unprepared('DROP TRIGGER cant_update_prestasi');
     }
 };

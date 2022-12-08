@@ -46,6 +46,19 @@ return new class extends Migration
         VALUES (OLD.roster_id, OLD.mapel, OLD.kelas, OLD.waktu_mulai, OLD.durasi, OLD.hari, "delete", NOW());
         END
         ');
+
+        /* cant_update_roster */
+        DB::unprepared('
+        CREATE TRIGGER cant_update_roster
+        BEFORE UPDATE ON roster_kelas
+        FOR EACH ROW
+        BEGIN
+            IF (OLD.mapel <> NEW.mapel OR OLD.kelas <> NEW.kelas) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
+            END IF;
+        END
+        ');
     }
 
     /**
@@ -58,5 +71,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_roster_kelas');
         DB::unprepared('DROP TRIGGER log_update_roster_kelas');
         DB::unprepared('DROP TRIGGER log_delete_roster_kelas');
+        DB::unprepared('DROP TRIGGER cant_update_roster');
     }
 };

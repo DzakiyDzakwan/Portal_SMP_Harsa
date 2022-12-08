@@ -46,6 +46,19 @@ return new class extends Migration
         VALUES (OLD.mapel_id, OLD.nama_mapel, OLD.kelompok_mapel, OLD.kurikulum, "delete", NOW());
         END
         ');
+
+        /* cant_update_mapel */
+        DB::unprepared('
+        CREATE TRIGGER cant_update_mapel
+        BEFORE UPDATE ON mapels
+        FOR EACH ROW
+        BEGIN
+            IF (OLD.kurikulum <> NEW.kurikulum) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah kurikulum";
+            END IF;
+        END
+        ');
     }
 
     /**
@@ -58,5 +71,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_mapel');
         DB::unprepared('DROP TRIGGER log_update_mapel');
         DB::unprepared('DROP TRIGGER log_delete_mapel');
+        DB::unprepared('DROP TRIGGER cant_update_mapel');
     }
 };

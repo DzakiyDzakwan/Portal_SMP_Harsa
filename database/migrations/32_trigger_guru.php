@@ -46,6 +46,19 @@ return new class extends Migration
         VALUES (OLD.user, OLD.NIP, OLD.jabatan, OLD.pendidikan, OLD.tahun_ijazah, OLD.status_perkawinan, OLD.tanggal_masuk, OLD.status, OLD.is_wali_kelas, "delete", NOW());
         END
         ');
+
+        /* cant_update_guru */
+        DB::unprepared('
+        CREATE TRIGGER cant_update_guru
+        BEFORE UPDATE ON gurus
+        FOR EACH ROW
+        BEGIN
+            IF (OLD.user <> NEW.user OR OLD.tanggal_masuk <> NEW.tanggal_masuk) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
+            END IF;
+        END
+        ');
     }
 
     /**
@@ -58,5 +71,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_guru');
         DB::unprepared('DROP TRIGGER log_update_guru');
         DB::unprepared('DROP TRIGGER log_delete_guru');
+        DB::unprepared('DROP TRIGGER cant_update_guru');
     }
 };

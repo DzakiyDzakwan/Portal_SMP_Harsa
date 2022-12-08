@@ -46,6 +46,19 @@ return new class extends Migration
         VALUES (OLD.user, OLD.email, OLD.nama, OLD.alamat_tinggal, OLD.alamat_domisili, OLD.tempat_lahir, OLD.tgl_lahir, OLD.jenis_kelamin, OLD.foto, "delete", NOW());
         END
         ');
+
+        /* cant_update_profile */
+        DB::unprepared('
+        CREATE TRIGGER cant_update_profile 
+        BEFORE UPDATE ON user_profiles
+        FOR EACH ROW
+        BEGIN
+            IF (OLD.user <> NEW.user) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
+            END IF;
+        END
+        ');
     }
 
     /**
@@ -58,5 +71,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_profile');
         DB::unprepared('DROP TRIGGER log_update_profile');
         DB::unprepared('DROP TRIGGER log_delete_profile');
+        DB::unprepared('DROP TRIGGER cant_update_profile');
     }
 };

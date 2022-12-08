@@ -47,6 +47,19 @@ return new class extends Migration
         END
         ');
 
+        /* cant_update_user */
+        DB::unprepared('
+        CREATE TRIGGER cant_update_user 
+	    BEFORE UPDATE ON users
+	    FOR EACH ROW
+	    BEGIN
+            IF (OLD.role <> NEW.role) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah role";
+            END IF;
+	    END
+        ');
+
     }
 
     /**
@@ -59,5 +72,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_user');
         DB::unprepared('DROP TRIGGER log_update_user');
         DB::unprepared('DROP TRIGGER log_delete_user');
+        DB::unprepared('DROP TRIGGER cant_update_user');
     }
 };
