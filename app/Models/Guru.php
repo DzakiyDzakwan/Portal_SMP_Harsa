@@ -46,6 +46,6 @@ class Guru extends Model
     }
 
     public function profiles(){
-        return $this->belongsTo(UserProfile::class, 'user', 'uuid');
+        return $this->belongsTo(UserProfile::class, 'user', 'user');
     }
 }

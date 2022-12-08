@@ -221,16 +221,16 @@
                                 >Log Mata-Pelajaran</a
                             >
                         </li>
-                        <li class="submenu-item">
-                            <a href="/log-roster"
-                                >Log Roster</a
+                        {{-- <li class="submenu-item">
+                            <a href="/log-guruMapel"
+                                >Log Guru Mapel</a
                             >
                         </li>
                         <li class="submenu-item">
                             <a href="/log-tagihan"
                                 >Log Tagihan</a
                             >
-                        </li>
+                        </li> --}}
                         <li class="submenu-item">
                             <a href="/log-ekstrakulikuler"
                                 >Log Ekstrakulikuler</a
