@@ -20,8 +20,7 @@ class KelasController extends Controller
     public function index()
     {
         $pages = 'manajemenKelas';
-        $guru = Guru::join('users', 'users.uuid', '=', 'gurus.user')
-        ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
+        $guru = Guru::join('user_profiles', 'user_profiles.user', '=', 'gurus.user')
         ->get(['gurus.*', 'user_profiles.nama']);
 
         $kelas = DB::table('table_kelas')
@@ -57,7 +56,7 @@ class KelasController extends Controller
     {
         $kelas = new Kelas;
         $kelas->kelas_id = $request->id;
-        $kelas->grade = $request->group;
+        $kelas->grade = $request->grade;
         $kelas->kelompok_kelas = $request->group;
         $kelas->nama_kelas = $request->nama;
         $kelas->wali_kelas = $request->guru;
