@@ -20,7 +20,7 @@ return new class extends Migration
             $table->char('grade',1);
             $table->enum('semester',['Ganjil', 'Genap']);
             $table->year('tahun_ajaran');
-            $table->enum('status', ['Lulus', 'Gagal', 'Ongoing']);
+            $table->enum('status', ['Lulus', 'Gagal', 'On Going']);
             $table->enum('action', ['insert', 'delete', 'update']);
             $table->timestamps();
         });

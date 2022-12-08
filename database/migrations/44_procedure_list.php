@@ -305,24 +305,30 @@ return new class extends Migration
         
             DECLARE uuid CHAR(36);
             SET uuid = UUID();
-        
+
             INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
             VALUES (uuid, nis, pass, "siswa", NOW(), NOW());
-        
+
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "insert", "users", NOW());
-        
-             INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at ,updated_at)
+
+            INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
             VALUES (uuid, nama, jk, NOW(), NOW());
-        
+
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "insert", "user_profiles", NOW());
-        
+
             INSERT INTO siswas(nisn, kelas, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
-            VALUES(nisn, kelas_id, uuid, nis, tgl_masuk, kelas_id, "aktif", uuid, NOW(), NOW());
-        
+            VALUES(nisn, kelas_id, uuid, nis, tgl_masuk, kelas_id, "Aktif",  NOW(), NOW());
+
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "insert", "siswas", NOW());
+
+            INSERT INTO kontrak_semesters(siswa, grade, semester, tahun_ajaran, status, created_at, updated_at)
+            VALUES(nisn, "7", "Ganjil", YEAR(NOW()), "On Going", NOW(), NOW());
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "insert", "kontrak_semesters", NOW());
         
         END
         ');
