@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -338,7 +339,7 @@ return new class extends Migration
         END
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
             CREATE PROCEDURE inactive_siswa (
                 IN uuid CHAR(36),
                 IN status VARCHAR(10)
@@ -347,6 +348,29 @@ return new class extends Migration
                 UPDATE siswas SET status = status WHERE user = uuid;
                 
                 UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
+            END
+        '); */
+
+        DB::unprepared('
+            CREATE PROCEDURE inactive_siswa (
+                IN user CHAR(36),
+                IN status VARCHAR(10),
+                IN admin CHAR(36
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+                START TRANSACTION;
+                UPDATE siswas SET status = status, updated_at = NOW() WHERE user = user COLLATE utf8mb4_general_ci;
+            
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "update", "siswas", NOW());
+                
+                UPDATE users SET deleted_at = NOW() WHERE uuid = user COLLATE utf8mb4_general_ci; 
+                COMMIT;
             END
         ');
     }
