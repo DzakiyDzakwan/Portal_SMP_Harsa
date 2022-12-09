@@ -355,7 +355,7 @@ return new class extends Migration
             CREATE PROCEDURE inactive_siswa (
                 IN user CHAR(36),
                 IN status VARCHAR(10),
-                IN admin CHAR(36
+                IN admin CHAR(36)
             )
             BEGIN
                 DECLARE errno INT;

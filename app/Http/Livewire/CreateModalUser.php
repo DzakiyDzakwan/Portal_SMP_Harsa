@@ -11,15 +11,20 @@ class CreateModalUser extends Component
 {
     public $username, $password;
 
-    public function render()
-    {
-        return view('admin.components.livewire.create-modal-user');
+    protected $rules = [
+        'username' => 'required|min:5',
+        'password' => 'required'  
+    ];
+
+    public function updated($fields) {
+        $this->validateOnly($fields);
     }
 
     public function store() {
+
         $this->validate([
-            'username' => 'required|max:255|min:5',
-            'password' => 'required|max:255|min:5',
+            'username' => 'required|min:5',
+            'password' => 'required'  
         ]);
 
         $this->password = Hash::make($this->password);
@@ -27,7 +32,15 @@ class CreateModalUser extends Component
         DB::select('CALL add_admin(?, ?, ?)', [$this->username, $this->password, auth()->user()->uuid]);
         $this->reset();
         $this->emit('userStore');
+        $this->dispatchBrowserEvent('close-create-modal');
     }
+
+    public function render()
+    {
+        return view('admin.components.livewire.create-modal-user');
+    }
+
+    
 
 
 }

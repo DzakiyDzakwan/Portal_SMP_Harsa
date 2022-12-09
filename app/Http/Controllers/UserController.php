@@ -12,67 +12,7 @@ class UserController extends Controller
 {
     public function index() {
         $pages = 'user';
-        $totalUser = User::withTrashed()->count();
-        $totalActiveUser = User::withoutTrashed()->count();
-        $totalInactiveUser = User::onlyTrashed()->count();
-        $users = User::all();
-        $inactiveUsers = User::onlyTrashed()->get();
 
-        return view('admin.users', compact('pages', 'totalUser', 'totalActiveUser', 'totalInactiveUser', 'users', 'inactiveUsers'));
-    }
-
-    public function store(Request $request) {
-
-        $validatedData = $request->validate([
-            'username' => 'required|min:5|max:255',
-            'password' => 'required|min:5|max:255',
-        ]);
-
-        $validatedData['password'] = Hash::make($validatedData['password']);
-
-        DB::beginTransaction();
-
-        try {
-            User::create($validatedData);
-            LogActivity::create([
-                'actor' => auth()->user()->uuid,
-                'action' => 'insert',
-                'at' => 'users'
-            ]);
-
-            DB::commit();
-
-            $message = "user" . $request->username . "berhasil ditambahkan";
-            return back()->with('success', $message);
-        } catch (\Throwable $e) {
-            DB::rollback();
-            return back()->with('error',$e->getMessage());
-        }
-
-       
-    }
-
-    public function delete($uuid) {
-        User::where('uuid', $uuid)->delete();
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'insert',
-            'at' => 'users'
-        ]);
-        return back()->with('success', "user berhasil dihapus");
-        /* DB::beginTransaction();
-
-        try {
-            
-            LogActivity::create([
-                'user' => auth()->user()->uuid,
-                'transaksi' => 'delete',
-                'at' => 'users'
-            ]);
-            
-        } catch (/Throwable $th) {
-            //throw $th;
-            return back()->with('error',$e->getMessage());
-        } */
+        return view('admin.users', compact('pages'));
     }
 }

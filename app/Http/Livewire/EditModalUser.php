@@ -10,17 +10,23 @@ use Illuminate\Support\Facades\Hash;
 class EditModalUser extends Component
 {
 
-    public $uuid, $sequences, $username, $password;
+    public $uuid, $username, $password;
 
-    public function mount($uuid, $sequences) {
-        $this->uuid = $uuid;
-        $this->sequences = $sequences;
+    protected $listeners = [
+        'userEdit' => 'showUser'
+    ];
+
+    protected $rules = [
+        'username' => 'required|min:5',
+        'password' => 'required'  
+    ];
+
+    public function updated($fields) {
+        $this->validateOnly($fields);
     }
 
     public function render()
     {
-        $user = User::where('uuid', $this->uuid)->get()[0];
-        $this->username = $user->username;
         return view('admin.components.livewire.edit-modal-user');
     }
 
@@ -44,7 +50,14 @@ class EditModalUser extends Component
             'at' => 'users'
         ]);
 
-        $this->emit('userStore');
+        $this->emit('userUpdate');
+        $this->reset();
+    }
 
+    public function showUser($user) {
+        $data = User::where('uuid', $user)->first();
+        $this->uuid = $data->uuid;
+        $this->username = $data->username;
+        $this->dispatchBrowserEvent('show-update-modal');
     }
 }
