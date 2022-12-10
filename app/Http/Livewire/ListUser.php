@@ -12,7 +12,8 @@ class ListUser extends Component
     public $users;
     protected $listeners = [
         'userStore'=> 'render',
-        'userUpdate' => 'render'
+        'userUpdate' => 'render',
+        'restoreUser' => 'render'
     ];
 
     public function render()

@@ -58,6 +58,6 @@ class EditModalUser extends Component
         $data = User::where('uuid', $user)->first();
         $this->uuid = $data->uuid;
         $this->username = $data->username;
-        $this->dispatchBrowserEvent('show-update-modal');
+        $this->dispatchBrowserEvent('update-modal');
     }
 }
