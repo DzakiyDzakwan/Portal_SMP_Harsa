@@ -4,8 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Guru;
-use App\Models\User;
 use App\Models\Kelas;
+use Illuminate\Support\Facades\DB;
 
 class CreateModalKelas extends Component
 {
@@ -27,8 +27,16 @@ class CreateModalKelas extends Component
     }
 
     public function store() {
+        $this->validate([
+            'kelas_id' => 'required|max:3|unique:kelas',
+            'nama_kelas' => 'required|unique:kelas',
+            'kelompok_kelas' => 'required|min:1'
+        ]);
 
-        dd($this);
+        DB::select('CALL add_kelas(?, ?, ?, ?, ?, ?)', [$this->kelas_id, $this->wali_kelas, $this->grade, $this->kelompok_kelas, $this->nama_kelas, auth()->user()->uuid]);
+        $this->reset();
+        $this->emit('storeKelas');
+        $this->dispatchBrowserEvent('close-create-modal');
     }
 
     public function render()

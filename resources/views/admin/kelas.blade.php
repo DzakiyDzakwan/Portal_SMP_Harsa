@@ -36,51 +36,11 @@
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
             <h5>List Kelas</h5>
             <div class="form-group">
-                @livewire('create-modal-kelas', [$guru])
+                @livewire('create-modal-kelas')
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered" id="table1">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Kelas</th>
-                        <th>Nomor Kelas</th>
-                        <th>Wali Kelas</th>
-                        <th>Jumlah Siswa</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($kelas as $k)
-                        <tr>
-                            <td>{{ $k->kelas_id }}</td>
-                            <td>{{ $k->nama_kelas }}</td>
-                            <td>{{ $k->grade }}-{{ $k->kelompok_kelas }}</td>
-                            <td>{{ $k->Wali_Kelas }}</td>
-                            <td>{{ $k->Jumlah_Siswa }}</td>
-                            <td>
-                                {{-- Update Button --}}
-                                <div class="modal-warning me-1 mb-1 d-inline-block">
-                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#update{{ $k->kelas_id }}" data-order=>
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                </div>
-                                {{-- Delete Button --}}
-                                <div class="modal-danger me-1 mb-1 d-inline-block">
-                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete{{ $k->kelas_id }}">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-
-
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @livewire('list-kelas')
         </div>
     </div>
 
@@ -185,6 +145,14 @@
 @endsection
 
 @section('script')
+    <script>
+        const createModal = new bootstrap.Modal('#createModal', {
+            keyboard: false
+        })
+        window.addEventListener('close-create-modal', event => {
+            createModal.hide();
+        });
+    </script>
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>

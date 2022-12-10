@@ -1,10 +1,10 @@
 <div>
-    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#inlineForm">
+    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
         <i class="bi bi-plus-circle"></i> Tambah Kelas
     </button>
 
     <!--Modal tambah kelasl -->
-    <div wire:ignore.self class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
+    <div wire:ignore.self class="modal fade text-left" id="createModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel33" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
