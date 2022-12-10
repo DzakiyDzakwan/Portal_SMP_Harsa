@@ -126,11 +126,11 @@
                     <td>{{$siswa->nama}}</td>
                     <td>{{$siswa->tanggal_masuk}}</td>
                     <td>
-                        @if ($siswa->status_keaktifan == 'Aktif')
-                            <span class="badge bg-success">{{$siswa->status_keaktifan}}</span>   
-                        @else
-                            <span class="badge bg-danger">{{$siswa->status_keaktifan}}</span>   
-                        @endif
+                        @if ($siswa->status == 'Aktif')
+                            <span class="badge bg-success">Active</span>
+                    @else
+                            <span class="badge bg-danger">Inactive</span> 
+                    @endif
                     </td>
                     <td>
                         {{-- Preview Button --}}
@@ -209,7 +209,11 @@
                         </div>
                         <label>Ruang Kelas: </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Ruang Kelas" name="kelas_id"/>
+                            <select name="kelas_id" class="form-select form-control" id="basicSelect">
+                                @foreach ($kelas as $k)
+                                <option value="{{$k->kelas_id}}">{{$k->nama_kelas}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <label>Jenis Kelamin: </label>
                         <div class="form-group">
