@@ -20,19 +20,13 @@ class KelasController extends Controller
     public function index()
     {
         $pages = 'manajemenKelas';
-        $guru = Guru::join('user_profiles', 'user_profiles.user', '=', 'gurus.user')
-        ->get(['gurus.*', 'user_profiles.nama']);
 
         $kelas = DB::table('table_kelas')
         ->get();
 
-        $total = Kelas::count();
-
         return  view('admin.kelas', [
             'pages' => $pages,
-            'guru' => $guru,
             'kelas' => $kelas,
-            'total' => $total
         ]);
     }
 
