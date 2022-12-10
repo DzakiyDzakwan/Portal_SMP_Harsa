@@ -387,10 +387,12 @@
                                     <td class="p-1">NIS</td>
                                     <td class="p-1">:</td>
                                     @if ($guru->jabatan == 'wks')
-                                    <td class="p-1">{{ $guru->NIS }}</td>
-                    @else
-                            <span class="badge bg-danger">Inactive</span> 
-                    @endif
+                                    <td class="p-1">Wakil Kepala Sekolah</td>
+                                    @elseif($guru->jabatan == 'bk')
+                                    <td class="p-1">Bimbingan Konseling</td>
+                                    @else
+                                    <td class="p-1">Guru</td>
+                                    @endif
                                     <td class="p-1">{{ $guru->NIS }}</td>
                                 </tr>
                                 <tr>
