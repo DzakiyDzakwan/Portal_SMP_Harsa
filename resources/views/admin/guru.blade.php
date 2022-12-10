@@ -319,10 +319,10 @@
     </div>
 </div>
 
-@foreach ($gurus as $guru)
+@foreach ($gurus as $item)
 <div
     class="modal fade text-left"
-    id="info{{$guru->user}}"
+    id="info{{$item->user}}"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -362,10 +362,6 @@
                         <a class="nav-link" id="profilePribadi-tab" data-bs-toggle="tab" href="#profilePribadi" role="tab"
                             aria-controls="profilePribadi" aria-selected="false">Profil Pribadi</a>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="prestasi-tab" data-bs-toggle="tab" href="#prestasi" role="tab"
-                            aria-controls="prestasi" aria-selected="false">Prestasi</a>
-                    </li>
                 </ul>
                 
                 {{-- Navigasi Content --}}
@@ -376,44 +372,43 @@
                                 <tr>
                                     <td class="p-1">Nama</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->nama }}</td>
+                                    <td class="p-1">{{ $item->nama }}</td>
                                 </tr>
                                 <tr>
                                     <td class="p-1">NIP</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->nip }}</td>
+                                    <td class="p-1">{{ $item->NIP }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">NIS</td>
+                                    <td class="p-1">Jabatan</td>
                                     <td class="p-1">:</td>
-                                    @if ($guru->jabatan == 'wks')
+                                    @if ($item->jabatan == 'wks')
                                     <td class="p-1">Wakil Kepala Sekolah</td>
-                                    @elseif($guru->jabatan == 'bk')
+                                    @elseif($item->jabatan == 'bk')
                                     <td class="p-1">Bimbingan Konseling</td>
                                     @else
                                     <td class="p-1">Guru</td>
                                     @endif
-                                    <td class="p-1">{{ $guru->NIS }}</td>
                                 </tr>
                                 <tr>
                                     <td class="p-1">Jenis Kelamin</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->jenis_kelamin }}</td>
+                                    @if ($item->jenis_kelamin == 'LK')
+                                    <td class="p-1">Laki-Laki</td>
+                                    @else
+                                    <td class="p-1">Perempuan</td>
+                                    @endif
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Kelas Awal</td>
+                                    <td class="p-1">Tanggal Masuk</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->kelas_awal }}</td>
+                                    <td class="p-1">{{ $item->tanggal_masuk }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Semester</td>
-                                    <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->semester }}</td>
-                                </tr>
                                 <tr>
                                     <td class="p-1">Status Keaktifan</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->status_keaktifan }}</td>
+                                    <td class="p-1">{{ $item->status }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -422,84 +417,42 @@
                         <table class="table table-borderless mb-0">
                             <tbody>
                                 <tr>
-                                    <td class="p-1">Nama</td>
+                                    <td class="p-1">Pendidikan</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->nama }}</td>
+                                    <td class="p-1">{{ $item->pendidikan }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Anak Ke</td>
+                                    <td class="p-1">Tahun Ijazah</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->anak_ke }}</td>
+                                    <td class="p-1">{{ $item->tahun_ijazah }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Nama Ayah</td>
+                                    <td class="p-1">Status Perkawinan</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->nama_ayah }}</td>
+                                    <td class="p-1">{{ $item->status_perkawinan }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Pekerjan Ayah</td>
+                                    <td class="p-1">Alamat Tinggal</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->nama_ayah }}</td>
+                                    <td class="p-1">{{ $item->alamat_tinggal }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Nama Ibu</td>
+                                    <td class="p-1">Alamat Domisili</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->nama_ibu }}</td>
+                                    <td class="p-1">{{ $item->alamat_domisili }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Pekerjaan Ibu</td>
+                                    <td class="p-1">Tempat Lahir</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->pekerjaan_ibu }}</td>
+                                    <td class="p-1">{{ $item->tempat_lahir }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-1">Alamat Orangtua</td>
+                                    <td class="p-1">Tanggal Lahir</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->alamat_orangtua }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-1">Telepon Orangtua</td>
-                                    <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->telepon_orangtua }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-1">Nama Wali</td>
-                                    <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->nama_wali }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-1">Pekerjaan Wali</td>
-                                    <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->pekerjaan_wali }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-1">Telepon Wali</td>
-                                    <td class="p-1">:</td>
-                                    <td class="p-1">{{ $guru->telepon_wali }}</td>
+                                    <td class="p-1">{{ $item->tgl_lahir }}</td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="tab-pane fade" id="prestasi" role="tabpanel" aria-labelledby="data-prestasis">
-                       <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Keterangan</th>
-                                <th>Jenis</th>
-                                <th>Tanggal</th>
-                                <th>Semester</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $guru->keterangan }}</td>
-                                <td>{{ $siswa->jenis_prestasi }}</td>
-                                <td>{{ $siswa->tanggal_prestasi }}</td>
-                                <td>{{ $siswa->semester }}</td>
-                            </tr>
-                        </tbody>
-                       </table>
                     </div>
                 </div>
             </div>
@@ -517,221 +470,146 @@
     </div>
 </div>
 
-@foreach ($gurus as $item)
-    {{-- Modal Preview--}}
-    <div
-        class="modal fade text-left"
-        id="info{{$item->user}}"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel130"
-        aria-hidden="true"
-    >
-        <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            role="document"
-        >
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel130">Profil Guru</h5>
-                </div>
-                <div class="modal-body">
-                    {{-- Image --}}
-                    <img
-                        src="assets/images/test.jpg"
-                        class="mx-auto d-block w-50 my-3"
-                        alt="..."
-                    />
-                    <table class="table table-borderless mb-0">
-                        <tbody>
-                            <tr>
-                                <td class="p-1">Nama</td>
-                                <td class="p-1">:</td>
-                                <td class="p-1">{{$item->nama}}</td>
-                            </tr>
-                            <tr>
-                                <td class="p-1">NIP</td>
-                                <td class="p-1">:</td>
-                                <td class="p-1">{{$item->NIP}}</td>
-                            </tr>
-                            <tr>
-                                <td class="p-1">Jenis Kelamin</td>
-                                <td class="p-1">:</td>
-                                @if ($item->jenis_kelamin == 'LK')
-                                    <td class="p-1">Laki-Laki</td>
-                                @else
-                                    <td class="p-1">Perempuan</td>
-                                @endif
-                            </tr>
-                            <tr>
-                                <td class="p-1">Tanggal Lahir</td>
-                                <td class="p-1">:</td>
-                                <td class="p-1">{{$item->tanggal_lahir}}</td>
-                            </tr>
-                            <tr>
-                                <td class="p-1">Tempat Lahir</td>
-                                <td class="p-1">:</td>
-                                <td class="p-1">{{$item->tempat_lahir}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-light-secondary"
-                        data-bs-dismiss="modal"
-                    >
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                </div>
-            </div>
+{{-- Modal Update --}}
+<div
+class="modal fade text-left"
+id="update{{$item->user}}"
+tabindex="-1"
+role="dialog"
+aria-labelledby="myModalLabel130"
+aria-hidden="true"
+>
+<div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+    role="document"
+>
+    <div class="modal-content">
+        <div class="modal-header bg-warning">
+            <h5 class="modal-title white" id="myModalLabel130">
+                Ubah Data guru
+            </h5>
         </div>
-    </div>
-
-    {{-- Modal Update --}}
-    <div
-        class="modal fade text-left"
-        id="update{{$item->user}}"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel130"
-        aria-hidden="true"
-    >
-        <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            role="document"
-        >
-            <div class="modal-content">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title white" id="myModalLabel130">
-                        Ubah Data guru
-                    </h5>
-                </div>
-                <div class="modal-body">
-                    <form class="form form-vertical" action="guru/updateGuru/{{$item->NIP}}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <div class="form-body modal-body">
-                            <div class="row">
-                                {{-- NIP --}}
-                                <div class="col-12">
-                                    <div class="form-group has-icon-left">
-                                        <label for="nip">NIP</label>
-                                        <div class="position-relative">
-                                            <input
-                                                value="{{$item->NIP}}"
-                                                name="nip"
-                                                type="text"
-                                                class="form-control"
-                                                placeholder="Masukkan NIP guru"
-                                                id="nip"
-                                            />
-                                            <div class="form-control-icon">
-                                                <i class="bi bi-person"></i>
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                This is invalid state.
-                                            </div>
-                                        </div>
+        <div class="modal-body">
+            <form class="form form-vertical" action="guru/updateGuru/{{$item->NIP}}" method="POST">
+                @csrf
+                @method('PATCH')
+                <div class="form-body modal-body">
+                    <div class="row">
+                        {{-- NIP --}}
+                        <div class="col-12">
+                            <div class="form-group has-icon-left">
+                                <label for="nip">NIP</label>
+                                <div class="position-relative">
+                                    <input
+                                        value="{{$item->NIP}}"
+                                        name="nip"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Masukkan NIP guru"
+                                        id="nip"
+                                    />
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person"></i>
                                     </div>
-                                </div>
-
-                                {{-- Jabatan --}}
-                                <div class="col-12">
-                                    <div class="form-group has-icon-left">
-                                        <label for="jabatan">Jabatan</label>
-                                        <div class="position-relative">
-                                            <select name="jabatan" class="form-select form-control" id="basicSelect">
-                                                <option value="wks">Wakil Kepala Sekolah</option>
-                                                <option value="bk">Bimbingan Konseling</option>
-                                                <option value="guru">Guru</option>
-                                            </select>
-                                            <div class="form-control-icon">
-                                                <i class="bi bi-person"></i>
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                This is invalid state.
-                                            </div>
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        This is invalid state.
                                     </div>
-                                </div>
-                                
-                                <div class="col-12 d-flex justify-content-end">
-                                    <button type="button" class="btn btn-light-secondary me-1 mb-1" data-bs-dismiss="modal">
-                                        <i class="bx bx-x d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Close</span>
-                                    </button>
-                                    <button type="submit" class="btn btn-success me-1 mb-1">
-                                        Simpan
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </form>       
+
+                        {{-- Jabatan --}}
+                        <div class="col-12">
+                            <div class="form-group has-icon-left">
+                                <label for="jabatan">Jabatan</label>
+                                <div class="position-relative">
+                                    <select name="jabatan" class="form-select form-control" id="basicSelect">
+                                        <option value="wks">Wakil Kepala Sekolah</option>
+                                        <option value="bk">Bimbingan Konseling</option>
+                                        <option value="guru">Guru</option>
+                                    </select>
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        This is invalid state.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="button" class="btn btn-light-secondary me-1 mb-1" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Close</span>
+                            </button>
+                            <button type="submit" class="btn btn-success me-1 mb-1">
+                                Simpan
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>       
         </div>
     </div>
+</div>
+</div>
 
-    {{-- Modal Inactive --}}
-    <div
-        class="modal fade text-left"
-        id="delete{{$item->user}}"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel130"
-        aria-hidden="true"
-    >
-        <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            role="document"
-        >
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                    <h5 class="modal-title white" id="myModalLabel130">
-                        Non Aktifkan Guru
-                    </h5>
-                    <button
-                        type="button"
-                        class="close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                    >
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">Apakah yakin ingin menonaktifkan {{$item->nama}}?</div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-light-secondary"
-                        data-bs-dismiss="modal"
-                    >
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                    <form action="guru/inactiveGuru/{{$item->user}}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <button
-                            class="btn btn-danger ml-1"
-                            data-bs-dismiss="modal"
-                        >
-                            <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Yes</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
+{{-- Modal Inactive --}}
+<div
+class="modal fade text-left"
+id="delete{{$item->user}}"
+tabindex="-1"
+role="dialog"
+aria-labelledby="myModalLabel130"
+aria-hidden="true"
+>
+<div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+    role="document"
+>
+    <div class="modal-content">
+        <div class="modal-header bg-danger">
+            <h5 class="modal-title white" id="myModalLabel130">
+                Non Aktifkan Guru
+            </h5>
+            <button
+                type="button"
+                class="close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+            >
+                <i data-feather="x"></i>
+            </button>
+        </div>
+        <div class="modal-body">Apakah yakin ingin menonaktifkan {{$item->nama}}?</div>
+        <div class="modal-footer">
+            <button
+                type="button"
+                class="btn btn-light-secondary"
+                data-bs-dismiss="modal"
+            >
+                <i class="bx bx-x d-block d-sm-none"></i>
+                <span class="d-none d-sm-block">Close</span>
+            </button>
+            <form action="guru/inactiveGuru/{{$item->user}}" method="POST">
+                @csrf
+                @method('PATCH')
+                <button
+                    class="btn btn-danger ml-1"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Yes</span>
+                </button>
+            </form>
         </div>
     </div>
-
+</div>
+</div>
 @endforeach
-
 @endsection
 
 @section('script')
