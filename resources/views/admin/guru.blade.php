@@ -319,6 +319,202 @@
     </div>
 </div>
 
+@foreach ($gurus as $guru)
+<div
+    class="modal fade text-left"
+    id="info{{$guru->user}}"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel130"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel130">
+                    Profil Siswa
+                </h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+
+                {{-- Image --}}
+                <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
+                
+                {{-- Navigation --}}
+                <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Profil</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="profilePribadi-tab" data-bs-toggle="tab" href="#profilePribadi" role="tab"
+                            aria-controls="profilePribadi" aria-selected="false">Profil Pribadi</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="prestasi-tab" data-bs-toggle="tab" href="#prestasi" role="tab"
+                            aria-controls="prestasi" aria-selected="false">Prestasi</a>
+                    </li>
+                </ul>
+                
+                {{-- Navigasi Content --}}
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="p-1">Nama</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">NIP</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->nip }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">NIS</td>
+                                    <td class="p-1">:</td>
+                                    @if ($guru->jabatan == 'wks')
+                                    <td class="p-1">{{ $guru->NIS }}</td>
+                    @else
+                            <span class="badge bg-danger">Inactive</span> 
+                    @endif
+                                    <td class="p-1">{{ $guru->NIS }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Jenis Kelamin</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->jenis_kelamin }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Kelas Awal</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->kelas_awal }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Semester</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->semester }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Status Keaktifan</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->status_keaktifan }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="profilePribadi" role="tabpanel" aria-labelledby="profilePribadi-tab">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="p-1">Nama</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Anak Ke</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->anak_ke }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Nama Ayah</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->nama_ayah }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Pekerjan Ayah</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->nama_ayah }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Nama Ibu</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->nama_ibu }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Pekerjaan Ibu</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->pekerjaan_ibu }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Alamat Orangtua</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->alamat_orangtua }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Telepon Orangtua</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->telepon_orangtua }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Nama Wali</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->nama_wali }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Pekerjaan Wali</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->pekerjaan_wali }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">Telepon Wali</td>
+                                    <td class="p-1">:</td>
+                                    <td class="p-1">{{ $guru->telepon_wali }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="prestasi" role="tabpanel" aria-labelledby="data-prestasis">
+                       <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Keterangan</th>
+                                <th>Jenis</th>
+                                <th>Tanggal</th>
+                                <th>Semester</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $guru->keterangan }}</td>
+                                <td>{{ $siswa->jenis_prestasi }}</td>
+                                <td>{{ $siswa->tanggal_prestasi }}</td>
+                                <td>{{ $siswa->semester }}</td>
+                            </tr>
+                        </tbody>
+                       </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-light-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @foreach ($gurus as $item)
     {{-- Modal Preview--}}
     <div
