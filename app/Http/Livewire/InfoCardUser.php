@@ -11,7 +11,9 @@ class InfoCardUser extends Component
     public $totalUser, $totalActiveUser, $totalInactiveUser;
     protected $listeners = [
         'userStore'=> 'render',
-        'userNonaktif' => 'render'
+        'userNonaktif' => 'render',
+        'restoreUser' => 'render',
+        'deleteUser' => 'render'
     ];
 
     public function render()
