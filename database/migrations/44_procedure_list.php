@@ -339,18 +339,6 @@ return new class extends Migration
         END
         ');
 
-        /* DB::unprepared('
-            CREATE PROCEDURE inactive_siswa (
-                IN uuid CHAR(36),
-                IN status VARCHAR(10)
-            )
-            BEGIN
-                UPDATE siswas SET status = status WHERE user = uuid;
-                
-                UPDATE users SET deleted_at = NOW() WHERE uuid = uuid; 
-            END
-        '); */
-
         DB::unprepared('
             CREATE PROCEDURE inactive_siswa (
                 IN user CHAR(36),
@@ -360,9 +348,9 @@ return new class extends Migration
             BEGIN
                 DECLARE errno INT;
                 DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
+                    BEGIN
+                        ROLLBACK;
+                    END;
                 START TRANSACTION;
                 UPDATE siswas SET status = status, updated_at = NOW() WHERE user = user COLLATE utf8mb4_general_ci;
             
