@@ -274,6 +274,11 @@
                 </button>
             </div>
             <div class="modal-body">
+                
+
+                {{-- Image --}}
+                <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
+                
                 {{-- Navigation --}}
                 <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -289,10 +294,7 @@
                             aria-controls="prestasi" aria-selected="false">Prestasi</a>
                     </li>
                 </ul>
-
-                {{-- Image --}}
-                <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
-
+                
                 {{-- Navigasi Content --}}
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">

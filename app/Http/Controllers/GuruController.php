@@ -24,6 +24,8 @@ class GuruController extends Controller
         $gurus = User::withTrashed()->join('gurus', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get();
         /* $guru = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get(); */
         /* dd($gurus); */
+        $guru = DB::table('table_guru')
+        ->get();
         return view('admin.guru', compact('pages', 'totalGuru', 'guruActive', 'guruInactive', 'gurus'));
     }
 

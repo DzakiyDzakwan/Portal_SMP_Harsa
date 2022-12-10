@@ -27,8 +27,17 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW table_ekskul AS
-        SELECT *
-        FROM ekstrakurikulers
+        SELECT * FROM ekstrakurikulers
+        ');
+
+        DB::unprepared('
+        CREATE VIEW table_guru AS
+        SELECT * FROM gurus
+        ');
+
+        DB::unprepared('
+        CREATE VIEW table_siswa AS
+        SELECT * FROM siswas
         ');
 
         DB::unprepared('

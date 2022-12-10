@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserProfiles;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,7 @@ class SiswaController extends Controller
         //             ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
         //             ->join('prestasis', 'prestasis.siswa', '=', 'siswas.NISN')
         //             ->get();
-        $siswas = Siswa::join('users', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
+        $siswas = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
         return view('admin.siswa', compact('totalSiswa', 'pages', 'siswas', 'siswaActive', 'siswaInactive'));
     }
 
@@ -60,7 +61,7 @@ class SiswaController extends Controller
 
         $password = Hash::make($validatedData['nisn']);
 
-        \DB::select('CALL registrasi_siswa(?, ?, ?, ?, ?, ?, ?, ?)', [$validatedData["nama"], $validatedData["nisn"], $request->NIS, $password, $request->tanggal_masuk, $request->kelas_id, $request->jenis_kelamin, auth()->user()->uuid]);
+        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', [$validatedData["nama"], $validatedData["nisn"], $request->NIS, $password, $request->tanggal_masuk, $request->kelas_id, $request->jenis_kelamin, auth()->user()->uuid]);
         return back()->with('success', "Siswa berhasil dibuat");
     }
 

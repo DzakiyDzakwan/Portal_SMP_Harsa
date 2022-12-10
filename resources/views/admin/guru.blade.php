@@ -360,9 +360,9 @@
                                 <td class="p-1">Jenis Kelamin</td>
                                 <td class="p-1">:</td>
                                 @if ($item->jenis_kelamin == 'LK')
-                                    <td class="p-1">Pria</td>
+                                    <td class="p-1">Laki-Laki</td>
                                 @else
-                                    <td class="p-1">Wanita</td>
+                                    <td class="p-1">Perempuan</td>
                                 @endif
                             </tr>
                             <tr>
