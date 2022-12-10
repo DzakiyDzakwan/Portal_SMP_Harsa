@@ -1,7 +1,7 @@
 <div>
     <!--Modal Edit Admin -->
-    <div wire:ignore.self class="modal fade text-left" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
-    aria-hidden="true">
+    <div wire:ignore.self class="modal fade text-left" id="editModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel130" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-warning justify-content-center">
@@ -15,15 +15,16 @@
                                 <div class="form-group has-icon-left">
                                     <label for="edit-username">Username</label>
                                     <div class="position-relative">
-                                        <input name="username" type="text" class="form-control @error('username')is-invalid @enderror"
-                                            placeholder="Username" id="edit-username" wire:model.defer="username"/>
+                                        <input name="username" type="text"
+                                            class="form-control @error('username')is-invalid @enderror"
+                                            placeholder="Username" id="edit-username" wire:model.defer="username" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-person"></i>
                                         </div>
                                         @error('username')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
-                                                {{$message}}
+                                                {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
@@ -34,7 +35,8 @@
                                 <div class="form-group has-icon-left">
                                     <label for="edit-password">Password</label>
                                     <div class="position-relative">
-                                        <input name="password" type="password" class="form-control @error('password')is-invalid @enderror"
+                                        <input name="password" type="password"
+                                            class="form-control @error('password')is-invalid @enderror"
                                             placeholder="New Password" id="edit-password" wire:model.defer="password" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-lock"></i>
@@ -42,14 +44,15 @@
                                         @error('password')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
-                                                {{$message}}
+                                                {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-light-secondary me-1 mb-1" data-bs-dismiss="modal">
+                                <button type="button" class="btn btn-light-secondary me-1 mb-1"
+                                    data-bs-dismiss="modal">
                                     <i class="bx bx-x d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Close</span>
                                 </button>
