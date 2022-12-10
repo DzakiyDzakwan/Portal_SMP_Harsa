@@ -37,9 +37,7 @@
             <div class="d-flex align-items-center justify-content-between gap-2" >
                 <div class="form-group">
                     {{-- Button Tambah User --}}
-                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#inlineForm">
-                        <i class="bi bi-plus-circle"></i> Create Admin
-                    </button>
+                    @livewire('create-modal-user')
                 </div>
                 <div class="form-group">
                     {{-- Button Inactive Admin --}}
@@ -54,9 +52,6 @@
             @livewire('list-user')
         </div>
     </div>
-
-    <!--Modal Tambah Admin -->
-    @livewire('create-modal-user')
 
     <!--Modal Inactive Admin -->
     <div class="modal fade text-left" id="trashedUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
@@ -79,9 +74,25 @@
         </div>
     </div>
 
+    @livewire('edit-modal-user')
+
 @endsection
 
 @section('script')
+    <script>
+        const createModal = new bootstrap.Modal('#createModal', {
+                keyboard: false
+        })
+        const updateModal = new bootstrap.Modal('#editModal', {
+                keyboard: false
+        })
+        window.addEventListener('close-create-modal', event=>{
+            createModal.show();
+        });
+        window.addEventListener('show-update-modal', event=>{
+            updateModal.show();
+        })
+    </script>
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>

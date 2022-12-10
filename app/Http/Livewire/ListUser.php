@@ -11,13 +11,19 @@ class ListUser extends Component
 
     public $users;
     protected $listeners = [
-        'userStore'=> 'render'
+        'userStore'=> 'render',
+        'userUpdate' => 'render'
     ];
 
     public function render()
     {
-        $this->users = User::all();
+        $this->users = User::latest()->get();
         return view('admin.components.livewire.list-user');
+    }
+
+    public function editUser($uuid) {
+        $user = $uuid;
+        $this->emit('userEdit', $user);
     }
     
     public function inactive($uuid) {

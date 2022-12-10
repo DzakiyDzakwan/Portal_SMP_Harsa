@@ -1,7 +1,19 @@
-CREATE PROCEDURE registrasi_admin( IN uname VARCHAR(255), IN pass VARCHAR(255) )
-BEGIN DECLARE errno INT; DECLARE uuid CHAR(36); DECLARE EXIT HANDLER FOR
-SQLEXCEPTION BEGIN SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Error"; ROLLBACK;
-END; DECLARE exit handler for sqlwarning BEGIN SIGNAL SQLSTATE "45000" SET
-MESSAGE_TEXT = "Warning"; ROLLBACK; END; SET uuid = UUID(); START TRANSACTION;
-INSERT INTO users(uuid, username, password, role, created_at, updated_at) VALUES
-(uuid, uname, pass, "admin", NOW(), NOW()); COMMIT; END
+<div class="modal fade text-left" id="trashedUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document" style="max-width: 50%">
+        <div class="modal-content">
+            <div class="modal-header bg-danger justify-content-center">
+                <h4 class="modal-title white " id="myModalLabel33">Inactive Admin</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
