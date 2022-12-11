@@ -10,6 +10,10 @@ class InfoCardKelas extends Component
 
     public $totalKelas;
 
+    protected $listeners = [
+        'storeKelas' => 'render'
+    ];
+
     public function render()
     {
         

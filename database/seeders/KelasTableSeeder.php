@@ -15,13 +15,6 @@ class KelasTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('kelas')->insert([
-            [
-                "kelas_id" => 'A01',
-                "kelompok_kelas" => "8A",
-                "nama_kelas" => 'Ibnu Sina',
-                "wali_kelas" => '123456789123456789'
-            ],
-        ]);
+        DB::select('CALL add_kelas(?, ?, ?, ?, ?, ?)', ['K01', '111111111111111111', '7', 'A', 'Ibnu Sina', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }

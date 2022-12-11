@@ -85,5 +85,14 @@ return new class extends Migration
     {
         DB::unprepared('DROP VIEW table_kelas');
         DB::unprepared('DROP VIEW table_ekskul');
+        DB::unprepared('DROP VIEW table_guru');
+        DB::unprepared('DROP VIEW table_siswa');
+        DB::unprepared('DROP VIEW table_log_activities');
+        DB::unprepared('DROP VIEW table_log_users');
+        DB::unprepared('DROP VIEW table_log_siswas');
+        DB::unprepared('DROP VIEW table_log_gurus');
+        DB::unprepared('DROP VIEW table_log_kelas');
+        DB::unprepared('DROP VIEW table_log_mapels');
+        DB::unprepared('DROP VIEW table_log_ekstrakurikulers');
     }
 };

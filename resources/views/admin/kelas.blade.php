@@ -44,114 +44,130 @@
         </div>
     </div>
 
-    @foreach ($kelas as $k)
-        {{-- Modal Edit --}}
-        <div class="modal fade text-left" id="update{{ $k->kelas_id }}" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel130" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-warning">
-                        <h5 class="modal-title white" id="myModalLabel130">
-                            Ubah Kelas
-                        </h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/kelas/updateKelas/{{ $k->kelas_id }}" method="post">
-                            @csrf
-                            <div class="modal-body">
-                                <label for="id">Id Kelas: </label>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Id Kelas" class="form-control" name="id"
-                                        id="id" value="{{ $k->kelas_id }}" />
-                                </div>
-                                <label for="grade">Grade: </label>
-                                <div class="form-group">
-                                    <select class="choices form-select" id="grade" name="grade">
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                    </select>
-                                </div>
-                                <label for="group">Kelompok Kelas: </label>
-                                <div class="form-group">
-                                    <input type="text" placeholder="kelompok Kelas" class="form-control" name="group"
-                                        id="group" value="{{ $k->kelompok_kelas }}" />
-                                </div>
-                                <label for="nama">Nama Kelas: </label>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Nama Kelas" class="form-control" name="nama"
-                                        id="nama" value="{{ $k->nama_kelas }}" />
-                                </div>
-                                <label for="guru">Wali Kelas: </label>
-                                <div class="form-group">
-                                    <select class="choices form-select" id="guru" name="guru">
-                                        {{-- @foreach ($guru as $g)
-                                            <option value="{{ $g->NIP }}">{{ $g->profiles->nama }}</option>
-                                        @endforeach --}}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Close</span>
-                                </button>
-                                <button class="btn btn-success ml-1" data-bs-dismiss="modal" type="submit">
-                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Simpan</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+    @livewire('edit-modal-kelas')
+
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        {{-- Insert Kelas --}}
+        <div id="insertToast" class="toast align-items-center  text-bg-success" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Kelas Berhasil dibuat
                 </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
 
-        {{-- Modal Delete --}}
-        <div class="modal fade text-left" id="delete{{ $k->kelas_id }}" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel130" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-danger">
-                        <h5 class="modal-title white" id="myModalLabel130">
-                            Hapus Mata Pelajaran
-                        </h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">Apakah yakin menghapus data ini?</div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
-                        <form action="/kelas/deleteKelas/{{ $k->kelas_id }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger ml-1" data-bs-dismiss="modal">
-                                <i class="bx bx-check d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block">Yes</span>
-                            </button>
-                        </form>
-                    </div>
+        {{-- Inaktif Kelas --}}
+        <div id="inactiveToast" class="toast align-items-center  text-bg-danger" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Kelas Berhasil di Non Aktifkan
                 </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
-    @endforeach
+
+        {{-- Update Kelas --}}
+        <div id="updateToast" class="toast align-items-center  text-bg-warning" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Kelas berhasil diubah
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+
+        {{-- Restore Kelas --}}
+        <div id="restoreToast" class="toast align-items-center  text-bg-success" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Kelas berhasil dipulihkan
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+
+        {{-- Delete Kelas --}}
+        <div id="deleteToast" class="toast align-items-center  text-bg-danger" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Kelas berhasil dihapus
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
     <script>
+        //Modal
         const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
         })
+        const editModal = new bootstrap.Modal('#editModal', {
+            keyboard: false
+        })
+        /* 
+                const inactiveModal = new bootstrap.Modal('#trashedUser', {
+                    keyboard: false
+                })
+                const restoreModal = new bootstrap.Modal('#restoreModal', {
+                    keyboard: false
+                })
+                const deleteModal = new bootstrap.Modal('#deleteModal', {
+                    keyboard: false
+                }) */
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
         });
+        window.addEventListener('edit-modal', event => {
+            editModal.toggle();
+        });
+        /* 
+                window.addEventListener('restore-modal', event => {
+                    restoreModal.toggle();
+                })
+                window.addEventListener('delete-modal', event => {
+                    deleteModal.toggle();
+                })
+                window.addEventListener('inactive-modal', event => {
+                    inactiveModal.toggle();
+                }) */
+
+        //Toast
+        const insertToast = new bootstrap.Toast('#insertToast')
+        const inactiveToast = new bootstrap.Toast('#inactiveToast')
+        const updateToast = new bootstrap.Toast('#updateToast')
+        const restoreToast = new bootstrap.Toast('#restoreToast')
+        const deleteToast = new bootstrap.Toast('#deleteToast')
+
+
+        window.addEventListener('insert-alert', e => {
+            insertToast.show()
+        })
+
+        window.addEventListener('inactive-alert', e => {
+            inactiveToast.show()
+        })
+
+        window.addEventListener('update-alert', e => {
+            updateToast.show()
+        })
+
+        window.addEventListener('restore-alert', e => {
+            restoreToast.show()
+        })
+
+        window.addEventListener('delete-alert', e => {
+            deleteToast.show()
+        })
     </script>
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>

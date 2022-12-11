@@ -16,29 +16,6 @@ class SiswaTableSeeder extends Seeder
      */
     public function run()
     {
-        // INSERT INTO siswas(nisn, nis, ruang_kelas, kelas_awal, semester, status_keaktifan, user, created_at, updated_at)
-        //     VALUES(nisn, nis, kelas_id, kelas_id, "1", "aktif", uuid, NOW(), NOW());
-        DB::table('siswas')->insert([
-            [
-                "NISN" => '211402018',
-                "NIS" => "1234",
-                "ruang_kelas" => 'A01',
-                "tanggal_masuk" => '2019-01-01',
-                "kelas_awal" => '7A',
-                "semester" => '2',
-                "status_keaktifan" => 'Aktif',
-                "user" => 'siswa1'
-            ],
-            [
-                "NISN" => '211402009',
-                "NIS" => "4321",
-                "ruang_kelas" => 'A01',
-                "tanggal_masuk" => '2019-01-01',
-                "kelas_awal" => '7A',
-                "semester" => '2',
-                "status_keaktifan" => 'Aktif',
-                "user" => 'siswa2'
-            ],
-        ]);
+        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', ['Siswa Dummy Satu', '1234567890', '1234', Hash::make('1234'), '2022-12-01', 'K01', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }
