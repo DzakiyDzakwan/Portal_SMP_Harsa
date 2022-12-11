@@ -3,7 +3,7 @@
         <tr>
             <th>No</th>
             <th>Nama Kelas</th>
-            <th>Nomor Kelas</th>
+            <th>Kelas</th>
             <th>Wali Kelas</th>
             <th>Jumlah Siswa</th>
             <th>Action</th>
@@ -14,7 +14,7 @@
             <tr>
                 <td>{{ $k->kelas_id }}</td>
                 <td>{{ $k->nama_kelas }}</td>
-                <td>{{ $k->grade }}-{{ $k->kelompok_kelas }}</td>
+                <td>{{ $k->grade }}{{ $k->kelompok_kelas }}</td>
                 <td>{{ $k->Wali_Kelas }}</td>
                 <td>{{ $k->Jumlah_Siswa }}</td>
                 <td>

@@ -7,7 +7,7 @@ use App\Models\User;
 
 class InactiveModalUser extends Component
 {
-    public $inactiveUser, $uuid;
+    public $uuid;
 
     protected $listeners = [
         'getRestoreModal',

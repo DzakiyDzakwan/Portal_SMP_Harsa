@@ -19,6 +19,10 @@ class CreateModalKelas extends Component
         'wali_kelas' => 'required'
     ];
 
+    protected $listeners = [
+        'inactiveKelas' => 'render'
+    ];
+
     public function updated($fields) {
         $this->validateOnly($fields);
     }
