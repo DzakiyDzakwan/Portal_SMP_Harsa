@@ -10,6 +10,8 @@ class Guru extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'nip';
+
     protected $guarded = [
         "created_at",
         "updated_at"

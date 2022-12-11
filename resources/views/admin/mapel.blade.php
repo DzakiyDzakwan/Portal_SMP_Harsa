@@ -27,6 +27,7 @@
             </nav>
         </div>
     </div>
+
     <div class="row">
         <div class="col-12 col-lg-4 col-md-6">
             <div class="card">
@@ -49,55 +50,128 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-            <h5>List Mata Pelajaran</h5>
-            <div class="form-group">
-                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#inlineForm">
-                    <i class="bi bi-plus-circle"></i> Tambah Mata Pelajaran
-                </button>
+
+    {{-- Navigation --}}
+    <ul class="nav nav-tabs justify-content-start align-items-center my-3" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                aria-controls="profile" aria-selected="false">Mata Pelajaran</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profilePribadi-tab" data-bs-toggle="tab" href="#profilePribadi" role="tab"
+                aria-controls="profilePribadi" aria-selected="false">Mapel Guru</a>
+        </li>
+    </ul>
+
+    {{-- Navigasi Content --}}
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="card">
+                <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+                    <h5>List Mata Pelajaran</h5>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                            data-bs-target="#inlineForm">
+                            <i class="bi bi-plus-circle"></i> Tambah Mata Pelajaran
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered" id="table1">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Mapel</th>
+                                <th>Nama Mapel</th>
+                                <th>Kelompok Mapel</th>
+                                <th>Kurikulum</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($mapel as $pel)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pel->mapel_id }}</td>
+                                    <td>{{ $pel->nama_mapel }}</td>
+                                    <td>{{ $pel->kelompok_mapel }}</td>
+                                    <td>{{ $pel->kurikulum }}</td>
+                                    <td>
+                                        {{-- Update Button --}}
+                                        <div class="modal-warning me-1 mb-1 d-inline-block">
+                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#update{{ $loop->iteration }}" data-order=>
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </div>
+                                        {{-- Delete Button --}}
+                                        <div class="modal-danger me-1 mb-1 d-inline-block">
+                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#delete{{ $loop->iteration }}">
+                                                <i class="bi bi-trash"></i></a>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="card-body">
-            <table class="table table-bordered" id="table1">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Kode Mapel</th>
-                        <th>Nama Mapel</th>
-                        <th>Kelompok Mapel</th>
-                        <th>Kurikulum</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($mapel as $pel)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $pel->mapel_id }}</td>
-                            <td>{{ $pel->nama_mapel }}</td>
-                            <td>{{ $pel->kelompok_mapel }}</td>
-                            <td>{{ $pel->kurikulum }}</td>
-                            <td>
-                                {{-- Update Button --}}
-                                <div class="modal-warning me-1 mb-1 d-inline-block">
-                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#update{{ $loop->iteration }}" data-order=>
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                </div>
-                                {{-- Delete Button --}}
-                                <div class="modal-danger me-1 mb-1 d-inline-block">
-                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete{{ $loop->iteration }}">
-                                        <i class="bi bi-trash"></i></a>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="tab-pane fade" id="profilePribadi" role="tabpanel" aria-labelledby="profilePribadi-tab">
+            <div class="card">
+                <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+                    <h5>List Mata Pelajaran Guru</h5>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                            data-bs-target="#inlineForm">
+                            <i class="bi bi-plus-circle"></i> Tambah Mata Pelajaran
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered" id="table2">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Mapel</th>
+                                <th>Nama Mapel</th>
+                                <th>Kelompok Mapel</th>
+                                <th>Kurikulum</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($mapel as $pel)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pel->mapel_id }}</td>
+                                    <td>{{ $pel->nama_mapel }}</td>
+                                    <td>{{ $pel->kelompok_mapel }}</td>
+                                    <td>{{ $pel->kurikulum }}</td>
+                                    <td>
+                                        {{-- Update Button --}}
+                                        <div class="modal-warning me-1 mb-1 d-inline-block">
+                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#update{{ $loop->iteration }}" data-order=>
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </div>
+                                        {{-- Delete Button --}}
+                                        <div class="modal-danger me-1 mb-1 d-inline-block">
+                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#delete{{ $loop->iteration }}">
+                                                <i class="bi bi-trash"></i></a>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -117,11 +191,13 @@
                     <div class="modal-body">
                         <label>Kode Mata Pelajaran: </label>
                         <div class="form-group">
-                            <input type="text" placeholder="Kode Mata Pelajaran" class="form-control" name="mapel_id">
+                            <input type="text" placeholder="Kode Mata Pelajaran" class="form-control"
+                                name="mapel_id">
                         </div>
                         <label>Nama Mata Pelajaran: </label>
                         <div class="form-group">
-                            <input type="text" placeholder="Nama Mata Pelajaran" class="form-control" name="nama_mapel">
+                            <input type="text" placeholder="Nama Mata Pelajaran" class="form-control"
+                                name="nama_mapel">
                         </div>
                         <label>Kelompok Mata Pelajaran: </label>
                         <div class="form-group">
