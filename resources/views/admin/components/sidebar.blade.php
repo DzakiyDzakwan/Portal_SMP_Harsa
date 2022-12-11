@@ -95,7 +95,7 @@
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                            <a href="/users">Users</a>
+                            <a href="/admin">Admin</a>
                         </li>
                         <li class="submenu-item">
                             <a href="/guru">Guru</a>

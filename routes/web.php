@@ -35,13 +35,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     //Dashboard/Kelas
     Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
-    Route::post('/kelas/addKelas', [KelasController::class, 'store'])->name('addKelas');
-    Route::post('/kelas/updateKelas/{id}', [KelasController::class, 'update'])->name('updateKelas');
-    Route::delete('/kelas/deleteKelas/{id}', [KelasController::class, 'destroy'])->name('deleteKelas');
-    //Dashboard/User
-    Route::get('/users', [UserController::class, 'index'])->name('users');
-    Route::post('/users/addAdmin', [UserController::class, 'store'])->name('addAdmin');
-    Route::delete('/users/deleteAdmin/{uuid}', [UserController::class, 'delete'])->name('deleteAdmin');
+    //Dashboard/Admin
+    Route::get('/admin', [UserController::class, 'index'])->name('users');
     //Dashboard/Mapel
     Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
     Route::post('/mapel/addMapel', [MapelController::class, 'store'])->name('addMapel');

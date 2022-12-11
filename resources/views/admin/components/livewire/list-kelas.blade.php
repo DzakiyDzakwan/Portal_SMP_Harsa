@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>No</th>
+            <th>Kelas ID</th>
             <th>Nama Kelas</th>
             <th>Kelas</th>
             <th>Wali Kelas</th>
@@ -12,6 +13,7 @@
     <tbody>
         @foreach ($kelas as $k)
             <tr>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $k->kelas_id }}</td>
                 <td>{{ $k->nama_kelas }}</td>
                 <td>{{ $k->grade }}{{ $k->kelompok_kelas }}</td>
