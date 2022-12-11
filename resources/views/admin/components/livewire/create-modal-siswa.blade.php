@@ -1,12 +1,12 @@
 <div>
     {{-- button tambah --}}
     <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-        data-bs-target="#inlineForm">
+        data-bs-target="#createModal">
         <i class="bi bi-plus-circle"></i> Tambah Siswa 
     </button>
 
     {{-- modal tambah siswa --}}
-    <div wire:ignore.self class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
+    <div wire:ignore.self class="modal fade text-left" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
     aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">

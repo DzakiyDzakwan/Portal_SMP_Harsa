@@ -48,6 +48,7 @@
     </div>
 </div>
 
+@livewire('edit-modal-siswa')
 
 {{-- Modal Preview --}}
 @foreach ($siswas as $siswa)
@@ -244,36 +245,65 @@
 
 @section('script')
     <script>
+        //Modal
         const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
         })
-        const updateModal = new bootstrap.Modal('#editModal', {
+        const editModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        const inactiveModal = new bootstrap.Modal('#trashedUser', {
-            keyboard: false
-        })
-        const restoreModal = new bootstrap.Modal('#restoreModal', {
-            keyboard: false
-        })
-        const deleteModal = new bootstrap.Modal('#deleteModal', {
-            keyboard: false
-        })
+        // const inactiveModal = new bootstrap.Modal('#inactiveModal', {
+        //     keyboard: false
+        // })
+        // const restoreModal = new bootstrap.Modal('#restoreModal', {
+        //     keyboard: false
+        // })
+        // const deleteModal = new bootstrap.Modal('#deleteModal', {
+        //     keyboard: false
+        // })
 
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
         });
-        window.addEventListener('update-modal', event => {
-            updateModal.toggle();
+        window.addEventListener('edit-modal', event => {
+            editModal.toggle();
+        });
+        // window.addEventListener('inactive-modal', event => {
+        //     inactiveModal.toggle();
+        // })
+        // window.addEventListener('restore-modal', event => {
+        //     restoreModal.toggle();
+        // })
+        // window.addEventListener('delete-modal', event => {
+        //     deleteModal.toggle();
+        // })
+
+        //Toast
+        const insertToast = new bootstrap.Toast('#insertToast')
+        const inactiveToast = new bootstrap.Toast('#inactiveToast')
+        const updateToast = new bootstrap.Toast('#updateToast')
+        const restoreToast = new bootstrap.Toast('#restoreToast')
+        const deleteToast = new bootstrap.Toast('#deleteToast')
+
+
+        window.addEventListener('insert-alert', e => {
+            insertToast.show()
         })
-        window.addEventListener('restore-modal', event => {
-            restoreModal.toggle();
+
+        window.addEventListener('inactive-alert', e => {
+            inactiveToast.show()
         })
-        window.addEventListener('delete-modal', event => {
-            deleteModal.toggle();
+
+        window.addEventListener('update-alert', e => {
+            updateToast.show()
         })
-        window.addEventListener('inactive-modal', event => {
-            inactiveModal.toggle();
+
+        window.addEventListener('restore-alert', e => {
+            restoreToast.show()
+        })
+
+        window.addEventListener('delete-alert', e => {
+            deleteToast.show()
         })
     </script>
     @livewireScripts

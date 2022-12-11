@@ -13,11 +13,11 @@ class ListSiswa extends Component
     protected $listeners = [
         'siswaStore'=> 'render',
         'siswaUpdate'=> 'render',
+        'siswaNonaktif' => 'render',
     ];
 
-    public function editSiswa($user) {
-        $siswa = $user;
-        $this->emit('siswaEdit', $siswa);
+    public function editSiswa($id) {
+        $this->emit('editUser', $id);
     }
 
     public function inactive($user) {
@@ -31,7 +31,7 @@ class ListSiswa extends Component
 
     public function render()
     {
-        $this->siswas = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
+        $this->siswas = User::withTrashed()->join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
         return view('admin.components.livewire.list-siswa');
     }
 }
