@@ -95,7 +95,7 @@
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item">
-                            <a href="/users">Users</a>
+                            <a href="/admin">Admin</a>
                         </li>
                         <li class="submenu-item">
                             <a href="/guru">Guru</a>
@@ -121,9 +121,6 @@
                         </li>
                         <li class="submenu-item">
                             <a href="/mapel">Mata Pelajaran</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/mapel">Mata Pelajaran Guru</a>
                         </li>
                         <li class="submenu-item">
                             <a href="/roster">Roster Pelajaran</a>

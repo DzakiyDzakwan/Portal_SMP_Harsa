@@ -1,7 +1,7 @@
 @extends('admin.master.main')
 
 @section('title')
-    <title>Users</title>
+    <title>Admin</title>
 @endsection
 
 @section('style')
@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Data Users</h3>
+            <h3>Data Admin</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -22,7 +22,7 @@
                         <a href="/">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Users
+                        Admin
                     </li>
                 </ol>
             </nav>
@@ -33,10 +33,10 @@
 
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-            <h5>List User</h5>
+            <h5>List Admin</h5>
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
-                    {{-- Button Tambah User --}}
+                    {{-- Button Tambah Admin --}}
                     @livewire('create-modal-user')
                 </div>
                 <div class="form-group">
