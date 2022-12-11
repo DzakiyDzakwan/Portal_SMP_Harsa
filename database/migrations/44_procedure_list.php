@@ -341,7 +341,7 @@ return new class extends Migration
 
         DB::unprepared('
             CREATE PROCEDURE inactive_siswa (
-                IN user CHAR(36),
+                IN siswa CHAR(36),
                 IN status VARCHAR(10),
                 IN admin CHAR(36)
             )
@@ -352,12 +352,12 @@ return new class extends Migration
                         ROLLBACK;
                     END;
                 START TRANSACTION;
-                UPDATE siswas SET status = status, updated_at = NOW() WHERE user = user COLLATE utf8mb4_general_ci;
+                UPDATE siswas SET status = status, updated_at = NOW() WHERE user = siswa COLLATE utf8mb4_general_ci;
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(admin, "update", "siswas", NOW());
                 
-                UPDATE users SET deleted_at = NOW() WHERE uuid = user COLLATE utf8mb4_general_ci; 
+                UPDATE users SET deleted_at = NOW() WHERE uuid = siswa COLLATE utf8mb4_general_ci; 
                 COMMIT;
             END
         ');

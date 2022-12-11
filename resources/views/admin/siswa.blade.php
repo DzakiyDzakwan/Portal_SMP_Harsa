@@ -7,6 +7,7 @@
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/pages/simple-datatables.css')}}">
+    @livewireStyles
 @endsection
 
 @section('content')
@@ -30,221 +31,20 @@
         </nav>
     </div>
 </div>
-<div class="row">
-    <div class="col-12 col-lg-4 col-md-6">
-        <div class="card">
-            <div class="card-body px-4 py-4-5">
-                <div class="row">
-                    <div
-                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
-                    >
-                        <div class="stats-icon purple mb-2">
-                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Tunggakan">
-                                <i class="bi bi-people-fill"></i>
-                            </div>   
-                        </div>
-                    </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                        <h6 class="text-muted font-semibold">Total Siswa</h6>
-                        <h6 class="font-extrabold mb-0">{{$totalSiswa}}</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-lg-4 col-md-6">
-        <div class="card">
-            <div class="card-body px-4 py-4-5">
-                <div class="row">
-                    <div
-                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
-                    >
-                        <div class="stats-icon green mb-2">
-                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Siswa Aktif">
-                                <i class="bi bi-people-fill"></i>
-                            </div>   
-                        </div>
-                    </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                        <h6 class="text-muted font-semibold">Active</h6>
-                        <h6 class="font-extrabold mb-0">{{$siswaActive}}</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-lg-4 col-md-6">
-        <div class="card">
-            <div class="card-body px-4 py-4-5">
-                <div class="row">
-                    <div
-                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start"
-                    >
-                        <div class="stats-icon red mb-2">
-                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Siswa Inaktif">
-                                <i class="bi bi-people-fill"></i>
-                            </div>   
-                        </div>
-                    </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                        <h6 class="text-muted font-semibold">Inactive</h6>
-                        <h6 class="font-extrabold mb-0">{{$siswaInactive}}</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{-- Info Card Siswa --}}
+@livewire('info-card-siswa')
+
 <div class="card">
     <div class="card-header d-flex gap-2 align-items-center justify-content-between">
         <h5>List Siswa</h5>
         <div class="form-group">
             {{-- Button Tambah User --}}
-            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                data-bs-target="#inlineForm">
-                <i class="bi bi-plus-circle"></i> Tambah Siswa 
-            </button>
+            @livewire('create-modal-siswa')
         </div>
     </div>
     <div class="card-body">
-        <table class="table table-bordered" id="table1">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>NISN</th>
-                    <th>Nama</th>
-                    <th>Tanggal Masuk</th>
-                    <th>Status Keaktifan</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    @foreach ($siswas as $siswa) 
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$siswa->NISN}}</td>
-                    <td>{{$siswa->nama}}</td>
-                    <td>{{$siswa->tanggal_masuk}}</td>
-                    <td>
-                        @if ($siswa->status == 'Aktif')
-                            <span class="badge bg-success">Active</span>
-                    @else
-                            <span class="badge bg-danger">Inactive</span> 
-                    @endif
-                    </td>
-                    <td>
-                        {{-- Preview Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#info{{$siswa->user}}">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
-                        {{-- Update Button --}}
-                        <div class="modal-warning me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#update{{$siswa->user}}">
-                                <i class="bi bi-pencil"></i></a>
-                            </button>
-                        </div>
-                        {{-- Delete Button --}}
-                        <div class="modal-danger me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#delete{{$loop->iteration}}">
-                                <i class="bi bi-trash"></i></a>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<!--Modal Tambah Siswa -->
-<div
-    class="modal fade text-left"
-    id="inlineForm"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel130"
-    aria-hidden="true"
->
-    <div
-        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-        role="document"
-    >
-        <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h4 class="modal-title white" id="myModalLabel33">Tambah Siswa</h4>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('add-siswa') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <label>Nama: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nama" name="nama"/>
-                        </div>
-                        <label>NISN: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="NISN" name="nisn"/>
-                        </div>
-                        <label>NIS: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="NIS" name="NIS"/>
-                        </div>
-                        <label>Tanggal Masuk: </label>
-                        <div class="form-group">
-                            <input type="date" class="form-control" placeholder="Tanggal Masuk" name="tanggal_masuk"/>
-                        </div>
-                        <label>Ruang Kelas: </label>
-                        <div class="form-group">
-                            <select name="kelas_id" class="form-select form-control" id="basicSelect">
-                                @foreach ($kelas as $k)
-                                <option value="{{$k->kelas_id}}">{{$k->nama_kelas}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <label>Jenis Kelamin: </label>
-                        <div class="form-group">
-                            <select name="jenis_kelamin" class="form-select form-control" id="basicSelect">
-                                <option value="LK">Laki-Laki</option>
-                                <option value="PR">Perempuan</option>
-                            </select>
-                        </div>
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-light-secondary"
-                            data-bs-dismiss="modal"
-                        >
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
-                        <button
-                            type="submit"
-                            class="btn btn-success ml-1"
-                            data-bs-dismiss="modal"
-                        >
-                            <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Simpan</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        {{-- List siswa --}}
+        @livewire('list-siswa')
     </div>
 </div>
 
@@ -278,11 +78,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                
-
-                {{-- Image --}}
-                <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
-                
                 {{-- Navigation --}}
                 <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -298,7 +93,10 @@
                             aria-controls="prestasi" aria-selected="false">Prestasi</a>
                     </li>
                 </ul>
-                
+
+                {{-- Image --}}
+                <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
+
                 {{-- Navigasi Content --}}
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -337,7 +135,7 @@
                                 <tr>
                                     <td class="p-1">Status Keaktifan</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $siswa->status_keaktifan }}</td>
+                                    <td class="p-1">{{ $siswa->status }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -440,146 +238,45 @@
         </div>
     </div>
 </div>
-
-{{-- Modal Update --}}
-<div
-    class="modal fade text-left"
-    id="update{{$siswa->user}}"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel130"
-    aria-hidden="true"
->
-    <div
-        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-        role="document"
-    >
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Ubah Data Siswa
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-            <form action="/siswa/update-siswa{{ $siswa->NISN }}}" method="POST">
-                @csrf
-                <div class="modal-body">
-                    <label>NISN: </label>
-                    <div class="form-group">
-                        <input
-                            value="{{$siswa->NISN}}"
-                            name="nisn"
-                            type="text"
-                            class="form-control"
-                            id="nisn"
-                        />
-                    </div>
-                    <label>Nama: </label>
-                    <div class="form-group">
-                        <input
-                            value="{{$siswa->nama}}"
-                            name="nama"
-                            type="text"
-                            class="form-control"
-                            id="nama"
-                        />
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-success ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Simpan</span>
-                </button>
-            </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-{{-- Modal Delete --}}
-<div
-    class="modal fade text-left"
-    id="delete{{$loop->iteration}}"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel130"
-    aria-hidden="true"
->
-    <div
-        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-        role="document"
-    >
-        <div class="modal-content">
-            <div class="modal-header bg-danger">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Non-Aktifkan {{$siswa->nama}}
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <form action="/siswa/delete-siswa/{{$siswa->NISN}}" method="post">
-            <div class="modal-body">
-                <label>Opsi: </label>
-                <div class="form-group">
-                    <select name="status_keaktifan" class="form-select form-control" id="basicSelect">
-                        <option value="Lulus">Lulus</option>
-                        <option value="Pindah">Pindah</option>
-                        <option value="Drop Out">Drop Out</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger ml-1" data-bs-dismiss="modal">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Simpan</span>
-                    </button>                        
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 @endforeach
 
 @endsection
 
 @section('script')
+    <script>
+        const createModal = new bootstrap.Modal('#createModal', {
+            keyboard: false
+        })
+        const updateModal = new bootstrap.Modal('#editModal', {
+            keyboard: false
+        })
+        const inactiveModal = new bootstrap.Modal('#trashedUser', {
+            keyboard: false
+        })
+        const restoreModal = new bootstrap.Modal('#restoreModal', {
+            keyboard: false
+        })
+        const deleteModal = new bootstrap.Modal('#deleteModal', {
+            keyboard: false
+        })
+
+        window.addEventListener('close-create-modal', event => {
+            createModal.hide();
+        });
+        window.addEventListener('update-modal', event => {
+            updateModal.toggle();
+        })
+        window.addEventListener('restore-modal', event => {
+            restoreModal.toggle();
+        })
+        window.addEventListener('delete-modal', event => {
+            deleteModal.toggle();
+        })
+        window.addEventListener('inactive-modal', event => {
+            inactiveModal.toggle();
+        })
+    </script>
+    @livewireScripts
     <script src="{{asset('assets/extensions/simple-datatables/umd/simple-datatables.js')}}"></script>
     <script src="{{asset('assets/js/pages/simple-datatables.js')}}"></script>
 @endsection

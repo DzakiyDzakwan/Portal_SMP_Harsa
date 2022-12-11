@@ -119,11 +119,9 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, $nisn)
+    public function delete(Request $request, $user)
     {
-        Siswa::where('NISN', $nisn)->update([
-            'status_keaktifan' => $request->status_keaktifan
-        ]);
+        DB::select('CALL inactive_siswa(?, ?, ?)', [$user, $request->status, auth()->user()->uuid]);
 
         return back()->with('succes', 'Siswa berhasil di non-aktif kan');
     }
