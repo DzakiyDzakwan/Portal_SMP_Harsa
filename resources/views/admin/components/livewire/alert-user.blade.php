@@ -4,7 +4,7 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Kelas Berhasil dibuat
+                Admin Berhasil dibuat
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -15,7 +15,7 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Kelas Berhasil di Non Aktifkan
+                Admin Berhasil di Non Aktifkan
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -26,7 +26,7 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Kelas berhasil diubah
+                Admin berhasil diubah
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -37,7 +37,7 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Kelas berhasil dipulihkan
+                Admin berhasil dipulihkan
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -48,7 +48,7 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Kelas berhasil dihapus
+                Admin berhasil dihapus
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>

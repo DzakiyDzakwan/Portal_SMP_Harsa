@@ -59,5 +59,6 @@ class EditModalUser extends Component
         $this->uuid = $data->uuid;
         $this->username = $data->username;
         $this->dispatchBrowserEvent('update-modal');
+        $this->dispatchBrowserEvent('update-alert');
     }
 }

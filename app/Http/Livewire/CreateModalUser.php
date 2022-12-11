@@ -33,6 +33,7 @@ class CreateModalUser extends Component
         $this->reset();
         $this->emit('userStore');
         $this->dispatchBrowserEvent('close-create-modal');
+        $this->dispatchBrowserEvent('insert-alert');
     }
 
     public function render()

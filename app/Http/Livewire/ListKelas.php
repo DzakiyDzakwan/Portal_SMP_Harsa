@@ -17,14 +17,14 @@ class ListKelas extends Component
 
     public function render()
     {
-        $this->kelas = DB::table('table_kelas')->get();;
+        $this->kelas = DB::table('table_kelas')->get();
         return view('admin.components.livewire.list-kelas');
     }
 
     public function inactiveKelas($id) {
         DB::select('call inactive_kelas(?, ?)', [$id, auth()->user()->uuid]);
         $this->render();
-        $this->emit('storeKelas');
+        $this->emit('inactiveKelas');
         $this->dispatchBrowserEvent('inactive-alert');
     }
 

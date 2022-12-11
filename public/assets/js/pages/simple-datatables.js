@@ -51,7 +51,7 @@ let dataTable2 = new simpleDatatables.DataTable(
 );
 // Move "per page dropdown" selector element out of label
 // to make it work with bootstrap 5. Add bs5 classes.
-function adaptPageDropdow2() {
+function adaptPageDropdown2() {
     const selector = dataTable2.wrapper.querySelector(".dataTable-selector");
     selector.parentNode.parentNode.insertBefore(selector, selector.parentNode);
     selector.classList.add("form-select");

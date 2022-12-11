@@ -31,5 +31,6 @@ class ListUser extends Component
         DB::select('CALL inactive_admin(?)',[$uuid]);
         $this->render();
         $this->emit('userNonaktif');
+        $this->dispatchBrowserEvent('inactive-alert');
     }
 }

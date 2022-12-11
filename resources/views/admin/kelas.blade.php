@@ -35,8 +35,15 @@
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
             <h5>List Kelas</h5>
-            <div class="form-group">
-                @livewire('create-modal-kelas')
+            <div class="d-flex align-items-center justify-content-between gap-2">
+                <div class="form-group">
+                    {{-- Button Tambah Kelas --}}
+                    @livewire('create-modal-kelas')
+                </div>
+                <div class="form-group">
+                    {{-- Button Inactive Kelas --}}
+                    @livewire('inactive-modal-kelas')
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -46,63 +53,7 @@
 
     @livewire('edit-modal-kelas')
 
-
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-        {{-- Insert Kelas --}}
-        <div id="insertToast" class="toast align-items-center  text-bg-success" role="alert" aria-live="assertive"
-            aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    Kelas Berhasil dibuat
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-
-        {{-- Inaktif Kelas --}}
-        <div id="inactiveToast" class="toast align-items-center  text-bg-danger" role="alert" aria-live="assertive"
-            aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    Kelas Berhasil di Non Aktifkan
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-
-        {{-- Update Kelas --}}
-        <div id="updateToast" class="toast align-items-center  text-bg-warning" role="alert" aria-live="assertive"
-            aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    Kelas berhasil diubah
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-
-        {{-- Restore Kelas --}}
-        <div id="restoreToast" class="toast align-items-center  text-bg-success" role="alert" aria-live="assertive"
-            aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    Kelas berhasil dipulihkan
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-
-        {{-- Delete Kelas --}}
-        <div id="deleteToast" class="toast align-items-center  text-bg-danger" role="alert" aria-live="assertive"
-            aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    Kelas berhasil dihapus
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
+    @livewire('alert-kelas')
 @endsection
 
 @section('script')
@@ -114,32 +65,31 @@
         const editModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        /* 
-                const inactiveModal = new bootstrap.Modal('#trashedUser', {
-                    keyboard: false
-                })
-                const restoreModal = new bootstrap.Modal('#restoreModal', {
-                    keyboard: false
-                })
-                const deleteModal = new bootstrap.Modal('#deleteModal', {
-                    keyboard: false
-                }) */
+        const inactiveModal = new bootstrap.Modal('#inactiveModal', {
+            keyboard: false
+        })
+        const restoreModal = new bootstrap.Modal('#restoreModal', {
+            keyboard: false
+        })
+        const deleteModal = new bootstrap.Modal('#deleteModal', {
+            keyboard: false
+        })
+
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
         });
         window.addEventListener('edit-modal', event => {
             editModal.toggle();
         });
-        /* 
-                window.addEventListener('restore-modal', event => {
-                    restoreModal.toggle();
-                })
-                window.addEventListener('delete-modal', event => {
-                    deleteModal.toggle();
-                })
-                window.addEventListener('inactive-modal', event => {
-                    inactiveModal.toggle();
-                }) */
+        window.addEventListener('inactive-modal', event => {
+            inactiveModal.toggle();
+        })
+        window.addEventListener('restore-modal', event => {
+            restoreModal.toggle();
+        })
+        window.addEventListener('delete-modal', event => {
+            deleteModal.toggle();
+        })
 
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
