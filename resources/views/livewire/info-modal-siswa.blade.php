@@ -12,6 +12,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+                    {{-- Image --}}
+                    <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
+
                     {{-- Navigation --}}
                     <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab"
                         role="tablist">
@@ -28,9 +32,6 @@
                                 aria-controls="prestasi" aria-selected="false">Prestasi</a>
                         </li>
                     </ul>
-
-                    {{-- Image --}}
-                    <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
 
                     {{-- Navigasi Content --}}
                     <div class="tab-content" id="myTabContent">

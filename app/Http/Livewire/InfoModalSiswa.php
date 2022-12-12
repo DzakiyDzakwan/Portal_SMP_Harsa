@@ -11,7 +11,7 @@ class InfoModalSiswa extends Component
     public $nama, $nisn, $nis, $jk, $kelas, $status, $anak_ke, $n_ayah, $p_ayah, $n_ibu, $p_ibu, $alamat_ortu, $telp_ortu, $n_wali, $p_wali, $telp_wali;
 
     protected $listeners = [
-        'infoUser' => 'showSiswa'
+        'infoSiswa' => 'showSiswa'
     ];
 
     public function render()

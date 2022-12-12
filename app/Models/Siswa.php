@@ -9,6 +9,8 @@ class Siswa extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'NISN';
+
     protected $guarded = [
         'created_at',
         'updated_at'

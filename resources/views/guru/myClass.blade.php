@@ -7,6 +7,7 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/simple-datatables.css') }}">
+    @livewireStyles
 @endsection
 
 @section('content')
@@ -21,7 +22,7 @@
                         <a href="/dashboard-guru">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Kelas Saya
+                        Wali Kelas
                     </li>
                 </ol>
             </nav>
@@ -54,12 +55,33 @@
             <h5>List Siswa</h5>
         </div>
         <div class="card-body">
-            @livewire('siswa-wali-kelas', ['kelas' => $kelas->kelas_id])
+            @livewire('list-siswa-wali-kelas', ['kelas' => $kelas->kelas_id])
         </div>
     </div>
+
+    @livewire('info-modal-siswa')
+    @livewire('create-modal-prestasi')
 @endsection
 
 @section('script')
+    <script>
+        const infoModal = new bootstrap.Modal('#infoModal', {
+            keyboard: false
+        })
+
+        const createPrestasi = new bootstrap.Modal('#createPrestasi', {
+            keyboard: false
+        })
+
+        window.addEventListener('info-modal', event => {
+            infoModal.toggle();
+        });
+
+        window.addEventListener('create-prestasi', event => {
+            createPrestasi.toggle();
+        });
+    </script>
+    @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
 @endsection

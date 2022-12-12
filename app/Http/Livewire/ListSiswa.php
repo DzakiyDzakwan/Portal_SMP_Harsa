@@ -21,7 +21,7 @@ class ListSiswa extends Component
     }
 
     public function infoSiswa($id) {
-        $this->emit('infoUser', $id);
+        $this->emit('infoSiswa', $id);
     }
 
     public function inactive($user) {
