@@ -25,10 +25,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="pt-3 px-3">
-                            <form class="form form-horizontal">
+                            <form class="form form-horizontal" action="/coba" method="post">
+
+                                @csrf
                                 <div class="form-body">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        {{-- <div class="col-md-3">
                                             <label>Profile Picture</label>
                                         </div>
                                         <div class="col-md-9 form-group">
@@ -54,23 +56,37 @@
                                         <div class="col-md-9 form-group">
                                             <input type="text" id="nama" class="form-control" name="nama"
                                                 value="Talitha Syafiyah" placeholder="Nama">
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-3">
                                             <label>NISN</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="number" id="nis-id" class="form-control" name="nisn"
+                                            <input type="number" id="nis-id" class="form-control" name="NISN"
                                                 value="213211402018" placeholder="NISN" disabled>
                                         </div>
+
                                         <div class="col-md-3">
                                             <label>NIS</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="number" id="nis-id" class="form-control" name="nis"
+                                            <input type="number" id="nis-id" class="form-control" name="NIS"
                                                 value="211402018" placeholder="NIS" disabled>
                                         </div>
-
                                         <div class="col-md-3">
+                                            <label>Kelas</label>
+                                        </div>
+                                        <div class="col-md-9 form-group">
+                                            <input type="text" id="tempat" class="form-control" name="kelas"
+                                                value="VII-A (Tujuh)" placeholder="Kelas" disabled>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Tanggal Masuk</label>
+                                        </div>
+                                        <div class="col-md-9 form-group">
+                                            <input type="date" id="ttl" class="form-control" name="tanggal_masuk"
+                                                value="11/12/2003" placeholder="Tanggal Masuk" disabled>
+                                        </div>
+                                        {{-- <div class="col-md-3">
                                             <label>Tanggal Lahir</label>
                                         </div>
                                         <div class="col-md-9 form-group">
@@ -83,7 +99,7 @@
                                         <div class="col-md-9 form-group">
                                             <input type="text" id="tempat" class="form-control" name="tempatlahir"
                                                 value="Medan" placeholder="Tempat Lahir">
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-3">
                                             <label>Jenis Kelamin</label>
                                         </div>
@@ -105,14 +121,14 @@
                                             <label>Alamat Tinggal</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="alamat"
+                                            <input type="text" id="tempat" class="form-control" name="alamat_tinggal"
                                                 value="Jl. Imam Bonjol Medan" placeholder="Alamat Tinggal">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Alamat Domisili</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="alamatdom"
+                                            <input type="text" id="tempat" class="form-control" name="alamat_domisili"
                                                 value="Jl. Imam Bonjol, Padangsidimpuan Selatan"
                                                 placeholder="Alamat Domisili">
                                         </div>
@@ -120,15 +136,15 @@
                                             <label>Tanggal Masuk</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="tglmasuk"
-                                                value="21 Juni 2018" placeholder="Tanggal Masuk" disabled>
+                                            <input type="text" id="tempat" class="form-control" name="tanggal_masuk"
+                                                value="21 Juni 2018" placeholder="Tanggal Masuk" >
                                         </div>
                                         <div class="col-md-3">
                                             <label>Kelas Awal</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="klsawal"
-                                                value="VII-A (Tujuh)" placeholder="Kelas Awal" disabled>
+                                            <input type="text" id="tempat" class="form-control" name="kelas_awal"
+                                                value="VII-A (Tujuh)" placeholder="Kelas Awal" >
                                         </div>
                                         <div class="col-md-3">
                                             <label>Semester</label>
@@ -142,13 +158,13 @@
                                         </div>
                                         <div class="col-md-9 form-group">
                                             <input type="text" id="tempat" class="form-control" name="agama"
-                                                value="Islam" placeholder="Agama">
+                                                value="Islam" placeholder="Agama" disabled>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Anak ke</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="anak"
+                                            <input type="text" id="tempat" class="form-control" name="anak_ke"
                                                 value="1" placeholder="Anak ke">
                                         </div>
                                         <div class="col-md-3">
@@ -162,7 +178,7 @@
                                             <label>Nama Ayah</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="namaayah"
+                                            <input type="text" id="tempat" class="form-control" name="nama_ayah"
                                                 value="Budiman" placeholder="Nama Ayah">
                                         </div>
                                         <div class="col-md-3">
@@ -170,13 +186,13 @@
                                         </div>
                                         <div class="col-md-9 form-group">
                                             <input type="text" id="tempat" class="form-control"
-                                                name="pekerjaanayah" value="Wiraswasta" placeholder="Pekerjaan Ayah">
+                                                name="pekerjaan_ayah" value="Wiraswasta" placeholder="Pekerjaan Ayah">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Nama Ibu</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="namaibu"
+                                            <input type="text" id="tempat" class="form-control" name="nama_ibu"
                                                 value="Siti" placeholder="Nama Ibu">
                                         </div>
                                         <div class="col-md-3">
@@ -184,13 +200,13 @@
                                         </div>
                                         <div class="col-md-9 form-group">
                                             <input type="text" id="tempat" class="form-control"
-                                                name="pekerjaanibu" value="Ibu Rumah Tangga" placeholder="Pekerjaan Ibu">
+                                                name="pekerjaan_ibu" value="Ibu Rumah Tangga" placeholder="Pekerjaan Ibu">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Alamat Orangtua</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="alamat"
+                                            <input type="text" id="tempat" class="form-control" name="alamat_orangtua"
                                                 value="Jalan Dr. T. Mansur No.9, Padang Bulan "
                                                 placeholder="Alamat Orangtua">
                                         </div>
@@ -198,37 +214,37 @@
                                             <label>Telepon Orangtua</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="tempat"
+                                            <input type="text" id="tempat" class="form-control" name="telepon_orangtua"
                                                 value="081273737889" placeholder="Telepon Orangtua">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Nama Wali</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="tempat"
-                                                value="-" placeholder="Nama Wali">
+                                            <input type="text" id="tempat" class="form-control" name="nama_wali"
+                                                value="Deni" placeholder="Nama Wali">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Pekerjaan Wali</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="tempat"
-                                                value="-" placeholder="Pekerjaan Wali">
+                                            <input type="text" id="tempat" class="form-control" name="pekerjaan_wali"
+                                                value="Bandar" placeholder="Pekerjaan Wali">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Telepon Wali</label>
                                         </div>
                                         <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="tempat"
-                                                value="-" placeholder="Telepon Wali">
+                                            <input type="text" id="tempat" class="form-control" name="telepon_wali"
+                                                value="911" placeholder="Telepon Wali">
                                         </div>
                                         <div class="form-group  px-3 pt-2 modal-footer">
                                             <a href="#" class="btn icon icon-left btn-danger m-3 px-3"><i
                                                     data-feather="x"></i>
                                                 Cancel</a>
-                                            <a href="#" class="btn icon icon-left btn-success px-3"><i
+                                            <button type="submit" class="btn icon icon-left btn-success px-3"><i
                                                     data-feather="check-circle"></i>
-                                                Submit</a>
+                                                Submit</button>
                                         </div>
                                     </div>
                                 </div>

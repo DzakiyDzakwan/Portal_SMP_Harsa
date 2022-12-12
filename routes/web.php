@@ -12,6 +12,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\siswa;
+use App\Http\Controllers\siswa\ProfilController;
 use App\Models\Kelas;
 
 /*
@@ -124,3 +125,4 @@ Route::get('/test', function () {
     $users = auth()->user()->username;
     return view('admin.test', compact('users', 'pages'));
 });
+Route::post('/coba', [ProfilController::class, 'updateProfilSiswa']);
