@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\guru;
 
 use App\Http\Controllers\Controller;
+use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\Prestasi;
+use App\Models\Siswa;
+use App\Models\LogActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ListkelasController extends Controller
 {
@@ -15,8 +22,27 @@ class ListkelasController extends Controller
     public function index()
     {
         $pages = 'listKelas';
+        $id = Auth::user()->uuid;
+        // $guru = Guru::select('NIP')
+        // ->where('user', '=', $id)
+        // ->first();
+        // $kelas = Kelas::join('gurus', 'gurus.NIP', '=', 'kelas.wali_kelas')
+        // ->where('gurus.user', '=', $id)
+        // ->first();
+        $siswas = Siswa::join('user_profiles', 'user_profiles.user', '=', 'siswas.user')
+        ->join('kelas', 'kelas.kelas_id', '=', 'siswas.kelas')
+        ->join('gurus', 'gurus.NIP', '=', 'kelas.wali_kelas')
+        ->where('gurus.user', '=', $id)
+        ->get();
+        $prestasis = Prestasi::join('siswas', 'prestasis.siswa', '=', 'siswas.NISN')
+        ->get();
         return view('guru.siswa', [
-            'pages' => $pages
+            'pages' => $pages,
+            'id' => $id,
+            //'guru' => $guru,
+            // 'kelas' => $kelas,
+            'siswas' => $siswas,
+            'prestasis' => $prestasis
         ]);
     }
 
@@ -36,9 +62,38 @@ class ListkelasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'keterangan' => 'required|min:5|max:255',
+            'tanggal' => 'required',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            Prestasi::create([
+                'siswa' => $id,
+                'jenis_prestasi'=> $request->jenis,
+                'keterangan'=> $validatedData['keterangan'],
+                'tanggal_prestasi'=> $validatedData['tanggal']
+            ]);
+    
+            LogActivity::create([
+                'actor' => Auth::user()->uuid,
+                'transaksi' => 'insert',
+                'at' => 'prestasi'
+            ]);
+
+            DB::commit();
+    
+            return back()->with('success', 'Data Berhasil di input');
+        } catch (\Throwable $e) {
+            return back()->with('error', 'Ada masalah');
+            DB::rollback();
+        }
+
+        return redirect()->route('listKelas');
     }
 
     /**
@@ -72,7 +127,19 @@ class ListkelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            Prestasi::where('prestasi_id', $id)->update([
+                'jenis_prestasi' => $request->jenis,
+                'keterangan' => $request->keterangan,
+                'tanggal_prestasi' => $request->tanggal
+            ]);
+            DB::commit();
+            return back()->with('success', "Berhasil mengubah data");
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+        return redirect()->route('listKelas');
     }
 
     /**
@@ -83,6 +150,7 @@ class ListkelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Prestasi::where('prestasi_id', $id)->delete();
+        return redirect()->route('listKelas');
     }
 }

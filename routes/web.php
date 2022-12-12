@@ -111,6 +111,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     Route::get('/edit-profil-guru', [guru\ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
     //List-Kelas
     Route::get('/list-kelas', [guru\ListkelasController::class, 'index'])->name('listKelas');
+    Route::post('/list-kelas/addPrestasi/{id}', [guru\ListkelasController::class, 'store'])->name('addPrestasi');
+    Route::post('/list-kelas/updatePrestasi/{id}', [guru\ListkelasController::class, 'update'])->name('updatePrestasi');
+    Route::delete('/list-kelas/deletePrestasi/{id}', [guru\ListkelasController::class, 'destroy'])->name('deletePrestasi');
     //Input-NilaiBulanan
     Route::get('/pilih-kelas', [guru\InputController::class, 'pilihKelas1'])->name('pilihKelas');
     Route::get('/input-nilai', [guru\InputController::class, 'inputNilai1'])->name('inputNilai');
