@@ -59,14 +59,16 @@
                 {{-- Sekolah --}}
                 <li class="sidebar-title">Sekolah</li>
 
-                <li class="sidebar-item @if ($pages === 'listKelas') active @endif ">
+
+                @if (auth()->user()->is_wali_kelas!="iya")
+                <li class="sidebar-item @if($pages === 'listKelas') active @endif ">
                     <a href="/list-kelas" class="sidebar-link">
                         <i class="bi bi-people-fill"></i>
                         <span>Manajemen Siswa</span>
                     </a>
                 </li>
-
-                <li class="sidebar-item has-sub @if ($pages === 'inputNilai') active @endif">
+                @else
+                <li class="sidebar-item has-sub @if($pages === 'inputNilai') active  @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-clipboard-heart-fill"></i>
                         <span>Manajemen Nilai</span>
@@ -97,6 +99,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
             </ul>
         </div>
     </div>

@@ -72,7 +72,7 @@ class EditModalKelas extends Component
                 'action' => 'update',
                 'at' => 'gurus'
             ]);
-    
+        
             Guru::where('NIP', $this->wali_kelas)->update([
                 'is_wali_kelas' => 'iya'
             ]);
