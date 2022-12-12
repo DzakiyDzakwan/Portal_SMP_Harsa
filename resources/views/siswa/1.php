@@ -22,13 +22,13 @@
 
         <div class="card">
             <div class="card-body">
-                 <div class="row">
+                <div class="row">
                     <div class="col-12">
                         <div class="pt-3 px-3">
-                             <form class="form form-horizontal" action="/edit-siswa" method="post">
+                            <form class="form form-horizontal" action="/coba" method="post">
 
                                 @csrf
-                                <div class="form-body ">
+                                <div class="form-body">
                                     <div class="row">
                                         {{-- <div class="col-md-3">
                                             <label>Profile Picture</label>
