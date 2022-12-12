@@ -26,6 +26,7 @@ class CreateModalSiswa extends Component
 
         $this->reset();
         $this->emit('siswaStore');
+        $this->dispatchBrowserEvent('insert-alert');
         $this->dispatchBrowserEvent('close-create-modal');
     }
 

@@ -20,13 +20,17 @@ class ListSiswa extends Component
         $this->emit('editUser', $id);
     }
 
+    public function infoSiswa($id) {
+        $this->emit('infoUser', $id);
+    }
+
     public function inactive($user) {
 
         DB::select('CALL inactive_siswa(?, ?, ?)', [$user, $this->status, auth()->user()->uuid]);
 
-        return back()->with('succes', 'Siswa berhasil di non-aktif kan');
         $this->render();
         $this->emit('siswaNonaktif');
+        $this->dispatchBrowserEvent('inactive-alert');
     }
 
     public function render()
