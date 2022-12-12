@@ -30,8 +30,8 @@
             <td>
                 {{-- Preview Button --}}
                 <div class="modal-info me-1 mb-1 d-inline-block">
-                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                        data-bs-target="#info{{$siswa->user}}">
+                    <button type="button" class="btn btn-sm btn-info"
+                        wire:click="infoSiswa('{{ $siswa->user }}')">
                         <i class="bi bi-eye"></i>
                     </button>
                 </div>
@@ -44,7 +44,6 @@
                         bi-pencil"></i>
                     </button>
                 </div>
-                @endif
                 {{-- Delete Button --}}
                 <div class="modal-danger me-1 mb-1 d-inline-block">
                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
@@ -52,6 +51,7 @@
                         <i class="bi bi-trash"></i></a>
                     </button>
                 </div>
+                @endif
                 <div
                     class="modal fade text-left"
                     id="delete{{$loop->iteration}}"
@@ -82,6 +82,7 @@
                                 <label>Opsi: </label>
                                 <div class="form-group">
                                     <select name="status" class="form-select form-control" id="basicSelect" wire:model.defer="status">
+                                        <option>Pilih opsi</option>
                                         <option value="Lulus">Lulus</option>
                                         <option value="Pindah">Pindah</option>
                                         <option value="Drop Out">Drop Out</option>
