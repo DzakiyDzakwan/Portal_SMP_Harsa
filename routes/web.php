@@ -94,6 +94,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/rapor-semester', [siswa\RaporController::class, 'semester'])->name('rapor-semester');
     Route::get('/profil-siswa', [siswa\ProfilController::class, 'profilSiswa'])->name('profilSiswa');
     Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
+    Route::post('/edit-siswa', [ProfilController::class, 'updateProfilSiswa']);
+
 });
 
 //Guru
@@ -125,4 +127,3 @@ Route::get('/test', function () {
     $users = auth()->user()->username;
     return view('admin.test', compact('users', 'pages'));
 });
-Route::post('/coba', [ProfilController::class, 'updateProfilSiswa']);
