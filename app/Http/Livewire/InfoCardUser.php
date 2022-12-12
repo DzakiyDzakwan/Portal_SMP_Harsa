@@ -22,6 +22,6 @@ class InfoCardUser extends Component
         $this->totalActiveUser = User::withoutTrashed()->where('role', 'admin')->count();
         $this->totalInactiveUser = User::onlyTrashed()->where('role', 'admin')->count();
 
-        return view('admin.components.livewire.info-card-user');
+        return view('livewire.info-card-user');
     }
 }

@@ -28,7 +28,7 @@ class EditModalSiswa extends Component
     public function render()
     {
         $this->siswas = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->get();
-        return view('admin.components.livewire.edit-modal-siswa');
+        return view('livewire.edit-modal-siswa');
     }
 
     public function showModal($id) {

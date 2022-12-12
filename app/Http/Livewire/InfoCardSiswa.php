@@ -23,6 +23,6 @@ class InfoCardSiswa extends Component
         $this->siswaPindah = Siswa::where('status', 'Pindah')->count();
         $this->siswaDO = Siswa::where('status', 'Drop Out')->count();
 
-        return view('admin.components.livewire.info-card-siswa');
+        return view('livewire.info-card-siswa');
     }
 }

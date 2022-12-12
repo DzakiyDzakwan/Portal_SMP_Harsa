@@ -16,7 +16,7 @@ class InfoModalSiswa extends Component
 
     public function render()
     {
-        return view('admin.components.livewire.info-modal-siswa');
+        return view('livewire.info-modal-siswa');
     }
 
     public function showSiswa($id)

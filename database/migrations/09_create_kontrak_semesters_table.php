@@ -19,6 +19,9 @@ return new class extends Migration
             $table->char('grade', 1);
             $table->enum('semester', ['Ganjil', 'Genap']);
             $table->year('tahun_ajaran');
+            $table->integer('sakit')->unsigned()->default(0);
+            $table->integer('izin')->unsigned()->default(0);
+            $table->integer('alpa')->unsigned()->default(0);
             $table->enum('status', ['Lulus', 'Gagal', 'On Going']);
             $table->foreign('siswa')->references('NISN')->on('siswas');
             $table->timestamps();

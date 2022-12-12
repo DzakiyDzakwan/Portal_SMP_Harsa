@@ -19,7 +19,7 @@ class ListInactiveKelas extends Component
     public function render()
     {
         $this->inactiveKelas = DB::table('kelas')->where('deleted_at', '<>', null)->get();
-        return view('admin.components.livewire.list-inactive-kelas');
+        return view('livewire.list-inactive-kelas');
     }
 
     public function getRestoreModal($id) {

@@ -15,7 +15,7 @@ class InfoModalGuru extends Component
 
     public function render()
     {
-        return view('admin.components.livewire.info-modal-guru');
+        return view('livewire.info-modal-guru');
     }
 
     public function showModal($id) {

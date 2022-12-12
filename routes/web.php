@@ -40,9 +40,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/admin', [UserController::class, 'index'])->name('users');
     //Dashboard/Mapel
     Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
-    Route::post('/mapel/addMapel', [MapelController::class, 'store'])->name('addMapel');
-    Route::post('/mapel/updateMapel/{mapel_id}', [MapelController::class, 'update'])->name('updateMapel');
-    Route::delete('/mapel/deleteMapel/{mapel_id}', [MapelController::class, 'destroy'])->name('deleteMapel');
     //Dashboard/eskul
     Route::get('/ekstrakulikuler',[EkskulController::class,'index'])->name('ekskul');
     Route::post('/ekskul/addEkskul',[EkskulController::class,'store'])->name('addEkskul');
@@ -50,14 +47,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::delete('/ekskul/deleteEkskul/{id}', [EkskulController::class, 'destroy'])->name('deleteEkskul');
     //Dashboard/Siswa
     Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
-    Route::post('/siswa/add-siswa',[SiswaController::class,'store'])->name('add-siswa');
-    Route::post('/siswa/update-siswa/{id}', [SiswaController::class, 'edit'])->name('edit-siswa');
-    Route::delete('/siswa/delete-siswa/{uuid}',[SiswaController::class,'delete'])->name('delete-siswa');
     //Dashboard/Guru
-    Route::get('/guru', [GuruController::class, 'index'])->name('guru');
-    Route::post('/guru/addGuru', [GuruController::class, 'store'])->name('addGuru');
-    Route::patch('/guru/inactiveGuru/{uuid}', [GuruController::class, 'delete'])->name('inactiveGuru');
-    Route::patch('/guru/updateGuru/{id}', [GuruController::class, 'edit'])->name('updateGuru');
+    Route::get('/guru', [GuruController::class, 'index'])->name('guru');    
     //Dashboard/Log-Users
     Route::get('/log-activities',[LogController::class,'activity'])->name('log-activities');
     //Dashboard/Log-Users
@@ -108,10 +99,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     Route::get('/profil-guru', [guru\ProfilController::class, 'profilGuru'])->name('profilGuru');
     Route::get('/edit-profil-guru', [guru\ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
     //List-Kelas
-    Route::get('/list-kelas', [guru\ListkelasController::class, 'index'])->name('listKelas');
-    Route::post('/list-kelas/addPrestasi/{id}', [guru\ListkelasController::class, 'store'])->name('addPrestasi');
-    Route::post('/list-kelas/updatePrestasi/{id}', [guru\ListkelasController::class, 'update'])->name('updatePrestasi');
-    Route::delete('/list-kelas/deletePrestasi/{id}', [guru\ListkelasController::class, 'destroy'])->name('deletePrestasi');
+    Route::get('/kelas-saya', [guru\MyClassController::class, 'index'])->name('kelas-saya');
+    Route::post('/list-kelas/addPrestasi/{id}', [guru\MyClassController::class, 'store'])->name('addPrestasi');
+    Route::post('/list-kelas/updatePrestasi/{id}', [guru\MyClassController::class, 'update'])->name('updatePrestasi');
+    Route::delete('/list-kelas/deletePrestasi/{id}', [guru\MyClassController::class, 'destroy'])->name('deletePrestasi');
     //Input-NilaiBulanan
     Route::get('/pilih-kelas', [guru\InputController::class, 'pilihKelas1'])->name('pilihKelas');
     Route::get('/input-nilai', [guru\InputController::class, 'inputNilai1'])->name('inputNilai');

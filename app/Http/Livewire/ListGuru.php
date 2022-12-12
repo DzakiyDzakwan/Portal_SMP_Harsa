@@ -22,7 +22,7 @@ class ListGuru extends Component
     public function render()
     {
         $this->gurus = User::withTrashed()->join('gurus', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get();
-        return view('admin.components.livewire.list-guru');
+        return view('livewire.list-guru');
     }
 
     public function inactiveGuru($user) {

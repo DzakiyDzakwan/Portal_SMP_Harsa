@@ -19,7 +19,7 @@ class ListKelas extends Component
     public function render()
     {
         $this->kelas = DB::table('table_kelas')->get();
-        return view('admin.components.livewire.list-kelas');
+        return view('livewire.list-kelas');
     }
 
     public function inactiveKelas($id) {
