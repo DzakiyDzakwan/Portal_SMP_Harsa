@@ -111,10 +111,11 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($siswas as $siswa)
                 <tr>
-                    <td>Graiden</td>
-                    <td>7A</td>
-                    <td>Jenis Kelamin</td>
+                    <td>{{ $siswa->nama }}</td>
+                    <td>{{ $siswa->grade }}-{{ $siswa->kelompok_kelas }}</td>
+                    <td>{{ $siswa->jenis_kelamin }}</td>
                     <td>
                         <span class="badge bg-success">Active</span>
                     </td>
@@ -122,43 +123,20 @@
                         {{-- Add Button --}}
                         <div class="modal-info me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                data-bs-target="#add">
+                                data-bs-target="#add{{ $siswa->NISN }}">
                                 <i class="bi bi-plus-circle"></i>
                             </button>
                         </div>
                         {{-- Preview Button --}}
                         <div class="modal-info me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#info">
+                                data-bs-target="#info{{ $siswa->NISN }}">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>Dale</td>
-                    <td>7A</td>
-                    <td>Jenis Kelamin</td>
-                    <td>
-                        <span class="badge bg-success">Active</span>
-                    </td>
-                    <td>
-                        {{-- Add Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                data-bs-target="#add">
-                                <i class="bi bi-plus-circle"></i>
-                            </button>
-                        </div>
-                        {{-- Preview Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                data-bs-target="#info">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -166,9 +144,10 @@
 
 
 {{-- Modal Add --}}
+@foreach ($siswas as $siswa )
 <div
     class="modal fade text-left"
-    id="add"
+    id="add{{ $siswa->NISN }}"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -193,39 +172,72 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
-                    <div class="modal-body">
-                        <label>Jenis Prestasi: </label>
-                        <div class="form-group">
-                            <select class="choices form-select">
-                                <option value="akademil">Akademik</option>
-                                <option value="nonakademik">Non Akademik</option>
-                            </select>
-                        </div>
-                        <label>Keterangan: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
-                        </div>
-                        <label>Tanggal Prestasi: </label>
-                        <div class="form-group">
-                            <input type="date" class="form-control" readonly />
-                        </div>
-                        <label>Semester: </label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" readonly />
+                <form action="/list-kelas/addPrestasi/{{ $siswa->NISN }}" class="form form-vertical" method="post">
+                    @csrf
+                    <div class="form-body modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="jenis">Jenis Prestasi</label>
+                                    <div class="position-relative">
+                                        <select class="choices form-control" id="jenis" name="jenis">
+                                            <option value="Akademik">Akademik</option>
+                                            <option value="NonAkademik">Non Akademik</option>
+                                        </select>
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-award"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="keterangan">Keterangan</label>
+                                    <div class="position-relative">
+                                        <input name="keterangan" type="text" class="form-control @error('keterangan') is-invalid @enderror "
+                                            placeholder="keterangan" id="keterangan" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-filter-square"></i>
+                                        </div>
+                                        @error('keterangan')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{$message}}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="tanggal">Tanggal Prestasi</label>
+                                    <div class="position-relative">
+                                        <input name="tanggal" type="date" class="form-control @error('tanggal') is-invalid @enderror "
+                                            placeholder="tanggal" id="tanggal" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-calendar"></i>
+                                        </div>
+                                        @error('tanggal')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{$message}}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="button" class="btn btn-light-secondary me-1 mb-1" data-bs-dismiss="modal">
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Close</span>
+                                </button>
+                                <button type="submit" class="btn btn-success me-1 mb-1" >
+                                    Simpan
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
             </div>
         </div>
     </div>
@@ -234,7 +246,7 @@
 {{-- Modal Preview --}}
 <div
     class="modal fade text-left"
-    id="info"
+    id="info{{ $siswa->NISN }}"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel130"
@@ -259,80 +271,163 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
-                    <div class="modal-body">
-                        <div class="text-center">
+                <form class="form form-vertical">
+                    <div class="form-body modal-body">
+                        <div class="row">
+                          <div class="text-center">
                             <img src="..." class="rounded" alt="...">
                           </div>
-                          <label>Nama: </label>
-                          <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Nama"/>
-                          </div>
-                          <label>Kelas: </label>
-                          <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Kelas"/>
-                          </div>
+                          <div class="col-12">
+                            <div class="form-group has-icon-left">
+                                <label for="nama">Nama</label>
+                                <div class="position-relative">
+                                    <input name="nama" type="text" class="form-control"
+                                        placeholder="nama" id="nama" value="{{ $siswa->nama }}"/>
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person-heart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="kelas">Kelas</label>
+                                    <div class="position-relative">
+                                        <input name="kelas" type="text" class="form-control"
+                                            placeholder="kelas" id="kelas" value="{{ $siswa->grade }}-{{ $siswa->kelompok_kelas }}" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-123"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                        @foreach ($prestasis as $pres )
                           <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Prestasi 1</h4>
+                                <h4 class="card-title">Prestasi {{ $loop->iteration }}</h4>
                             </div>
                             <div class="card-body">
                                 <p class="card-text">
-                                    Click the buttons below to show and hide another element via class changes:
+                                    {{ $pres->keterangan }}
                                 </p>
                                 <p>
                                     {{-- Update Button --}}
-                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#update" aria-expanded="false" aria-controls="update">
+                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#update{{ $pres->prestasi_id }}" aria-expanded="false" aria-controls="update">
                                         <i class="bi bi-pencil"></i></a>
                                     </button>
                                     {{-- Delete Button --}}
-                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
-                                        <i class="bi bi-trash"></i></a>
-                                    </button>
-                                    </p>
-                                    <div class="collapse" id="update">
-                                        <label>Jenis Prestasi: </label>
-                                        <div class="form-group">
-                                            <select class="choices form-select">
-                                                <option value="akademil">Akademik</option>
-                                                <option value="nonakademik">Non Akademik</option>
-                                            </select>
-                                        </div>
-                                        <label>Keterangan: </label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" readonly />
-                                        </div>
-                                        <label>Tanggal Prestasi: </label>
-                                        <div class="form-group">
-                                            <input type="date" class="form-control" readonly />
-                                        </div>
-                                        <label>Semester: </label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" readonly />
-                                        </div>
-                                        <button type="button" class="btn btn-success ml-1">
-                                            <i class="bx bx-check d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Simpan</span>
+                                    <div class="modal-danger me-1 mb-1 d-inline-block">
+                                        <button type="button" class="btn btn-sm btn-danger" dt-bs-toggle="modal" data-bs-target="#delete{{ $pres->prestasi_id }}">
+                                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus">
+                                                <i class="bi bi-trash-fill"></i></i>
+                                            </div>
                                         </button>
+                                    </div>
+
+                                    {{-- Modal Delete --}}
+                                    <div class="modal fade text-left" id="delete{{ $pres->prestasi_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                            <form action="/list-kelas/deletePrestasi/{{ $pres->prestas_id }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-danger">
+                                                    <h5 class="modal-title white" id="myModalLabel130">
+                                                        Hapus
+                                                    </h5>
+                                                </div>
+                                                <div class="modal-body">Apakah anda yakin ingin menghapus permanen?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-secondary">
+                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                        <span class="d-none d-sm-block">Close</span>
+                                                    </button>
+                                                    <button class="btn btn-danger ml-1">
+                                                        <i class="bx bx-check d-block d-sm-none"></i>
+                                                        <span class="d-none d-sm-block">Hapus</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    {{-- Update Modal --}}
+                                    <div class="collapse" id="update{{ $pres->prestasi_id }}">
+                                        <form action="/list-kelas/updatePrestasi/{{ $pres->prestasi_id }}" class="form form-vertical" method="post">
+                                            @csrf
+                                            <div class="form-body modal-body">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="jenis">Jenis Prestasi</label>
+                                                            <div class="position-relative">
+                                                                <select class="choices form-control" id="jenis" name="jenis">
+                                                                    <option value="Akademik" @if($pres->jenis_prestasi == "Akademik") selected @endif>Akademik</option>
+                                                                    <option value="NonAkademik" @if($pres->jenis_prestasi == "NonAkademik") selected @endif>Non Akademik</option>
+                                                                </select>
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi bi-award"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="keterangan">Keterangan</label>
+                                                            <div class="position-relative">
+                                                                <input name="keterangan" type="text" class="form-control @error('keterangan') is-invalid @enderror "
+                                                                    placeholder="keterangan" id="keterangan" value="{{ $pres->keterangan }}"/>
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi bi-filter-square"></i>
+                                                                </div>
+                                                                @error('keterangan')
+                                                                    <div class="invalid-feedback">
+                                                                        <i class="bx bx-radio-circle"></i>
+                                                                        {{$message}}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="tanggal">Tanggal Prestasi</label>
+                                                            <div class="position-relative">
+                                                                <input name="tanggal" type="date" class="form-control @error('tanggal') is-invalid @enderror "
+                                                                    placeholder="tanggal" id="tanggal"  value="{{ $pres->tanggal_prestasi }}"/>
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi bi-calendar"></i>
+                                                                </div>
+                                                                @error('keterangan')
+                                                                    <div class="invalid-feedback">
+                                                                        <i class="bx bx-radio-circle"></i>
+                                                                        {{$message}}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="submit" class="btn btn-success me-1 mb-1" >
+                                                            Simpan
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
+                        @endforeach
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-            </div>
         </div>
     </div>
 </div>
+@endforeach
 
 
 {{-- Modal Update
@@ -423,56 +518,6 @@
         </div>
     </div>
 </div> --}}
-
-{{-- Modal Delete --}}
-<div
-    class="modal fade text-left"
-    id="delete"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel130"
-    aria-hidden="true"
->
-    <div
-        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-        role="document"
-    >
-        <div class="modal-content">
-            <div class="modal-header bg-danger">
-                <h5 class="modal-title white" id="myModalLabel130">
-                    Hapus Data Siswa
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">Apakah yakin menghapus data ini?</div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-light-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-danger ml-1"
-                    data-bs-dismiss="modal"
-                >
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Hapus</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
 

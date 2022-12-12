@@ -24,9 +24,9 @@ class Siswa extends Model
         return $this->belongsTo(User::class, 'user', 'uuid');
     }
 
-    public function kelas(): BelongsTo
+    public function kelas()
     {
-        return $this->belongsTo(Kelas::class, 'ruang_kelas', 'kelas_id');
+        return $this->belongsTo(Kelas::class, 'kelas_id', 'kelas');
     }
 
     /**
@@ -42,5 +42,9 @@ class Siswa extends Model
     public function kontrak_semesters()
     {
         return $this->hasMany(KontrakSemester::class, 'siswa', 'NISN');
+    }
+
+    public function profiles(){
+        return $this->belongsTo(UserProfile::class, 'user', 'user');
     }
 }
