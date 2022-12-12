@@ -18,7 +18,7 @@ class ListInactiveUser extends Component
     public function render()
     {
         $this->inactiveUser = User::onlyTrashed()->where('role', 'admin')->latest()->get();
-        return view('admin.components.livewire.list-inactive-user');
+        return view('livewire.list-inactive-user');
     }
 
     public function getRestoreModal($uuid){

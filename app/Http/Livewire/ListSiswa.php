@@ -36,6 +36,6 @@ class ListSiswa extends Component
     public function render()
     {
         $this->siswas = User::withTrashed()->join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
-        return view('admin.components.livewire.list-siswa');
+        return view('livewire.list-siswa');
     }
 }

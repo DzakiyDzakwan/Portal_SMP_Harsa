@@ -1,7 +1,7 @@
 @extends('guru.master.main')
 
 @section('title')
-    <title>Siswa</title>
+    <title>{{ $kelas->grade }}{{ $kelas->kelompok_kelas }} {{ $kelas->nama_kelas }}</title>
 @endsection
 
 @section('style')

@@ -16,7 +16,7 @@ class InactiveModalUser extends Component
 
     public function render()
     {
-        return view('admin.components.livewire.inactive-modal-user');
+        return view('livewire.inactive-modal-user');
     }
 
     public function inactiveModal() {

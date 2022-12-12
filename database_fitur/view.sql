@@ -71,3 +71,7 @@ LEFT JOIN kelas ON kelas.kelas_id = roster_kelas.ruang_kelas
 LEFT JOIN gurus ON gurus.nip = roster_kelas.guru
 LEFT JOIN users ON users.uuid = gurus.user
 RIGHT JOIN user_profiles ON user_profiles.user = users.uuid;
+
+/* Detail siswa Kelas */
+CREATE view siswa_kelas AS
+SELECT siswas.NISN, siswas.kelas, user_profiles.nama, kontrak_semesters.sakit, kontrak_semesters.izin, kontrak_semesters.alpa FROM siswas JOIN user_profiles ON user_profiles.user = siswas.user JOIN kontrak_semesters ON kontrak_semesters.siswa = siswas.NISN;

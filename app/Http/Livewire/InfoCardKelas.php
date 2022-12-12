@@ -18,6 +18,6 @@ class InfoCardKelas extends Component
     {
         
         $this->totalKelas = Kelas::count();
-        return view('admin.components.livewire.info-card-kelas');
+        return view('livewire.info-card-kelas');
     }
 }

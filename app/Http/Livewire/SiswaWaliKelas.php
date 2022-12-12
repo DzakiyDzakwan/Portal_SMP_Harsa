@@ -12,9 +12,9 @@ class SiswaWaliKelas extends Component
 
     public function render()
     {
-        $this->siswa = Siswa::where('kelas', $this->kelas)->get();
+        $this->siswa = Siswa::select('siswas.NISN', 'user_profiles.nama', 'kontrak_semesters.sakit', 'kontrak_semesters.izin', 'kontrak_semesters.alpa')->join('user_profiles', 'user_profiles.user', '=', 'siswas.user')->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.nisn')->where('kelas', $this->kelas)->get();
         /* dd($this->siswa); */
-        return view('guru.components.livewire.siswa-wali-kelas');
+        return view('livewire.siswa-wali-kelas');
     }
     
 }

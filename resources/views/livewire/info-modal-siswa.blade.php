@@ -1,41 +1,27 @@
 <div>
-    <div
-        wire:ignore.self
-        class="modal fade text-left"
-        id="infoModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel130"
-        aria-hidden="true"
-    >
-        <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            role="document"
-        >
+    <div wire:ignore.self class="modal fade text-left" id="infoModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel130" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel130">
                         Profil Siswa
                     </h5>
-                    <button
-                        type="button"
-                        class="close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                    >
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
                 </div>
                 <div class="modal-body">
                     {{-- Navigation --}}
-                    <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab"
+                        role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
-                                aria-controls="profile" aria-selected="false">Profil</a>
+                            <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile"
+                                role="tab" aria-controls="profile" aria-selected="false">Profil</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profilePribadi-tab" data-bs-toggle="tab" href="#profilePribadi" role="tab"
-                                aria-controls="profilePribadi" aria-selected="false">Profil Pribadi</a>
+                            <a class="nav-link" id="profilePribadi-tab" data-bs-toggle="tab" href="#profilePribadi"
+                                role="tab" aria-controls="profilePribadi" aria-selected="false">Profil Pribadi</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="prestasi-tab" data-bs-toggle="tab" href="#prestasi" role="tab"
@@ -48,7 +34,8 @@
 
                     {{-- Navigasi Content --}}
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane fade show active" id="profile" role="tabpanel"
+                            aria-labelledby="profile-tab">
                             <table class="table table-borderless mb-0">
                                 <tbody>
                                     <tr>
@@ -84,7 +71,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="tab-pane fade" id="profilePribadi" role="tabpanel" aria-labelledby="profilePribadi-tab">
+                        <div class="tab-pane fade" id="profilePribadi" role="tabpanel"
+                            aria-labelledby="profilePribadi-tab">
                             <table class="table table-borderless mb-0">
                                 <tbody>
                                     <tr>
@@ -145,35 +133,31 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id="prestasi" role="tabpanel" aria-labelledby="data-prestasis">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Keterangan</th>
-                                    <th>Jenis</th>
-                                    <th>Tanggal</th>
-                                    <th>Semester</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Keterangan</th>
+                                        <th>Jenis</th>
+                                        <th>Tanggal</th>
+                                        <th>Semester</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-light-secondary"
-                        data-bs-dismiss="modal"
-                    >
+                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Close</span>
                     </button>

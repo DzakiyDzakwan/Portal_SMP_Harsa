@@ -8,6 +8,6 @@ class AlertUser extends Component
 {
     public function render()
     {
-        return view('admin.components.livewire.alert-user');
+        return view('livewire.alert-user');
     }
 }
