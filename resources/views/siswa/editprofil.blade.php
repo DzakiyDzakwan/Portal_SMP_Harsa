@@ -28,7 +28,7 @@
                             <form class="form form-horizontal" action="/edit-siswa" method="post">
 
                                 @csrf
-                                <div class="form-body">
+                                <div class="form-body ">
                                     <div class="row">
                                         {{-- <div class="col-md-3">
                                             <label>Profile Picture</label>
