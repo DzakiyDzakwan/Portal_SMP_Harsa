@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/rapor', [siswa\RaporController::class,  'rapor'])->name('rapor');
     //Pilih rapor
     Route::get('/pilih-rapor-ganjil-7', [siswa\RaporController::class, 'ganjil7'])->name('pilih-rapor-ganjil-7');
-    Route::get('/pilih-rapor-genap-7', [siswa\RaporController::class, 'genap7'])->name('pilih-rapor-genap-7');
+     Route::get('/pilih-rapor-genap-7', [siswa\RaporController::class, 'genap7'])->name('pilih-rapor-genap-7');
     /* Route::get('/pilih-rapor-ganjil-8', [siswa\RaporController::class, 'ganjil8'])->name('pilih-rapor-ganjil-8');
     Route::get('/pilih-rapor-genap-8', [siswa\RaporController::class, 'genap8'])->name('pilih-rapor-genap-8');
     Route::get('/pilih-rapor-ganjil-9', [siswa\RaporController::class, 'ganjil9'])->name('pilih-rapor-ganjil-9');
