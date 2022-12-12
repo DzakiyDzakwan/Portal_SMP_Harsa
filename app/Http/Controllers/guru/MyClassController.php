@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ListkelasController extends Controller
+class MyCLassController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,28 +22,17 @@ class ListkelasController extends Controller
     public function index()
     {
         $pages = 'listKelas';
-        $id = Auth::user()->uuid;
-        // $guru = Guru::select('NIP')
-        // ->where('user', '=', $id)
-        // ->first();
-        // $kelas = Kelas::join('gurus', 'gurus.NIP', '=', 'kelas.wali_kelas')
-        // ->where('gurus.user', '=', $id)
-        // ->first();
-        $siswas = Siswa::join('user_profiles', 'user_profiles.user', '=', 'siswas.user')
+        $nip = Auth::user()->gurus->NIP;
+        $kelas = Kelas::where('wali_kelas', $nip)->first();
+        $totalSiswa = Siswa::where('kelas', $kelas->kelas_id)->count();
+        /* $siswas = Siswa::join('user_profiles', 'user_profiles.user', '=', 'siswas.user')
         ->join('kelas', 'kelas.kelas_id', '=', 'siswas.kelas')
         ->join('gurus', 'gurus.NIP', '=', 'kelas.wali_kelas')
         ->where('gurus.user', '=', $id)
         ->get();
         $prestasis = Prestasi::join('siswas', 'prestasis.siswa', '=', 'siswas.NISN')
-        ->get();
-        return view('guru.siswa', [
-            'pages' => $pages,
-            'id' => $id,
-            //'guru' => $guru,
-            // 'kelas' => $kelas,
-            'siswas' => $siswas,
-            'prestasis' => $prestasis
-        ]);
+        ->get(); */
+        return view('guru.myClass', compact('pages','kelas', 'totalSiswa'));
     }
 
     /**

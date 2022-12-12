@@ -19,7 +19,7 @@ class Siswa extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users(): BelongsTo
+    public function users()
     {
         return $this->belongsTo(User::class, 'user', 'uuid');
     }
