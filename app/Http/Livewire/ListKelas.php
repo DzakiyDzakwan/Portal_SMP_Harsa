@@ -12,7 +12,8 @@ class ListKelas extends Component
 
     protected $listeners = [
         'storeKelas' => 'render',
-        'updateKelas' => 'render'
+        'updateKelas' => 'render',
+        'restoreKelas' => 'render'
     ];
 
     public function render()

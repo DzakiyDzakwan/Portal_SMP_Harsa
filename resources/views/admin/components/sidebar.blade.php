@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex flex-column align-items-center">
                 <div class="logo">
-                    <a href="/dashboard-siswa"><img src="assets/images/logo/logo-harapan.png" alt="Logo"
+                    <a href="/dashboard-siswa"><img src="{{ asset('assets/images/logo/logo-harapan.png') }}" alt="Logo"
                             srcset="" /></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">

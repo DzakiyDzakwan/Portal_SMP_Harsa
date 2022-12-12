@@ -46,7 +46,7 @@ class CreateModalKelas extends Component
         $this->emit('storeKelas');
         $this->dispatchBrowserEvent('close-create-modal');
         session()->flash('message', 'Kelas Berhasil dibuat');
-        $this->dispatchBrowserEvent('success-alert');
+        $this->dispatchBrowserEvent('insert-alert');
     }
 
     public function render()

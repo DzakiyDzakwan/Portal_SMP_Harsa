@@ -46,57 +46,7 @@
 
     @livewire('edit-modal-guru')
 
-    {{-- Modal Restore Guru --}}
-    <div class="modal fade text-left" id="restoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-success">
-                    <h5 class="modal-title white" id="myModalLabel130">
-                        Restore
-                    </h5>
-                </div>
-                <div class="modal-body">Apakah anda yakin ingin mengembalikan akun?</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" wire:click="closeRestoreModal()">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                    <button class="btn btn-success ml-1" wire:click="restoreUser()">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Restore</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal Delete permanen --}}
-    <div class="modal fade text-left" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                    <h5 class="modal-title white" id="myModalLabel130">
-                        Hapus
-                    </h5>
-                </div>
-                <div class="modal-body">Apakah anda yakin ingin menghapus permanen?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                    <button class="btn btn-danger ml-1" wire:click="deleteUser()">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Hapus</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    @livewire('info-modal-guru')
 
     @livewire('alert-guru')
 @endsection
@@ -110,12 +60,9 @@
         const editModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        /* const inactiveModal = new bootstrap.Modal('#inactiveModal', {
+        const infoModal = new bootstrap.Modal('#infoModal', {
             keyboard: false
-        }) */
-        /* const restoreModal = new bootstrap.Modal('#restoreModal', {
-            keyboard: false
-        }) */
+        })
         /* const deleteModal = new bootstrap.Modal('#deleteModal', {
             keyboard: false
         }) */
@@ -126,12 +73,9 @@
         window.addEventListener('edit-modal', event => {
             editModal.toggle();
         });
-        /* window.addEventListener('inactive-modal', event => {
-            inactiveModal.toggle();
-        }) */
-        /* window.addEventListener('restore-modal', event => {
-            restoreModal.toggle();
-        }) */
+        window.addEventListener('info-modal', event => {
+            infoModal.toggle();
+        })
         /* window.addEventListener('delete-modal', event => {
             deleteModal.toggle();
         }) */
@@ -139,6 +83,7 @@
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
         const inactiveToast = new bootstrap.Toast('#inactiveToast')
+        const nonInactiveToast = new bootstrap.Toast('#nonInactiveToast')
         const updateToast = new bootstrap.Toast('#updateToast')
         const restoreToast = new bootstrap.Toast('#restoreToast')
         const deleteToast = new bootstrap.Toast('#deleteToast')
@@ -150,6 +95,10 @@
 
         window.addEventListener('inactive-alert', e => {
             inactiveToast.show()
+        })
+
+        window.addEventListener('nonInactive-alert', e => {
+            nonInactiveToast.show()
         })
 
         window.addEventListener('update-alert', e => {

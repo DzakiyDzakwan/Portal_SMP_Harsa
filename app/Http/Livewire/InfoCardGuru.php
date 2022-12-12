@@ -12,7 +12,8 @@ class InfoCardGuru extends Component
 
     protected $listeners = [
         'storeGuru' => 'render',
-        'inactiveGuru' => 'render'
+        'inactiveGuru' => 'render',
+        'deleteGuru' => 'render'
     ];
 
     public function render()

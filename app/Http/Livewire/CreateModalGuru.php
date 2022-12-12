@@ -14,7 +14,7 @@ class CreateModalGuru extends Component
 
     protected $rules = [
         'nama' => 'required|max:255',
-        'nip' => 'required|min:18|max:18',
+        'nip' => 'required|min:18|max:18|unique:gurus',
         'tgl_masuk' => 'required'
     ];
 
