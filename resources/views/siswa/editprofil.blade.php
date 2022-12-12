@@ -22,7 +22,7 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="row">
+                 <div class="row">
                     <div class="col-12">
                         <div class="pt-3 px-3">
                              <form class="form form-horizontal" action="/edit-siswa" method="post">

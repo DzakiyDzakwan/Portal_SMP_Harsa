@@ -44,5 +44,5 @@ class ProfilController extends Controller
         // dd($validated);
         Siswa::where('user', auth()->user()->uuid)->update($validated);
         return  redirect('/edit-profil-siswa');
-     }
+      }
 }
