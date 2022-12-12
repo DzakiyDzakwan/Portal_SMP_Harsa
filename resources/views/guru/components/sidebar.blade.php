@@ -61,30 +61,29 @@
 
                 @if (Auth::user()->gurus->is_wali_kelas == 'iya')
                     {{-- Manajemen Siswa --}}
-                    <li class="sidebar-item @if ($pages === 'listKelas') active @endif ">
+                    <li class="sidebar-item @if ($pages === 'waliKelas') active @endif ">
                         <a href="/kelas-saya" class="sidebar-link">
-                            <i class="bi bi-people-fill"></i>
-                            <span>Kelas Saya</span>
+                            <i class="bi bi-person-fill"></i>
+                            <span>Wali Kelas</span>
                         </a>
-                    </li>
-
-                    {{-- Manajemen Absen --}}
-                    <li class="sidebar-item has-sub @if ($pages === 'inputAbsen') active @endif">
-                        <a href="#" class="sidebar-link">
-                            <i class="bi bi-calendar-heart-fill"></i>
-                            <span>Manajemen Absen</span>
-                        </a>
-                        <ul class="submenu  @if ($pages === 'inputAbsen') active @endif">
-                            {{-- if login as wk --}}
-                            <li class="submenu-item @if ($pages === 'inputAbsen' && $ganjil === 'ganjil') active @endif">
-                                <a href="/input-absen">Semester Ganjil</a>
-                            </li>
-                            <li class="submenu-item @if ($pages === 'inputAbsen' && $genap === 'genap') active @endif">
-                                <a href="/input-absen2">Semester Genap</a>
-                            </li>
-                        </ul>
                     </li>
                 @endif
+
+                {{-- List Kelas --}}
+                <li class="sidebar-item has-sub @if ($pages === 'listKelas') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-person-workspace"></i>
+                        <span>List Kelas</span>
+                    </a>
+                    <ul class="submenu @if ($pages === 'listKelas') active @endif">
+                        <li class="submenu-item ">
+                            <a href="/pilih-kelas">Matematika 7A</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/pilih-kelas2">Matematika 9A</a>
+                        </li>
+                    </ul>
+                </li>
 
                 {{-- Manajemen Nilai --}}
                 <li class="sidebar-item has-sub @if ($pages === 'inputNilai') active @endif">

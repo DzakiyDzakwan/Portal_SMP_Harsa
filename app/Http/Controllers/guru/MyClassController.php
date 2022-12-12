@@ -21,7 +21,7 @@ class MyCLassController extends Controller
      */
     public function index()
     {
-        $pages = 'listKelas';
+        $pages = 'waliKelas';
         $nip = Auth::user()->gurus->NIP;
         $kelas = Kelas::where('wali_kelas', $nip)->first();
         $totalSiswa = Siswa::where('kelas', $kelas->kelas_id)->count();
