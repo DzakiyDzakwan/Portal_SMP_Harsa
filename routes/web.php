@@ -99,7 +99,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     Route::get('/direktori-guru', [guru\direktoriController::class, 'direktori'])->name('direktoriGuru');
     //Profil-Guru
     Route::get('/profil-guru', [guru\ProfilController::class, 'profilGuru'])->name('profilGuru');
-    Route::get('/edit-profil-guru', [guru\ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
+    Route::get('/edit-profil-guru/{id}/edit', [guru\ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
+    Route::put('/edit-profil-guru', [guru\ProfilController::class, 'updateProfilGuru'])->name('updateProfilGuru');
     //List-Kelas
     Route::get('/kelas-saya', [guru\MyClassController::class, 'index'])->name('kelas-saya');
     Route::post('/list-kelas/addPrestasi/{id}', [guru\MyClassController::class, 'store'])->name('addPrestasi');
