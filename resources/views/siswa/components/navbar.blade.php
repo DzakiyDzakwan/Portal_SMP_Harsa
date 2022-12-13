@@ -21,7 +21,7 @@
                 id="navbarSupportedContent"
             >
                 <ul class="navbar-nav ms-auto mb-lg-0">
-                    <li class="nav-item dropdown me-1">
+                    {{-- <li class="nav-item dropdown me-1">
                         <a
                             class="nav-link active dropdown-toggle text-gray-600"
                             href="#"
@@ -141,7 +141,7 @@
                                 </p>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
                 <div class="dropdown">
                     <a
@@ -154,12 +154,12 @@
                                 class="user-name text-end me-3"
                             >
                                 <h6 class="mb-0 text-gray-600">
-                                    Udin Kecap
+                                    {{Auth::user()->username}}
                                 </h6>
                                 <p
                                     class="mb-0 text-sm text-gray-600"
                                 >
-                                    Administrator
+                                    Siswa
                                 </p>
                             </div>
                             <div
@@ -178,7 +178,7 @@
                         aria-labelledby="dropdownMenuButton"
                         style="min-width: 11rem"
                     >
-                        <li>
+                        {{-- <li>
                             <a class="dropdown-item" href="/profil-siswa"
                                 ><i
                                     class="icon-mid bi bi-person me-2"
@@ -196,7 +196,7 @@
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
-                        </li>
+                        </li> --}}
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 ><i

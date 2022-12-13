@@ -17,7 +17,7 @@ class EkskulController extends Controller
      */
     public function index()
     {
-        $pages = 'user';
+        $pages = 'manajemenKelas';
         $totalEkskul = Ekstrakurikuler::count();
         $ekskuls = DB::table('table_ekskul')
         ->get();

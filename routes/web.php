@@ -12,7 +12,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\siswa;
-use App\Models\Kelas;
+use App\Http\Controllers\RosterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +62,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::post('/guru/addGuru', [GuruController::class, 'store'])->name('addGuru');
     Route::patch('/guru/inactiveGuru/{uuid}', [GuruController::class, 'delete'])->name('inactiveGuru');
     Route::patch('/guru/updateGuru/{id}', [GuruController::class, 'edit'])->name('updateGuru');
+    //Dashboard/Roster
+    Route::get('/roster', [RosterController::class, 'index'])->name('roster');
     //Dashboard/Log-Users
     Route::get('/log-activities',[LogController::class,'activity'])->name('log-activities');
     //Dashboard/Log-Users
