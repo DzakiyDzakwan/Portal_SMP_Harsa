@@ -3,7 +3,7 @@
         aria-labelledby="myModalLabel130" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header justify-content-center">
                     <h5 class="modal-title" id="myModalLabel130">
                         Profil Siswa
                     </h5>
@@ -14,7 +14,7 @@
                 <div class="modal-body">
 
                     {{-- Image --}}
-                    <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
+                    <img src="assets/images/test.jpg" class="mx-auto d-block w-25 my-3" alt="...">
 
                     {{-- Navigation --}}
                     <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab"
@@ -134,26 +134,7 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id="prestasi" role="tabpanel" aria-labelledby="data-prestasis">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Keterangan</th>
-                                        <th>Jenis</th>
-                                        <th>Tanggal</th>
-                                        <th>Semester</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            @livewire('list-prestasi', ['nisn' => $nisn])
                         </div>
                     </div>
                 </div>
