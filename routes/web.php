@@ -13,7 +13,7 @@ use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\siswa;
 use App\Http\Controllers\siswa\ProfilController;
-use App\Models\Kelas;
+use App\Http\Controllers\RosterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
     //Dashboard/Guru
     Route::get('/guru', [GuruController::class, 'index'])->name('guru');    
+    //Dashboard/Roster
+    Route::get('/roster', [RosterController::class, 'index'])->name('roster');
     //Dashboard/Log-Users
     Route::get('/log-activities',[LogController::class,'activity'])->name('log-activities');
     //Dashboard/Log-Users

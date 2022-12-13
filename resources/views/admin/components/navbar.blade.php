@@ -194,9 +194,9 @@
                                 Settings</a
                             >
                         </li> --}}
-                        <li>
+                        {{-- <li>
                             <hr class="dropdown-divider" />
-                        </li>
+                        </li> --}}
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 ><i

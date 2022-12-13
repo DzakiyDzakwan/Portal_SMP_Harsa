@@ -1,7 +1,7 @@
 <div>
     <table class="table table-bordered text-center m-o" id="table2">
         <thead>
-            <tr>
+            <tr  class="text-center">
                 <th>No</th>
                 <th>Username</th>
                 <th>Inactive_at</th>
