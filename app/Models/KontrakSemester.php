@@ -35,11 +35,6 @@ class KontrakSemester extends Model
         return $this->hasMany(Nilai::class, 'kontrak_siswa', 'kontrak_semester_id');
     }
 
-    public function rekap_absensis()
-    {
-        return $this->hasMany(RekapAbsensi::class, 'kontrak_siswa', 'kontrak_semester_id');
-    }
-
     public function ekstrakurikuler_siswas()
     {
         return $this->hasMany(EkskulSiswa::class, 'kontrak_siswa', 'kontrak_semester_id');

@@ -5,55 +5,51 @@
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/pages/simple-datatables.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/simple-datatables.css') }}">
     @livewireStyles
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>Data Siswa</h3>
-    </div>
-    <div class="col-12 col-md-6 order-md-2 order-first">
-        <nav
-            aria-label="breadcrumb"
-            class="breadcrumb-header float-start float-lg-end"
-        >
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="/">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    Siswa
-                </li>
-            </ol>
-        </nav>
-    </div>
-</div>
-{{-- Info Card Siswa --}}
-@livewire('info-card-siswa')
-
-<div class="card">
-    <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-        <h5>List Siswa</h5>
-        <div class="form-group">
-            {{-- Button Tambah User --}}
-            @livewire('create-modal-siswa')
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h3>Data Siswa</h3>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Siswa
+                    </li>
+                </ol>
+            </nav>
         </div>
     </div>
-    <div class="card-body">
-        {{-- List siswa --}}
-        @livewire('list-siswa')
+    {{-- Info Card Siswa --}}
+    @livewire('info-card-siswa')
+
+    <div class="card">
+        <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+            <h5>List Siswa</h5>
+            <div class="form-group">
+                {{-- Button Tambah User --}}
+                @livewire('create-modal-siswa')
+            </div>
+        </div>
+        <div class="card-body">
+            {{-- List siswa --}}
+            @livewire('list-siswa')
+        </div>
     </div>
-</div>
 
-@livewire('edit-modal-siswa')
+    @livewire('edit-modal-siswa')
 
-@livewire('alert-siswa')
+    @livewire('alert-siswa')
 
-@livewire('info-modal-siswa')
-
+    @livewire('info-modal-siswa')
 @endsection
 
 @section('script')
@@ -87,9 +83,9 @@
         window.addEventListener('info-modal', event => {
             infoModal.toggle();
         });
-        window.addEventListener('inactive-modal', event => {
+        /* window.addEventListener('inactive-modal', event => {
             inactiveModal.toggle();
-        });
+        }); */
         // window.addEventListener('restore-modal', event => {
         //     restoreModal.toggle();
         // })
@@ -126,6 +122,6 @@
         })
     </script>
     @livewireScripts
-    <script src="{{asset('assets/extensions/simple-datatables/umd/simple-datatables.js')}}"></script>
-    <script src="{{asset('assets/js/pages/simple-datatables.js')}}"></script>
+    <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
 @endsection

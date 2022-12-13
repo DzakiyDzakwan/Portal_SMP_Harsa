@@ -18,8 +18,8 @@ class ListUser extends Component
 
     public function render()
     {
-        $this->users = User::latest()->get();
-        return view('admin.components.livewire.list-user');
+        $this->users = User::where('role', 'admin')->latest()->get();
+        return view('livewire.list-user');
     }
 
     public function editUser($uuid) {

@@ -27,7 +27,7 @@ class EditModalUser extends Component
 
     public function render()
     {
-        return view('admin.components.livewire.edit-modal-user');
+        return view('livewire.edit-modal-user');
     }
 
     public function update() 
@@ -52,6 +52,8 @@ class EditModalUser extends Component
 
         $this->emit('userUpdate');
         $this->reset();
+        $this->dispatchBrowserEvent('update-modal');
+        $this->dispatchBrowserEvent('update-alert');
     }
 
     public function showUser($user) {
@@ -59,6 +61,6 @@ class EditModalUser extends Component
         $this->uuid = $data->uuid;
         $this->username = $data->username;
         $this->dispatchBrowserEvent('update-modal');
-        $this->dispatchBrowserEvent('update-alert');
+        
     }
 }
