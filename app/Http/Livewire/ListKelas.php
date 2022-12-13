@@ -12,13 +12,14 @@ class ListKelas extends Component
 
     protected $listeners = [
         'storeKelas' => 'render',
-        'updateKelas' => 'render'
+        'updateKelas' => 'render',
+        'restoreKelas' => 'render'
     ];
 
     public function render()
     {
         $this->kelas = DB::table('table_kelas')->get();
-        return view('admin.components.livewire.list-kelas');
+        return view('livewire.list-kelas');
     }
 
     public function inactiveKelas($id) {

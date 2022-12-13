@@ -1,5 +1,5 @@
 <div>
-    <table class="table table-bordered text-center m-o" id="table2">
+    <table class="table table-bordered m-o" id="table2">
         <thead>
             <tr>
                 <th>No</th>

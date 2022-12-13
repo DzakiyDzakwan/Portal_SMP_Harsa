@@ -7,7 +7,13 @@ use App\Models\Siswa;
 
 class InfoCardSiswa extends Component
 {
-    public $totalSiswa, $siswaActive, $siswaLulus, $siswaPindah, $siswaDO, $siswaInactive;
+    public $totalSiswa, $siswaActive, $siswaLulus, $siswaPindah, $siswaDO;
+
+    protected $listeners = [
+        'siswaStore'=> 'render',
+        'siswaNonaktif' => 'render',
+        'siswaUpdate' => 'render'
+    ];
 
     public function render()
     {
@@ -16,8 +22,7 @@ class InfoCardSiswa extends Component
         $this->siswaLulus = Siswa::where('status', 'Lulus')->count();
         $this->siswaPindah = Siswa::where('status', 'Pindah')->count();
         $this->siswaDO = Siswa::where('status', 'Drop Out')->count();
-        $this->siswaInactive = $this->siswaLulus + $this->siswaPindah + $this->siswaDO;
 
-        return view('admin.components.livewire.info-card-siswa');
+        return view('livewire.info-card-siswa');
     }
 }

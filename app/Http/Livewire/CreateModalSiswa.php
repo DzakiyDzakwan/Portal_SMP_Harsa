@@ -26,12 +26,13 @@ class CreateModalSiswa extends Component
 
         $this->reset();
         $this->emit('siswaStore');
+        $this->dispatchBrowserEvent('insert-alert');
         $this->dispatchBrowserEvent('close-create-modal');
     }
 
     public function render()
     {
         $this->kelas = DB::table('kelas')->get();
-        return view('admin.components.livewire.create-modal-siswa');
+        return view('livewire.create-modal-siswa');
     }
 }

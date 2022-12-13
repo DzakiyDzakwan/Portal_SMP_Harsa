@@ -20,8 +20,8 @@ return new class extends Migration
         AFTER INSERT ON kontrak_semesters
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kontraks(kontrak_semester_id, siswa, grade, semester, tahun_ajaran, status, action, created_at)
-        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.grade, NEW.semester, NEW.tahun_ajaran, NEW.status, "insert", NOW());
+        INSERT INTO log_kontraks(kontrak_semester_id, siswa, grade, semester, tahun_ajaran, sakit, izin, alpa, status, action, created_at)
+        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.grade, NEW.semester, NEW.tahun_ajaran, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "insert", NOW());
         END
         ');
 
@@ -31,19 +31,19 @@ return new class extends Migration
         AFTER UPDATE ON kontrak_semesters
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kontraks(kontrak_semester_id, siswa, grade, semester, tahun_ajaran, status, action, created_at)
-        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.grade, NEW.semester, NEW.tahun_ajaran, NEW.status, "update", NOW());
+        INSERT INTO log_kontraks(kontrak_semester_id, siswa, grade, semester, tahun_ajaran, sakit, izin, alpa, status, action, created_at)
+        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.grade, NEW.semester, NEW.tahun_ajaran, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "update", NOW());
         END
         ');
 
         /* log delete kontrak */
         DB::unprepared('
         CREATE TRIGGER log_delete_kontrak
-        AFTER DELETE ON kontrak_semesters
+        BEFORE DELETE ON kontrak_semesters
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kontraks(kontrak_semester_id, siswa, grade, semester, tahun_ajaran, status, action, created_at)
-        VALUES (OLD.kontrak_semester_id, OLD.siswa, OLD.grade, OLD.semester, OLD.tahun_ajaran, OLD.status, "delete", NOW());
+            SIGNAL SQLSTATE "45000"
+            SET MESSAGE_TEXT = "Tidak dapat menghapus data";
         END
         ');
     }

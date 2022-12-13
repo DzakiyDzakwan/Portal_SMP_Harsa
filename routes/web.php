@@ -12,7 +12,8 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\siswa;
-use App\Models\Kelas;
+use App\Http\Controllers\siswa\ProfilController;
+use App\Http\Controllers\RosterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,18 +36,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     //Dashboard/Kelas
     Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
-    Route::post('/kelas/addKelas', [KelasController::class, 'store'])->name('addKelas');
-    Route::post('/kelas/updateKelas/{id}', [KelasController::class, 'update'])->name('updateKelas');
-    Route::delete('/kelas/deleteKelas/{id}', [KelasController::class, 'destroy'])->name('deleteKelas');
-    //Dashboard/User
-    Route::get('/users', [UserController::class, 'index'])->name('users');
-    Route::post('/users/addAdmin', [UserController::class, 'store'])->name('addAdmin');
-    Route::delete('/users/deleteAdmin/{uuid}', [UserController::class, 'delete'])->name('deleteAdmin');
+    //Dashboard/Admin
+    Route::get('/admin', [UserController::class, 'index'])->name('users');
     //Dashboard/Mapel
     Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
-    Route::post('/mapel/addMapel', [MapelController::class, 'store'])->name('addMapel');
-    Route::post('/mapel/updateMapel/{mapel_id}', [MapelController::class, 'update'])->name('updateMapel');
-    Route::delete('/mapel/deleteMapel/{mapel_id}', [MapelController::class, 'destroy'])->name('deleteMapel');
     //Dashboard/eskul
     Route::get('/ekstrakulikuler',[EkskulController::class,'index'])->name('ekskul');
     Route::post('/ekskul/addEkskul',[EkskulController::class,'store'])->name('addEkskul');
@@ -54,14 +47,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::delete('/ekskul/deleteEkskul/{id}', [EkskulController::class, 'destroy'])->name('deleteEkskul');
     //Dashboard/Siswa
     Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
-    Route::post('/siswa/add-siswa',[SiswaController::class,'store'])->name('add-siswa');
-    Route::post('/siswa/update-siswa/{id}', [SiswaController::class, 'edit'])->name('edit-siswa');
-    Route::delete('/siswa/delete-siswa/{uuid}',[SiswaController::class,'delete'])->name('delete-siswa');
     //Dashboard/Guru
-    Route::get('/guru', [GuruController::class, 'index'])->name('guru');
-    Route::post('/guru/addGuru', [GuruController::class, 'store'])->name('addGuru');
-    Route::patch('/guru/inactiveGuru/{uuid}', [GuruController::class, 'delete'])->name('inactiveGuru');
-    Route::patch('/guru/updateGuru/{id}', [GuruController::class, 'edit'])->name('updateGuru');
+    Route::get('/guru', [GuruController::class, 'index'])->name('guru');    
+    //Dashboard/Roster
+    Route::get('/roster', [RosterController::class, 'index'])->name('roster');
     //Dashboard/Log-Users
     Route::get('/log-activities',[LogController::class,'activity'])->name('log-activities');
     //Dashboard/Log-Users
@@ -85,10 +74,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/dashboard-siswa', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
     //Rapor
-    Route::get('/rapor', [siswa\RaporController::class, 'rapor'])->name('rapor');
+    Route::get('/rapor', [siswa\RaporController::class,  'rapor'])->name('rapor');
     //Pilih rapor
     Route::get('/pilih-rapor-ganjil-7', [siswa\RaporController::class, 'ganjil7'])->name('pilih-rapor-ganjil-7');
-    Route::get('/pilih-rapor-genap-7', [siswa\RaporController::class, 'genap7'])->name('pilih-rapor-genap-7');
+      Route::get('/pilih-rapor-genap-7', [siswa\RaporController::class, 'genap7'])->name('pilih-rapor-genap-7');
     /* Route::get('/pilih-rapor-ganjil-8', [siswa\RaporController::class, 'ganjil8'])->name('pilih-rapor-ganjil-8');
     Route::get('/pilih-rapor-genap-8', [siswa\RaporController::class, 'genap8'])->name('pilih-rapor-genap-8');
     Route::get('/pilih-rapor-ganjil-9', [siswa\RaporController::class, 'ganjil9'])->name('pilih-rapor-ganjil-9');
@@ -98,6 +87,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/rapor-semester', [siswa\RaporController::class, 'semester'])->name('rapor-semester');
     Route::get('/profil-siswa', [siswa\ProfilController::class, 'profilSiswa'])->name('profilSiswa');
     Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
+    Route::post('/edit-siswa', [ProfilController::class, 'updateProfilSiswa']);
+
 });
 
 //Guru
@@ -111,7 +102,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     Route::get('/edit-profil-guru/{id}/edit', [guru\ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
     Route::put('/edit-profil-guru', [guru\ProfilController::class, 'updateProfilGuru'])->name('updateProfilGuru');
     //List-Kelas
-    Route::get('/list-kelas', [guru\ListkelasController::class, 'index'])->name('listKelas');
+    Route::get('/kelas-saya', [guru\MyClassController::class, 'index'])->name('kelas-saya');
+    Route::post('/list-kelas/addPrestasi/{id}', [guru\MyClassController::class, 'store'])->name('addPrestasi');
+    Route::post('/list-kelas/updatePrestasi/{id}', [guru\MyClassController::class, 'update'])->name('updatePrestasi');
+    Route::delete('/list-kelas/deletePrestasi/{id}', [guru\MyClassController::class, 'destroy'])->name('deletePrestasi');
     //Input-NilaiBulanan
     Route::get('/pilih-kelas', [guru\InputController::class, 'pilihKelas1'])->name('pilihKelas');
     Route::get('/input-nilai', [guru\InputController::class, 'inputNilai1'])->name('inputNilai');

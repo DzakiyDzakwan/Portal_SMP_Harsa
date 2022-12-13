@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('ekstrakurikuler_siswa_id');
             $table->char('ekstrakurikuler', 5);
             $table->unsignedBigInteger('kontrak_siswa');
-            $table->float('nilai');
+            $table->float('nilai')->unsigned();
             $table->text('keterangan');
             $table->foreign('ekstrakurikuler')->references('ekstrakurikuler_id')->on('ekstrakurikulers');
             $table->foreign('kontrak_siswa')->references('kontrak_semester_id')->on('kontrak_semesters');

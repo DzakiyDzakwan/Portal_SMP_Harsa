@@ -4,19 +4,22 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Kelas;
+use Illuminate\Support\Facades\DB;
 
 class ListInactiveKelas extends Component
 {
     public $inactiveKelas;
 
     protected $listeners = [
-        'inactiveKelas' => 'render'
+        'inactiveKelas' => 'render',
+        'deleteKelas' => 'render',
+        'restoreKelas' => 'render'
     ];
 
     public function render()
     {
-        $this->inactiveKelas = Kelas::onlyTrashed()->get();
-        return view('admin.components.livewire.list-inactive-kelas');
+        $this->inactiveKelas = DB::table('kelas')->where('deleted_at', '<>', null)->get();
+        return view('livewire.list-inactive-kelas');
     }
 
     public function getRestoreModal($id) {

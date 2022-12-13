@@ -18,15 +18,11 @@ class GuruController extends Controller
     public function index()
     {
         $pages = 'user';
-        $totalGuru = Guru::count();
-        $guruActive = Guru::where('status', 'Aktif')->count();
-        $guruInactive = Guru::where('status', 'Inaktif')->count();
-        $gurus = User::withTrashed()->join('gurus', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get();
         /* $guru = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get(); */
         /* dd($gurus); */
         $guru = DB::table('table_guru')
         ->get();
-        return view('admin.guru', compact('pages', 'totalGuru', 'guruActive', 'guruInactive', 'gurus'));
+        return view('admin.guru', compact('pages'));
     }
 
     public function store(Request $request)
