@@ -20,6 +20,7 @@ class UserProfile extends Model
         'user',
         'nama',
         'jenis_kelamin',
+        
     ];
     /**
      * Get the user that owns the UserProfile
