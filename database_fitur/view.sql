@@ -75,3 +75,14 @@ RIGHT JOIN user_profiles ON user_profiles.user = users.uuid;
 /* Detail siswa Kelas */
 CREATE view siswa_kelas AS
 SELECT siswas.NISN, siswas.kelas, user_profiles.nama, kontrak_semesters.sakit, kontrak_semesters.izin, kontrak_semesters.alpa FROM siswas JOIN user_profiles ON user_profiles.user = siswas.user JOIN kontrak_semesters ON kontrak_semesters.siswa = siswas.NISN;
+
+CREATE VIEW info_siswa AS
+SELECT  p.foto, p.nama, p.email, s.NISN, s.NIS, IF(p.jenis_kelamin = "LK", "Pria", "Wanita" ) AS jenis_kelamin, k.nama_kelas AS kelas, DATE_FORMAT(s.tanggal_masuk, "%d %M %Y") AS tanggal_masuk, s.status, p.tempat_lahir, DATE_FORMAT(p.tgl_lahir, "%d %M %Y") AS tanggal_lahir, umur(p.tgl_lahir) AS tanggal_lahir, p.alamat_tinggal, p.alamat_domisili, s.anak_ke, s.telepon_orangtua, s.alamat_orangtua, s.nama_ayah, s.pekerjaan_ayah, s.nama_ibu, s.pekerjaan_ibu, s.telepon_wali, s.nama_wali, s.pekerjaan_wali FROM `siswas` AS s JOIN users AS u ON s.user = u.uuid JOIN user_profiles AS p ON u.uuid = p.user JOIN kelas AS k ON s.kelas = k.kelas_id;
+
+CREATE VIEW list_guru AS
+SELECT g.nip, p.nama, g.jabatan, g.status FROM `gurus` AS g JOIN user_profiles AS p ON g.user = p.user;
+
+CREATE VIEW info_guru AS
+SELECT p.nama, p.email, g.nip, g.jabatan, IF(p.jenis_kelamin = "LK", "Pria", "Wanita" ) AS jenis_kelamin, DATE_FORMAT(g.tanggal_masuk, "%d %M %Y") AS tanggal_masuk, g.status, masa_mengajar(g.tanggal_masuk), g.pendidikan, g.tahun_ijazah, g.status_perkawinan, p.alamat_tinggal, p.alamat_domisili, p.tempat_lahir, DATE_FORMAT(p.tgl_lahir, "%d %M %Y") AS tanggal_lahir, umur(p.tgl_lahir) AS umur FROM `gurus` AS g JOIN users AS u ON g.user = u.uuid JOIN user_profiles AS p ON u.uuid = p.user;
+
+

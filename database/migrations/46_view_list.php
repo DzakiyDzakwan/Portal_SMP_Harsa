@@ -14,6 +14,37 @@ return new class extends Migration
      */
     public function up()
     {
+
+        DB::unprepared('
+        CREATE VIEW list_admin AS
+        SELECT uuid, username, role, created_at FROM `users` WHERE 1;
+        ');
+
+        DB::unprepared('
+        CREATE VIEW list_inactive_admin AS
+        SELECT uuid, username, deleted_at FROM `users` WHERE deleted_at <> null;
+        ');
+
+        DB::unprepared('
+        CREATE VIEW list_siswa AS
+        SELECT s.nisn, p.nama, DATE_FORMAT(s.tanggal_masuk, "%d %M %Y") AS tanggal_masuk, s.status  FROM `siswas` AS s JOIN users AS u ON s.user = u.uuid JOIN user_profiles AS p ON u.uuid = p.user;
+        ');
+
+        DB::unprepared('
+        CREATE VIEW info_siswa AS
+        SELECT  p.foto, p.nama, p.email, s.NISN, s.NIS, IF(p.jenis_kelamin = "LK", "Pria", "Wanita" ) AS jenis_kelamin, k.nama_kelas AS kelas, DATE_FORMAT(s.tanggal_masuk, "%d %M %Y") AS tanggal_masuk, s.status, p.tempat_lahir, DATE_FORMAT(p.tgl_lahir, "%d %M %Y") AS tanggal_lahir, p.alamat_tinggal, p.alamat_domisili, s.anak_ke, s.telepon_orangtua, s.alamat_orangtua, s.nama_ayah, s.pekerjaan_ayah, s.nama_ibu, s.pekerjaan_ibu, s.telepon_wali, s.nama_wali, s.pekerjaan_wali FROM `siswas` AS s JOIN users AS u ON s.user = u.uuid JOIN user_profiles AS p ON u.uuid = p.user JOIN kelas AS k ON s.kelas = k.kelas_id
+        ');
+
+        DB::unprepared('
+        CREATE VIEW list_guru AS
+        SELECT g.nip, p.nama, g.jabatan, g.status FROM `gurus` AS g JOIN user_profiles AS p ON g.user = p.user;
+        ');
+
+        DB::unprepared('
+        CREATE VIEW info_guru AS
+        SELECT p.nama, p.email, g.nip, g.jabatan, IF(p.jenis_kelamin = "LK", "Pria", "Wanita" ) AS jenis_kelamin, DATE_FORMAT(g.tanggal_masuk, "%d %M %Y") AS tanggal_masuk, g.status, masa_mengajar(g.tanggal_masuk), g.pendidikan, g.tahun_ijazah, g.status_perkawinan, p.alamat_tinggal, p.alamat_domisili, p.tempat_lahir, DATE_FORMAT(p.tgl_lahir, "%d %M %Y") AS tanggal_lahir, umur(p.tgl_lahir) AS umur FROM `gurus` AS g JOIN users AS u ON g.user = u.uuid JOIN user_profiles AS p ON u.uuid = p.user;
+        ');
+
         DB::unprepared('
         CREATE VIEW table_kelas AS
         SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS Jumlah_Siswa
@@ -27,7 +58,7 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW table_ekskul AS
-        SELECT * FROM ekstrakurikulers
+        SELECT ekstrakurikuler_id AS id, nama, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(waktu_mulai, durasi) AS waktu_akhir, SEC_TO_TIME(durasi*60) AS durasi, tempat, kelas FROM ekstrakurikulers;
         ');
 
         DB::unprepared('

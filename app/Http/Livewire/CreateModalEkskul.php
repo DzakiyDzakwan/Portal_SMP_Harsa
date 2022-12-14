@@ -11,7 +11,7 @@ class CreateModalEkskul extends Component
     public $ekstrakurikuler_id, $nama, $hari, $waktu_mulai, $durasi, $tempat, $kelas;
     public function store(){
         $this->validate([
-            'ekstrakurikuler_id' => 'required|max:3|unique:ekstrakurikulers',
+            'ekstrakurikuler_id' => 'required|min:3|max:5|unique:ekstrakurikulers',
             'nama' => 'required|unique:ekstrakurikulers',
             'waktu_mulai' => 'required',
             'durasi' => 'required|integer|min:30',

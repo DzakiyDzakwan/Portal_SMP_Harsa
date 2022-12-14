@@ -123,3 +123,16 @@ BEGIN
     RETURN(umur);
 END?
 DELIMITER ;
+
+DELIMITER ?
+CREATE FUNCTION waktu_akhir(
+    waktu_awal TIME,
+    durasi INT 
+)
+RETURNS TIME
+BEGIN
+    DECLARE waktu_akhir TIME;
+    SET waktu_akhir = ADDTIME(waktu_awal, SEC_TO_TIME(durasi*60));
+RETURN (waktu_akhir);
+END?
+DELIMITER ;
