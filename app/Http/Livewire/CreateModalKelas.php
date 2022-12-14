@@ -3,9 +3,9 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 use App\Models\Guru;
 use App\Models\Kelas;
-use Illuminate\Support\Facades\DB;
 
 class CreateModalKelas extends Component
 {
