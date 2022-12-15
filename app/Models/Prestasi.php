@@ -9,6 +9,8 @@ class Prestasi extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'prestasi_id';
+
     protected $guarded = [
         "prestasi_id",
         "created_at",

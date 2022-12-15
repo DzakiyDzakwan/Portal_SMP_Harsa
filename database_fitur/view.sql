@@ -90,16 +90,12 @@ CREATE VIEW list_ekstrakurikuler AS
 SELECT ekstrakurikuler_id AS id, nama, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(waktu_mulai, durasi) AS waktu_akhir, SEC_TO_TIME(durasi*60) AS durasi, tempat, kelas 
 FROM ekstrakurikulers;
 
-/* BARU SAMPE SINI 👆 */
-
-/* Table Prestasi */
-CREATE VIEW table_prestasi AS
-SELECT user_profiles.nama, prestasis.jenis_prestasi, prestasis.keterangan, 
-prestasis.tanggal_prestasi, prestasis.semester
-FROM prestasis
-LEFT JOIN siswas ON siswas.nisn = prestasis.siswa
-LEFT JOIN users ON users.uuid = siswas.user
-RIGHT JOIN user_profiles ON user_profiles.user = users.uuid;
+/* List Prestasi */
+CREATE VIEW list_prestasi AS
+SELECT p.keterangan, p.jenis_prestasi, DATE_FORMAT(p.tanggal_prestasi, "%d %M %Y") AS tanggal_prestasi, ktk.grade AS kelas
+FROM prestasis AS p
+JOIN siswas AS s ON p.siswa = s.NISN
+JOIN kontrak_semesters AS ktk ON ktk.siswa = s.NISN;
 
 
 
