@@ -3,7 +3,7 @@
         aria-labelledby="myModalLabel130" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header justify-content-center">
                     <h5 class="modal-title" id="myModalLabel130">
                         Profil Siswa
                     </h5>
@@ -14,7 +14,7 @@
                 <div class="modal-body">
 
                     {{-- Image --}}
-                    <img src="assets/images/test.jpg" class="mx-auto d-block w-50 my-3" alt="...">
+                    <img src="assets/images/test.jpg" class="mx-auto d-block w-25 my-3" alt="...">
 
                     {{-- Navigation --}}
                     <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab"
@@ -141,19 +141,28 @@
                                         <th>Keterangan</th>
                                         <th>Jenis</th>
                                         <th>Tanggal</th>
-                                        <th>Semester</th>
+                                        <th>Kelas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    @if ($prestasi->isEmpty())
+                                        <tr>
+                                            <td colspan="5" class="text-center">Tidak ada data</td>
+                                        </tr>
+                                    @else
+                                        @foreach ($prestasi as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->keterangan }}</td>
+                                                <td>{{ $item->jenis_prestasi }}</td>
+                                                <td>{{ $item->tanggal_prestasi }}</td>
+                                                <td>{{ $item->siswas->kelas }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>

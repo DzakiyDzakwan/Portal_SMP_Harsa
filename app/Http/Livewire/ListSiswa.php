@@ -16,6 +16,12 @@ class ListSiswa extends Component
         'siswaNonaktif' => 'render',
     ];
 
+    public function render()
+    {
+        $this->siswas = User::withTrashed()->join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
+        return view('livewire.list-siswa');
+    }
+
     public function editSiswa($id) {
         $this->emit('editUser', $id);
     }
@@ -32,10 +38,5 @@ class ListSiswa extends Component
         $this->emit('siswaNonaktif');
         $this->dispatchBrowserEvent('inactive-alert');
     }
-
-    public function render()
-    {
-        $this->siswas = User::withTrashed()->join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
-        return view('livewire.list-siswa');
-    }
+    
 }

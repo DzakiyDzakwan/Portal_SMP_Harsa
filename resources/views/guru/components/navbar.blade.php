@@ -91,7 +91,7 @@
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img src="{{ asset('assets/images/faces/1.jpg') }}" />
+                                    <img src="{{ Auth::user()->user_profiles->foto }}" />
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
-                        </li> --}}
+                        </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"><i
                                     class="icon-mid bi bi-box-arrow-left me-2"></i>
