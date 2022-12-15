@@ -24,9 +24,9 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="pt-3 text-center">
                         @if ($gurus->foto)
-                        <img src="{{ asset($gurus->foto) }}" class="rounded"  width="220">
+                        <img src="{{ asset('storage/'. $gurus->foto) }}" class="rounded" alt="..." width="220">
                         @else
-                        <img class="img-preview img-fluid mb-3 col-sm-5">
+                        <img class="rounded">
                         @endif
                     </div>
                 </div>

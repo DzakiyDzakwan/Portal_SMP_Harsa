@@ -91,7 +91,7 @@
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img src="{{ Auth::user()->user_profiles->foto }}" />
+                                    <img src="{{ asset('storage/'. Auth::user()->user_profiles->foto) }}" />
                                 </div>
                             </div>
                         </div>
