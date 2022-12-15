@@ -5,10 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Siswa;
+use App\Models\Prestasi;
 
 class InfoModalSiswa extends Component
 {
-    public $nama, $nisn, $nis, $jk, $kelas, $status, $anak_ke, $n_ayah, $p_ayah, $n_ibu, $p_ibu, $alamat_ortu, $telp_ortu, $n_wali, $p_wali, $telp_wali;
+    public $nama, $nisn, $nis, $jk, $kelas, $status, $anak_ke, $n_ayah, $p_ayah, $n_ibu, $p_ibu, $alamat_ortu, $telp_ortu, $n_wali, $p_wali, $telp_wali, $prestasi;
 
     protected $listeners = [
         'infoSiswa' => 'showSiswa'
@@ -16,6 +17,8 @@ class InfoModalSiswa extends Component
 
     public function render()
     {
+        $this->prestasi = Prestasi::where('siswa', $this->nisn)->get();
+
         return view('livewire.info-modal-siswa');
     }
 
@@ -23,6 +26,7 @@ class InfoModalSiswa extends Component
     {
         $data = User::withTrashed()->join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('siswas.user', $id)->first();
 
+        
         $data1 = Siswa::join('kelas', 'kelas.kelas_id', '=', 'siswas.kelas')->where('siswas.user', $id)->first();
 
         //profil
@@ -45,7 +49,6 @@ class InfoModalSiswa extends Component
         $this->n_wali = $data->nama_wali;
         $this->p_wali = $data->pekerjaan_wali;
         $this->telp_wali = $data->telepon_wali;
-
         $this->dispatchBrowserEvent('info-modal');
     }
 }

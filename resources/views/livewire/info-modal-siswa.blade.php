@@ -134,7 +134,35 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id="prestasi" role="tabpanel" aria-labelledby="data-prestasis">
-                            @livewire('list-prestasi', ['nisn' => $nisn])
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Keterangan</th>
+                                        <th>Jenis</th>
+                                        <th>Tanggal</th>
+                                        <th>Kelas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($prestasi->isEmpty())
+                                        <tr>
+                                            <td colspan="5" class="text-center">Tidak ada data</td>
+                                        </tr>
+                                    @else
+                                        @foreach ($prestasi as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->keterangan }}</td>
+                                                <td>{{ $item->jenis_prestasi }}</td>
+                                                <td>{{ $item->tanggal_prestasi }}</td>
+                                                <td>{{ $item->siswas->kelas }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
                 </div>
