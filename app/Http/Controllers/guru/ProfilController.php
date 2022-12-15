@@ -10,6 +10,7 @@ use App\Models\UserProfile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\Guru;
 use Illuminate\Contracts\View\View;
@@ -34,23 +35,36 @@ class ProfilController extends Controller
         return view('guru.editprofile',compact('pages', 'data'));
     }
 
-    public function updateProfilGuru(Request $request, UserProfile $post)
+    public function updateProfilGuru(Request $request)
     {   
         $id = auth()->user()->uuid;
         // dd($request->all());
 
+        $validatedData = $request->validate([
+            'foto' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:3024',
+            'username' => 'required|min:5',
+            'email' => 'required|email',
+            'nama' => 'required|max:100',
+            'jenis_kelamin' => 'required',
+            'tgl_lahir' => 'required',
+            'tempat_lahir' => 'required|max:255',
+            'pendidikan' => 'required',
+            'tahun_ijazah' => 'required',
+            'status_perkawinan' => 'required'
+        ]);
+
         $data = Guru::where('user', $id);
         $data->update([
-            'pendidikan' => $request->pendidikan,
-            'tahun_ijazah' => $request->tahun_ijazah,
-            'status_perkawinan' => $request->status_perkawinan,
+            'pendidikan' => $validatedData['pendidikan'],
+            'tahun_ijazah' => $validatedData['tahun_ijazah'],
+            'status_perkawinan' => $validatedData['status_perkawinan'],
         ]);
         $data = User::where('uuid', $id);
         // dd($id);
 
 
         $data->update([
-            'username' => $request->username
+            'username' => $validatedData['username']
         ]);
 
 
@@ -70,19 +84,7 @@ class ProfilController extends Controller
             
             $data = UserProfile::where('user',$id);
 
-            // $rules = [
-            //     'foto' => 'image|file|max:255'
-            // ];
-
             
-            // $request->foto->move(public_path().'/editprofilguru');
-            
-
-            // if($request->slug != $id->slug){
-            //     $rules['slug'] = 'required|unique:posts';
-            // }
-                        
-            // $validatedData = $request->validate($rules);
             
             if($request->hasFile('foto')) {
                 // $fileNameWithExt = $request->file('foto')->getClientOriginalName();
@@ -96,22 +98,31 @@ class ProfilController extends Controller
                 // $validatedData['foto'] = $request->file('foto')->store('/editprofilguru2');
                 // $newAlamat = $request->file('foto')->store('/editprofilguru2');
                 // $alamatbaru = $newAlamat;
-                $fileName = $request->file('foto')->getClientOriginalName();
-                $path = $request->file('foto')->storeAs('fotoprofil',   $fileName, 'public');
-                $request->foto='/storage/'.$path;
+                $fileNameWithExt = $request->file('foto')->getClientOriginalName();
+                $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('foto')->getClientOriginalExtension();
+                $filenameSimpan = $filename.'_'.time().'.'.$extension;
+                // $validatedData['foto'] = $request->file('foto')->store('/editprofilguru2');
+                // $newAlamat = $request->file('foto')->store('/editprofileguru2');
+                $path = $request->file('foto')->store('fotoprofil','public');
+                $newAlamat = $request->file('foto')->store('fotoprofil','public');
+                // $request->foto='/storage/'.$path;
                 
             }
             $data->update([
-                'foto' => $request->foto,
-                'email' => $request->email,
-                'nama' => $request->nama,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'tgl_lahir' => $request->tgl_lahir,
-                'tempat_lahir' => $request->tempat_lahir,
+                'foto' => $validatedData['foto']=$newAlamat,
+                'email' => $validatedData['email'],
+                'nama' => $validatedData['nama'],
+                'jenis_kelamin' => $validatedData['jenis_kelamin'],
+                'tgl_lahir' => $validatedData['tgl_lahir'],
+                'tempat_lahir' => $validatedData['tempat_lahir']
                 ]);
         // ]);
-        
-        
+            // if (session('success')) {
+            //     Alert::success(session('success'));
+            // }
+
+        // return redirect()->back()->with('success', 'Created successfully!');
         return redirect('profil-guru');
     }
 
