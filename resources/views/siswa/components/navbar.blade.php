@@ -99,12 +99,12 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
                         style="min-width: 11rem">
                         <li>
-                            <a class="dropdown-item" href="/profil-guru"><i class="icon-mid bi bi-person me-2"></i>
+                            <a class="dropdown-item" href="/profil-siswa"><i class="icon-mid bi bi-person me-2"></i>
                                 My Profile</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
-                        </li> --}}
+                        </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"><i
                                     class="icon-mid bi bi-box-arrow-left me-2"></i>

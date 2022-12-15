@@ -42,9 +42,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
     //Dashboard/eskul
     Route::get('/ekstrakulikuler',[EkskulController::class,'index'])->name('ekskul');
-    Route::post('/ekskul/addEkskul',[EkskulController::class,'store'])->name('addEkskul');
-    Route::post('/ekskul/updateEkskul/{id}', [EkskulController::class, 'update'])->name('updateEkskul');
-    Route::delete('/ekskul/deleteEkskul/{id}', [EkskulController::class, 'destroy'])->name('deleteEkskul');
     //Dashboard/Siswa
     Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
     //Dashboard/Guru
@@ -99,7 +96,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     Route::get('/direktori-guru', [guru\direktoriController::class, 'direktori'])->name('direktoriGuru');
     //Profil-Guru
     Route::get('/profil-guru', [guru\ProfilController::class, 'profilGuru'])->name('profilGuru');
-    Route::get('/edit-profil-guru', [guru\ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
+    Route::get('/edit-profil-guru/{id}/edit', [guru\ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
+    Route::put('/edit-profil-guru', [guru\ProfilController::class, 'updateProfilGuru'])->name('updateProfilGuru');
     //List-Kelas
     Route::get('/kelas-saya', [guru\MyClassController::class, 'index'])->name('kelas-saya');
     Route::post('/list-kelas/addPrestasi/{id}', [guru\MyClassController::class, 'store'])->name('addPrestasi');

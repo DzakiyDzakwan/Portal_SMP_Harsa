@@ -97,18 +97,29 @@
                                 <div class="form-group has-icon-left">
                                     <label for="password-id-icon">Kelas</label>
                                     <div class="position-relative">
-                                        <select name="kelas_id" class="form-select form-control" id="basicSelect"
-                                            wire:model.defer="kelas_id">
+                                        <select name="kelas_id"
+                                            class="form-select form-control  @error('kelas_id') is-invalid
+                                        @enderror"
+                                            id="basicSelect" wire:model.defer="kelas_id">
                                             <option>Pilih Kelas</option>
-                                            @foreach ($kelas as $k)
-                                                <option value="{{ $k->kelas_id }}">{{ $k->nama_kelas }}</option>
-                                            @endforeach
-                                        </select>
-                                        {{-- <input name="kelas_id" type="text" class="form-control @error('kelas_id') is-invalid @enderror "
+                                            <select name="kelas_id" class="form-select form-control" id="basicSelect"
+                                                wire:model.defer="kelas_id">
+                                                <option>Pilih Kelas</option>
+                                                @foreach ($kelas as $k)
+                                                    <option value="{{ $k->kelas_id }}">{{ $k->nama_kelas }}</option>
+                                                @endforeach
+                                            </select>
+                                            {{-- <input name="kelas_id" type="text" class="form-control @error('kelas_id') is-invalid @enderror "
                                             placeholder="Kelas" id="kelas_id" wire:model.defer="kelas_id" /> --}}
-                                        <div class="form-control-icon">
-                                            <i class="bi bi-person-video3"></i>
-                                        </div>
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-person-video3"></i>
+                                            </div>
+                                            @error('kelas_id')
+                                                <div class="invalid-feedback">
+                                                    <i class="bx bx-radio-circle"></i>
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                     </div>
                                 </div>
                             </div>
@@ -116,17 +127,27 @@
                                 <div class="form-group has-icon-left">
                                     <label for="password-id-icon">Jenis Kelamin</label>
                                     <div class="position-relative">
-                                        <select name="jenis_kelamin" class="form-select form-control" id="basicSelect"
-                                            wire:model.defer="jenis_kelamin">
-                                            <option>Pilih Jenis Kelamin</option>
-                                            <option value="LK">Laki-Laki</option>
-                                            <option value="PR">Perempuan</option>
-                                        </select>
-                                        {{-- <input name="jenis_kelamin" type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror "
+                                        <select name="jenis_kelamin"
+                                            class="form-select form-control  @error('jenis_kelamin') is-invalid
+                                        @enderror"
+                                            id="basicSelect" wire:model.defer="jenis_kelamin">
+                                            <select name="jenis_kelamin" class="form-select form-control"
+                                                id="basicSelect" wire:model.defer="jenis_kelamin">
+                                                <option>Pilih Jenis Kelamin</option>
+                                                <option value="LK">Laki-Laki</option>
+                                                <option value="PR">Perempuan</option>
+                                            </select>
+                                            {{-- <input name="jenis_kelamin" type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror "
                                             placeholder="Jenis Kelamin" id="jenis_kelamin" wire:model.defer="jenis_kelamin" /> --}}
-                                        <div class="form-control-icon">
-                                            <i class="bi bi-people"></i>
-                                        </div>
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-people"></i>
+                                            </div>
+                                            @error('jenis_kelamin')
+                                                <div class="invalid-feedback">
+                                                    <i class="bx bx-radio-circle"></i>
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                     </div>
                                 </div>
                             </div>
