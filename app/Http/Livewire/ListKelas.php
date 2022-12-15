@@ -18,7 +18,7 @@ class ListKelas extends Component
 
     public function render()
     {
-        $this->kelas = DB::table('table_kelas')->get();
+        $this->kelas = DB::table('list_kelas')->get();
         return view('livewire.list-kelas');
     }
 

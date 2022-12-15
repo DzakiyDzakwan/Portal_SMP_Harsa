@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('mapel_gurus', function (Blueprint $table) {
-            $table->integer('mapel_guru_id')->primary();
+            $table->id('mapel_guru_id');
             $table->char('mapel', 3);
             $table->char('guru', 18);
             $table->foreign('mapel')->references('mapel_id')->on('mapels');
