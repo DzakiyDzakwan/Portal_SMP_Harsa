@@ -7,7 +7,7 @@
 
         <link rel="stylesheet" href="{{asset('assets/css/main/app.css')}}" />
         <link rel="stylesheet" href="{{asset('assets/css/main/app-dark.css')}}" />
-
+        @include('sweetalert::alert')
         <link rel="stylesheet" href="assets/css/shared/iconly.css" />
         @yield('style')
     </head>

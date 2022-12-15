@@ -28,11 +28,21 @@
                             @method('PUT')
                             <div class="form-body">
                                 <div class="row">
+                                    {{-- @if ($data->foto)
+                                    <div class="col-md-3">
+                                        <label>My Profil Now </label>
+                                    </div>
+                                    <div class="col-md-9 form-group">
+                                        <img src="{{ asset('storage/'. $data->foto) }}" class="rounded d-block" alt="..." width="160px">
+                                    </div>
+                                    @else
+                                    <img class="rounded">
+                                    @endif --}}
                                     <div class="col-md-3">
                                         <label>Profile Picture</label>
                                     </div>
                                     <div class="col-md-9 form-group">
-                                        <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto" name="foto" value="{{$data->foto}}">
+                                        <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto" name="foto" value="{{$data->foto}}" onchange="previewImage()">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Username</label>
@@ -100,7 +110,7 @@
                                         <label>Tahun Ijazah</label>
                                     </div>
                                     <div class="col-md-9 form-group">
-                                        <input type="number" id="tahun" class="form-control" name="tahun_ijazah"
+                                        <input type="year" id="tahun" class="form-control" name="tahun_ijazah"
                                             value="{{$data->tahun_ijazah}}" placeholder="-">
                                     </div>
                                     <div class="col-md-3">
@@ -143,7 +153,7 @@
                                                 data-feather="x"></i>
                                             Cancel</a>
 
-                                        <button type="submit" class="btn icon icon-left btn-success px-3"><i
+                                        <button id="success" type="submit" class="btn icon icon-left btn-success px-3"><i
                                             data-feather="check-circle"></i>
                                             Update
                                         </button>
@@ -160,6 +170,21 @@
 @endsection
 
 @section('script')
+<script>
+    function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+</script>
 <script src="{{asset('assets/extensions/apexcharts/apexcharts.min.js')}}"></script>
 <script src="{{asset('assets/js/pages/dashboard.js')}}"></script>
 @endsection
