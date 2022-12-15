@@ -35,6 +35,20 @@ return new class extends Migration
         END
         ');
 
+
+        DB::unprepared('
+        CREATE FUNCTION waktu_akhir(
+            waktu_awal TIME,
+            durasi INT 
+        )
+        RETURNS TIME
+        BEGIN
+            DECLARE waktu_akhir TIME;
+            SET waktu_akhir = ADDTIME(waktu_awal, SEC_TO_TIME(durasi*60));
+        return (waktu_akhir);
+        END
+        ');
+
         DB::unprepared('
         CREATE function indeks(
             kkm INT,
@@ -106,6 +120,7 @@ return new class extends Migration
     {
         DB::unprepared('DROP FUNCTION masa_mengajar');
         DB::unprepared('DROP FUNCTION umur');
+        DB::unprepared('DROP FUNCTION waktu_akhir');
         DB::unprepared('DROP FUNCTION indeks');
     }
 };

@@ -42,9 +42,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
     //Dashboard/eskul
     Route::get('/ekstrakulikuler',[EkskulController::class,'index'])->name('ekskul');
-    Route::post('/ekskul/addEkskul',[EkskulController::class,'store'])->name('addEkskul');
-    Route::post('/ekskul/updateEkskul/{id}', [EkskulController::class, 'update'])->name('updateEkskul');
-    Route::delete('/ekskul/deleteEkskul/{id}', [EkskulController::class, 'destroy'])->name('deleteEkskul');
     //Dashboard/Siswa
     Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
     //Dashboard/Guru

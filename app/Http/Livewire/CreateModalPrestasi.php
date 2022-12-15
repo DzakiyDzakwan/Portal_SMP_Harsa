@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Prestasi;
 use App\Models\LogActivity;
+use Illuminate\Support\Facades\DB;
 
 class CreateModalPrestasi extends Component
 {
@@ -30,18 +31,25 @@ class CreateModalPrestasi extends Component
     }
 
     public function store() {
-        Prestasi::create([
-            'siswa' => $this->siswa,
-            'jenis_prestasi' => $this->jenis_prestasi,
-            'keterangan' => $this->keterangan,
-            'tanggal_prestasi' => $this->tgl_prestasi
-        ]);
+        DB::beginTransaction();
 
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'insert',
-            'at' => 'prestasis'
-        ]);
+        try {
+            Prestasi::create([
+                'siswa' => $this->siswa,
+                'jenis_prestasi' => $this->jenis_prestasi,
+                'keterangan' => $this->keterangan,
+                'tanggal_prestasi' => $this->tgl_prestasi
+            ]);
+    
+            LogActivity::create([
+                'actor' => auth()->user()->uuid,
+                'action' => 'insert',
+                'at' => 'prestasis'
+            ]);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
 
         $this->dispatchBrowserEvent('create-prestasi');
     }

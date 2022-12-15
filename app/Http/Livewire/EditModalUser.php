@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class EditModalUser extends Component
 {
@@ -39,21 +40,29 @@ class EditModalUser extends Component
 
         $this->password = Hash::make($this->password);
 
-        User::where('uuid', $this->uuid)->update([
-            'username' => $this->username,
-            'password' => $this->password
-        ]);
+        DB::beginTransaction();
 
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'update',
-            'at' => 'users'
-        ]);
+        try {
+            User::where('uuid', $this->uuid)->update([
+                'username' => $this->username,
+                'password' => $this->password
+            ]);
+    
+            LogActivity::create([
+                'actor' => auth()->user()->uuid,
+                'action' => 'update',
+                'at' => 'users'
+            ]);
+    
+            $this->emit('userUpdate');
+            $this->reset();
+            $this->dispatchBrowserEvent('update-modal');
+            $this->dispatchBrowserEvent('update-alert');
 
-        $this->emit('userUpdate');
-        $this->reset();
-        $this->dispatchBrowserEvent('update-modal');
-        $this->dispatchBrowserEvent('update-alert');
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
     }
 
     public function showUser($user) {

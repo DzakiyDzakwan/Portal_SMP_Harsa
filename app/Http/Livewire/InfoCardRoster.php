@@ -11,6 +11,7 @@ class InfoCardRoster extends Component
 
     protected $listeners = [
         'rosterStore'=> 'render',
+        'rosterDelete'=> 'render',
     ];
 
     public function render()

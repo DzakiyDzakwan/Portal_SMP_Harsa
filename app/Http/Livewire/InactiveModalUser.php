@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Activity;
 
 class InactiveModalUser extends Component
 {
@@ -61,6 +62,12 @@ class InactiveModalUser extends Component
 
     public function deleteUser() {
         User::where('uuid', $this->uuid)->forceDelete();
+        LogActivity::create([
+            'actor' => auth()->user()->uuid,
+            'action' => 'delete',
+            'at' => 'users'
+        ]);
+
         $this->closeDeleteModal();
         $this->emit('deleteUser');
     }
