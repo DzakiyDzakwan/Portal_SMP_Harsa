@@ -360,6 +360,34 @@ BEGIN
 END?
 DELIMITER;
 
+-- Delete siswa permanen
+DELIMITER ?
+CREATE PROCEDURE delete_siswa(
+    IN siswa CHAR(10),
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+    START TRANSACTION;
+
+    DELETE FROM kontrak_semesters WHERE kontrak_semesters.siswa = siswa COLLATE utf8mb4_general_ci;
+                
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "delete", "kontrak_semesters", NOW());
+    
+    DELETE FROM siswas WHERE NISN = siswa COLLATE utf8mb4_general_ci;
+    
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "delete", "siswas", NOW());
+
+    COMMIT;
+END?
+DELIMITER ;
+
 /* Sesi Penilaian */
 
 /* Input Nilai */

@@ -69,7 +69,7 @@ return new class extends Migration
         LEFT JOIN users ON gurus.user = users.uuid
         INNER JOIN user_profiles ON users.uuid = user_profiles.user
         LEFT JOIN siswas ON kelas.kelas_id = siswas.kelas
-        GROUP BY kelas.kelas_id;
+        GROUP BY kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.nama, siswas.NIS;
         ');
 
         DB::unprepared('

@@ -98,12 +98,8 @@
                                     <label for="password-id-icon">Kelas</label>
                                     <div class="position-relative">
                                         <select name="kelas_id"
-                                            class="form-select form-control  @error('kelas_id') is-invalid
-                                        @enderror"
+                                            class="form-select form-control  @error('kelas_id') is-invalid @enderror"
                                             id="basicSelect" wire:model.defer="kelas_id">
-                                            <option>Pilih Kelas</option>
-                                            <select name="kelas_id" class="form-select form-control" id="basicSelect"
-                                                wire:model.defer="kelas_id">
                                                 <option>Pilih Kelas</option>
                                                 @foreach ($kelas as $k)
                                                     <option value="{{ $k->kelas_id }}">{{ $k->nama_kelas }}</option>
@@ -128,11 +124,8 @@
                                     <label for="password-id-icon">Jenis Kelamin</label>
                                     <div class="position-relative">
                                         <select name="jenis_kelamin"
-                                            class="form-select form-control  @error('jenis_kelamin') is-invalid
-                                        @enderror"
+                                            class="form-select form-control  @error('jenis_kelamin') is-invalid @enderror"
                                             id="basicSelect" wire:model.defer="jenis_kelamin">
-                                            <select name="jenis_kelamin" class="form-select form-control"
-                                                id="basicSelect" wire:model.defer="jenis_kelamin">
                                                 <option>Pilih Jenis Kelamin</option>
                                                 <option value="LK">Laki-Laki</option>
                                                 <option value="PR">Perempuan</option>

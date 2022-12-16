@@ -12,7 +12,8 @@ class InfoCardSiswa extends Component
     protected $listeners = [
         'siswaStore'=> 'render',
         'siswaNonaktif' => 'render',
-        'siswaUpdate' => 'render'
+        'siswaUpdate' => 'render',
+        'siswaDelete' => 'render'
     ];
 
     public function render()

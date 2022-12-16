@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('roster_kelas', function (Blueprint $table) {
             $table->id('roster_id');
-            $table->integer('mapel');
+            $table->unsignedBigInteger('mapel');
             $table->char('kelas', 3);
             $table->time('waktu_mulai');
             $table->integer('durasi');
