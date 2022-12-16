@@ -48,6 +48,7 @@
     @livewire('edit-modal-siswa')
 
     @livewire('alert-siswa')
+    @livewire('alert-prestasi')
 
     @livewire('info-modal-siswa')
 @endsection
@@ -64,15 +65,12 @@
         const infoModal = new bootstrap.Modal('#infoModal', {
             keyboard: false
         })
-        // const inactiveModal = new bootstrap.Modal('#inactiveModal', {
-        //     keyboard: false
-        // })
-        // const restoreModal = new bootstrap.Modal('#restoreModal', {
-        //     keyboard: false
-        // })
-        // const deleteModal = new bootstrap.Modal('#deleteModal', {
-        //     keyboard: false
-        // })
+        const restoreModal = new bootstrap.Modal('#editModalPrestasi', {
+            keyboard: false
+        })
+        const deleteModal = new bootstrap.Modal('#deleteModalPrestasi', {
+            keyboard: false
+        })
 
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
@@ -83,15 +81,12 @@
         window.addEventListener('info-modal', event => {
             infoModal.toggle();
         });
-        /* window.addEventListener('inactive-modal', event => {
-            inactiveModal.toggle();
-        }); */
-        // window.addEventListener('restore-modal', event => {
-        //     restoreModal.toggle();
-        // })
-        // window.addEventListener('delete-modal', event => {
-        //     deleteModal.toggle();
-        // })
+        window.addEventListener('edit-prestasi-modal', event => {
+            restoreModal.toggle();
+        })
+        window.addEventListener('delete-prestasi-modal', event => {
+            deleteModal.toggle();
+        })
 
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
@@ -99,6 +94,9 @@
         const updateToast = new bootstrap.Toast('#updateToast')
         const restoreToast = new bootstrap.Toast('#restoreToast')
         const deleteToast = new bootstrap.Toast('#deleteToast')
+        const insertPrestasiToast = new bootstrap.Toast('#insertPrestasiToast')
+        const updatePrestasiToast = new bootstrap.Toast('#updatePrestasiToast')
+        const deletePrestasiToast = new bootstrap.Toast('#deletePrestasiToast')
 
 
         window.addEventListener('insert-alert', e => {
@@ -119,6 +117,18 @@
 
         window.addEventListener('delete-alert', e => {
             deleteToast.show()
+        })
+
+        window.addEventListener('insert-prestasi-alert', e => {
+            insertPrestasiToast.show()
+        })
+
+        window.addEventListener('edit-prestasi-alert', e => {
+            editPrestasiToast.show()
+        })
+
+        window.addEventListener('delete-prestasi-alert', e => {
+            deletePrestasiToast.show()
         })
     </script>
     @livewireScripts

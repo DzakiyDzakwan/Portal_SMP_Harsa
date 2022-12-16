@@ -1,5 +1,5 @@
 <div>
-    <div wire:ignore.self class="modal fade text-left" id="infoModal" tabindex="-1" role="dialog"
+    <div wire:ignore.self class="modal modal-lg fade text-left" id="infoModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel130" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -35,7 +35,7 @@
 
                     {{-- Navigasi Content --}}
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="profile" role="tabpanel"
+                        <div class="tab-pane mx-auto w-50 fade show active" id="profile" role="tabpanel"
                             aria-labelledby="profile-tab">
                             <table class="table table-borderless mb-0">
                                 <tbody>
@@ -67,12 +67,22 @@
                                     <tr>
                                         <td class="p-1">Status Keaktifan</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $status }}</td>
+                                        <td class="p-1">
+                                            @if ($status == 'Aktif')
+                                                <span class="badge bg-success">{{ $status }}</span>
+                                            @elseif($status == 'Lulus')
+                                                <span class="badge bg-success">{{ $status }}</span>
+                                            @elseif($status == 'Pindah')
+                                                <span class="badge bg-warning">{{ $status }}</span>
+                                            @else
+                                                <span class="badge bg-danger">{{ $status }}</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="tab-pane fade" id="profilePribadi" role="tabpanel"
+                        <div class="tab-pane mx-auto w-50 fade" id="profilePribadi" role="tabpanel"
                             aria-labelledby="profilePribadi-tab">
                             <table class="table table-borderless mb-0">
                                 <tbody>
@@ -142,12 +152,13 @@
                                         <th>Jenis</th>
                                         <th>Tanggal</th>
                                         <th>Kelas</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($prestasi->isEmpty())
                                         <tr>
-                                            <td colspan="5" class="text-center">Tidak ada data</td>
+                                            <td colspan="6" class="text-center">Tidak ada data</td>
                                         </tr>
                                     @else
                                         @foreach ($prestasi as $item)
@@ -157,6 +168,28 @@
                                                 <td>{{ $item->jenis_prestasi }}</td>
                                                 <td>{{ $item->tanggal_prestasi }}</td>
                                                 <td>{{ $item->siswas->kelas }}</td>
+                                                <td>
+                                                    <div class="modal-danger me-1 mb-1 d-inline-block">
+                                                        <button type="button" class="btn btn-sm btn-warning"
+                                                            wire:click="getEditModal('{{ $item->prestasi_id }}')">
+                                                            <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                title="Edit">
+                                                                <i
+                                                                    class="bi
+                                                                bi-pencil"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-danger me-1 mb-1 d-inline-block">
+                                                        <button type="button" class="btn btn-sm btn-danger"
+                                                            wire:click="getDeleteModal('{{ $item->prestasi_id }}')">
+                                                            <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                title="Hapus">
+                                                                <i class="bi bi-trash-fill"></i></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -170,6 +203,137 @@
                     <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Update Prestasi --}}
+    <div class="modal fade text-left" id="editModalPrestasi" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel130" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title white" id="myModalLabel130">
+                        Edit Prestasi
+                    </h5>
+                </div>
+                <form class="form form-vertical" wire:submit.prevent="update()">
+                    @csrf
+                    <div class="form-body modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="siswa">NISN</label>
+                                    <div class="position-relative">
+                                        <input name="siswa" type="text"
+                                            class="form-control @error('nisn') is-invalid @enderror "
+                                            placeholder="Siswa" id="siswa" wire:model.defer="nisn" disabled />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-file-earmark-person"></i>
+                                        </div>
+                                        @error('nisn')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="jenis">Jenis Prestasi</label>
+                                    <div class="position-relative">
+                                        <select class="choices form-control" id="jenis" name="jenis"
+                                            wire:model.defer="jenis">
+                                            <option value="Akademik">Akademik</option>
+                                            <option value="NonAkademik">Non Akademik</option>
+                                        </select>
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-award"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="keterangan">Keterangan</label>
+                                    <div class="position-relative">
+                                        <input name="keterangan" type="text"
+                                            class="form-control @error('keterangan') is-invalid @enderror "
+                                            placeholder="keterangan" id="keterangan" wire:model.defer="keterangan" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-filter-square"></i>
+                                        </div>
+                                        @error('keterangan')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="tgl_prestasi">Tanggal Prestasi</label>
+                                    <div class="position-relative">
+                                        <input name="tgl_prestasi" type="date"
+                                            class="form-control @error('tgl_prestasi') is-invalid @enderror "
+                                            placeholder="Tanggal Prestasi" id="tgl_prestasi"
+                                            wire:model.defer="tgl_prestasi" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-calendar"></i>
+                                        </div>
+                                        @error('tgl_prestasi')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="button" class="btn btn-light-secondary me-1 mb-1"
+                                    data-bs-dismiss="modal">
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Close</span>
+                                </button>
+                                <button type="submit" class="btn btn-success me-1 mb-1">
+                                    Simpan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    {{-- Modal Delete Prestasu --}}
+    <div class="modal fade text-left" id="deleteModalPrestasi" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel130" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title white" id="myModalLabel130">
+                        Hapus Prestasi
+                    </h5>
+                </div>
+                <div class="modal-body">Apakah Anda yakin ingin menghapus data prestasi ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-secondary" wire:click="closeDeleteModal()">
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                    <button class="btn btn-danger ml-1" wire:click="delete()">
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Hapus</span>
                     </button>
                 </div>
             </div>

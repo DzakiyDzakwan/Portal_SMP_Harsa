@@ -3,7 +3,7 @@
     aria-labelledby="myModalLabel130" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <div class="modal-header justify-content-center bg-warning">
+            <div class="modal-header justify-content-center bg-success">
                 <h5 class="modal-title white" id="myModalLabel130">
                     Input Prestasi
                 </h5>

@@ -61,6 +61,7 @@
 
     @livewire('info-modal-siswa')
     @livewire('create-modal-prestasi')
+    @livewire('alert-prestasi')
 @endsection
 
 @section('script')
@@ -73,6 +74,14 @@
             keyboard: false
         })
 
+        const restoreModal = new bootstrap.Modal('#editModalPrestasi', {
+            keyboard: false
+        })
+
+        const deleteModal = new bootstrap.Modal('#deleteModalPrestasi', {
+            keyboard: false
+        })
+
         window.addEventListener('info-modal', event => {
             infoModal.toggle();
         });
@@ -80,6 +89,30 @@
         window.addEventListener('create-prestasi', event => {
             createPrestasi.toggle();
         });
+
+        window.addEventListener('edit-prestasi-modal', event => {
+            restoreModal.toggle();
+        })
+        window.addEventListener('delete-prestasi-modal', event => {
+            deleteModal.toggle();
+        })
+
+        //Modal
+        const insertPrestasiToast = new bootstrap.Toast('#insertPrestasiToast')
+        const updatePrestasiToast = new bootstrap.Toast('#updatePrestasiToast')
+        const deletePrestasiToast = new bootstrap.Toast('#deletePrestasiToast')
+
+        window.addEventListener('insert-prestasi-alert', e => {
+            insertPrestasiToast.show()
+        })
+
+        window.addEventListener('edit-prestasi-alert', e => {
+            editPrestasiToast.show()
+        })
+
+        window.addEventListener('delete-prestasi-alert', e => {
+            deletePrestasiToast.show()
+        })
     </script>
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>

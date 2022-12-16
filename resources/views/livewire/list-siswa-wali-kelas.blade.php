@@ -68,7 +68,7 @@
                         </button>
                     </div>
                     <div class="modal-info me-1 mb-1 d-inline-block">
-                        <button type="button" class="btn btn-sm btn-warning"
+                        <button type="button" class="btn btn-sm btn-success"
                             wire:click="createPrestasi('{{ $item->NISN }}')">
                             <i class="bi bi-trophy-fill"></i>
                         </button>

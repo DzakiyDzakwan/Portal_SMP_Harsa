@@ -20,6 +20,16 @@ class CreateModalPrestasi extends Component
         $this->jenis_prestasi = "Akademik";
     }
 
+    protected $rules = [
+        'jenis_prestasi' => 'required',
+        'keterangan' => 'required|max:255' ,
+        'tgl_prestasi' => 'required'
+    ];
+
+    public function updated($fields) {
+        $this->validateOnly($fields);
+    }
+
     public function render()
     {
         return view('livewire.create-modal-prestasi');
@@ -31,6 +41,13 @@ class CreateModalPrestasi extends Component
     }
 
     public function store() {
+
+        $this->validate([
+            'jenis_prestasi' => 'required',
+            'keterangan' => 'required|max:255' ,
+            'tgl_prestasi' => 'required'
+        ]);
+
         DB::beginTransaction();
 
         try {
@@ -47,6 +64,7 @@ class CreateModalPrestasi extends Component
                 'at' => 'prestasis'
             ]);
             DB::commit();
+            $this->dispatchBrowserEvent('insert-prestasi-alert');
         } catch (\Throwable $th) {
             DB::rollback();
         }
