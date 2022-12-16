@@ -93,7 +93,7 @@
                         {{-- Restore Button --}}
                         <div class="modal-success me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                data-bs-target="#restoreModal{{ $item->NIP }}">
+                                data-bs-target="#restoreModal{{ $item->user }}">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Restore">
                                     <i class="bi bi-arrow-repeat"></i></i>
                                 </div>

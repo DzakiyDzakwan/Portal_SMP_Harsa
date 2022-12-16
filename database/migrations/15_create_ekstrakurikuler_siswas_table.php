@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('nilai')->unsigned();
             $table->text('keterangan');
             $table->foreign('ekstrakurikuler')->references('ekstrakurikuler_id')->on('ekstrakurikulers')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('kontrak_siswa')->references('kontrak_semester_id')->on('kontrak_semesters')->onUpdate('cascde')->onDelete('cascade');
+            $table->foreign('kontrak_siswa')->references('kontrak_semester_id')->on('kontrak_semesters')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

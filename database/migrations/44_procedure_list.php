@@ -44,6 +44,30 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        CREATE PROCEDURE update_admin (
+            IN admin CHAR(36),
+            IN user CHAR(36),
+            IN username VARCHAR(255),
+            IN pass VARCHAR(255)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+            START TRANSACTION;
+            UPDATE users SET username = username, password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "users", NOW());
+            COMMIT;
+        
+        END
+        ');
+
+        DB::unprepared('
             CREATE PROCEDURE inactive_admin (
                 IN admin CHAR(36)
             )
@@ -57,6 +81,34 @@ return new class extends Migration
                 UPDATE users SET deleted_at = NOW() WHERE uuid = admin COLLATE utf8mb4_general_ci; 
                 COMMIT;
             END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE restore_admin(
+            IN admin CHAR(36)
+        )
+        BEGIN
+            UPDATE users SET deleted_at = NULL WHERE uuid = admin COLLATE utf8mb4_general_ci;
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE delete_admin (
+            IN admin CHAR(36),
+            IN user CHAR(36),
+        )
+        BEGIN
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+            START TRANSACTION;
+            DELETE users WHERE uuid = user COLLATE utf8mb4_general_ci; 
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "delete", "users", NOW());
+            COMMIT;
+        END
         ');
 
         DB::unprepared('
@@ -108,6 +160,24 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        BEGIN
+        
+            DECLARE guru CHAR(36);
+            SELECT user INTO guru FROM gurus WHERE nip = oldnip COLLATE utf8mb4_general_ci;
+        
+            UPDATE gurus SET NIP = newnip, jabatan = jabatan WHERE NIP = oldnip COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "gurus", NOW());
+        
+            UPDATE users SET username = newnip WHERE uuid = guru COLLATE utf8mb4_general_ci;
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "gurus", NOW());
+        END
+        ');
+
+        DB::unprepared('
             CREATE PROCEDURE inactive_guru (
                 IN guru CHAR(36),
                 IN admin CHAR(36)
@@ -126,6 +196,50 @@ return new class extends Migration
                 
                 UPDATE users SET deleted_at = NOW() WHERE uuid = guru COLLATE utf8mb4_general_ci; 
                 COMMIT;
+            END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE restore_guru (
+            IN guru CHAR(36),
+            IN admin CHAR(36)
+        )
+            BEGIN
+                UPDATE gurus SET status = "Aktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
+        
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "update", "gurus", NOW());
+                
+                UPDATE users SET deleted_at = NULL WHERE uuid = guru COLLATE utf8mb4_general_ci; 
+            END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE delete_guru (
+            IN guru CHAR(36),
+            IN admin CHAR(36)
+        )
+                BEGIN
+                DECLARE nip CHAR(18);
+                SELECT NIP INTO nip FROM gurus WHERE user = guru COLLATE utf8mb4_general_ci;
+
+                IF EXISTS(SELECT * FROM kelas WHERE wali_kelas = nip COLLATE utf8mb4_general_ci) THEN
+                    UPDATE kelas SET wali_kelas = NULL WHERE wali_kelas = nip COLLATE utf8mb4_general_ci;
+                END IF;
+                DELETE FROM gurus WHERE user = guru COLLATE utf8mb4_general_ci;
+        
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "delete", "gurus", NOW());
+        
+                DELETE FROM user_profiles WHERE user = guru COLLATE utf8mb4_general_ci;
+        
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "delete", "user_profiles", NOW());
+                
+                DELETE FROM users WHERE uuid = guru COLLATE utf8mb4_general_ci; 
+        
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "delete", "users", NOW());
             END
         ');
 
@@ -242,6 +356,35 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        CREATE PROCEDURE update_kelas(
+            IN old_kelas CHAR(3),
+            IN new_kelas CHAR(3),
+            IN old_wali CHAR(3),
+            IN wali CHAR(18),
+            IN nama VARCHAR(255),
+            admin CHAR(36)
+        )
+        BEGIN
+        
+            UPDATE kelas SET kelas_id = new_kelas, wali_kelas = wali, nama_kelas = nama WHERE kelas_id = old_kelas COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "kelas", NOW());
+        
+            UPDATE guru SET is_wali_kelas = "Tidak" WHERE NIP = old_wali COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "gurus", NOW());
+        
+            UPDATE guru SET is_wali_kelas = "Iya" WHERE NIP = wali COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "gurus", NOW());
+        
+        END
+        ');
+
+        DB::unprepared('
             CREATE PROCEDURE inactive_kelas(
                 IN kelas CHAR(3),
                 IN admin CHAR(36)
@@ -262,6 +405,22 @@ return new class extends Migration
                 VALUES(admin, "update", "gurus", NOW());
             
             END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE restore_kelas(
+            IN kelas CHAR(3),
+            IN wali CHAR(18),
+            IN admin CHAR(36)
+        )
+        BEGIN
+        
+            UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "kelas", NOW());
+            
+        END
         ');
 
         DB::unprepared('
@@ -388,6 +547,78 @@ return new class extends Migration
                 COMMIT;
             END
         ');
+
+        DB::unprepared('
+        CREATE PROCEDURE add_prestasi(
+            IN nisn CHAR(10),
+            IN jenis VARCHAR(12),
+            IN ket TEXT,
+            IN tgl DATE,
+            IN admin CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+            
+                START TRANSACTION;
+                INSERT INTO prestasis(siswa, jenis_prestasi, keterangan, tanggal_prestasi)
+                VALUES(nisn, jenis, ket, tgl);
+            
+                 INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "insert", "prestasis", NOW());
+                COMMIT;
+            END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE update_prestasi(
+            IN prestasi INT,
+            IN jenis VARCHAR(12),
+            IN ket TEXT,
+            IN tgl DATE,
+            IN admin CHAR(36)
+        )
+        BEGIN
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+            UPDATE prestasis SET jenis_prestasi = jenis, keterangan = ket, tanggal_prestasi = tgl WHERE prestasi_id = prestasi;
+        
+             INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "prestasis", NOW());
+        
+            COMMIT;
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE delete_prestasi(
+            IN prestasi INT,
+            IN admin CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+            
+                START TRANSACTION;
+                DELETE FROM prestasis WHERE prestasi_id = prestasi;
+            
+                 INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "delete", "prestasis", NOW());
+                
+                COMMIT;
+            END
+        ');
     }
 
     /**
@@ -398,17 +629,28 @@ return new class extends Migration
     public function down()
     {
         DB::unprepared("DROP PROCEDURE add_admin");
+        DB::unprepared("DROP PROCEDURE update_admin");
         DB::unprepared("DROP PROCEDURE inactive_admin");
+        DB::unprepared("DROP PROCEDURE restore_admin");
+        DB::unprepared("DROP PROCEDURE delete_admin");
         DB::unprepared("DROP PROCEDURE add_guru");
+        DB::unprepared("DROP PROCEDURE update_guru");
         DB::unprepared("DROP PROCEDURE inactive_guru");
+        DB::unprepared("DROP PROCEDURE restore_guru");
+        DB::unprepared("DROP PROCEDURE delete_guru");
         DB::unprepared("DROP PROCEDURE add_mapel");
         DB::unprepared("DROP PROCEDURE inactive_mapel");
         DB::unprepared("DROP PROCEDURE delete_mapel");
         DB::unprepared("DROP PROCEDURE add_kelas");
+        DB::unprepared("DROP PROCEDURE update_kelas");
+        DB::unprepared("DROP PROCEDURE restore_kelas");
         DB::unprepared("DROP PROCEDURE inactive_kelas");
         DB::unprepared("DROP PROCEDURE delete_kelas");
         DB::unprepared("DROP PROCEDURE inactive_siswa");
         DB::unprepared("DROP PROCEDURE add_siswa");
         DB::unprepared("DROP PROCEDURE delete_siswa");
+        DB::unprepared("DROP PROCEDURE add_prestasi");
+        DB::unprepared("DROP PROCEDURE delete_prestasi");
+        DB::unprepared("DROP PROCEDURE update_prestasi");
     }
 };

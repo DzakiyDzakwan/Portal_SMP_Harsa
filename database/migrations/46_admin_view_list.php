@@ -189,7 +189,6 @@ return new class extends Migration
         DB::unprepared('DROP VIEW list_inactive_kelas');
         DB::unprepared('DROP VIEW list_mapel');
         DB::unprepared('DROP VIEW list_inactive_mapel');
-        DB::unprepared('DROP VIEW mapel_guru');
         DB::unprepared('DROP VIEW list_roster_kelas');
         DB::unprepared('DROP VIEW sesi_penilaian');
         DB::unprepared('DROP VIEW list_ekstrakurikuler');

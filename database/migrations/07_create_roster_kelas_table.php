@@ -20,7 +20,7 @@ return new class extends Migration
             $table->time('waktu_mulai');
             $table->integer('durasi');
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
-            $table->foreign('mapel')->references('mapel_guru_id')->on('mapel_gurus')->onUpdate('cascade')->onDelete();
+            $table->foreign('mapel')->references('mapel_guru_id')->on('mapel_gurus')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('kelas')->references('kelas_id')->on('kelas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

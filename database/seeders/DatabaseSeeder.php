@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MapelTableSeeder::class);
         $this->call(KelasTableSeeder::class);
         $this->call(SiswaTableSeeder::class);
+        $this->call(PrestasiTableSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

@@ -15,7 +15,7 @@ class PrestasiTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('prestasis')->insert([
+        /* DB::table('prestasis')->insert([
             [
                 "siswa" => '211402018',
                 "jenis_prestasi" => "Akademik",
@@ -30,6 +30,9 @@ class PrestasiTableSeeder extends Seeder
                 "tanggal_prestasi" => Carbon::create('2021-11-01'),
                 "semester" => '2'
             ],
-        ]);
+        ]); */
+        DB::select('CALL add_prestasi(?, ?, ?, ?, ?)', ["1234567890", "Akademik", "Juara 1 Tidur di Kelas tingkat Nasional", "2022-12-01", '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_prestasi(?, ?, ?, ?, ?)', ["1234567890", "Akademik", "Juara 1 Menggambar Gunung Legend Tingkat Internasional", "2022-12-01", '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }

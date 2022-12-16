@@ -28,18 +28,27 @@ BEGIN
 END?
 DELIMITER ;
 
---Update Admin (❌)
+--Update Admin (✅)
 DELIMITER ?
 CREATE PROCEDURE update_admin (
     IN admin CHAR(36),
+    IN user CHAR(36),
     IN username VARCHAR(255),
     IN pass VARCHAR(255)
 )
 BEGIN
+
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    START TRANSACTION;
     UPDATE users SET username = username, password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "update", "users", NOW());
+    COMMIT;
 
 END?
 DELIMITER;
@@ -61,26 +70,33 @@ CREATE PROCEDURE inactive_admin (
     END?
 DELIMITER;
 
---Restore Admin (❌)
+--Restore Admin (✅)
 DELIMITER ?
 CREATE PROCEDURE restore_admin(
     IN admin CHAR(36)
 )
 BEGIN
     UPDATE users SET deleted_at = NULL WHERE uuid = admin COLLATE utf8mb4_general_ci;
-END
+END?
 DELIMITER;
 
---Delete Admin (❌)
+--Delete Admin (✅)
 DELIMITER ?
 CREATE PROCEDURE delete_admin (
     IN admin CHAR(36),
     IN user CHAR(36),
 )
 BEGIN
+ DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    START TRANSACTION;
     DELETE users WHERE uuid = user COLLATE utf8mb4_general_ci; 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "delete", "users", NOW());
+    COMMIT;
 END?
 DELIMITER;
 
@@ -99,8 +115,8 @@ CREATE PROCEDURE add_guru(
 )
 BEGIN
 
-    DECLARE errno INT;
     DECLARE uuid CHAR(36);
+    DECLARE errno INT;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
@@ -108,7 +124,7 @@ BEGIN
     DECLARE exit handler for sqlwarning
     BEGIN
         ROLLBACK;
-    END?
+    END;
 
     SET uuid = UUID();
 
@@ -135,29 +151,119 @@ BEGIN
 END?
 DELIMITER ;
 
+--Update Guru Admin(✅)
+DELIMITER ?
+CREATE PROCEDURE update_guru(
+    IN oldnip CHAR(18),
+    IN newnip CHAR(18),
+    IN jabatan CHAR(4),
+    IN admin CHAR(36)
+)
+BEGIN
+
+    BEGIN
+        
+            DECLARE guru CHAR(36);
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+            SELECT user INTO guru FROM gurus WHERE nip = oldnip COLLATE utf8mb4_general_ci;
+        
+            UPDATE gurus SET NIP = newnip, jabatan = jabatan WHERE NIP = oldnip COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "gurus", NOW());
+        
+            UPDATE users SET username = newnip WHERE uuid = guru COLLATE utf8mb4_general_ci;
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "gurus", NOW());
+        END?
+DELIMITER ;
+
 --Non Aktifkan Guru (✅)
 DELIMITER ?
 CREATE PROCEDURE inactive_guru (
     IN guru CHAR(36),
     IN admin CHAR(36)
 )
-BEGIN
-    DECLARE errno INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        ROLLBACK;
-    END;
-    START TRANSACTION;
-    UPDATE gurus SET status = "Inaktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
+        DECLARE errno INT;
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+        START TRANSACTION;
+        UPDATE gurus SET status = "Inaktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
 
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "gurus", NOW());
-    
-    UPDATE users SET deleted_at = NOW() WHERE uuid = guru COLLATE utf8mb4_general_ci; 
-    COMMIT;
-END?
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "update", "gurus", NOW());
+        
+        UPDATE users SET deleted_at = NOW() WHERE uuid = guru COLLATE utf8mb4_general_ci; 
+        COMMIT;
+    END?
 DELIMITER;
 
+--Restore Guru(✅)
+DELIMITER ?
+CREATE PROCEDURE restore_guru (
+    IN guru CHAR(36),
+    IN admin CHAR(36)
+)
+    BEGIN
+        DECLARE errno INT;
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+        UPDATE gurus SET status = "Aktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
+
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "update", "gurus", NOW());
+        
+        UPDATE users SET deleted_at = NULL WHERE uuid = guru COLLATE utf8mb4_general_ci; 
+    END?
+DELIMITER;
+
+--Delete Guru(✅)
+DELIMITER ?
+CREATE PROCEDURE delete_guru (
+    IN guru CHAR(36),
+    IN admin CHAR(36)
+)
+    BEGIN
+        DECLARE nip CHAR(18);
+        DECLARE errno INT;
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+        SELECT NIP INTO nip FROM gurus WHERE user = guru COLLATE utf8mb4_general_ci;
+
+        START TRANSACTION;
+
+        IF EXISTS(SELECT * FROM kelas WHERE wali_kelas = nip COLLATE utf8mb4_general_ci) THEN
+            UPDATE kelas SET wali_kelas = NULL WHERE wali_kelas = nip COLLATE utf8mb4_general_ci;
+        END IF;
+        DELETE FROM gurus WHERE user = guru COLLATE utf8mb4_general_ci;
+
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "delete", "gurus", NOW());
+
+        DELETE FROM user_profiles WHERE user = guru COLLATE utf8mb4_general_ci;
+
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "delete", "user_profiles", NOW());
+        
+        DELETE FROM users WHERE uuid = guru COLLATE utf8mb4_general_ci; 
+
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "delete", "users", NOW());
+        COMMIT;
+    END?
+DELIMITER;
 
 /* Mapel */
 --Insert Mapel (✅)
@@ -275,6 +381,36 @@ BEGIN
 END?
 DELIMITER ;
 
+--Update Kelas
+DELIMITER ?
+CREATE PROCEDURE update_kelas(
+    IN old_kelas CHAR(3),
+    IN new_kelas CHAR(3),
+    IN old_wali CHAR(3),
+    IN wali CHAR(18),
+    IN nama VARCHAR(255),
+    admin CHAR(36)
+)
+BEGIN
+
+    UPDATE kelas SET kelas_id = new_kelas, wali_kelas = wali, nama_kelas = nama WHERE kelas_id = old_kelas COLLATE utf8mb4_general_ci;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "kelas", NOW());
+
+    UPDATE guru SET is_wali_kelas = "Tidak" WHERE NIP = old_wali COLLATE utf8mb4_general_ci;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "gurus", NOW());
+
+    UPDATE guru SET is_wali_kelas = "Iya" WHERE NIP = wali COLLATE utf8mb4_general_ci;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "gurus", NOW());
+
+END?
+DELIMITER ;
+
 --Nonaktifkan Kelas (✅)
 DELIMITER ?
 CREATE PROCEDURE inacitve_kelas(
@@ -296,6 +432,23 @@ BEGIN
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "update", "gurus", NOW());
 
+END?
+DELIMITER ;
+
+--Restore Kelas(❌)
+DELIMITER ?
+CREATE PROCEDURE restore_kelas(
+    IN kelas CHAR(3),
+    IN wali CHAR(18),
+    IN admin CHAR(36)
+)
+BEGIN
+
+    UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas COLLATE utf8mb4_general_ci;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "kelas", NOW());
+    
 END?
 DELIMITER ;
 
@@ -333,7 +486,7 @@ DELIMITER ;
 
 
 /* Siswa */
---Registrasi Siswa (❌) Anak-ke Cannot null
+--Registrasi Siswa (✅)
 DELIMITER ?
 CREATE PROCEDURE add_siswa(
     IN nama VARCHAR(255),
@@ -458,6 +611,82 @@ DELIMITER ;
 /* Input Nilai END */
 
 --Prestasi Siswa Akademik--
+--Add Prestasi (✅)
+DELIMITER ?
+CREATE PROCEDURE add_prestasi(
+IN nisn CHAR(10),
+IN jenis VARCHAR(12),
+IN ket TEXT,
+IN tgl DATE,
+IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE uuid CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+    INSERT INTO prestasis(siswa, jenis_prestasi, keterangan, tanggal_prestasi)
+    VALUES(nisn, jenis, ket, tgl);
+
+     INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "prestasis", NOW());
+    COMMIT;
+END?
+DELIMITER ;
+
+--Update Prestasi(✅)
+DELIMITER ?
+CREATE PROCEDURE update_prestasi(
+    IN prestasi INT,
+    IN jenis VARCHAR(12),
+    IN ket TEXT,
+    IN tgl DATE,
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+    UPDATE prestasis SET jenis_prestasi = jenis, keterangan = ket, tanggal_prestasi = tgl WHERE prestasi_id = prestasi;
+
+     INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "prestasis", NOW());
+
+    COMMIT;
+END?
+DELIMITER ;
+
+--Delete Prestasi (✅)
+DELIMITER ?
+CREATE PROCEDURE delete_prestasi(
+IN prestasi INT,
+IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+    DELETE FROM prestasis WHERE prestasi_id = prestasi;
+
+     INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "delete", "prestasis", NOW());
+    
+    COMMIT;
+END?
+DELIMITER ;
+
 /* Prosedur mencari prestasi siswa tertentu secara nonAkademik */
 DELIMITER ?
 CREATE PROCEDURE prestasi_akademik(
