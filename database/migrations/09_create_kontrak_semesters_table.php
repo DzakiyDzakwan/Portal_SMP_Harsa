@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('izin')->unsigned()->default(0);
             $table->integer('alpa')->unsigned()->default(0);
             $table->enum('status', ['Lulus', 'Gagal', 'On Going']);
-            $table->foreign('siswa')->references('NISN')->on('siswas');
+            $table->foreign('siswa')->references('NISN')->on('siswas')->onUpdate('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

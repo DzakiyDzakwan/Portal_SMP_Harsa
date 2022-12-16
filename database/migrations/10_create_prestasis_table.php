@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('jenis_prestasi', ['Akademik', 'NonAkademik']);
             $table->string('keterangan');
             $table->date('tanggal_prestasi');
-            $table->foreign('siswa')->references('NISN')->on('siswas');
+            $table->foreign('siswa')->references('NISN')->on('siswas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

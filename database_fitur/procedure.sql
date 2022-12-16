@@ -28,20 +28,59 @@ BEGIN
 END?
 DELIMITER ;
 
+--Update Admin (❌)
+DELIMITER ?
+CREATE PROCEDURE update_admin (
+    IN admin CHAR(36),
+    IN username VARCHAR(255),
+    IN pass VARCHAR(255)
+)
+BEGIN
+    UPDATE users SET username = username, password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "users", NOW());
+
+END?
+DELIMITER;
+
 --Non Aktifkan Admin Sementara (✅)
 DELIMITER ?
 CREATE PROCEDURE inactive_admin (
     IN admin CHAR(36)
 )
-BEGIN
-    DECLARE errno INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        ROLLBACK;
-    END;
-    START TRANSACTION;
-    UPDATE users SET deleted_at = NOW() WHERE uuid = admin COLLATE utf8mb4_general_ci; 
-    COMMIT;
+        DECLARE errno INT;
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+        START TRANSACTION;
+        UPDATE users SET deleted_at = NOW() WHERE uuid = admin COLLATE utf8mb4_general_ci; 
+        COMMIT;
+    END?
+DELIMITER;
+
+--Restore Admin (❌)
+DELIMITER ?
+CREATE PROCEDURE restore_admin(
+    IN admin CHAR(36)
+)
+BEGIN
+    UPDATE users SET deleted_at = NULL WHERE uuid = admin COLLATE utf8mb4_general_ci;
+END
+DELIMITER;
+
+--Delete Admin (❌)
+DELIMITER ?
+CREATE PROCEDURE delete_admin (
+    IN admin CHAR(36),
+    IN user CHAR(36),
+)
+BEGIN
+    DELETE users WHERE uuid = user COLLATE utf8mb4_general_ci; 
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "delete", "users", NOW());
 END?
 DELIMITER;
 

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('tanggal_masuk');
             $table->enum('status', ['Aktif', 'Inaktif']);
             $table->enum('is_wali_kelas', ['iya', 'tidak']);
-            $table->foreign('user')->references('uuid')->on('users')->onUpdate('cascade');
+            $table->foreign('user')->references('uuid')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

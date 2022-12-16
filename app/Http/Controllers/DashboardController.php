@@ -15,6 +15,7 @@ class DashboardController extends Controller
 {
     public function index() {
         $pages = 'dashboard';
+        $subpages = 'dashboard';
         $user = User::count();
         $siswa = Siswa::count();
         $guru = Guru::count();
@@ -24,6 +25,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard',compact(
             'pages',
+            'subpages',
             'user',
             'siswa',
             'guru',

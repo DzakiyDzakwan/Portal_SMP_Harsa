@@ -14,6 +14,7 @@ use App\Http\Controllers\MapelController;
 use App\Http\Controllers\siswa;
 use App\Http\Controllers\siswa\ProfilController;
 use App\Http\Controllers\RosterController;
+use App\Http\Controllers\NilaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/guru', [GuruController::class, 'index'])->name('guru');    
     //Dashboard/Roster
     Route::get('/roster', [RosterController::class, 'index'])->name('roster');
+    //Dashboard/eskul
+    Route::get('/penilaian',[NilaiController::class,'index'])->name('nilai');
     //Dashboard/Log-Users
     Route::get('/log-activities',[LogController::class,'activity'])->name('log-activities');
     //Dashboard/Log-Users
@@ -100,9 +103,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     Route::put('/edit-profil-guru', [guru\ProfilController::class, 'updateProfilGuru'])->name('updateProfilGuru');
     //List-Kelas
     Route::get('/kelas-saya', [guru\MyClassController::class, 'index'])->name('kelas-saya');
-    Route::post('/list-kelas/addPrestasi/{id}', [guru\MyClassController::class, 'store'])->name('addPrestasi');
-    Route::post('/list-kelas/updatePrestasi/{id}', [guru\MyClassController::class, 'update'])->name('updatePrestasi');
-    Route::delete('/list-kelas/deletePrestasi/{id}', [guru\MyClassController::class, 'destroy'])->name('deletePrestasi');
     //Input-NilaiBulanan
     Route::get('/pilih-kelas', [guru\InputController::class, 'pilihKelas1'])->name('pilihKelas');
     Route::get('/input-nilai', [guru\InputController::class, 'inputNilai1'])->name('inputNilai');

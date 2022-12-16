@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('grade', ['7', '8', '9']);
             $table->char('kelompok_kelas', 1);
             $table->string('nama_kelas')->unique();
-            $table->foreign('wali_kelas')->references('NIP')->on('gurus');
+            $table->foreign('wali_kelas')->references('NIP')->on('gurus')->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

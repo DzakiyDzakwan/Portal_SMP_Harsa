@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('tgl_lahir')->nullable();
             $table->enum('jenis_kelamin', ['LK', 'PR']);
             $table->string('foto')->nullable();
-            $table->foreign('user')->references('uuid')->on('users')->onUpdate('cascade');
+            $table->foreign('user')->references('uuid')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

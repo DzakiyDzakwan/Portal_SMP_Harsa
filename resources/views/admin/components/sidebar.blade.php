@@ -93,7 +93,7 @@
                         <i class="bi bi-people-fill"></i>
                         <span>Manajemen User</span>
                     </a>
-                    <ul class="submenu">
+                    <ul class="submenu @if ($pages === 'user') active @endif">
                         <li class="submenu-item">
                             <a href="/admin">Admin</a>
                         </li>
@@ -115,17 +115,20 @@
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Manajemen Sekolah</span>
                     </a>
-                    <ul class="submenu">
-                        <li class="submenu-item">
+                    <ul class="submenu @if ($pages === 'manajemenKelas') active @endif">
+                        <li class="submenu-item @if ($subpages === 'kelas') active @endif">
                             <a href="/kelas">Kelas</a>
                         </li>
-                        <li class="submenu-item">
+                        <li class="submenu-item @if ($subpages === 'mapel') active @endif">
                             <a href="/mapel">Mata Pelajaran</a>
                         </li>
-                        <li class="submenu-item">
+                        <li class="submenu-item @if ($subpages === 'roster') active @endif">
                             <a href="/roster">Roster Pelajaran</a>
                         </li>
-                        <li class="submenu-item">
+                        <li class="submenu-item @if ($subpages === 'nilai') active @endif">
+                            <a href="/penilaian">Nilai</a>
+                        </li>
+                        <li class="submenu-item @if ($subpages === 'ekstrakurikuler') active @endif">
                             <a href="/ekstrakulikuler">Ekstrakulikuler</a>
                         </li>
                     </ul>

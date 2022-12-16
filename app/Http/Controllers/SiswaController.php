@@ -20,21 +20,8 @@ class SiswaController extends Controller
     public function index()
     {
         $pages = 'user';
-        $totalSiswa = Siswa::count();
-        $siswaActive = Siswa::where('status', 'Aktif')->count();
-        $siswaLulus = Siswa::where('status', 'Lulus')->count();
-        $siswaPindah = Siswa::where('status', 'Pindah')->count();
-        $siswaDO = Siswa::where('status', 'Drop Out')->count();
-        $kelas = Kelas::all();
-        $siswaInactive = $siswaLulus + $siswaPindah + $siswaDO;
-        
-        // $siswas = DB::table('siswas')
-        //             ->join('users', 'users.uuid', '=', 'siswas.user')
-        //             ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
-        //             ->join('prestasis', 'prestasis.siswa', '=', 'siswas.NISN')
-        //             ->get();
-        $siswas = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
-        return view('admin.siswa', compact('totalSiswa', 'pages', 'siswas', 'siswaActive', 'siswaInactive', 'kelas'));
+        $subpages = 'siswa';
+        return view('admin.siswa', compact('pages', 'subpages'));
         
     }
 

@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RosterController extends Controller
+class NilaiController extends Controller
 {
     public function index() {
         $pages = 'manajemenKelas';
-        $subpages = 'roster';
-        return view('admin.roster',compact('pages', 'subpages'));
+        $subpages = 'nilai';
+        return view('admin.nilai', compact('pages', 'subpages'));
     }
 }

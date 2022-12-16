@@ -101,18 +101,6 @@
         const insertPrestasiToast = new bootstrap.Toast('#insertPrestasiToast')
         const updatePrestasiToast = new bootstrap.Toast('#updatePrestasiToast')
         const deletePrestasiToast = new bootstrap.Toast('#deletePrestasiToast')
-
-        window.addEventListener('insert-prestasi-alert', e => {
-            insertPrestasiToast.show()
-        })
-
-        window.addEventListener('edit-prestasi-alert', e => {
-            editPrestasiToast.show()
-        })
-
-        window.addEventListener('delete-prestasi-alert', e => {
-            deletePrestasiToast.show()
-        })
     </script>
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
