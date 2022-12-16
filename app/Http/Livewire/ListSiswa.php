@@ -14,6 +14,7 @@ class ListSiswa extends Component
         'siswaStore'=> 'render',
         'siswaUpdate'=> 'render',
         'siswaNonaktif' => 'render',
+        'siswaDelete' => 'render',
     ];
 
     public function render()
@@ -37,6 +38,15 @@ class ListSiswa extends Component
         $this->render();
         $this->emit('siswaNonaktif');
         $this->dispatchBrowserEvent('inactive-alert');
+    }
+
+    public function delete($user) {
+
+        DB::select('CALL delete_siswa(?, ?)', [$user, auth()->user()->uuid]);
+
+        $this->render();
+        $this->emit('siswaDelete');
+        $this->dispatchBrowserEvent('delete-alert');
     }
     
 }

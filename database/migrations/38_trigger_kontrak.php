@@ -35,17 +35,6 @@ return new class extends Migration
         VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.grade, NEW.semester, NEW.tahun_ajaran, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "update", NOW());
         END
         ');
-
-        /* log delete kontrak */
-        DB::unprepared('
-        CREATE TRIGGER log_delete_kontrak
-        BEFORE DELETE ON kontrak_semesters
-        FOR EACH ROW
-        BEGIN
-            SIGNAL SQLSTATE "45000"
-            SET MESSAGE_TEXT = "Tidak dapat menghapus data";
-        END
-        ');
     }
 
     /**
@@ -57,6 +46,5 @@ return new class extends Migration
     {
         DB::unprepared('DROP TRIGGER log_insert_kontrak');
         DB::unprepared('DROP TRIGGER log_update_kontrak');
-        DB::unprepared('DROP TRIGGER log_delete_kontrak');
     }
 };
