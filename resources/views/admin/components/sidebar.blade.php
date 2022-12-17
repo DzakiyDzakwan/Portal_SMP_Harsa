@@ -122,6 +122,9 @@
                         <li class="submenu-item @if ($subpages === 'mapel') active @endif">
                             <a href="/mapel">Mata Pelajaran</a>
                         </li>
+                        <li class="submenu-item @if ($subpages === 'mapelguru') active @endif">
+                            <a href="/mapelguru">Mata Pelajaran Guru</a>
+                        </li>
                         <li class="submenu-item @if ($subpages === 'roster') active @endif">
                             <a href="/roster">Roster Pelajaran</a>
                         </li>

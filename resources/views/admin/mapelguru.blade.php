@@ -1,7 +1,7 @@
 @extends('admin.master.main')
 
 @section('title')
-    <title>Mata Pelajaran</title>
+    <title>Mata Pelajaran Guru</title>
 @endsection
 
 @section('style')
@@ -38,20 +38,20 @@
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
                     {{-- Button Tambah mapel --}}
-                    @livewire('create-modal-mapel')
+                    @livewire('create-modal-mapel-guru')
                 </div>
                 <div class="form-group">
                     {{-- Button Inactive Mata Pelajaran --}}
-                    @livewire('inactive-modal-mapel')
+                    @livewire('inactive-modal-mapel-guru')
                 </div>
             </div>
         </div>
         <div class="card-body">
-            @livewire('list-mapel')
+            @livewire('list-mapel-guru')
         </div>
     </div>
 
-    @livewire('edit-modal-mapel')
+    @livewire('edit-modal-mapel-guru')
 
     @livewire('alert-mapel')
 @endsection
