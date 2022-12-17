@@ -46,6 +46,19 @@ return new class extends Migration
         VALUES (OLD.NISN, OLD.NIS, OLD.kelas, OLD.user, OLD.tanggal_masuk, OLD.kelas_awal, OLD.anak_ke, OLD.nama_ayah, OLD.pekerjaan_ayah, OLD.nama_ibu, OLD.pekerjaan_ibu, OLD.alamat_orangtua, OLD.telepon_orangtua, OLD.nama_wali, OLD.pekerjaan_wali, OLD.telepon_wali, OLD.status, "delete", NOW());
         END
         ');
+
+        /* disable update siswa */
+        DB::unprepared('
+        CREATE TRIGGER disable_update_siswa
+        BEFORE UPDATE ON siswas
+        FOR EACH ROW
+        BEGIN
+            IF (NEW.NISN <> OLD.NISN OR NEW.tanggal_masuk <> OLD.tanggal_masuk OR NEW.kelas_awal <> OLD.kelas_awal) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data siswa tersebut";
+            END IF;
+        END
+        ');
     }
 
     /**
@@ -58,5 +71,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_siswa');
         DB::unprepared('DROP TRIGGER log_update_siswa');
         DB::unprepared('DROP TRIGGER log_delete_siswa');
+        DB::unprepared('DROP TRIGGER disable_update_siswa');
     }
 };
