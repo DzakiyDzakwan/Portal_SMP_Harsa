@@ -650,6 +650,62 @@ return new class extends Migration
                 COMMIT;
             END
         ');
+
+        DB::unprepared('
+        CREATE PROCEDURE add_sesi(
+            IN sesi VARCHAR(3),
+            IN ta YEAR,
+            IN start DATETIME,
+            IN end DATETIME,
+            IN admin CHAR(36)
+        )
+        BEGIN
+            
+            DECLARE uname VARCHAR(255);
+            
+            SELECT username INTO uname FROM users WHERE uuid = admin COLLATE utf8mb4_general_ci;
+            
+            INSERT INTO sesi_penilaians(nama_sesi, tahun_ajaran, tanggal_mulai, tanggal_berakhir, created_by)
+            VALUES(sesi, ta, start, end, uname);
+        
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE add_nilai(
+            IN sesi INT,
+            IN mapel CHAR(3),
+            IN guru CHAR(18),
+            IN kontrak INT,
+            IN kkm INT,
+            IN nilai_p FLOAT,
+            IN deskripsi_p TEXT,
+            IN nilai_k FLOAT,
+            IN deskripsi_k TEXT,
+            IN status VARCHAR(15),
+            IN user CHAR(36)
+        )
+        BEGIN
+        
+            DECLARE start DATETIME;
+            DECLARE end DATETIME;
+            
+            SELECT tanggal_mulai INTO start FROM sesi_penilaians WHERE sesi_id = sesi;
+            SELECT tanggal_berakhir INTO end FROM sesi_penilaians WHERE sesi_id = sesi;
+            
+            IF cek_sesi(start, end) = 1 THEN
+                INSERT INTO nilais(sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status)
+                VALUES(sesi, mapel, guru, kontrak, kkm, nilai_p, deskripsi_p, nilai_k, deskripsi_k, status);
+            
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(user, "insert", "prestasis", NOW());
+                COMMIT;
+            ELSE
+            SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT ="Sesi tidak tersedia";
+            END IF;
+        
+        END
+        ');
     }
 
     /**
