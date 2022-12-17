@@ -84,7 +84,7 @@ DELIMITER;
 DELIMITER ?
 CREATE PROCEDURE delete_admin (
     IN admin CHAR(36),
-    IN user CHAR(36),
+    IN user CHAR(36)
 )
 BEGIN
  DECLARE errno INT;
@@ -93,7 +93,7 @@ BEGIN
         ROLLBACK;
     END;
     START TRANSACTION;
-    DELETE users WHERE uuid = user COLLATE utf8mb4_general_ci; 
+    DELETE FROM users WHERE uuid = user COLLATE utf8mb4_general_ci; 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "delete", "users", NOW());
     COMMIT;
@@ -160,27 +160,24 @@ CREATE PROCEDURE update_guru(
     IN admin CHAR(36)
 )
 BEGIN
-
+    DECLARE guru CHAR(36);
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
+        ROLLBACK;
+    END;
+    SELECT user INTO guru FROM gurus WHERE nip = oldnip COLLATE utf8mb4_general_ci;
         
-            DECLARE guru CHAR(36);
-            DECLARE errno INT;
-            DECLARE EXIT HANDLER FOR SQLEXCEPTION
-            BEGIN
-                ROLLBACK;
-            END;
-            SELECT user INTO guru FROM gurus WHERE nip = oldnip COLLATE utf8mb4_general_ci;
+    UPDATE gurus SET NIP = newnip, jabatan = jabatan WHERE NIP = oldnip COLLATE utf8mb4_general_ci;
         
-            UPDATE gurus SET NIP = newnip, jabatan = jabatan WHERE NIP = oldnip COLLATE utf8mb4_general_ci;
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "gurus", NOW());
         
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "gurus", NOW());
-        
-            UPDATE users SET username = newnip WHERE uuid = guru COLLATE utf8mb4_general_ci;
+    UPDATE users SET username = newnip WHERE uuid = guru COLLATE utf8mb4_general_ci;
 
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "gurus", NOW());
-        END?
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "gurus", NOW());
+END?
 DELIMITER ;
 
 --Non Aktifkan Guru (✅)
@@ -381,32 +378,45 @@ BEGIN
 END?
 DELIMITER ;
 
---Update Kelas
+--Update Kelas (✅)
 DELIMITER ?
 CREATE PROCEDURE update_kelas(
     IN old_kelas CHAR(3),
     IN new_kelas CHAR(3),
-    IN old_wali CHAR(3),
     IN wali CHAR(18),
     IN nama VARCHAR(255),
     admin CHAR(36)
 )
 BEGIN
 
+    DECLARE old_wali CHAR(18);
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+
+    SELECT wali_kelas INTO old_wali FROM kelas WHERE kelas_id = old_kelas COLLATE utf8mb4_general_ci;
+    START TRANSACTION;
+
+    IF EXISTs( SELECT * FROM gurus WHERE NIP = old_wali  COLLATE utf8mb4_general_ci) THEN
+        UPDATE gurus SET is_wali_kelas = "Tidak" WHERE NIP = old_wali COLLATE utf8mb4_general_ci;
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "update", "gurus", NOW());
+    END IF;
+
     UPDATE kelas SET kelas_id = new_kelas, wali_kelas = wali, nama_kelas = nama WHERE kelas_id = old_kelas COLLATE utf8mb4_general_ci;
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "update", "kelas", NOW());
 
-    UPDATE guru SET is_wali_kelas = "Tidak" WHERE NIP = old_wali COLLATE utf8mb4_general_ci;
+
+    UPDATE gurus SET is_wali_kelas = "Iya" WHERE NIP = wali COLLATE utf8mb4_general_ci;
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "update", "gurus", NOW());
 
-    UPDATE guru SET is_wali_kelas = "Iya" WHERE NIP = wali COLLATE utf8mb4_general_ci;
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "gurus", NOW());
+    COMMIT;
 
 END?
 DELIMITER ;
@@ -419,8 +429,14 @@ CREATE PROCEDURE inacitve_kelas(
 )
 BEGIN
     DECLARE wali CHAR(18);
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
 
     SELECT wali_kelas INTO wali FROM kelas WHERE kelas_id = kelas COLLATE utf8mb4_general_ci ;
+    START TRANSACTION;
 
     UPDATE kelas SET wali_kelas = NULL, deleted_at = NOW() WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
 
@@ -431,11 +447,12 @@ BEGIN
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "update", "gurus", NOW());
+    COMMIT;
 
 END?
 DELIMITER ;
 
---Restore Kelas(❌)
+--Restore Kelas(✅)
 DELIMITER ?
 CREATE PROCEDURE restore_kelas(
     IN kelas CHAR(3),
@@ -443,11 +460,23 @@ CREATE PROCEDURE restore_kelas(
     IN admin CHAR(36)
 )
 BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+    START TRANSACTION;
 
-    UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas COLLATE utf8mb4_general_ci;
+    UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas = kelas COLLATE utf8mb4_general_ci;
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "update", "kelas", NOW());
+
+    UPDATE gurus SET is_wali_kelas = "iya" WHERE NIP = wali COLLATE utf8mb4_general_ci;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "gurus", NOW());
+    COMMIT;
     
 END?
 DELIMITER ;
@@ -581,29 +610,60 @@ END?
 DELIMITER ;
 
 /* Sesi Penilaian */
-
-/* Input Nilai */
+--add sesi (✅)
 DELIMITER ?
-CREATE PROCEDURE input_nilai(
-    IN nilai_p FLOAT,
-    IN nilai_k FLOAT,
-    IN deskripsi_p TEXT,
-    IN deskripsi_k TEXT,
-    IN semester CHAR(1),
-    IN kategori CHAR(2),
-    IN siswa CHAR(10),
-    IN mapel CHAR(3)
+CREATE PROCEDURE add_sesi(
+    IN sesi VARCHAR(3),
+    IN ta YEAR,
+    IN start DATETIME,
+    IN end DATETIME,
+    IN admin CHAR(36)
 )
 BEGIN
 
-DECLARE timenow tinyint(1);
-SET timenow = CURRENT_TIMESTAMP();
+DECLARE uname VARCHAR(255);
 
-IF EXIST(SELECT * FROM sesi_penilaian WHERE waktu_mulai <= timenow AND waktu_akhir >= timenow AND kategori_nilai = kategori) THEN 
-    INSERT INTO nilai(semester, tahun_pelajaran, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, kategori_nilai, siswa, mata_pelajaran)
-    VALUES(semester, tahun_p, nilai_p, deskripsi_p, nilai_k, deskripsi_k, kategori, siswa, mapel);
+SELECT username INTO uname FROM users WHERE uuid = admin COLLATE utf8mb4_general_ci;
+
+INSERT INTO sesi_penilaians(nama_sesi, tahun_ajaran, tanggal_mulai, tanggal_berakhir, created_by)
+VALUES(sesi, ta, start, end, uname);
+
+END?
+DELIMITER ;
+
+/* Nilai */
+--Input Nilai(✅)
+DELIMITER ?
+CREATE PROCEDURE add_nilai(
+    IN sesi INT,
+    IN mapel CHAR(3),
+    IN guru CHAR(18),
+    IN kontrak INT,
+    IN kkm INT,
+    IN nilai_p FLOAT,
+    IN deskripsi_p TEXT,
+    IN nilai_k FLOAT,
+    IN deskripsi_k TEXT,
+    IN status VARCHAR(15),
+    IN user CHAR(36)
+)
+BEGIN
+
+DECLARE start DATETIME;
+DECLARE end DATETIME;
+
+SELECT tanggal_mulai INTO start FROM sesi_penilaians WHERE sesi_id = sesi;
+SELECT tanggal_berakhir INTO end FROM sesi_penilaians WHERE sesi_id = sesi;
+
+IF check_sesi(start, end) = 1 THEN
+    INSERT INTO nilais(sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status)
+    VALUES(sesi, mapel, guru, kontrak, kkm, nilai_p, deskripsi_p, nilai_k, deskripsi_k, status);
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(user, "insert", "prestasis", NOW());
+    COMMIT;
 ELSE
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Sesi tidak ada";
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT ="Sesi tidak tersedia";
 END IF;
 
 END?

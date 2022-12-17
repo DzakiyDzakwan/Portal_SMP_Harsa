@@ -62,6 +62,14 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        CREATE VIEW calon_wali_kelas AS
+        SELECT g.NIP, p.nama 
+        FROM gurus AS g
+        JOIN user_profiles AS p ON p.user = g.user
+        WHERE is_wali_kelas = "tidak";
+        ');
+
+        DB::unprepared('
         CREATE VIEW list_kelas AS
         SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS Jumlah_Siswa
         FROM kelas
@@ -113,6 +121,18 @@ return new class extends Migration
         CREATE VIEW list_sesi_penilaian AS
         SELECT sesi_id, nama_sesi, DATE_FORMAT(tanggal_mulai, "%d %M %Y %H:%i:%s") AS waktu_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y %H:%i:%s") AS waktu_selesai, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, created_by AS admin 
         FROM sesi_penilaians;
+        ');
+
+        DB::unprepared('
+        CREATE VIEW list_nilai_pending AS
+        SELECT n.nilai_id, p.nama AS siswa, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NIP AS guru, n.status 
+        FROM nilais AS n
+        JOIN sesi_penilaians AS sp ON n.sesi = sp.sesi_id
+        JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
+        JOIN siswas AS s ON k.siswa = s.NISN
+        JOIN user_profiles AS p ON p.user = s.user
+        JOIN gurus AS g ON n.guru = g.NIP
+        WHERE n.status = "pending";
         ');
 
         DB::unprepared('
@@ -185,12 +205,16 @@ return new class extends Migration
         DB::unprepared('DROP VIEW info_siswa');
         DB::unprepared('DROP VIEW list_guru');
         DB::unprepared('DROP VIEW info_guru');
+        DB::unprepared('DROP VIEW calon_wali_kelas');
         DB::unprepared('DROP VIEW list_kelas');
         DB::unprepared('DROP VIEW list_inactive_kelas');
         DB::unprepared('DROP VIEW list_mapel');
+        DB::unprepared('DROP VIEW list_mapel_guru');
         DB::unprepared('DROP VIEW list_inactive_mapel');
         DB::unprepared('DROP VIEW list_roster_kelas');
-        DB::unprepared('DROP VIEW sesi_penilaian');
+        DB::unprepared('DROP VIEW list_sesi_penilaian');
+        DB::unprepared('DROP VIEW list_nilai_pending');
+        DB::unprepared('DROP VIEW list_prestasi');
         DB::unprepared('DROP VIEW list_ekstrakurikuler');
         DB::unprepared('DROP VIEW table_log_activities');
         DB::unprepared('DROP VIEW table_log_users');

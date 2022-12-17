@@ -20,8 +20,8 @@ return new class extends Migration
         AFTER INSERT ON nilais
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_nilais(nilai_id, sesi, mapel, kontrak_siswa, kkm, jenis_nilai, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, action, created_at)
-        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.kontrak_siswa, NEW.kkm, NEW.jenis_nilai, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, "insert", NOW());
+        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, action, created_at)
+        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.kontrak_siswa, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, "insert", NOW());
         END
         ');
 
@@ -31,8 +31,8 @@ return new class extends Migration
         AFTER UPDATE ON nilais
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_nilais(nilai_id, sesi, mapel, kontrak_siswa, kkm, jenis_nilai, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, action, created_at)
-        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.kontrak_siswa, NEW.kkm, NEW.jenis_nilai, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, "update", NOW());
+        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, action, created_at)
+        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.kontrak_siswa, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, "update", NOW());
         END
         ');
 
@@ -42,8 +42,8 @@ return new class extends Migration
         AFTER DELETE ON nilais
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_nilais(nilai_id, sesi, mapel, kontrak_siswa, kkm, jenis_nilai, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, action, created_at)
-        VALUES (OLD.nilai_id, OLD.sesi, OLD.mapel, OLD.kontrak_siswa, OLD.kkm, OLD.jenis_nilai, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, OLD.status, "delete", NOW());
+        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, action, created_at)
+        VALUES (OLD.nilai_id, OLD.sesi, OLD.mapel, OLD.guru, OLD.kontrak_siswa, OLD.kkm, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, OLD.status, "delete", NOW());
         END
         ');
 

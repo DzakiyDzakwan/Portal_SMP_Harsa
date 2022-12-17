@@ -38,6 +38,13 @@ FROM `gurus` AS g
 JOIN users AS u ON g.user = u.uuid 
 JOIN user_profiles AS p ON u.uuid = p.user;
 
+/* Guru Bukan wali kelas */
+CREATE VIEW calon_wali_kelas AS
+SELECT g.NIP, p.nama 
+FROM gurus AS g
+JOIN user_profiles AS p ON p.user = g.user
+WHERE is_wali_kelas = "tidak";
+
 /* List Kelas */
 CREATE VIEW list_kelas AS
 SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS Jumlah_Siswa
@@ -84,6 +91,17 @@ JOIN kelas AS k ON r.kelas = k.kelas_id;
 CREATE VIEW list_sesi_penilaian AS
 SELECT sesi_id, nama_sesi, DATE_FORMAT(tanggal_mulai, "%d %M %Y %H:%i:%s") AS waktu_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y %H:%i:%s") AS waktu_selesai, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, created_by AS admin 
 FROM sesi_penilaians;
+
+/* List pending nilai */
+CREATE VIEW list_nilai_pending AS
+SELECT n.nilai_id, p.nama AS siswa, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NIP AS guru, n.status 
+FROM nilais AS n
+JOIN sesi_penilaians AS sp ON n.sesi = sp.sesi_id
+JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
+JOIN siswas AS s ON k.siswa = s.NISN
+JOIN user_profiles AS p ON p.user = s.user
+JOIN gurus AS g ON n.guru = g.NIP
+WHERE n.status = "pending";
 
 /* List Ekstrakurikuler */
 CREATE VIEW list_ekstrakurikuler AS

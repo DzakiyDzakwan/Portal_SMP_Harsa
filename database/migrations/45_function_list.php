@@ -50,6 +50,23 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        CREATE FUNCTION cek_sesi(
+            waktu_awal DATETIME,
+            waktu_akhir DATETIME
+        )
+        RETURNS INT
+        BEGIN
+            DECLARE hasil INT;
+            IF waktu_awal > NOW() OR waktu_akhir < NOW() THEN
+                SET hasil = 0;
+            ELSE
+                SET hasil = 1;
+            END IF;
+            RETURN(hasil);
+        END
+        ');
+
+        DB::unprepared('
         CREATE function indeks(
             kkm INT,
             nilai FLOAT
@@ -121,6 +138,7 @@ return new class extends Migration
         DB::unprepared('DROP FUNCTION masa_mengajar');
         DB::unprepared('DROP FUNCTION umur');
         DB::unprepared('DROP FUNCTION waktu_akhir');
+        DB::unprepared('DROP FUNCTION cek_sesi');
         DB::unprepared('DROP FUNCTION indeks');
     }
 };

@@ -1,41 +1,4 @@
---Function Nilai Rapot Tengah Semester--
-/* Stored Function untuk mendapatkan nilai rapot tengah semester siswa */
-DELIMTER ?
-CREATE function nilai_uts(
-    ph1 FLOAT,
-    ph2 FLOAT,
-    ph3 FLOAT,
-    uts FLOAT
-)
-RETURNS FLOAT
-BEGIN
-    DECLARE nilai FLOAT;
-    SET nilai = FLOOR((ph1 + ph2 + ph3 + uts)/4);
-    RETURN (nilai);
-END?
-DELIMITER ;
-
---Function Nilai Rapot Semester--
-/* Stored Function untuk mendapatkan nilai rapot semester siswa */
-DELIMTER ?
-CREATE function nilai_uas(
-    ph1 FLOAT,
-    ph2 FLOAT,
-    ph3 FLOAT,
-    uts FLOAT,
-    uas FLOAT
-)
-RETURNS FLOAT
-BEGIN
-    DECLARE nilai FLOAT;
-    DECLARE rts FLOAT;
-    SELECT nilai_uts(ph1, ph2, ph3, uts) INTO rts;
-    SET nilai = FLOOR((rts + uas)/2);
-    RETURN (nilai);
-END?
-DELIMITER ;
-
---Function Indeks Rapot--
+--Indeks--
 /* Stored Function untuk mendapatkan indeks penilaian siswa */
 DELIMITER ?
 CREATE function indeks(
@@ -134,5 +97,76 @@ BEGIN
     DECLARE waktu_akhir TIME;
     SET waktu_akhir = ADDTIME(waktu_awal, SEC_TO_TIME(durasi*60));
 RETURN (waktu_akhir);
+END?
+DELIMITER ;
+
+--Waktu Akhirr--
+Stored Function untuk mendapatkan waktu berakhir roster dan ekstrakurikuler_id
+DELIMITER ?
+CREATE FUNCTION waktu_akhir(
+    waktu_awal TIME,
+    durasi INT 
+)
+RETURNS TIME
+BEGIN
+    DECLARE waktu_akhir TIME;
+    SET waktu_akhir = ADDTIME(waktu_awal, SEC_TO_TIME(durasi*60));
+return (waktu_akhir);
+END?
+DELIMITER ;
+
+--Cek Sesi--
+/* Function Untuk mengecek waktu sesi penilaian */
+DELIMITER ?
+CREATE FUNCTION cek_sesi(
+    waktu_awal DATETIME,
+    waktu_akhir DATETIME
+)
+RETURNS INT
+BEGIN
+    DECLARE hasil INT;
+    IF waktu_awal > NOW() OR waktu_akhir < NOW() THEN
+        SET hasil = 0;
+    ELSE
+        SET hasil = 1;
+    END IF;
+    RETURN(hasil);
+END?
+DELIMITER;
+
+--Function Nilai Rapot Tengah Semester--
+/* Stored Function untuk mendapatkan nilai rapot tengah semester siswa */
+DELIMTER ?
+CREATE function nilai_uts(
+    ph1 FLOAT,
+    ph2 FLOAT,
+    ph3 FLOAT,
+    uts FLOAT
+)
+RETURNS FLOAT
+BEGIN
+    DECLARE nilai FLOAT;
+    SET nilai = FLOOR((ph1 + ph2 + ph3 + uts)/4);
+    RETURN (nilai);
+END?
+DELIMITER ;
+
+--Function Nilai Rapot Semester--
+/* Stored Function untuk mendapatkan nilai rapot semester siswa */
+DELIMTER ?
+CREATE function nilai_uas(
+    ph1 FLOAT,
+    ph2 FLOAT,
+    ph3 FLOAT,
+    uts FLOAT,
+    uas FLOAT
+)
+RETURNS FLOAT
+BEGIN
+    DECLARE nilai FLOAT;
+    DECLARE rts FLOAT;
+    SELECT nilai_uts(ph1, ph2, ph3, uts) INTO rts;
+    SET nilai = FLOOR((rts + uas)/2);
+    RETURN (nilai);
 END?
 DELIMITER ;
