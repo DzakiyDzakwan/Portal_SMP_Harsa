@@ -134,6 +134,20 @@ BEGIN
 END?
 DELIMITER;
 
+--get Sesi Aktif--
+DELIMITER ?
+CREATE FUNCTION sesi_aktif(
+    waktu_awal DATETIME,
+    waktu_akhir DATETIME
+)
+RETURNS INT
+BEGIN
+    DECLARE id INT;
+    SELECT sesi_id INTO id WHERE cek_sesi(waktu_awal, waktu_akhir) = 1;
+    RETURN(id);
+END?
+DELIMITER;
+
 --Function Nilai Rapot Tengah Semester--
 /* Stored Function untuk mendapatkan nilai rapot tengah semester siswa */
 DELIMTER ?
