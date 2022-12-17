@@ -95,7 +95,7 @@ return new class extends Migration
         DB::unprepared('
         CREATE PROCEDURE delete_admin (
             IN admin CHAR(36),
-            IN user CHAR(36),
+            IN user CHAR(36)
         )
         BEGIN
             DECLARE errno INT;
@@ -104,7 +104,7 @@ return new class extends Migration
                 ROLLBACK;
             END;
             START TRANSACTION;
-            DELETE users WHERE uuid = user COLLATE utf8mb4_general_ci; 
+            DELETE FROM users WHERE uuid = user COLLATE utf8mb4_general_ci; 
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "delete", "users", NOW());
             COMMIT;
@@ -160,28 +160,38 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        CREATE PROCEDURE update_guru(
+            IN oldnip CHAR(18),
+            IN newnip CHAR(18),
+            IN jabatan CHAR(4),
+            IN admin CHAR(36)
+        )
         BEGIN
-
             DECLARE guru CHAR(36);
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
             SELECT user INTO guru FROM gurus WHERE nip = oldnip COLLATE utf8mb4_general_ci;
-
+                
             UPDATE gurus SET NIP = newnip, jabatan = jabatan WHERE NIP = oldnip COLLATE utf8mb4_general_ci;
-
+                
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "update", "gurus", NOW());
-
+                
             UPDATE users SET username = newnip WHERE uuid = guru COLLATE utf8mb4_general_ci;
-
+        
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "update", "gurus", NOW());
         END
         ');
 
         DB::unprepared('
-            CREATE PROCEDURE inactive_guru (
-                IN guru CHAR(36),
-                IN admin CHAR(36)
-            )
+        CREATE PROCEDURE inactive_guru (
+            IN guru CHAR(36),
+            IN admin CHAR(36)
+        )
             BEGIN
                 DECLARE errno INT;
                 DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -190,7 +200,7 @@ return new class extends Migration
                 END;
                 START TRANSACTION;
                 UPDATE gurus SET status = "Inaktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
-            
+        
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(admin, "update", "gurus", NOW());
                 
@@ -297,50 +307,25 @@ return new class extends Migration
         ');
 
         DB::unprepared('
-            CREATE PROCEDURE inactive_mapel_guru(
-                IN mapelguru CHAR(3),
-                admin CHAR(36)
-            )
-            BEGIN
+        CREATE PROCEDURE inactive_mapel_guru(
+            IN mapelguru CHAR(3),
+            IN admin CHAR(36)
+        )
+        BEGIN
 
-                DECLARE errno INT;
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                    BEGIN
-                        ROLLBACK;
-                    END;
-                START TRANSACTION;
-                UPDATE mapel_gurus SET deleted_at = NOW() WHERE mapel_guru_id = mapelguru COLLATE utf8mb4_general_ci;
-            
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "update", "mapels", NOW());
-
-                COMMIT;
-                
-            END
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+            START TRANSACTION;
+            UPDATE mapel_gurus SET deleted_at = NOW() WHERE mapel_guru_id = mapelguru COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "mapels", NOW());
+            COMMIT;
+        END
         ');
-
-        DB::unprepared('
-            CREATE PROCEDURE inactive_mapel_guru(
-                IN mapelguru CHAR(3),
-                admin CHAR(36)
-            )
-            BEGIN
-
-                DECLARE errno INT;
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                    BEGIN
-                        ROLLBACK;
-                    END;
-                START TRANSACTION;
-                UPDATE mapel_gurus SET deleted_at = NOW() WHERE mapel_guru_id = mapelguru COLLATE utf8mb4_general_ci;
-            
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "update", "mapels", NOW());
-
-                COMMIT;
-                
-            END
-        ');
 
         DB::unprepared('
             CREATE PROCEDURE delete_mapel(
@@ -365,29 +350,6 @@ return new class extends Migration
 
             END
         ');
-
-        DB::unprepared('
-            CREATE PROCEDURE inactive_mapel_guru(
-                IN mapelguru CHAR(3),
-                admin CHAR(36)
-            )
-            BEGIN
-
-                DECLARE errno INT;
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                    BEGIN
-                        ROLLBACK;
-                    END;
-                START TRANSACTION;
-                UPDATE mapel_gurus SET deleted_at = NOW() WHERE mapel_guru_id = mapelguru COLLATE utf8mb4_general_ci;
-            
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "update", "mapels", NOW());
-
-                COMMIT;
-                
-            END
-        ');
 
         DB::unprepared('
             CREATE PROCEDURE add_kelas(
@@ -721,5 +683,7 @@ return new class extends Migration
         DB::unprepared("DROP PROCEDURE add_prestasi");
         DB::unprepared("DROP PROCEDURE delete_prestasi");
         DB::unprepared("DROP PROCEDURE update_prestasi");
+        DB::unprepared("DROP PROCEDURE add_nilai");
+        DB::unprepared("DROP PROCEDURE add_sesi");
     }
 };

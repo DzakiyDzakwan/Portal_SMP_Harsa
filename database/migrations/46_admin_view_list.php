@@ -107,25 +107,6 @@ return new class extends Migration
         ');
 
         DB::unprepared('
-        CREATE VIEW list_mapel_guru AS
-        SELECT mg.mapel_guru_id, p.nama, m.nama_mapel , m.kelompok_mapel, m.deleted_at
-        FROM mapel_gurus AS mg 
-        JOIN gurus AS g ON g.NIP = mg.guru 
-        JOIN mapels AS m ON mg.mapel = m.mapel_id 
-        JOIN user_profiles AS p ON g.user = p.user;
-        ');
-
-        //         // DB::unprepared('
-        //         // CREATE VIEW list_inactive_mapel_guru AS
-        //         // SELECT mg.mapel_guru_id, p.nama, m.nama_mapel , m.kelompok_mapel, m.deleted_at
-        //         // FROM mapel_gurus AS mg 
-        //         // JOIN gurus AS g ON g.NIP = mg.guru 
-        //         // JOIN mapels AS m ON mg.mapel = m.mapel_id 
-        //         // JOIN user_profiles AS p ON g.user = p.user
-
-        //         // ');
-
-        DB::unprepared('
         CREATE VIEW list_roster_kelas AS
         SELECT r.roster_id AS id, m.nama_mapel, p.nama, k.nama_kelas, TIME_FORMAT(r.waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(r.waktu_mulai, r.durasi) AS waktu_akhir, SEC_TO_TIME(r.durasi*60) AS durasi, r.hari
         FROM roster_kelas AS r
