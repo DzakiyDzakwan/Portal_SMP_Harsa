@@ -1,20 +1,21 @@
 <?php
 
+use App\Http\Controllers\guru;
+use App\Http\Controllers\siswa;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LogController;
-use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\guru;
 use App\Http\Controllers\KelasController;
-use App\Http\Controllers\EkskulController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapelController;
-use App\Http\Controllers\siswa;
-use App\Http\Controllers\siswa\ProfilController;
-use App\Http\Controllers\RosterController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\EkskulController;
+use App\Http\Controllers\RosterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MapelGuruController;
+use App\Http\Controllers\siswa\ProfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,18 +42,20 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/admin', [UserController::class, 'index'])->name('users');
     //Dashboard/Mapel
     Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
+    //Dashboard/MapelGuru
+    Route::get('/mapelguru', [MapelGuruController::class, 'index'])->name('mapelguru');
     //Dashboard/eskul
-    Route::get('/ekstrakulikuler',[EkskulController::class,'index'])->name('ekskul');
+    Route::get('/ekstrakulikuler', [EkskulController::class, 'index'])->name('ekskul');
     //Dashboard/Siswa
-    Route::get('/siswa',[SiswaController::class,'index'])->name('siswa');
+    Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa');
     //Dashboard/Guru
-    Route::get('/guru', [GuruController::class, 'index'])->name('guru');    
+    Route::get('/guru', [GuruController::class, 'index'])->name('guru');
     //Dashboard/Roster
     Route::get('/roster', [RosterController::class, 'index'])->name('roster');
     //Dashboard/eskul
-    Route::get('/penilaian',[NilaiController::class,'index'])->name('nilai');
+    Route::get('/penilaian', [NilaiController::class, 'index'])->name('nilai');
     //Dashboard/Log-Users
-    Route::get('/log-activities',[LogController::class,'activity'])->name('log-activities');
+    Route::get('/log-activities', [LogController::class, 'activity'])->name('log-activities');
     //Dashboard/Log-Users
     Route::get('/log-activities', [LogController::class, 'activity'])->name('log-activities');
     //Dashboard/Log-Users
@@ -77,7 +80,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/rapor', [siswa\RaporController::class,  'rapor'])->name('rapor');
     //Pilih rapor
     Route::get('/pilih-rapor-ganjil-7', [siswa\RaporController::class, 'ganjil7'])->name('pilih-rapor-ganjil-7');
-      Route::get('/pilih-rapor-genap-7', [siswa\RaporController::class, 'genap7'])->name('pilih-rapor-genap-7');
+    Route::get('/pilih-rapor-genap-7', [siswa\RaporController::class, 'genap7'])->name('pilih-rapor-genap-7');
     /* Route::get('/pilih-rapor-ganjil-8', [siswa\RaporController::class, 'ganjil8'])->name('pilih-rapor-ganjil-8');
     Route::get('/pilih-rapor-genap-8', [siswa\RaporController::class, 'genap8'])->name('pilih-rapor-genap-8');
     Route::get('/pilih-rapor-ganjil-9', [siswa\RaporController::class, 'ganjil9'])->name('pilih-rapor-ganjil-9');
@@ -88,7 +91,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/profil-siswa', [siswa\ProfilController::class, 'profilSiswa'])->name('profilSiswa');
     Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
     Route::post('/edit-siswa', [ProfilController::class, 'updateProfilSiswa']);
-
 });
 
 //Guru
