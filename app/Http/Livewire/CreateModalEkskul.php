@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Ekstrakurikuler;
 use App\Models\LogActivity;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class CreateModalEkskul extends Component
@@ -17,21 +18,23 @@ class CreateModalEkskul extends Component
             'durasi' => 'required|integer|min:30',
             'tempat' => 'required'
         ]);
-        Ekstrakurikuler::create([
-            'ekstrakurikuler_id' => $this->ekstrakurikuler_id,
-            'nama' => $this->nama,
-            'hari' => $this->hari,
-            'waktu_mulai' => $this->waktu_mulai,
-            'durasi' => $this->durasi,
-            'tempat' => $this->tempat,
-            'kelas' => $this->kelas
-        ]);
 
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'insert',
-            'at' => 'ekstrakurikulers'
-        ]);
+        DB::select('CALL add_ekstrakurikuler(?, ?, ?, ?, ?, ?, ?, ?)', [auth()->user()->uuid, $this->ekstrakurikuler_id, $this->nama, $this->hari, $this->waktu_mulai, $this->durasi, $this->tempat, $this->kelas]);
+        // Ekstrakurikuler::create([
+        //     'ekstrakurikuler_id' => $this->ekstrakurikuler_id,
+        //     'nama' => $this->nama,
+        //     'hari' => $this->hari,
+        //     'waktu_mulai' => $this->waktu_mulai,
+        //     'durasi' => $this->durasi,
+        //     'tempat' => $this->tempat,
+        //     'kelas' => $this->kelas
+        // ]);
+
+        // LogActivity::create([
+        //     'actor' => auth()->user()->uuid,
+        //     'action' => 'insert',
+        //     'at' => 'ekstrakurikulers'
+        // ]);
 
         $this->reset();
         $this->emit('storeEkskul');
