@@ -682,7 +682,6 @@ return new class extends Migration
             IN deskripsi_p TEXT,
             IN nilai_k FLOAT,
             IN deskripsi_k TEXT,
-            IN status VARCHAR(15),
             IN user CHAR(36)
         )
         BEGIN
@@ -694,8 +693,8 @@ return new class extends Migration
             SELECT tanggal_berakhir INTO end FROM sesi_penilaians WHERE sesi_id = sesi;
             
             IF cek_sesi(start, end) = 1 THEN
-                INSERT INTO nilais(sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status)
-                VALUES(sesi, mapel, guru, kontrak, kkm, nilai_p, deskripsi_p, nilai_k, deskripsi_k, status);
+                INSERT INTO nilais(sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, created_at, updated_at)
+                VALUES(sesi, mapel, guru, kontrak, kkm, nilai_p, deskripsi_p, nilai_k, deskripsi_k, "pending", NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(user, "insert", "prestasis", NOW());
@@ -728,6 +727,7 @@ return new class extends Migration
         DB::unprepared("DROP PROCEDURE add_mapel");
         DB::unprepared("DROP PROCEDURE inactive_mapel");
         DB::unprepared("DROP PROCEDURE delete_mapel");
+        DB::unprepared("DROP PROCEDURE inactive_mapel_guru");
         DB::unprepared("DROP PROCEDURE add_kelas");
         DB::unprepared("DROP PROCEDURE update_kelas");
         DB::unprepared("DROP PROCEDURE restore_kelas");

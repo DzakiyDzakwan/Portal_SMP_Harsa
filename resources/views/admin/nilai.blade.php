@@ -37,16 +37,20 @@
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
                     {{-- Button Inactive Kelas --}}
-                    {{-- @livewire('sesi-penilaian-modal') --}}
+                    @livewire('sesi-penilaian-modal')
+                </div>
+                <div class="form-group">
+                    {{-- Button Inactive Kelas --}}
+                    @livewire('history-konfirmasi-modal')
                 </div>
             </div>
         </div>
         <div class="card-body">
-            {{-- @livewire('list-nilai') --}}
+            @livewire('list-nilai-pending')
         </div>
     </div>
 
-    {{-- @livewire('alert-nilai') --}}
+    @livewire('alert-nilai')
 @endsection
 
 @section('script')
@@ -86,31 +90,32 @@
 
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
-        const inactiveToast = new bootstrap.Toast('#inactiveToast')
+        /* const inactiveToast = new bootstrap.Toast('#inactiveToast')
         const updateToast = new bootstrap.Toast('#updateToast')
         const restoreToast = new bootstrap.Toast('#restoreToast')
-        const deleteToast = new bootstrap.Toast('#deleteToast')
+        const deleteToast = new bootstrap.Toast('#deleteToast') */
 
 
         window.addEventListener('insert-alert', e => {
             insertToast.show()
         })
 
-        window.addEventListener('inactive-alert', e => {
-            inactiveToast.show()
-        })
+        w
+        /* indow.addEventListener('inactive-alert', e => {
+                    inactiveToast.show()
+                })
 
-        window.addEventListener('update-alert', e => {
-            updateToast.show()
-        })
+                window.addEventListener('update-alert', e => {
+                    updateToast.show()
+                })
 
-        window.addEventListener('restore-alert', e => {
-            restoreToast.show()
-        })
+                window.addEventListener('restore-alert', e => {
+                    restoreToast.show()
+                })
 
-        window.addEventListener('delete-alert', e => {
-            deleteToast.show()
-        })
+                window.addEventListener('delete-alert', e => {
+                    deleteToast.show()
+                }) */
     </script>
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>

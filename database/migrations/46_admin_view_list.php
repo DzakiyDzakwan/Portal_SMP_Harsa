@@ -119,20 +119,38 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_sesi_penilaian AS
-        SELECT sesi_id, nama_sesi, DATE_FORMAT(tanggal_mulai, "%d %M %Y %H:%i:%s") AS waktu_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y %H:%i:%s") AS waktu_selesai, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, created_by AS admin 
-        FROM sesi_penilaians;
+        SELECT sesi_id, nama_sesi, tahun_ajaran, DATE_FORMAT(tanggal_mulai, "%d %M %Y %H:%i:%s") AS waktu_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y %H:%i:%s") AS waktu_selesai, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, created_by AS admin , IF(cek_sesi(tanggal_mulai, tanggal_berakhir) = 1 , "Aktif", "Inaktif") AS status 
+        FROM sesi_penilaians
+        ORDER BY status;
         ');
 
         DB::unprepared('
-        CREATE VIEW list_nilai_pending AS
-        SELECT n.nilai_id, p.nama AS siswa, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NIP AS guru, n.status 
+        CREATE VIEW list_nilai AS
+        SELECT n.nilai_id, p.nama AS siswa, m.nama_mapel, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NIP AS guru, n.status 
         FROM nilais AS n
         JOIN sesi_penilaians AS sp ON n.sesi = sp.sesi_id
         JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
         JOIN siswas AS s ON k.siswa = s.NISN
         JOIN user_profiles AS p ON p.user = s.user
         JOIN gurus AS g ON n.guru = g.NIP
-        WHERE n.status = "pending";
+        JOIN mapels AS m ON m.mapel_id = n.mapel
+        WHERE n.status <> "pending"
+        ORDER BY n.mapel;
+        ');
+
+        DB::unprepared('
+        CREATE VIEW list_nilai_pending AS
+        CREATE VIEW list_nilai_pending AS
+        SELECT n.nilai_id, p.nama AS siswa, m.nama_mapel, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NIP AS guru, n.status 
+        FROM nilais AS n
+        JOIN sesi_penilaians AS sp ON n.sesi = sp.sesi_id
+        JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
+        JOIN siswas AS s ON k.siswa = s.NISN
+        JOIN user_profiles AS p ON p.user = s.user
+        JOIN gurus AS g ON n.guru = g.NIP
+        JOIN mapels AS m ON m.mapel_id = n.mapel
+        WHERE n.status = "pending"
+        ORDER BY n.mapel;
         ');
 
         DB::unprepared('
@@ -212,6 +230,7 @@ return new class extends Migration
         DB::unprepared('DROP VIEW list_inactive_mapel');
         DB::unprepared('DROP VIEW list_roster_kelas');
         DB::unprepared('DROP VIEW list_sesi_penilaian');
+        DB::unprepared('DROP VIEW list_nilai');
         DB::unprepared('DROP VIEW list_nilai_pending');
         DB::unprepared('DROP VIEW list_prestasi');
         DB::unprepared('DROP VIEW list_ekstrakurikuler');

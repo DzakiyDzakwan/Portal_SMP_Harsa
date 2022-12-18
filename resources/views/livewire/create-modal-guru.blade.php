@@ -1,6 +1,6 @@
 <div>
     <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
-        <i class="bi bi-plus-circle"></i> Tambah Guru
+        <i class="bi bi-plus-circle"></i> Sesi Penilaian
     </button>
 
     <!--Modal tambah Guru -->

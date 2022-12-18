@@ -13,10 +13,20 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Sesi Aktif</h6>
-                        @if ($sesi->isEmpty())
-                            <h6 class="font-extrabold mb-0">Tidak ada Sesi</h6>
+                        @if (is_null($sesi))
+                            <h6 class="font-extrabold mb-0">-</h6>
                         @else
-                            <h6 class="font-extrabold mb-0">Ulangan Harian 1</h6>
+                            @if ($sesi->nama_sesi == 'uh1')
+                                <h6 class="font-extrabold mb-0">Ulangan Harian 1</h6>
+                            @elseif($sesi->nama_sesi == 'uh2')
+                                <h6 class="font-extrabold mb-0">Ulangan Harian 2</h6>
+                            @elseif($sesi->nama_sesi == 'uh3')
+                                <h6 class="font-extrabold mb-0">Ulangan Harian 3</h6>
+                            @elseif($sesi->nama_sesi == 'uts')
+                                <h6 class="font-extrabold mb-0">Ulangan Tengah Semester</h6>
+                            @else
+                                <h6 class="font-extrabold mb-0">Ulangan Akhir Semester</h6>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -37,10 +47,10 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Tanggal Mulai</h6>
-                        @if ($sesi->isEmpty())
+                        @if (is_null($sesi))
                             <h6 class="font-extrabold mb-0">-</h6>
                         @else
-                            <h6 class="font-extrabold mb-0">14 Desember 2022, 00:00:00</h6>
+                            <h6 class="font-extrabold mb-0">{{ $sesi->waktu_mulai }}</h6>
                         @endif
                     </div>
                 </div>
@@ -61,10 +71,10 @@
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                         <h6 class="text-muted font-semibold">Tanggal Berakhir</h6>
-                        @if ($sesi->isEmpty())
+                        @if (is_null($sesi))
                             <h6 class="font-extrabold mb-0">-</h6>
                         @else
-                            <h6 class="font-extrabold mb-0 ">21 Desember 2022, 23:59:00</h6>
+                            <h6 class="font-extrabold mb-0 ">{{ $sesi->waktu_selesai }}</h6>
                         @endif
                     </div>
                 </div>
