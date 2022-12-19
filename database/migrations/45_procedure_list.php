@@ -63,7 +63,6 @@ return new class extends Migration
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "update", "users", NOW());
             COMMIT;
-        
         END
         ');
 
@@ -874,7 +873,7 @@ return new class extends Migration
             END;
     
             START TRANSACTION;
-            UPDATE roster_kelas SET waktu_mulai = waktu_mulai, durasi = durasi, hari = hari WHERE roster_id = roster COLLATE utf8mb4_general_ci;
+            UPDATE roster_kelas SET waktu_mulai = waktu_mulai, durasi = durasi, hari = hari WHERE roster_id = roster;
 
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "update", "roster_kelas", NOW());

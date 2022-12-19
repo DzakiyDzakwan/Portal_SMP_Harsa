@@ -205,6 +205,43 @@ return new class extends Migration
         CREATE VIEW table_log_ekstrakurikulers AS 
         SELECT * FROM log_ekstrakurikulers
         ');
+
+        DB::unprepared('
+        CREATE VIEW table_log_roster AS
+        SELECT r.roster_id AS id, m.nama_mapel, p.nama, k.nama_kelas, TIME_FORMAT(r.waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(r.waktu_mulai, r.durasi) AS waktu_akhir, SEC_TO_TIME(r.durasi*60) AS durasi, r.hari, r.created_at
+        FROM roster_kelas AS r
+        JOIN mapel_gurus AS mg ON r.mapel = mg.mapel_guru_id
+        JOIN gurus AS g ON g.NIP = mg.guru 
+        JOIN mapels AS m ON mg.mapel = m.mapel_id 
+        JOIN user_profiles AS p ON g.user = p.user
+        JOIN kelas AS k ON r.kelas = k.kelas_id;
+        ');
+
+        DB::unprepared('
+        CREATE VIEW table_log_profiles AS 
+        SELECT * FROM user_profiles
+        ');
+
+        DB::unprepared('
+        CREATE VIEW table_log_nilai AS
+        SELECT n.nilai_id, p.nama AS siswa, m.nama_mapel, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NIP AS guru, n.status, n.created_at
+        FROM nilais AS n
+        JOIN sesi_penilaians AS sp ON n.sesi = sp.sesi_id
+        JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
+        JOIN siswas AS s ON k.siswa = s.NISN
+        JOIN user_profiles AS p ON p.user = s.user
+        JOIN gurus AS g ON n.guru = g.NIP
+        JOIN mapels AS m ON m.mapel_id = n.mapel
+        ORDER BY n.mapel;
+        ');
+
+        DB::unprepared('
+        CREATE VIEW table_log_prestasi AS
+        SELECT up.nama, p.siswa, p.jenis_prestasi, p.keterangan, p.tanggal_prestasi, p.created_at
+        FROM prestasis AS p JOIN siswas AS s ON p.siswa = s.NISN
+        JOIN user_profiles AS up ON s.user = up.user
+        GROUP BY up.nama, p.siswa, p.jenis_prestasi, p.keterangan, p.tanggal_prestasi, p.created_at;
+        ');
     }
 
 
@@ -240,5 +277,9 @@ return new class extends Migration
         DB::unprepared('DROP VIEW table_log_mapels');
         DB::unprepared('DROP VIEW table_log_kelas');
         DB::unprepared('DROP VIEW table_log_ekstrakurikulers');
+        DB::unprepared('DROP VIEW table_log_roster');
+        DB::unprepared('DROP VIEW table_log_profiles');
+        DB::unprepared('DROP VIEW table_log_nilai');
+        DB::unprepared('DROP VIEW table_log_prestasi');
     }
 };

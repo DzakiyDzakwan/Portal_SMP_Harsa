@@ -75,4 +75,49 @@ class LogController extends Controller
         return view('admin.logeskul', compact('pages', 'subpages', 'logEkskul'));
     }
 
+    public function roster() {
+        $pages = 'history';
+        $subpages = 'logRoster';
+        $logRoster = DB::table('table_log_roster')
+        ->latest()
+        ->get();
+        return view('admin.logroster', compact('pages', 'subpages', 'logRoster'));
+    }
+
+    public function profiles() {
+        $pages = 'history';
+        $subpages = 'logProfiles';
+        $logProfiles = DB::table('table_log_profiles')
+        ->latest()
+        ->get();
+        return view('admin.logprofiles', compact('pages', 'subpages', 'logProfiles'));
+    }
+
+    public function nilai() {
+        $pages = 'history';
+        $subpages = 'logNilai';
+        $logNilai = DB::table('table_log_nilai')
+        ->latest()
+        ->get();
+        return view('admin.lognilai', compact('pages', 'subpages', 'logNilai'));
+    }
+
+    public function prestasi() {
+        $pages = 'history';
+        $subpages = 'logPrestasi';
+        $logPrestasi = DB::table('table_log_prestasi')
+        ->latest()
+        ->get();
+        return view('admin.logprestasi', compact('pages', 'subpages', 'logPrestasi'));
+    }
+
+    public function ekskulSiswa() {
+        $pages = 'history';
+        $subpages = 'logEkskulSiswa';
+        $logEkskulSiswa = DB::table('table_log_ekstrakurikuler_siswa')
+        ->latest()
+        ->get();
+        return view('admin.logekskulsiswa', compact('pages', 'subpages', 'logEkskulSiswa'));
+    }
+
 }
