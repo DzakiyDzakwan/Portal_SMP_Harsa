@@ -38,7 +38,7 @@
                     @if ($siswa->status == 'Aktif')
                         <div class="modal-warning me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning"
-                                wire:click="editSiswa('{{ $siswa->user }}')">
+                                wire:click="editSiswa('{{ $siswa->NIS }}')">
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </div>

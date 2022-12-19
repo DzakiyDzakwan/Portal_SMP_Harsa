@@ -7,10 +7,11 @@ use App\Models\User;
 use App\Models\Siswa;
 use App\Models\UserProfile;
 use App\Models\LogActivity;
+use Illuminate\Support\Facades\DB;
 
 class EditModalSiswa extends Component
 {
-    public $siswas, $nisn, $nis;
+    public $siswas, $nisn, $oldnis, $nis, $user;
 
     protected $listeners = [
         'editUser' => 'showModal'
@@ -33,11 +34,13 @@ class EditModalSiswa extends Component
 
     public function showModal($id) {
         // dd($id);
-        $data = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('siswas.user', $id)->first();
-        $this->user = $id;
+        $data = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('siswas.NIS', $id)->first();
+        //$this->user = $id;
         $this->nama = $data->nama;
         $this->nisn = $data->NISN;
         $this->nis = $data->NIS;
+        $this->oldnis = $data->NIS;
+        $this->user = $data->user;
 
         $this->dispatchBrowserEvent('edit-modal');
     }
@@ -49,20 +52,8 @@ class EditModalSiswa extends Component
             'nis' => 'required|max:4'
         ]);
 
-        Siswa::where('user', $this->user)->update([
-            'NIS' => $this->nis,
-        ]);
-
-        UserProfile::where('user', $this->user)->update([
-            'nama' => $this->nama,
-        ]);
-
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'update',
-            'at' => 'siswas'
-        ]);
-
+        DB::select('CALL update_siswa(?, ?, ?, ?)', [$this->oldnis, $this->nis, $this->nama, auth()->user()->uuid]);
+        
         $this->emit('siswaUpdate');
         $this->dispatchBrowserEvent('update-alert');
         $this->dispatchBrowserEvent('edit-modal');

@@ -22,14 +22,7 @@ class ListRoster extends Component
     }
 
     public function delete($id) {
-
-        RosterKelas::where('roster_id', $id)->delete();
-
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'delete',
-            'at' => 'roster_kelas'
-        ]);
+        DB::select('CALL delete_roster(?, ?)', [$id, auth()->user()->uuid]);
 
         $this->render();
         $this->emit('rosterDelete');
