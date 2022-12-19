@@ -153,6 +153,9 @@
                             <a href="/log-users">Log User</a>
                         </li>
                         <li class="submenu-item">
+                            <a href="/log-profiles">Log Profile</a>
+                        </li>
+                        <li class="submenu-item">
                             <a href="/log-guru">Log Guru</a>
                         </li>
                         <li class="submenu-item">
@@ -165,16 +168,22 @@
                             <a href="/log-kelas">Log Kelas</a>
                         </li>
                         <li class="submenu-item">
-                            <a href="/log-Roster">Log Roster</a>
+                            <a href="/log-roster">Log Roster</a>
                         </li>
                         <li class="submenu-item">
                             <a href="/log-kontrak">Log Kontrak Siswa</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-nilai">Log Nilai</a>
                         </li>
                         <li class="submenu-item">
                             <a href="/log-prestasi">Log Prestasi</a>
                         </li>
                         <li class="submenu-item">
                             <a href="/log-ekstrakulikuler">Log Ekstrakulikuler</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-ekstrakurikuler-siswa">Log Ekstrakulikuler Siswa</a>
                         </li>
                     </ul>
                 </li>
