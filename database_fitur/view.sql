@@ -85,7 +85,8 @@ JOIN mapel_gurus AS mg ON r.mapel = mg.mapel_guru_id
 JOIN gurus AS g ON g.NIP = mg.guru 
 JOIN mapels AS m ON mg.mapel = m.mapel_id 
 JOIN user_profiles AS p ON g.user = p.user
-JOIN kelas AS k ON r.kelas = k.kelas_id;
+JOIN kelas AS k ON r.kelas = k.kelas_id
+ORDER BY r.hari;
 
 /* List Sesi penilaian */
 CREATE VIEW list_sesi_penilaian AS

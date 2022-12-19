@@ -140,7 +140,6 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_nilai_pending AS
-        CREATE VIEW list_nilai_pending AS
         SELECT n.nilai_id, p.nama AS siswa, m.nama_mapel, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NIP AS guru, n.status 
         FROM nilais AS n
         JOIN sesi_penilaians AS sp ON n.sesi = sp.sesi_id
