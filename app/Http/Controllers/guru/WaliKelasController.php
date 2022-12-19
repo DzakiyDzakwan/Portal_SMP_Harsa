@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class MyCLassController extends Controller
+class WaliKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class MyCLassController extends Controller
     {
         $pages = 'waliKelas';
         $kelas = DB::table('list_kelas')->where('NIP', auth()->user()->gurus->NIP)->first();
-        return view('guru.myClass', compact('pages','kelas'));
+        return view('guru.wali-kelas', compact('pages','kelas'));
     }
 
     /**

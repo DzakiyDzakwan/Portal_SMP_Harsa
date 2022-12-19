@@ -79,7 +79,7 @@ JOIN user_profiles AS p ON g.user = p.user;
 
 /* List Roster */
 CREATE VIEW list_roster_kelas AS
-SELECT r.roster_id AS id, m.nama_mapel, p.nama, k.nama_kelas, TIME_FORMAT(r.waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(r.waktu_mulai, r.durasi) AS waktu_akhir, SEC_TO_TIME(r.durasi*60) AS durasi, r.hari
+SELECT r.roster_id AS id, m.nama_mapel, p.nama, k.kelas_id, k.nama_kelas, TIME_FORMAT(r.waktu_mulai, "%H:%i") AS waktu_mulai, TIME_FORMAT(waktu_akhir(r.waktu_mulai, r.durasi), "%H:%i") AS waktu_akhir, SEC_TO_TIME(r.durasi*60) AS durasi, r.hari
 FROM roster_kelas AS r
 JOIN mapel_gurus AS mg ON r.mapel = mg.mapel_guru_id
 JOIN gurus AS g ON g.NIP = mg.guru 
@@ -87,6 +87,15 @@ JOIN mapels AS m ON mg.mapel = m.mapel_id
 JOIN user_profiles AS p ON g.user = p.user
 JOIN kelas AS k ON r.kelas = k.kelas_id
 ORDER BY r.hari;
+
+/* List Kelas Guru */
+CREATE VIEW list_kelas_guru AS
+SELECT mg.guru, k.kelas_id, k.grade, k.kelompok_kelas, k.nama_kelas, m.nama_mapel
+FROM roster_kelas AS r
+JOIN mapel_gurus AS mg ON r.mapel = mg.mapel_guru_id
+JOIN mapels AS m ON mg.mapel = m.mapel_id
+JOIN kelas AS k ON r.kelas = k.kelas_id
+GROUP BY r.mapel, r.kelas;
 
 /* List Sesi penilaian */
 CREATE VIEW list_sesi_penilaian AS

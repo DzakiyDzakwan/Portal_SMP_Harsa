@@ -3,7 +3,8 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex flex-column align-items-center">
                 <div class="logo">
-                    <a href="/dashboard-siswa"><img src="assets/images/logo/logo-harapan.png" alt="Logo" srcset=""/></a>
+                    <a href="/dashboard-siswa"><img src="assets/images/logo/logo-harapan.png" alt="Logo"
+                            srcset="" /></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -50,16 +51,20 @@
                     </a>
                 </li>
                 {{-- SPP --}}
-                <li class="sidebar-title">SPP</li>
+                {{-- <li class="sidebar-title">SPP</li>
                 <li class="sidebar-item @if ($pages === 'tagihanSPP') active @endif">
                     <a href="/tagihan-spp" class="sidebar-link">
                         <i class="bi bi-hexagon-fill"></i>
                         <span>Daftar Tagihan SPP</span>
                     </a>
-                </li>
+                </li> --}}
                 {{-- Rapor --}}
                 <li class="sidebar-title">Hasil Pembelajaran</li>
-                <li class="sidebar-item @if ($pages === 'rapor' || $pages === 'pilih-rapor-ganjil-7' || $pages === 'pilih-rapor-genap-7' || $pages === 'rapor-bulanan' || $pages === 'rapor-semester') active @endif">
+                <li class="sidebar-item @if ($pages === 'rapor' ||
+                    $pages === 'pilih-rapor-ganjil-7' ||
+                    $pages === 'pilih-rapor-genap-7' ||
+                    $pages === 'rapor-bulanan' ||
+                    $pages === 'rapor-semester') active @endif">
                     <a href="/rapor" class="sidebar-link">
                         <i class="bi bi-file-ruled-fill"></i>
                         <span>Rapor</span>
