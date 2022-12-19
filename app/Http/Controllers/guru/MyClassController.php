@@ -22,7 +22,8 @@ class MyCLassController extends Controller
     public function index()
     {
         $pages = 'waliKelas';
-        return view('guru.myClass', compact('pages','kelas', 'totalSiswa'));
+        $kelas = DB::table('list_kelas')->where('NIP', auth()->user()->gurus->NIP)->first();
+        return view('guru.myClass', compact('pages','kelas'));
     }
 
     /**

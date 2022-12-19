@@ -47,7 +47,7 @@ WHERE is_wali_kelas = "tidak";
 
 /* List Kelas */
 CREATE VIEW list_kelas AS
-SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS Jumlah_Siswa
+SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NIP, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS jumlah
 FROM kelas
 LEFT JOIN gurus ON kelas.wali_kelas = gurus.NIP 
 LEFT JOIN users ON gurus.user = users.uuid
@@ -71,7 +71,7 @@ SELECT mapel_id, nama_mapel, deleted_at FROM mapels WHERE deleted_at IS NOT NULL
 
 /* List Mapel Guru */
 CREATE VIEW list_mapel_guru AS
-SELECT mg.mapel_guru_id, p.nama, m.nama_mapel 
+SELECT mg.mapel_guru_id, p.nama, m.nama_mapel, m.kelompok_mapel 
 FROM mapel_gurus AS mg 
 JOIN gurus AS g ON g.NIP = mg.guru 
 JOIN mapels AS m ON mg.mapel = m.mapel_id 
