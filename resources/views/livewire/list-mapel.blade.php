@@ -16,7 +16,7 @@
                 <td>{{ $pel->mapel_id }}</td>
                 <td>{{ $pel->nama_mapel }}</td>
                 <td>
-                    @if ($pel->kelompok_mapel = 'B')
+                    @if ($pel->kelompok_mapel == 'B')
                         {{ 'Peminatan' }}
                     @else
                         {{ 'Wajib' }}

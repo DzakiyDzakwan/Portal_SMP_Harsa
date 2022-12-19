@@ -41,14 +41,15 @@ class ListRoster extends Component
         // JOIN user_profiles ON user_profiles.user = users.uuid
         // GROUP BY roster_kelas.roster_id, mapels.nama_mapel, user_profiles.nama, kelas.nama_kelas, roster_kelas.waktu_mulai, roster_kelas.durasi, roster_kelas.hari
         // $this->roster = DB::table('table_roster_kelas')->get();
-        $this->roster = DB::table('roster_kelas')
+        /* $this->roster = DB::table('roster_kelas')
         ->join('kelas', 'kelas.kelas_id', '=', 'roster_kelas.kelas')
         ->join('mapel_gurus', 'mapel_gurus.mapel_guru_id', '=', 'roster_kelas.mapel')
         ->join('mapels', 'mapels.mapel_id', '=', 'mapel_gurus.mapel')
         ->join('gurus', 'gurus.NIP', '=', 'mapel_gurus.guru')
         ->join('users', 'users.uuid', '=', 'gurus.user')
         ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
-        ->get();
+        ->get(); */
+        $this->roster = DB::table('list_roster_kelas')->get();
         return view('livewire.list-roster');
     }
 }

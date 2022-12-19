@@ -35,7 +35,7 @@ class CreateModalRoster extends Component
 
     public function render()
     {
-        $this->mapels = DB::table('mapel_gurus')->join('gurus', 'gurus.NIP', '=', 'mapel_gurus.guru')->join('user_profiles', 'user_profiles.user', '=', 'gurus.user')->get();
+        $this->mapels = DB::table('mapel_gurus')->join('gurus', 'gurus.NIP', '=', 'mapel_gurus.guru')->join('user_profiles', 'user_profiles.user', '=', 'gurus.user')->join('mapels', 'mapel_gurus.mapel', '=', 'mapels.mapel_id')->get();
         $this->kelass = DB::table('kelas')->get();
         return view('livewire.create-modal-roster');
     }

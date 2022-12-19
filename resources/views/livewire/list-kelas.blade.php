@@ -18,7 +18,7 @@
                 <td>{{ $k->nama_kelas }}</td>
                 <td>{{ $k->grade }}{{ $k->kelompok_kelas }}</td>
                 <td>{{ $k->Wali_Kelas }}</td>
-                <td>{{ $k->Jumlah_Siswa }}</td>
+                <td>{{ $k->jumlah }}</td>
                 <td>
                     {{-- Update Button --}}
                     <div class="modal-warning me-1 mb-1 d-inline-block">
