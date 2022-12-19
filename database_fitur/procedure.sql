@@ -559,6 +559,38 @@ BEGIN
 END?
 DELIMITER ;
 
+--Update Siswa
+CREATE PROCEDURE update_siswa(
+    IN oldnis CHAR(4),
+    IN newnis CHAR(4),
+    IN nama VARCHAR(255),
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE siswa CHAR(36);
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    SELECT user INTO siswa FROM siswas WHERE NIS = oldnis COLLATE utf8mb4_general_ci;
+        
+    UPDATE siswas SET NIS = newnis WHERE NIS = oldnis COLLATE utf8mb4_general_ci;
+        
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "siswas", NOW());
+
+    UPDATE user_profiles SET nama = nama WHERE user = siswa COLLATE utf8mb4_general_ci;
+        
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "user_profiles", NOW());
+    
+    UPDATE users SET username = newnis WHERE uuid = siswa COLLATE utf8mb4_general_ci;
+    
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "users", NOW());
+END
+
 --Non Aktifkan Siswa (❌)
 DELIMITER ?
 CREATE PROCEDURE inactive_siswa (
@@ -767,3 +799,84 @@ BEGIN
 SELECT * FROM prestasi WHERE siswa = NIS AND jenis_prestasi = "nonAkademik";
 END?
 DELIMITER ;
+
+--Roster
+--Add Roster
+CREATE PROCEDURE add_roster(
+    IN mapel INT,
+    IN kelas CHAR(3),
+    IN waktu_mulai TIME,
+    IN durasi INT,
+    IN hari CHAR(6),
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE admin CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    SET admin = UUID();
+
+    START TRANSACTION;
+
+    INSERT INTO roster_kelas(mapel, kelas, waktu_mulai, durasi, hari, created_at, updated_at) 
+    VALUES (mapel, kelas, waktu_mulai, durasi, hari, NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "roster_kelas", NOW());
+    
+    COMMIT;
+END
+
+--Update Roster
+CREATE PROCEDURE update_roster(
+    IN roster INT,
+    IN waktu_mulai TIME,
+    IN durasi INT,
+    IN hari CHAR(6),
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+    UPDATE roster_kelas SET waktu_mulai = waktu_mulai, durasi = durasi, hari = hari WHERE roster_id = roster COLLATE utf8mb4_general_ci;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "roster_kelas", NOW());
+
+    COMMIT;
+    
+END
+
+--Delete Roster
+CREATE PROCEDURE delete_roster(
+    IN roster INT,
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE admin CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    SET admin = UUID();
+
+    START TRANSACTION;
+    DELETE FROM roster_kelas WHERE roster_id = roster;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "delete", "roster_kelas", NOW());
+    
+    COMMIT;
+
+END
