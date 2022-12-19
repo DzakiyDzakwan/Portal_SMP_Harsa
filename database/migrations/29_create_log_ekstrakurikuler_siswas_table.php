@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('log_ekstrakulikuler_siswas', function (Blueprint $table) {
+        Schema::create('log_ekstrakurikuler_siswas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('ekstrakurikuler_siswa_id');
             $table->char('guru', 18)->nullable();

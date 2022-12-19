@@ -622,7 +622,7 @@ return new class extends Migration
             START TRANSACTION;
             UPDATE prestasis SET jenis_prestasi = jenis, keterangan = ket, tanggal_prestasi = tgl WHERE prestasi_id = prestasi;
         
-             INSERT INTO log_activities(actor, action, at, created_at)
+            INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "update", "prestasis", NOW());
         
             COMMIT;
@@ -652,59 +652,93 @@ return new class extends Migration
         ');
 
         DB::unprepared('
-        CREATE PROCEDURE add_sesi(
-            IN sesi VARCHAR(3),
-            IN ta YEAR,
-            IN start DATETIME,
-            IN end DATETIME,
-            IN admin CHAR(36)
-        )
-        BEGIN
+        CREATE PROCEDURE add_ekstrakurikuler(
+            IN admin CHAR(36),
+            IN ekstrakurikuler CHAR(5),
+            IN nama VARCHAR(30),
+            IN hari CHAR(6),
+            IN waktu_mulai TIME,
+            IN durasi INT,
+            IN tempat VARCHAR(100),
+            IN kelas CHAR(1)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE uuid CHAR(36);
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
             
-            DECLARE uname VARCHAR(255);
+                SET uuid = UUID();
             
-            SELECT username INTO uname FROM users WHERE uuid = admin COLLATE utf8mb4_general_ci;
-            
-            INSERT INTO sesi_penilaians(nama_sesi, tahun_ajaran, tanggal_mulai, tanggal_berakhir, created_by)
-            VALUES(sesi, ta, start, end, uname);
-        
-        END
+                START TRANSACTION;
+                INSERT INTO ekstrakurikulers(ekstrakurikuler_id, nama, hari, waktu_mulai, durasi, tempat, kelas,  created_at, updated_at) 
+                VALUES (ekstrakurikuler, nama, hari, waktu_mulai, durasi, tempat, kelas, NOW(), NOW());
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "insert", "ekstrakurikulers", NOW());
+                
+                COMMIT;
+            END
         ');
 
         DB::unprepared('
-        CREATE PROCEDURE add_nilai(
-            IN sesi INT,
-            IN mapel CHAR(3),
-            IN guru CHAR(18),
-            IN kontrak INT,
-            IN kkm INT,
-            IN nilai_p FLOAT,
-            IN deskripsi_p TEXT,
-            IN nilai_k FLOAT,
-            IN deskripsi_k TEXT,
-            IN user CHAR(36)
-        )
-        BEGIN
+        CREATE PROCEDURE update_ekstrakurikuler(
+            IN admin CHAR(36),
+            IN ekstrakurikuler CHAR(5),
+            IN nama VARCHAR(30),
+            IN hari CHAR(6),
+            IN waktu_mulai TIME,
+            IN durasi INT,
+            IN tempat VARCHAR(100),
+            IN kelas CHAR(1)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
         
-            DECLARE start DATETIME;
-            DECLARE end DATETIME;
-            
-            SELECT tanggal_mulai INTO start FROM sesi_penilaians WHERE sesi_id = sesi;
-            SELECT tanggal_berakhir INTO end FROM sesi_penilaians WHERE sesi_id = sesi;
-            
-            IF cek_sesi(start, end) = 1 THEN
-                INSERT INTO nilais(sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, created_at, updated_at)
-                VALUES(sesi, mapel, guru, kontrak, kkm, nilai_p, deskripsi_p, nilai_k, deskripsi_k, "pending", NOW(), NOW());
-            
+                START TRANSACTION;
+                UPDATE ekstrakurikulers SET nama = nama, hari = hari, waktu_mulai = waktu_mulai, durasi = durasi, tempat = tempat, kelas = kelas WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
+
                 INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(user, "insert", "prestasis", NOW());
+                VALUES(admin, "update", "ekstrakurikulers", NOW());
+
                 COMMIT;
-            ELSE
-            SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT ="Sesi tidak tersedia";
-            END IF;
-        
-        END
+                
+            END
         ');
+        
+        DB::unprepared('
+        CREATE PROCEDURE delete_ekstrakurikuler(
+            IN admin CHAR(36),
+            IN ekstrakurikuler CHAR(5)
+            )
+            BEGIN
+            
+                DECLARE errno INT;
+                DECLARE admin CHAR(36);
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+            
+                SET admin = UUID();
+            
+                START TRANSACTION;
+                DELETE FROM ekstrakurikulers WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "delete", "ekstrakurikulers", NOW());
+                
+                COMMIT;
+
+            END
+        ');
+        
     }
 
     /**
@@ -727,7 +761,6 @@ return new class extends Migration
         DB::unprepared("DROP PROCEDURE add_mapel");
         DB::unprepared("DROP PROCEDURE inactive_mapel");
         DB::unprepared("DROP PROCEDURE delete_mapel");
-        DB::unprepared("DROP PROCEDURE inactive_mapel_guru");
         DB::unprepared("DROP PROCEDURE add_kelas");
         DB::unprepared("DROP PROCEDURE update_kelas");
         DB::unprepared("DROP PROCEDURE restore_kelas");
@@ -741,5 +774,8 @@ return new class extends Migration
         DB::unprepared("DROP PROCEDURE update_prestasi");
         DB::unprepared("DROP PROCEDURE add_nilai");
         DB::unprepared("DROP PROCEDURE add_sesi");
+        DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
+        DB::unprepared("DROP PROCEDURE update_ekstrakurikuler");
+        DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
     }
 };

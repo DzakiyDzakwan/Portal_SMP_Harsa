@@ -20,7 +20,7 @@ return new class extends Migration
         AFTER INSERT on ekstrakurikuler_siswas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_ekstrakulikuler_siswas (ekstrakurikuler_siswa_id, ekstrakurikuler, guru, kontrak_siswa, nilai, keterangan, action, created_at)
+        INSERT INTO log_ekstrakurikuler_siswas (ekstrakurikuler_siswa_id, ekstrakurikuler, guru, kontrak_siswa, nilai, keterangan, action, created_at)
         VALUES (NEW.ekstrakurikuler_siswa_id, NEW.ekstrakurikuler, NEW.guru, NEW.kontrak_siswa, NEW.nilai, NEW.keterangan, "insert", NOW());
         END
         ');

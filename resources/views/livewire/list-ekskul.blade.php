@@ -25,7 +25,7 @@
                     {{-- Update Button --}}
                     <div class="modal-warning me-1 mb-1 d-inline-block">
                         <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                        wire:click="editEkskul('{{ $e->ekstrakurikuler_id }}')">
+                        wire:click="editEkskul('{{ $e->id }}')">
                         <div data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
                             <i class="bi  bi-pencil"></i></a>
                         </div>
@@ -34,14 +34,14 @@
                     {{-- Delete Button --}}
                     <div class="modal-danger me-1 mb-1 d-inline-block">
                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#delete{{ $e->ekstrakurikuler_id }}">
+                            data-bs-target="#delete{{ $e->id }}">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
                     {{-- Delete Modal --}}
                     <div
                         class="modal fade text-left"
-                        id="delete{{ $e->ekstrakurikuler_id }}"
+                        id="delete{{ $e->id }}"
                         tabindex="-1"
                         role="dialog"
                         aria-labelledby="myModalLabel130"
@@ -78,7 +78,7 @@
                                     <button
                                         class="btn btn-danger ml-1"
                                         data-bs-dismiss="modal"
-                                        wire:click="deleteEkskul('{{ $e->ekstrakurikuler_id }}')"
+                                        wire:click="deleteEkskul('{{ $e->id }}')"
                                     >
                                         <i class="bx bx-check d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Yes</span>

@@ -18,7 +18,7 @@ class ListEkskul extends Component
 
     public function render()
     {
-        $this->ekskuls = DB::table('table_ekskul')
+        $this->ekskuls = DB::table('list_ekstrakurikuler')
         ->get();
         return view('livewire.list-ekskul');
     }
@@ -28,13 +28,15 @@ class ListEkskul extends Component
     }
 
     public function deleteEkskul($id) {
-        Ekstrakurikuler::where('ekstrakurikuler_id', $id)->delete();
+        // Ekstrakurikuler::where('ekstrakurikuler_id', $id)->delete();
 
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'delete',
-            'at' => 'ekstrakurikulers'
-        ]);
+        // LogActivity::create([
+        //     'actor' => auth()->user()->uuid,
+        //     'action' => 'delete',
+        //     'at' => 'ekstrakurikulers'
+        // ]);
+
+        DB::select('call delete_ekstrakurikuler(?, ?)', [auth()->user()->uuid, $id]);
 
         $this->render();
         $this->emit('deleteEkskul');
