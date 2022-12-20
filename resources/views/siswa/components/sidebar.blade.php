@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex flex-column align-items-center">
                 <div class="logo">
-                    <a href="/dashboard-siswa"><img src="assets/images/logo/logo-harapan.png" alt="Logo"
+                    <a href="/dashboard-siswa"><img src="{{ asset('assets/images/logo/logo-harapan.png') }}" alt="Logo"
                             srcset="" /></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
@@ -66,16 +66,17 @@
                         <span>Rapor</span>
                     </a>
                     @php
-                        $kelas = DB::table('siswas')->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
+                        $kelas = DB::table('siswas')
+                            ->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
                             ->where('user', Auth::user()->uuid)
                             ->get();
                     @endphp
                     <ul class="submenu @if ($pages === 'rapor') active @endif">
-                    @foreach ($kelas as $k)   
-                        <li class="submenu-item">
-                            <a href="/rapor">Kelas {{ $k->grade }}</a>
-                        </li>
-                    @endforeach
+                        @foreach ($kelas as $k)
+                            <li class="submenu-item">
+                                <a href="/rapor/{{ $k->grade }}">Kelas {{ $k->grade }}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
             </ul>

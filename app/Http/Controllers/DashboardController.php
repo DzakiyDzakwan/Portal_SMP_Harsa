@@ -6,7 +6,6 @@ use App\Models\Siswa;
 use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Mapel;
-use App\Models\Ekstrakurikuler;
 use App\Models\Prestasi;
 use Illuminate\Support\Facades\DB;
 
@@ -40,20 +39,16 @@ class DashboardController extends Controller
 
     public function siswa() {
         $pages = 'dashboardSiswa';
+        $roster = DB::table('list_roster_siswa')->where('kelas', Auth::user()->siswas->kelas)->get();
         $siswa = Siswa::join('users', 'siswas.user', '=', 'users.uuid')
         ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
         ->where('siswas.user', Auth::user()->uuid)->first();
-        $prestasis = Prestasi::join('siswas', 'siswas.NISN', '=', 'prestasis.siswa')
-        ->where('siswas.user', Auth::user()->uuid)->get();
-        $ekskul = Ekstrakurikuler::join('ekstrakurikuler_siswas', 'ekstrakurikuler_siswas.ekstrakurikuler', '=', 'ekstrakurikulers.ekstrakurikuler_id')
-        ->join('kontrak_semesters', 'kontrak_semesters.kontrak_semester_id', '=', 'ekstrakurikuler_siswas.kontrak_siswa')
-        ->join('siswas', 'siswas.NISN', '=', 'kontrak_semesters.siswa')
-        ->where('siswas.user', Auth::user()->uuid)->get();
+        $prestasi = Prestasi::where('siswa',Auth::user()->siswas->NISN)->get();
         return view('siswa.dashboard', [
             'pages'=>$pages,
             'siswa' => $siswa,
-            'prestasis' => $prestasis,
-            'ekskul' => $ekskul
+            'roster' => $roster,
+            'prestasi' => $prestasi
         ]);
     }
 

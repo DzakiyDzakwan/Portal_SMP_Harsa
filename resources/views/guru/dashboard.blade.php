@@ -29,8 +29,8 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-12">
                                             <div class="pt-3">
-                                                <img src="{{ Auth::user()->user_profiles->foto }}" class="rounded d-block"
-                                                    alt="..." width="130">
+                                                <img src="{{ asset('storage/' . Auth::user()->user_profiles->foto) }}"
+                                                    class="rounded d-block" alt="..." width="130">
                                             </div>
                                         </div>
 

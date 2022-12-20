@@ -21,7 +21,7 @@
             <section class="row">
                 <div class="col-12">
                     <div class="row">
-                        {{--<div class="col-lg-12 col-md-12">
+                        {{-- <div class="col-lg-12 col-md-12">
                              <div class="card bg-danger">
                                 <div class="card-body">
                                     <div class="row">
@@ -95,8 +95,8 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-12">
                                             <div class="pt-3">
-                                                <img src="{{ asset('storage/'.$siswa->foto) }}" class="rounded mx-auto d-block"
-                                                    alt="..." width="130">
+                                                <img src="{{ asset('storage/' . $siswa->foto) }}"
+                                                    class="rounded mx-auto d-block" alt="..." width="130">
                                             </div>
                                         </div>
 
@@ -117,10 +117,10 @@
                                                         <tr>
                                                             <td>Jenis Kelamin</td>
                                                             <td>:</td>
-                                                            @if($siswa->jenis_kelamin = "LK")
-                                                            <td>Laki - laki</td>
+                                                            @if ($siswa->jenis_kelamin = 'LK')
+                                                                <td>Laki - laki</td>
                                                             @else
-                                                            <td>Perempuan</td>
+                                                                <td>Perempuan</td>
                                                             @endif
                                                         </tr>
                                                         <tr>
@@ -155,7 +155,6 @@
                                             <thead>
                                                 <tr>
                                                     <th>Hari</th>
-                                                    <th>Jam Ke-</th>
                                                     <th>Mata Pelajaran</th>
                                                     <th>Jam Masuk</th>
                                                     <th>Jam Keluar</th>
@@ -163,120 +162,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td rowspan="8">Senin</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Kimia</td>
-                                                    <td>07.15</td>
-                                                    <td>08.00</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Matematika</td>
-                                                    <td>08.15</td>
-                                                    <td>08.55</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Fisika</td>
-                                                    <td>08.55</td>
-                                                    <td>09.35</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Sejarah</td>
-                                                    <td>09.35</td>
-                                                    <td>10.15</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Sosiologi</td>
-                                                    <td>10.15</td>
-                                                    <td>10.35</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Seni Budaya</td>
-                                                    <td>10.35</td>
-                                                    <td>11.15</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>7</td>
-                                                    <td>Ekonomi</td>
-                                                    <td>11.15</td>
-                                                    <td>11.55</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                {{-- Selasa --}}
-                                                {{-- <tr>
-                                                    <td rowspan="8">Selasa</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Kimia</td>
-                                                    <td>07.15</td>
-                                                    <td>08.00</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Matematika</td>
-                                                    <td>08.15</td>
-                                                    <td>08.55</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Fisika</td>
-                                                    <td>08.55</td>
-                                                    <td>09.35</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Sejarah</td>
-                                                    <td>09.35</td>
-                                                    <td>10.15</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Sosiologi</td>
-                                                    <td>10.15</td>
-                                                    <td>10.35</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Seni Budaya</td>
-                                                    <td>10.35</td>
-                                                    <td>11.15</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>7</td>
-                                                    <td>Ekonomi</td>
-                                                    <td>11.15</td>
-                                                    <td>11.55</td>
-                                                    <td>Ali Akbar Sikumbang</td>
-                                                </tr>
+                                                @foreach ($roster as $item)
+                                                    <tr>
+                                                        <td>{{ $item->hari }}</td>
+                                                        <td>{{ $item->nama_mapel }}</td>
+                                                        <td>{{ $item->waktu_mulai }}</td>
+                                                        <td>{{ $item->waktu_akhir }}</td>
+                                                        <td>{{ $item->nama }}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div> --}}
-                    {{-- </div> --}} 
+                    {{-- </div> --}}
                     <div class="row">
-                        <div class="col-lg-6 col-md-12">
+                        <div class="col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4>Prestasi</h4>
@@ -287,19 +190,19 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Prestasi</th>
-                                                    <th>Peringkat</th>
-                                                    <th>Tahun</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Jenis</th>
+                                                    <th>Tanggal</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($prestasis as $pres)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $pres->jenis_prestasi }}</td>
-                                                    <td>{{ $pres->keterangan }}</td>
-                                                    <td>{{ $pres->tanggal_prestasi }}</td>
-                                                </tr>
+                                                @foreach ($prestasi as $item)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $item->keterangan }}</td>
+                                                        <td>{{ $item->jenis_prestasi }}</td>
+                                                        <td>{{ date('d M Y'), strtotime($item->tanggal_prestasi) }}</td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -307,7 +210,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-12">
+                        {{-- <div class="col-lg-6 col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4>Ekstrakurikuler</h4>
@@ -341,7 +244,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </section>

@@ -148,5 +148,21 @@ JOIN kontrak_semesters AS k ON s.NISN = k.siswa
 WHERE k.status = "On Going"
 ORDER BY p.nama;
 
+CREATE VIEW list_roster_siswa AS
+SELECT r.kelas, m.nama_mapel, TIME_FORMAT(r.waktu_mulai, "%H:%i") AS waktu_mulai, TIME_FORMAT(waktu_akhir(r.waktu_mulai, r.durasi), "%H:%i") AS waktu_akhir, r.hari
+FROM roster_kelas AS r
+JOIN mapel_gurus AS mg ON mg.mapel_guru_id = r.mapel
+JOIN mapels AS m ON m.mapel_id = mg.mapel;
+
+CREATE VIEW rapot_nilai_pengetahuan AS
+SELECT n.jenis, n.kontrak_siswa, m.kelompok_mapel, m.nama_mapel, n.kkm, n.nilai_pengetahuan, n.deskripsi_pengetahuan, indeks(n.kkm, n.nilai_pengetahuan) AS indeks  
+FROM nilais AS n
+JOIN mapels AS m ON n.mapel = m.mapel_id;
+
+CREATE VIEW rapot_nilai_keterampilan AS
+SELECT n.jenis, n.kontrak_siswa, m.kelompok_mapel, m.nama_mapel, n.kkm, n.nilai_keterampilan, n.deskripsi_keternilai_keterampilan, indeks(n.kkm, n.nilai_pengetahuan) AS indeks  
+FROM nilais AS n
+JOIN mapels AS m ON n.mapel = m.mapel_id;
+
 
 

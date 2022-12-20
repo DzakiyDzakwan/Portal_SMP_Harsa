@@ -91,7 +91,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
     //Route::post('/edit-profil-siswa', [ProfilController::class, 'updateProfilSiswa'])->name('updateProfilSiswa');
     //Rapor
-    Route::get('/rapor', [siswa\RaporController::class,  'index'])->name('rapor');
+    Route::get('/rapor/{grade}', [siswa\RaporController::class,  'index'])->name('rapor');
     //Pilih rapor
     // Route::get('/pilih-rapor-ganjil-7', [siswa\RaporController::class, 'ganjil7'])->name('pilih-rapor-ganjil-7');
     // Route::get('/pilih-rapor-genap-7', [siswa\RaporController::class, 'genap7'])->name('pilih-rapor-genap-7');
@@ -106,7 +106,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
 //Dashboard-Guru
 Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     Route::get('/dashboard-guru', [DashboardController::class, 'guru'])->name('dashboardGuru');
-    //Direktori-Guru
+//Direktori-Guru
     Route::get('/direktori-guru', [guru\direktoriController::class, 'direktori'])->name('direktoriGuru');
     //Profil-Guru
     Route::get('/profil-guru', [guru\ProfilController::class, 'profilGuru'])->name('profilGuru');
