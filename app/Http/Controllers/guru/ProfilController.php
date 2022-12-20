@@ -48,6 +48,8 @@ class ProfilController extends Controller
             'jenis_kelamin' => 'required',
             'tgl_lahir' => 'required',
             'tempat_lahir' => 'required|max:255',
+            'alamat_tinggal' => 'required|max:255',
+            'alamat_domisili' => 'required|max:255',
             'pendidikan' => 'required',
             'tahun_ijazah' => 'required',
             'status_perkawinan' => 'required'
@@ -115,7 +117,9 @@ class ProfilController extends Controller
                 'nama' => $validatedData['nama'],
                 'jenis_kelamin' => $validatedData['jenis_kelamin'],
                 'tgl_lahir' => $validatedData['tgl_lahir'],
-                'tempat_lahir' => $validatedData['tempat_lahir']
+                'tempat_lahir' => $validatedData['tempat_lahir'],
+                'alamat_tinggal' => $validatedData['alamat_tinggal'],
+                'alamat_domisili' => $validatedData['alamat_domisili']
                 ]);
         // ]);
             // if (session('success')) {
