@@ -14,6 +14,8 @@ class RaporController extends Controller
         $kontrak = DB::table('kontrak_semesters')
             ->join('siswas', 'siswas.NISN', '=', 'kontrak_semesters.siswa')
             ->join('nilais', 'nilais.kontrak_siswa', '=', 'kontrak_semesters.kontrak_semester_id')
+            ->join('sesi_penilaians', 'sesi_penilaians.sesi_id', '=', 'nilais.sesi')
+            ->join('mapels', 'mapels.mapel_id', '=', 'nilais.mapel')
             ->where('siswas.user', Auth::user()->uuid)
             ->get();
         // dd($kontrak);
