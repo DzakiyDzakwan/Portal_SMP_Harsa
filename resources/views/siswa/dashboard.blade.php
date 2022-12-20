@@ -142,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -216,7 +216,7 @@
                                                     <td>Ali Akbar Sikumbang</td>
                                                 </tr>
                                                 {{-- Selasa --}}
-                                                <tr>
+                                                {{-- <tr>
                                                     <td rowspan="8">Selasa</td>
                                                 </tr>
                                                 <tr>
@@ -273,8 +273,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div> --}}
+                    {{-- </div> --}} 
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="card">
@@ -293,24 +293,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($prestasis as $pres)
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Olimpiade Matematika</td>
-                                                    <td>Medali Perak</td>
-                                                    <td>2020</td>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $pres->jenis_prestasi }}</td>
+                                                    <td>{{ $pres->keterangan }}</td>
+                                                    <td>{{ $pres->tanggal_prestasi }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Olimpiade Fisika</td>
-                                                    <td>Medali Emas</td>
-                                                    <td>2021</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Olimpiade Kimia</td>
-                                                    <td>Medali Perunggu</td>
-                                                    <td>2021</td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -331,35 +321,21 @@
                                                     <th>Nama Ekskul</th>
                                                     <th>Hari</th>
                                                     <th>Waktu Mulai</th>
-                                                    <th>Waktu Selesai</th>
+                                                    <th>Durasi</th>
                                                     <th>Tempat</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($ekskul as $e)
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Ansamble</td>
-                                                    <td>Sabtu</td>
-                                                    <td>14.00</td>
-                                                    <td>16.00</td>
-                                                    <td>Yaspendhar</td>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $e->nama }}</td>
+                                                    <td>{{ $e->hari }}</td>
+                                                    <td>{{ $e->waktu_mulai }}</td>
+                                                    <td>{{ $e->durasi }} menit</td>
+                                                    <td>{{ $e->tempat }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Tahsin</td>
-                                                    <td>Jumat</td>
-                                                    <td>14.00</td>
-                                                    <td>16.00</td>
-                                                    <td>Yaspendhar</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Pramuka</td>
-                                                    <td>Sabtu</td>
-                                                    <td>14.00</td>
-                                                    <td>16.00</td>
-                                                    <td>Taman Ahmad Yani</td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
