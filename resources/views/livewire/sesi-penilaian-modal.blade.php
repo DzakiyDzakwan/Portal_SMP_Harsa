@@ -23,7 +23,7 @@
                                 <div class="form-body modal-body">
                                     <div class="row">
                                         {{-- Sesi  --}}
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <div class="form-group has-icon-left">
                                                 <label for="nama_sesi">Sesi</label>
                                                 <div class="position-relative">
@@ -52,7 +52,7 @@
                                         </div>
 
                                         {{-- Tahun --}}
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <div class="form-group has-icon-left">
                                                 <label for="tahun_ajaran">Tahun Ajaran</label>
                                                 <div class="position-relative">
@@ -76,7 +76,7 @@
                                         </div>
 
                                         {{-- start --}}
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <div class="form-group has-icon-left">
                                                 <label for="start">Waktu Mulai</label>
                                                 <div class="position-relative">
@@ -99,7 +99,7 @@
                                         </div>
 
                                         {{-- end --}}
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <div class="form-group has-icon-left">
                                                 <label for="end">Waktu Akhir</label>
                                                 <div class="position-relative">

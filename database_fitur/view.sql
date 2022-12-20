@@ -90,7 +90,7 @@ ORDER BY r.hari;
 
 /* List Kelas Guru */
 CREATE VIEW list_kelas_guru AS
-SELECT mg.guru, k.kelas_id, k.grade, k.kelompok_kelas, k.nama_kelas, m.nama_mapel
+SELECT mg.guru, k.kelas_id, k.grade, k.kelompok_kelas, k.nama_kelas, m.mapel_id, m.nama_mapel
 FROM roster_kelas AS r
 JOIN mapel_gurus AS mg ON r.mapel = mg.mapel_guru_id
 JOIN mapels AS m ON mg.mapel = m.mapel_id
@@ -138,6 +138,15 @@ SELECT p.keterangan, p.jenis_prestasi, DATE_FORMAT(p.tanggal_prestasi, "%d %M %Y
 FROM prestasis AS p
 JOIN siswas AS s ON p.siswa = s.NISN
 JOIN kontrak_semesters AS ktk ON ktk.siswa = s.NISN;
+
+/* List Siswa Kelas */
+CREATE VIEW list_siswa_kelas AS
+SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester, s.kelas 
+FROM siswas AS s
+JOIN user_profiles AS p ON s.user = p.user
+JOIN kontrak_semesters AS k ON s.NISN = k.siswa 
+WHERE k.status = "On Going"
+ORDER BY p.nama;
 
 
 
