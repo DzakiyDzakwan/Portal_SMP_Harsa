@@ -139,6 +139,19 @@ return new class extends Migration
             RETURN (i);
         END
         ');
+
+        DB::unprepared('
+        CREATE FUNCTION is_nilai_exists(
+            sesi INT,
+            mapel CHAR(3),
+            kontrak INT,
+            jenis CHAR(3)
+        )
+        RETURNS INT
+        BEGIN
+            RETURN (SELECT EXISTS(SELECT 1 FROM nilais WHERE sesi = sesi AND mapel = mapel AND kontrak_siswa = kontrak AND jenis= jenis));
+        END
+        ');
     }
 
     /**
@@ -154,5 +167,6 @@ return new class extends Migration
         DB::unprepared('DROP FUNCTION cek_sesi');
         DB::unprepared('DROP FUNCTION get_sesi');
         DB::unprepared('DROP FUNCTION indeks');
+        DB::unprepared('DROP FUNCTION is_nilai_exists');
     }
 };

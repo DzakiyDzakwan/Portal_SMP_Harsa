@@ -20,8 +20,8 @@ return new class extends Migration
         AFTER INSERT ON nilais
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, action, created_at)
-        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.kontrak_siswa, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, "insert", NOW());
+        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, admin, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
+        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.admin, NEW.kontrak_siswa, NEW.jenis, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, NEW.keterangan, "insert", NOW());
         END
         ');
 
@@ -31,8 +31,8 @@ return new class extends Migration
         AFTER UPDATE ON nilais
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, action, created_at)
-        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.kontrak_siswa, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, "update", NOW());
+        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, admin, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
+        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.admin, NEW.kontrak_siswa, NEW.jenis, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, NEW.keterangan, "update", NOW());
         END
         ');
 
@@ -42,14 +42,14 @@ return new class extends Migration
         AFTER DELETE ON nilais
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, action, created_at)
-        VALUES (OLD.nilai_id, OLD.sesi, OLD.mapel, OLD.guru, OLD.kontrak_siswa, OLD.kkm, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, OLD.status, "delete", NOW());
+        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, admin, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
+        VALUES (OLD.nilai_id, OLD.sesi, OLD.mapel, OLD.guru, OLD.admin, OLD.kontrak_siswa, OLD.jenis, OLD.kkm, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, OLD.status, OLD.keterangan, "delete", NOW());
         END
         ');
 
         /* validasi inputan nilai*/
         DB::unprepared('
-        CREATE TRIGGER validasi_nilai
+        CREATE TRIGGER validasi_input_nilai
         BEFORE INSERT ON nilais
         FOR EACH ROW
         BEGIN
@@ -65,6 +65,17 @@ return new class extends Migration
             END IF;
         END
         ');
+
+        DB::unprepared('
+        CREATE TRIGGER validasi_nilai
+        BEFORE INSERT ON nilais
+        FOR EACH ROW
+        BEGIN
+            IF is_nilai_exists(NEW.sesi, NEW.mapel, NEW.kontrak, NEW.jenis) = 1 THEN
+                SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Error Nilai Sudah tersedia";
+            END IF;
+        END
+        ');
     }
 
     /**
@@ -77,6 +88,7 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_nilai');
         DB::unprepared('DROP TRIGGER log_update_nilai');
         DB::unprepared('DROP TRIGGER log_delete_nilai');
-        DB::unprepared('DROP TRIGGER validasi_nilai');
+        DB::unprepared('DROP TRIGGER validasi_input_nilai');
+       /*  DB::unprepared('DROP TRIGGER validasi_nilai'); */
     }
 };

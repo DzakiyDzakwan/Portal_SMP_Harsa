@@ -9,6 +9,8 @@ class Nilai extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'nilai_id';
+
     protected $guarded = [
         "nilai_id",
         "created_at",

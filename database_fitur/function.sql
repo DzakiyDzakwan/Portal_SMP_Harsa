@@ -148,6 +148,22 @@ BEGIN
 END?
 DELIMITER;
 
+--Cek Nilai Tersedia--
+/* Stored Function untuk memeriksa nilai yang tersedia */
+DELIMITER ?
+CREATE FUNCTION is_nilai_exists(
+    sesi INT,
+    mapel CHAR(3),
+    kontrak INT,
+    jenis CHAR(3)
+)
+RETURNS INT
+BEGIN
+    RETURN (SELECT EXISTS(SELECT 1 FROM nilais WHERE sesi = sesi AND mapel = mapel AND kontrak_siswa = kontrak AND jenis= jenis));
+END?
+DELIMITER ;
+
+
 --Function Nilai Rapot Tengah Semester--
 /* Stored Function untuk mendapatkan nilai rapot tengah semester siswa */
 DELIMTER ?

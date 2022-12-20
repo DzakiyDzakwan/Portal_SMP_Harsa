@@ -38,7 +38,8 @@
                                                     <option value="uas">Ulangan Akhir
                                                         Semester</option>
                                                 </select> --}}
-                                                <input name="sesi" type="text" class="form-control"
+                                                <input name="sesi" type="text"
+                                                    class="form-control @error('sesi')is-invalid @enderror"
                                                     placeholder="Tidak ada sesi yang tersedia" id="sesi"
                                                     wire:model="sesi" disabled />
                                                 <div class="form-control-icon">
@@ -125,8 +126,8 @@
                                         <div class="form-group has-icon-left">
                                             <label for="deskripsi_p">Deskripsi Pengetahuan</label>
                                             <div class="position-relative">
-                                                <textarea class="form-control" placeholder="Masukkan Deskripsi Keterampilan" id="floatingTextarea"
-                                                    wire:model.defer="deskripsi_p"></textarea>
+                                                <textarea class="form-control @error('deskripsi_p')is-invalid @enderror" placeholder="Masukkan Deskripsi Keterampilan"
+                                                    id="floatingTextarea" wire:model.defer="deskripsi_p"></textarea>
                                                 <div class="form-control-icon">
                                                     <i class="bi bi-card-text"></i>
                                                 </div>
@@ -145,8 +146,8 @@
                                         <div class="form-group has-icon-left">
                                             <label for="deskripsi_k">Deskripsi Keterampilan</label>
                                             <div class="position-relative">
-                                                <textarea class="form-control" placeholder="Masukkan Deskripsi Pengetahuan" id="floatingTextarea"
-                                                    wire:model.defer="deskripsi_k"></textarea>
+                                                <textarea class="form-control @error('deskripsi_k')is-invalid @enderror" placeholder="Masukkan Deskripsi Pengetahuan"
+                                                    id="floatingTextarea" wire:model.defer="deskripsi_k"></textarea>
                                                 <div class="form-control-icon">
                                                     <i class="bi bi-card-text"></i>
                                                 </div>
@@ -185,13 +186,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (!$nilai->isEmpty())
-                                    @foreach ($nilai as $item)
-                                        <tr>
-                                            <td class="text-center" colspan="8">Tidak Ada List</td>
-                                        </tr>
-                                    @endforeach
-                                @endif
+                                <tr>
+                                    {{-- <td>{{ $nilai }}</td> --}}
+                                </tr>
                             </tbody>
                         </table>
                     </div>

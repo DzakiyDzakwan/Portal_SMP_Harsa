@@ -140,19 +140,27 @@
     </div>
 
     @livewire('create-nilai-modal', ['mapel' => $kelas->mapel_id])
+    @livewire('alert-nilai')
 
 @endsection
 
 @section('script')
+    @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
-    @livewireScripts
     <script>
+        //Modal
         const modalNilai = new bootstrap.Modal('#modalNilai', {
             keyboard: false
         })
         window.addEventListener('nilai-modal', event => {
             modalNilai.toggle();
         });
+
+        //Toast
+        const insertToast = new bootstrap.Toast('#insertNilaiToast')
+        window.addEventListener('insert-alert', e => {
+            insertToast.show()
+        })
     </script>
 @endsection
