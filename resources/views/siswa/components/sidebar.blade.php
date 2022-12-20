@@ -59,19 +59,24 @@
                     </a>
                 </li> --}}
                 {{-- Rapor --}}
-                <li class="sidebar-title">Akademik</li>
+                <li class="sidebar-title">Hasil Pembelajaran</li>
                 <li class="sidebar-item has-sub @if ($pages === 'rapor') active @endif">
                     <a href="#" class="sidebar-link">
-                        <i class="bi bi-hexagon-fill"></i>
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                         <span>Rapor</span>
                     </a>
-                    @foreach ($siswa as $s)
+                    @php
+                        $kelas = DB::table('siswas')->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
+                            ->where('user', Auth::user()->uuid)
+                            ->get();
+                    @endphp
                     <ul class="submenu @if ($pages === 'rapor') active @endif">
+                    @foreach ($kelas as $k)   
                         <li class="submenu-item">
-                            <a href="/rapor">{{ $s->kelas }}</a>
+                            <a href="/rapor">Kelas {{ $k->grade }}</a>
                         </li>
-                    </ul>
                     @endforeach
+                    </ul>
                 </li>
             </ul>
         </div>

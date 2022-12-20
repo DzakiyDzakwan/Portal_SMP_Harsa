@@ -87,17 +87,12 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/dashboard-siswa', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
     //Rapor
-    Route::get('/rapor', [siswa\RaporController::class,  'rapor'])->name('rapor');
+    Route::get('/rapor', [siswa\RaporController::class,  'index'])->name('rapor');
     //Pilih rapor
-    Route::get('/pilih-rapor-ganjil-7', [siswa\RaporController::class, 'ganjil7'])->name('pilih-rapor-ganjil-7');
-    Route::get('/pilih-rapor-genap-7', [siswa\RaporController::class, 'genap7'])->name('pilih-rapor-genap-7');
-    /* Route::get('/pilih-rapor-ganjil-8', [siswa\RaporController::class, 'ganjil8'])->name('pilih-rapor-ganjil-8');
-    Route::get('/pilih-rapor-genap-8', [siswa\RaporController::class, 'genap8'])->name('pilih-rapor-genap-8');
-    Route::get('/pilih-rapor-ganjil-9', [siswa\RaporController::class, 'ganjil9'])->name('pilih-rapor-ganjil-9');
-    Route::get('/pilih-rapor-genap-9', [siswa\RaporController::class, 'genap9'])->name('pilih-rapor-genap-9');
-    */
-    Route::get('/rapor-bulanan', [siswa\RaporController::class, 'bulanan'])->name('rapor-bulanan');
-    Route::get('/rapor-semester', [siswa\RaporController::class, 'semester'])->name('rapor-semester');
+    // Route::get('/pilih-rapor-ganjil-7', [siswa\RaporController::class, 'ganjil7'])->name('pilih-rapor-ganjil-7');
+    // Route::get('/pilih-rapor-genap-7', [siswa\RaporController::class, 'genap7'])->name('pilih-rapor-genap-7');
+    // Route::get('/rapor-bulanan', [siswa\RaporController::class, 'bulanan'])->name('rapor-bulanan');
+    // Route::get('/rapor-semester', [siswa\RaporController::class, 'semester'])->name('rapor-semester');
     Route::get('/profil-siswa', [siswa\ProfilController::class, 'profilSiswa'])->name('profilSiswa');
     Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
     Route::post('/edit-siswa', [ProfilController::class, 'updateProfilSiswa']);

@@ -23,49 +23,47 @@
         <section class="row mt-3">
             <div class="col-12">
                 <div class="card">
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                        {{-- Kelas VII --}}
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Kelas VII
-                            </button>
-                            </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    {{-- body --}}
-                                    <p><a href="/pilih-rapor-ganjil-7" style="color: inherit;">Semester Ganjil</a></p>
-                                    </p><a href="/pilih-rapor-genap-7" style="color: inherit;">Semester Genap</a></p>
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">Ganjil</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                                    aria-controls="profile" aria-selected="false">Genap</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row mt-4">
+                                    <div class="col-11">
+                                        <select class="form-select" id="basicSelect">
+                                            @foreach ($kontrak as $item)
+                                                <option>{{ $item->sesi }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="submit" class="btn btn-success me-1 mb-1" data-bs-dismiss="modal">
+                                            Pilih
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {{-- Kelas VIII --}}
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                Kelas VIII
-                            </button>
-                            </h2>
-                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    {{-- body --}}
-                                    <p><a href="" style="color: inherit;">Semester Ganjil</a></p>
-                                    </p><a href="" style="color: inherit;">Semester Genap</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Kelas IX --}}
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                Kelas IX
-                            </button>
-                            </h2>
-                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    {{-- body --}}
-                                    <p><a href="" style="color: inherit;">Semester Ganjil</a></p>
-                                    </p><a href="" style="color: inherit;">Semester Genap</a></p>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row mt-4">
+                                    <div class="col-11">
+                                        <select class="form-select" id="basicSelect">
+                                            <option>UH 1</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="submit" class="btn btn-success me-1 mb-1" data-bs-dismiss="modal">
+                                            Pilih
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
