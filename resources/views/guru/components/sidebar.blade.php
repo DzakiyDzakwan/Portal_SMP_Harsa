@@ -76,17 +76,21 @@
                         <span>List Kelas</span>
                     </a>
                     <ul class="submenu @if ($pages === 'listKelas') active @endif">
-                        <li class="submenu-item ">
-                            <a href="/pilih-kelas">Matematika 7A</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/pilih-kelas2">Matematika 9A</a>
-                        </li>
+                        @php
+                            $sidebar_kelas = DB::table('list_kelas_guru')
+                                ->where('guru', Auth::user()->gurus->NIP)
+                                ->get();
+                        @endphp
+                        @foreach ($sidebar_kelas as $item)
+                            <li class="submenu-item ">
+                                <a href="/kelas/{{ $item->kelas_id }}">{{ $item->nama_kelas }}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
 
                 {{-- Manajemen Nilai --}}
-                <li class="sidebar-item has-sub @if ($pages === 'inputNilai') active @endif">
+                {{-- <li class="sidebar-item has-sub @if ($pages === 'inputNilai') active @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-clipboard-heart-fill"></i>
                         <span>Manajemen Nilai</span>
@@ -99,7 +103,7 @@
                             <a href="/pilih-kelas2">Nilai Semester</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

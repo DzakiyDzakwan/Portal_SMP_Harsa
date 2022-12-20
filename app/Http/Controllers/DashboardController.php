@@ -7,6 +7,7 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Ekstrakurikuler;
+use Illuminate\Support\Facades\DB;
 
 
 use Illuminate\Http\Request;
@@ -45,9 +46,8 @@ class DashboardController extends Controller
     public function guru()
     {
         $pages = 'dashboardGuru';
-        return view('guru.dashboard', [
-            'pages'=>$pages
-        ]);
+        $listKelas = DB::table('list_kelas_guru')->where('guru', auth()->user()->gurus->NIP)->get();
+        return view('guru.dashboard', compact("pages","listKelas"));
     }
 
     public function login()
