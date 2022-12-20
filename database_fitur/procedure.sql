@@ -668,6 +668,7 @@ DELIMITER ;
 DELIMITER ?
 CREATE PROCEDURE add_nilai(
     IN sesi INT,
+    IN jenis CHAR(5),
     IN mapel CHAR(3),
     IN guru CHAR(18),
     IN kontrak INT,
@@ -686,9 +687,9 @@ DECLARE end DATETIME;
 SELECT tanggal_mulai INTO start FROM sesi_penilaians WHERE sesi_id = sesi;
 SELECT tanggal_berakhir INTO end FROM sesi_penilaians WHERE sesi_id = sesi;
 
-IF check_sesi(start, end) = 1 THEN
-    INSERT INTO nilais(sesi, mapel, guru, kontrak_siswa, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, created_at, updated_at)
-    VALUES(sesi, mapel, guru, kontrak, kkm, nilai_p, deskripsi_p, nilai_k, deskripsi_k, "pending", NOW(), NOW());
+IF cek_sesi(start, end) = 1 THEN
+    INSERT INTO nilais(sesi, mapel, guru, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, created_at, updated_at)
+    VALUES(sesi, mapel, guru, kontrak, jenis, kkm, nilai_p, deskripsi_p, nilai_k, deskripsi_k, "pending", NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(user, "insert", "prestasis", NOW());

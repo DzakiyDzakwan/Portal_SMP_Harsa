@@ -16,8 +16,8 @@ class SesiPenilaianModal extends Component
     }
 
     public function store() {
-        $start = date("Y-m-d H:m:s", strtotime($this->start));
-        $end = date("Y-m-d H:m:s", strtotime($this->end));
+        $start = date("Y-m-d H:i:s", strtotime($this->start));
+        $end = date("Y-m-d H:i:s", strtotime($this->end));
         DB::select('call add_sesi(?, ?, ?, ?, ?)', [$this->nama_sesi, $this->tahun_ajaran, $start, $end, auth()->user()->uuid]);
         $this->reset();
         $this->emit('storeSesi');
