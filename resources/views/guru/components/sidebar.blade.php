@@ -73,7 +73,7 @@
                 <li class="sidebar-item has-sub @if ($pages === 'listKelas') active @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-person-workspace"></i>
-                        <span>List Kelas</span>
+                        <span>Kelas</span>
                     </a>
                     <ul class="submenu @if ($pages === 'listKelas') active @endif">
                         @php
@@ -83,7 +83,8 @@
                         @endphp
                         @foreach ($sidebar_kelas as $item)
                             <li class="submenu-item ">
-                                <a href="/kelas/{{ $item->kelas_id }}">{{ $item->nama_kelas }}</a>
+                                <a href="/kelas/{{ $item->kelas_id }}">{{ $item->grade }}{{ $item->kelompok_kelas }}
+                                    {{ $item->nama_kelas }}</a>
                             </li>
                         @endforeach
                     </ul>

@@ -120,7 +120,7 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_kelas_guru AS
-        SELECT mg.guru, k.kelas_id, k.nama_kelas, m.nama_mapel
+        SELECT mg.guru, k.kelas_id, k.grade, k.kelompok_kelas, k.nama_kelas, m.mapel_id, m.nama_mapel
         FROM roster_kelas AS r
         JOIN mapel_gurus AS mg ON r.mapel = mg.mapel_guru_id
         JOIN mapels AS m ON mg.mapel = m.mapel_id
@@ -176,6 +176,16 @@ return new class extends Migration
         CREATE VIEW list_ekstrakurikuler AS
         SELECT ekstrakurikuler_id AS id, nama, hari, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(waktu_mulai, durasi) AS waktu_akhir, SEC_TO_TIME(durasi*60) AS durasi, tempat, kelas 
         FROM ekstrakurikulers;
+        ');
+
+        DB::unprepared('
+        CREATE VIEW list_siswa_kelas AS
+        SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester, s.kelas 
+        FROM siswas AS s
+        JOIN user_profiles AS p ON s.user = p.user
+        JOIN kontrak_semesters AS k ON s.NISN = k.siswa 
+        WHERE k.status = "On Going"
+        ORDER BY p.nama;
         ');
 
         DB::unprepared('
@@ -280,6 +290,7 @@ return new class extends Migration
         DB::unprepared('DROP VIEW list_nilai_pending');
         DB::unprepared('DROP VIEW list_prestasi');
         DB::unprepared('DROP VIEW list_ekstrakurikuler');
+        DB::unprepared('DROP VIEW list_siswa_kelas');
         DB::unprepared('DROP VIEW table_log_activities');
         DB::unprepared('DROP VIEW table_log_users');
         DB::unprepared('DROP VIEW table_log_siswas');
