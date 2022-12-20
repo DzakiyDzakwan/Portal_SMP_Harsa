@@ -86,6 +86,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 //Dashboard-Siswa
 Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/dashboard-siswa', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
+    //Profile-Siswa
+    Route::get('/profil-siswa', [siswa\ProfilController::class, 'profilSiswa'])->name('profilSiswa');
+    Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
+    //Route::post('/edit-profil-siswa', [ProfilController::class, 'updateProfilSiswa'])->name('updateProfilSiswa');
     //Rapor
     Route::get('/rapor', [siswa\RaporController::class,  'index'])->name('rapor');
     //Pilih rapor

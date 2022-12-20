@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/simple-datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/shared/iconly.css') }}">
+    @livewireStyles
 @endsection
 
 @section('content')
@@ -22,240 +23,77 @@
 
         <div class="card">
             <div class="card-body">
-                 <div class="row">
-                    <div class="col-12">
-                        <div class="pt-3 px-3">
-                             <form class="form form-horizontal" action="/edit-siswa" method="post">
-
-                                @csrf
-                                <div class="form-body ">
-                                    <div class="row">
-                                        {{-- <div class="col-md-3">
-                                            <label>Profile Picture</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input class="form-control" type="file" id="formFile">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Username</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="nama" class="form-control" name="username"
-                                                value="talithasya11" placeholder="Username">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Email</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input value="Talithasyafiyah@gmail.com" type="text" id="nama"
-                                                class="form-control" name="email" placeholder="Email">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Nama</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="nama" class="form-control" name="nama"
-                                                value="Talitha Syafiyah" placeholder="Nama">
-                                        </div> --}}
-                                        <div class="col-md-3">
-                                            <label>NISN</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="number" id="nis-id" class="form-control" name="NISN"
-                                                value="213211402018" placeholder="NISN" disabled>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <label>NIS</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="number" id="nis-id" class="form-control" name="NIS"
-                                                value="211402018" placeholder="NIS" disabled>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Kelas</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="kelas"
-                                                value="VII-A (Tujuh)" placeholder="Kelas" disabled>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Tanggal Masuk</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="date" id="ttl" class="form-control" name="tanggal_masuk"
-                                                value="11/12/2003" placeholder="Tanggal Masuk" disabled>
-                                        </div>
-                                        {{-- <div class="col-md-3">
-                                            <label>Tanggal Lahir</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="date" id="ttl" class="form-control" name="tanggallahir"
-                                                value="11/12/2003" placeholder="Tanggal Lahir">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Tempat Lahir</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="tempatlahir"
-                                                value="Medan" placeholder="Tempat Lahir">
-                                        </div> --}}
-                                        <div class="col-md-3">
-                                            <label>Jenis Kelamin</label>
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Laki-Laki
-                                            </label>
-                                        </div>
-                                        <div class="col-md-5 form-group">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault2" checked>
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Perempuan
-                                            </label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Alamat Tinggal</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="alamat_tinggal"
-                                                value="Jl. Imam Bonjol Medan" placeholder="Alamat Tinggal">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Alamat Domisili</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="alamat_domisili"
-                                                value="Jl. Imam Bonjol, Padangsidimpuan Selatan"
-                                                placeholder="Alamat Domisili">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Tanggal Masuk</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="tanggal_masuk"
-                                                value="21 Juni 2018" placeholder="Tanggal Masuk" >
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Kelas Awal</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="kelas_awal"
-                                                value="VII-A (Tujuh)" placeholder="Kelas Awal" >
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Semester</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="sem"
-                                                value="1" placeholder="Semester" disabled>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Agama</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="agama"
-                                                value="Islam" placeholder="Agama" disabled>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Anak ke</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="anak_ke"
-                                                value="1" placeholder="Anak ke">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Status dalam Keluarga</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="status"
-                                                value="Kandung" placeholder="Status dalam Keluarga">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Nama Ayah</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="nama_ayah"
-                                                value="Budiman" placeholder="Nama Ayah">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Pekerjaan Ayah</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control"
-                                                name="pekerjaan_ayah" value="Wiraswasta" placeholder="Pekerjaan Ayah">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Nama Ibu</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="nama_ibu"
-                                                value="Siti" placeholder="Nama Ibu">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Pekerjaan Ibu</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control"
-                                                name="pekerjaan_ibu" value="Ibu Rumah Tangga" placeholder="Pekerjaan Ibu">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Alamat Orangtua</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="alamat_orangtua"
-                                                value="Jalan Dr. T. Mansur No.9, Padang Bulan "
-                                                placeholder="Alamat Orangtua">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Telepon Orangtua</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="telepon_orangtua"
-                                                value="081273737889" placeholder="Telepon Orangtua">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Nama Wali</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="nama_wali"
-                                                value="Deni" placeholder="Nama Wali">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Pekerjaan Wali</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="pekerjaan_wali"
-                                                value="Bandar" placeholder="Pekerjaan Wali">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Telepon Wali</label>
-                                        </div>
-                                        <div class="col-md-9 form-group">
-                                            <input type="text" id="tempat" class="form-control" name="telepon_wali"
-                                                value="911" placeholder="Telepon Wali">
-                                        </div>
-                                        <div class="form-group  px-3 pt-2 modal-footer">
-                                            <a href="#" class="btn icon icon-left btn-danger m-3 px-3"><i
-                                                    data-feather="x"></i>
-                                                Cancel</a>
-                                            <button type="submit" class="btn icon icon-left btn-success px-3"><i
-                                                    data-feather="check-circle"></i>
-                                                Submit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                @livewire('edit-profil-siswa')
             </div>
         </div>
     </div>
+    @livewire('alert-siswa')
 @endsection
+
+@section('script')
+<script>
+    //Modal
+    // const createModal = new bootstrap.Modal('#createModal', {
+    //     keyboard: false
+    // })
+    // const editModal = new bootstrap.Modal('#editModal', {
+    //     keyboard: false
+    // })
+    // const infoModal = new bootstrap.Modal('#infoModal', {
+    //     keyboard: false
+    // })
+    /* const deleteModal = new bootstrap.Modal('#deleteModal', {
+        keyboard: false
+    }) */
+
+    // window.addEventListener('close-create-modal', event => {
+    //     createModal.hide();
+    // });
+    // window.addEventListener('edit-modal', event => {
+    //     editModal.toggle();
+    // });
+    // window.addEventListener('info-modal', event => {
+    //     infoModal.toggle();
+    // })
+    /* window.addEventListener('delete-modal', event => {
+        deleteModal.toggle();
+    }) */
+
+    //Toast
+    const insertToast = new bootstrap.Toast('#insertToast')
+    const inactiveToast = new bootstrap.Toast('#inactiveToast')
+    const nonInactiveToast = new bootstrap.Toast('#nonInactiveToast')
+    const updateToast = new bootstrap.Toast('#updateToast')
+    const restoreToast = new bootstrap.Toast('#restoreToast')
+    const deleteToast = new bootstrap.Toast('#deleteToast')
+
+
+    window.addEventListener('insert-alert', e => {
+        insertToast.show()
+    })
+
+    window.addEventListener('inactive-alert', e => {
+        inactiveToast.show()
+    })
+
+    window.addEventListener('nonInactive-alert', e => {
+        nonInactiveToast.show()
+    })
+
+    window.addEventListener('update-alert', e => {
+        updateToast.show()
+    })
+
+    window.addEventListener('restore-alert', e => {
+        restoreToast.show()
+    })
+
+    window.addEventListener('delete-alert', e => {
+        deleteToast.show()
+    })
+</script>
+
+@livewireScripts
 
 @section('script')
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
