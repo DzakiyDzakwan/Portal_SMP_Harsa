@@ -10,6 +10,7 @@ use App\Models\Ekstrakurikuler;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -37,8 +38,12 @@ class DashboardController extends Controller
 
     public function siswa() {
         $pages = 'dashboardSiswa';
+        $siswa = Siswa::join('users', 'siswas.user', '=', 'users.uuid')
+        ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
+        ->where('siswas.user', Auth::user()->uuid)->first();
         return view('siswa.dashboard', [
-            'pages'=>$pages
+            'pages'=>$pages,
+            'siswa' => $siswa
         ]);
     }
 

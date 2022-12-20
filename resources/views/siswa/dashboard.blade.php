@@ -95,7 +95,7 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-12">
                                             <div class="pt-3">
-                                                <img src="assets/images/Abby.jpg" class="rounded mx-auto d-block"
+                                                <img src="{{ asset('storage/'.$siswa->foto) }}" class="rounded mx-auto d-block"
                                                     alt="..." width="130">
                                             </div>
                                         </div>
@@ -107,27 +107,31 @@
                                                         <tr>
                                                             <td>Nama</td>
                                                             <td>:</td>
-                                                            <td>Abby Syafiyah</td>
+                                                            <td>{{ $siswa->nama }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>NIS</td>
                                                             <td>:</td>
-                                                            <td>211402018</td>
+                                                            <td>{{ $siswa->NIS }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Jenis Kelamin</td>
                                                             <td>:</td>
+                                                            @if($siswa->jenis_kelamin = "LK")
+                                                            <td>Laki - laki</td>
+                                                            @else
                                                             <td>Perempuan</td>
+                                                            @endif
                                                         </tr>
                                                         <tr>
                                                             <td>Tanggal Lahir</td>
                                                             <td>:</td>
-                                                            <td>11/12/2003</td>
+                                                            <td>{{ $siswa->tgl_lahir }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Tempat Lahir</td>
                                                             <td>:</td>
-                                                            <td>Medan</td>
+                                                            <td>{{ $siswa->tempat_lahir }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

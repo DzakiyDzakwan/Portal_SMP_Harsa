@@ -133,7 +133,7 @@
                                         @if ($data->jabatan == 'wks')
                                         <input type="text" id="jabatan" class="form-control" name="jabatan"
                                                 value="Wakil Kepala Sekolah" placeholder="Jabatan" disabled>
-                                        @elseif($gurus->jabatan == 'bk')
+                                        @elseif($data->jabatan == 'bk')
                                         <input type="text" id="jabatan" class="form-control" name="jabatan"
                                                 value="Bimbingan Konseling" placeholder="Jabatan" disabled>
                                         @else
