@@ -76,8 +76,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/log-ekstrakulikuler', [LogController::class, 'ekskul'])->name('log-ekskul');
     //Dashboard/Log-Roster
     Route::get('/log-roster', [LogController::class, 'roster'])->name('log-roster');
-    //Dashboard/Log-Ekstrakurikuler
+    //Dashboard/Log-Ekstrakurikuler-Siswa
     Route::get('/log-ekstrakurikuler-siswa', [LogController::class, 'ekskulSiswa'])->name('log-ekskul-siswa');
+    //Dashboard/Log-Kontrak
+    Route::get('/log-kontrak', [LogController::class, 'kontrak'])->name('log-kontrak');
 });
 
 //Siswa

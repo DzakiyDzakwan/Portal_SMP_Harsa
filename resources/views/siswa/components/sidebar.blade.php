@@ -22,7 +22,7 @@
                             </g>
                         </g>
                     </svg>
-                    <div class="form-check form-switch fs-6">
+                    <div class="fPorm-check form-switch fs-6">
                         <input class="form-check-input me-0" type="checkbox" id="toggle-dark" />
                         <label class="form-check-label"></label>
                     </div>
@@ -50,8 +50,8 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                {{-- SPP --}}
-                {{-- <li class="sidebar-title">SPP</li>
+                {{--
+                <li class="sidebar-title">SPP</li>
                 <li class="sidebar-item @if ($pages === 'tagihanSPP') active @endif">
                     <a href="/tagihan-spp" class="sidebar-link">
                         <i class="bi bi-hexagon-fill"></i>
@@ -59,16 +59,19 @@
                     </a>
                 </li> --}}
                 {{-- Rapor --}}
-                <li class="sidebar-title">Hasil Pembelajaran</li>
-                <li class="sidebar-item @if ($pages === 'rapor' ||
-                    $pages === 'pilih-rapor-ganjil-7' ||
-                    $pages === 'pilih-rapor-genap-7' ||
-                    $pages === 'rapor-bulanan' ||
-                    $pages === 'rapor-semester') active @endif">
-                    <a href="/rapor" class="sidebar-link">
-                        <i class="bi bi-file-ruled-fill"></i>
+                <li class="sidebar-title">Akademik</li>
+                <li class="sidebar-item has-sub @if ($pages === 'rapor') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-hexagon-fill"></i>
                         <span>Rapor</span>
                     </a>
+                    @foreach ($siswa as $s)
+                    <ul class="submenu @if ($pages === 'rapor') active @endif">
+                        <li class="submenu-item">
+                            <a href="/rapor">{{ $s->kelas }}</a>
+                        </li>
+                    </ul>
+                    @endforeach
                 </li>
             </ul>
         </div>

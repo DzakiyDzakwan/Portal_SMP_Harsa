@@ -38,9 +38,9 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Siswa</th>
-                        <th>NISN</th>
-                        <th>Jenis Prestasi</th>
+                        <th>Ekstrakurikuler</th>
+                        <th>Guru</th>
+                        <th>KOntrak Siswa</th>
                         <th>Keterangan</th>
                         <th>Tanggal Prestasi</th>
                         <th>Tanggal Kegiatan</th>
@@ -50,11 +50,11 @@
                     @foreach ($logEkskulSiswa as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$item->nama}}</td>
-                        <td>{{$item->siswa}}</td>
-                        <td>{{$item->jenis_prestasi}}</td>
+                        <td>{{$item->ekstrakulikuler}}</td>
+                        <td>{{$item->guru}}</td>
+                        <td>{{$item->kontrak_siswa}}</td>
+                        <td>{{$item->nilai}}</td>
                         <td>{{$item->keterangan}}</td>
-                        <td>{{$item->tanggal_prestasi}}</td>
                         <td>{{$item->created_at}}</td>
                     </tr>
                     @endforeach

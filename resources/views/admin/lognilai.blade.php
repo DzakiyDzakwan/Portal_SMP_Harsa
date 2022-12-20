@@ -38,12 +38,15 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Siswa</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Nilai Pengetahuan</th>
-                        <th>Nilai Keterampilan</th>
                         <th>Sesi</th>
+                        <th>Mata Pelajaran</th>
                         <th>Guru</th>
+                        <th>Kontrak Siswa</th>
+                        <th>KKM</th>
+                        <th>Nilai Pengetahuan</th>
+                        <th>Deskripsi Keterampilan</th>
+                        <th>Nilai Keterampilan</th>
+                        <th>Deskripsi Keterampilan</th>
                         <th>Status</th>
                         <th>Tanggal Kegiatan</th>
                     </tr>
@@ -52,12 +55,15 @@
                     @foreach ($logNilai as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$item->siswa}}</td>
-                        <td>{{$item->nama_mapel}}</td>
-                        <td>{{$item->nilai_pengetahuan}}</td>
-                        <td>{{$item->nilai_keterampilan}}</td>
                         <td>{{$item->sesi}}</td>
+                        <td>{{$item->mapel}}</td>
                         <td>{{$item->guru}}</td>
+                        <td>{{$item->kontrak_siswa}}</td>
+                        <td>{{$item->kkm}}</td>
+                        <td>{{$item->nilai_pengetahuan}}</td>
+                        <td>{{$item->deskripsi_pengetahuan}}</td>
+                        <td>{{$item->nilai_keterampilan}}</td>
+                        <td>{{$item->deskripsi_keterampilan}}</td>
                         <td>{{$item->status}}</td>
                         <td>{{$item->created_at}}</td>
                     </tr>
