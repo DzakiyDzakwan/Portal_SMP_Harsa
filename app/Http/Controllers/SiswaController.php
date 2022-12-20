@@ -19,10 +19,8 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $pages = 'user';
-        $subpages = 'siswa';
-        return view('admin.siswa', compact('pages', 'subpages'));
-        
+        // $siswa = Siswa::where('user', auth()->user()->uuid);
+        // return view('siswa.components.sidebar', compact('siswa'));
     }
 
     /**
@@ -45,15 +43,7 @@ class SiswaController extends Controller
     {
         // dd($request->all());
 
-        $validatedData = $request->validate([
-            'nama' => 'required|min:5|max:255',
-            'nisn' => 'required|min:10|max:10',
-        ]);
-
-        $password = Hash::make($validatedData['nisn']);
-
-        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', [$validatedData["nama"], $validatedData["nisn"], $request->NIS, $password, $request->tanggal_masuk, $request->kelas_id, $request->jenis_kelamin, auth()->user()->uuid]);
-        return back()->with('success', "Siswa berhasil dibuat");
+        
     }
 
     /**
@@ -73,19 +63,9 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $nisn)
+    public function edit(Request $request)
     {
-        DB::beginTransaction();
-        try {
-            Siswa::where('NISN', $nisn)->update([
-                'NISN'=>$request->nisn,
-                'nama' => $request->nama
-            ]);
-            DB::commit();
-            return back()->with('success', "Berhasil mengubah data");
-        } catch (\Throwable $th) {
-            DB::rollback();
-        }
+        
     }
 
     /**
@@ -106,10 +86,8 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, $user)
+    public function delete(Request $request)
     {
-        DB::select('CALL inactive_siswa(?, ?, ?)', [$user, $request->status, auth()->user()->uuid]);
-
-        return back()->with('succes', 'Siswa berhasil di non-aktif kan');
+ 
     }
 }

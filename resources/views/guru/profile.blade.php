@@ -90,6 +90,20 @@
                                             value="{{$gurus->tempat_lahir}}" placeholder="-" readonly>
                                     </div>
                                     <div class="col-md-3">
+                                        <label>Alamat Tinggal</label>
+                                    </div>
+                                    <div class="col-md-9 form-group">
+                                        <input type="text" id="alamat_tinggal" class="form-control" name="alamat_tinggal"
+                                            value="{{$gurus->alamat_tinggal}}" placeholder="-" readonly>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Alamat Domisili</label>
+                                    </div>
+                                    <div class="col-md-9 form-group">
+                                        <input type="text" id="alamat_domisili" class="form-control" name="alamat_domisili"
+                                            value="{{$gurus->alamat_domisili}}" placeholder="-" readonly>
+                                    </div>
+                                    <div class="col-md-3">
                                         <label>Ijazah Tertinggi</label>
                                     </div>
                                     <div class="col-md-9 form-group">

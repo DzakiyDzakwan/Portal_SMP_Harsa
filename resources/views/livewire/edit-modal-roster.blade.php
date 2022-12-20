@@ -26,7 +26,7 @@
                                 <div class="position-relative">
                                     <input
                                     name="waktu_mulai"
-                                    type="text"
+                                    type="time"
                                     class="form-control"
                                     id="waktu_mulai"
                                     wire:model.defer="waktu_mulai"
@@ -48,7 +48,7 @@
                                 <div class="position-relative">
                                     <input
                                     name="durasi"
-                                    type="text"
+                                    type="number"
                                     class="form-control"
                                     id="durasi"
                                     wire:model.defer="durasi"

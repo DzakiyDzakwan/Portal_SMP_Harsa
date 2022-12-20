@@ -54,14 +54,18 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/roster', [RosterController::class, 'index'])->name('roster');
     //Dashboard/eskul
     Route::get('/penilaian', [NilaiController::class, 'index'])->name('nilai');
-    //Dashboard/Log-Users
-    Route::get('/log-activities', [LogController::class, 'activity'])->name('log-activities');
-    //Dashboard/Log-Users
+    //Dashboard/Log-Activity
     Route::get('/log-activities', [LogController::class, 'activity'])->name('log-activities');
     //Dashboard/Log-Users
     Route::get('/log-users', [LogController::class, 'user'])->name('log-user');
+    //Dashboard/Log-Profile
+    Route::get('/log-profiles', [LogController::class, 'profiles'])->name('log-profiles');
     //Dashboard/Log-Siswa
     Route::get('/log-siswa', [LogController::class, 'siswa'])->name('log-siswa');
+    //Dashboard/Log-Prestasi
+    Route::get('/log-prestasi', [LogController::class, 'prestasi'])->name('log-prestasi');
+    //Dashboard/Log-Nilai
+    Route::get('/log-nilai', [LogController::class, 'nilai'])->name('log-nilai');
     //Dashboard/Log-Guru
     Route::get('/log-guru', [LogController::class, 'guru'])->name('log-guru');
     //Dashboard/Log-Kelas
@@ -70,6 +74,12 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/log-mapel', [LogController::class, 'mapel'])->name('log-mapel');
     //Dashboard/Log-Ekstrakurikuler
     Route::get('/log-ekstrakulikuler', [LogController::class, 'ekskul'])->name('log-ekskul');
+    //Dashboard/Log-Roster
+    Route::get('/log-roster', [LogController::class, 'roster'])->name('log-roster');
+    //Dashboard/Log-Ekstrakurikuler-Siswa
+    Route::get('/log-ekstrakurikuler-siswa', [LogController::class, 'ekskulSiswa'])->name('log-ekskul-siswa');
+    //Dashboard/Log-Kontrak
+    Route::get('/log-kontrak', [LogController::class, 'kontrak'])->name('log-kontrak');
 });
 
 //Siswa

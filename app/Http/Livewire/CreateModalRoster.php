@@ -13,19 +13,8 @@ class CreateModalRoster extends Component
 
     public function store()
     {
-        RosterKelas::create([
-            'mapel' => $this->mapel,
-            'kelas' => $this->kelas,
-            'waktu_mulai' => $this->waktu_mulai,
-            'durasi' => $this->durasi,
-            'hari' => $this->hari
-        ]);
-
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'insert',
-            'at' => 'roster_kelas'
-        ]);
+        $waktu_mulai = date("Y-m-d H:m:s", strtotime($this->waktu_mulai));
+        DB::select('CALL add_roster(?, ?, ?, ?, ?, ?)', [$this->mapel, $this->kelas, $this->waktu_mulai, $this->durasi, $this->hari, auth()->user()->uuid]);
 
         $this->reset();
         $this->emit('rosterStore');

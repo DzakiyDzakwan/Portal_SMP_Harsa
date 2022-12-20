@@ -42,22 +42,8 @@ class EditModalRoster extends Component
 
     public function update()
     {
-        // $this->validate([
-        //     'nama' => 'required',
-        //     'nis' => 'required|max:4'
-        // ]);
-
-        RosterKelas::where('roster_id', $this->roster_id)->update([
-            'waktu_mulai' => $this->waktu_mulai,
-            'durasi' => $this->durasi,
-            'hari' => $this->hari,
-        ]);
-
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'update',
-            'at' => 'roster_kelas'
-        ]);
+        $waktu_mulai = date("Y-m-d H:m:s", strtotime($this->waktu_mulai));
+        DB::select('CALL update_roster(?, ?, ?, ?, ?)', [$this->roster_id, $waktu_mulai, $this->durasi, $this->hari, auth()->user()->uuid]);
 
         $this->emit('rosterUpdate');
         $this->dispatchBrowserEvent('update-alert');

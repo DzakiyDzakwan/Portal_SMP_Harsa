@@ -66,7 +66,7 @@
                                 <div class="form-group has-icon-left">
                                     <label for="start">Waktu Mulai</label>
                                     <div class="position-relative">
-                                        <input name="waktu_mulai" type="text" class="form-control"
+                                        <input name="waktu_mulai" type="time" class="form-control"
                                             placeholder="Waktu Mulai" id="start" wire:model.defer="waktu_mulai" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-clock-fill"></i>
@@ -81,7 +81,7 @@
 
                             <div class="col-6">
                                 <div class="form-group has-icon-left">
-                                    <label for="end">Durasi</label>
+                                    <label for="end">Durasi (Menit)</label>
                                     <div class="position-relative">
                                         <input name="durasi" type="text" class="form-control" placeholder="Durasi"
                                             id="end" wire:model.defer="durasi" />
