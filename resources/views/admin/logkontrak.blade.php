@@ -1,7 +1,7 @@
 @extends('admin.master.main')
 
 @section('title')
-    <title>Log Roster Kelas</title>
+    <title>Log Kontrak Semester</title>
 @endsection
 
 @section('style')
@@ -12,7 +12,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>History Log Roster Kelas</h3>
+            <h3>History Log Kontrak Semester</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav
@@ -24,7 +24,7 @@
                         <a href="/">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item Aktif" aria-current="page">
-                        Log-Roster-Kelas
+                        Log-Kontrak-Semester
                     </li>
                 </ol>
             </nav>
@@ -38,25 +38,29 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Kelas</th>
-                        <th>Waktu Mulai</th>
-                        <th>Waktu Akhir</th>
-                        <th>Durasi</th>
-                        <th>Hari</th>
+                        <th>siswa</th>
+                        <th>Grade</th>
+                        <th>Semester</th>
+                        <th>Tahun Ajaran</th>
+                        <th>Sakit</th>
+                        <th>Izin</th>
+                        <th>Alpa</th>
+                        <th>Status</th>
                         <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($logRoster as $item)
+                    @foreach ($logKontrak as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$item->mapel}}</td>
-                        <td>{{$item->kelas}}</td>
-                        <td>{{$item->waktu_mulai}}</td>
-                        <td>{{$item->waktu_akhir}}</td>
-                        <td>{{$item->durasi}}</td>
-                        <td>{{$item->hari}}</td>
+                        <td>{{$item->siswa}}</td>
+                        <td>{{$item->grade}}</td>
+                        <td>{{$item->semester}}</td>
+                        <td>{{$item->tahun_ajaran}}</td>
+                        <td>{{$item->sakit}}</td>
+                        <td>{{$item->izin}}</td>
+                        <td>{{$item->alpa}}</td>
+                        <td>{{$item->status}}</td>
                         <td>{{$item->created_at}}</td>
                     </tr>
                     @endforeach
