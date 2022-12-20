@@ -18,9 +18,22 @@
                     </thead>
                     <tbody>
 
-                        <tr>
-                            <td class="text-center" colspan="6">Kelompok A</td>
-                        </tr>
+                        @if ($kelompokA->isEmpty())
+                            <tr>
+                                <td class="text-center" colspan="6">Belum Ada Nilai</td>
+                            </tr>
+                        @else
+                            @foreach ($kelompokA as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama_mapel }}</td>
+                                    <td>{{ $item->kkm }}</td>
+                                    <td>{{ $item->nilai_keterampilan }}</td>
+                                    <td>{{ $item->indeks }}</td>
+                                    <td>{{ $item->deskripsi_keterampilan }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
 
                     </tbody>
                 </table>
@@ -42,9 +55,22 @@
                     </thead>
                     <tbody>
 
-                        <tr>
-                            <td class="text-center" colspan="6">Kelompok B</td>
-                        </tr>
+                        @if ($kelompokB->isEmpty())
+                            <tr>
+                                <td class="text-center" colspan="6">Belum Ada Nilai</td>
+                            </tr>
+                        @else
+                            @foreach ($kelompokB as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama_mapel }}</td>
+                                    <td>{{ $item->kkm }}</td>
+                                    <td>{{ $item->nilai_keterampilan }}</td>
+                                    <td>{{ $item->indeks }}</td>
+                                    <td>{{ $item->deskripsi_keterampilan }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
 
                     </tbody>
                 </table>

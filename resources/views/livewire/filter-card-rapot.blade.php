@@ -18,7 +18,7 @@
                                                 <div class="position-relative">
                                                     <select name="semester"
                                                         class="form-select form-control @error('semester') is-invalid @enderror"
-                                                        id="basicSelect" wire:model.defer="semester">
+                                                        id="basicSelect" wire:model="semester">
                                                         <option value="">Pilih Semester</option>
                                                         @foreach ($kontrak as $item)
                                                             <option value="{{ $item->kontrak_semester_id }}">
@@ -46,7 +46,7 @@
                                                 <div class="position-relative">
                                                     <select name="jenis"
                                                         class="form-select form-control @error('jenis') is-invalid @enderror"
-                                                        id="basicSelect" wire:model.defer="jenis">
+                                                        id="basicSelect" wire:model="jenis">
                                                         <option value="">Jenis Raport</option>
                                                         <option value="uh1">Ulangan Harian 1</option>
                                                         <option value="uh2">Ulangan Harian 2</option>

@@ -17,7 +17,15 @@ class FilterCardRapot extends Component
         return view('livewire.filter-card-rapot', compact('kontrak'));
     }
 
+    public function updatedsemester($kontrak) {
+        $this->emit('kontrakChange', $kontrak);
+    }
+
+    public function updatedjenis($jenis) {
+        $this->emit('jenisChange',$jenis);
+    }
+
     public function search() {
-        $this->emit('search-nilai', [$this->grade, $this->semester]);
+        $this->emit('search');
     }
 }

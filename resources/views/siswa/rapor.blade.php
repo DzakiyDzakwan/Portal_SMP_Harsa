@@ -37,10 +37,10 @@
 
     <div class="row">
         {{-- Pengetahuan --}}
-        @livewire('list-table-pengetahuan')
+        @livewire('list-table-pengetahuan', ['grade' => $grade])
 
         {{-- Keterampilan --}}
-        @livewire('list-table-keterampilan')
+        @livewire('list-table-keterampilan', ['grade' => $grade])
     </div>
 @endsection
 
