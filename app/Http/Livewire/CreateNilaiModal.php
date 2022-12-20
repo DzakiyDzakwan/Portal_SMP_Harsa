@@ -3,15 +3,16 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\DB;
 use App\Models\Nilai;
+use App\Models\KontrakSemester;
+use Illuminate\Support\Facades\DB;
 
 class CreateNilaiModal extends Component
 {
 
-    public $mapel, $kontrak, $sesi, $sesi_id, $kkm, $nilai_p, $nilai_k, $deskripsi_p, $deskripsi_k;
+    public $nilai, $mapel, $kontrak_id, $sesi, $sesi_id, $kkm, $nilai_p, $nilai_k, $deskripsi_p, $deskripsi_k;
 
-    protected $rules = [
+    /* protected $rules = [
         'sesi' => 'required',
         'kkm' => 'required',
         'nilai_p' => 'required',
@@ -22,7 +23,7 @@ class CreateNilaiModal extends Component
 
     public function updated($fields) {
         $this->validateOnly($fields);
-    }
+    } */
 
     public function mount($mapel) {
         $this->mapel = $mapel;
@@ -34,11 +35,13 @@ class CreateNilaiModal extends Component
 
     public function render()
     {
+        
+        $this->nilai = Nilai::where('kontrak_siswa', 2)->get();
         return view('livewire.create-nilai-modal');
     }
 
     public function showModal($id) {
-        $this->kontrak = $id;
+        $this->kontrak_id = $id;
         $cekSesi = DB::table("list_sesi_penilaian")->where('status', "Aktif")->get();
         if($cekSesi->isEmpty()) {
             $this->sesi = "Tidak ada sesi yang tersedia";
@@ -47,7 +50,6 @@ class CreateNilaiModal extends Component
             $this->sesi = $sesiAktif->nama_sesi;
             $this->sesi_id = $sesiAktif->sesi_id;
         }
-        /* $this->nilai = Nilai::where('kontrak_siswa', $this->kontrak)->get(''); */
         $this->dispatchBrowserEvent('nilai-modal');
     }
 
