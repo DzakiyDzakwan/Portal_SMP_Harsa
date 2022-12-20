@@ -71,7 +71,7 @@ return new class extends Migration
         BEFORE INSERT ON nilais
         FOR EACH ROW
         BEGIN
-            IF is_nilai_exists(NEW.sesi, NEW.mapel, NEW.kontrak, NEW.jenis) = 1 THEN
+            IF is_nilai_exists(NEW.sesi, NEW.mapel, NEW.kontrak_siswa, NEW.jenis) = 1 THEN
                 SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Error Nilai Sudah tersedia";
             END IF;
         END
