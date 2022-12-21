@@ -220,7 +220,7 @@
                             </div>
                         </div>
                         {{-- Table Detail Siswa --}}
-                        <div class="col-12 col-md-6">
+                        {{-- <div class="col-12 col-md-6">
                             <div class="card">
                                 <div class="card-header">
                                     <h4>Detail Siswa</h4>
@@ -252,9 +252,9 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- Table Detail Guru --}}
-                        <div class="col-12 col-md-6">
+                        {{-- <div class="col-12 col-md-6">
                             <div class="card">
                                 <div class="card-header">
                                     <h4>Detail Guru</h4>
@@ -286,7 +286,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 

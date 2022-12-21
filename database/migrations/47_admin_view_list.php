@@ -283,6 +283,16 @@ return new class extends Migration
         FROM nilais AS n
         JOIN mapels AS m ON n.mapel = m.mapel_id;
         ');
+
+        DB::unprepared('
+        CREATE VIEW detail_kelas AS
+        SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.jenis_kelamin, SUM(if(user_profiles.jenis_kelamin = "PR", 1, 0)) AS jumlah_PR, SUM(if(user_profiles.jenis_kelamin = "LK", 1, 0)) AS jumlah_LK
+        FROM kelas
+        LEFT JOIN siswas ON kelas.kelas_id = siswas.kelas 
+        LEFT JOIN users ON siswas.user = users.uuid
+        INNER JOIN user_profiles ON users.uuid = user_profiles.user
+        GROUP BY kelas.kelas_id;
+        ');
     }
 
 
