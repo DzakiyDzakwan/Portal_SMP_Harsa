@@ -26,6 +26,8 @@ class DashboardController extends Controller
         $mapel = Mapel::count();
         $ekskul = Ekstrakurikuler::count();
 
+        $detail_kelas = DB::table('detail_kelas')->get();
+
         return view('admin.dashboard',compact(
             'pages',
             'subpages',
@@ -34,7 +36,8 @@ class DashboardController extends Controller
             'guru',
             'kelas',
             'mapel',
-            'ekskul'
+            'ekskul',
+            'detail_kelas'
         ));
     }
 
