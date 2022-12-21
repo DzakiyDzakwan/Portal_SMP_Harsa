@@ -19,8 +19,10 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        // $siswa = Siswa::where('user', auth()->user()->uuid);
-        // return view('siswa.components.sidebar', compact('siswa'));
+        $siswa = Siswa::where('user', auth()->user()->uuid);
+        $pages = 'user';
+        $subpages = 'siswa';
+        return view('admin.siswa', compact('siswa', 'pages', 'subpages'));
     }
 
     /**

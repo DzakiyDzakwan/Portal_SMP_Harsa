@@ -20,5 +20,13 @@ class MapelTableSeeder extends Seeder
         DB::select('CALL add_mapel(?, ?, ?, ?, ?)', ['M02', 'Matematika', 'A', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
         DB::select('CALL add_mapel(?, ?, ?, ?, ?)', ['M03', 'Fisika', 'A', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ?)', ['M04', 'Kimia', 'A', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ?)', ['M03', 'Biologi', 'A', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ?)', ['M03', 'Matematika', 'B', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ?)', ['M03', 'Sejarah', 'B', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }
