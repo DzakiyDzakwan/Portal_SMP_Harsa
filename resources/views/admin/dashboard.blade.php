@@ -199,46 +199,22 @@
                                     <table class="table table-bordered text-center">
                                         <thead>
                                             <tr>
-                                                <th>no</th>
+                                                <th>No</th>
                                                 <th>Kelas</th>
                                                 <th>Laki-Laki</th>
                                                 <th>Perempuan</th>
-                                                <th colspan="2">Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-group-divider">
+                                            @foreach ($detail_kelas as $row)
                                             <tr>
-                                                <td>1</td>
-                                                <td>7A Zaid bin Haritsah</td>
-                                                <td>20</td>
-                                                <td>10</td>
-                                                <td>30</td>
-                                                <td rowspan="4">120</td>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $row->grade }}{{ $row->kelompok_kelas }} - {{ $row->nama_kelas }}</td>
+                                                <td>{{ $row->jumlah_LK }}</td>
+                                                <td>{{ $row->jumlah_PR }}</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>7B Ubay bin Ka'ab</td>
-                                                <td>20</td>
-                                                <td>10</td>
-                                                <td>30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>7C Mus'ab bin Umair</td>
-                                                <td>20</td>
-                                                <td>10</td>
-                                                <td>30</td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
-                                        <tfoot class="table-group-divider">
-                                            <tr>
-                                                <td colspan="2">Jumlah</td>
-                                                <td>60</td>
-                                                <td>30</td>
-                                                <td>90</td>
-                                                <td>120</td>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
