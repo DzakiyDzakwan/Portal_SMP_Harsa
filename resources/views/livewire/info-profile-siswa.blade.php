@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-3 col-md-6">
         <div class="pt-3 text-center">
-            <img src="{{ asset('storage/'. $siswa->foto) }}" class="rounded" alt="..." width="220">
+            <img src="{{ asset('storage/fotoprofil/'. $siswa->foto) }}" class="rounded" alt="..." width="200">
         </div>
     </div>
     <div class="col-9">

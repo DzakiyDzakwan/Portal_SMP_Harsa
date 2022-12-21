@@ -95,11 +95,10 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-12">
                                             <div class="pt-3">
-                                                <img src="{{ asset('storage/' . $siswa->foto) }}"
-                                                    class="rounded mx-auto d-block" alt="..." width="130">
+                                                <img src="{{ asset('storage/fotoprofil/' . Auth::user()->user_profiles->foto) }}"
+                                                    class="rounded d-block" alt="..." width="130">
                                             </div>
                                         </div>
-
                                         <div class="col-lg-9 col-md-12">
                                             <div class="pt-3">
                                                 <table class="table mb-0">
