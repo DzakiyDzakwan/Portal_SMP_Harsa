@@ -309,6 +309,7 @@ return new class extends Migration
         DB::unprepared('DROP VIEW list_kelas_guru');
         DB::unprepared('DROP VIEW list_sesi_penilaian');
         DB::unprepared('DROP VIEW list_nilai');
+        DB::unprepared('DROP VIEW detail_kelas');
         DB::unprepared('DROP VIEW list_nilai_pending');
         DB::unprepared('DROP VIEW list_prestasi');
         DB::unprepared('DROP VIEW list_ekstrakurikuler');
