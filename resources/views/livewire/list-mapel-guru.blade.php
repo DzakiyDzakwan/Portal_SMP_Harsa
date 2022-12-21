@@ -2,9 +2,9 @@
     <thead>
         <tr>
             <th>No</th>
+            <th>Guru</th>
             <th>Mata Pelajaran</th>
             <th>Kelompok Mata Pelajaran</th>
-            <th>Guru</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -12,9 +12,13 @@
         @foreach ($mapelGuru as $mg)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $mg->nama_mapel }}</td>
-                <td>{{ $mg->kelompok_mapel }}</td>
                 <td>{{ $mg->nama }}</td>
+                <td>{{ $mg->nama_mapel }}</td>
+                @if ($mg->kelompok_mapel == 'A')
+                    <td>Wajib</td>
+                @else
+                    <td>Peminatan</td>
+                @endif
                 <td>
                     {{-- Update Button --}}
                     <div class="modal-warning me-1 mb-1 d-inline-block">

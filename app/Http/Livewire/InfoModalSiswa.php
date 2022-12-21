@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class InfoModalSiswa extends Component
 {
-    public $nama, $nisn, $nis, $jk, $kelas, $status, $anak_ke, $n_ayah, $p_ayah, $n_ibu, $p_ibu, $alamat_ortu, $telp_ortu, $n_wali, $p_wali, $telp_wali, $prestasi, $prestasi_id, $jenis, $keterangan, $tgl_prestasi;
+    public $nama, $nisn, $foto, $nis, $jk, $kelas, $status, $anak_ke, $n_ayah, $p_ayah, $n_ibu, $p_ibu, $alamat_ortu, $telp_ortu, $n_wali, $p_wali, $telp_wali, $prestasi, $prestasi_id, $jenis, $keterangan, $tgl_prestasi;
 
     protected $listeners = [
         'infoSiswa' => 'showSiswa'
@@ -51,6 +51,7 @@ class InfoModalSiswa extends Component
 
         //profil pribadi
         $this->anak_ke = $data->anak_ke;
+        $this->foto = $data->foto;
         $this->n_ayah = $data->nama_ayah;
         $this->p_ayah = $data->pekerjaan_ayah;
         $this->n_ibu = $data->nama_ibu;

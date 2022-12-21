@@ -15,7 +15,18 @@
 
 
                 {{-- Image --}}
-                <img src="assets/images/test.jpg" class="mx-auto d-block w-25 my-3" alt="...">
+                @if (!$foto == null)
+                    <img src="{{ asset('storage/' . $foto) }}" class="mx-auto d-block w-25 my-3" alt="...">
+                @else
+                    @if ($jenis_kelamin == 'LK')
+                        <img src="{{ asset('assets/images/faces/2.jpg') }}" class="mx-auto d-block w-25 my-3"
+                            alt="...">
+                    @else
+                        <img src="{{ asset('assets/images/faces/3.jpg') }}" class="mx-auto d-block w-25 my-3"
+                            alt="...">
+                    @endif
+                @endif
+
 
                 {{-- Navigation --}}
                 <ul class="nav nav-tabs justify-content-center align-items-center my-3" id="myTab" role="tablist">

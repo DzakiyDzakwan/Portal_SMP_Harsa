@@ -3,6 +3,7 @@
         <tr>
             <th>No</th>
             <th>NISN</th>
+            <th>Kelas</th>
             <th>Nama</th>
             <th>Tanggal Masuk</th>
             <th>Status Keaktifan</th>
@@ -14,8 +15,9 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $siswa->NISN }}</td>
+                <td>{{ $siswa->grade }}</td>
                 <td>{{ $siswa->nama }}</td>
-                <td>{{ $siswa->tanggal_masuk }}</td>
+                <td>{{ date('d M Y', strtotime($siswa->tanggal_masuk)) }}</td>
                 <td>
                     @if ($siswa->status == 'Aktif')
                         <span class="badge bg-success">{{ $siswa->status }}</span>

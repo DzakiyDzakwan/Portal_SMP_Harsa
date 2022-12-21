@@ -7,6 +7,7 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Prestasi;
+use App\Models\Ekstrakurikuler;
 use Illuminate\Support\Facades\DB;
 
 
@@ -25,6 +26,8 @@ class DashboardController extends Controller
         $mapel = Mapel::count();
         $ekskul = Ekstrakurikuler::count();
 
+        $detail_kelas = DB::table('detail_kelas')->get();
+
         return view('admin.dashboard',compact(
             'pages',
             'subpages',
@@ -33,7 +36,8 @@ class DashboardController extends Controller
             'guru',
             'kelas',
             'mapel',
-            'ekskul'
+            'ekskul',
+            'detail_kelas'
         ));
     }
 
