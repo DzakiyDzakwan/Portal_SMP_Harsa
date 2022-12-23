@@ -12,7 +12,7 @@
                                     <div class="row">
 
                                         {{-- start --}}
-                                        <div class="col-5">
+                                        <div class="col-6">
                                             <div class="form-group has-icon-left">
                                                 {{--  <label for="start">Waktu Mulai</label> --}}
                                                 <div class="position-relative">
@@ -40,7 +40,7 @@
                                         </div>
 
                                         {{-- end --}}
-                                        <div class="col-5">
+                                        <div class="col-6">
                                             <div class="form-group has-icon-left">
                                                 {{-- <label for="end">Waktu Akhir</label> --}}
                                                 <div class="position-relative">
@@ -67,11 +67,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-2 ">
+                                        {{-- <div class="col-2 ">
                                             <button type="submit" class="btn btn-sm btn-primary me-1 w-full">
                                                 cari
                                             </button>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </form>
