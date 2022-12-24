@@ -772,140 +772,140 @@ return new class extends Migration
         ');
 
         DB::unprepared('
-        CREATE PROCEDURE update_ekstrakurikuler(
-            IN admin CHAR(36),
-            IN ekstrakurikuler CHAR(5),
-            IN nama VARCHAR(30),
-            IN hari CHAR(6),
-            IN waktu_mulai TIME,
-            IN durasi INT,
-            IN tempat VARCHAR(100),
-            IN kelas CHAR(1)
-            )
-            BEGIN
-                DECLARE errno INT;
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
-        
-                START TRANSACTION;
-                UPDATE ekstrakurikulers SET nama = nama, hari = hari, waktu_mulai = waktu_mulai, durasi = durasi, tempat = tempat, kelas = kelas WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
+CREATE PROCEDURE update_ekstrakurikuler(
+    IN admin CHAR(36),
+    IN ekstrakurikuler CHAR(5),
+    IN nama VARCHAR(30),
+    IN hari CHAR(6),
+    IN waktu_mulai TIME,
+    IN durasi INT,
+    IN tempat VARCHAR(100),
+    IN kelas CHAR(1)
+    )
+    BEGIN
+        DECLARE errno INT;
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
 
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "update", "ekstrakurikulers", NOW());
+        START TRANSACTION;
+        UPDATE ekstrakurikulers SET nama = nama, hari = hari, waktu_mulai = waktu_mulai, durasi = durasi, tempat = tempat, kelas = kelas WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
 
-                COMMIT;
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "update", "ekstrakurikulers", NOW());
+
+        COMMIT;
                 
             END
         ');
         
         DB::unprepared('
-        CREATE PROCEDURE delete_ekstrakurikuler(
-            IN admin CHAR(36),
-            IN ekstrakurikuler CHAR(5)
-            )
-            BEGIN
-            
-                DECLARE errno INT;
-                DECLARE admin CHAR(36);
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
-            
-                SET admin = UUID();
-            
-                START TRANSACTION;
-                DELETE FROM ekstrakurikulers WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
-
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "delete", "ekstrakurikulers", NOW());
-                
-                COMMIT;
-
-            END
-        ');
-
-        DB::unprepared('
-        CREATE PROCEDURE add_roster(
-            IN mapel INT,
-            IN kelas CHAR(3),
-            IN waktu_mulai TIME,
-            IN durasi INT,
-            IN hari CHAR(6),
-            IN admin CHAR(36)
-        )
-        BEGIN
-            DECLARE errno INT;
-            DECLARE admin CHAR(36);
-            DECLARE EXIT HANDLER FOR SQLEXCEPTION
-            BEGIN
-                ROLLBACK;
-            END;
-        
-            SET admin = UUID();
-        
-            START TRANSACTION;
-
-            INSERT INTO roster_kelas(mapel, kelas, waktu_mulai, durasi, hari, created_at, updated_at) 
-            VALUES (mapel, kelas, waktu_mulai, durasi, hari, NOW(), NOW());
-
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "insert", "roster_kelas", NOW());
-            
-            COMMIT;
-        END
-        ');
-
-        DB::unprepared('
-        CREATE PROCEDURE update_roster(
-            IN roster INT,
-            IN waktu_mulai TIME,
-            IN durasi INT,
-            IN hari CHAR(6),
-            IN admin CHAR(36)
-        )
-        BEGIN
-            DECLARE errno INT;
-            DECLARE EXIT HANDLER FOR SQLEXCEPTION
-            BEGIN
-                ROLLBACK;
-            END;
+CREATE PROCEDURE delete_ekstrakurikuler(
+    IN admin CHAR(36),
+    IN ekstrakurikuler CHAR(5)
+    )
+    BEGIN
     
-            START TRANSACTION;
-            UPDATE roster_kelas SET waktu_mulai = waktu_mulai, durasi = durasi, hari = hari WHERE roster_id = roster;
+        DECLARE errno INT;
+        DECLARE admin CHAR(36);
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+    
+        SET admin = UUID();
+    
+        START TRANSACTION;
+        DELETE FROM ekstrakurikulers WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
 
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "roster_kelas", NOW());
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "delete", "ekstrakurikulers", NOW());
+        
+        COMMIT;
 
-            COMMIT;
+            END
+        ');
+
+        DB::unprepared('
+CREATE PROCEDURE add_roster(
+    IN mapel INT,
+    IN kelas CHAR(3),
+    IN waktu_mulai TIME,
+    IN durasi INT,
+    IN hari CHAR(6),
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE admin CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    SET admin = UUID();
+
+    START TRANSACTION;
+
+    INSERT INTO roster_kelas(mapel, kelas, waktu_mulai, durasi, hari, created_at, updated_at) 
+    VALUES (mapel, kelas, waktu_mulai, durasi, hari, NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "roster_kelas", NOW());
+    
+    COMMIT;
+        END
+        ');
+
+        DB::unprepared('
+CREATE PROCEDURE update_roster(
+    IN roster INT,
+    IN waktu_mulai TIME,
+    IN durasi INT,
+    IN hari CHAR(6),
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+    UPDATE roster_kelas SET waktu_mulai = waktu_mulai, durasi = durasi, hari = hari WHERE roster_id = roster;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "roster_kelas", NOW());
+
+    COMMIT;
             
         END
         ');
 
         DB::unprepared('
-        CREATE PROCEDURE delete_roster(
-            IN roster INT,
-            IN admin CHAR(36)
-        )
-        BEGIN
-            DECLARE errno INT;
-            DECLARE admin CHAR(36);
-            DECLARE EXIT HANDLER FOR SQLEXCEPTION
-            BEGIN
-                ROLLBACK;
-            END;
-        
-            SET admin = UUID();
-        
-            START TRANSACTION;
-            DELETE FROM roster_kelas WHERE roster_id = roster;
+CREATE PROCEDURE delete_roster(
+    IN roster INT,
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE admin CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
 
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "delete", "roster_kelas", NOW());
-            
-            COMMIT;
+    SET admin = UUID();
+
+    START TRANSACTION;
+    DELETE FROM roster_kelas WHERE roster_id = roster;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "delete", "roster_kelas", NOW());
+    
+    COMMIT;
 
         END
         '); */

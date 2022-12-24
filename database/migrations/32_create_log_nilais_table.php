@@ -18,9 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('nilai_id');
             $table->unsignedBigInteger('sesi');
             $table->char('mapel', 3);
-            $table->char('guru', 18)->nullable();
-            $table->uuid('admin')->nullable();
-            $table->char('kontrak_siswa', 10);
+            $table->char('guru', 16);
+            $table->char('pemeriksa', 36)->nullable();
+            $table->unsignedBigInteger('kontrak_siswa');
             $table->enum('jenis', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
             $table->integer('kkm');
             $table->float('nilai_pengetahuan', 8, 2);
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->float('nilai_keterampilan', 8, 2);
             $table->text('deskripsi_keterampilan');
             $table->enum('status', ['pending', 'confirmed', 'rejected']);
-            $table->text("keterangan")->nullable();
+            $table->text('keterangan')->nullable();
             $table->enum('action', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');
         });

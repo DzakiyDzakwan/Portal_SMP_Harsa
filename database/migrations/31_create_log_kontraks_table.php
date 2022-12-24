@@ -19,13 +19,13 @@ return new class extends Migration
             $table->char('siswa',10);
             $table->char('grade',1);
             $table->enum('semester',['Ganjil', 'Genap']);
-            $table->year('tahun_ajaran');
+            $table->char('tahun_ajaran',9);
             $table->integer('sakit')->unsigned()->default(0);
             $table->integer('izin')->unsigned()->default(0);
             $table->integer('alpa')->unsigned()->default(0);
             $table->enum('status', ['Lulus', 'Gagal', 'On Going']);
             $table->enum('action', ['insert', 'delete', 'update']);
-            $table->timestamps();
+            $table->timestamps('created_at');
         });
     }
 

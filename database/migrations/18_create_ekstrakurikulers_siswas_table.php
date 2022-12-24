@@ -15,15 +15,12 @@ return new class extends Migration
     {
         Schema::create('ekstrakurikuler_siswas', function (Blueprint $table) {
             $table->id('ekstrakurikuler_siswa_id');
-            $table->char('ekstrakurikuler', 5);
-            $table->char('guru', 18)->nullable();
-            $table->unsignedBigInteger('kontrak_siswa');
-            $table->float('nilai')->unsigned();
-            $table->text('keterangan');
+            $table->char('ekstrakurikuler', 6);
+            $table->char('siswa', 10);
+            $table->char('tahun_ajaran_aktif', 9);
+            $table->timestamp('created_at');
             $table->foreign('ekstrakurikuler')->references('ekstrakurikuler_id')->on('ekstrakurikulers')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('guru')->references('NIP')->on('gurus')->onUpdate('cascade')->onDelete('set null');
-            $table->foreign('kontrak_siswa')->references('kontrak_semester_id')->on('kontrak_semesters')->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreign('siswa')->references('NISN')->on('siswas')->onUpdate('cascade')->onDelete('set null');
         });
     }
 
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ekstrakurikuler_siswas');
+        Schema::dropIfExists('nilai_ekstrakurikulers');
     }
 };

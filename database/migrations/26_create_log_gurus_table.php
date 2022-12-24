@@ -16,14 +16,13 @@ return new class extends Migration
         Schema::create('log_gurus', function (Blueprint $table) {
             $table->id();
             $table->char('user', 36);
-            $table->char('NIP', 18);
-            $table->enum('jabatan', ['wks', 'bk', 'guru']);
+            $table->char('NUPTK', 16);
+            $table->enum('jabatan', ['guru', 'wks', 'ks']);
             $table->string('pendidikan')->nullable();
             $table->year('tahun_ijazah')->nullable();
             $table->enum('status_perkawinan', ['Kawin', 'Tidak Kawin'])->nullable();
             $table->date('tanggal_masuk');
-            $table->enum('status', ['Aktif', 'Inaktif']);
-            $table->enum('is_wali_kelas', ['iya', 'tidak']);
+            $table->enum('status', ['aktif', 'inaktif']);
             $table->enum('action', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');
         });
