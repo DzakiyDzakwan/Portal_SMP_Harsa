@@ -7,7 +7,6 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Prestasi;
-use App\Models\Ekstrakurikuler;
 use Illuminate\Support\Facades\DB;
 
 
