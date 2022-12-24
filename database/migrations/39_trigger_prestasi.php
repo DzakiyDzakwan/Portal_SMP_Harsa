@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         /* log insert prestasi */
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE TRIGGER log_insert_prestasi
         AFTER INSERT ON prestasis
         FOR EACH ROW
@@ -25,7 +25,6 @@ return new class extends Migration
         END
         ');
 
-        /* log update prestasi */
         DB::unprepared('
         CREATE TRIGGER log_update_prestasi
         AFTER UPDATE ON prestasis
@@ -36,7 +35,6 @@ return new class extends Migration
         END
         ');
 
-        /* log delete prestasi */
         DB::unprepared('
         CREATE TRIGGER log_delete_prestasi
         AFTER DELETE ON prestasis
@@ -47,7 +45,6 @@ return new class extends Migration
         END
         ');
 
-        /* cant_update_prestasi */
         DB::unprepared('
         CREATE TRIGGER cant_update_prestasi
         BEFORE UPDATE ON prestasis
@@ -58,7 +55,7 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
         END
-        ');
+        '); */
     }
 
     /**
@@ -68,9 +65,9 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_prestasi');
+        /* DB::unprepared('DROP TRIGGER log_insert_prestasi');
         DB::unprepared('DROP TRIGGER log_update_prestasi');
         DB::unprepared('DROP TRIGGER log_delete_prestasi');
-        DB::unprepared('DROP TRIGGER cant_update_prestasi');
+        DB::unprepared('DROP TRIGGER cant_update_prestasi'); */
     }
 };

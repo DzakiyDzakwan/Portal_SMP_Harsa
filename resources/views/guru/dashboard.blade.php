@@ -22,7 +22,7 @@
                 <div class="col-12">
                     <div class="row mb-3">
                         {{-- Profil Singkat --}}
-                        <div class="col-lg-6 col-md-12">
+                        <div class="col-lg-7 col-md-12">
                             <div class="card h-full">
                                 <div class="card-body">
                                     <h4>Profil Singkat</h4>
@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-12">
+                        <div class="col-lg-5 col-md-12">
                             <div class="card h-full">
                                 <div class="card-header ">
                                     <h4>Kelas yang dimasuki</h4>

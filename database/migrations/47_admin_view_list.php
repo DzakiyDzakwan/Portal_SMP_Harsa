@@ -53,13 +53,13 @@ return new class extends Migration
         JOIN user_profiles AS p ON g.user = p.user;
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW info_guru AS
         SELECT p.nama, p.email, g.nip, g.jabatan, IF(p.jenis_kelamin = "LK", "Pria", "Wanita" ) AS jenis_kelamin, DATE_FORMAT(g.tanggal_masuk, "%d %M %Y") AS tanggal_masuk, g.status, masa_mengajar(g.tanggal_masuk), g.pendidikan, g.tahun_ijazah, g.status_perkawinan, p.alamat_tinggal, p.alamat_domisili, p.tempat_lahir, DATE_FORMAT(p.tgl_lahir, "%d %M %Y") AS tanggal_lahir, umur(p.tgl_lahir) AS umur 
         FROM `gurus` AS g 
         JOIN users AS u ON g.user = u.uuid 
         JOIN user_profiles AS p ON u.uuid = p.user;
-        ');
+        '); */
 
         DB::unprepared('
         CREATE VIEW calon_wali_kelas AS
@@ -106,7 +106,7 @@ return new class extends Migration
         JOIN user_profiles AS p ON g.user = p.user;
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW list_roster_kelas AS
         SELECT r.roster_id AS id, m.nama_mapel, p.nama, k.kelas_id, k.nama_kelas, TIME_FORMAT(r.waktu_mulai, "%H:%i") AS waktu_mulai, TIME_FORMAT(waktu_akhir(r.waktu_mulai, r.durasi), "%H:%i") AS waktu_akhir, SEC_TO_TIME(r.durasi*60) AS durasi, r.hari
         FROM roster_kelas AS r
@@ -116,7 +116,7 @@ return new class extends Migration
         JOIN user_profiles AS p ON g.user = p.user
         JOIN kelas AS k ON r.kelas = k.kelas_id
         ORDER BY r.hari;
-        ');
+        '); */
 
         DB::unprepared('
         CREATE VIEW list_kelas_guru AS
@@ -128,12 +128,12 @@ return new class extends Migration
         GROUP BY r.mapel, r.kelas;
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW list_sesi_penilaian AS
         SELECT sesi_id, nama_sesi, tahun_ajaran, DATE_FORMAT(tanggal_mulai, "%d %M %Y %H:%i:%s") AS waktu_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y %H:%i:%s") AS waktu_selesai, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, created_by AS admin , IF(cek_sesi(tanggal_mulai, tanggal_berakhir) = 1 , "Aktif", "Inaktif") AS status 
         FROM sesi_penilaians
         ORDER BY status;
-        ');
+        '); */
 
         DB::unprepared('
         CREATE VIEW list_nilai AS
@@ -172,11 +172,11 @@ return new class extends Migration
 
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW list_ekstrakurikuler AS
         SELECT ekstrakurikuler_id AS id, nama, hari, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(waktu_mulai, durasi) AS waktu_akhir, SEC_TO_TIME(durasi*60) AS durasi, tempat, kelas 
         FROM ekstrakurikulers;
-        ');
+        '); */
 
         DB::unprepared('
         CREATE VIEW list_siswa_kelas AS
@@ -227,11 +227,11 @@ return new class extends Migration
         SELECT * FROM log_ekstrakurikulers
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW table_log_rosters AS
         SELECT mapel, kelas, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(waktu_mulai, durasi) AS waktu_akhir, SEC_TO_TIME(durasi*60) AS durasi, hari, created_at
         FROM roster_kelas;
-        ');
+        '); */
 
         DB::unprepared('
         CREATE VIEW table_log_profiles AS 
@@ -262,27 +262,27 @@ return new class extends Migration
         FROM ekstrakurikuler_siswas
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW list_roster_siswa AS
         SELECT r.kelas, m.nama_mapel, TIME_FORMAT(r.waktu_mulai, "%H:%i") AS waktu_mulai, TIME_FORMAT(waktu_akhir(r.waktu_mulai, r.durasi), "%H:%i") AS waktu_akhir, r.hari
         FROM roster_kelas AS r
         JOIN mapel_gurus AS mg ON mg.mapel_guru_id = r.mapel
         JOIN mapels AS m ON m.mapel_id = mg.mapel
-        ');
+        '); */
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW rapot_nilai_pengetahuan AS
         SELECT n.jenis, n.kontrak_siswa, m.kelompok_mapel, m.nama_mapel, n.kkm, n.nilai_pengetahuan, n.deskripsi_pengetahuan, indeks(n.kkm, n.nilai_pengetahuan) AS indeks  
         FROM nilais AS n
         JOIN mapels AS m ON n.mapel = m.mapel_id
-        ');
+        '); */
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW rapot_nilai_keterampilan AS
         SELECT n.jenis, n.kontrak_siswa, m.kelompok_mapel, m.nama_mapel, n.kkm, n.nilai_keterampilan, n.deskripsi_keterampilan, indeks(n.kkm, n.nilai_pengetahuan) AS indeks  
         FROM nilais AS n
         JOIN mapels AS m ON n.mapel = m.mapel_id;
-        ');
+        '); */
 
         DB::unprepared('
         CREATE VIEW detail_kelas AS

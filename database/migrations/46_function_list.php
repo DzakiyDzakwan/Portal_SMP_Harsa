@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE function masa_mengajar(
             tanggal_masuk DATE
         )
@@ -151,7 +151,7 @@ return new class extends Migration
         BEGIN
             RETURN (SELECT EXISTS(SELECT 1 FROM nilais WHERE sesi = sesi AND mapel = mapel AND kontrak_siswa = kontrak AND jenis= jenis));
         END
-        ');
+        '); */
     }
 
     /**
@@ -161,12 +161,12 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP FUNCTION masa_mengajar');
+        /* DB::unprepared('DROP FUNCTION masa_mengajar');
         DB::unprepared('DROP FUNCTION umur');
         DB::unprepared('DROP FUNCTION waktu_akhir');
         DB::unprepared('DROP FUNCTION cek_sesi');
         DB::unprepared('DROP FUNCTION get_sesi');
         DB::unprepared('DROP FUNCTION indeks');
-        DB::unprepared('DROP FUNCTION is_nilai_exists');
+        DB::unprepared('DROP FUNCTION is_nilai_exists'); */
     }
 };
