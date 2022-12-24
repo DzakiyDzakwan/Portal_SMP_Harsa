@@ -560,6 +560,7 @@ END?
 DELIMITER ;
 
 --Update Siswa
+DELIMITER ?
 CREATE PROCEDURE update_siswa(
     IN oldnis CHAR(4),
     IN newnis CHAR(4),
@@ -589,7 +590,8 @@ BEGIN
     
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "update", "users", NOW());
-END
+END?
+DELIMITER ;
 
 --Non Aktifkan Siswa (❌)
 DELIMITER ?
