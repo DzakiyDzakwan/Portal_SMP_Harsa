@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('mapels', function (Blueprint $table) {
-            $table->char('mapel_id', 3)->primary();
+            $table->char('mapel_id', 5)->primary();
             $table->string('nama_mapel');
             $table->enum('kelompok_mapel', ['A', 'B']);
-            $table->string('kurikulum');
+            $table->integer('kkm', 3)->default(0);
+            $table->string('kurikulum', 10);
             $table->timestamps();
             $table->softDeletes();
         });

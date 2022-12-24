@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roster_kelas', function (Blueprint $table) {
+        Schema::create('rosters', function (Blueprint $table) {
             $table->id('roster_id');
-            $table->unsignedBigInteger('mapel');
-            $table->char('kelas', 3);
+            $table->unsignedBigInteger('mapel_guru');
+            $table->char('kelas', 6);
+            $table->char('tahun_ajaran_aktif', 9);
+            $table->enum('semester_aktif', ['ganjil', 'genap']);
             $table->time('waktu_mulai');
-            $table->integer('durasi');
+            $table->time('waktu_akhir');
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->foreign('mapel')->references('mapel_guru_id')->on('mapel_gurus')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('kelas')->references('kelas_id')->on('kelas')->onUpdate('cascade')->onDelete('cascade');

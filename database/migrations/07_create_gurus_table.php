@@ -14,15 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('gurus', function (Blueprint $table) {
-            $table->char('NIP', 18)->nullable()->primary();
+            $table->char('NUPTK', 18)->nullable()->primary();
             $table->uuid('user');
-            $table->enum('jabatan', ['wks', 'bk', 'guru']);
+            $table->enum('jabatan', ['ks', 'wks', 'guru']);
             $table->string('pendidikan')->nullable();
             $table->year('tahun_ijazah')->nullable();
             $table->enum('status_perkawinan', ['Kawin', 'Tidak Kawin'])->nullable();
             $table->date('tanggal_masuk');
-            $table->enum('status', ['Aktif', 'Inaktif']);
-            $table->enum('is_wali_kelas', ['iya', 'tidak']);
+            $table->enum('status', ['aktif', 'inaktif'])->default('aktif');
             $table->foreign('user')->references('uuid')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
