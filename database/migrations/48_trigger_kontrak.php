@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         /* log insert kontrak */
-        /* DB::unprepared('
+        DB::unprepared('
         CREATE TRIGGER log_insert_kontrak
         AFTER INSERT ON kontrak_semesters
         FOR EACH ROW
@@ -45,7 +45,26 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah role";
             END IF;
         END
-        '); */
+        ');
+
+        DB::unprepared('
+        CREATE TRIGGER disable_update_log_kontraks
+        AFTER UPDATE on log_kontraks
+        FOR EACH ROW
+        BEGIN
+            SIGNAL SQLSTATE "45000"
+            SET MESSAGE_TEXT = "Tidak dapat mengubah data pada log kontraks";
+        END
+        ');
+        DB::unprepared('
+        CREATE TRIGGER disable_delete_log_kontraks
+        AFTER DELETE on log_kontraks
+        FOR EACH ROW
+        BEGIN
+            SIGNAL SQLSTATE "45000"
+            SET MESSAGE_TEXT = "Tidak dapat menghapus data pada log kontraks";
+        END
+        ');
     }
 
     /**
@@ -55,8 +74,10 @@ return new class extends Migration
      */
     public function down()
     {
-        /* DB::unprepared('DROP TRIGGER log_insert_kontrak');
+        DB::unprepared('DROP TRIGGER log_insert_kontrak');
         DB::unprepared('DROP TRIGGER log_update_kontrak');
-        DB::unprepared('DROP TRIGGER disable_update_kontrak'); */
+        DB::unprepared('DROP TRIGGER disable_update_kontrak');
+        DB::unprepared('DROP TRIGGER disable_update_log_kontraks');
+        DB::unprepared('DROP TRIGGER disable_delete_log_kontraks');
     }
 };
