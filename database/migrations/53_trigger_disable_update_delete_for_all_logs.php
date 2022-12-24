@@ -12,9 +12,8 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    /* public function up()
     {
-        /* disable log activities */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_activities
         AFTER UPDATE on log_activities
@@ -224,7 +223,7 @@ return new class extends Migration
         END
         ');
         
-    }
+    } */
         
         /**
          * Reverse the migrations.
@@ -232,7 +231,7 @@ return new class extends Migration
          * @return void
          */
 
-    public function down()
+   /*  public function down()
     {
         DB::unprepared('DROP TRIGGER disable_update_log_activities');
         DB::unprepared('DROP TRIGGER disable_update_log_users');
@@ -257,5 +256,5 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER disable_delete_log_ekstrakurikulers');
         DB::unprepared('DROP TRIGGER disable_delete_log_ekstrakurikuler_siswas');
         
-    }
+    } */
 };
