@@ -72,7 +72,7 @@
                                     @enderror"
                                         placeholder="Masukkan NIP guru" id="nip" wire:model.defer="nip" />
                                     <div class="form-control-icon">
-                                        <i class="bi bi-person"></i>
+                                        <i class="bi bi-123"></i>
                                     </div>
                                     @error('nip')
                                         <div class="invalid-feedback">
@@ -99,7 +99,7 @@
                                         <option value="guru">Guru</option>
                                     </select>
                                     <div class="form-control-icon">
-                                        <i class="bi bi-person"></i>
+                                        <i class="bi bi-person-workspace"></i>
                                     </div>
                                     @error('jabatan')
                                         <div class="invalid-feedback">

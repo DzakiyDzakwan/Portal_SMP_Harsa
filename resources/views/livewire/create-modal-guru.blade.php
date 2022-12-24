@@ -1,6 +1,6 @@
 <div>
     <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
-        <i class="bi bi-plus-circle"></i> Sesi Penilaian
+        <i class="bi bi-plus-circle"></i> Tambah Guru
     </button>
 
     <!--Modal tambah Guru -->
@@ -55,7 +55,7 @@
                                             <option value="PR">Perempuan</option>
                                         </select>
                                         <div class="form-control-icon">
-                                            <i class="bi bi-person"></i>
+                                            <i class="bi bi-gender-ambiguous"></i>
                                         </div>
                                         @error('jenis_kelamin')
                                             <div class="invalid-feedback">
@@ -78,7 +78,7 @@
                                         @enderror"
                                             placeholder="Masukkan NIP guru" id="nip" wire:model.defer="nip" />
                                         <div class="form-control-icon">
-                                            <i class="bi bi-person"></i>
+                                            <i class="bi bi-card-text"></i>
                                         </div>
                                         @error('nip')
                                             <div class="invalid-feedback">
@@ -105,7 +105,7 @@
                                             <option value="guru">Guru</option>
                                         </select>
                                         <div class="form-control-icon">
-                                            <i class="bi bi-person"></i>
+                                            <i class="bi bi-person-workspace"></i>
                                         </div>
                                         @error('jabatan')
                                             <div class="invalid-feedback">
