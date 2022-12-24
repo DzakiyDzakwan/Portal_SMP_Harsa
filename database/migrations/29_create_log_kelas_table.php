@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('log_kelas', function (Blueprint $table) {
             $table->id();
-            $table->char('kelas_id', 3);
-            $table->char('wali_kelas', 18)->nullable();
-            $table->char('grade', 1);
+            $table->char('kelas_id', 6);
+            $table->char('wali_kelas', 16)->nullable();
+            $table->enum('grade', ['7', '8', '9']);
             $table->char('kelompok_kelas', 1);
             $table->string('nama_kelas');
             $table->enum('action', ['insert', 'update', 'delete']);

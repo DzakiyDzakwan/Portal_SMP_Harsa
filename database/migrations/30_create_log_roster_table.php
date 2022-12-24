@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('log_rosters', function (Blueprint $table) {
             $table->id();
             $table->integer('roster_id');
-            $table->integer('mapel');
+            $table->integer('mapel_guru');
             $table->char('kelas', 3);
+            $table->enum('semester_aktif', ['Gannjil', 'Genap']);
+            $table->char('tahun_ajaran_aktif', 9);
             $table->time('waktu_mulai');
             $table->integer('durasi');
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
-            $table->enum('action', ['insert','update','delete']);
+            $table->enum('action', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');
         });
     }

@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('log_users', function (Blueprint $table) {
             $table->id();
             $table->char('uuid', 36);
-            $table->string('username', 255)->nullable();
-            $table->string('password', 255)->nullable();
-            $table->enum('role', ['admin', 'guru', 'siswa']);
+            $table->string('username', 255);
+            $table->string('password', 255);
             $table->enum('action', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');
         });
