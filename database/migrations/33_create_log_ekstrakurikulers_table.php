@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('log_ekstrakurikulers', function (Blueprint $table) {
             $table->id();
-            $table->char('ekstrakurikuler_id',5);
+            $table->char('ekstrakurikuler_id',6);
+            $table->char('penanggung_jawab',16)->nullable();
             $table->string('nama', 255);
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->time('waktu_mulai');
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->string('tempat', 255);
             $table->char('kelas', 1);
             $table->enum('action', ['insert', 'update', 'delete']);
-            $table->timestamp('created_at');
+            $table->timestamp('created_at');                                         
         });
     }
 
