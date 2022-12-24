@@ -30,7 +30,7 @@ return new class extends Migration
             $table->text("keterangan")->nullable();
             $table->foreign('sesi')->references('sesi_id')->on('sesi_penilaians')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('mapel')->references('mapel_id')->on('mapels')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('guru')->references('NIP')->on('gurus')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('guru')->references('NUPTK')->on('gurus')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('pemeriksa')->references('uuid')->on('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('kontrak_siswa')->references('kontrak_semester_id')->on('kontrak_semesters')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

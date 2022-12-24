@@ -17,7 +17,7 @@ return new class extends Migration
             $table->char('mapel_id', 5)->primary();
             $table->string('nama_mapel');
             $table->enum('kelompok_mapel', ['A', 'B']);
-            $table->integer('kkm', 3)->default(0);
+            $table->integer('kkm');
             $table->string('kurikulum', 10);
             $table->timestamps();
             $table->softDeletes();

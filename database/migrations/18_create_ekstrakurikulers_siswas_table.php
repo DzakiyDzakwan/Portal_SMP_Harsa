@@ -20,7 +20,7 @@ return new class extends Migration
             $table->char('tahun_ajaran_aktif', 9);
             $table->timestamp('created_at');
             $table->foreign('ekstrakurikuler')->references('ekstrakurikuler_id')->on('ekstrakurikulers')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('siswa')->references('NISN')->on('siswas')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('siswa')->references('NISN')->on('siswas')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

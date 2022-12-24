@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('alpa')->unsigned()->default(0);
             $table->enum('status', ['Lulus', 'Gagal', 'On Going']);
             $table->enum('action', ['insert', 'delete', 'update']);
-            $table->timestamps('created_at');
+            $table->timestamp('created_at');
         });
     }
 

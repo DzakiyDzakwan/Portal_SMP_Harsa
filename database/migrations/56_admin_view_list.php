@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW list_admin AS
         SELECT uuid, username, role, created_at F
         FROM users 
@@ -51,7 +51,7 @@ return new class extends Migration
         SELECT g.nip, p.nama, g.jabatan, g.status 
         FROM `gurus` AS g 
         JOIN user_profiles AS p ON g.user = p.user;
-        ');
+        '); */
 
         /* DB::unprepared('
         CREATE VIEW info_guru AS
@@ -61,7 +61,7 @@ return new class extends Migration
         JOIN user_profiles AS p ON u.uuid = p.user;
         '); */
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW calon_wali_kelas AS
         SELECT g.NIP, p.nama 
         FROM gurus AS g
@@ -104,7 +104,7 @@ return new class extends Migration
         JOIN gurus AS g ON g.NIP = mg.guru 
         JOIN mapels AS m ON mg.mapel = m.mapel_id 
         JOIN user_profiles AS p ON g.user = p.user;
-        ');
+        '); */
 
         /* DB::unprepared('
         CREATE VIEW list_roster_kelas AS
@@ -118,7 +118,7 @@ return new class extends Migration
         ORDER BY r.hari;
         '); */
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW list_kelas_guru AS
         SELECT mg.guru, k.kelas_id, k.grade, k.kelompok_kelas, k.nama_kelas, m.mapel_id, m.nama_mapel
         FROM roster_kelas AS r
@@ -126,7 +126,7 @@ return new class extends Migration
         JOIN mapels AS m ON mg.mapel = m.mapel_id
         JOIN kelas AS k ON r.kelas = k.kelas_id
         GROUP BY r.mapel, r.kelas;
-        ');
+        '); */
 
         /* DB::unprepared('
         CREATE VIEW list_sesi_penilaian AS
@@ -135,7 +135,7 @@ return new class extends Migration
         ORDER BY status;
         '); */
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW list_nilai AS
         SELECT n.nilai_id, p.nama AS siswa, m.nama_mapel, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NIP AS guru, n.status 
         FROM nilais AS n
@@ -170,7 +170,7 @@ return new class extends Migration
         JOIN siswas AS s ON p.siswa = s.NISN
         JOIN kontrak_semesters AS ktk ON ktk.siswa = s.NISN;
 
-        ');
+        '); */
 
         /* DB::unprepared('
         CREATE VIEW list_ekstrakurikuler AS
@@ -178,7 +178,7 @@ return new class extends Migration
         FROM ekstrakurikulers;
         '); */
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW list_siswa_kelas AS
         SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester, s.kelas 
         FROM siswas AS s
@@ -225,7 +225,7 @@ return new class extends Migration
         DB::unprepared('
         CREATE VIEW table_log_ekstrakurikulers AS 
         SELECT * FROM log_ekstrakurikulers
-        ');
+        '); */
 
         /* DB::unprepared('
         CREATE VIEW table_log_rosters AS
@@ -233,7 +233,7 @@ return new class extends Migration
         FROM roster_kelas;
         '); */
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW table_log_profiles AS 
         SELECT * FROM user_profiles
         ');
@@ -260,7 +260,7 @@ return new class extends Migration
         CREATE VIEW table_log_ekstrakurikuler_siswas AS
         SELECT *
         FROM ekstrakurikuler_siswas
-        ');
+        '); */
 
         /* DB::unprepared('
         CREATE VIEW list_roster_siswa AS
@@ -284,7 +284,7 @@ return new class extends Migration
         JOIN mapels AS m ON n.mapel = m.mapel_id;
         '); */
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW detail_kelas AS
         SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.jenis_kelamin, SUM(if(user_profiles.jenis_kelamin = "PR", 1, 0)) AS jumlah_PR, SUM(if(user_profiles.jenis_kelamin = "LK", 1, 0)) AS jumlah_LK
         FROM kelas
@@ -292,7 +292,7 @@ return new class extends Migration
         LEFT JOIN users ON siswas.user = users.uuid
         INNER JOIN user_profiles ON users.uuid = user_profiles.user
         GROUP BY kelas.kelas_id;
-        ');
+        '); */
     }
 
 
@@ -303,7 +303,7 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP VIEW list_admin');
+        /* DB::unprepared('DROP VIEW list_admin');
         DB::unprepared('DROP VIEW list_inactive_admin');
         DB::unprepared('DROP VIEW list_siswa');
         DB::unprepared('DROP VIEW info_siswa');
@@ -336,6 +336,6 @@ return new class extends Migration
         DB::unprepared('DROP VIEW table_log_nilais');
         DB::unprepared('DROP VIEW table_log_prestasis');
         DB::unprepared('DROP VIEW table_log_kontraks');
-        DB::unprepared('DROP VIEW table_log_ekstrakurikuler_siswas');
+        DB::unprepared('DROP VIEW table_log_ekstrakurikuler_siswas'); */
     }
 };
