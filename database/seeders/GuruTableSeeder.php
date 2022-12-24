@@ -7,6 +7,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
+use App\Models\Guru;
+use App\Models\User;
+use App\Models\UserProfile;
 
 class GuruTableSeeder extends Seeder
 {
@@ -26,5 +29,26 @@ class GuruTableSeeder extends Seeder
         DB::select('CALL add_guru(?, ?, ?, ?, ?, ?, ?)', ["Jonal Stipelberg", '123456789012345678', 'guru', Hash::make('444444444444444444'), '2022-01-12', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
         DB::select('CALL add_guru(?, ?, ?, ?, ?, ?, ?)', ["Ulrich Nielsen", '876543210987654321', 'guru', Hash::make('444444444444444444'), '2022-01-12', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
         DB::select('CALL add_guru(?, ?, ?, ?, ?, ?, ?)', ["Yuki Hanamura", '555555555555555555', 'guru', Hash::make('444444444444444444'), '2022-01-12', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']); */
+
+        User::create([
+            'uuid' => '58f5ab52-75d2-11ed-9489-f875a4fd08d6',
+            'username' => '1234567890123456',
+            'password' => Hash::make('1234567890123456')
+        ])->assignRole('kepsek');
+
+        Guru::create([
+            'NUPTK' => '1234567890123456',
+            'user' => '58f5ab52-75d2-11ed-9489-f875a4fd08d6',
+            'jabatan' => 'ks',
+            'tanggal_masuk' => '2022-01-12',
+            'status' => 'aktif'
+        ]);
+
+        UserProfile::Create([
+            'user' => '58f5ab52-75d2-11ed-9489-f875a4fd08d6',
+            'nama' => 'Kepala Sekolah Satu',
+            'jenis_kelamin' => 'LK'
+        ]);
+
     }
 }

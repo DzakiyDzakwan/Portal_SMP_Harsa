@@ -9,10 +9,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, Uuids, softDeletes;
+    use HasApiTokens, HasFactory, Notifiable, Uuids, softDeletes, HasRoles;
 
     protected $primaryKey = 'uuid';
 
@@ -52,7 +53,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user_profiles()
+    public function profiles()
     {
         return $this->hasOne(UserProfile::class, 'user', 'uuid');
     }
@@ -65,6 +66,11 @@ class User extends Authenticatable
     public function siswas()
     {
         return $this->hasOne(Siswa::class, 'user', 'uuid');
+    }
+    
+    public function nilais()
+    {
+        return $this->hasMany(Comment::class, 'pemeriksa', 'uuid');
     }
 
 }

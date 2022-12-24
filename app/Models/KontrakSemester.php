@@ -9,6 +9,8 @@ class KontrakSemester extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'kontrak_semester_id';
+
     protected $guarded = [
         'kontrak_semester_id',
         'created_at',
@@ -25,6 +27,11 @@ class KontrakSemester extends Model
         return $this->belongsTo(Siswa::class, 'siswa', 'NISN');
     }
 
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas', 'kelas_id');
+    }
+
     /**
      * Get all of the nilais for the KontrakSemester
      *
@@ -35,8 +42,8 @@ class KontrakSemester extends Model
         return $this->hasMany(Nilai::class, 'kontrak_siswa', 'kontrak_semester_id');
     }
 
-    public function ekstrakurikuler_siswas()
+    public function nilai_ektrakurikulers()
     {
-        return $this->hasMany(EkskulSiswa::class, 'kontrak_siswa', 'kontrak_semester_id');
+        return $this->hasMany(NilaiEkstrakurikuler::class, 'kontrak_siswa', 'kontrak_semester_id');
     }
 }
