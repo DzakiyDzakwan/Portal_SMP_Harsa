@@ -101,6 +101,8 @@
                         <li>
                             <a class="dropdown-item" href="/profil-siswa"><i class="icon-mid bi bi-person me-2"></i>
                                 My Profile</a>
+                            <a class="dropdown-item" href="/change-password"><i class="icon-mid bi bi-key me-2"></i>
+                                Change Password</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
