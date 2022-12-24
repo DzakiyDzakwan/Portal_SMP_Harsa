@@ -26,11 +26,9 @@ class Siswa extends Model
         return $this->belongsTo(User::class, 'user', 'uuid');
     }
 
-    public function kelas()
-    {
-        return $this->belongsTo(Kelas::class, 'kelas_id', 'kelas');
+    public function profiles(){
+        return $this->hasOne(UserProfile::class, 'user', 'user');
     }
-
     /**
      * Get all of the prestasi for the Siswa
      *
@@ -41,12 +39,14 @@ class Siswa extends Model
         return $this->hasMany(Prestasi::class, 'siswa', 'NISN');
     }
 
-    public function kontrak_semesters()
+    public function kontraks()
     {
         return $this->hasMany(KontrakSemester::class, 'siswa', 'NISN');
     }
 
-    public function profiles(){
-        return $this->belongsTo(UserProfile::class, 'user', 'user');
+    public function ekstrakurikulers()
+    {
+        return $this->belongsToMany(Ekstrakurikuler::class, 'ekstrakurikuler_siswas', 'ekstrakurikuler_id', 'NISN');
     }
+
 }

@@ -10,7 +10,7 @@ class Guru extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'nip';
+    protected $primaryKey = 'NUPTK';
 
     protected $guarded = [
         "created_at",
@@ -44,10 +44,27 @@ class Guru extends Model
      */
     public function kelas()
     {
-        return $this->hasOne(Kelas::class, 'wali_kelas', 'NIP');
+        return $this->hasOne(Kelas::class, 'wali_kelas', 'NUPTK');
     }
+
+    public function ekstrakurikuler()
+    {
+        return $this->hasOne(Ekstrakurikuler::class, 'penanggung_jawab', 'NUPTK');
+    }
+
 
     public function profiles(){
         return $this->belongsTo(UserProfile::class, 'user', 'user');
     }
+
+    /**
+     * Get all of the nilais for the Guru
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function nilais()
+    {
+        return $this->hasMany(Nilai::class, 'guru', 'NUPTK');
+    }
+    
 }
