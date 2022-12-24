@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('nilais', function (Blueprint $table) {
             $table->id('nilai_id');
             $table->unsignedBigInteger('sesi');
-            $table->char('mapel', 3);
-            $table->char('guru', 18)->nullable();
-            $table->uuid('admin')->nullable();
+            $table->char('mapel', 5);
+            $table->char('guru', 16)->nullable();
+            $table->uuid('pemeriksa')->nullable();
             $table->unsignedBigInteger('kontrak_siswa');
             $table->enum('jenis', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
-            $table->integer('kkm');
+            $table->integer('kkm_aktif');
             $table->float('nilai_pengetahuan');
             $table->text('deskripsi_pengetahuan');
             $table->float('nilai_keterampilan');
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->foreign('sesi')->references('sesi_id')->on('sesi_penilaians')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('mapel')->references('mapel_id')->on('mapels')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('guru')->references('NIP')->on('gurus')->onUpdate('cascade')->onDelete('set null');
-            $table->foreign('admin')->references('uuid')->on('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('pemeriksa')->references('uuid')->on('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('kontrak_siswa')->references('kontrak_semester_id')->on('kontrak_semesters')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

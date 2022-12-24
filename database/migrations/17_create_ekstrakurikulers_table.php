@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('nama');
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->time('waktu_mulai');
-            $table->integer('durasi');
+            $table->time('waktu_akhir');
             $table->string('tempat');
-            $table->char('kelas', 1);
+            $table->enum('kelas', ['7', '8', '9']);
             $table->timestamps();
         });
     }
