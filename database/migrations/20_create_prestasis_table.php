@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('prestasis', function (Blueprint $table) {
             $table->id('prestasi_id');
             $table->char('siswa', 10);
-            $table->enum('jenis_prestasi', ['Akademik', 'NonAkademik']);
+            $table->enum('jenis_prestasi', ['akademik', 'nonakademik']);
             $table->string('keterangan');
             $table->date('tanggal_prestasi');
             $table->foreign('siswa')->references('NISN')->on('siswas')->onUpdate('cascade')->onDelete('cascade');
