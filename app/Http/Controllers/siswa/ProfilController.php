@@ -27,6 +27,14 @@ class ProfilController extends Controller
         ]);
     }
 
+    public function changePassword()
+    {
+        $pages = 'changePassword';
+        return view('siswa.change-password', [
+            'pages' => $pages
+        ]);
+    }
+
     public function updateProfilSiswa(Request $request)
     {   
         

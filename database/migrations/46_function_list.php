@@ -140,7 +140,7 @@ return new class extends Migration
         END
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE FUNCTION is_nilai_exists(
             sesi INT,
             mapel CHAR(3),
@@ -167,6 +167,6 @@ return new class extends Migration
         DB::unprepared('DROP FUNCTION cek_sesi');
         DB::unprepared('DROP FUNCTION get_sesi');
         DB::unprepared('DROP FUNCTION indeks');
-        DB::unprepared('DROP FUNCTION is_nilai_exists'); */
+        // DB::unprepared('DROP FUNCTION is_nilai_exists');
     }
 };
