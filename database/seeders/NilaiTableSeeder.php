@@ -15,6 +15,6 @@ class NilaiTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::select('CALL add_nilai(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [4, "M01", "111111111111111111", "1", 80, 85,"Siswa Berhasil menyelesaikan dengan baik",  90, "Sikap dan Perilaku Siswa sangat baik", "pending"]);
+        /* DB::select('CALL add_nilai(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [4, "M01", "111111111111111111", "1", 80, 85,"Siswa Berhasil menyelesaikan dengan baik",  90, "Sikap dan Perilaku Siswa sangat baik", "pending"]); */
     }
 }

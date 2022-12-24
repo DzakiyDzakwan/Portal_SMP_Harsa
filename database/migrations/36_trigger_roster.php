@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         /* log insert kelas */
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE TRIGGER log_insert_roster_kelas
         AFTER INSERT ON roster_kelas
         FOR EACH ROW
@@ -25,7 +25,6 @@ return new class extends Migration
         END
         ');
 
-        /* log update kelas */
         DB::unprepared('
         CREATE TRIGGER log_update_roster_kelas
         AFTER UPDATE ON roster_kelas
@@ -36,7 +35,6 @@ return new class extends Migration
         END
         ');
 
-        /* log delete kelas */
         DB::unprepared('
         CREATE TRIGGER log_delete_roster_kelas
         AFTER DELETE ON roster_kelas
@@ -47,7 +45,6 @@ return new class extends Migration
         END
         ');
 
-        /* cant_update_roster */
         DB::unprepared('
         CREATE TRIGGER cant_update_roster
         BEFORE UPDATE ON roster_kelas
@@ -58,7 +55,7 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
         END
-        ');
+        '); */
     }
 
     /**
@@ -68,9 +65,9 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_roster_kelas');
+        /* DB::unprepared('DROP TRIGGER log_insert_roster_kelas');
         DB::unprepared('DROP TRIGGER log_update_roster_kelas');
         DB::unprepared('DROP TRIGGER log_delete_roster_kelas');
-        DB::unprepared('DROP TRIGGER cant_update_roster');
+        DB::unprepared('DROP TRIGGER cant_update_roster'); */
     }
 };

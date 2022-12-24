@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
 
-        DB::unprepared('
+        /* DB::unprepared('
             CREATE PROCEDURE add_admin(
                 IN uname VARCHAR(255),
                 IN pass VARCHAR(255),
@@ -908,7 +908,7 @@ return new class extends Migration
             COMMIT;
 
         END
-        ');
+        '); */
         
     }
 
@@ -919,7 +919,7 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared("DROP PROCEDURE add_admin");
+        /* DB::unprepared("DROP PROCEDURE add_admin");
         DB::unprepared("DROP PROCEDURE update_admin");
         DB::unprepared("DROP PROCEDURE inactive_admin");
         DB::unprepared("DROP PROCEDURE restore_admin");
@@ -951,6 +951,6 @@ return new class extends Migration
         DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE add_roster");
         DB::unprepared("DROP PROCEDURE update_roster");
-        DB::unprepared("DROP PROCEDURE delete_roster");
+        DB::unprepared("DROP PROCEDURE delete_roster"); */
     }
 };

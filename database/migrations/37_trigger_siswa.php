@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         /* log insert kelas */
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE TRIGGER log_insert_siswa
         AFTER INSERT ON siswas
         FOR EACH ROW
@@ -25,7 +25,6 @@ return new class extends Migration
         END
         ');
 
-        /* log update kelas */
         DB::unprepared('
         CREATE TRIGGER log_update_siswa
         AFTER UPDATE ON siswas
@@ -36,7 +35,6 @@ return new class extends Migration
         END
         ');
 
-        /* log delete kelas */
         DB::unprepared('
         CREATE TRIGGER log_delete_siswa
         AFTER DELETE ON siswas
@@ -47,7 +45,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable update siswa */
         DB::unprepared('
         CREATE TRIGGER disable_update_siswa
         BEFORE UPDATE ON siswas
@@ -58,7 +55,7 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data siswa tersebut";
             END IF;
         END
-        ');
+        '); */
     }
 
     /**
@@ -68,9 +65,9 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_siswa');
+        /* DB::unprepared('DROP TRIGGER log_insert_siswa');
         DB::unprepared('DROP TRIGGER log_update_siswa');
         DB::unprepared('DROP TRIGGER log_delete_siswa');
-        DB::unprepared('DROP TRIGGER disable_update_siswa');
+        DB::unprepared('DROP TRIGGER disable_update_siswa'); */
     }
 };

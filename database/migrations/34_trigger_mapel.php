@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         /* log insert mapel */
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE TRIGGER log_insert_mapel
         AFTER INSERT ON mapels
         FOR EACH ROW
@@ -25,7 +25,6 @@ return new class extends Migration
         END
         ');
 
-        /* log update mapel */
         DB::unprepared('
         CREATE TRIGGER log_update_mapel
         AFTER UPDATE ON mapels
@@ -36,7 +35,6 @@ return new class extends Migration
         END
         ');
 
-        /* log delete mapel */
         DB::unprepared('
         CREATE TRIGGER log_delete_mapel
         AFTER DELETE ON mapels
@@ -47,7 +45,6 @@ return new class extends Migration
         END
         ');
 
-        /* cant_update_mapel */
         DB::unprepared('
         CREATE TRIGGER cant_update_mapel
         BEFORE UPDATE ON mapels
@@ -58,7 +55,7 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah kurikulum";
             END IF;
         END
-        ');
+        '); */
     }
 
     /**
@@ -68,9 +65,9 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_mapel');
+        /* DB::unprepared('DROP TRIGGER log_insert_mapel');
         DB::unprepared('DROP TRIGGER log_update_mapel');
         DB::unprepared('DROP TRIGGER log_delete_mapel');
-        DB::unprepared('DROP TRIGGER cant_update_mapel');
+        DB::unprepared('DROP TRIGGER cant_update_mapel'); */
     }
 };

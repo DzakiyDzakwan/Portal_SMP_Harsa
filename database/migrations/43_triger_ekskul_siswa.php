@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         /* log insert ekskul */
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE TRIGGER log_insert_ekskul_siswa
         AFTER INSERT on ekstrakurikuler_siswas
         FOR EACH ROW
@@ -25,7 +25,6 @@ return new class extends Migration
         END
         ');
 
-        /* log update ekskul */
         DB::unprepared('
         CREATE TRIGGER log_update_ekskul_siswa
         AFTER UPDATE on ekstrakurikuler_siswas
@@ -36,7 +35,6 @@ return new class extends Migration
         END
         ');
 
-        /* log delete ekskul */
         DB::unprepared('
         CREATE TRIGGER log_delete_ekskul_siswa
         AFTER DELETE on ekstrakurikuler_siswas
@@ -57,7 +55,7 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
         END
-        ');
+        '); */
         }
         
         /**
@@ -68,7 +66,7 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('log_ekstrakurikuler_siswas');
-        DB::unprepared('DROP TRIGGER cant_update_ekskul_siswa');
+        /* Schema::dropIfExists('log_ekstrakurikuler_siswas');
+        DB::unprepared('DROP TRIGGER cant_update_ekskul_siswa'); */
     }
 };

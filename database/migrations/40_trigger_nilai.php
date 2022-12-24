@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         /* log insert nilai */
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE TRIGGER log_insert_nilai
         AFTER INSERT ON nilais
         FOR EACH ROW
@@ -25,7 +25,6 @@ return new class extends Migration
         END
         ');
 
-        /* log update nilai */
         DB::unprepared('
         CREATE TRIGGER log_update_nilai
         AFTER UPDATE ON nilais
@@ -36,7 +35,6 @@ return new class extends Migration
         END
         ');
 
-        /* log delete nilai */
         DB::unprepared('
         CREATE TRIGGER log_delete_nilai
         AFTER DELETE ON nilais
@@ -47,7 +45,6 @@ return new class extends Migration
         END
         ');
 
-        /* validasi inputan nilai*/
         DB::unprepared('
         CREATE TRIGGER validasi_input_nilai
         BEFORE INSERT ON nilais
@@ -75,7 +72,7 @@ return new class extends Migration
                 SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Error Nilai Sudah tersedia";
             END IF;
         END
-        ');
+        '); */
     }
 
     /**
@@ -85,10 +82,10 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_nilai');
+        /* DB::unprepared('DROP TRIGGER log_insert_nilai');
         DB::unprepared('DROP TRIGGER log_update_nilai');
         DB::unprepared('DROP TRIGGER log_delete_nilai');
-        DB::unprepared('DROP TRIGGER validasi_input_nilai');
+        DB::unprepared('DROP TRIGGER validasi_input_nilai'); */
        /*  DB::unprepared('DROP TRIGGER validasi_nilai'); */
     }
 };

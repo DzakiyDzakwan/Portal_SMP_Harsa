@@ -15,7 +15,7 @@ return new class extends Migration
         public function up()
         {
                 /* log insert ekskul */
-                DB::unprepared('
+                /* DB::unprepared('
                         CREATE TRIGGER log_insert_ekskul
                         AFTER INSERT on ekstrakurikulers
                         FOR EACH ROW
@@ -25,7 +25,6 @@ return new class extends Migration
                         END
                 ');
 
-                /* log update ekskul */
                 DB::unprepared('
                         CREATE TRIGGER log_update_ekskul
                         AFTER UPDATE on ekstrakurikulers
@@ -36,7 +35,6 @@ return new class extends Migration
                         END
                 ');
 
-                /* log delete ekskul */
                 DB::unprepared('
                 CREATE TRIGGER log_delete_ekskul
                 AFTER DELETE on ekstrakurikulers
@@ -45,7 +43,7 @@ return new class extends Migration
                         INSERT INTO log_ekstrakurikulers (ekstrakurikuler_id, nama, hari, waktu_mulai, durasi, tempat, kelas, action, created_at)
                         VALUES (OLD.ekstrakurikuler_id, OLD.nama, OLD.hari, OLD.waktu_mulai, OLD.durasi, OLD.tempat, OLD.kelas, "delete", NOW());
                 END
-        ');
+        '); */
         }
         
         /**
@@ -55,7 +53,7 @@ return new class extends Migration
          */
         public function down()
         {
-                DB::unprepared('DROP TRIGGER log_insert_ekskul');
-                DB::unprepared('DROP TRIGGER log_delete_ekskul');
+                /* DB::unprepared('DROP TRIGGER log_insert_ekskul');
+                DB::unprepared('DROP TRIGGER log_delete_ekskul'); */
         }
 };

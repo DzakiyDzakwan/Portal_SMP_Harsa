@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         /* log_insert_guru */
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE TRIGGER log_insert_guru
         AFTER INSERT ON gurus
         FOR EACH ROW
@@ -25,7 +25,6 @@ return new class extends Migration
         END
         ');
 
-        /* log_update_guru */
         DB::unprepared('
         CREATE TRIGGER log_update_guru
         AFTER UPDATE ON gurus
@@ -36,7 +35,6 @@ return new class extends Migration
         END
         ');
 
-        /* log_delete_guru */
         DB::unprepared('
         CREATE TRIGGER log_delete_guru
         AFTER DELETE ON gurus
@@ -47,7 +45,6 @@ return new class extends Migration
         END
         ');
 
-        /* cant_update_guru */
         DB::unprepared('
         CREATE TRIGGER cant_update_guru
         BEFORE UPDATE ON gurus
@@ -58,7 +55,7 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
         END
-        ');
+        '); */
     }
 
     /**
@@ -68,9 +65,9 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER log_insert_guru');
+        /* DB::unprepared('DROP TRIGGER log_insert_guru');
         DB::unprepared('DROP TRIGGER log_update_guru');
         DB::unprepared('DROP TRIGGER log_delete_guru');
-        DB::unprepared('DROP TRIGGER cant_update_guru');
+        DB::unprepared('DROP TRIGGER cant_update_guru'); */
     }
 };

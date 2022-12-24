@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         /* disable log activities */
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE TRIGGER disable_update_log_activities
         AFTER UPDATE on log_activities
         FOR EACH ROW
@@ -34,7 +34,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log users */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_users
         AFTER UPDATE on log_users
@@ -54,7 +53,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log profiles */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_profiles
         AFTER UPDATE on log_profiles
@@ -74,7 +72,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log gurus */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_gurus
         AFTER UPDATE on log_gurus
@@ -94,7 +91,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log mapels */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_mapels
         AFTER UPDATE on log_mapels
@@ -114,7 +110,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log kelas */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_kelas
         AFTER UPDATE on log_kelas
@@ -134,7 +129,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log rosters */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_rosters
         AFTER UPDATE on log_rosters
@@ -154,7 +148,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log siswas */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_siswas
         AFTER UPDATE on log_siswas
@@ -174,7 +167,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log kontraks */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_kontraks
         AFTER UPDATE on log_kontraks
@@ -194,7 +186,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log prestasis */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_prestasis
         AFTER UPDATE on log_prestasis
@@ -214,7 +205,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log nilais */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_nilais
         AFTER UPDATE on log_nilais
@@ -234,7 +224,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log ekstrakurikulers */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_ekstrakurikulers
         AFTER UPDATE on log_ekstrakurikulers
@@ -254,7 +243,6 @@ return new class extends Migration
         END
         ');
 
-        /* disable log ekstrakurikuler siswa */
         DB::unprepared('
         CREATE TRIGGER disable_update_log_ekstrakurikuler_siswas
         AFTER UPDATE on log_ekstrakurikuler_siswas
@@ -272,7 +260,7 @@ return new class extends Migration
             SIGNAL SQLSTATE "45000"
             SET MESSAGE_TEXT = "Tidak dapat menghapus data pada log ekstrakurikuler siswas";
         END
-        ');
+        '); */
         
     }
         
@@ -284,7 +272,7 @@ return new class extends Migration
 
     public function down()
     {
-        DB::unprepared('DROP TRIGGER disable_update_log_activities');
+        /* DB::unprepared('DROP TRIGGER disable_update_log_activities');
         DB::unprepared('DROP TRIGGER disable_update_log_users');
         DB::unprepared('DROP TRIGGER disable_update_log_profiles');
         DB::unprepared('DROP TRIGGER disable_update_log_gurus');
@@ -309,7 +297,7 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER disable_delete_log_prestasis');
         DB::unprepared('DROP TRIGGER disable_delete_log_nilais');
         DB::unprepared('DROP TRIGGER disable_delete_log_ekstrakurikulers');
-        DB::unprepared('DROP TRIGGER disable_delete_log_ekstrakurikuler_siswas');
+        DB::unprepared('DROP TRIGGER disable_delete_log_ekstrakurikuler_siswas'); */
         
     }
 };
