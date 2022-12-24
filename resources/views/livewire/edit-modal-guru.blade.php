@@ -72,7 +72,7 @@
                                     @enderror"
                                         placeholder="Masukkan NIP guru" id="nip" wire:model.defer="nip" />
                                     <div class="form-control-icon">
-                                        <i class="bi bi-123"></i>
+                                        <i class="bi bi-card-text"></i>
                                     </div>
                                     @error('nip')
                                         <div class="invalid-feedback">
