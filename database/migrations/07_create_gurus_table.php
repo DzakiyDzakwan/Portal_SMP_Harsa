@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('jabatan', ['ks', 'wks', 'guru']);
             $table->string('pendidikan')->nullable();
             $table->year('tahun_ijazah')->nullable();
-            $table->enum('status_perkawinan', ['Kawin', 'Tidak Kawin'])->nullable();
+            $table->enum('status_perkawinan', ['kawin', 'tidak kawin'])->nullable();
             $table->date('tanggal_masuk');
             $table->enum('status', ['aktif', 'inaktif'])->default('aktif');
             $table->foreign('user')->references('uuid')->on('users')->onUpdate('cascade')->onDelete('cascade');

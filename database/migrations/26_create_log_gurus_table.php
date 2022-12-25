@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('jabatan', ['guru', 'wks', 'ks']);
             $table->string('pendidikan')->nullable();
             $table->year('tahun_ijazah')->nullable();
-            $table->enum('status_perkawinan', ['Kawin', 'Tidak Kawin'])->nullable();
+            $table->enum('status_perkawinan', ['kawin', 'tidak kawin'])->nullable();
             $table->date('tanggal_masuk');
             $table->enum('status', ['aktif', 'inaktif']);
             $table->enum('action', ['insert', 'update', 'delete']);
