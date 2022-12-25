@@ -52,31 +52,180 @@
                 </li>
 
                 <li class="sidebar-title">User</li>
+
+                {{-- Manajemen User --}}
+                <li class="sidebar-item has-sub @if ($pages === 'user') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Manajemen User</span>
+                    </a>
+                    <ul class="submenu @if ($pages === 'user') active @endif">
+                        <li class="submenu-item">
+                            <a href="/roles">User</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/roles">Role</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/permission">Permission</a>
+                        </li>
+                        {{-- <li class="submenu-item">
+                            <a href="/alumni">Alumni</a>
+                        </li> --}}
+                    </ul>
+                </li>
+
+                {{-- Manajemen Akun --}}
+                <li class="sidebar-item has-sub @if ($pages === 'user') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Manajemen Akun</span>
+                    </a>
+                    <ul class="submenu @if ($pages === 'user') active @endif">
+                        <li class="submenu-item">
+                            <a href="/admin">Admin</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/guru">Guru</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/siswa">Siswa</a>
+                        </li>
+                        {{-- <li class="submenu-item">
+                            <a href="/alumni">Alumni</a>
+                        </li> --}}
+                    </ul>
+                </li>
+
                 <li class="sidebar-title">Sekolah</li>
-                <li class="sidebar-title">Audit</li>
+
+                {{-- Tahun Akademik --}}
+                <li class="sidebar-item @if ($pages === 'tahunakademik') active @endif">
+                    <a href="/dashboard-guru" class="sidebar-link">
+                        <i class="bi bi-calendar-date-fill"></i>
+                        <span>Tahun Akademik</span>
+                    </a>
+                </li>
+
+                {{-- Manajemen Mata Pelajaran --}}
+                <li class="sidebar-item has-sub @if ($pages === 'user') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-book-fill"></i>
+                        <span>Manajemen Mata Pelajaran</span>
+                    </a>
+                    <ul class="submenu @if ($pages === 'user') active @endif">
+                        <li class="submenu-item">
+                            <a href="/admin">Mata Pelajaran</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/guru">Mata Pelajaran Guru</a>
+                        </li>
+                    </ul>
+                </li>
+
+                {{-- Manajemen Kelas --}}
+                <li class="sidebar-item has-sub @if ($pages === 'user') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-person-video3"></i>
+                        <span>Manajemen Kelas</span>
+                    </a>
+                    <ul class="submenu @if ($pages === 'user') active @endif">
+                        <li class="submenu-item">
+                            <a href="/admin">Kelas</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/guru">Roster Kelas</a>
+                        </li>
+                    </ul>
+                </li>
+
+                {{-- Direktori --}}
                 {{-- <li class="sidebar-item @if ($pages === 'direktoriGuru') active @endif">
                     <a href="/direktori-guru" class="sidebar-link">
                         <i class="bi bi-person-rolodex"></i>
                         <span>Direktori</span>
                     </a>
                 </li> --}}
-                {{-- Sekolah --}}
 
                 {{-- Manajemen Nilai --}}
-                {{-- <li class="sidebar-item has-sub @if ($pages === 'inputNilai') active @endif">
+                <li class="sidebar-item has-sub @if ($pages === 'inputNilai') active @endif">
                     <a href="#" class="sidebar-link">
-                        <i class="bi bi-clipboard-heart-fill"></i>
+                        <i class="bi bi-clipboard-plus-fill"></i>
                         <span>Manajemen Nilai</span>
                     </a>
-                    <ul class="submenu  @if ($pages === 'inputNilai') active @endif">
-                        <li class="submenu-item @if ($pages === 'inputNilai' && $bulan == 'Bulanan') active @endif">
-                            <a href="/pilih-kelas">Nilai Bulanan</a>
+                    <ul class="submenu @if ($pages === 'user') active @endif">
+                        <li class="submenu-item">
+                            <a href="/admin">Sesi Penilaian</a>
                         </li>
-                        <li class="submenu-item @if ($pages === 'inputNilai' && $semester === 'Semester') active @endif">
-                            <a href="/pilih-kelas2">Nilai Semester</a>
+                        <li class="submenu-item">
+                            <a href="/guru">Ulangan Harian 1</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/guru">Ulangan Harian 2</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/guru">Ulangan Harian 3</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/guru">Ujian Tengah Semester</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/guru">Ujian Akhir Semester</a>
                         </li>
                     </ul>
-                </li> --}}
+                </li>
+
+                <li class="sidebar-title">Audit</li>
+
+                {{-- History Log --}}
+                <li class="sidebar-item has-sub @if ($pages == 'history') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-clock-history"></i>
+                        <span>History Log</span>
+                    </a>
+                    <ul class="submenu @if ($pages == 'history') active @endif">
+                        <li class="submenu-item">
+                            <a href="/log-activities">Log Aktivitas</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-users">Log User</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-profiles">Log Profile</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-guru">Log Guru</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-siswa">Log Siswa</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-mapel">Log Mata-Pelajaran</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-kelas">Log Kelas</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-roster">Log Roster</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-kontrak">Log Kontrak Siswa</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-nilai">Log Nilai</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-prestasi">Log Prestasi</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-ekstrakulikuler">Log Ekstrakulikuler</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="/log-ekstrakurikuler-siswa">Log Ekstrakulikuler Siswa</a>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
     </div>

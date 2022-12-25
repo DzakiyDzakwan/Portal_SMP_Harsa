@@ -20,7 +20,49 @@
         <div class="page-content">
             <section class="row">
                 <div class="col-12">
-                    <div class="row my-2">
+
+                    {{-- TA dan Sesi Row --}}
+                    <div class="row">
+                        {{-- Tahun Ajaran Aktif --}}
+                        <div class="col-6 col-lg-6 col-md-6">
+                            <div class="card">
+                                {{-- <div class="card-header py-1 px-2 d-flex justify-content-end">
+                                    <button class="btn btn-success btn-sm">
+                                        <i class="bi bi-box-arrow-in-down-right"></i>
+                                    </button>
+                                </div> --}}
+                                <div class="card-body px-4 py-4-5">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
+                                            <h6 class="text-muted font-semibold">Tahun Ajaran Aktif</h6>
+                                            <h6 class="font-extrabold mb-0">2022/2023</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="card-footer py-1 px-2 text-end">
+                                    <button class="btn btn-success btn-sm">
+                                        <i class="bi bi-box-arrow-in-down-right"></i>
+                                    </button>
+                                </div> --}}
+                            </div>
+                        </div>
+                        {{-- Sesi Penilaian Aktif --}}
+                        <div class="col-6 col-lg-6 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-4 py-4-5">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
+                                            <h6 class="text-muted font-semibold">Tahun Ajaran Aktif</h6>
+                                            <h6 class="font-extrabold mb-0">Tidak Ada</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Info Row --}}
+                    <div class="row">
                         {{-- Info User --}}
                         <div class="col-6 col-lg-3 col-md-6">
                             <a href="/users">
@@ -154,7 +196,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                                                <h6 class="text-muted font-semibold">Ekstrakulikuler</h6>
+                                                <h6 class="text-muted font-semibold">Ekstrakurikuler</h6>
                                                 <h6 class="font-extrabold mb-0">0</h6>
                                             </div>
                                         </div>
@@ -164,9 +206,12 @@
                         </div>
                     </div>
 
-                    <div class="row my-2">
+
+
+                    {{-- Profil Row --}}
+                    <div class="row">
                         {{-- Profil Singkat --}}
-                        <div class="col-lg-7 col-md-12">
+                        <div class="col-lg-7 col-md-12 mb-4">
                             <div class="card h-full">
                                 <div class="card-body">
                                     <h4>Profil Singkat</h4>
@@ -227,7 +272,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-12">
+                        <div class="col-lg-5 col-md-12 mb-4">
                             <div class="card h-full">
                                 <div class="card-header ">
                                     <h4>Kelas yang dimasuki</h4>
@@ -252,7 +297,8 @@
                         </div>
                     </div>
 
-                    <div class="row my-2">
+                    {{-- Roster Row --}}
+                    <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
