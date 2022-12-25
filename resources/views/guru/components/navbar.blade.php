@@ -83,15 +83,21 @@
                         <div class="user-menu d-flex">
                             <div class="user-name text-end me-3">
                                 <h6 class="mb-0 text-gray-600">
-                                    {{ Auth::user()->user_profiles->nama }}
+                                    {{ Auth::user()->profiles->nama }}
                                 </h6>
                                 <p class="mb-0 text-sm text-gray-600">
-                                    {{ Auth::user()->role }}
+                                    @if (Auth::user()->gurus->jabatan == 'ks')
+                                        Kepala Sekolah
+                                    @elseif(Auth::user()->gurus->jabatan == 'wks')
+                                        Wakil Kepala Sekolah
+                                    @else
+                                        Guru
+                                    @endif
                                 </p>
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img src="{{ asset('storage/'. Auth::user()->user_profiles->foto) }}" />
+                                    <img src="" />
                                 </div>
                             </div>
                         </div>
