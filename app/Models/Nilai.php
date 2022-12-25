@@ -36,5 +36,10 @@ class Nilai extends Model
     {
         return $this->belongsTo(SesiPenilaian::class, 'sesi', 'sesi_id');
     }
+
+    public function pemeriksa()
+    {
+        return $this->belongsTo(User::class, 'pemeriksa', 'uuid');
+    }
     
 }

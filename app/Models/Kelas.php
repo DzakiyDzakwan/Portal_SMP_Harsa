@@ -25,7 +25,7 @@ class Kelas extends Model
      */
     public function gurus(): BelongsTo
     {
-        return $this->belongsTo(Guru::class, 'wali_kelas', 'NIP');
+        return $this->belongsTo(Guru::class, 'wali_kelas', 'NUPTK');
     }
 
     /**
@@ -35,11 +35,11 @@ class Kelas extends Model
      */
     public function siswas()
     {
-        return $this->hasMany(Siswa::class, 'kelas', 'kelas_id');
+        return $this->hasMany(KontrakSemester::class, 'kelas', 'kelas_id');
     }
 
-    public function rosters(): HasMany
+    public function rosters()
     {
-        return $this->hasMany(RosterKelas::class, 'ruang_kelas', 'kelas_id');
+        return $this->hasMany(RosterKelas::class, 'kelas', 'kelas_id');
     }
 }

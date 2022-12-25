@@ -21,7 +21,7 @@ return new class extends Migration
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_berakhir');
             $table->string('created_by');
-            $table->timestamp('created_at');
+            $table->timestamps();
         });
     }
 
