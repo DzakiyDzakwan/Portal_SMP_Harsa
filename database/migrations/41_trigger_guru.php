@@ -14,14 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        /* log_insert_guru */
-        /* DB::unprepared('
+        DB::unprepared('
         CREATE TRIGGER log_insert_guru
         AFTER INSERT ON gurus
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_gurus(user, NIP, jabatan, pendidikan, tahun_ijazah, status_perkawinan, tanggal_masuk, status, is_wali_kelas, action, created_at)
-        VALUES (NEW.user, NEW.NIP, NEW.jabatan, NEW.pendidikan, NEW.tahun_ijazah, NEW.status_perkawinan, NEW.tanggal_masuk, NEW.status, NEW.is_wali_kelas, "insert", NOW());
+        INSERT INTO log_gurus(user, NUPTK, jabatan, pendidikan, tahun_ijazah, status_perkawinan, tanggal_masuk, status, action, created_at)
+        VALUES (NEW.user, NEW.NUPTK, NEW.jabatan, NEW.pendidikan, NEW.tahun_ijazah, NEW.status_perkawinan, NEW.tanggal_masuk, NEW.status, "insert", NOW());
         END
         ');
 
@@ -30,8 +29,8 @@ return new class extends Migration
         AFTER UPDATE ON gurus
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_gurus(user, NIP, jabatan, pendidikan, tahun_ijazah, status_perkawinan, tanggal_masuk, status, is_wali_kelas, action, created_at)
-        VALUES (NEW.user, NEW.NIP, NEW.jabatan, NEW.pendidikan, NEW.tahun_ijazah, NEW.status_perkawinan, NEW.tanggal_masuk, NEW.status, NEW.is_wali_kelas, "update", NOW());
+        INSERT INTO log_gurus(user, NUPTK, jabatan, pendidikan, tahun_ijazah, status_perkawinan, tanggal_masuk, status, action, created_at)
+        VALUES (NEW.user, NEW.NUPTK, NEW.jabatan, NEW.pendidikan, NEW.tahun_ijazah, NEW.status_perkawinan, NEW.tanggal_masuk, NEW.status, "update", NOW());
         END
         ');
 
@@ -40,13 +39,13 @@ return new class extends Migration
         AFTER DELETE ON gurus
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_gurus(user, NIP, jabatan, pendidikan, tahun_ijazah, status_perkawinan, tanggal_masuk, status, is_wali_kelas, action, created_at)
-        VALUES (OLD.user, OLD.NIP, OLD.jabatan, OLD.pendidikan, OLD.tahun_ijazah, OLD.status_perkawinan, OLD.tanggal_masuk, OLD.status, OLD.is_wali_kelas, "delete", NOW());
+        INSERT INTO log_gurus(user, NUPTK, jabatan, pendidikan, tahun_ijazah, status_perkawinan, tanggal_masuk, status, action, created_at)
+        VALUES (OLD.user, OLD.NUPTK, OLD.jabatan, OLD.pendidikan, OLD.tahun_ijazah, OLD.status_perkawinan, OLD.tanggal_masuk, OLD.status, "delete", NOW());
         END
         ');
 
         DB::unprepared('
-        CREATE TRIGGER cant_update_guru
+        CREATE TRIGGER disable_update_guru
         BEFORE UPDATE ON gurus
         FOR EACH ROW
         BEGIN
@@ -55,7 +54,7 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
         END
-        '); */
+        ');
     }
 
     /**
@@ -65,9 +64,9 @@ return new class extends Migration
      */
     public function down()
     {
-        /* DB::unprepared('DROP TRIGGER log_insert_guru');
+        DB::unprepared('DROP TRIGGER log_insert_guru');
         DB::unprepared('DROP TRIGGER log_update_guru');
         DB::unprepared('DROP TRIGGER log_delete_guru');
-        DB::unprepared('DROP TRIGGER cant_update_guru'); */
+        DB::unprepared('DROP TRIGGER disable_update_guru');
     }
 };
