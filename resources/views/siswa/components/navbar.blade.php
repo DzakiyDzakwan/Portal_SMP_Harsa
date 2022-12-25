@@ -83,7 +83,7 @@
                         <div class="user-menu d-flex">
                             <div class="user-name text-end me-3">
                                 <h6 class="mb-0 text-gray-600">
-                                    {{ Auth::user()->user_profiles->nama }}
+                                    {{ Auth::user()->profiles->nama }}
                                 </h6>
                                 <p class="mb-0 text-sm text-gray-600">
                                     {{ Auth::user()->role }}
@@ -91,7 +91,7 @@
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img src="{{ 'storage/fotoprofil/'.Auth::user()->user_profiles->foto }}" />
+                                    <img src="{{ 'storage/fotoprofil/' . Auth::user()->profiles->foto }}" />
                                 </div>
                             </div>
                         </div>

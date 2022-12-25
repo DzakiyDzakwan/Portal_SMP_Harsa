@@ -57,9 +57,8 @@ class DashboardController extends Controller
 
     public function guru()
     {
-        $pages = 'dashboardGuru';
-        $listKelas = DB::table('list_kelas_guru')->where('guru', auth()->user()->gurus->NIP)->get();
-        return view('guru.dashboard', compact("pages","listKelas"));
+        $pages = 'dashboard';
+        return view('guru.dashboard', compact("pages"));
     }
 
     public function login()

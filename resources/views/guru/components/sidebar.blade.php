@@ -44,12 +44,16 @@
                 <li class="sidebar-title">Menu</li>
 
                 {{-- Dashboard --}}
-                <li class="sidebar-item @if ($pages === 'dashboardGuru') active @endif">
+                <li class="sidebar-item @if ($pages === 'dashboard') active @endif">
                     <a href="/dashboard-guru" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
+
+                <li class="sidebar-title">User</li>
+                <li class="sidebar-title">Sekolah</li>
+                <li class="sidebar-title">Audit</li>
                 {{-- <li class="sidebar-item @if ($pages === 'direktoriGuru') active @endif">
                     <a href="/direktori-guru" class="sidebar-link">
                         <i class="bi bi-person-rolodex"></i>
@@ -57,38 +61,6 @@
                     </a>
                 </li> --}}
                 {{-- Sekolah --}}
-                <li class="sidebar-title">Sekolah</li>
-
-                @if (Auth::user()->gurus->is_wali_kelas == 'iya')
-                    {{-- Manajemen Siswa --}}
-                    <li class="sidebar-item @if ($pages === 'waliKelas') active @endif ">
-                        <a href="/kelas-saya" class="sidebar-link">
-                            <i class="bi bi-person-fill"></i>
-                            <span>Wali Kelas</span>
-                        </a>
-                    </li>
-                @endif
-
-                {{-- List Kelas --}}
-                <li class="sidebar-item has-sub @if ($pages === 'listKelas') active @endif">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-person-workspace"></i>
-                        <span>Kelas</span>
-                    </a>
-                    <ul class="submenu @if ($pages === 'listKelas') active @endif">
-                        @php
-                            $sidebar_kelas = DB::table('list_kelas_guru')
-                                ->where('guru', Auth::user()->gurus->NIP)
-                                ->get();
-                        @endphp
-                        @foreach ($sidebar_kelas as $item)
-                            <li class="submenu-item ">
-                                <a href="/kelas/{{ $item->kelas_id }}">{{ $item->grade }}{{ $item->kelompok_kelas }}
-                                    {{ $item->nama_kelas }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </li>
 
                 {{-- Manajemen Nilai --}}
                 {{-- <li class="sidebar-item has-sub @if ($pages === 'inputNilai') active @endif">

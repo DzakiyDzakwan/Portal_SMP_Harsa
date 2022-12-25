@@ -16,10 +16,18 @@
 <body>
     <div id="app">
         {{-- Sidebar --}}
-        @include('admin.components.sidebar')
+        @hasanyrole('kepsek|wakepsek|admin|guru')
+            @include('guru.components.sidebar')
+        @else
+            @include('siswa.components.sidebar')
+        @endhasanyrole
         <div id="main">
             {{-- Navbar --}}
-            @include('admin.components.navbar')
+            @hasanyrole('kepsek|wakepsek|admin|guru')
+                @include('guru.components.navbar')
+            @else
+                @include('siswa.components.navbar')
+            @endhasanyrole
 
             @yield('content')
         </div>

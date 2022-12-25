@@ -166,28 +166,28 @@
 
                     {{-- Graph --}}
                     {{-- <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Jumlah Siswa</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="chart-profile-visit"></div>
+                        <div class="col-12 col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Jumlah Siswa</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart-profile-visit"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Bar Chart</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="bar"></div>
+                        <div class="col-12 col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Bar Chart</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="bar"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div> --}}
+                    </div> --}}
 
                     {{-- Info Detail --}}
                     <div class="row">
@@ -207,18 +207,20 @@
                                         </thead>
                                         <tbody class="table-group-divider">
                                             @foreach ($detail_kelas as $row)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $row->grade }}{{ $row->kelompok_kelas }} - {{ $row->nama_kelas }}</td>
-                                                <td>{{ $row->jumlah_LK }}</td>
-                                                <td>{{ $row->jumlah_PR }}</td>
-                                            </tr>
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $row->grade }}{{ $row->kelompok_kelas }} -
+                                                        {{ $row->nama_kelas }}</td>
+                                                    <td>{{ $row->jumlah_LK }}</td>
+                                                    <td>{{ $row->jumlah_PR }}</td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+
                         {{-- Table Detail Siswa --}}
                         {{-- <div class="col-12 col-md-6">
                             <div class="card">

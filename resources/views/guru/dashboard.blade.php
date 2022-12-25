@@ -1,4 +1,4 @@
-@extends('guru.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Dashboard</title>
@@ -20,17 +20,166 @@
         <div class="page-content">
             <section class="row">
                 <div class="col-12">
-                    <div class="row mb-3">
+                    <div class="row my-2">
+                        {{-- Info User --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/users">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon green mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="User">
+                                                        <i class="bi bi-people-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">User</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Info Siswa --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/siswa">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon green mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Siswa">
+                                                        <i class="bi bi-people-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Siswa</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Info Guru --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/guru">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon green mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Guru">
+                                                        <i class="bi bi-people-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Guru</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Info Kelas --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/kelas">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon green mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Total Kelas">
+                                                        <i class="bi bi-house-door-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Total Kelas</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Info Mata Pelajaran --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/mapel">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon blue mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Mata Pelajaran">
+                                                        <i class="bi bi-people-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Mata Pelajaran</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Info Ekstrakulikuler --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/ekskull">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon blue mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Ekstrakulikuler">
+                                                        <i class="bi bi-people-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Ekstrakulikuler</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row my-2">
                         {{-- Profil Singkat --}}
                         <div class="col-lg-7 col-md-12">
                             <div class="card h-full">
                                 <div class="card-body">
                                     <h4>Profil Singkat</h4>
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-12">
+                                        <div class="col-lg-3 col-md-12">
                                             <div class="pt-3">
-                                                <img src="{{ asset('storage/' . Auth::user()->user_profiles->foto) }}"
-                                                    class="rounded d-block" alt="..." width="130">
+                                                @if (Auth::user()->profiles->foto == null)
+                                                    <img src="{{ asset('assets/images/faces/2.jpg') }}"
+                                                        class="rounded w-100 d-block" alt="...">
+                                                @else
+                                                    <img src="{{ asset('storages/' . Auth::user()->profiles->foto) }}"
+                                                        class="rounded w-100 d-block" alt="...">
+                                                @endif
                                             </div>
                                         </div>
 
@@ -41,31 +190,32 @@
                                                         <tr>
                                                             <td>Nama</td>
                                                             <td>:</td>
-                                                            <td>{{ Auth::user()->user_profiles->nama }}</td>
+                                                            <td>{{ Auth::user()->profiles->nama }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>NIP</td>
+                                                            <td>NUPTK</td>
                                                             <td>:</td>
-                                                            <td>{{ Auth::user()->gurus->NIP }}</td>
+                                                            <td>{{ Auth::user()->gurus->NUPTK }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Jenis Kelamin</td>
                                                             <td>:</td>
-                                                            @if (Auth::user()->user_profiles->jenis_kelamin == 'LK')
-                                                                <td>Laki-Laki</td>
+                                                            @if (Auth::user()->profiles->jenis_kelamin === 'LK')
+                                                                <td>Laki Laki</td>
                                                             @else
                                                                 <td>Perempuan</td>
                                                             @endif
+
 
                                                         </tr>
                                                         <tr>
                                                             <td>Tempat/Tanggal Lahir</td>
                                                             <td>:</td>
-                                                            @if (Auth::user()->user_profiles->tgl_lahir == null || Auth::user()->user_profiles->tempat_lahir == null)
+                                                            @if (Auth::user()->profiles->tgl_lahir == null || Auth::user()->profiles->tempat_lahir == null)
                                                                 <td>-</td>
                                                             @else
                                                                 <td>
-                                                                    {{ Auth::user()->user_profiles->tempat_lahir }}/{{ date('d M Y', strtotime(Auth::user()->user_profiles->tgl_lahir)) }}
+                                                                    {{ Auth::user()->profiles->tempat_lahir }}/{{ date('d M Y', strtotime(Auth::user()->profiles->tgl_lahir)) }}
                                                                 </td>
                                                             @endif
                                                         </tr>
@@ -94,25 +244,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if ($listKelas->isEmpty())
-                                                @else
-                                                    @foreach ($listKelas as $item)
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $item->grade }}{{ $item->kelompok_kelas }}
-                                                                {{ $item->nama_kelas }}</td>
-                                                            <td>Bahasa Indonesia</td>
-                                                            <td>
-                                                                <div class="modal-danger me-1 mb-1 d-inline-block">
-                                                                    <a class="btn btn-sm btn-primary"
-                                                                        href="/kelas/{{ $item->kelas_id }}">
-                                                                        <i class="bi bi-box-arrow-in-right"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -120,7 +251,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+
+                    <div class="row my-2">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">

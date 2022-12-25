@@ -16,6 +16,7 @@ use App\Http\Controllers\RosterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MapelGuruController;
 use App\Http\Controllers\siswa\ProfilController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +30,19 @@ use App\Http\Controllers\siswa\ProfilController;
 */
 
 //Login
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-//Dashboard
+Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'ceklevel']], function(){
+    Route::get('/guru/dashboard', [DashboardController::class, 'guru'])->name('dashboardGuru');
+});
+
+Route::group(['middleware' => ['auth', 'role:siswa', 'ceklevel']], function(){
+    Route::get('siswa/dashboard', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
+});
+
+/* //Dashboard
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     //Dashboard/Kelas
@@ -81,9 +90,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     //Dashboard/Log-Kontrak
     Route::get('/log-kontrak', [LogController::class, 'kontrak'])->name('log-kontrak');
 });
-
 //Siswa
-//Dashboard-Siswa
 Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/dashboard-siswa', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
     //Profile-Siswa
@@ -102,12 +109,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
     Route::post('/edit-siswa', [ProfilController::class, 'updateProfilSiswa']);
 });
-
 //Guru
-//Dashboard-Guru
 Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     Route::get('/dashboard-guru', [DashboardController::class, 'guru'])->name('dashboardGuru');
-//Direktori-Guru
+    //Direktori-Guru
     Route::get('/direktori-guru', [guru\direktoriController::class, 'direktori'])->name('direktoriGuru');
     //Profil-Guru
     Route::get('/profil-guru', [guru\ProfilController::class, 'profilGuru'])->name('profilGuru');
@@ -128,10 +133,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     Route::get('/input-absen2', [guru\InputController::class, 'inputAbsen2'])->name('inputAbsen2');
     //Rekapitulasi-Absen
     Route::get('/rekap-absen', [guru\InputController::class, 'rekapAbsen'])->name('rekapAbsen');
-});
+}); */
 
-Route::get('/test', function () {
-    $pages = 'test';
-    $users = auth()->user()->username;
-    return view('admin.test', compact('users', 'pages'));
-});
+

@@ -15,9 +15,9 @@ class CekLevel
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, $guard = null)
     {
-        if (Auth::user()->role == $role) {
+        /* if (Auth::user()->role == $role) {
             return $next($request);
         } else {
             if(Auth::user()->role == 'admin'){
@@ -27,8 +27,14 @@ class CekLevel
             } else {
                 return redirect('/dashboard-guru');
             }
+        } */
+
+        if(Auth::user()->hasRole(['kepsek', 'wakepsek', 'admin', 'guru'])) {
+            return $next($request);
+        } else {
+            return redirect('/siswa/dashboard');
         }
 
-        return redirect('/login');
+        return redirect('/');
     }
 }
