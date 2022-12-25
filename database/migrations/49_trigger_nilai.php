@@ -20,7 +20,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, pemeriksa, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
-        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.pemeriksa, NEW.kontrak_siswa, NEW.jenis, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, NEW.keterangan, "insert", NOW());
+        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.pemeriksa, NEW.kontrak_siswa, NEW.jenis, NEW.kkm_aktif, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, NEW.keterangan, "insert", NOW());
         END
         ');
 
@@ -30,7 +30,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, pemeriksa, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
-        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.pemeriksa, NEW.kontrak_siswa, NEW.jenis, NEW.kkm, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, NEW.keterangan, "update", NOW());
+        VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.pemeriksa, NEW.kontrak_siswa, NEW.jenis, NEW.kkm_aktif, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, NEW.keterangan, "update", NOW());
         END
         ');
 
@@ -40,7 +40,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, pemeriksa, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
-        VALUES (OLD.nilai_id, OLD.sesi, OLD.mapel, OLD.guru, OLD.pemeriksa, OLD.kontrak_siswa, OLD.jenis, OLD.kkm, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, OLD.status, OLD.keterangan, "delete", NOW());
+        VALUES (OLD.nilai_id, OLD.sesi, OLD.mapel, OLD.guru, OLD.pemeriksa, OLD.kontrak_siswa, OLD.jenis, OLD.kkm_aktif, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, OLD.status, OLD.keterangan, "delete", NOW());
         END
         ');
 
