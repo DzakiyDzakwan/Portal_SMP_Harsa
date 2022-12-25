@@ -18,10 +18,10 @@ return new class extends Migration
             $table->integer('roster_id');
             $table->integer('mapel_guru');
             $table->char('kelas', 3);
-            $table->enum('semester_aktif', ['Gannjil', 'Genap']);
+            $table->enum('semester_aktif', ['Ganjil', 'Genap']);
             $table->char('tahun_ajaran_aktif', 9);
             $table->time('waktu_mulai');
-            $table->integer('durasi');
+            $table->integer('waktu_akhir');
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->enum('action', ['insert', 'update', 'delete']);
             $table->timestamp('created_at');

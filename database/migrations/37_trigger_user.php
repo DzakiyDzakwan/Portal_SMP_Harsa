@@ -15,13 +15,13 @@ return new class extends Migration
     public function up()
     {
         /* log_insert_user */
-        /* DB::unprepared('
+        DB::unprepared('
         CREATE TRIGGER log_insert_user
         AFTER INSERT ON users
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_users(uuid, username,password, role, action, created_at)
-        VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, "insert", NOW());
+        INSERT INTO log_users(uuid, username,password, action, created_at)
+        VALUES (NEW.uuid, NEW.username, NEW.password, "insert", NOW());
         END
         ');
 
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON users
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_users(uuid, username,password, role, action, created_at)
-        VALUES (NEW.uuid, NEW.username, NEW.password, NEW.role, "update", NOW());
+        INSERT INTO log_users(uuid, username,password, action, created_at)
+        VALUES (NEW.uuid, NEW.username, NEW.password, "update", NOW());
         END
         ');
 
@@ -40,23 +40,22 @@ return new class extends Migration
         AFTER DELETE ON users
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_users(uuid, username,password, role, action, created_at)
-        VALUES (OLD.uuid, OLD.username, OLD.password, OLD.role, "delete", NOW());
+        INSERT INTO log_users(uuid, username,password, action, created_at)
+        VALUES (OLD.uuid, OLD.username, OLD.password, "delete", NOW());
         END
         ');
 
         DB::unprepared('
-        CREATE TRIGGER cant_update_user 
+        CREATE TRIGGER disable_update_user 
 	    BEFORE UPDATE ON users
 	    FOR EACH ROW
 	    BEGIN
-            IF (OLD.role <> NEW.role) THEN
+            IF (OLD.uuid <> NEW.uuid) THEN
                 SIGNAL SQLSTATE "45000"
                 SET MESSAGE_TEXT = "Tidak dapat mengubah role";
             END IF;
 	    END
-        '); */
-
+        ');
     }
 
     /**
@@ -66,9 +65,9 @@ return new class extends Migration
      */
     public function down()
     {
-        /* DB::unprepared('DROP TRIGGER log_insert_user');
+        DB::unprepared('DROP TRIGGER log_insert_user');
         DB::unprepared('DROP TRIGGER log_update_user');
         DB::unprepared('DROP TRIGGER log_delete_user');
-        DB::unprepared('DROP TRIGGER cant_update_user'); */
+        DB::unprepared('DROP TRIGGER disable_update_user');
     }
 };

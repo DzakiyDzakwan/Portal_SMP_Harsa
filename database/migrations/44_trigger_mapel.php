@@ -15,13 +15,13 @@ return new class extends Migration
     public function up()
     {
         /* log insert mapel */
-        /* DB::unprepared('
+        DB::unprepared('
         CREATE TRIGGER log_insert_mapel
         AFTER INSERT ON mapels
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kurikulum, action, created_at)
-        VALUES (NEW.mapel_id, NEW.nama_mapel, NEW.kelompok_mapel, NEW.kurikulum, "insert", NOW());
+        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kkm, kurikulum, action, created_at)
+        VALUES (NEW.mapel_id, NEW.nama_mapel, NEW.kelompok_mapel, NEW.kkm, NEW.kurikulum, "insert", NOW());
         END
         ');
 
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON mapels
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kurikulum, action, created_at)
-        VALUES (NEW.mapel_id, NEW.nama_mapel, NEW.kelompok_mapel, NEW.kurikulum, "update", NOW());
+        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kkm, kurikulum, action, created_at)
+        VALUES (NEW.mapel_id, NEW.nama_mapel, NEW.kelompok_mapel, NEW.kkm, NEW.kurikulum, "update", NOW());
         END
         ');
 
@@ -40,13 +40,13 @@ return new class extends Migration
         AFTER DELETE ON mapels
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kurikulum, action, created_at)
-        VALUES (OLD.mapel_id, OLD.nama_mapel, OLD.kelompok_mapel, OLD.kurikulum, "delete", NOW());
+        INSERT INTO log_mapels(mapel_id,  nama_mapel, kelompok_mapel, kkm, kurikulum, action, created_at)
+        VALUES (OLD.mapel_id, OLD.nama_mapel, OLD.kelompok_mapel, OLD.kkm, OLD.kurikulum, "delete", NOW());
         END
         ');
 
         DB::unprepared('
-        CREATE TRIGGER cant_update_mapel
+        CREATE TRIGGER disable_update_mapel
         BEFORE UPDATE ON mapels
         FOR EACH ROW
         BEGIN
@@ -55,7 +55,7 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah kurikulum";
             END IF;
         END
-        '); */
+        ');
     }
 
     /**
@@ -65,9 +65,9 @@ return new class extends Migration
      */
     public function down()
     {
-        /* DB::unprepared('DROP TRIGGER log_insert_mapel');
+        DB::unprepared('DROP TRIGGER log_insert_mapel');
         DB::unprepared('DROP TRIGGER log_update_mapel');
         DB::unprepared('DROP TRIGGER log_delete_mapel');
-        DB::unprepared('DROP TRIGGER cant_update_mapel'); */
+        DB::unprepared('DROP TRIGGER disable_update_mapel');
     }
 };
