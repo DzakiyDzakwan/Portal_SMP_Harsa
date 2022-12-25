@@ -15,13 +15,13 @@ return new class extends Migration
     public function up()
     {
         /* log insert kelas */
-        /* DB::unprepared('
+        DB::unprepared('
         CREATE TRIGGER log_insert_kelas
         AFTER INSERT ON kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, action, created_at)
-        VALUES (NEW.kelas_id, NEW.wali_kelas, NEW.grade, NEW.kelompok_kelas, NEW.nama_kelas, "insert", NOW());
+        INSERT INTO log_kelas(kelas_id, wali_kelas, nama_kelas, grade, kelompok_kelas,  action, created_at)
+        VALUES (NEW.kelas_id, NEW.wali_kelas, NEW.nama_kelas, NEW.grade, NEW.kelompok_kelas, "insert", NOW());
         END
         ');
 
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, action, created_at)
-        VALUES (NEW.kelas_id, NEW.wali_kelas, NEW.grade, NEW.kelompok_kelas, NEW.nama_kelas, "update", NOW());
+        INSERT INTO log_kelas(kelas_id, wali_kelas, nama_kelas, grade, kelompok_kelas,  action, created_at)
+        VALUES (NEW.kelas_id, NEW.wali_kelas, NEW.nama_kelas, NEW.grade, NEW.kelompok_kelas, "update", NOW());
         END
         ');
 
@@ -40,13 +40,13 @@ return new class extends Migration
         AFTER DELETE ON kelas
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, action, created_at)
-        VALUES (OLD.kelas_id, OLD.wali_kelas, OLD.grade, OLD.kelompok_kelas, OLD.nama_kelas, "delete", NOW());
+        INSERT INTO log_kelas(kelas_id, wali_kelas, nama_kelas, grade, kelompok_kelas,  action, created_at)
+        VALUES (OLD.kelas_id, OLD.wali_kelas, OLD.nama_kelas, OLD.grade, OLD.kelompok_kelas, "delete", NOW());
         END
         ');
 
         DB::unprepared('
-        CREATE TRIGGER cant_update_kelas
+        CREATE TRIGGER disable_update_kelas
         BEFORE UPDATE ON kelas
         FOR EACH ROW
         BEGIN
@@ -55,7 +55,7 @@ return new class extends Migration
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
         END
-        '); */
+        ');
     }
 
     /**
@@ -65,9 +65,9 @@ return new class extends Migration
      */
     public function down()
     {
-        /* DB::unprepared('DROP TRIGGER log_insert_kelas');
+        DB::unprepared('DROP TRIGGER log_insert_kelas');
         DB::unprepared('DROP TRIGGER log_update_kelas');
         DB::unprepared('DROP TRIGGER log_delete_kelas');
-        DB::unprepared('DROP TRIGGER cant_update_kelas'); */
+        DB::unprepared('DROP TRIGGER disable_update_kelas');
     }
 };
