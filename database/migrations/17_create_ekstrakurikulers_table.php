@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->time('waktu_mulai');
             $table->time('waktu_akhir');
+            $table->integer('durasi');
             $table->string('tempat');
             $table->enum('kelas', ['7', '8', '9']);
             $table->timestamps();
