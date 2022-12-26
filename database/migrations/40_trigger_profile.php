@@ -45,26 +45,6 @@ return new class extends Migration
         END
         ');
 
-        
-        DB::unprepared('
-        CREATE TRIGGER disable_update_log_profiles
-        AFTER UPDATE on log_profiles
-        FOR EACH ROW
-        BEGIN
-            SIGNAL SQLSTATE "45000"
-            SET MESSAGE_TEXT = "Tidak dapat mengubah data pada log profiles";
-        END
-        ');
-        DB::unprepared('
-        CREATE TRIGGER disable_delete_log_profiles
-        AFTER DELETE on log_profiles
-        FOR EACH ROW
-        BEGIN
-            SIGNAL SQLSTATE "45000"
-            SET MESSAGE_TEXT = "Tidak dapat menghapus data pada log profiles";
-        END
-        ');
-
         DB::unprepared('
         CREATE TRIGGER cant_update_profile 
         BEFORE UPDATE ON user_profiles
@@ -89,7 +69,5 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_update_profile');
         DB::unprepared('DROP TRIGGER log_delete_profile');
         DB::unprepared('DROP TRIGGER cant_update_profile');
-        DB::unprepared('DROP TRIGGER disable_update_log_profiles');
-        DB::unprepared('DROP TRIGGER disable_delete_log_profiles');
     }
 };

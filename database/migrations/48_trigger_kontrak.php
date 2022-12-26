@@ -40,29 +40,10 @@ return new class extends Migration
         BEFORE UPDATE ON kontrak_semesters
         FOR EACH ROW
         BEGIN
-            IF(NEW.status <> OLD.status)THEN
+            IF(NEW.kontrak_semester_id <> OLD.kontrak_semester_id OR NEW.siswa <> OLD.siswa OR NEW.grade <> OLD.grade OR NEW.semester <> OLD.semester OR NEW.tahun_ajaran <> OLD.tahun_ajaran)THEN
                 SIGNAL SQLSTATE "45000"
                 SET MESSAGE_TEXT = "Tidak dapat mengubah role";
             END IF;
-        END
-        ');
-
-        DB::unprepared('
-        CREATE TRIGGER disable_update_log_kontraks
-        AFTER UPDATE on log_kontraks
-        FOR EACH ROW
-        BEGIN
-            SIGNAL SQLSTATE "45000"
-            SET MESSAGE_TEXT = "Tidak dapat mengubah data pada log kontraks";
-        END
-        ');
-        DB::unprepared('
-        CREATE TRIGGER disable_delete_log_kontraks
-        AFTER DELETE on log_kontraks
-        FOR EACH ROW
-        BEGIN
-            SIGNAL SQLSTATE "45000"
-            SET MESSAGE_TEXT = "Tidak dapat menghapus data pada log kontraks";
         END
         ');
     }
@@ -77,7 +58,5 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_kontrak');
         DB::unprepared('DROP TRIGGER log_update_kontrak');
         DB::unprepared('DROP TRIGGER disable_update_kontrak');
-        DB::unprepared('DROP TRIGGER disable_update_log_kontraks');
-        DB::unprepared('DROP TRIGGER disable_delete_log_kontraks');
     }
 };
