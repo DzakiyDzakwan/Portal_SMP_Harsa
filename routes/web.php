@@ -1,21 +1,11 @@
 <?php
 
-use App\Http\Controllers\guru;
-use App\Http\Controllers\siswa;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LogController;
-use App\Http\Controllers\GuruController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MapelController;
-use App\Http\Controllers\NilaiController;
-use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\EkskulController;
-use App\Http\Controllers\RosterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MapelGuruController;
-use App\Http\Controllers\siswa\ProfilController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ViewController;
+use App\Http\Controllers\LogController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -35,11 +25,87 @@ Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogi
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'ceklevel']], function(){
+
     Route::get('/guru/dashboard', [DashboardController::class, 'guru'])->name('dashboardGuru');
+    Route::get('/profil-guru', [ProfilController::class, 'profilGuru'])->name('profilGuru');
+    Route::get('/edit-profil-guru/{id}/edit', [ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
+
+    //Kepala Sekolah
+    Route::group(['middleware'=> ['role:kepsek']], function(){
+        //Log-Activity
+        Route::get('/guru/log-activities', [LogController::class, 'activity'])->name('log-activities');
+        //Log-Users
+        Route::get('/guru/log-users', [LogController::class, 'user'])->name('log-user');
+        //Log-Profile
+        Route::get('/guru/log-profiles', [LogController::class, 'profiles'])->name('log-profiles');
+        //Log-Siswa
+        Route::get('/guru/log-siswa', [LogController::class, 'siswa'])->name('log-siswa');
+        //Log-Prestasi
+        Route::get('/guru/log-prestasi', [LogController::class, 'prestasi'])->name('log-prestasi');
+        //Log-Nilai
+        Route::get('/guru/log-nilai', [LogController::class, 'nilai'])->name('log-nilai');
+        //Log-Guru
+        Route::get('/guru/log-guru', [LogController::class, 'guru'])->name('log-guru');
+        //Log-Kelas
+        Route::get('/guru/log-kelas', [LogController::class, 'kelas'])->name('log-kelas');
+        //Log-Mapel
+        Route::get('/guru/log-mapel', [LogController::class, 'mapel'])->name('log-mapel');
+        //Log-Ekstrakurikuler
+        Route::get('/guru/log-ekstrakulikuler', [LogController::class, 'ekskul'])->name('log-ekskul');
+        //Log-Roster
+        Route::get('/guru/log-roster', [LogController::class, 'roster'])->name('log-roster');
+        //Log-Ekstrakurikuler-Siswa
+        Route::get('/guru/log-ekstrakurikuler-siswa', [LogController::class, 'ekskulSiswa'])->name('log-ekskul-siswa');
+        //Log-Kontrak
+        Route::get('/guru/log-kontrak', [LogController::class, 'kontrak'])->name('log-kontrak');
+    });
+
+    //Wakil Kepala Sekolah
+    Route::group(['middleware'=> ['role:kepsek|wakepsek']], function(){
+        Route::controller(ViewController::class)->group(function(){
+            Route::get('/guru/user', 'user')->name('user');
+            Route::get('/guru/role', 'role')->name('role');
+            Route::get('/guru/permission', 'permission')->name('permission');
+            Route::get('/guru/admin', 'admin')->name('admin');
+        });
+    });
+
+    //Admin
+    Route::group(['middleware'=> ['role:kepsek|wakepsek|admin']], function(){
+        Route::controller(ViewController::class)->group(function(){
+            Route::get('/guru/guru', 'guru')->name('guru');
+            Route::get('/guru/siswa', 'siswa')->name('siswa');
+            Route::get('/guru/tahun-akademik', 'tahunAkademik')->name('tahun-akademik');
+            Route::get('/guru/mata-pelajaran', 'mapel')->name('mata-pelajaran');
+            Route::get('/guru/mata-pelajaran-guru', 'mapelGuru')->name('mata-pelajaran-guru');
+            Route::get('/guru/kelas', 'kelas')->name('kelas');
+            Route::get('/guru/roster', 'roster')->name('roster');
+            Route::get('/guru/ekstrakurikuler', 'ekstrakurikuler')->name('ekstrakurikuler');
+            Route::get('/guru/ekstrakurikuler-siswa', 'ekstrakurikulerSiswa')->name('ekstrakurikuler-siswa');
+            Route::get('/guru/nilai-ekstrakurikuler', 'nilaiEkstrakurikuler')->name('nilai-ekstrakurikuler');
+            Route::get('/guru/sesi-penilaian', 'sesiPenilaian')->name('sesi-penilaian');
+            
+        });
+    });
+
+    //Guru
+    Route::group(['middleware'=> ['role:kepsek|wakepsek']], function(){
+    });
+
+    //Wali Kelas
+    Route::group(['middleware'=> ['role:wali']], function(){
+        Route::controller(ViewController::class)->group(function(){
+            Route::get('/guru/kelas-saya', 'kelasSaya')->name('kelas-saya');           
+        });
+    });
+
 });
 
 Route::group(['middleware' => ['auth', 'role:siswa', 'ceklevel']], function(){
     Route::get('siswa/dashboard', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
+    Route::get('/profil-siswa', [siswa\ProfilController::class, 'profilSiswa'])->name('profilSiswa');
+    Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
+    Route::post('/edit-siswa', [ProfilController::class, 'updateProfilSiswa']);
 });
 
 /* //Dashboard
@@ -63,33 +129,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/roster', [RosterController::class, 'index'])->name('roster');
     //Dashboard/eskul
     Route::get('/penilaian', [NilaiController::class, 'index'])->name('nilai');
-    //Dashboard/Log-Activity
-    Route::get('/log-activities', [LogController::class, 'activity'])->name('log-activities');
-    //Dashboard/Log-Users
-    Route::get('/log-users', [LogController::class, 'user'])->name('log-user');
-    //Dashboard/Log-Profile
-    Route::get('/log-profiles', [LogController::class, 'profiles'])->name('log-profiles');
-    //Dashboard/Log-Siswa
-    Route::get('/log-siswa', [LogController::class, 'siswa'])->name('log-siswa');
-    //Dashboard/Log-Prestasi
-    Route::get('/log-prestasi', [LogController::class, 'prestasi'])->name('log-prestasi');
-    //Dashboard/Log-Nilai
-    Route::get('/log-nilai', [LogController::class, 'nilai'])->name('log-nilai');
-    //Dashboard/Log-Guru
-    Route::get('/log-guru', [LogController::class, 'guru'])->name('log-guru');
-    //Dashboard/Log-Kelas
-    Route::get('/log-kelas', [LogController::class, 'kelas'])->name('log-kelas');
-    //Dashboard/Log-Mapel
-    Route::get('/log-mapel', [LogController::class, 'mapel'])->name('log-mapel');
-    //Dashboard/Log-Ekstrakurikuler
-    Route::get('/log-ekstrakulikuler', [LogController::class, 'ekskul'])->name('log-ekskul');
-    //Dashboard/Log-Roster
-    Route::get('/log-roster', [LogController::class, 'roster'])->name('log-roster');
-    //Dashboard/Log-Ekstrakurikuler-Siswa
-    Route::get('/log-ekstrakurikuler-siswa', [LogController::class, 'ekskulSiswa'])->name('log-ekskul-siswa');
-    //Dashboard/Log-Kontrak
-    Route::get('/log-kontrak', [LogController::class, 'kontrak'])->name('log-kontrak');
 });
+
 //Siswa
 Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::get('/dashboard-siswa', [DashboardController::class, 'siswa'])->name('dashboardSiswa');

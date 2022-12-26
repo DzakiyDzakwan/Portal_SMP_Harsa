@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\guru;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,6 +17,7 @@ use Illuminate\Contracts\View\View;
 
 class ProfilController extends Controller
 {
+    //Guru
     public function profilGuru()
     {
         $pages = 'profilGuru';
@@ -130,7 +131,37 @@ class ProfilController extends Controller
         return redirect('profil-guru');
     }
 
-    //     $fileNameWithExt    = $request->file('foto')->getClientOriginalName();
+    //Siswa
+    public function profilSiswa()
+    {
+        $pages = 'profilSiswa';
+        return view('siswa.profil', [
+            'pages' => $pages
+        ]);
+    }
+
+    public function editProfilSiswa()
+    {
+        $pages = 'editProfilSiswa';
+        return view('siswa.editProfil', [
+            'pages' => $pages
+        ]);
+    }
+
+    public function changePassword()
+    {
+        $pages = 'changePassword';
+        return view('siswa.change-password', [
+            'pages' => $pages
+        ]);
+    }
+
+    public function updateProfilSiswa(Request $request)
+    {   
+        
+    }
+
+   /*  //     $fileNameWithExt    = $request->file('foto')->getClientOriginalName();
         //     $fileName           = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
         //     $fileSize           = $request->file('foto')->getSize();
         //     $fileExt            = $request->file('foto')->getClientOriginalExtension();
@@ -176,5 +207,6 @@ class ProfilController extends Controller
         // return view('guru.editprofile', [
         //     'pages' => $pages,
         // ]);
-    // }
+    // } */
+    
 }
