@@ -50,6 +50,13 @@
                                             class="form-control" name="nama" placeholder="-" readonly>
                                     </div>
                                     <div class="col-md-3">
+                                        <label>Password</label>
+                                    </div>
+                                    <div class="col-md-9 form-group">
+                                        <input value="{{$gurus->password}}" type="password" id="password"
+                                            class="form-control" name="password" placeholder="-" readonly>
+                                    </div>
+                                    <div class="col-md-3">
                                         <label>Nama</label>
                                     </div>
                                     <div class="col-md-9 form-group">
@@ -57,11 +64,11 @@
                                             value="{{$gurus->nama}}" placeholder="-" readonly>
                                     </div>
                                     <div class="col-md-3">
-                                        <label>NIP</label>
+                                        <label>NUPTK</label>
                                     </div>
                                     <div class="col-md-9 form-group">
                                         <input type="number" id="nis-id" class="form-control" name="nis-id"
-                                            value="{{$gurus->NIP}}" placeholder="-" readonly>
+                                            value="{{$gurus->NUPTK}}" placeholder="-" readonly>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Jenis Kelamin</label>
@@ -152,7 +159,7 @@
                                             value="{{$gurus->tanggal_masuk}}" placeholder="-" readonly>
                                     </div>
                                     <div class="my-4 pt-2">
-                                        <a href="{{URL('/edit-profil-guru/'.$gurus->NIP.'/edit')}}"
+                                        <a href="{{URL('/edit-profil-guru/'.$gurus->NUPTK.'/edit')}}"
                                             class="btn icon icon-left btn-primary btn-lg btn-block"><i
                                                 data-feather="edit"></i> Edit Profil</a>
                                     </div>

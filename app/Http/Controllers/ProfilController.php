@@ -44,6 +44,12 @@ class ProfilController extends Controller
         $validatedData = $request->validate([
             'foto' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:3024',
             'username' => 'required|min:5',
+            'password' => [
+                'required',
+                'min:5',             // must be at least 10 characters in length
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+            ],
             'email' => 'required|email',
             'nama' => 'required|max:100',
             'jenis_kelamin' => 'required',
@@ -67,7 +73,8 @@ class ProfilController extends Controller
 
 
         $data->update([
-            'username' => $validatedData['username']
+            'username' => $validatedData['username'],
+            'password' => $validatedData['password']
         ]);
 
 
