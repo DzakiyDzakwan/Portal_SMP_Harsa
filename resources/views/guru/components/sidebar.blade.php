@@ -45,99 +45,59 @@
 
                 {{-- Dashboard --}}
                 <li class="sidebar-item @if ($pages === 'dashboard') active @endif">
-                    <a href="/dashboard-guru" class="sidebar-link">
+                    <a href="/guru/dashboard" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="sidebar-title">User</li>
+                @hasanyrole('kepsek|wakepsek|admin')
+                    <li class="sidebar-title">User</li>
 
-                {{-- Manajemen User --}}
-                <li class="sidebar-item has-sub @if ($pages === 'user') active @endif">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-people-fill"></i>
-                        <span>Manajemen User</span>
-                    </a>
-                    <ul class="submenu @if ($pages === 'user') active @endif">
-                        <li class="submenu-item">
-                            <a href="/roles">User</a>
+                    {{-- Manajemen User --}}
+                    @hasanyrole('kepsek|wakepsek')
+                        <li class="sidebar-item has-sub @if ($pages === 'user') active @endif">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-people-fill"></i>
+                                <span>Manajemen User</span>
+                            </a>
+                            <ul class="submenu @if ($pages === 'user') active @endif">
+                                <li class="submenu-item">
+                                    <a href="/guru/user">User</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/guru/role">Role</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/guru/permission">Permission</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="submenu-item">
-                            <a href="/roles">Role</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/permission">Permission</a>
-                        </li>
-                        {{-- <li class="submenu-item">
-                            <a href="/alumni">Alumni</a>
-                        </li> --}}
-                    </ul>
-                </li>
+                    @endhasanyrole
 
-                {{-- Manajemen Akun --}}
-                <li class="sidebar-item has-sub @if ($pages === 'user') active @endif">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-people-fill"></i>
-                        <span>Manajemen Akun</span>
-                    </a>
-                    <ul class="submenu @if ($pages === 'user') active @endif">
-                        <li class="submenu-item">
-                            <a href="/admin">Admin</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/guru">Guru</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/siswa">Siswa</a>
-                        </li>
-                        {{-- <li class="submenu-item">
-                            <a href="/alumni">Alumni</a>
-                        </li> --}}
-                    </ul>
-                </li>
+                    {{-- Manajemen Akun --}}
+                    <li class="sidebar-item has-sub @if ($pages === 'akun') active @endif">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Manajemen Akun</span>
+                        </a>
+                        <ul class="submenu @if ($pages === 'akun') active @endif">
+                            @hasanyrole('kepsek|wakepsek')
+                                <li class="submenu-item">
+                                    <a href="/guru/admin">Admin</a>
+                                </li>
+                            @endhasanyrole
+                            <li class="submenu-item">
+                                <a href="/guru/guru">Guru</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/siswa">Siswa</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endhasanyrole
 
                 <li class="sidebar-title">Sekolah</li>
-
-                {{-- Tahun Akademik --}}
-                <li class="sidebar-item @if ($pages === 'tahunakademik') active @endif">
-                    <a href="/dashboard-guru" class="sidebar-link">
-                        <i class="bi bi-calendar-date-fill"></i>
-                        <span>Tahun Akademik</span>
-                    </a>
-                </li>
-
-                {{-- Manajemen Mata Pelajaran --}}
-                <li class="sidebar-item has-sub @if ($pages === 'user') active @endif">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-book-fill"></i>
-                        <span>Manajemen Mata Pelajaran</span>
-                    </a>
-                    <ul class="submenu @if ($pages === 'user') active @endif">
-                        <li class="submenu-item">
-                            <a href="/admin">Mata Pelajaran</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/guru">Mata Pelajaran Guru</a>
-                        </li>
-                    </ul>
-                </li>
-
-                {{-- Manajemen Kelas --}}
-                <li class="sidebar-item has-sub @if ($pages === 'user') active @endif">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-person-video3"></i>
-                        <span>Manajemen Kelas</span>
-                    </a>
-                    <ul class="submenu @if ($pages === 'user') active @endif">
-                        <li class="submenu-item">
-                            <a href="/admin">Kelas</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/guru">Roster Kelas</a>
-                        </li>
-                    </ul>
-                </li>
 
                 {{-- Direktori --}}
                 {{-- <li class="sidebar-item @if ($pages === 'direktoriGuru') active @endif">
@@ -147,6 +107,62 @@
                     </a>
                 </li> --}}
 
+                {{-- Tahun Akademik --}}
+                @hasanyrole('kepsek|wakepsek|admin')
+                    <li class="sidebar-item @if ($pages === 'tahunakademik') active @endif">
+                        <a href="/guru/tahun-akademik" class="sidebar-link">
+                            <i class="bi bi-calendar-date-fill"></i>
+                            <span>Tahun Akademik</span>
+                        </a>
+                    </li>
+                @endhasanyrole
+
+                {{-- Kelas Saya --}}
+                @hasrole('wali')
+                    <li class="sidebar-item @if ($pages === 'tahunakademik') active @endif">
+                        <a href="/guru/kelas-saya" class="sidebar-link">
+                            <i class="bi bi-person-workspace"></i>
+                            <span>Kelas Saya</span>
+                        </a>
+                    </li>
+                @endhasrole
+
+
+                {{--  Mata Pelajaran & Kelas --}}
+                @hasanyrole('kepsek|wakepsek|admin')
+                    {{-- Manajemen Mata Pelajaran --}}
+                    <li class="sidebar-item has-sub @if ($pages === 'mapel') active @endif">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-book-fill"></i>
+                            <span>Manajemen Mata Pelajaran</span>
+                        </a>
+                        <ul class="submenu @if ($pages === 'mapel') active @endif">
+                            <li class="submenu-item">
+                                <a href="/guru/mata-pelajaran">Mata Pelajaran</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/mata-pelajaran-guru">Mata Pelajaran Guru</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    {{-- Manajemen Kelas --}}
+                    <li class="sidebar-item has-sub @if ($pages === 'kelas') active @endif">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-house-door-fill"></i>
+                            <span>Manajemen Kelas</span>
+                        </a>
+                        <ul class="submenu @if ($pages === 'kelas') active @endif">
+                            <li class="submenu-item">
+                                <a href="/guru/kelas">Kelas</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/roster">Roster</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endhasanyrole
+
                 {{-- Manajemen Nilai --}}
                 <li class="sidebar-item has-sub @if ($pages === 'inputNilai') active @endif">
                     <a href="#" class="sidebar-link">
@@ -154,77 +170,108 @@
                         <span>Manajemen Nilai</span>
                     </a>
                     <ul class="submenu @if ($pages === 'user') active @endif">
-                        <li class="submenu-item">
-                            <a href="/admin">Sesi Penilaian</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/guru">Ulangan Harian 1</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/guru">Ulangan Harian 2</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/guru">Ulangan Harian 3</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/guru">Ujian Tengah Semester</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/guru">Ujian Akhir Semester</a>
-                        </li>
+                        @hasanyrole('kepsek|wakepsek|admin')
+                            <li class="submenu-item">
+                                <a href="/guru/sesi-penilaian">Sesi Penilaian</a>
+                            </li>
+                        @endhasanyrole
+                        @hasanyrole('kepsek|wakepsek')
+                            <li class="submenu-item">
+                                <a href="/guru/nilai/uh1">Ulangan Harian 1</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/nilai/uh2">Ulangan Harian 2</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/nilai/uh3">Ulangan Harian 3</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/nilai/uts">Ujian Tengah Semester</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/nilai/uas">Ujian Akhir Semester</a>
+                            </li>
+                        @endhasanyrole
                     </ul>
                 </li>
 
-                <li class="sidebar-title">Audit</li>
+                {{-- Manajemen Ekstrakurikuler --}}
+                @hasanyrole('kepsek|wakepsek|admin|pembina')
+                    <li class="sidebar-item has-sub @if ($pages === 'ekskul') active @endif">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-clipboard2-pulse-fill"></i>
+                            <span>Manajemen Ekstrakurikuler</span>
+                        </a>
+                        <ul class="submenu @if ($pages === 'ekskul') active @endif">
+                            @hasanyrole('kepsek|wakepsek|admin')
+                                <li class="submenu-item">
+                                    <a href="/guru/ekstrakurikuler">Ekstrakurikuler</a>
+                                </li>
+                            @endhasanyrole
+                            <li class="submenu-item">
+                                <a href="/guru/ekstrakurikuler-siswa">Ekstrakurikuler Siswa</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/nilai-ekstrakurikuler">Nilai Ekstrakurikuler</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endhasanyrole
 
-                {{-- History Log --}}
-                <li class="sidebar-item has-sub @if ($pages == 'history') active @endif">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-clock-history"></i>
-                        <span>History Log</span>
-                    </a>
-                    <ul class="submenu @if ($pages == 'history') active @endif">
-                        <li class="submenu-item">
-                            <a href="/log-activities">Log Aktivitas</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-users">Log User</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-profiles">Log Profile</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-guru">Log Guru</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-siswa">Log Siswa</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-mapel">Log Mata-Pelajaran</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-kelas">Log Kelas</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-roster">Log Roster</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-kontrak">Log Kontrak Siswa</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-nilai">Log Nilai</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-prestasi">Log Prestasi</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-ekstrakulikuler">Log Ekstrakulikuler</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="/log-ekstrakurikuler-siswa">Log Ekstrakulikuler Siswa</a>
-                        </li>
-                    </ul>
-                </li>
+                {{-- Audit Section --}}
+                @hasrole('kepsek')
+                    <li class="sidebar-title">Audit</li>
+
+                    {{-- History Log --}}
+                    <li class="sidebar-item has-sub @if ($pages == 'history') active @endif">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-clock-history"></i>
+                            <span>History Log</span>
+                        </a>
+                        <ul class="submenu @if ($pages == 'history') active @endif">
+                            <li class="submenu-item">
+                                <a href="/guru/log-activities">Log Aktivitas</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-users">Log User</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-profiles">Log Profile</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-guru">Log Guru</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-siswa">Log Siswa</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-mapel">Log Mata-Pelajaran</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-kelas">Log Kelas</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-roster">Log Roster</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-kontrak">Log Kontrak Siswa</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-nilai">Log Nilai</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-prestasi">Log Prestasi</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-ekstrakulikuler">Log Ekstrakulikuler</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-ekstrakurikuler-siswa">Log Ekstrakulikuler Siswa</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endhasrole
+
 
             </ul>
         </div>

@@ -97,7 +97,11 @@
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img src="" />
+                                    @if (Auth::user()->profiles->foto == null)
+                                        <img src="{{ asset('/assets/images/faces/2.jpg') }}" />
+                                    @else
+                                        <img src="{{ asset('/storages/' . Auth::user()->profiles->foto) }}" />
+                                    @endif
                                 </div>
                             </div>
                         </div>

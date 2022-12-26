@@ -34,6 +34,15 @@ class CreatePermissionTables extends Migration
             $table->unique(['name', 'guard_name']);
         });
 
+        Schema::create('log_permissions', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('permission_id'); // permission id
+            $table->string('name');       // For MySQL 8.0 use string('name', 125);
+            $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->enum('action', ['insert', 'update', 'delete']);
+            $table->timestamp('created_at');
+        });
+
         Schema::create($tableNames['roles'], function (Blueprint $table) use ($teams, $columnNames) {
             $table->bigIncrements('id'); // role id
             if ($teams || config('permission.testing')) { // permission.testing is a fix for sqlite testing
@@ -48,6 +57,15 @@ class CreatePermissionTables extends Migration
             } else {
                 $table->unique(['name', 'guard_name']);
             }
+        });
+
+        Schema::create('log_roles', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('role_id'); // permission id
+            $table->string('name');       // For MySQL 8.0 use string('name', 125);
+            $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->enum('action', ['insert', 'update', 'delete']);
+            $table->timestamp('created_at');
         });
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames, $teams) {
@@ -136,6 +154,8 @@ class CreatePermissionTables extends Migration
         Schema::drop($tableNames['model_has_roles']);
         Schema::drop($tableNames['model_has_permissions']);
         Schema::drop($tableNames['roles']);
+        Schema::drop($tableNames['log_roles']);
         Schema::drop($tableNames['permissions']);
+        Schema::drop($tableNames['log_permissions']);
     }
 }
