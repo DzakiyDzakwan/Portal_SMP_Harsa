@@ -99,5 +99,6 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER disable_update_nilai');
         DB::unprepared('DROP TRIGGER validasi_input_nilai');
        /*  DB::unprepared('DROP TRIGGER validasi_nilai'); */
+       DB::unprepared('DROP TRIGGER disable_update_nilai');
     }
 };
