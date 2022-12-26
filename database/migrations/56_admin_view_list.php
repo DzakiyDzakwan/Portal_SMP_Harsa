@@ -178,7 +178,7 @@ return new class extends Migration
         FROM ekstrakurikulers;
         '); */
 
-        /* DB::unprepared('
+       /*  DB::unprepared('
         CREATE VIEW list_siswa_kelas AS
         SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester, s.kelas 
         FROM siswas AS s
@@ -186,80 +186,6 @@ return new class extends Migration
         JOIN kontrak_semesters AS k ON s.NISN = k.siswa 
         WHERE k.status = "On Going"
         ORDER BY p.nama;
-        ');
-
-        DB::unprepared('
-        CREATE VIEW table_log_activities AS 
-        SELECT * FROM log_activities
-        ');
-        DB::unprepared('
-        CREATE VIEW table_log_users AS 
-        SELECT * FROM log_users
-        ');
-
-
-        DB::unprepared('
-        CREATE VIEW table_log_siswas AS 
-        SELECT * FROM log_siswas
-        ');
-        DB::unprepared('
-        CREATE VIEW table_log_gurus AS 
-        SELECT * FROM log_gurus
-        ');
-
-        DB::unprepared('
-        CREATE VIEW table_log_mapels AS 
-        SELECT * FROM log_mapels
-        ');
-
-        DB::unprepared('
-        CREATE VIEW table_log_kelas AS
-        SELECT log_kelas.kelas_id, user_profiles.nama AS wali_kelas, log_kelas.grade, log_kelas.kelompok_kelas, log_kelas.nama_kelas, log_kelas.action, log_kelas.created_at
-        FROM log_kelas
-        LEFT JOIN gurus ON log_kelas.wali_kelas = gurus.NIP
-        LEFT JOIN users ON users.uuid = gurus.user
-        LEFT JOIN user_profiles ON user_profiles.user = users.uuid
-        GROUP BY log_kelas.kelas_id, user_profiles.nama, log_kelas.grade, log_kelas.kelompok_kelas, log_kelas.nama_kelas, log_kelas.action, log_kelas.created_at
-        ');
-
-        DB::unprepared('
-        CREATE VIEW table_log_ekstrakurikulers AS 
-        SELECT * FROM log_ekstrakurikulers
-        '); */
-
-        /* DB::unprepared('
-        CREATE VIEW table_log_rosters AS
-        SELECT mapel, kelas, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(waktu_mulai, durasi) AS waktu_akhir, SEC_TO_TIME(durasi*60) AS durasi, hari, created_at
-        FROM roster_kelas;
-        '); */
-
-        /* DB::unprepared('
-        CREATE VIEW table_log_profiles AS 
-        SELECT * FROM user_profiles
-        ');
-
-        DB::unprepared('
-        CREATE VIEW table_log_nilais AS
-        SELECT *
-        FROM nilais
-        ');
-
-        DB::unprepared('
-        CREATE VIEW table_log_prestasis AS
-        SELECT *
-        FROM prestasis
-        ');
-
-        DB::unprepared('
-        CREATE VIEW table_log_kontraks AS
-        SELECT *
-        FROM kontrak_semesters
-        ');
-
-        DB::unprepared('
-        CREATE VIEW table_log_ekstrakurikuler_siswas AS
-        SELECT *
-        FROM ekstrakurikuler_siswas
         '); */
 
         /* DB::unprepared('
@@ -293,6 +219,8 @@ return new class extends Migration
         INNER JOIN user_profiles ON users.uuid = user_profiles.user
         GROUP BY kelas.kelas_id;
         '); */
+
+        
     }
 
 
@@ -324,18 +252,6 @@ return new class extends Migration
         DB::unprepared('DROP VIEW list_prestasi');
         DB::unprepared('DROP VIEW list_ekstrakurikuler');
         DB::unprepared('DROP VIEW list_siswa_kelas');
-        DB::unprepared('DROP VIEW table_log_activities');
-        DB::unprepared('DROP VIEW table_log_users');
-        DB::unprepared('DROP VIEW table_log_siswas');
-        DB::unprepared('DROP VIEW table_log_gurus');
-        DB::unprepared('DROP VIEW table_log_mapels');
-        DB::unprepared('DROP VIEW table_log_kelas');
-        DB::unprepared('DROP VIEW table_log_ekstrakurikulers');
-        DB::unprepared('DROP VIEW table_log_rosters');
-        DB::unprepared('DROP VIEW table_log_profiles');
-        DB::unprepared('DROP VIEW table_log_nilais');
-        DB::unprepared('DROP VIEW table_log_prestasis');
-        DB::unprepared('DROP VIEW table_log_kontraks');
-        DB::unprepared('DROP VIEW table_log_ekstrakurikuler_siswas'); */
+         */
     }
 };

@@ -1,12 +1,12 @@
-@extends('admin.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Log Kontrak Semester</title>
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/pages/simple-datatables.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/simple-datatables.css') }}">
 @endsection
 
 @section('content')
@@ -15,10 +15,7 @@
             <h3>History Log Kontrak Semester</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav
-                aria-label="breadcrumb"
-                class="breadcrumb-header float-start float-lg-end"
-            >
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="/">Dashboard</a>
@@ -51,18 +48,18 @@
                 </thead>
                 <tbody>
                     @foreach ($logKontrak as $item)
-                    <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$item->siswa}}</td>
-                        <td>{{$item->grade}}</td>
-                        <td>{{$item->semester}}</td>
-                        <td>{{$item->tahun_ajaran}}</td>
-                        <td>{{$item->sakit}}</td>
-                        <td>{{$item->izin}}</td>
-                        <td>{{$item->alpa}}</td>
-                        <td>{{$item->status}}</td>
-                        <td>{{$item->created_at}}</td>
-                    </tr>
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->siswa }}</td>
+                            <td>{{ $item->grade }}</td>
+                            <td>{{ $item->semester }}</td>
+                            <td>{{ $item->tahun_ajaran }}</td>
+                            <td>{{ $item->sakit }}</td>
+                            <td>{{ $item->izin }}</td>
+                            <td>{{ $item->alpa }}</td>
+                            <td>{{ $item->status }}</td>
+                            <td>{{ $item->created_at }}</td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -71,6 +68,6 @@
 @endsection
 
 @section('script')
-    <script src="{{asset('assets/extensions/simple-datatables/umd/simple-datatables.js')}}"></script>
-    <script src="{{asset('assets/js/pages/simple-datatables.js')}}"></script>
+    <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
 @endsection

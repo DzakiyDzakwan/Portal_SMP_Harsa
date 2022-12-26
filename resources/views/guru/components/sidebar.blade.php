@@ -175,7 +175,7 @@
                                 <a href="/guru/sesi-penilaian">Sesi Penilaian</a>
                             </li>
                         @endhasanyrole
-                        @hasanyrole('kepsek|wakepsek')
+                        {{--  @hasanyrole('kepsek|wakepsek')
                             <li class="submenu-item">
                                 <a href="/guru/nilai/uh1">Ulangan Harian 1</a>
                             </li>
@@ -191,7 +191,7 @@
                             <li class="submenu-item">
                                 <a href="/guru/nilai/uas">Ujian Akhir Semester</a>
                             </li>
-                        @endhasanyrole
+                        @endhasanyrole --}}
                     </ul>
                 </li>
 

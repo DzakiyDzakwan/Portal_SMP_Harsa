@@ -25,7 +25,9 @@ class ViewController extends Controller
     }
 
     public function admin() {
-        //Code Here
+        $pages = 'user';
+        $subpages = 'admin';
+
         dd('admin');
         return view('user.admin');
     }

@@ -1,12 +1,12 @@
-@extends('admin.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Log Siswa</title>
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/pages/simple-datatables.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/simple-datatables.css') }}">
 @endsection
 
 @section('content')
@@ -15,10 +15,7 @@
             <h3>History Log Siswa</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav
-                aria-label="breadcrumb"
-                class="breadcrumb-header float-start float-lg-end"
-            >
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="/">Dashboard</a>
@@ -62,26 +59,26 @@
                 <tbody>
                     @foreach ($logSiswa as $item)
                         <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$item->user}}</td>
-                            <td>{{$item->NISN}}</td>
-                            <td>{{$item->NIS }}</td>
-                            <td>{{$item->kelas}}</td>
-                            <td>{{$item->tanggal_masuk}}</td>
-                            <td>{{$item->kelas_awal}}</td>
-                            <td>{{$item->anak_ke}}</td>
-                            <td>{{$item->nama_ayah}}</td>
-                            <td>{{$item->pekerjaan_ayah}}</td>
-                            <td>{{$item->nama_ibu}}</td>
-                            <td>{{$item->pekerjaan_ibu}}</td>
-                            <td>{{$item->alamat_orangtua}}</td>
-                            <td>{{$item->telepon_orangtua}}</td>
-                            <td>{{$item->nama_wali}}</td>
-                            <td>{{$item->pekerjaan_wali}}</td>
-                            <td>{{$item->telepon_wali}}</td>
-                            <td>{{$item->status}}</td>
-                            <td>{{$item->action}}</td>
-                            <td>{{$item->created_at}}</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->user }}</td>
+                            <td>{{ $item->NISN }}</td>
+                            <td>{{ $item->NIS }}</td>
+                            <td>{{ $item->kelas }}</td>
+                            <td>{{ $item->tanggal_masuk }}</td>
+                            <td>{{ $item->kelas_awal }}</td>
+                            <td>{{ $item->anak_ke }}</td>
+                            <td>{{ $item->nama_ayah }}</td>
+                            <td>{{ $item->pekerjaan_ayah }}</td>
+                            <td>{{ $item->nama_ibu }}</td>
+                            <td>{{ $item->pekerjaan_ibu }}</td>
+                            <td>{{ $item->alamat_orangtua }}</td>
+                            <td>{{ $item->telepon_orangtua }}</td>
+                            <td>{{ $item->nama_wali }}</td>
+                            <td>{{ $item->pekerjaan_wali }}</td>
+                            <td>{{ $item->telepon_wali }}</td>
+                            <td>{{ $item->status }}</td>
+                            <td>{{ $item->action }}</td>
+                            <td>{{ $item->created_at }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -91,6 +88,6 @@
 @endsection
 
 @section('script')
-    <script src="{{asset('assets/extensions/simple-datatables/umd/simple-datatables.js')}}"></script>
-    <script src="{{asset('assets/js/pages/simple-datatables.js')}}"></script>
+    <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
 @endsection

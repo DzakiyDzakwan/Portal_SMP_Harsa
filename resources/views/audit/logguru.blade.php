@@ -1,12 +1,12 @@
-@extends('admin.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Log Guru</title>
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/pages/simple-datatables.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/simple-datatables.css') }}">
 @endsection
 
 @section('content')
@@ -15,10 +15,7 @@
             <h3>History Log Guru</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav
-                aria-label="breadcrumb"
-                class="breadcrumb-header float-start float-lg-end"
-            >
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="/">Dashboard</a>
@@ -54,18 +51,18 @@
                 <tbody>
                     @foreach ($logGuru as $item)
                         <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$item->user}}</td>
-                            <td>{{$item->NIP}}</td>
-                            <td>{{$item->jabatan}}</td>
-                            <td>{{$item->pendidikan}}</td>
-                            <td>{{$item->tahun_ijazah}}</td>
-                            <td>{{$item->status_perkawinan}}</td>
-                            <td>{{$item->tanggal_masuk}}</td>
-                            <td>{{$item->status}}</td>
-                            <td>{{$item->is_wali_kelas}}</td>
-                            <td>{{$item->action}}</td>
-                            <td>{{$item->created_at}}</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->user }}</td>
+                            <td>{{ $item->NIP }}</td>
+                            <td>{{ $item->jabatan }}</td>
+                            <td>{{ $item->pendidikan }}</td>
+                            <td>{{ $item->tahun_ijazah }}</td>
+                            <td>{{ $item->status_perkawinan }}</td>
+                            <td>{{ $item->tanggal_masuk }}</td>
+                            <td>{{ $item->status }}</td>
+                            <td>{{ $item->is_wali_kelas }}</td>
+                            <td>{{ $item->action }}</td>
+                            <td>{{ $item->created_at }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -75,6 +72,6 @@
 @endsection
 
 @section('script')
-    <script src="{{asset('assets/extensions/simple-datatables/umd/simple-datatables.js')}}"></script>
-    <script src="{{asset('assets/js/pages/simple-datatables.js')}}"></script>
+    <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
 @endsection

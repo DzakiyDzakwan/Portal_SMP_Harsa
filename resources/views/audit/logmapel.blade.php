@@ -1,12 +1,12 @@
-@extends('admin.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Log Mapel</title>
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/pages/simple-datatables.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/simple-datatables.css') }}">
 @endsection
 
 @section('content')
@@ -15,10 +15,7 @@
             <h3>History Log Mata Pelajaran</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav
-                aria-label="breadcrumb"
-                class="breadcrumb-header float-start float-lg-end"
-            >
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="/">Dashboard</a>
@@ -48,16 +45,16 @@
                 </thead>
                 <tbody>
                     @foreach ($logMapel as $item)
-                    <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$item->mapel_id}}</td>
-                        <td>{{$item->nama_mapel}}</td>
-                        <td>{{$item->kelompok_mapel}}</td>
-                        <td>{{$item->kurikulum}}</td>
-                        <td>{{$item->action}}</td>
-                        <td>{{$item->created_at}}</td>
-                    </tr>
-                    @endforeach                    
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->mapel_id }}</td>
+                            <td>{{ $item->nama_mapel }}</td>
+                            <td>{{ $item->kelompok_mapel }}</td>
+                            <td>{{ $item->kurikulum }}</td>
+                            <td>{{ $item->action }}</td>
+                            <td>{{ $item->created_at }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -65,6 +62,6 @@
 @endsection
 
 @section('script')
-    <script src="{{asset('assets/extensions/simple-datatables/umd/simple-datatables.js')}}"></script>
-    <script src="{{asset('assets/js/pages/simple-datatables.js')}}"></script>
+    <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
 @endsection

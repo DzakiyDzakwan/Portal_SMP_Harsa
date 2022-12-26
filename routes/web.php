@@ -26,7 +26,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'ceklevel']], function(){
 
-    Route::get('/guru/dashboard', [DashboardController::class, 'guru'])->name('dashboardGuru');
+    Route::get('/guru/dashboard', [DashboardController::class, 'indexguru'])->name('dashboardGuru');
     Route::get('/profil-guru', [ProfilController::class, 'profilGuru'])->name('profilGuru');
     Route::get('/edit-profil-guru/{id}/edit', [ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
     Route::put('/edit-profil-guru', [ProfilController::class, 'updateProfilGuru'])->name('updateProfilGuru');
