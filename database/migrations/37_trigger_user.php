@@ -105,6 +105,7 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_user');
         DB::unprepared('DROP TRIGGER log_update_user');
         DB::unprepared('DROP TRIGGER log_delete_user');
+        DB::unprepared('DROP TRIGGER log_softdelete_user');
         DB::unprepared('DROP TRIGGER disable_update_user');
     }
 };
