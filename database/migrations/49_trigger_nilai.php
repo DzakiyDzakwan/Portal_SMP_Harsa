@@ -19,7 +19,7 @@ return new class extends Migration
         AFTER INSERT ON nilais
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, pemeriksa, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
+        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, pemeriksa, kontrak_siswa, jenis, kkm_aktif, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
         VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.pemeriksa, NEW.kontrak_siswa, NEW.jenis, NEW.kkm_aktif, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, NEW.keterangan, "insert", NOW());
         END
         ');
@@ -29,7 +29,7 @@ return new class extends Migration
         AFTER UPDATE ON nilais
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, pemeriksa, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
+        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, pemeriksa, kontrak_siswa, jenis, kkm_aktif, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
         VALUES (NEW.nilai_id, NEW.sesi, NEW.mapel, NEW.guru, NEW.pemeriksa, NEW.kontrak_siswa, NEW.jenis, NEW.kkm_aktif, NEW.nilai_pengetahuan, NEW.deskripsi_pengetahuan, NEW.nilai_keterampilan, NEW.deskripsi_keterampilan, NEW.status, NEW.keterangan, "update", NOW());
         END
         ');
@@ -39,7 +39,7 @@ return new class extends Migration
         AFTER DELETE ON nilais
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, pemeriksa, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
+        INSERT INTO log_nilais(nilai_id, sesi, mapel, guru, pemeriksa, kontrak_siswa, jenis, kkm_aktif, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, keterangan, action, created_at)
         VALUES (OLD.nilai_id, OLD.sesi, OLD.mapel, OLD.guru, OLD.pemeriksa, OLD.kontrak_siswa, OLD.jenis, OLD.kkm_aktif, OLD.nilai_pengetahuan, OLD.deskripsi_pengetahuan, OLD.nilai_keterampilan, OLD.deskripsi_keterampilan, OLD.status, OLD.keterangan, "delete", NOW());
         END
         ');
@@ -58,6 +58,18 @@ return new class extends Migration
                 SET NEW.nilai_keterampilan = 0;
             ELSEIF (NEW.nilai_pengetahuan > 100 OR NEW.nilai_keterampilan > 100) THEN
                 SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Error Nilai tidak dapat lebih dari 100";
+            END IF;
+        END
+        ');
+
+        DB::unprepared('
+        CREATE TRIGGER disable_update_nilai
+        BEFORE UPDATE ON nilais
+        FOR EACH ROW
+        BEGIN
+            IF(NEW.nilai_id <> OLD.nilai_id OR NEW.sesi <> OLD.sesi OR NEW.mapel <> OLD.mapel OR NEW.guru <> OLD.guru OR NEW.kontrak_siswa <> OLD.kontrak_siswa OR NEW.jenis <> OLD.jenis OR NEW.kkm_aktif <> OLD.kkm_aktif)THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah role";
             END IF;
         END
         ');
