@@ -49,7 +49,7 @@ return new class extends Migration
         BEFORE UPDATE ON gurus
         FOR EACH ROW
         BEGIN
-            IF (OLD.user <> NEW.user OR OLD.tanggal_masuk <> NEW.tanggal_masuk) THEN
+            IF (OLD.user <> NEW.user OR OLD.tanggal_masuk <> NEW.tanggal_masuk OR OLD.NUPTK <> NEW.NUPTK) THEN
                 SIGNAL SQLSTATE "45000"
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
