@@ -59,6 +59,13 @@
                                             class="form-control" name="email" placeholder="-">
                                     </div>
                                     <div class="col-md-3">
+                                        <label>Password</label>
+                                    </div>
+                                    <div class="col-md-9 form-group">
+                                        <input value="{{$data->password}}" type="password" id="password"
+                                            class="form-control" name="password" placeholder="-">
+                                    </div>
+                                    <div class="col-md-3">
                                         <label>Nama</label>
                                     </div>
                                     <div class="col-md-9 form-group">
@@ -66,11 +73,11 @@
                                             value="{{$data->nama}}" placeholder="-">
                                     </div>
                                     <div class="col-md-3">
-                                        <label>NIP</label>
+                                        <label>NUPTK</label>
                                     </div>
                                     <div class="col-md-9 form-group">
                                         <input type="number" id="nip" class="form-control" name="nip"
-                                            value="{{$data->NIP}}" placeholder="-" disabled>
+                                            value="{{$data->NUPTK}}" placeholder="-" disabled>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Jenis Kelamin</label>
