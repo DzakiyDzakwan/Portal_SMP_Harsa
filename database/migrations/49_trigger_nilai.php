@@ -69,7 +69,7 @@ return new class extends Migration
         BEGIN
             IF(NEW.nilai_id <> OLD.nilai_id OR NEW.sesi <> OLD.sesi OR NEW.mapel <> OLD.mapel OR NEW.guru <> OLD.guru OR NEW.kontrak_siswa <> OLD.kontrak_siswa OR NEW.jenis <> OLD.jenis OR NEW.kkm_aktif <> OLD.kkm_aktif)THEN
                 SIGNAL SQLSTATE "45000"
-                SET MESSAGE_TEXT = "Tidak dapat mengubah nilai";
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
         END
         ');
@@ -96,6 +96,7 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_nilai');
         DB::unprepared('DROP TRIGGER log_update_nilai');
         DB::unprepared('DROP TRIGGER log_delete_nilai');
+        DB::unprepared('DROP TRIGGER disable_update_nilai');
         DB::unprepared('DROP TRIGGER validasi_input_nilai');
        /*  DB::unprepared('DROP TRIGGER validasi_nilai'); */
        DB::unprepared('DROP TRIGGER disable_update_nilai');
