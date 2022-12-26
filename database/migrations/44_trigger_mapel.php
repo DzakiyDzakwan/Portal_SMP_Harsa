@@ -50,7 +50,7 @@ return new class extends Migration
         BEFORE UPDATE ON mapels
         FOR EACH ROW
         BEGIN
-            IF (OLD.kurikulum <> NEW.kurikulum) THEN
+            IF (OLD.kurikulum <> NEW.kurikulum or OLD.mapel_id <> NEW.mapel_id) THEN
                 SIGNAL SQLSTATE "45000"
                 SET MESSAGE_TEXT = "Tidak dapat mengubah kurikulum";
             END IF;

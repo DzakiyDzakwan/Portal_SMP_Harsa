@@ -50,7 +50,7 @@ return new class extends Migration
         BEFORE UPDATE ON rosters
         FOR EACH ROW
         BEGIN
-            IF (OLD.mapel_guru <> NEW.mapel_guru OR OLD.kelas <> NEW.kelas) THEN
+            IF (OLD.kelas <> NEW.kelas OR OLD.tahun_ajaran_aktif <> NEW.tahun_ajaran_aktif OR OLD.semester_aktif <> NEW.semester_aktif OR OLD.roster_id <> NEW.roster_id) THEN
                 SIGNAL SQLSTATE "45000"
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;

@@ -30,10 +30,23 @@ return new class extends Migration
         AFTER UPDATE ON users
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_users(uuid, username,password, action, created_at)
-        VALUES (NEW.uuid, NEW.username, NEW.password, "update", NOW());
+        IF (OLD.username <> NEW.username OR OLD.password <> NEW.password) THEN
+            INSERT INTO log_users(uuid, username,password, action, created_at)
+            VALUES (OLD.uuid, OLD.username, OLD.password, "update", NOW());
+            END IF;
         END
         ');
+
+        // DB::unprepared('
+        // CREATE TRIGGER log_update_user
+        // AFTER UPDATE ON users
+        // FOR EACH ROW
+        // IF (OLD.username <> NEW.username OR OLD.password <> NEW.password) THEN
+        //     INSERT INTO log_users(uuid, username,password, action, created_at)
+        //     VALUES (OLD.uuid, OLD.username, OLD.password, "update", NOW());
+        //     END IF;
+        // END
+        // ');
 
         DB::unprepared('
         CREATE TRIGGER log_delete_user
@@ -44,6 +57,30 @@ return new class extends Migration
         VALUES (OLD.uuid, OLD.username, OLD.password, "delete", NOW());
         END
         ');
+
+        DB::unprepared('
+        CREATE TRIGGER log_softdelete_user
+        AFTER UPDATE ON users
+        FOR EACH ROW
+	    BEGIN
+            IF (NEW.deleted_at) THEN
+            INSERT INTO log_users(uuid, username,password, action, created_at)
+            VALUES (OLD.uuid, OLD.username, OLD.password, "softdelete", NOW());
+            END IF;
+	    END
+        ');
+
+        // DB::unprepared('
+        // CREATE TRIGGER log_restore_user
+        // AFTER UPDATE ON users
+        // FOR EACH ROW
+        // BEGIN
+        //     IF (NEW.deleted_at is NULL) THEN
+        //     INSERT INTO log_users(uuid, username,password, action, created_at)
+        //     VALUES (OLD.uuid, OLD.username, OLD.password, "restore", NOW());
+        //     END IF;
+        // END
+        // ');
 
         DB::unprepared('
         CREATE TRIGGER disable_update_user 
@@ -68,6 +105,7 @@ return new class extends Migration
         DB::unprepared('DROP TRIGGER log_insert_user');
         DB::unprepared('DROP TRIGGER log_update_user');
         DB::unprepared('DROP TRIGGER log_delete_user');
+        DB::unprepared('DROP TRIGGER log_softdelete_user');
         DB::unprepared('DROP TRIGGER disable_update_user');
     }
 };

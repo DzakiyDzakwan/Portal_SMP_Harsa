@@ -18,7 +18,7 @@ return new class extends Migration
             $table->char('uuid', 36);
             $table->string('username');
             $table->string('password');
-            $table->enum('action', ['insert', 'update', 'delete']);
+            $table->enum('action', ['insert', 'update', 'delete', 'softdelete', 'restore']);
             $table->timestamp('created_at');
         });
     }
