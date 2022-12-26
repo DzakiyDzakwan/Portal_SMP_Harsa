@@ -50,7 +50,7 @@ return new class extends Migration
         BEFORE UPDATE ON prestasis
         FOR EACH ROW
         BEGIN
-            IF (OLD.siswa <> NEW.siswa) THEN
+            IF (OLD.prestasi_id <> NEW.prestasi_id OR OLD.siswa <> NEW.siswa) THEN
                 SIGNAL SQLSTATE "45000"
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
