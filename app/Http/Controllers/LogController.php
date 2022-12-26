@@ -18,7 +18,7 @@ class LogController extends Controller
         $logActivities = DB::table('table_log_activities')
         ->latest()
         ->get();
-        return view('admin.logactivity', compact('pages', 'logActivities', 'subpages'));
+        return view('audit.logactivity', compact('pages', 'logActivities', 'subpages'));
     }
 
     public function user() {
@@ -27,7 +27,7 @@ class LogController extends Controller
         $logUser = DB::table('table_log_users')
         ->latest()
         ->get();
-        return  view('admin.logusers',compact('pages', 'subpages', 'logUser'));
+        return  view('audit.logusers',compact('pages', 'subpages', 'logUser'));
     }
 
     public function siswa() {
@@ -36,7 +36,7 @@ class LogController extends Controller
         $logSiswa = DB::table('table_log_siswas')
         ->latest()
         ->get();
-        return  view('admin.logsiswa', compact('pages', 'subpages', 'logSiswa'));
+        return  view('audit.logsiswa', compact('pages', 'subpages', 'logSiswa'));
     }
 
     public function guru() {
@@ -45,7 +45,7 @@ class LogController extends Controller
         $logGuru = DB::table('table_log_gurus')
         ->latest()
         ->get();
-        return  view('admin.logguru', compact('pages', 'subpages', 'logGuru'));
+        return  view('audit.logguru', compact('pages', 'subpages', 'logGuru'));
     }
 
     public function kelas() {
@@ -54,7 +54,7 @@ class LogController extends Controller
         $logKelas = DB::table('table_log_Kelas')
         ->latest()
         ->get();
-        return  view('admin.logkelas', compact('pages', 'subpages', 'logKelas'));
+        return  view('audit.logkelas', compact('pages', 'subpages', 'logKelas'));
     }
 
     public function mapel() {
@@ -63,7 +63,7 @@ class LogController extends Controller
         $logMapel = DB::table('table_log_Mapels')
         ->latest()
         ->get();
-        return  view('admin.logmapel', compact('pages', 'subpages', 'logMapel'));
+        return  view('audit.logmapel', compact('pages', 'subpages', 'logMapel'));
     }
     
     public function ekskul() {
@@ -72,7 +72,7 @@ class LogController extends Controller
         $logEkskul = DB::table('table_log_ekstrakurikulers')
         ->latest()
         ->get();
-        return view('admin.logeskul', compact('pages', 'subpages', 'logEkskul'));
+        return view('audit.logeskul', compact('pages', 'subpages', 'logEkskul'));
     }
 
     public function roster() {
@@ -81,7 +81,7 @@ class LogController extends Controller
         $logRoster = DB::table('table_log_rosters')
         ->latest()
         ->get();
-        return view('admin.logroster', compact('pages', 'subpages', 'logRoster'));
+        return view('audit.logroster', compact('pages', 'subpages', 'logRoster'));
     }
 
     public function profiles() {
@@ -90,7 +90,7 @@ class LogController extends Controller
         $logProfiles = DB::table('table_log_profiles')
         ->latest()
         ->get();
-        return view('admin.logprofiles', compact('pages', 'subpages', 'logProfiles'));
+        return view('audit.logprofiles', compact('pages', 'subpages', 'logProfiles'));
     }
 
     public function nilai() {
@@ -99,7 +99,7 @@ class LogController extends Controller
         $logNilai = DB::table('table_log_nilais')
         ->latest()
         ->get();
-        return view('admin.lognilai', compact('pages', 'subpages', 'logNilai'));
+        return view('audit.lognilai', compact('pages', 'subpages', 'logNilai'));
     }
 
     public function prestasi() {
@@ -108,7 +108,7 @@ class LogController extends Controller
         $logPrestasi = DB::table('table_log_prestasis')
         ->latest()
         ->get();
-        return view('admin.logprestasi', compact('pages', 'subpages', 'logPrestasi'));
+        return view('audit.logprestasi', compact('pages', 'subpages', 'logPrestasi'));
     }
 
     public function ekskulSiswa() {
@@ -117,7 +117,7 @@ class LogController extends Controller
         $logEkskulSiswa = DB::table('table_log_ekstrakurikuler_siswas')
         ->latest()
         ->get();
-        return view('admin.logekskulsiswa', compact('pages', 'subpages', 'logEkskulSiswa'));
+        return view('audit.logekskulsiswa', compact('pages', 'subpages', 'logEkskulSiswa'));
     }
 
     public function kontrak() {
@@ -126,7 +126,7 @@ class LogController extends Controller
         $logKontrak = DB::table('table_log_kontraks')
         ->latest()
         ->get();
-        return view('admin.logkontrak', compact('pages', 'subpages', 'logKontrak'));
+        return view('audit.logkontrak', compact('pages', 'subpages', 'logKontrak'));
     }
 
 }
