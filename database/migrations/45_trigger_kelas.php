@@ -50,7 +50,7 @@ return new class extends Migration
         BEFORE UPDATE ON kelas
         FOR EACH ROW
         BEGIN
-            IF (OLD.grade <> NEW.grade OR OLD.kelompok_kelas <> NEW.kelompok_kelas) THEN
+            IF (OLD.kelas_id <> NEW.kelas_id OR OLD.grade <> NEW.grade OR OLD.kelompok_kelas <> NEW.kelompok_kelas) THEN
                 SIGNAL SQLSTATE "45000"
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
