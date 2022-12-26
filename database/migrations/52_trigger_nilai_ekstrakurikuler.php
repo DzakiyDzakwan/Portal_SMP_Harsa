@@ -50,7 +50,7 @@ return new class extends Migration
         BEFORE UPDATE ON nilai_ekstrakurikulers
         FOR EACH ROW
         BEGIN
-            IF (OLD.nilai <> NEW.nilai) THEN
+            IF (OLD.nilai_ekstrakurikuler_id <> NEW.nilai_ekstrakurikuler_id OR OLD.ekstrakurikuler <> NEW.ekstrakurikuler OR OLD.kontrak_siswa <> NEW.kontrak_siswa) THEN
                 SIGNAL SQLSTATE "45000"
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
