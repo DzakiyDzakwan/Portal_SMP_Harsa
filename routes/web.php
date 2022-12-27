@@ -104,8 +104,8 @@ Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'cekle
 
 Route::group(['middleware' => ['auth', 'role:siswa', 'ceklevel']], function(){
     Route::get('siswa/dashboard', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
-    Route::get('/profil-siswa', [siswa\ProfilController::class, 'profilSiswa'])->name('profilSiswa');
-    Route::get('/edit-profil-siswa', [siswa\ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
+    Route::get('/profil-siswa', [ProfilController::class, 'profilSiswa'])->name('profilSiswa');
+    Route::get('/edit-profil-siswa', [ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
     Route::get('/change-password', [ProfilController::class, 'changePassword'])->name('changePassword');
 });
 
