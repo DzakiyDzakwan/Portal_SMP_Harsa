@@ -15,14 +15,13 @@ return new class extends Migration
     public function up()
     {
 
-        /* DB::unprepared('
+        DB::unprepared('
             CREATE PROCEDURE add_admin(
                 IN uname VARCHAR(255),
                 IN pass VARCHAR(255),
-                IN admin CHAR(36)
+                IN actor CHAR(36)
             )
             BEGIN
-            
                 DECLARE errno INT;
                 DECLARE uuid CHAR(36);
                 DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -33,17 +32,42 @@ return new class extends Migration
                 SET uuid = UUID();
             
                 START TRANSACTION;
-                INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
-                VALUES (uuid, uname, pass, "admin", NOW(), NOW());
+                INSERT INTO users(uuid, username, password, created_at, updated_at) 
+                VALUES (uuid, uname, pass, NOW(), NOW());
+
+                INSERT INTO model_has_roles(role_id, model_type, model_id)
+                VALUES ("3", "App\Models\User", uuid);
 
                 INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "insert", "users", NOW());
+                VALUES(actor, "insert", "users", NOW());
                 
                 COMMIT;
             END
         ');
 
         DB::unprepared('
+        CREATE PROCEDURE delete_admin (
+            IN actor CHAR(36),
+            IN user CHAR(36)
+        )
+        BEGIN
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+            START TRANSACTION;
+
+            DELETE FROM users WHERE uuid = user COLLATE utf8mb4_general_ci;
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "delete", "users", NOW());
+
+            COMMIT;
+        END
+        ');
+
+        /*DB::unprepared('
         CREATE PROCEDURE update_admin (
             IN admin CHAR(36),
             IN user CHAR(36),
@@ -88,25 +112,6 @@ return new class extends Migration
         )
         BEGIN
             UPDATE users SET deleted_at = NULL WHERE uuid = admin COLLATE utf8mb4_general_ci;
-        END
-        ');
-
-        DB::unprepared('
-        CREATE PROCEDURE delete_admin (
-            IN admin CHAR(36),
-            IN user CHAR(36)
-        )
-        BEGIN
-            DECLARE errno INT;
-            DECLARE EXIT HANDLER FOR SQLEXCEPTION
-            BEGIN
-                ROLLBACK;
-            END;
-            START TRANSACTION;
-            DELETE FROM users WHERE uuid = user COLLATE utf8mb4_general_ci; 
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "delete", "users", NOW());
-            COMMIT;
         END
         ');
 
