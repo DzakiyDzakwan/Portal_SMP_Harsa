@@ -8,13 +8,11 @@ class ViewController extends Controller
 {
     public function user() {
        //Code Here
-       dd('user');
         return view('user.user');
     }
 
     public function role() {
         //Code Here
-        dd('role');
         return view('user.role');
     }
 
