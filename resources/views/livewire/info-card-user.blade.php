@@ -12,7 +12,7 @@
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
-                        <h6 class="text-muted font-semibold">Total Admin</h6>
+                        <h6 class="text-muted font-semibold">Total User</h6>
                         <h6 class="font-extrabold mb-0">{{ $totalUser }}</h6>
                     </div>
                 </div>

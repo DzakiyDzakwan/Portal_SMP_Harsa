@@ -17,7 +17,7 @@ class ListInactiveUser extends Component
 
     public function render()
     {
-        $this->inactiveUser = User::onlyTrashed()->where('role', 'admin')->latest()->get();
+        $this->inactiveUser = User::onlyTrashed()->latest()->get();
         return view('livewire.list-inactive-user');
     }
 

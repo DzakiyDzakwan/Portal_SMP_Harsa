@@ -18,7 +18,7 @@ class ListUser extends Component
 
     public function render()
     {
-        $this->users = User::where('role', 'admin')->latest()->get();
+        $this->users = User::latest()->get();
         return view('livewire.list-user');
     }
 

@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
     public function indexguru()
     {
-        $pages = 'dashboard';
+        $menu = 'dashboard';
         $jumlah= [
             'user' => User::withTrashed()->count(),
             'admin' => User::withTrashed()->role(['kepsek', 'wakepsek', 'admin'])->count(),
@@ -27,7 +27,7 @@ class DashboardController extends Controller
             'ekskul' => Ekstrakurikuler::count(),
         ];
 
-        return view('guru.dashboard', compact("pages", "jumlah"));
+        return view('guru.dashboard', compact("menu", "jumlah"));
     }
 
     public function siswa() {
