@@ -18,7 +18,7 @@ return new class extends Migration
             $table->char('tahun_ajaran', 9);
             $table->enum('semester', ['ganjil', 'genap']);
             $table->dateTime('tanggal_mulai');
-            $table->dateTime('tanggal_akhir');
+            $table->dateTime('tanggal_berakhir');
             $table->timestamps();
         });
     }

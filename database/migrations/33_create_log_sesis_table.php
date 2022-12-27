@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('log_sesis', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->enum('nama_sesi', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
+            $table->char('tahun_ajaran_aktif', 9);
+            $table->enum('semester_aktif', ["ganjil", "genap"]);
+            $table->dateTime('tanggal_mulai');
+            $table->dateTime('tanggal_berakhir');
+            $table->enum('action', ['insert', 'update']);
+            $table->timestamp('created_at');
         });
     }
 

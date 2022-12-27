@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('log_tahuns', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->char('tahun_ajaran', 9);
+            $table->enum('semester', ['ganjil', 'genap']);
+            $table->dateTime('tanggal_mulai');
+            $table->dateTime('tanggal_berakhir');
+            $table->enum('action', ['insert', 'update']);
+            $table->timestamp('created_at');
         });
     }
 
