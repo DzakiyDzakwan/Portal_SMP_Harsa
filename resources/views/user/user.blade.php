@@ -1,4 +1,4 @@
-@extends('guru.master.main')
+@extends('master.main')
 
 @section('title')
     <title>User</title>
@@ -37,7 +37,7 @@
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
                     {{-- Button Tambah User --}}
-                    @livewire('create-modal-user')
+                    {{-- @livewire('create-modal-user') --}}
                 </div>
                 <div class="form-group">
                     {{-- Button Inactive User --}}
