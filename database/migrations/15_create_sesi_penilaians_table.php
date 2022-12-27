@@ -20,7 +20,6 @@ return new class extends Migration
             $table->enum('semester_aktif', ["ganjil", "genap"]);
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_berakhir');
-            $table->string('created_by');
             $table->timestamps();
         });
     }
