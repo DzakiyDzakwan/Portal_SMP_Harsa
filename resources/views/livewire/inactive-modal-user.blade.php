@@ -1,16 +1,16 @@
 <div>
-    {{-- Button Inactive Admin --}}
+    {{-- Button Inactive User --}}
     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#trashedUser">
-        <i class="bi bi-person-x-fill"></i> Inactive Admin
+        <i class="bi bi-person-x-fill"></i> Inactive User
     </button>
 
-    <!--Modal Inactive Admin -->
+    <!--Modal Inactive User -->
     <div class="modal fade text-left" id="trashedUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document" style="max-width: 50%">
             <div class="modal-content">
                 <div class="modal-header bg-danger justify-content-center">
-                    <h4 class="modal-title white " id="myModalLabel33">Inactive Admin</h4>
+                    <h4 class="modal-title white " id="myModalLabel33">Inactive User</h4>
                 </div>
                 <div class="modal-body">
                     @livewire('list-inactive-user')
