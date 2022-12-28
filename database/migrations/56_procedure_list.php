@@ -39,6 +39,124 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        CREATE PROCEDURE add_role(
+            IN nama VARCHAR(255),
+            IN user CHAR(36)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+            INSERT INTO roles(name, guard_name, created_at, updated_at) 
+            VALUES (nama, "web", NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(user, "insert", "roles", NOW());
+            
+            COMMIT;
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE update_role(
+            IN role INT,
+            IN nama VARCHAR(255),
+            IN user CHAR(36)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+            UPDATE roles SET name = nama WHERE id = role;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(user, "insert", "users", NOW());
+            
+            COMMIT;
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE delete_role(
+            IN role INT,
+            IN user CHAR(36)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+            DELETE FROM roles WHERE id = role;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(user, "delete", "roles", NOW());
+            
+            COMMIT;
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE add_permission(
+            IN nama VARCHAR(255),
+            IN user CHAR(36)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+            INSERT INTO permissions(name, guard_name, created_at, updated_at) 
+            VALUES (nama, "web", NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(user, "insert", "permissions", NOW());
+            
+            COMMIT;
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE delete_permission(
+            IN permission INT,
+            IN user CHAR(36)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+            DELETE FROM permissions WHERE id = permission;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(user, "delete", "permissions", NOW());
+            
+            COMMIT;
+        END
+        ');
+
+        DB::unprepared('
             CREATE PROCEDURE add_admin(
                 IN uname VARCHAR(255),
                 IN pass VARCHAR(255),
@@ -957,6 +1075,11 @@ BEGIN
     public function down()
     {
         DB::unprepared("DROP PROCEDURE update_user");
+        DB::unprepared("DROP PROCEDURE add_role");
+        DB::unprepared("DROP PROCEDURE update_role");
+        DB::unprepared("DROP PROCEDURE delete_role");
+        DB::unprepared("DROP PROCEDURE add_permission");
+        DB::unprepared("DROP PROCEDURE delete_permission");
         DB::unprepared("DROP PROCEDURE add_admin");
         DB::unprepared("DROP PROCEDURE update_admin");
         DB::unprepared("DROP PROCEDURE delete_admin");
