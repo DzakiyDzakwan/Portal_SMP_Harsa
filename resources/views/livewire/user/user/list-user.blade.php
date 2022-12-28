@@ -3,7 +3,8 @@
         <tr>
             <th>No</th>
             <th>Username</th>
-            <th>Created_at</th>
+            <th>Name</th>
+            <th>Role</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -12,27 +13,40 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->username }}</td>
-                <td>{{ $item->created_at }}</td>
+                <td>{{ $item->profiles->nama }}</td>
                 <td>
+                    @foreach ($item->getRoleNames() as $role)
+                        <span class="badge bg-primary">{{ $role }}</span>
+                    @endforeach
+                </td>
+                <td>
+                    <!-- Role Button -->
+                    <div class="modal-primary me-1 mb-1 d-inline-block">
+                        <button class="btn btn-sm btn-primary" wire:click="roleUser('{{ $item->uuid }}')">
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Role User">
+                                <i class="bi bi-person-bounding-box"></i>
+                            </div>
+                        </button>
+                    </div>
                     <!-- Update Button -->
                     <div class="modal-warning me-1 mb-1 d-inline-block">
                         <button class="btn btn-sm btn-warning" wire:click="editUser('{{ $item->uuid }}')">
-                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Admin">
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User">
                                 <i class="bi bi-pencil"></i></a>
                             </div>
                         </button>
                     </div>
                     <!--Delete Button-->
-                    <div class="modal-danger me-1 mb-1 d-inline-block">
+                    {{-- <div class="modal-danger me-1 mb-1 d-inline-block">
                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                             data-bs-target="#delete{{ $loop->iteration }}">
-                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="NonAktif Admin">
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Non Aktif User">
                                 <i class="bi bi-person-x-fill"></i>
                             </div>
                         </button>
-                    </div>
+                    </div> --}}
                     {{-- Modal Delete --}}
-                    <div class="modal fade text-left" id="delete{{ $loop->iteration }}" tabindex="-1" role="dialog"
+                    {{-- <div class="modal fade text-left" id="delete{{ $loop->iteration }}" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel130" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                             <div class="modal-content">
@@ -56,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </td>
             </tr>
         @endforeach

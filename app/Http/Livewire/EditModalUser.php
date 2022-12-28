@@ -28,7 +28,7 @@ class EditModalUser extends Component
 
     public function render()
     {
-        return view('livewire.edit-modal-user');
+        return view('livewire.user.user.edit-modal-user');
     }
 
     public function showUser($user) {
@@ -49,7 +49,7 @@ class EditModalUser extends Component
         $this->password = Hash::make($this->password);
 
         try {
-            DB::select('CALL update_admin(?, ?, ?, ?)', [auth()->user()->uuid, $this->uuid, $this->username, $this->password]);
+            DB::select('CALL update_user(?, ?, ?)', [auth()->user()->uuid, $this->uuid, $this->password]);
     
             $this->emit('userUpdate');
             $this->reset();

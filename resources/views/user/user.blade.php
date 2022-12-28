@@ -53,32 +53,30 @@
 
     @livewire('edit-modal-user')
     @livewire('alert-user')
+    @livewire('role-modal-user')
 @endsection
 
 @section('script')
     <script>
-        const createModal = new bootstrap.Modal('#createModal', {
-            keyboard: false
-        })
         const updateModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        const inactiveModal = new bootstrap.Modal('#trashedUser', {
+        const roleModal = new bootstrap.Modal('#roleModal', {
             keyboard: false
         })
-        const restoreModal = new bootstrap.Modal('#restoreModal', {
+        const inactiveModal = new bootstrap.Modal('#trashedUser', {
             keyboard: false
         })
         const deleteModal = new bootstrap.Modal('#deleteModal', {
             keyboard: false
         })
 
-        window.addEventListener('close-create-modal', event => {
-            createModal.hide();
-        });
         window.addEventListener('update-modal', event => {
             updateModal.toggle();
         })
+        window.addEventListener('role-modal', event => {
+            roleModal.toggle();
+        });
         window.addEventListener('restore-modal', event => {
             restoreModal.toggle();
         })
@@ -90,15 +88,15 @@
         })
 
         //Toast
-        const insertToast = new bootstrap.Toast('#insertToast')
+        const roleToast = new bootstrap.Toast('#roleToast')
         const inactiveToast = new bootstrap.Toast('#inactiveToast')
         const updateToast = new bootstrap.Toast('#updateToast')
         const restoreToast = new bootstrap.Toast('#restoreToast')
         const deleteToast = new bootstrap.Toast('#deleteToast')
 
 
-        window.addEventListener('insert-alert', e => {
-            insertToast.show()
+        window.addEventListener('role-alert', e => {
+            roleToast.show()
         })
 
         window.addEventListener('inactive-alert', e => {
@@ -107,10 +105,6 @@
 
         window.addEventListener('update-alert', e => {
             updateToast.show()
-        })
-
-        window.addEventListener('restore-alert', e => {
-            restoreToast.show()
         })
 
         window.addEventListener('delete-alert', e => {

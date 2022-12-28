@@ -16,6 +16,29 @@ return new class extends Migration
     {
 
         DB::unprepared('
+        CREATE PROCEDURE update_user (
+            IN actor CHAR(36),
+            IN user CHAR(36),
+            IN pass VARCHAR(255)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+            START TRANSACTION;
+            
+            UPDATE users SET password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "update", "users", NOW());
+            COMMIT;
+        END
+        ');
+
+        DB::unprepared('
             CREATE PROCEDURE add_admin(
                 IN uname VARCHAR(255),
                 IN pass VARCHAR(255),
@@ -927,38 +950,39 @@ BEGIN
      */
     public function down()
     {
-        /* DB::unprepared("DROP PROCEDURE add_admin");
+        DB::unprepared("DROP PROCEDURE update_user");
+        DB::unprepared("DROP PROCEDURE add_admin");
         DB::unprepared("DROP PROCEDURE update_admin");
-        DB::unprepared("DROP PROCEDURE inactive_admin");
-        DB::unprepared("DROP PROCEDURE restore_admin");
         DB::unprepared("DROP PROCEDURE delete_admin");
-        DB::unprepared("DROP PROCEDURE add_guru");
-        DB::unprepared("DROP PROCEDURE update_guru");
-        DB::unprepared("DROP PROCEDURE inactive_guru");
-        DB::unprepared("DROP PROCEDURE restore_guru");
-        DB::unprepared("DROP PROCEDURE delete_guru");
-        DB::unprepared("DROP PROCEDURE add_mapel");
-        DB::unprepared("DROP PROCEDURE inactive_mapel");
-        DB::unprepared("DROP PROCEDURE delete_mapel");
-        DB::unprepared("DROP PROCEDURE add_kelas");
-        DB::unprepared("DROP PROCEDURE update_kelas");
-        DB::unprepared("DROP PROCEDURE restore_kelas");
-        DB::unprepared("DROP PROCEDURE inactive_kelas");
-        DB::unprepared("DROP PROCEDURE delete_kelas");
-        DB::unprepared("DROP PROCEDURE inactive_siswa");
-        DB::unprepared("DROP PROCEDURE add_siswa");
-        DB::unprepared("DROP PROCEDURE update_siswa");
-        DB::unprepared("DROP PROCEDURE delete_siswa");
-        DB::unprepared("DROP PROCEDURE add_prestasi");
-        DB::unprepared("DROP PROCEDURE delete_prestasi");
-        DB::unprepared("DROP PROCEDURE update_prestasi");
-        DB::unprepared("DROP PROCEDURE add_nilai");
-        DB::unprepared("DROP PROCEDURE add_sesi");
-        DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
-        DB::unprepared("DROP PROCEDURE update_ekstrakurikuler");
-        DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
-        DB::unprepared("DROP PROCEDURE add_roster");
-        DB::unprepared("DROP PROCEDURE update_roster");
-        DB::unprepared("DROP PROCEDURE delete_roster"); */
+        // DB::unprepared("DROP PROCEDURE inactive_admin");
+        // DB::unprepared("DROP PROCEDURE restore_admin");
+        // DB::unprepared("DROP PROCEDURE add_guru");
+        // DB::unprepared("DROP PROCEDURE update_guru");
+        // DB::unprepared("DROP PROCEDURE inactive_guru");
+        // DB::unprepared("DROP PROCEDURE restore_guru");
+        // DB::unprepared("DROP PROCEDURE delete_guru");
+        // DB::unprepared("DROP PROCEDURE add_mapel");
+        // DB::unprepared("DROP PROCEDURE inactive_mapel");
+        // DB::unprepared("DROP PROCEDURE delete_mapel");
+        // DB::unprepared("DROP PROCEDURE add_kelas");
+        // DB::unprepared("DROP PROCEDURE update_kelas");
+        // DB::unprepared("DROP PROCEDURE restore_kelas");
+        // DB::unprepared("DROP PROCEDURE inactive_kelas");
+        // DB::unprepared("DROP PROCEDURE delete_kelas");
+        // DB::unprepared("DROP PROCEDURE inactive_siswa");
+        // DB::unprepared("DROP PROCEDURE add_siswa");
+        // DB::unprepared("DROP PROCEDURE update_siswa");
+        // DB::unprepared("DROP PROCEDURE delete_siswa");
+        // DB::unprepared("DROP PROCEDURE add_prestasi");
+        // DB::unprepared("DROP PROCEDURE delete_prestasi");
+        // DB::unprepared("DROP PROCEDURE update_prestasi");
+        // DB::unprepared("DROP PROCEDURE add_nilai");
+        // DB::unprepared("DROP PROCEDURE add_sesi");
+        // DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
+        // DB::unprepared("DROP PROCEDURE update_ekstrakurikuler");
+        // DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
+        // DB::unprepared("DROP PROCEDURE add_roster");
+        // DB::unprepared("DROP PROCEDURE update_roster");
+        // DB::unprepared("DROP PROCEDURE delete_roster");
     }
 };

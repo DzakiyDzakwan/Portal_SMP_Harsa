@@ -13,18 +13,24 @@ class ListUser extends Component
     protected $listeners = [
         'userStore'=> 'render',
         'userUpdate' => 'render',
-        'restoreUser' => 'render'
+        'restoreUser' => 'render',
+        'assignRole' => 'render'
     ];
 
     public function render()
     {
-        $this->users = User::latest()->get();
-        return view('livewire.list-user');
+        $this->users = User::oldest()->get();
+        return view('livewire.user.user.list-user');
     }
 
     public function editUser($uuid) {
         $user = $uuid;
         $this->emit('userEdit', $user);
+    }
+
+    public function roleUser($uuid) {
+        $user = $uuid;
+        $this->emit('userRole', $user);
     }
     
     public function inactive($uuid) {
