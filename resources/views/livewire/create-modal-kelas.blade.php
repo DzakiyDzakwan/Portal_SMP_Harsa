@@ -112,7 +112,7 @@
                                             id="basicSelect" wire:model.defer="wali_kelas">
                                             @if (!$gurus->isEmpty())
                                                 @foreach ($gurus as $gr)
-                                                    <option value="{{ $gr->NIP }}">{{ $gr->nama }}</option>
+                                                    <option value="{{ $gr->NUPTK }}">{{ $gr->nama }}</option>
                                                 @endforeach
                                             @else
                                                 <option>Tidak ada guru yang tersedia</option>

@@ -13,7 +13,7 @@ class EditModalKelas extends Component
     public $gurus, $kelas_id, $nama_kelas, $old_wali_kelas, $wali_kelas, $nama_wali;
 
     protected $listeners = [
-        'editUser' => 'showModal'
+        'editKelas' => 'showModal'
     ];
 
     protected $rules = [
@@ -30,7 +30,7 @@ class EditModalKelas extends Component
 
     public function render()
     {
-        $this->gurus = Guru::select('gurus.NIP', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('is_wali_kelas', 'tidak')->get();
+        $this->gurus = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->get();
         return view('livewire.edit-modal-kelas');
     }
 
@@ -40,7 +40,7 @@ class EditModalKelas extends Component
         $this->kelas_id = $id;
         $this->wali_kelas = $data->wali_kelas;
         $this->old_wali_kelas = $data->wali_kelas;
-        $this->nama_wali = Guru::join('user_profiles', 'user_profiles.user', 'gurus.user')->where('gurus.NIP', $data->wali_kelas)->first()->nama;
+        $this->nama_wali = Guru::join('user_profiles', 'user_profiles.user', 'gurus.user')->where('gurus.NUPTK', $data->wali_kelas)->first()->nama;
         $this->nama_kelas = $data->nama_kelas;
         $this->dispatchBrowserEvent('edit-modal');
     }
