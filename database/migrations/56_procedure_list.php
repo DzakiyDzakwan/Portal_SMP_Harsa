@@ -125,7 +125,7 @@ return new class extends Migration
             IN pass VARCHAR(255),
             IN tgl_masuk DATE,
             IN jk CHAR(2),
-            IN admin CHAR(36)
+            IN actor CHAR(36)
         )
         BEGIN
         
@@ -147,25 +147,25 @@ return new class extends Migration
             VALUES (uuid, NUPTK, pass, NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "insert", "users", NOW());
+            VALUES(actor, "insert", "users", NOW());
         
             INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
             VALUES (uuid, nama, jk, NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "insert", "user_profiles", NOW());
+            VALUES(actor, "insert", "user_profiles", NOW());
         
             INSERT INTO gurus(NUPTK, user, jabatan, tanggal_masuk, status, created_at, updated_at)
             VALUES(NUPTK, uuid, "guru", tgl_masuk, "aktif", NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "insert", "gurus", NOW());
+            VALUES(actor, "insert", "gurus", NOW());
 
             INSERT INTO model_has_roles(role_id, model_type, model_id)
             VALUES ("4", "App\Models\User", uuid);
 
             INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "insert", "model_has_roles", NOW());
+            VALUES(actor, "insert", "model_has_roles", NOW());
             COMMIT;
         
         END
@@ -173,54 +173,60 @@ return new class extends Migration
         /*
         DB::unprepared('
         CREATE PROCEDURE update_guru(
-            IN oldnip CHAR(18),
-            IN newnip CHAR(18),
+            IN nuptk CHAR(18),
             IN jabatan CHAR(4),
-            IN admin CHAR(36)
+            IN guru CHAR(36),
+            IN actor CHAR(36)
         )
         BEGIN
-            DECLARE guru CHAR(36);
             DECLARE errno INT;
             DECLARE EXIT HANDLER FOR SQLEXCEPTION
             BEGIN
                 ROLLBACK;
             END;
-            SELECT user INTO guru FROM gurus WHERE nip = oldnip COLLATE utf8mb4_general_ci;
-                
-            UPDATE gurus SET NIP = newnip, jabatan = jabatan WHERE NIP = oldnip COLLATE utf8mb4_general_ci;
-                
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "gurus", NOW());
-                
-            UPDATE users SET username = newnip WHERE uuid = guru COLLATE utf8mb4_general_ci;
+            START TRANSACTION;
+            
+            UPDATE users SET username = nuptk WHERE uuid = guru COLLATE utf8mb4_general_ci; 
         
             INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "gurus", NOW());
+            VALUES(actor, "update", "users", NOW());
+
+            UPDATE gurus SET NUPTK = nuptk WHERE user = guru COLLATE utf8mb4_general_ci; 
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "update", "gurus", NOW());
+
+            COMMIT;
         END
-        ');
+        '); */
+
 
         DB::unprepared('
         CREATE PROCEDURE inactive_guru (
             IN guru CHAR(36),
-            IN admin CHAR(36)
+            IN actor CHAR(36)
         )
-            BEGIN
+           BEGIN
                 DECLARE errno INT;
                 DECLARE EXIT HANDLER FOR SQLEXCEPTION
                 BEGIN
                     ROLLBACK;
                 END;
                 START TRANSACTION;
-                UPDATE gurus SET status = "Inaktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
+                UPDATE gurus SET status = "inaktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
         
                 INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "update", "gurus", NOW());
+                VALUES(actor, "update", "gurus", NOW());
                 
                 UPDATE users SET deleted_at = NOW() WHERE uuid = guru COLLATE utf8mb4_general_ci; 
+                
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "update", "users", NOW());
                 COMMIT;
             END
         ');
 
+        /*
         DB::unprepared('
         CREATE PROCEDURE restore_guru (
             IN guru CHAR(36),
@@ -370,7 +376,7 @@ return new class extends Migration
                 IN urutan CHAR(1),
                 IN kelompok CHAR(1),
                 IN nama VARCHAR(255),
-                admin CHAR(36)
+                actor CHAR(36)
             )
             BEGIN
 
@@ -386,7 +392,7 @@ return new class extends Migration
                 VALUES(kelas, wali, urutan, kelompok, nama, NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "insert", "kelas", NOW());
+                VALUES(actor, "insert", "kelas", NOW());
 
                 COMMIT;
             

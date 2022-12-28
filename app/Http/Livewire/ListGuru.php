@@ -27,15 +27,17 @@ class ListGuru extends Component
     }
 
     public function inactiveGuru($user) {
-        $guru = Guru::where('user', $user)->first()->NIP;
-        if(Kelas::where('wali_kelas', $guru)->get()->isEmpty()){
-            DB::select('CALL inactive_guru(?, ?)', [$user, auth()->user()->uuid]);
-            $this->render();
-            $this->emit('inactiveGuru');
-            $this->dispatchBrowserEvent('inactive-alert');
-        } else {
-            $this->dispatchBrowserEvent('nonInactive-alert');
-        }
+        $guru = Guru::where('user', $user)->first()->NUPTK;
+        DB::select('CALL inactive_guru(?, ?)', [$user, auth()->user()->uuid]);
+        $this->dispatchBrowserEvent('inactive-alert');
+        // if(Kelas::where('wali_kelas', $guru)->get()->isEmpty()){
+            
+        //     $this->render();
+        //     $this->emit('inactiveGuru');
+           
+        // } else {
+        //     $this->dispatchBrowserEvent('nonInactive-alert');
+        // }
     }
 
     public function infoGuru($id) {

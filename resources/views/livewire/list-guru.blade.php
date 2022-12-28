@@ -99,7 +99,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="modal fade text-left" id="restoreModal{{ $item->NIP }}" tabindex="-1"
+                        <div class="modal fade text-left" id="restoreModal{{ $item->NUPTK }}" tabindex="-1"
                             role="dialog" aria-labelledby="myModalLabel130" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
@@ -118,7 +118,7 @@
                                             <span class="d-none d-sm-block">Close</span>
                                         </button>
                                         <button class="btn btn-success ml-1"
-                                            wire:click="restoreUser('{{ $item->NIP }}')">
+                                            wire:click="restoreUser('{{ $item->NUPTK }}')">
                                             <i class="bx bx-check d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Pulihkan</span>
                                         </button>
@@ -129,13 +129,13 @@
                         {{-- Delete Button --}}
                         <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal{{ $item->NIP }}">
+                                data-bs-target="#deleteModal{{ $item->NUPTK }}">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus">
                                     <i class="bi bi-trash-fill"></i></i>
                                 </div>
                             </button>
                         </div>
-                        <div class="modal fade text-left" id="deleteModal{{ $item->NIP }}" tabindex="-1"
+                        <div class="modal fade text-left" id="deleteModal{{ $item->NUPTK }}" tabindex="-1"
                             role="dialog" aria-labelledby="myModalLabel130" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content">

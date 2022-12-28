@@ -106,8 +106,7 @@ DELIMITER;
 DELIMITER ?
 CREATE PROCEDURE add_guru(
     IN nama VARCHAR(255),
-    IN nip CHAR(18),
-    IN jabatan CHAR(4),
+    IN NUPTK CHAR(18),
     IN pass VARCHAR(255),
     IN tgl_masuk DATE,
     IN jk CHAR(2),
@@ -115,13 +114,13 @@ CREATE PROCEDURE add_guru(
 )
 BEGIN
 
-    DECLARE uuid CHAR(36);
     DECLARE errno INT;
+    DECLARE uuid CHAR(36);
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
     END;
-    DECLARE exit handler for sqlwarning
+    DECLARE EXIT HANDLER for SQLWARNING
     BEGIN
         ROLLBACK;
     END;
@@ -129,8 +128,8 @@ BEGIN
     SET uuid = UUID();
 
     START TRANSACTION;
-    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
-    VALUES (uuid, nip, pass, "guru", NOW(), NOW());
+    INSERT INTO users(uuid, username, password, created_at, updated_at) 
+    VALUES (uuid, NUPTK, pass, NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "insert", "users", NOW());
@@ -141,13 +140,18 @@ BEGIN
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "insert", "user_profiles", NOW());
 
-    INSERT INTO gurus(nip, user, jabatan, tanggal_masuk, status, is_wali_kelas, created_at, updated_at)
-    VALUES(nip, uuid, jabatan, tgl_masuk, "aktif", "tidak", NOW(), NOW());
+    INSERT INTO gurus(NUPTK, user, jabatan, tanggal_masuk, status, created_at, updated_at)
+    VALUES(NUPTK, uuid, "guru", tgl_masuk, "aktif", NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(admin, "insert", "gurus", NOW());
-    COMMIT;
 
+    INSERT INTO model_has_roles(role_id, model_type, model_id)
+    VALUES ("4", "App\Models\User", uuid);
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "model_has_roles", NOW());
+    COMMIT;
 END?
 DELIMITER ;
 
@@ -184,23 +188,26 @@ DELIMITER ;
 DELIMITER ?
 CREATE PROCEDURE inactive_guru (
     IN guru CHAR(36),
-    IN admin CHAR(36)
-)
+    IN actor CHAR(36)
+    )
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        DECLARE errno INT;
-        DECLARE EXIT HANDLER FOR SQLEXCEPTION
-        BEGIN
-            ROLLBACK;
-        END;
-        START TRANSACTION;
-        UPDATE gurus SET status = "Inaktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
+        ROLLBACK;
+    END;
+    START TRANSACTION;
+    UPDATE gurus SET status = "inaktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
 
-        INSERT INTO log_activities(actor, action, at, created_at)
-        VALUES(admin, "update", "gurus", NOW());
-        
-        UPDATE users SET deleted_at = NOW() WHERE uuid = guru COLLATE utf8mb4_general_ci; 
-        COMMIT;
-    END?
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(actor, "update", "gurus", NOW());
+    
+    UPDATE users SET deleted_at = NOW() WHERE uuid = guru COLLATE utf8mb4_general_ci; 
+    
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(actor, "update", "users", NOW());
+    COMMIT;
+END?
 DELIMITER;
 
 --Restore Guru(✅)
@@ -350,7 +357,7 @@ CREATE PROCEDURE add_kelas(
     IN urutan CHAR(1),
     IN kelompok CHAR(1),
     IN nama VARCHAR(255),
-    admin CHAR(36)
+    actor CHAR(36)
 )
 BEGIN
 
@@ -366,15 +373,9 @@ BEGIN
     VALUES(kelas, wali, urutan, kelompok, nama, NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "insert", "kelas", NOW());
-
-    UPDATE gurus SET is_wali_kelas = "iya" WHERE NIP = wali COLLATE utf8mb4_general_ci;
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "gurus", NOW());
+    VALUES(actor, "insert", "kelas", NOW());
 
     COMMIT;
-
 END?
 DELIMITER ;
 

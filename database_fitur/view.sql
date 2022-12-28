@@ -27,9 +27,11 @@ JOIN kelas AS k ON s.kelas = k.kelas_id
 
 /* List Guru */
 CREATE VIEW list_guru AS
-SELECT g.nip, p.nama, g.jabatan, g.status 
-FROM `gurus` AS g 
-JOIN user_profiles AS p ON g.user = p.user;
+SELECT gurus.NUPTK, gurus.jabatan, gurus.status, gurus.user, user_profiles.nama
+FROM gurus
+LEFT JOIN users ON users.uuid = gurus.user
+LEFT JOIN user_profiles ON user_profiles.user = users.uuid
+ORDER BY gurus.created_at DESC
 
 /* Info Modal Guru */
 CREATE VIEW info_guru AS
@@ -47,12 +49,13 @@ WHERE is_wali_kelas = "tidak";
 
 /* List Kelas */
 CREATE VIEW list_kelas AS
-SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NIP, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS jumlah
+SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NUPTK, user_profiles.nama AS 		Wali_Kelas, COUNT(siswas.NIS) AS jumlah
 FROM kelas
-LEFT JOIN gurus ON kelas.wali_kelas = gurus.NIP 
+LEFT JOIN gurus ON kelas.wali_kelas = gurus.NUPTK
 LEFT JOIN users ON gurus.user = users.uuid
 INNER JOIN user_profiles ON users.uuid = user_profiles.user
-LEFT JOIN siswas ON kelas.kelas_id = siswas.kelas
+LEFT JOIN kontrak_semesters ON kontrak_semesters.kelas = kelas.kelas_id
+LEFT JOIN siswas ON kontrak_semesters.siswa = siswas.NISN
 GROUP BY kelas.kelas_id;
 
 /*List Inactve Kelas*/
