@@ -150,12 +150,12 @@ DELIMITER ;
 --Add Admin (✅)
 DELIMITER ?
 CREATE PROCEDURE add_admin(
-    IN uname VARCHAR(255),
+    IN NUPTK CHAR(36),
     IN pass VARCHAR(255),
-    IN admin CHAR(36)
+    IN tgl_masuk DATE,
+    IN actor CHAR(36)
 )
 BEGIN
-
     DECLARE errno INT;
     DECLARE uuid CHAR(36);
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -166,11 +166,20 @@ BEGIN
     SET uuid = UUID();
 
     START TRANSACTION;
-    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
-    VALUES (uuid, uname, pass, "admin", NOW(), NOW());
+    INSERT INTO users(uuid, username, password, created_at, updated_at) 
+    VALUES (uuid, NUPTK, pass, NOW(), NOW());
+
+    INSERT INTO model_has_roles(role_id, model_type, model_id)
+    VALUES ("3", "App\Models\User", uuid);
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "insert", "users", NOW());
+    VALUES(actor, "insert", "users", NOW());
+
+    INSERT INTO gurus(NUPTK, user, jabatan, tanggal_masuk, status, created_at, updated_at)
+    VALUES(NUPTK, uuid, "tu", tgl_masuk, "aktif", NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(actor, "insert", "gurus", NOW());
     
     COMMIT;
 END?
@@ -179,9 +188,8 @@ DELIMITER ;
 --Update Admin (✅)
 DELIMITER ?
 CREATE PROCEDURE update_admin (
-    IN admin CHAR(36),
+    IN actor CHAR(36),
     IN user CHAR(36),
-    IN username VARCHAR(255),
     IN pass VARCHAR(255)
 )
 BEGIN
@@ -192,39 +200,64 @@ BEGIN
         ROLLBACK;
     END;
     START TRANSACTION;
-    UPDATE users SET username = username, password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
+    
+    UPDATE users SET password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "users", NOW());
-    COMMIT;
+    VALUES(actor, "update", "users", NOW());
 
+    COMMIT;
 END?
 DELIMITER;
 
 --Non Aktifkan Admin Sementara (✅)
 DELIMITER ?
 CREATE PROCEDURE inactive_admin (
-    IN admin CHAR(36)
+    IN admin CHAR(36),
+    IN actor CHAR(36)
 )
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        DECLARE errno INT;
-        DECLARE EXIT HANDLER FOR SQLEXCEPTION
-        BEGIN
-            ROLLBACK;
-        END;
-        START TRANSACTION;
-        UPDATE users SET deleted_at = NOW() WHERE uuid = admin COLLATE utf8mb4_general_ci; 
-        COMMIT;
-    END?
+        ROLLBACK;
+    END;
+    START TRANSACTION;
+
+    UPDATE users SET deleted_at = NOW() WHERE uuid = admin COLLATE utf8mb4_general_ci;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(actor, "update", "users", NOW());
+
+    UPDATE gurus SET status = "inaktif", updated_at = NOW() WHERE user = admin COLLATE utf8mb4_general_ci;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(actor, "update", "gurus", NOW());
+
+    COMMIT;
+END ?
 DELIMITER;
 
 --Restore Admin (✅)
 DELIMITER ?
 CREATE PROCEDURE restore_admin(
-    IN admin CHAR(36)
+    IN admin CHAR(36),
+    IN actor CHAR(36)
 )
 BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    START TRANSACTION;
+
     UPDATE users SET deleted_at = NULL WHERE uuid = admin COLLATE utf8mb4_general_ci;
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(actor, "update", "users", NOW());
+
+    COMMIT;
 END?
 DELIMITER;
 

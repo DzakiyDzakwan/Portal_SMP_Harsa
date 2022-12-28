@@ -13,7 +13,8 @@ class ListAdmin extends Component
     protected $listeners = [
         'adminStore'=> 'render',
         'adminUpdate' => 'render',
-        'adminDelete' => 'render'
+        'adminInactive' => 'render',
+        'adminRestore' => 'render'
     ];
 
     public function render()
@@ -26,12 +27,21 @@ class ListAdmin extends Component
         $this->emit('editUser', $uuid);
     }
 
-    public function delete($uuid) {
+    public function inactive($uuid) {
+
+        DB::select('CALL inactive_admin(?, ?)', [$uuid, auth()->user()->uuid]);
+
+        $this->render();
+        $this->emit('adminInactive');
+        $this->dispatchBrowserEvent('inactive-alert');
+    }
+
+    /* public function delete($uuid) {
 
         DB::select('CALL delete_admin(?, ?)', [auth()->user()->uuid, $uuid]);
 
         $this->render();
         $this->emit('adminDelete');
         $this->dispatchBrowserEvent('delete-alert');
-    }
+    } */
 }
