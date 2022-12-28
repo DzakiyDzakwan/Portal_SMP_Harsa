@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'cekle
 
     //Guru
     Route::group(['middleware'=> ['role:kepsek|wakepsek']], function(){
+
     });
 
     //Wali Kelas
@@ -99,6 +100,7 @@ Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'cekle
             Route::get('/guru/kelas-saya', 'kelasSaya')->name('kelas-saya');           
         });
     });
+    
 
 });
 

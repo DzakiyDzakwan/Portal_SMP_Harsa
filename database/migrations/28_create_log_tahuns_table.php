@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sesi_penilaians', function (Blueprint $table) {
-            $table->id('sesi_id');
-            $table->enum('nama_sesi', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
-            $table->char('tahun_ajaran_aktif', 9);
-            $table->enum('semester_aktif', ["ganjil", "genap"]);
+        Schema::create('log_tahuns', function (Blueprint $table) {
+            $table->id();
+            $table->char('tahun_ajaran', 9);
+            $table->enum('semester', ['ganjil', 'genap']);
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_berakhir');
-            $table->timestamps();
+            $table->enum('action', ['insert', 'update']);
+            $table->timestamp('created_at');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sesi_penilaians');
+        Schema::dropIfExists('log_tahuns');
     }
 };

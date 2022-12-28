@@ -1,4 +1,4 @@
-@extends('guru.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Profile Guru</title>

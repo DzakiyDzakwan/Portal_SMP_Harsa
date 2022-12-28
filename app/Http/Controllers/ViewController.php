@@ -26,7 +26,7 @@ class ViewController extends Controller
         $menu = 'manajemenakun';
         $submenus = 'admin';
 
-        dd('admin');
+        // dd('admin');
         return view('user.admin', compact('menu'));
     }
 

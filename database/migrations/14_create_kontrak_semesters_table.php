@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('kontrak_semester_id');
             $table->char('siswa', 10);
             $table->char('kelas', 6);
+            $table->char('grade', 1);
             $table->enum('semester', ['Ganjil', 'Genap']);
             $table->char('tahun_ajaran', 9);
             $table->integer('sakit')->unsigned()->default(0);
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->integer('alpa')->unsigned()->default(0);
             $table->enum('status', ['lulus', 'gagal', 'ongoing']);
             $table->foreign('siswa')->references('NISN')->on('siswas')->onUpdate('cascade')->onUpdate('cascade');
-            $table->foreign('kelas')->references('kelas_id')->on('kelas')->onUpdate('cascade');
+            $table->foreign('kelas')->references('kelas_id')->on('kelas')->onUpdate('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
