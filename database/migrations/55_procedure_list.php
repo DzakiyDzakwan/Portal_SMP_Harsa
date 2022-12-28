@@ -109,12 +109,11 @@ return new class extends Migration
             COMMIT;
         END
         ');
-
+         */
         DB::unprepared('
         CREATE PROCEDURE add_guru(
             IN nama VARCHAR(255),
-            IN nip CHAR(18),
-            IN jabatan CHAR(4),
+            IN NUPTK CHAR(18),
             IN pass VARCHAR(255),
             IN tgl_masuk DATE,
             IN jk CHAR(2),
@@ -136,8 +135,8 @@ return new class extends Migration
             SET uuid = UUID();
         
             START TRANSACTION;
-            INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
-            VALUES (uuid, nip, pass, "guru", NOW(), NOW());
+            INSERT INTO users(uuid, username, password, created_at, updated_at) 
+            VALUES (uuid, NUPTK, pass, NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "insert", "users", NOW());
@@ -148,20 +147,26 @@ return new class extends Migration
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "insert", "user_profiles", NOW());
         
-            INSERT INTO gurus(nip, user, jabatan, tanggal_masuk, status, is_wali_kelas, created_at, updated_at)
-            VALUES(nip, uuid, jabatan, tgl_masuk, "aktif", "tidak", NOW(), NOW());
+            INSERT INTO gurus(NUPTK, user, jabatan, tanggal_masuk, status, created_at, updated_at)
+            VALUES(NUPTK, uuid, "guru", tgl_masuk, "aktif", NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "insert", "gurus", NOW());
+
+            INSERT INTO model_has_roles(role_id, model_type, model_id)
+            VALUES(4, "App\Models\User", uuid);
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "insert", "model_has_users", NOW());
             COMMIT;
-        
+            
         END
         ');
 
+        /*
         DB::unprepared('
         CREATE PROCEDURE update_guru(
-            IN oldnip CHAR(18),
-            IN newnip CHAR(18),
+            IN NUPTK CHAR(18),
             IN jabatan CHAR(4),
             IN admin CHAR(36)
         )
@@ -172,14 +177,13 @@ return new class extends Migration
             BEGIN
                 ROLLBACK;
             END;
-            SELECT user INTO guru FROM gurus WHERE nip = oldnip COLLATE utf8mb4_general_ci;
                 
-            UPDATE gurus SET NIP = newnip, jabatan = jabatan WHERE NIP = oldnip COLLATE utf8mb4_general_ci;
+            UPDATE gurus SET NUPTK = NUPTK, jabatan = jabatan WHERE user = guru COLLATE utf8mb4_general_ci;
                 
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "update", "gurus", NOW());
                 
-            UPDATE users SET username = newnip WHERE uuid = guru COLLATE utf8mb4_general_ci;
+            UPDATE users SET username = NUPTK WHERE uuid = guru COLLATE utf8mb4_general_ci;
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "update", "gurus", NOW());

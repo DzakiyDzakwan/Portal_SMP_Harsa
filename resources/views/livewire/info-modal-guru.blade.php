@@ -54,7 +54,7 @@
                                 <tr>
                                     <td class="p-1">NIP</td>
                                     <td class="p-1">:</td>
-                                    <td class="p-1">{{ $nip }}</td>
+                                    <td class="p-1">{{ $NUPTK }}</td>
                                 </tr>
                                 <tr>
                                     <td class="p-1">Jabatan</td>

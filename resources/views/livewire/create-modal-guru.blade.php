@@ -71,16 +71,16 @@
                             {{-- NIP --}}
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
-                                    <label for="nip">NIP</label>
+                                    <label for="nip">NIP atau NUPTK</label>
                                     <div class="position-relative">
-                                        <input name="nip" type="text"
-                                            class="form-control @error('nip') is-invalid
+                                        <input name="NUPTK" type="text"
+                                            class="form-control @error('NUPTK') is-invalid
                                         @enderror"
-                                            placeholder="Masukkan NIP guru" id="nip" wire:model.defer="nip" />
+                                            placeholder="Masukkan NIP atau NUPTK guru" id="NUPTK" wire:model.defer="NUPTK" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-card-text"></i>
                                         </div>
-                                        @error('nip')
+                                        @error('NUPTK')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}
@@ -92,7 +92,7 @@
                             </div>
 
                             {{-- Jabatan --}}
-                            <div class="col-12">
+                            {{-- <div class="col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="jabatan">Jabatan</label>
                                     <div class="position-relative">
@@ -116,7 +116,7 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> --}}
 
                             {{-- Tanggal Masuk --}}
                             <div class="col-12">

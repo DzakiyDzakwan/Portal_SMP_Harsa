@@ -20,7 +20,7 @@
                 @else
                     <td>Guru</td>
                 @endif
-                @if ($item->status == 'Aktif')
+                @if ($item->status == 'aktif')
                     <td>
                         <span class="badge bg-success">Active</span>
                     </td>
@@ -39,11 +39,11 @@
 
                         </button>
                     </div>
-                    @if ($item->status == 'Aktif')
+                    @if ($item->status == 'aktif')
                         {{-- Update Button --}}
                         <div class="modal-success me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning"
-                                wire:click="editGuru('{{ $item->NIP }}')">
+                                wire:click="editGuru('{{ $item->NUPTK }}')">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
                                     <i class="bi bi-pencil"></i>
                                 </div>

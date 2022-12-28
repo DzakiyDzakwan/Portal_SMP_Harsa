@@ -48,9 +48,11 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_guru AS
-        SELECT g.nip, p.nama, g.jabatan, g.status 
-        FROM `gurus` AS g 
-        JOIN user_profiles AS p ON g.user = p.user;
+        SELECT gurus.NUPTK, gurus.jabatan, gurus.status, gurus.user, user_profiles.nama
+        FROM gurus
+        LEFT JOIN users ON users.uuid = gurus.user
+        LEFT JOIN user_profiles ON user_profiles.user = users.uuid
+        ORDER BY gurus.created_at DESC
         '); */
 
         /* DB::unprepared('
