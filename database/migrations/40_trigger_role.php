@@ -18,7 +18,7 @@ return new class extends Migration
         AFTER INSERT ON roles
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_roles(id, name, guard_name, action, created_at)
+        INSERT INTO log_roles(role_id, name, guard_name, action, created_at)
         VALUES (NEW.id, NEW.name, NEW.guard_name, "insert", NOW());
         END
         ');
@@ -28,7 +28,7 @@ return new class extends Migration
         AFTER UPDATE ON roles
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_roles(id, name, guard_name, action, created_at)
+        INSERT INTO log_roles(role_id, name, guard_name, action, created_at)
         VALUES (NEW.id, NEW.name, NEW.guard_name, "update", NOW());
         END
         ');
@@ -38,7 +38,7 @@ return new class extends Migration
         AFTER DELETE ON roles
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_roles(id, name, guard_name, action, created_at)
+        INSERT INTO log_roles(role_id, name, guard_name, action, created_at)
         VALUES (OLD.id, OLD.name, OLD.guard_name, "delete", NOW());
         END
         ');
