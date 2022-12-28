@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
-use App\Models\LogActivity;
 
 class ListRole extends Component
 {
@@ -26,7 +25,7 @@ class ListRole extends Component
     }
 
     public function editRole($id) {
-        dd($id);
+       $this->emit('editRole', $id);
     }
 
     public function delete($id) {

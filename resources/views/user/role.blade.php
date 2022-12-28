@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    {{-- @livewire('edit-modal-role') --}}
+    @livewire('edit-modal-role')
     @livewire('alert-role')
     {{-- @livewire('role-modal-role') --}}
 @endsection
@@ -57,22 +57,22 @@
         const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
         })
-        /* const updateModal = new bootstrap.Modal('#editModal', {
+        const updateModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        const permissionModal = new bootstrap.Modal('#permissionModal', {
+        /* const permissionModal = new bootstrap.Modal('#permissionModal', {
             keyboard: false
         }) */
 
         window.addEventListener('create-modal', event => {
             createModal.hide();
         })
-        /* window.addEventListener('update-modal', event => {
+        window.addEventListener('edit-modal', event => {
             updateModal.toggle();
         })
-        window.addEventListener('permission-modal', event => {
-            permissionModal.toggle();
-        }); */
+        /*  window.addEventListener('permission-modal', event => {
+             permissionModal.toggle();
+         }); */
 
         //Toast
         const createToast = new bootstrap.Toast('#createToast')
