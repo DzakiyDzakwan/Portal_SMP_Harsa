@@ -42,7 +42,6 @@ class ViewController extends Controller
 
     public function tahunAkademik() {
         $menu = 'tahunakademik';
-        dd('tahun akademik');
         return view('sekolah.tahunakademik', compact('menu'));
     }
 
