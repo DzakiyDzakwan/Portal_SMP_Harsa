@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
-use App\Models\Activity;
+use App\Models\LogActivity;
 
 class InactiveModalUser extends Component
 {
@@ -17,7 +17,7 @@ class InactiveModalUser extends Component
 
     public function render()
     {
-        return view('livewire.inactive-modal-user');
+        return view('livewire.user.user.inactive-modal-user');
     }
 
     public function inactiveModal() {
