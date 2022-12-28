@@ -4,9 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
-use App\Models\Siswa;
-use App\Models\UserProfile;
-use App\Models\LogActivity;
 use Illuminate\Support\Facades\DB;
 
 class EditModalSiswa extends Component

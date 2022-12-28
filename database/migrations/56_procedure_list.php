@@ -46,6 +46,30 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        CREATE PROCEDURE update_admin (
+            IN actor CHAR(36),
+            IN user CHAR(36),
+            IN username VARCHAR(255),
+            IN pass VARCHAR(255)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+            START TRANSACTION;
+            
+            UPDATE users SET username = username, password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "update", "users", NOW());
+            COMMIT;
+        END
+        ');
+
+        DB::unprepared('
         CREATE PROCEDURE delete_admin (
             IN actor CHAR(36),
             IN user CHAR(36)
@@ -67,28 +91,7 @@ return new class extends Migration
         END
         ');
 
-        /*DB::unprepared('
-        CREATE PROCEDURE update_admin (
-            IN admin CHAR(36),
-            IN user CHAR(36),
-            IN username VARCHAR(255),
-            IN pass VARCHAR(255)
-        )
-        BEGIN
-        
-            DECLARE errno INT;
-            DECLARE EXIT HANDLER FOR SQLEXCEPTION
-            BEGIN
-                ROLLBACK;
-            END;
-            START TRANSACTION;
-            UPDATE users SET username = username, password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
-        
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "users", NOW());
-            COMMIT;
-        END
-        ');
+        /*
 
         DB::unprepared('
             CREATE PROCEDURE inactive_admin (
