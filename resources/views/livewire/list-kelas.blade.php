@@ -24,8 +24,9 @@
                     <div class="modal-warning me-1 mb-1 d-inline-block">
                         <button type="button" class="btn btn-sm btn-warning"
                             wire:click="editKelas('{{ $k->kelas_id }}')">
-                            <i class="bi
-                            bi-pencil"></i>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
+                                <i class="bi bi-pencil"></i>
+                            </div>
                         </button>
                     </div>
                     {{-- Delete Button --}}

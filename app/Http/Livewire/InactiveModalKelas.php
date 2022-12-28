@@ -16,15 +16,15 @@ class InactiveModalKelas extends Component
         'getDeleteModal'
     ];
 
-    public function mount() {
-        if(Guru::where('is_wali_kelas', 'tidak')->first() != null) {
-            $this->wali_kelas = Guru::where('is_wali_kelas', 'tidak')->first()->NIP;
-        }
-    }
+    // public function mount() {
+    //     if(Guru::where('is_wali_kelas', 'tidak')->first() != null) {
+    //         $this->wali_kelas = Guru::where('is_wali_kelas', 'tidak')->first()->NIP;
+    //     }
+    // }
 
     public function render()
     {
-        $this->gurus = Guru::select('gurus.NIP', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('is_wali_kelas', 'tidak')->get();
+        $this->gurus = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->get();
         return view('livewire.inactive-modal-kelas');
     }
 

@@ -1,4 +1,4 @@
-@extends('admin.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Kelas</title>
@@ -51,75 +51,75 @@
         </div>
     </div>
 
-    @livewire('edit-modal-kelas')
+    {{-- @livewire('edit-modal-kelas') --}}
 
     @livewire('alert-kelas')
 @endsection
 
 @section('script')
-    <script>
-        //Modal
-        const createModal = new bootstrap.Modal('#createModal', {
-            keyboard: false
-        })
-        const editModal = new bootstrap.Modal('#editModal', {
-            keyboard: false
-        })
-        const inactiveModal = new bootstrap.Modal('#inactiveModal', {
-            keyboard: false
-        })
-        const restoreModal = new bootstrap.Modal('#restoreModal', {
-            keyboard: false
-        })
-        const deleteModal = new bootstrap.Modal('#deleteModal', {
-            keyboard: false
-        })
+<script>
+    //Modal
+    const createModal = new bootstrap.Modal('#createModal', {
+        keyboard: false
+    })
+    const editModal = new bootstrap.Modal('#editModal', {
+        keyboard: false
+    })
+    // const infoModal = new bootstrap.Modal('#infoModal', {
+    //     keyboard: false
+    // })
+    /* const deleteModal = new bootstrap.Modal('#deleteModal', {
+        keyboard: false
+    }) */
 
-        window.addEventListener('close-create-modal', event => {
-            createModal.hide();
-        });
-        window.addEventListener('edit-modal', event => {
-            editModal.toggle();
-        });
-        window.addEventListener('inactive-modal', event => {
-            inactiveModal.toggle();
-        })
-        window.addEventListener('restore-modal', event => {
-            restoreModal.toggle();
-        })
-        window.addEventListener('delete-modal', event => {
-            deleteModal.toggle();
-        })
+    window.addEventListener('close-create-modal', event => {
+        createModal.hide();
+    });
+    window.addEventListener('edit-modal', event => {
+        editModal.toggle();
+    });
+    // window.addEventListener('info-modal', event => {
+    //     infoModal.toggle();
+    // })
+    /* window.addEventListener('delete-modal', event => {
+        deleteModal.toggle();
+    }) */
 
-        //Toast
-        const insertToast = new bootstrap.Toast('#insertToast')
-        const inactiveToast = new bootstrap.Toast('#inactiveToast')
-        const updateToast = new bootstrap.Toast('#updateToast')
-        const restoreToast = new bootstrap.Toast('#restoreToast')
-        const deleteToast = new bootstrap.Toast('#deleteToast')
+    //Toast
+    const insertToast = new bootstrap.Toast('#insertToast')
+    const inactiveToast = new bootstrap.Toast('#inactiveToast')
+    const nonInactiveToast = new bootstrap.Toast('#nonInactiveToast')
+    const updateToast = new bootstrap.Toast('#updateToast')
+    const restoreToast = new bootstrap.Toast('#restoreToast')
+    const deleteToast = new bootstrap.Toast('#deleteToast')
 
 
-        window.addEventListener('insert-alert', e => {
-            insertToast.show()
-        })
+    window.addEventListener('insert-alert', e => {
+        insertToast.show()
+    })
 
-        window.addEventListener('inactive-alert', e => {
-            inactiveToast.show()
-        })
+    window.addEventListener('inactive-alert', e => {
+        inactiveToast.show()
+    })
 
-        window.addEventListener('update-alert', e => {
-            updateToast.show()
-        })
+    window.addEventListener('nonInactive-alert', e => {
+        nonInactiveToast.show()
+    })
 
-        window.addEventListener('restore-alert', e => {
-            restoreToast.show()
-        })
+    window.addEventListener('update-alert', e => {
+        updateToast.show()
+    })
 
-        window.addEventListener('delete-alert', e => {
-            deleteToast.show()
-        })
-    </script>
-    @livewireScripts
-    <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
+    window.addEventListener('restore-alert', e => {
+        restoreToast.show()
+    })
+
+    window.addEventListener('delete-alert', e => {
+        deleteToast.show()
+    })
+</script>
+
+@livewireScripts
+    <script src="{{asset('assets/extensions/simple-datatables/umd/simple-datatables.js')}}"></script>
+    <script src="{{asset('assets/js/pages/simple-datatables.js')}}"></script>
 @endsection

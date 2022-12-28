@@ -44,7 +44,7 @@ return new class extends Migration
         JOIN users AS u ON s.user = u.uuid 
         JOIN user_profiles AS p ON u.uuid = p.user 
         JOIN kelas AS k ON s.kelas = k.kelas_id
-        ');
+        ');*/
 
         DB::unprepared('
         CREATE VIEW list_guru AS
@@ -53,7 +53,7 @@ return new class extends Migration
         LEFT JOIN users ON users.uuid = gurus.user
         LEFT JOIN user_profiles ON user_profiles.user = users.uuid
         ORDER BY gurus.created_at DESC
-        '); */
+        '); 
 
         /* DB::unprepared('
         CREATE VIEW info_guru AS
@@ -61,27 +61,29 @@ return new class extends Migration
         FROM `gurus` AS g 
         JOIN users AS u ON g.user = u.uuid 
         JOIN user_profiles AS p ON u.uuid = p.user;
-        '); */
+        '); 
 
-        /* DB::unprepared('
+        DB::unprepared('
         CREATE VIEW calon_wali_kelas AS
         SELECT g.NIP, p.nama 
         FROM gurus AS g
         JOIN user_profiles AS p ON p.user = g.user
         WHERE is_wali_kelas = "tidak";
-        ');
+        '); */
 
         DB::unprepared('
         CREATE VIEW list_kelas AS
-        SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NIP, user_profiles.nama AS Wali_Kelas, COUNT(siswas.NIS) AS jumlah
+        SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NUPTK, user_profiles.nama AS 		Wali_Kelas, COUNT(siswas.NIS) AS jumlah
         FROM kelas
-        LEFT JOIN gurus ON kelas.wali_kelas = gurus.NIP 
+        LEFT JOIN gurus ON kelas.wali_kelas = gurus.NUPTK
         LEFT JOIN users ON gurus.user = users.uuid
         INNER JOIN user_profiles ON users.uuid = user_profiles.user
-        LEFT JOIN siswas ON kelas.kelas_id = siswas.kelas
+        LEFT JOIN kontrak_semesters ON kontrak_semesters.kelas = kelas.kelas_id
+        LEFT JOIN siswas ON kontrak_semesters.siswa = siswas.NISN
         GROUP BY kelas.kelas_id;
         ');
 
+        /*
         DB::unprepared('
         CREATE VIEW list_inactive_kelas AS
         SELECT kelas_id, nama_kelas, deleted_at 
