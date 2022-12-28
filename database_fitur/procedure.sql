@@ -304,33 +304,33 @@ END?
 DELIMITER ;
 
 --Update Guru Admin(✅)
-DELIMITER ?
-CREATE PROCEDURE update_guru(
-    IN oldnip CHAR(18),
-    IN newnip CHAR(18),
-    IN jabatan CHAR(4),
-    IN admin CHAR(36)
-)
-BEGIN
-    DECLARE guru CHAR(36);
-    DECLARE errno INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-        ROLLBACK;
-    END;
-    SELECT user INTO guru FROM gurus WHERE nip = oldnip COLLATE utf8mb4_general_ci;
+-- DELIMITER ?
+-- CREATE PROCEDURE update_guru(
+--     IN oldnip CHAR(18),
+--     IN newnip CHAR(18),
+--     IN jabatan CHAR(4),
+--     IN admin CHAR(36)
+-- )
+-- BEGIN
+--     DECLARE guru CHAR(36);
+--     DECLARE errno INT;
+--     DECLARE EXIT HANDLER FOR SQLEXCEPTION
+--     BEGIN
+--         ROLLBACK;
+--     END;
+--     SELECT user INTO guru FROM gurus WHERE nip = oldnip COLLATE utf8mb4_general_ci;
         
-    UPDATE gurus SET NIP = newnip, jabatan = jabatan WHERE NIP = oldnip COLLATE utf8mb4_general_ci;
+--     UPDATE gurus SET NIP = newnip, jabatan = jabatan WHERE NIP = oldnip COLLATE utf8mb4_general_ci;
         
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "gurus", NOW());
+--     INSERT INTO log_activities(actor, action, at, created_at)
+--     VALUES(admin, "update", "gurus", NOW());
         
-    UPDATE users SET username = newnip WHERE uuid = guru COLLATE utf8mb4_general_ci;
+--     UPDATE users SET username = newnip WHERE uuid = guru COLLATE utf8mb4_general_ci;
 
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "gurus", NOW());
-END?
-DELIMITER ;
+--     INSERT INTO log_activities(actor, action, at, created_at)
+--     VALUES(admin, "update", "gurus", NOW());
+-- END?
+-- DELIMITER ;
 
 --Non Aktifkan Guru (✅)
 DELIMITER ?
@@ -362,21 +362,19 @@ DELIMITER;
 DELIMITER ?
 CREATE PROCEDURE restore_guru (
     IN guru CHAR(36),
-    IN admin CHAR(36)
+    IN actor CHAR(36)
 )
-    BEGIN
-        DECLARE errno INT;
-        DECLARE EXIT HANDLER FOR SQLEXCEPTION
-        BEGIN
-            ROLLBACK;
-        END;
-        UPDATE gurus SET status = "Aktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
+BEGIN
+    UPDATE gurus SET status = "aktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
 
-        INSERT INTO log_activities(actor, action, at, created_at)
-        VALUES(admin, "update", "gurus", NOW());
-        
-        UPDATE users SET deleted_at = NULL WHERE uuid = guru COLLATE utf8mb4_general_ci; 
-    END?
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(actor, "update", "gurus", NOW());
+    
+    UPDATE users SET deleted_at = NULL WHERE uuid = guru COLLATE utf8mb4_general_ci; 
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(actor, "update", "users", NOW());
+END?
 DELIMITER;
 
 --Delete Guru(✅)

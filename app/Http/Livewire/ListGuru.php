@@ -49,7 +49,9 @@ class ListGuru extends Component
     }
 
     public function restoreGuru($id) {
-        dd($id);
+        $guru = Guru::where('user', $id)->first()->NUPTK;
+        DB::select('CALL restore_guru(?, ?)', [$id, auth()->user()->uuid]);
+        $this->dispatchBrowserEvent('restore-alert');
     }
 
     public function deleteGuru($id) {

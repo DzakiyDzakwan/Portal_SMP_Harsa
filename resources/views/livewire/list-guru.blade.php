@@ -41,14 +41,14 @@
                     </div>
                     @if ($item->status == 'aktif')
                         {{-- Update Button --}}
-                        <div class="modal-success me-1 mb-1 d-inline-block">
+                        {{-- <div class="modal-success me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning"
                                 wire:click="editGuru('{{ $item->NUPTK }}')">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Update">
                                     <i class="bi bi-pencil"></i>
                                 </div>
                             </button>
-                        </div>
+                        </div> --}}
                         {{-- NonAktif Button --}}
                         <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
@@ -93,13 +93,13 @@
                         {{-- Restore Button --}}
                         <div class="modal-success me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                data-bs-target="#restoreModal{{ $item->user }}">
+                                data-bs-target="#restore{{ $item->user }}">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Restore">
                                     <i class="bi bi-arrow-repeat"></i></i>
                                 </div>
                             </button>
                         </div>
-                        <div class="modal fade text-left" id="restoreModal{{ $item->NUPTK }}" tabindex="-1"
+                        <div class="modal fade text-left" id="restore{{ $item->user }}" tabindex="-1"
                             role="dialog" aria-labelledby="myModalLabel130" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
@@ -117,8 +117,8 @@
                                             <i class="bx bx-x d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Close</span>
                                         </button>
-                                        <button class="btn btn-success ml-1"
-                                            wire:click="restoreUser('{{ $item->NUPTK }}')">
+                                        <button class="btn btn-success ml-1" data-bs-dismiss="modal"
+                                            wire:click="restoreGuru('{{ $item->user }}')">
                                             <i class="bx bx-check d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Pulihkan</span>
                                         </button>
@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         {{-- Delete Button --}}
-                        <div class="modal-danger me-1 mb-1 d-inline-block">
+                        {{-- <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal{{ $item->NUPTK }}">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus">
@@ -161,7 +161,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     @endif
                 </td>
             </tr>

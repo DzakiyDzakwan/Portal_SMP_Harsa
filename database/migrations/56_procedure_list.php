@@ -367,22 +367,26 @@ return new class extends Migration
             END
         ');
 
-        /*
+        
         DB::unprepared('
         CREATE PROCEDURE restore_guru (
             IN guru CHAR(36),
-            IN admin CHAR(36)
+            IN actor CHAR(36)
         )
             BEGIN
-                UPDATE gurus SET status = "Aktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
+                UPDATE gurus SET status = "aktif", updated_at = NOW()  WHERE user = guru COLLATE utf8mb4_general_ci;
         
                 INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "update", "gurus", NOW());
+                VALUES(actor, "update", "gurus", NOW());
                 
                 UPDATE users SET deleted_at = NULL WHERE uuid = guru COLLATE utf8mb4_general_ci; 
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "update", "users", NOW());
             END
         ');
-
+        
+        /*
         DB::unprepared('
         CREATE PROCEDURE delete_guru (
             IN guru CHAR(36),
