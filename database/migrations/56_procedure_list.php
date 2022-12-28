@@ -517,10 +517,10 @@ return new class extends Migration
         DB::unprepared('
             CREATE PROCEDURE add_kelas(
                 IN kelas CHAR(3),
-                IN wali CHAR(18),
+                IN nama VARCHAR(255),
                 IN urutan CHAR(1),
                 IN kelompok CHAR(1),
-                IN nama VARCHAR(255),
+                IN wali CHAR(18),
                 actor CHAR(36)
             )
             BEGIN
@@ -534,7 +534,7 @@ return new class extends Migration
                 START TRANSACTION;
             
                 INSERT INTO kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, created_at, updated_at)
-                VALUES(kelas, wali, urutan, kelompok, nama, NOW(), NOW());
+                VALUES(kelas, nama, urutan, kelompok, wali, NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "kelas", NOW());
@@ -543,59 +543,39 @@ return new class extends Migration
             
             END
         ');
-        /*
+
         DB::unprepared('
         CREATE PROCEDURE update_kelas(
-            IN old_kelas CHAR(3),
-            IN new_kelas CHAR(3),
-            IN old_wali CHAR(3),
-            IN wali CHAR(18),
+            IN kelas CHAR(6),
             IN nama VARCHAR(255),
-            admin CHAR(36)
+            IN wali CHAR(18),
+            actor CHAR(36)
         )
         BEGIN
         
-            UPDATE kelas SET kelas_id = new_kelas, wali_kelas = wali, nama_kelas = nama WHERE kelas_id = old_kelas COLLATE utf8mb4_general_ci;
+            UPDATE kelas SET wali_kelas = wali, nama_kelas = nama WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
         
             INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "kelas", NOW());
-        
-            UPDATE guru SET is_wali_kelas = "Tidak" WHERE NIP = old_wali COLLATE utf8mb4_general_ci;
-        
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "gurus", NOW());
-        
-            UPDATE guru SET is_wali_kelas = "Iya" WHERE NIP = wali COLLATE utf8mb4_general_ci;
-        
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "gurus", NOW());
+            VALUES(actor, "update", "kelas", NOW());
         
         END
         ');
-
+    
         DB::unprepared('
             CREATE PROCEDURE inactive_kelas(
-                IN kelas CHAR(3),
+                IN kelas CHAR(6),
                 IN admin CHAR(36)
             )
             BEGIN
-                DECLARE wali CHAR(18);
-            
-                SELECT wali_kelas INTO wali FROM kelas WHERE kelas_id = kelas COLLATE utf8mb4_general_ci ;
             
                 UPDATE kelas SET wali_kelas = NULL, deleted_at = NOW() WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(admin, "update", "kelas", NOW());
-                
-                UPDATE gurus SET is_wali_kelas = "tidak" WHERE NIP = wali COLLATE utf8mb4_general_ci;
-            
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "update", "gurus", NOW());
             
             END
         ');
-
+        
         DB::unprepared('
         CREATE PROCEDURE restore_kelas(
             IN kelas CHAR(3),
@@ -604,14 +584,14 @@ return new class extends Migration
         )
         BEGIN
         
-            UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas COLLATE utf8mb4_general_ci;
+            UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "update", "kelas", NOW());
             
         END
         ');
-
+        /*
         DB::unprepared('
             CREATE PROCEDURE delete_kelas(
                 IN kelas CHAR(3),

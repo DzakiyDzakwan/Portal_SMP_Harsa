@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Kelas;
 use App\Models\Guru;
+use Illuminate\Support\Facades\DB;
 
 class InactiveModalKelas extends Component
 {
@@ -33,7 +34,7 @@ class InactiveModalKelas extends Component
     }
 
     public function RestoreModal() {
-        $this->dispatchBrowserEvent('restore-modal');
+        $this->dispatchBrowserEvent('edit-modal');
     }
 
     public function getRestoreModal($id) {
@@ -48,11 +49,9 @@ class InactiveModalKelas extends Component
     }
 
     public function restoreUser() {
-        Kelas::where('kelas_id', $this->kelas_id)->restore();
-        Kelas::where('kelas_id', $this->kelas_id)->update([
-            'wali_kelas' => $this->wali_kelas,
-        ]);
-        $this->closeRestoreModal();
+        DB::select('CALL restore_kelas(?, ?, ?)', [$this->kelas_id, $this->wali_kelas, auth()->user()->uuid]);
+        // $this->dispatchBrowserEvent('restore-alert');
+        // $this->closeRestoreModal();
         $this->dispatchBrowserEvent('restore-alert');
         $this->emit('restoreKelas');
     }

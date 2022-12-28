@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    {{-- @livewire('edit-modal-kelas') --}}
+    @livewire('edit-modal-kelas')
 
     @livewire('alert-kelas')
 @endsection
