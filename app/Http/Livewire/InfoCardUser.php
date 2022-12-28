@@ -22,6 +22,6 @@ class InfoCardUser extends Component
         $this->totalActiveUser = User::withoutTrashed()->count();
         $this->totalInactiveUser = User::onlyTrashed()->count();
 
-        return view('livewire.user.user.info-card-user');
+        return view('livewire.user.manajemen-user.user.info-card-user');
     }
 }

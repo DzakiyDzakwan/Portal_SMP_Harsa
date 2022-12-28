@@ -17,11 +17,11 @@ class ListRole extends Component
     public function render()
     {
         $roles = Role::all();
-        return view('livewire.user.role.list-role', compact('roles'));
+        return view('livewire.user.manajemen-user.role.list-role', compact('roles'));
     }
 
     public function permissionRole($id) {
-        dd($id);
+        $this->emit('rolePermission', $id);
     }
 
     public function editRole($id) {

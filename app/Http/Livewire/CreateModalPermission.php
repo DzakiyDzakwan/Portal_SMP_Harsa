@@ -5,19 +5,20 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
-class CreateModalRole extends Component
+class CreateModalPermission extends Component
 {
+
     public $name;
 
     public function render()
     {
-        return view('livewire.user.manajemen-user.role.create-modal-role');
+        return view('livewire.user.manajemen-user.permission.create-modal-permission');
     }
 
     public function store() {
-        DB::select('call add_role(?, ?)', [strtolower($this->name), auth()->user()->uuid]);
+        DB::select('call add_permission(?, ?)', [strtolower($this->name), auth()->user()->uuid]);
         $this->reset();
-        $this->emit('createRole');
+        $this->emit('createPermission');
         $this->dispatchBrowserEvent('create-modal');
         $this->dispatchBrowserEvent('create-alert');
     }
