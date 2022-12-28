@@ -158,8 +158,9 @@ return new class extends Migration
 
         DB::unprepared('
             CREATE PROCEDURE add_admin(
-                IN uname VARCHAR(255),
+                IN NUPTK CHAR(36),
                 IN pass VARCHAR(255),
+                IN tgl_masuk DATE,
                 IN actor CHAR(36)
             )
             BEGIN
@@ -174,13 +175,19 @@ return new class extends Migration
             
                 START TRANSACTION;
                 INSERT INTO users(uuid, username, password, created_at, updated_at) 
-                VALUES (uuid, uname, pass, NOW(), NOW());
+                VALUES (uuid, NUPTK, pass, NOW(), NOW());
 
                 INSERT INTO model_has_roles(role_id, model_type, model_id)
                 VALUES ("3", "App\Models\User", uuid);
 
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "users", NOW());
+
+                INSERT INTO gurus(NUPTK, user, jabatan, tanggal_masuk, status, created_at, updated_at)
+                VALUES(NUPTK, uuid, "tu", tgl_masuk, "aktif", NOW(), NOW());
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "insert", "gurus", NOW());
                 
                 COMMIT;
             END
@@ -190,7 +197,6 @@ return new class extends Migration
         CREATE PROCEDURE update_admin (
             IN actor CHAR(36),
             IN user CHAR(36),
-            IN username VARCHAR(255),
             IN pass VARCHAR(255)
         )
         BEGIN
@@ -202,15 +208,65 @@ return new class extends Migration
             END;
             START TRANSACTION;
             
-            UPDATE users SET username = username, password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
+            UPDATE users SET password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "update", "users", NOW());
+
             COMMIT;
         END
         ');
 
         DB::unprepared('
+            CREATE PROCEDURE inactive_admin (
+                IN admin CHAR(36),
+                IN actor CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+                START TRANSACTION;
+
+                UPDATE users SET deleted_at = NOW() WHERE uuid = admin COLLATE utf8mb4_general_ci;
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "update", "users", NOW());
+
+                UPDATE gurus SET status = "inaktif", updated_at = NOW() WHERE user = admin COLLATE utf8mb4_general_ci;
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "update", "gurus", NOW());
+
+                COMMIT;
+            END
+        ');
+
+        DB::unprepared('
+            CREATE PROCEDURE restore_admin(
+                IN admin CHAR(36),
+                IN actor CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+                START TRANSACTION;
+
+                UPDATE users SET deleted_at = NULL WHERE uuid = admin COLLATE utf8mb4_general_ci;
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "update", "users", NOW());
+
+                COMMIT;
+            END
+        ');
+
+        /* DB::unprepared('
         CREATE PROCEDURE delete_admin (
             IN actor CHAR(36),
             IN user CHAR(36)
@@ -230,35 +286,8 @@ return new class extends Migration
 
             COMMIT;
         END
-        ');
+        '); */
 
-        /*
-
-        DB::unprepared('
-            CREATE PROCEDURE inactive_admin (
-                IN admin CHAR(36)
-            )
-            BEGIN
-                DECLARE errno INT;
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
-                START TRANSACTION;
-                UPDATE users SET deleted_at = NOW() WHERE uuid = admin COLLATE utf8mb4_general_ci; 
-                COMMIT;
-            END
-        ');
-
-        DB::unprepared('
-        CREATE PROCEDURE restore_admin(
-            IN admin CHAR(36)
-        )
-        BEGIN
-            UPDATE users SET deleted_at = NULL WHERE uuid = admin COLLATE utf8mb4_general_ci;
-        END
-        ');
-        */
         DB::unprepared('
         CREATE PROCEDURE add_guru(
             IN nama VARCHAR(255),
@@ -1086,9 +1115,9 @@ BEGIN
         DB::unprepared("DROP PROCEDURE delete_permission");
         DB::unprepared("DROP PROCEDURE add_admin");
         DB::unprepared("DROP PROCEDURE update_admin");
-        DB::unprepared("DROP PROCEDURE delete_admin");
-        // DB::unprepared("DROP PROCEDURE inactive_admin");
-        // DB::unprepared("DROP PROCEDURE restore_admin");
+        DB::unprepared("DROP PROCEDURE inactive_admin");
+        DB::unprepared("DROP PROCEDURE restore_admin");
+        // DB::unprepared("DROP PROCEDURE delete_admin");
         // DB::unprepared("DROP PROCEDURE add_guru");
         // DB::unprepared("DROP PROCEDURE update_guru");
         // DB::unprepared("DROP PROCEDURE inactive_guru");

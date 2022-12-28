@@ -17,15 +17,15 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
-                                    <label for="username">Username</label>
+                                    <label for="username">NUPTK</label>
                                     <div class="position-relative">
-                                        <input name="username" type="text"
-                                            class="form-control @error('username') is-invalid @enderror "
-                                            placeholder="Username" id="username" wire:model.defer="username" />
+                                        <input name="NUPTK" type="number"
+                                            class="form-control @error('NUPTK') is-invalid @enderror "
+                                            placeholder="NUPTK" id="NUPTK" wire:model.defer="NUPTK" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-person"></i>
                                         </div>
-                                        @error('username')
+                                        @error('NUPTK')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}
@@ -46,6 +46,25 @@
                                             <i class="bi bi-lock"></i>
                                         </div>
                                         @error('password')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="password">Tanggal Masuk</label>
+                                    <div class="position-relative">
+                                        <input name="tanggal_masuk" type="date"
+                                            class="form-control @error('tanggal_masuk') is-invalid @enderror"
+                                            placeholder="Tanggal Masuk" id="tanggal_masuk" wire:model.defer="tanggal_masuk" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-lock"></i>
+                                        </div>
+                                        @error('tanggal_masuk')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}

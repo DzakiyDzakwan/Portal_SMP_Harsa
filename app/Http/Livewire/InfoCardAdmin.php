@@ -12,7 +12,8 @@ class InfoCardAdmin extends Component
 
     protected $listeners = [
         'adminStore'=> 'render',
-        'adminDelete'=> 'render'
+        'adminInactive'=> 'render',
+        'adminRestore' => 'render'
     ];
 
     public function render()

@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class CreateModalAdmin extends Component
 {
-    public $username, $password;
+    public $NUPTK, $password, $tanggal_masuk;
 
     protected $rules = [
-        'username' => 'required|min:5',
-        'password' => 'required'  
+        'NUPTK' => 'required|min:16',
+        'password' => 'required',
+        'tanggal_masuk' => 'required' 
     ];
 
     public function updated($fields) {
@@ -22,13 +23,14 @@ class CreateModalAdmin extends Component
     public function store() {
 
         $this->validate([
-            'username' => 'required|min:5',
-            'password' => 'required'  
+            'NUPTK' => 'required|min:16',
+            'password' => 'required',
+            'tanggal_masuk' => 'required'  
         ]);
 
         $this->password = Hash::make($this->password);
 
-        DB::select('CALL add_admin(?, ?, ?)', [$this->username, $this->password, auth()->user()->uuid]);
+        DB::select('CALL add_admin(?, ?, ?, ?)', [$this->NUPTK, $this->password, $this->tanggal_masuk, auth()->user()->uuid]);
         $this->reset();
         $this->emit('adminStore');
         $this->dispatchBrowserEvent('close-create-modal');

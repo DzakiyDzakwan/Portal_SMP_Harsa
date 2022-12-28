@@ -16,17 +16,11 @@
                                     <label for="edit-username">Username</label>
                                     <div class="position-relative">
                                         <input name="username" type="text"
-                                            class="form-control @error('username')is-invalid @enderror"
-                                            placeholder="Username" id="edit-username" wire:model.defer="username" />
+                                            class="form-control"
+                                            placeholder="Username" id="edit-username" wire:model.defer="username" disabled />
                                         <div class="form-control-icon">
                                             <i class="bi bi-person"></i>
                                         </div>
-                                        @error('username')
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
                                     </div>
                                 </div>
 
