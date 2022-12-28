@@ -4,7 +4,7 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Admin Berhasil dibuat
+                Admin berhasil dibuat
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -15,7 +15,7 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Admin Berhasil di Non Aktifkan
+                Admin berhasil di non-aktifkan
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>

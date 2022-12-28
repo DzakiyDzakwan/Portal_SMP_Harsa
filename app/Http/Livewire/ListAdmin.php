@@ -22,6 +22,10 @@ class ListAdmin extends Component
         return view('livewire.list-admin');
     }
 
+    public function editAdmin($uuid) {
+        $this->emit('editUser', $uuid);
+    }
+
     public function delete($uuid) {
 
         DB::select('CALL delete_admin(?, ?)', [auth()->user()->uuid, $uuid]);

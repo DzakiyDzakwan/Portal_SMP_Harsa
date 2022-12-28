@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    {{-- @livewire('edit-modal-admin') --}}
+    @livewire('edit-modal-admin')
 
     @livewire('alert-admin')
 
@@ -61,10 +61,10 @@
         /* const deleteModal = new bootstrap.Modal('#deleteModal', {
             keyboard: false
         }) */
-        /* const editModal = new bootstrap.Modal('#editModal', {
+        const editModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        const infoModal = new bootstrap.Modal('#infoModal', {
+        /*const infoModal = new bootstrap.Modal('#infoModal', {
             keyboard: false
         })
         const restoreModal = new bootstrap.Modal('#editModalPrestasi', {
@@ -77,10 +77,10 @@
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
         });
-        /* window.addEventListener('edit-modal', event => {
+        window.addEventListener('edit-modal', event => {
             editModal.toggle();
         });
-        window.addEventListener('info-modal', event => {
+        /*window.addEventListener('info-modal', event => {
             infoModal.toggle();
         });
         window.addEventListener('edit-prestasi-modal', event => {
