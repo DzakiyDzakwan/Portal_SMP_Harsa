@@ -75,7 +75,7 @@
         });
         window.addEventListener('info-modal', event => {
             infoModal.toggle();
-        })
+        });
         /* window.addEventListener('delete-modal', event => {
             deleteModal.toggle();
         }) */

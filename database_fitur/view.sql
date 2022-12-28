@@ -31,6 +31,7 @@ SELECT gurus.NUPTK, gurus.jabatan, gurus.status, gurus.user, user_profiles.nama
 FROM gurus
 LEFT JOIN users ON users.uuid = gurus.user
 LEFT JOIN user_profiles ON user_profiles.user = users.uuid
+WHERE gurus.jabatan = "guru"
 ORDER BY gurus.created_at DESC
 
 /* Info Modal Guru */
