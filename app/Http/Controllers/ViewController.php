@@ -18,7 +18,6 @@ class ViewController extends Controller
 
     public function  permission() {
         $menu = 'manajemenuser';
-        dd('permission');
         return view('user.permission', compact('menu'));
     }
 

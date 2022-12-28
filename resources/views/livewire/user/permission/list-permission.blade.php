@@ -7,27 +7,11 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($roles as $item)
+        @foreach ($permission as $item)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->name }}</td>
                 <td>
-                    <!-- Role Button -->
-                    <div class="modal-primary me-1 mb-1 d-inline-block">
-                        <button class="btn btn-sm btn-primary" wire:click="permissionRole('{{ $item->id }}')">
-                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Permission Role">
-                                <i class="bi bi-person-bounding-box"></i>
-                            </div>
-                        </button>
-                    </div>
-                    <!-- Update Button -->
-                    <div class="modal-warning me-1 mb-1 d-inline-block">
-                        <button class="btn btn-sm btn-warning" wire:click="editRole('{{ $item->id }}')">
-                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Role">
-                                <i class="bi bi-pencil"></i></a>
-                            </div>
-                        </button>
-                    </div>
                     <!--Delete Button-->
                     <div class="modal-danger me-1 mb-1 d-inline-block">
                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"

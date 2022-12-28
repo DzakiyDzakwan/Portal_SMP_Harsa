@@ -49,7 +49,7 @@ BEGIN
 END?
 DELIMITER ;
 
---Update Role (❌)
+--Update Role (✅)
 DELIMITER ?
 CREATE PROCEDURE update_role(
     IN role INT,
@@ -74,10 +74,10 @@ BEGIN
 END?
 DELIMITER ;
 
---Delete Role (❌)
+--Delete Role (✅)
 DELIMITER ?
 CREATE PROCEDURE delete_role(
-    IN role INT,
+    IN role_id INT,
     IN user CHAR(36)
 )
 BEGIN
@@ -89,7 +89,7 @@ BEGIN
     END;
 
     START TRANSACTION;
-    DELETE FROM roles WHERE id = role;
+    DELETE FROM roles WHERE id = role_id;
 
     INSERT INTO log_activities(actor, action, at, created_at)
     VALUES(user, "delete", "roles", NOW());
@@ -98,7 +98,7 @@ BEGIN
 END?
 DELIMITER ;
 
---Add Permission (❌)
+--Add Permission (✅)
 DELIMITER ?
 CREATE PROCEDURE add_permission(
     IN nama VARCHAR(255),
@@ -123,7 +123,7 @@ BEGIN
 END?
 DELIMITER ;
 
---Delete Permission (❌)
+--Delete Permission (✅)
 DELIMITER ?
 CREATE PROCEDURE delete_permission(
     IN permission INT,
