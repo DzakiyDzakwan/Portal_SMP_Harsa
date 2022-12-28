@@ -1,4 +1,29 @@
 /* Admin */
+
+--Update User (❌)
+DELIMITER ?
+CREATE PROCEDURE update_user (
+    IN actor CHAR(36),
+    IN user CHAR(36),
+    IN pass VARCHAR(255)
+)
+BEGIN
+        
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    START TRANSACTION;
+            
+    UPDATE users SET password = pass WHERE uuid = user COLLATE utf8mb4_general_ci; 
+        
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(actor, "update", "users", NOW());
+    COMMIT;
+END?
+DELIMITER ;
+
 --Add Admin (✅)
 DELIMITER ?
 CREATE PROCEDURE add_admin(

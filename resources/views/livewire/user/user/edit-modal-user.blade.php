@@ -17,7 +17,8 @@
                                     <div class="position-relative">
                                         <input name="username" type="text"
                                             class="form-control @error('username')is-invalid @enderror"
-                                            placeholder="Username" id="edit-username" wire:model.defer="username" />
+                                            placeholder="Username" id="edit-username" wire:model.defer="username"
+                                            disabled />
                                         <div class="form-control-icon">
                                             <i class="bi bi-person"></i>
                                         </div>
