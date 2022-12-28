@@ -20,8 +20,8 @@ return new class extends Migration
         AFTER INSERT ON kontrak_semesters
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kontraks(kontrak_semester_id, siswa, grade, semester, tahun_ajaran, sakit, izin, alpa, status, action, created_at)
-        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.grade, NEW.semester, NEW.tahun_ajaran, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "insert", NOW());
+        INSERT INTO log_kontraks(kontrak_semester_id, siswa, kelas, semester, tahun_ajaran, sakit, izin, alpa, status, action, created_at)
+        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, NEW.semester, NEW.tahun_ajaran, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "insert", NOW());
         END
         ');
 
@@ -30,8 +30,8 @@ return new class extends Migration
         AFTER UPDATE ON kontrak_semesters
         FOR EACH ROW
         BEGIN
-        INSERT INTO log_kontraks(kontrak_semester_id, siswa, grade, semester, tahun_ajaran, sakit, izin, alpa, status, action, created_at)
-        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.grade, NEW.semester, NEW.tahun_ajaran, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "update", NOW());
+        INSERT INTO log_kontraks(kontrak_semester_id, siswa, kelas, semester, tahun_ajaran, sakit, izin, alpa, status, action, created_at)
+        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, NEW.semester, NEW.tahun_ajaran, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "update", NOW());
         END
         ');
 
@@ -40,9 +40,9 @@ return new class extends Migration
         BEFORE UPDATE ON kontrak_semesters
         FOR EACH ROW
         BEGIN
-            IF(NEW.kontrak_semester_id <> OLD.kontrak_semester_id OR NEW.siswa <> OLD.siswa OR NEW.grade <> OLD.grade OR NEW.semester <> OLD.semester OR NEW.tahun_ajaran <> OLD.tahun_ajaran)THEN
+            IF(NEW.kontrak_semester_id <> OLD.kontrak_semester_id OR NEW.siswa <> OLD.siswa OR NEW.kelas <> OLD.kelas OR NEW.semester <> OLD.semester OR NEW.tahun_ajaran <> OLD.tahun_ajaran)THEN
                 SIGNAL SQLSTATE "45000"
-                SET MESSAGE_TEXT = "Tidak dapat mengubah role";
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
         END
         ');

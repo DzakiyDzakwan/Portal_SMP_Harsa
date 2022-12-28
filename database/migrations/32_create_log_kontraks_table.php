@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('kontrak_semester_id');
             $table->char('siswa',10);
-            $table->char('grade',1);
+            $table->char('kelas',6);
             $table->enum('semester',['Ganjil', 'Genap']);
             $table->char('tahun_ajaran',9);
             $table->integer('sakit')->unsigned()->default(0);

@@ -7,7 +7,7 @@ use App\Models\User;
 
 class InfoModalGuru extends Component
 {
-   public $nama, $nip, $jabatan, $jenis_kelamin, $tgl_masuk, $status, $pendidikan, $tahun_ijazah, $status_perkawinan, $alamat_tinggal, $alamat_domisili, $tempat_lahir, $tgl_lahir, $foto;
+   public $nama, $NUPTK, $jabatan, $jenis_kelamin, $tgl_masuk, $status, $pendidikan, $tahun_ijazah, $status_perkawinan, $alamat_tinggal, $alamat_domisili, $tempat_lahir, $tgl_lahir, $foto;
 
     protected $listeners = [
         'infoGuru' => 'showModal'
@@ -21,7 +21,7 @@ class InfoModalGuru extends Component
     public function showModal($id) {
         $data = User::withTrashed()->join('gurus', 'users.uuid', '=', 'gurus.user')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('users.uuid', $id)->first();
         $this->nama = $data->nama;
-        $this->nip = $data->NIP;
+        $this->NUPTK = $data->NUPTK;
         $this->jabatan = $data->jabatan;
         $this->jenis_kelamin = $data->jenis_kelamin;
         $this->tgl_masuk = $data->tanggal_masuk;

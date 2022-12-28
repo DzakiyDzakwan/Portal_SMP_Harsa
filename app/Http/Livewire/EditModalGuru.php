@@ -11,10 +11,10 @@ use App\Models\LogActivity;
 class EditModalGuru extends Component
 {
 
-    public $oldnip, $nip, $jabatan, $user;
+    public $oldNUPTK, $NUPTK, $jabatan, $user;
 
     protected $rules = [
-        'nip' => 'required|min:18|max:18',
+        'NUPTK' => 'required|min:16|max:18',
     ];
 
     protected $listeners = [
@@ -31,9 +31,9 @@ class EditModalGuru extends Component
     }
 
     public function showModal($id) {
-        $data = Guru::where('NIP', $id)->first();
-        $this->nip = $data->NIP;
-        $this->oldnip = $data->NIP;
+        $data = Guru::where('NUPTK', $id)->first();
+        $this->NUPTK = $data->NUPTK;
+        $this->oldNUPTK = $data->NUPTK;
         $this->jabatan = $data->jabatan;
         $this->user = $data->user;
         $this->dispatchBrowserEvent('edit-modal');
@@ -41,11 +41,11 @@ class EditModalGuru extends Component
 
     public function update() {
         $this->validate([
-            'nip' => 'required|min:18|max:18',
+            'NUPTK' => 'required|min:16|max:18',
         ]);
 
-        Guru::where('NIP', $this->oldnip)->update([
-            'NIP' => $this->nip,
+        Guru::where('NUPTK', $this->oldNUPTK)->update([
+            'NUPTK' => $this->NUPTK,
             'jabatan' => $this->jabatan
         ]);
 
@@ -55,9 +55,9 @@ class EditModalGuru extends Component
             'at' => 'gurus'
         ]);
 
-        if($this->oldnip != $this->nip) {
+        if($this->oldNUPTK != $this->NUPTK) {
             User::where('uuid', $this->user)->update([
-                'username' => $this->nip
+                'username' => $this->NUPTK
             ]);
 
             LogActivity::create([

@@ -65,16 +65,16 @@
                         {{-- NIP --}}
                         <div class="col-12">
                             <div class="form-group has-icon-left">
-                                <label for="nip">NIP</label>
+                                <label for="NUPTK">NIP atau NUPTK</label>
                                 <div class="position-relative">
-                                    <input name="nip" type="text"
-                                        class="form-control @error('nip') is-invalid
+                                    <input name="NUPTK" type="text"
+                                        class="form-control @error('NUPTK') is-invalid
                                     @enderror"
-                                        placeholder="Masukkan NIP guru" id="nip" wire:model.defer="nip" />
+                                        placeholder="Masukkan NIP guru" id="NUPTK" wire:model.defer="NUPTK" />
                                     <div class="form-control-icon">
                                         <i class="bi bi-card-text"></i>
                                     </div>
-                                    @error('nip')
+                                    @error('NUPTK')
                                         <div class="invalid-feedback">
                                             <i class="bx bx-radio-circle"></i>
                                             {{ $message }}
@@ -94,8 +94,8 @@
                                         class="form-select form-control @error('jabatan') is-invalid
                                     @enderror"
                                         id="basicSelect" wire:model.defer="jabatan">
+                                        <option value="ks">Kepala Sekolah</option>
                                         <option value="wks">Wakil Kepala Sekolah</option>
-                                        <option value="bk">Bimbingan Konseling</option>
                                         <option value="guru">Guru</option>
                                     </select>
                                     <div class="form-control-icon">

@@ -32,7 +32,6 @@ class ViewController extends Controller
 
     public function guru() {
         $menu = 'manajemenakun';
-        dd('guru');
         return view('user.guru', compact('menu'));
     }
 
@@ -68,7 +67,6 @@ class ViewController extends Controller
 
     public function kelas() {
         $menu = 'sekolah';
-        dd('kelas');
         return view('sekolah.kelas', compact('menu'));
     }
 
