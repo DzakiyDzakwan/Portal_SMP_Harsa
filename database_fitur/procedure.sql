@@ -448,6 +448,156 @@ CREATE PROCEDURE delete_guru (
     END?
 DELIMITER;
 
+/* Siswa */
+--Registrasi Siswa (✅)
+DELIMITER ?
+CREATE PROCEDURE add_siswa(
+    IN nama VARCHAR(255),
+    IN nisn CHAR(10),
+    IN nis CHAR(4),
+    IN pass VARCHAR(255),
+    IN tgl_masuk DATE,
+    IN kelas_id CHAR(3),
+    IN jk CHAR(2),
+    IN admin CHAR(36)
+)
+BEGIN
+
+    DECLARE uuid CHAR(36);
+    SET uuid = UUID();
+
+    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
+    VALUES (uuid, nis, pass, "siswa", NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "users", NOW());
+
+    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
+    VALUES (uuid, nama, jk, NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "user_profiles", NOW());
+
+    INSERT INTO siswas(nisn, kelas, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
+    VALUES(nisn, kelas_id, uuid, nis, tgl_masuk, kelas_id, 'Aktif',  NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "siswas", NOW());
+
+    INSERT INTO kontrak_semesters(siswa, grade, semester, tahun_ajaran, status, created_at, updated_at)
+    VALUES(nisn, "7", "Ganjil", YEAR(NOW()), "On Going", NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "kontrak_semesters", NOW());
+
+END?
+DELIMITER ;
+
+--Update Siswa
+DELIMITER ?
+CREATE PROCEDURE update_siswa(
+    IN oldnis CHAR(4),
+    IN newnis CHAR(4),
+    IN nama VARCHAR(255),
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE siswa CHAR(36);
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    SELECT user INTO siswa FROM siswas WHERE NIS = oldnis COLLATE utf8mb4_general_ci;
+        
+    UPDATE siswas SET NIS = newnis WHERE NIS = oldnis COLLATE utf8mb4_general_ci;
+        
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "siswas", NOW());
+
+    UPDATE user_profiles SET nama = nama WHERE user = siswa COLLATE utf8mb4_general_ci;
+        
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "user_profiles", NOW());
+    
+    UPDATE users SET username = newnis WHERE uuid = siswa COLLATE utf8mb4_general_ci;
+    
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "update", "users", NOW());
+END?
+DELIMITER ;
+
+--Non Aktifkan Siswa (❌)
+DELIMITER ?
+CREATE PROCEDURE inactive_siswa (
+    IN uuid CHAR(36),
+    IN status VARCHAR(10)
+)
+BEGIN
+
+    DECLARE siswa CHAR(10);
+
+    SELECT NISN INTO siswa FROM siswas WHERE user = uuid COLLATE utf8mb4_general_ci;
+
+    UPDATE siswas SET status = status WHERE user = uuid COLLATE utf8mb4_general_ci;
+
+    UPDATE kontrak_semesters SET status = 'selesai' WHERE siswa = siswa;
+    
+    UPDATE users SET deleted_at = NOW() WHERE uuid = uuid COLLATE utf8mb4_general_ci;
+
+
+END?
+DELIMITER;
+
+-- Delete siswa permanen
+DELIMITER ?
+CREATE PROCEDURE delete_siswa(
+    IN siswa CHAR(10),
+    IN admin CHAR(36)
+)
+BEGIN
+    DECLARE errno INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+    START TRANSACTION;
+
+    DELETE FROM kontrak_semesters WHERE kontrak_semesters.siswa = siswa COLLATE utf8mb4_general_ci;
+                
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "delete", "kontrak_semesters", NOW());
+    
+    DELETE FROM siswas WHERE NISN = siswa COLLATE utf8mb4_general_ci;
+    
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "delete", "siswas", NOW());
+
+    COMMIT;
+END?
+DELIMITER ;
+
+/* Tahun Ajaran */
+--Add Tahun Ajaran
+DELIMITER ?
+CREATE PROCEDURE add_tahun_ajaran(
+    IN tahun_ajaran CHAR(9),
+    IN semester CHAR(6),
+    IN start DATETIME,
+    IN end DATETIME,
+    admin CHAR(36)
+)
+BEGIN
+
+    INSERT INTO tahun_ajarans(tahun_ajaran, semester, tanggal_mulai, tanggal_berakhir, created_at, updated_at)
+    VALUES(tahun_ajaran, semester, start, end, NOW(), NOW());
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "tahun_ajarans", NOW());
+
+END?
+DELIMITER ;
+
 /* Mapel */
 --Insert Mapel (✅)
 DELIMITER ?
@@ -690,136 +840,6 @@ BEGIN
 
     COMMIT;
     
-END?
-DELIMITER ;
-
-
-/* Siswa */
---Registrasi Siswa (✅)
-DELIMITER ?
-CREATE PROCEDURE add_siswa(
-    IN nama VARCHAR(255),
-    IN nisn CHAR(10),
-    IN nis CHAR(4),
-    IN pass VARCHAR(255),
-    IN tgl_masuk DATE,
-    IN kelas_id CHAR(3),
-    IN jk CHAR(2),
-    IN admin CHAR(36)
-)
-BEGIN
-
-    DECLARE uuid CHAR(36);
-    SET uuid = UUID();
-
-    INSERT INTO users(uuid, username, password, role, created_at, updated_at) 
-    VALUES (uuid, nis, pass, "siswa", NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "insert", "users", NOW());
-
-    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
-    VALUES (uuid, nama, jk, NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "insert", "user_profiles", NOW());
-
-    INSERT INTO siswas(nisn, kelas, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
-    VALUES(nisn, kelas_id, uuid, nis, tgl_masuk, kelas_id, 'Aktif',  NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "insert", "siswas", NOW());
-
-    INSERT INTO kontrak_semesters(siswa, grade, semester, tahun_ajaran, status, created_at, updated_at)
-    VALUES(nisn, "7", "Ganjil", YEAR(NOW()), "On Going", NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "insert", "kontrak_semesters", NOW());
-
-END?
-DELIMITER ;
-
---Update Siswa
-DELIMITER ?
-CREATE PROCEDURE update_siswa(
-    IN oldnis CHAR(4),
-    IN newnis CHAR(4),
-    IN nama VARCHAR(255),
-    IN admin CHAR(36)
-)
-BEGIN
-    DECLARE siswa CHAR(36);
-    DECLARE errno INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-        ROLLBACK;
-    END;
-    SELECT user INTO siswa FROM siswas WHERE NIS = oldnis COLLATE utf8mb4_general_ci;
-        
-    UPDATE siswas SET NIS = newnis WHERE NIS = oldnis COLLATE utf8mb4_general_ci;
-        
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "siswas", NOW());
-
-    UPDATE user_profiles SET nama = nama WHERE user = siswa COLLATE utf8mb4_general_ci;
-        
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "user_profiles", NOW());
-    
-    UPDATE users SET username = newnis WHERE uuid = siswa COLLATE utf8mb4_general_ci;
-    
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "users", NOW());
-END?
-DELIMITER ;
-
---Non Aktifkan Siswa (❌)
-DELIMITER ?
-CREATE PROCEDURE inactive_siswa (
-    IN uuid CHAR(36),
-    IN status VARCHAR(10)
-)
-BEGIN
-
-    DECLARE siswa CHAR(10);
-
-    SELECT NISN INTO siswa FROM siswas WHERE user = uuid COLLATE utf8mb4_general_ci;
-
-    UPDATE siswas SET status = status WHERE user = uuid COLLATE utf8mb4_general_ci;
-
-    UPDATE kontrak_semesters SET status = 'selesai' WHERE siswa = siswa;
-    
-    UPDATE users SET deleted_at = NOW() WHERE uuid = uuid COLLATE utf8mb4_general_ci;
-
-
-END?
-DELIMITER;
-
--- Delete siswa permanen
-DELIMITER ?
-CREATE PROCEDURE delete_siswa(
-    IN siswa CHAR(10),
-    IN admin CHAR(36)
-)
-BEGIN
-    DECLARE errno INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-        BEGIN
-            ROLLBACK;
-        END;
-    START TRANSACTION;
-
-    DELETE FROM kontrak_semesters WHERE kontrak_semesters.siswa = siswa COLLATE utf8mb4_general_ci;
-                
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "delete", "kontrak_semesters", NOW());
-    
-    DELETE FROM siswas WHERE NISN = siswa COLLATE utf8mb4_general_ci;
-    
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "delete", "siswas", NOW());
-
-    COMMIT;
 END?
 DELIMITER ;
 
