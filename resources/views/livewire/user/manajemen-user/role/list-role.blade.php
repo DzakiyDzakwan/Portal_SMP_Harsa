@@ -16,7 +16,7 @@
                     <div class="modal-primary me-1 mb-1 d-inline-block">
                         <button class="btn btn-sm btn-primary" wire:click="permissionRole('{{ $item->id }}')">
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Permission Role">
-                                <i class="bi bi-person-bounding-box"></i>
+                                <i class="bi bi-gear-fill"></i>
                             </div>
                         </button>
                     </div>

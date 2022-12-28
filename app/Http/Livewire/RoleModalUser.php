@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class RoleModalUser extends Component
 {
@@ -18,7 +19,7 @@ class RoleModalUser extends Component
 
     public function render()
     {
-        $role = DB::table('roles')->get();
+        $role = Role::all();
         return view('livewire.role-modal-user', compact('role'));
     }
 
@@ -27,8 +28,10 @@ class RoleModalUser extends Component
         $this->uuid = $user;
         $this->username = $data->username;
         $this->userRole = [];
-        foreach($data->roles as $item) {
-            $this->userRole[] = $item->name;
+        if($data->roles != null) {
+            foreach($data->roles as $item) {
+                $this->userRole[] = $item->name;
+            }
         }
         $this->dispatchBrowserEvent('role-modal');
     }

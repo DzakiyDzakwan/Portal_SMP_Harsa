@@ -28,7 +28,7 @@ class EditModalUser extends Component
 
     public function render()
     {
-        return view('livewire.user.user.edit-modal-user');
+        return view('livewire.user.manajemen-user.user.edit-modal-user');
     }
 
     public function showUser($user) {

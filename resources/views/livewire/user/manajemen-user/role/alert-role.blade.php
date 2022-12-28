@@ -4,24 +4,24 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Berhasil Menambah Permission
+                Berhasil Menambah Role
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
 
-    {{-- Update Kelas --}}
+    {{-- Update Role --}}
     <div id="updateToast" class="toast align-items-center  text-bg-warning" role="alert" aria-live="assertive"
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Berhasil Mengubah Permission
+                Berhasil Mengubah Role
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
 
-    {{-- Delete Kelas --}}
+    {{-- Delete Role --}}
     <div id="deleteToast" class="toast align-items-center  text-bg-danger" role="alert" aria-live="assertive"
         aria-atomic="true">
         <div class="d-flex">
@@ -33,7 +33,7 @@
     </div>
 
     {{-- Role Permission --}}
-    <div id="permissionToast" class="toast align-items-center  text-bg-danger" role="alert" aria-live="assertive"
+    <div id="permissionToast" class="toast align-items-center  text-bg-primary" role="alert" aria-live="assertive"
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
