@@ -8,6 +8,6 @@ class AlertAdmin extends Component
 {
     public function render()
     {
-        return view('livewire.alert-admin');
+        return view('livewire.user.manajemen-akun.admin.alert-admin');
     }
 }

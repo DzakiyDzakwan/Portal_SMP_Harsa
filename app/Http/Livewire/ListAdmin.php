@@ -20,7 +20,7 @@ class ListAdmin extends Component
     public function render()
     {
         $this->admin = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.uuid')->join('roles', 'roles.id', '=', 'model_has_roles.role_id')->where('roles.id', '3')->orderBy('users.created_at', 'ASC')->get();
-        return view('livewire.list-admin');
+        return view('livewire.user.manajemen-akun.admin.list-admin');
     }
 
     public function editAdmin($uuid) {

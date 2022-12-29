@@ -17,7 +17,7 @@ class ListInactiveAdmin extends Component
     public function render()
     {
         $this->inactiveAdmin = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.uuid')->join('roles', 'roles.id', '=', 'model_has_roles.role_id')->where('roles.id', '3')->onlyTrashed()->get();
-        return view('livewire.list-inactive-admin');
+        return view('livewire.user.manajemen-akun.admin.list-inactive-admin');
     }
 
     public function getRestoreModal($uuid){

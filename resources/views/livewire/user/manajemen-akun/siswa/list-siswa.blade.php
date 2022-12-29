@@ -3,8 +3,8 @@
         <tr>
             <th>No</th>
             <th>NISN</th>
-            <th>Kelas</th>
             <th>Nama</th>
+            <th>Kelas</th>
             <th>Tanggal Masuk</th>
             <th>Status Keaktifan</th>
             <th>Action</th>
@@ -15,18 +15,18 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $siswa->NISN }}</td>
-                <td>{{ $siswa->grade }}</td>
                 <td>{{ $siswa->nama }}</td>
+                <td>{{ $siswa->nama_kelas }}</td>
                 <td>{{ date('d M Y', strtotime($siswa->tanggal_masuk)) }}</td>
                 <td>
-                    @if ($siswa->status == 'Aktif')
-                        <span class="badge bg-success">{{ $siswa->status }}</span>
-                    @elseif ($siswa->status == 'Lulus')
-                        <span class="badge bg-primary">{{ $siswa->status }}</span>
-                    @elseif ($siswa->status == 'Pindah')
-                        <span class="badge bg-warning">{{ $siswa->status }}</span>
+                    @if ($siswa->status == 'aktif')
+                        <span class="badge bg-success">Aktif</span>
+                    @elseif ($siswa->status == 'lulus')
+                        <span class="badge bg-primary">Lulus</span>
+                    @elseif ($siswa->status == 'pindah')
+                        <span class="badge bg-warning">Pindah</span>
                     @else
-                        <span class="badge bg-danger">{{ $siswa->status }}</span>
+                        <span class="badge bg-danger">Drop Out</span>
                     @endif
                 </td>
                 <td>
@@ -37,10 +37,10 @@
                         </button>
                     </div>
                     {{-- Update Button --}}
-                    @if ($siswa->status == 'Aktif')
+                    @if ($siswa->status == 'aktif')
                         <div class="modal-warning me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning"
-                                wire:click="editSiswa('{{ $siswa->NIS }}')">
+                                wire:click="editSiswa('{{ $siswa->user }}')">
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </div>
@@ -53,12 +53,12 @@
                         </div>
                     @else
                         {{-- Delete Button --}}
-                        <div class="modal-danger me-1 mb-1 d-inline-block">
+                        {{-- <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#delete{{ $loop->iteration }}">
                                 <i class="bi bi-trash"></i>
                             </button>
-                        </div>
+                        </div> --}}
                     @endif
                     <div class="modal fade text-left" id="inactive{{ $loop->iteration }}" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel130" aria-hidden="true">
@@ -78,9 +78,9 @@
                                         <select name="status" class="form-select form-control" id="basicSelect"
                                             wire:model.defer="status">
                                             <option>Pilih opsi</option>
-                                            <option value="Lulus">Lulus</option>
-                                            <option value="Pindah">Pindah</option>
-                                            <option value="Drop Out">Drop Out</option>
+                                            <option value="lulus">Lulus</option>
+                                            <option value="pindah">Pindah</option>
+                                            <option value="dropout">Drop Out</option>
                                         </select>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                     </div>
 
                     {{-- Modal delete Permanen --}}
-                    <div class="modal fade text-left" id="delete{{ $loop->iteration }}" tabindex="-1" role="dialog"
+                    {{-- <div class="modal fade text-left" id="delete{{ $loop->iteration }}" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel130" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                             <div class="modal-content">
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </td>
             </tr>
         @endforeach

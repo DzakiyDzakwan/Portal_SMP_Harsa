@@ -16,7 +16,7 @@ class InactiveModalAdmin extends Component
 
     public function render()
     {
-        return view('livewire.inactive-modal-admin');
+        return view('livewire.user.manajemen-akun.admin.inactive-modal-admin');
     }
 
     public function inactiveModal() {

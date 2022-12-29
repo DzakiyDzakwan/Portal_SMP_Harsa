@@ -39,6 +39,6 @@ class CreateModalAdmin extends Component
 
     public function render()
     {
-        return view('livewire.create-modal-admin');
+        return view('livewire.user.manajemen-akun.admin.create-modal-admin');
     }
 }
