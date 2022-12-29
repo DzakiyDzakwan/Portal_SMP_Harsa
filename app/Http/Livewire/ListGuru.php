@@ -21,9 +21,9 @@ class ListGuru extends Component
 
     public function render()
     {
-        $this->gurus = DB::table('list_guru')
+        $this->gurus = DB::table('list_guru_active')
         ->get();
-        return view('livewire.list-guru');
+        return view('livewire.user.manajemen-akun.guru.list-guru');
     }
 
     public function inactiveGuru($user) {

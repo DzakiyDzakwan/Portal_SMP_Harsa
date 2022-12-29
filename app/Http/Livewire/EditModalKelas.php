@@ -32,7 +32,7 @@ class EditModalKelas extends Component
     public function render()
     {
         $this->gurus = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->get();
-        return view('livewire.edit-modal-kelas');
+        return view('livewire.sekolah.manajemen-kelas.kelas.edit-modal-kelas');
     }
 
     public function showModal($id) {

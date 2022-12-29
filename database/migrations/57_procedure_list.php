@@ -609,6 +609,7 @@ return new class extends Migration
                 IN urutan CHAR(1),
                 IN kelompok CHAR(1),
                 IN wali CHAR(18),
+                IN user CHAR(36),
                 actor CHAR(36)
             )
             BEGIN
@@ -621,11 +622,17 @@ return new class extends Migration
 
                 START TRANSACTION;
             
-                INSERT INTO kelas(kelas_id, wali_kelas, grade, kelompok_kelas, nama_kelas, created_at, updated_at)
+                INSERT INTO kelas(kelas_id, nama_kelas, grade, kelompok_kelas, wali_kelas, created_at, updated_at)
                 VALUES(kelas, nama, urutan, kelompok, wali, NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "kelas", NOW());
+
+                INSERT INTO model_has_roles(role_id, model_type, model_id)
+                VALUES (5, "App\Models\User", user);
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "insert", "model_has_roles", NOW());
 
                 COMMIT;
             
