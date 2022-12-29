@@ -100,37 +100,25 @@ RETURN (waktu_akhir);
 END?
 DELIMITER ;
 
---Waktu Akhirr--
-Stored Function untuk mendapatkan waktu berakhir roster dan ekstrakurikuler_id
-DELIMITER ?
-CREATE FUNCTION waktu_akhir(
-    waktu_awal TIME,
-    durasi INT 
-)
-RETURNS TIME
-BEGIN
-    DECLARE waktu_akhir TIME;
-    SET waktu_akhir = ADDTIME(waktu_awal, SEC_TO_TIME(durasi*60));
-return (waktu_akhir);
-END?
-DELIMITER ;
 
---Cek Sesi--
-/* Function Untuk mengecek waktu sesi penilaian */
+--time status--
+/* Function untuk menentukan status dari tahun ajaran dan sesi penilaian */
 DELIMITER ?
-CREATE FUNCTION cek_sesi(
-    waktu_awal DATETIME,
-    waktu_akhir DATETIME
+CREATE FUNCTION time_status(
+    start DATETIME,
+    end DATETIME
 )
-RETURNS INT
+RETURNS CHAR(7)
 BEGIN
-    DECLARE hasil INT;
-    IF waktu_awal > NOW() OR waktu_akhir < NOW() THEN
-        SET hasil = 0;
+    DECLARE status CHAR(7);
+    IF start > NOW()
+        SET status = "inaktif";
+    ELSE IF start < NOW() AND end > NOW() THEN
+        SET status = "aktif";
     ELSE
-        SET hasil = 1;
+        SET status = "selesai";
     END IF;
-    RETURN(hasil);
+    RETURN(status);
 END?
 DELIMITER;
 
