@@ -1,7 +1,7 @@
 <div>
     {{-- button tambah --}}
     <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
-        <i class="bi bi-plus-circle"></i> Tambah Siswa
+        <i class="bi bi-plus-circle"></i> &nbspTambah Siswa
     </button>
 
     {{-- modal tambah siswa --}}

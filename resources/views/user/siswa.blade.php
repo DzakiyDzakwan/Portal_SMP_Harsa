@@ -1,4 +1,4 @@
-@extends('admin.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Siswa</title>
@@ -34,9 +34,17 @@
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
             <h5>List Siswa</h5>
-            <div class="form-group">
-                {{-- Button Tambah User --}}
-                @livewire('create-modal-siswa')
+           <div class="d-flex align-items-center justify-content-between gap-2">
+                <div class="form-group">
+                    {{-- Button Tambah User --}}
+                    @livewire('create-modal-siswa')
+                </div>
+                <div class="form-group">
+                    {{-- Button Cetak --}}
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                        <i class="bi bi-printer"></i> &nbspCetak Daftar Siswa
+                    </button>
+                </div>
             </div>
         </div>
         <div class="card-body">

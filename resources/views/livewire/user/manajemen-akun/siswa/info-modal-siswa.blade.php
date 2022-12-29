@@ -82,14 +82,14 @@
                                         <td class="p-1">Status Keaktifan</td>
                                         <td class="p-1">:</td>
                                         <td class="p-1">
-                                            @if ($status == 'Aktif')
-                                                <span class="badge bg-success">{{ $status }}</span>
-                                            @elseif($status == 'Lulus')
-                                                <span class="badge bg-success">{{ $status }}</span>
-                                            @elseif($status == 'Pindah')
-                                                <span class="badge bg-warning">{{ $status }}</span>
+                                            @if ($status == 'aktif')
+                                                <span class="badge bg-success">Aktif</span>
+                                            @elseif($status == 'lulus')
+                                                <span class="badge bg-primary">Lulus</span>
+                                            @elseif($status == 'pindah')
+                                                <span class="badge bg-warning">Pindah</span>
                                             @else
-                                                <span class="badge bg-danger">{{ $status }}</span>
+                                                <span class="badge bg-danger">Drop Out</span>
                                             @endif
                                         </td>
                                     </tr>
@@ -108,51 +108,82 @@
                                     <tr>
                                         <td class="p-1">Anak Ke</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $anak_ke }}</td>
+                                        @if ($anak_ke != null)
+                                            <td class="p-1">{{ $anak_ke }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
+                                        
                                     </tr>
                                     <tr>
                                         <td class="p-1">Nama Ayah</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $n_ayah }}
+                                        @if ($n_ayah != null)
+                                            <td class="p-1">{{ $n_ayah }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
                                     <tr>
                                         <td class="p-1">Pekerjan Ayah</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $p_ayah }}</td>
+                                        @if ($n_ayah != null)
+                                            <td class="p-1">{{ $p_ayah }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
                                     </tr>
                                     <tr>
                                         <td class="p-1">Nama Ibu</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $n_ibu }}</td>
+                                        @if ($n_ayah != null)
+                                            <td class="p-1">{{ $n_ibu }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
                                     </tr>
                                     <tr>
                                         <td class="p-1">Pekerjaan Ibu</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $p_ibu }}</td>
+                                        @if ($n_ayah != null)
+                                            <td class="p-1">{{ $p_ibu }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
                                     </tr>
                                     <tr>
                                         <td class="p-1">Alamat Orangtua</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $alamat_ortu }}</td>
+                                        @if ($n_ayah != null)
+                                            <td class="p-1">{{ $alamat_ortu }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
                                     </tr>
                                     <tr>
                                         <td class="p-1">Telepon Orangtua</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $telp_ortu }}</td>
+                                        @if ($n_ayah != null)
+                                            <td class="p-1">{{ $telp_ortu }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
                                     </tr>
                                     <tr>
                                         <td class="p-1">Nama Wali</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $n_wali }}</td>
+                                        @if ($n_ayah != null)
+                                            <td class="p-1">{{ $n_wali }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
                                     </tr>
                                     <tr>
                                         <td class="p-1">Pekerjaan Wali</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $p_wali }}</td>
+                                        @if ($n_ayah != null)
+                                            <td class="p-1">{{ $p_wali }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
                                     </tr>
                                     <tr>
                                         <td class="p-1">Telepon Wali</td>
                                         <td class="p-1">:</td>
-                                        <td class="p-1">{{ $telp_wali }}</td>
+                                        @if ($n_ayah != null)
+                                            <td class="p-1">{{ $telp_wali }}</td>
+                                        @endif
+                                            <td class="p-1">Belum ada data</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -181,7 +212,7 @@
                                                 <td>{{ $item->keterangan }}</td>
                                                 <td>{{ $item->jenis_prestasi }}</td>
                                                 <td>{{ $item->tanggal_prestasi }}</td>
-                                                <td>{{ $item->siswas->kelas }}</td>
+                                                <td>{{ $item->nama_kelas }}</td>
                                                 <td>
                                                     <div class="modal-danger me-1 mb-1 d-inline-block">
                                                         <button type="button" class="btn btn-sm btn-warning"

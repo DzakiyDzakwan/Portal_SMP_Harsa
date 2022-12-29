@@ -33,6 +33,6 @@ class CreateModalSiswa extends Component
     public function render()
     {
         $this->kelas = DB::table('kelas')->get();
-        return view('livewire.create-modal-siswa');
+        return view('livewire.user.manajemen-akun.siswa.create-modal-siswa');
     }
 }

@@ -4,11 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Siswa;
 use Illuminate\Support\Facades\DB;
 
 class EditModalSiswa extends Component
 {
-    public $siswas, $nisn, $oldnis, $nis, $user;
+    public $siswas, $nama, $nisn, $oldnis, $nis, $user;
 
     protected $listeners = [
         'editUser' => 'showModal'
@@ -26,13 +27,14 @@ class EditModalSiswa extends Component
     public function render()
     {
         $this->siswas = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->get();
-        return view('livewire.edit-modal-siswa');
+        return view('livewire.user.manajemen-akun.siswa.edit-modal-siswa');
     }
 
     public function showModal($id) {
         // dd($id);
-        $data = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('siswas.NIS', $id)->first();
-        //$this->user = $id;
+        //SELECT users.uuid, siswas.NIS, siswas.NISN, user_profiles.nama FROM users JOIN siswas ON siswas.user = users.uuid JOIN user_profiles ON user_profiles.user = users.uuid;
+        $data = Siswa::join('users', 'users.uuid', '=', 'siswas.user')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('siswas.user', $id)->first();
+
         $this->nama = $data->nama;
         $this->nisn = $data->NISN;
         $this->nis = $data->NIS;

@@ -19,8 +19,15 @@ class ListSiswa extends Component
 
     public function render()
     {
-        $this->siswas = User::withTrashed()->select('siswas.user', 'siswas.NISN', 'siswas.tanggal_masuk', 'siswas.status', 'user_profiles.nama', 'kontrak_semesters.grade')->join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')->orderBy('siswas.created_at', 'DESC')->get();
-        return view('livewire.list-siswa');
+        $this->siswas = User::withTrashed()->select('siswas.user', 'siswas.NISN', 'siswas.tanggal_masuk', 'siswas.status', 'user_profiles.nama', 'kontrak_semesters.kelas', 'kelas.nama_kelas')
+        ->join('siswas', 'siswas.user', '=', 'users.uuid')
+        ->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')
+        ->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
+        ->join('kelas', 'kelas.kelas_id', '=', 'kontrak_semesters.kelas')
+        ->orderBy('siswas.created_at', 'DESC')
+        ->get();
+
+        return view('livewire.user.manajemen-akun.siswa.list-siswa');
     }
 
     public function editSiswa($id) {
@@ -40,13 +47,13 @@ class ListSiswa extends Component
         $this->dispatchBrowserEvent('inactive-alert');
     }
 
-    public function delete($user) {
+    /* public function delete($user) {
 
         DB::select('CALL delete_siswa(?, ?)', [$user, auth()->user()->uuid]);
 
         $this->render();
         $this->emit('siswaDelete');
         $this->dispatchBrowserEvent('delete-alert');
-    }
+    } */
     
 }

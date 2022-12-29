@@ -25,7 +25,7 @@ class EditModalAdmin extends Component
 
     public function render()
     {
-        return view('livewire.edit-modal-admin');
+        return view('livewire.user.manajemen-akun.admin.edit-modal-admin');
     }
 
     public function showModal($uuid) {

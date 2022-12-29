@@ -22,7 +22,7 @@ class ViewController extends Controller
     }
 
     public function admin() {
-        $menu = 'manajemenakun';
+        $menu = 'akun';
         $submenus = 'admin';
 
         // dd('admin');
@@ -35,8 +35,8 @@ class ViewController extends Controller
     }
 
     public function siswa() {
-        $menu = 'manajemenakun';
-        dd('siswa');
+        $menu = 'akun';
+        // dd('siswa');
         return view('user.siswa', compact('menu'));
     }
 
