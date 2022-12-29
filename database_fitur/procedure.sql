@@ -778,3 +778,88 @@ BEGIN
     COMMIT;
 
 END
+
+-- Add Ekskul
+CREATE PROCEDURE add_ekstrakurikuler(
+            IN admin CHAR(36),
+            IN ekstrakurikuler CHAR(5),
+            IN nama VARCHAR(30),
+            IN hari CHAR(6),
+            IN waktu_mulai TIME,
+            IN waktu_akhir TIME,
+            IN tempat VARCHAR(100),
+            IN kelas CHAR(1)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE uuid CHAR(36);
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+            
+                SET uuid = UUID();
+            
+                START TRANSACTION;
+                INSERT INTO ekstrakurikulers(ekstrakurikuler_id, nama, hari, waktu_mulai, waktu_akhir, tempat, kelas,  created_at, updated_at) 
+                VALUES (ekstrakurikuler, nama, hari, waktu_mulai, waktu_akhir, tempat, kelas, NOW(), NOW());
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "insert", "ekstrakurikulers", NOW());
+                
+                COMMIT;
+            END
+
+-- Update Ekskul
+CREATE PROCEDURE update_ekstrakurikuler(
+    IN admin CHAR(36),
+    IN ekstrakurikuler CHAR(5),
+    IN nama VARCHAR(30),
+    IN hari CHAR(6),
+    IN waktu_mulai TIME,
+    IN waktu_akhir TIME,
+    IN tempat VARCHAR(100),
+    IN kelas CHAR(1)
+    )
+    BEGIN
+        DECLARE errno INT;
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+
+        START TRANSACTION;
+        UPDATE ekstrakurikulers SET nama = nama, hari = hari, waktu_mulai = waktu_mulai, waktu_akhir = waktu_akhir, tempat = tempat, kelas = kelas WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
+
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "update", "ekstrakurikulers", NOW());
+
+        COMMIT;
+                
+            END
+
+-- Delete Ekskul
+CREATE PROCEDURE delete_ekstrakurikuler(
+    IN admin CHAR(36),
+    IN ekstrakurikuler CHAR(5)
+    )
+    BEGIN
+    
+        DECLARE errno INT;
+        DECLARE admin CHAR(36);
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+    
+        SET admin = UUID();
+    
+        START TRANSACTION;
+        DELETE FROM ekstrakurikulers WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
+
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "delete", "ekstrakurikulers", NOW());
+        
+        COMMIT;
+
+            END

@@ -112,6 +112,28 @@
 
                             <div class="col-4">
                                 <div class="form-group has-icon-left">
+                                    <label for="end">Waktu Akhir</label>
+                                    <div class="position-relative">
+                                        <input name="end" type="time"
+                                            class="form-control  @error('waktu_akhir') is-invalid
+                                @enderror"
+                                            placeholder="MasukkaJam yang Sesuai" id="end"
+                                            wire:model.defer="waktu_akhir" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-hourglass-top"></i>
+                                        </div>
+                                        @error('waktu_akhir')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- <div class="col-4">
+                                <div class="form-group has-icon-left">
                                     <label for="end">Durasi (Menit)</label>
                                     <div class="position-relative">
                                         <input name="durasi" type="text"
@@ -129,7 +151,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             {{-- Tempat --}}
                             <div class="col-12">

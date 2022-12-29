@@ -184,11 +184,11 @@ return new class extends Migration
 
         '); */
 
-        /* DB::unprepared('
+        DB::unprepared('
         CREATE VIEW list_ekstrakurikuler AS
-        SELECT ekstrakurikuler_id AS id, nama, hari, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(waktu_mulai, durasi) AS waktu_akhir, SEC_TO_TIME(durasi*60) AS durasi, tempat, kelas 
+        SELECT ekstrakurikuler_id AS id, nama, hari, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, TIME_FORMAT(waktu_akhir, "%H:%i") AS waktu_akhir, tempat, kelas 
         FROM ekstrakurikulers;
-        '); */
+        ');
 
        /*  DB::unprepared('
         CREATE VIEW list_siswa_kelas AS
