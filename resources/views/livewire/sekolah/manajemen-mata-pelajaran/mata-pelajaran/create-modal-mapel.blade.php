@@ -77,6 +77,25 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group has-icon-left">
+                                <label for="kkm">KKM</label>
+                                <div class="position-relative">
+                                    <input name="kkm" type="number"
+                                        class="form-control @error('kkm') is-invalid @enderror " placeholder="KKM"
+                                        id="kkm" wire:model.defer="kkm" />
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-sort-down"></i>
+                                    </div>
+                                    @error('kkm')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group has-icon-left">
                                 <label for="kurikulum">Kurikulum</label>
                                 <div class="position-relative">
                                     <input name="kurikulum" type="text"

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class CreateModalMapelGuru extends Component
 {
-    public $mapel_guru_id, $mapel, $guru, $guruu, $pelajaran;
+    public  $mapel_guru_id, $mapel, $guru, $guruu, $pelajaran;
 
     protected $listeners = [
         'inactiveMapelGuru' => 'render'
@@ -34,6 +34,9 @@ class CreateModalMapelGuru extends Component
             'at' => 'mapel'
         ]);
 
+        //DB::select('CALL add_mapelguru(?, ?, ?)', [$this->mapel, $this->guru, auth()->user()->uuid]);
+
+
         $this->reset();
         $this->emit('mapelGuruStore');
         $this->dispatchBrowserEvent('insert-alert');
@@ -44,7 +47,7 @@ class CreateModalMapelGuru extends Component
     public function render()
     {
         $this->pelajaran = DB::table('mapels')->get();
-        $this->guruu = Guru::select('gurus.NIP', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->get();
+        $this->guruu = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->get();
         return view('livewire.create-modal-mapel-guru');
     }
 }

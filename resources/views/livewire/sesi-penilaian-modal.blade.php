@@ -155,11 +155,9 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->nama_sesi }}</td>
-                                                <td>{{ $item->tahun_ajaran }}</td>
                                                 <td>{{ $item->waktu_mulai }}</td>
                                                 <td>{{ $item->waktu_selesai }}</td>
                                                 <td>{{ $item->jumlah_hari }}</td>
-                                                <td>{{ $item->admin }}</td>
                                                 @if ($item->status == 'Aktif')
                                                     <td>
                                                         <span class="badge bg-success">{{ $item->status }}</span>

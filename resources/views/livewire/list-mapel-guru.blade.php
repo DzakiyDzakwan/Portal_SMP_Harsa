@@ -4,21 +4,21 @@
             <th>No</th>
             <th>Guru</th>
             <th>Mata Pelajaran</th>
-            <th>Kelompok Mata Pelajaran</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($mapelGuru as $mg)
+        @foreach ($mapelguru as $mg)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $mg->nama }}</td>
-                <td>{{ $mg->nama_mapel }}</td>
-                @if ($mg->kelompok_mapel == 'A')
-                    <td>Wajib</td>
-                @else
-                    <td>Peminatan</td>
-                @endif
+                <td>{{ $mg->nama_mapel }}
+                    @if ($mg->kelompok_mapel == 'B')
+                        {{ 'Peminatan' }}
+                    @else
+                        {{ 'Wajib' }}
+                    @endif
+                </td>
                 <td>
                     {{-- Update Button --}}
                     <div class="modal-warning me-1 mb-1 d-inline-block">
@@ -36,13 +36,13 @@
                         </button>
                     </div>
                     {{-- Modal Delete --}}
-                    <div class="modal fade text-left" id="delete{{ $mg->mapel_guru_id }}" tabindex="-1" role="dialog"
+                    {{-- <div class="modal fade text-left" id="delete{{ $pel->mapel_id }}" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel130" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                             <div class="modal-content">
                                 <div class="modal-header justify-content-center bg-danger">
                                     <h5 class="modal-title white" id="myModalLabel130">
-                                        Nonaktifkan Mata Pelajaran {{ $mg->nama_mapel }}
+                                        Nonaktifkan Mata Pelajaran {{ $pel->nama_mapel }}
                                     </h5>
                                 </div>
                                 <div class="modal-body">Apakah yakin menonaktifkan mata pelajaran ini?</div>
@@ -52,14 +52,14 @@
                                         <span class="d-none d-sm-block">Close</span>
                                     </button>
                                     <button class="btn btn-danger ml-1" data-bs-dismiss="modal"
-                                        wire:click="inactiveMapelGuru('{{ $mg->mapel_guru_id }}')">
+                                        wire:click="inactiveMapel('{{ $pel->mapel_id }}')">
                                         <i class="bx bx-check d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Hapus</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </td>
             </tr>
         @endforeach
