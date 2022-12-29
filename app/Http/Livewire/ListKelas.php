@@ -30,6 +30,6 @@ class ListKelas extends Component
     }
 
     public function editKelas($id) {
-        $this->emit('editUser', $id);
+        $this->emit('editKelas', $id);
     }
 }
