@@ -1,4 +1,51 @@
---Indeks--
+--Umur-- ()()
+/* Stored Function untuk mendapatkan umur user */
+DELIMTER ?
+CREATE function umur(
+    tgl_lahir DATE
+)
+RETURNS INT
+BEGIN
+    DECLARE umur INT;
+    SET umur = YEAR(curdate())-YEAR(tgl_lahir) - (RIGHT(curdate(),5) < RIGHT(tgl_lahir,5));
+    RETURN(umur);
+END?
+DELIMITER ;
+
+--Masa Mengajar-- ()()
+/* Stored Function untuk mendapatkan lama bekerja guru di sekolah */
+DELIMITER ?
+CREATE function masa_mengajar(
+    tanggal_masuk DATE
+)
+RETURNS INT
+BEGIN
+    RETURN(DATEDIFF(NOW(), tanggal_masuk));
+END?
+DELIMITER ;
+
+--time status-- ()()
+/* Function untuk menentukan status dari tahun ajaran dan sesi penilaian */
+DELIMITER ?
+CREATE FUNCTION time_status(
+    start DATETIME,
+    end DATETIME
+)
+RETURNS CHAR(7)
+BEGIN
+    DECLARE status CHAR(7);
+    IF start > NOW()
+        SET status = "inaktif";
+    ELSE IF start < NOW() AND end > NOW() THEN
+        SET status = "aktif";
+    ELSE
+        SET status = "selesai";
+    END IF;
+    RETURN(status);
+END?
+DELIMITER;
+
+--Indeks-- ()()
 /* Stored Function untuk mendapatkan indeks penilaian siswa */
 DELIMITER ?
 CREATE function indeks(
@@ -61,32 +108,6 @@ DECLARE i CHAR(1);
 END?
 DELIMITER ;
 
---Masa Mengajar--
-/* Stored Function untuk mendapatkan lama bekerja guru di sekolah */
-DELIMTER ?
-CREATE function masa_mengajar(
-    tanggal_masuk DATE
-)
-RETURNS INT
-BEGIN
-    RETURN(DATEDIFF(NOW(), tanggal_masuk));
-END?
-DELIMITER ;
-
---Umur--
-/* Stored Function untuk mendapatkan umur user */
-DELIMTER ?
-CREATE function umur(
-    tgl_lahir DATE
-)
-RETURNS INT
-BEGIN
-    DECLARE umur INT;
-    SET umur = YEAR(curdate())-YEAR(tgl_lahir) - (RIGHT(curdate(),5) < RIGHT(tgl_lahir,5));
-    RETURN(umur);
-END?
-DELIMITER ;
-
 DELIMITER ?
 CREATE FUNCTION waktu_akhir(
     waktu_awal TIME,
@@ -99,28 +120,6 @@ BEGIN
 RETURN (waktu_akhir);
 END?
 DELIMITER ;
-
-
---time status--
-/* Function untuk menentukan status dari tahun ajaran dan sesi penilaian */
-DELIMITER ?
-CREATE FUNCTION time_status(
-    start DATETIME,
-    end DATETIME
-)
-RETURNS CHAR(7)
-BEGIN
-    DECLARE status CHAR(7);
-    IF start > NOW()
-        SET status = "inaktif";
-    ELSE IF start < NOW() AND end > NOW() THEN
-        SET status = "aktif";
-    ELSE
-        SET status = "selesai";
-    END IF;
-    RETURN(status);
-END?
-DELIMITER;
 
 --get Sesi Aktif--
 DELIMITER ?

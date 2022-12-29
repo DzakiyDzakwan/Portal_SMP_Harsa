@@ -73,6 +73,13 @@ return new class extends Migration
         '); */
 
         DB::unprepared('
+        CREATE VIEW list_tahun_ajaran AS
+        SELECT tahun_ajaran_id AS id , tahun_ajaran, semester, DATE_FORMAT(tanggal_mulai, "%d %M %Y") AS tanggal_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y") AS tanggal_berakhir, time_status(tanggal_mulai, tanggal_berakhir) AS status
+        FROM tahun_ajarans
+        ORDER BY status;
+        ');
+
+        DB::unprepared('
         CREATE VIEW list_kelas AS
         SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NUPTK, user_profiles.nama AS 		Wali_Kelas, COUNT(siswas.NIS) AS jumlah
         FROM kelas
@@ -236,27 +243,28 @@ return new class extends Migration
      */
     public function down()
     {
-        /* DB::unprepared('DROP VIEW list_admin');
-        DB::unprepared('DROP VIEW list_inactive_admin');
-        DB::unprepared('DROP VIEW list_siswa');
-        DB::unprepared('DROP VIEW info_siswa');
+        // DB::unprepared('DROP VIEW list_admin');
+        // DB::unprepared('DROP VIEW list_inactive_admin');
+        // DB::unprepared('DROP VIEW list_siswa');
+        // DB::unprepared('DROP VIEW info_siswa');
         DB::unprepared('DROP VIEW list_guru');
-        DB::unprepared('DROP VIEW info_guru');
-        DB::unprepared('DROP VIEW calon_wali_kelas');
+        // DB::unprepared('DROP VIEW info_guru');
+        // DB::unprepared('DROP VIEW calon_wali_kelas');
+        DB::unprepared('DROP VIEW list_tahun_ajaran');
         DB::unprepared('DROP VIEW list_kelas');
-        DB::unprepared('DROP VIEW list_inactive_kelas');
-        DB::unprepared('DROP VIEW list_mapel');
-        DB::unprepared('DROP VIEW list_mapel_guru');
-        DB::unprepared('DROP VIEW list_inactive_mapel');
-        DB::unprepared('DROP VIEW list_roster_kelas');
-        DB::unprepared('DROP VIEW list_kelas_guru');
-        DB::unprepared('DROP VIEW list_sesi_penilaian');
-        DB::unprepared('DROP VIEW list_nilai');
-        DB::unprepared('DROP VIEW detail_kelas');
-        DB::unprepared('DROP VIEW list_nilai_pending');
-        DB::unprepared('DROP VIEW list_prestasi');
-        DB::unprepared('DROP VIEW list_ekstrakurikuler');
-        DB::unprepared('DROP VIEW list_siswa_kelas');
-         */
+        // DB::unprepared('DROP VIEW list_inactive_kelas');
+        // DB::unprepared('DROP VIEW list_mapel');
+        // DB::unprepared('DROP VIEW list_mapel_guru');
+        // DB::unprepared('DROP VIEW list_inactive_mapel');
+        // DB::unprepared('DROP VIEW list_roster_kelas');
+        // DB::unprepared('DROP VIEW list_kelas_guru');
+        // DB::unprepared('DROP VIEW list_sesi_penilaian');
+        // DB::unprepared('DROP VIEW list_nilai');
+        // DB::unprepared('DROP VIEW detail_kelas');
+        // DB::unprepared('DROP VIEW list_nilai_pending');
+        // DB::unprepared('DROP VIEW list_prestasi');
+        // DB::unprepared('DROP VIEW list_ekstrakurikuler');
+        // DB::unprepared('DROP VIEW list_siswa_kelas');
+        
     }
 };

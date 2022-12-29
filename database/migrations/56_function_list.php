@@ -13,16 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-        /* DB::unprepared('
-        CREATE function masa_mengajar(
-            tanggal_masuk DATE
-        )
-        RETURNS INT
-        BEGIN
-            RETURN(DATEDIFF(NOW(), tanggal_masuk));
-        END
-        ');
-
         DB::unprepared('
         CREATE function umur(
             tgl_lahir DATE
@@ -35,7 +25,36 @@ return new class extends Migration
         END
         ');
 
+        DB::unprepared('
+        CREATE function masa_mengajar(
+            tanggal_masuk DATE
+        )
+        RETURNS INT
+        BEGIN
+            RETURN(DATEDIFF(NOW(), tanggal_masuk));
+        END
+        ');
 
+        DB::unprepared('
+        CREATE FUNCTION time_status(
+            start DATETIME,
+            end DATETIME
+        )
+        RETURNS CHAR(7)
+        BEGIN
+            DECLARE status CHAR(7);
+            IF start > NOW() THEN
+                SET status = "inaktif";
+            ELSEIF start < NOW() AND end > NOW() THEN
+                SET status = "aktif";
+            ELSE
+                SET status = "selesai";
+            END IF;
+            RETURN(status);
+        END
+        ');
+
+        /* 
         DB::unprepared('
         CREATE FUNCTION waktu_akhir(
             waktu_awal TIME,
@@ -161,13 +180,13 @@ return new class extends Migration
      */
     public function down()
     {
-        /* DB::unprepared('DROP FUNCTION masa_mengajar');
         DB::unprepared('DROP FUNCTION umur');
-        DB::unprepared('DROP FUNCTION waktu_akhir');
-        DB::unprepared('DROP FUNCTION cek_sesi');
-        DB::unprepared('DROP FUNCTION get_sesi');
-        DB::unprepared('DROP FUNCTION indeks');
-        DB::unprepared('DROP FUNCTION is_nilai_exists');
-        */
+        DB::unprepared('DROP FUNCTION masa_mengajar');
+        DB::unprepared('DROP FUNCTION time_status');
+        // DB::unprepared('DROP FUNCTION waktu_akhir');
+        // DB::unprepared('DROP FUNCTION get_sesi');
+        // DB::unprepared('DROP FUNCTION indeks');
+        // DB::unprepared('DROP FUNCTION is_nilai_exists');
+       
     }
 };

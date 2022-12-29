@@ -103,7 +103,9 @@ GROUP BY r.mapel, r.kelas;
 
 /* List Tahun Ajaran */
 CREATE VIEW list_tahun_ajaran AS
-
+SELECT tahun_ajaran_id AS id , tahun_ajaran, semester, DATE_FORMAT(tanggal_mulai, "%d %M %Y") AS tanggal_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y") AS tanggal_berakhir, time_status(tanggal_mulai, tanggal_berakhir) AS status
+FROM tahun_ajarans
+ORDER BY status;
 
 /* List Sesi penilaian */
 CREATE VIEW list_sesi_penilaian AS
