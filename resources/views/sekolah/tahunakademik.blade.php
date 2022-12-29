@@ -50,7 +50,8 @@
         </div>
     </div>
 
-    {{-- @livewire('alert-nilai') --}}
+    @livewire('edit-modal-tahun')
+    @livewire('alert-tahun-akademik')
 @endsection
 
 @section('script')
@@ -59,9 +60,9 @@
         const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
         })
-        /* const editModal = new bootstrap.Modal('#editModal', {
+        const editModal = new bootstrap.Modal('#editModal', {
             keyboard: false
-        }) */
+        })
         /* const inactiveModal = new bootstrap.Modal('#inactiveModal', {
             keyboard: false
         }) */
@@ -75,9 +76,9 @@
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
         });
-        /* window.addEventListener('edit-modal', event => {
+        window.addEventListener('edit-modal', event => {
             editModal.toggle();
-        }); */
+        });
         /* window.addEventListener('inactive-modal', event => {
             inactiveModal.toggle();
         }) */
@@ -89,23 +90,23 @@
         }) */
 
         //Toast
-        // const insertToast = new bootstrap.Toast('#insertToast')
+        const insertToast = new bootstrap.Toast('#insertToast')
         // const inactiveToast = new bootstrap.Toast('#inactiveToast')
-        // const updateToast = new bootstrap.Toast('#updateToast')
+        const updateToast = new bootstrap.Toast('#updateToast')
         // const restoreToast = new bootstrap.Toast('#restoreToast')
         // const deleteToast = new bootstrap.Toast('#deleteToast')
 
 
-        /* window.addEventListener('insert-alert', e => {
+        window.addEventListener('insert-alert', e => {
             insertToast.show()
-        }) */
+        })
+
+        window.addEventListener('update-alert', e => {
+            updateToast.show()
+        })
 
         /* window.addEventListener('inactive-alert', e => {
             inactiveToast.show()
-        }) */
-
-        /* window.addEventListener('update-alert', e => {
-            updateToast.show()
         }) */
 
         /* window.addEventListener('restore-alert', e => {

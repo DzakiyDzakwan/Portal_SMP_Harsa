@@ -417,6 +417,62 @@ return new class extends Migration
                 VALUES(actor, "update", "users", NOW());
             END
         ');
+
+        DB::unprepared('
+        CREATE PROCEDURE add_tahun_ajaran(
+            IN tahun_ajaran CHAR(9),
+            IN semester CHAR(6),
+            IN start DATETIME,
+            IN end DATETIME,
+            admin CHAR(36)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+        
+            INSERT INTO tahun_ajarans(tahun_ajaran_id ,tahun_ajaran, semester, tanggal_mulai, tanggal_berakhir, created_at, updated_at)
+            VALUES(UUID(), tahun_ajaran, semester, start, end, NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "tahun_ajarans", NOW());
+        
+            COMMIT;
+        
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE update_tahun_ajaran(
+            IN tahun_ajaran CHAR(36),
+            IN start DATETIME,
+            IN end DATETIME,
+            admin CHAR(36)
+        )
+        BEGIN
+        
+        DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+        
+            UPDATE tahun_ajarans SET tanggal_mulai = start, tanggal_berakhir = end, updated_at = NOW() wHERE tahun_ajaran_id = tahun_ajaran COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "insert", "tahun_ajarans", NOW());
+        
+            COMMIT;
+        
+        END
+        ');
         
         /*
         DB::unprepared('
