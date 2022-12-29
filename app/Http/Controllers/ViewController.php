@@ -82,7 +82,6 @@ class ViewController extends Controller
 
     public function ekstrakurikuler() {
         $menu = 'sekolah';
-        dd('ekstrakurikuler');
         return view('sekolah.ekskul', compact('menu'));
     }
 

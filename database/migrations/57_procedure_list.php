@@ -970,7 +970,7 @@ return new class extends Migration
             
             END
         ');
-
+        */
         DB::unprepared('
         CREATE PROCEDURE add_ekstrakurikuler(
             IN admin CHAR(36),
@@ -978,7 +978,7 @@ return new class extends Migration
             IN nama VARCHAR(30),
             IN hari CHAR(6),
             IN waktu_mulai TIME,
-            IN durasi INT,
+            IN waktu_akhir TIME,
             IN tempat VARCHAR(100),
             IN kelas CHAR(1)
             )
@@ -993,8 +993,8 @@ return new class extends Migration
                 SET uuid = UUID();
             
                 START TRANSACTION;
-                INSERT INTO ekstrakurikulers(ekstrakurikuler_id, nama, hari, waktu_mulai, durasi, tempat, kelas,  created_at, updated_at) 
-                VALUES (ekstrakurikuler, nama, hari, waktu_mulai, durasi, tempat, kelas, NOW(), NOW());
+                INSERT INTO ekstrakurikulers(ekstrakurikuler_id, nama, hari, waktu_mulai, waktu_akhir, tempat, kelas,  created_at, updated_at) 
+                VALUES (ekstrakurikuler, nama, hari, waktu_mulai, waktu_akhir, tempat, kelas, NOW(), NOW());
 
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(admin, "insert", "ekstrakurikulers", NOW());
@@ -1010,7 +1010,7 @@ CREATE PROCEDURE update_ekstrakurikuler(
     IN nama VARCHAR(30),
     IN hari CHAR(6),
     IN waktu_mulai TIME,
-    IN durasi INT,
+    IN waktu_akhir TIME,
     IN tempat VARCHAR(100),
     IN kelas CHAR(1)
     )
@@ -1022,7 +1022,7 @@ CREATE PROCEDURE update_ekstrakurikuler(
         END;
 
         START TRANSACTION;
-        UPDATE ekstrakurikulers SET nama = nama, hari = hari, waktu_mulai = waktu_mulai, durasi = durasi, tempat = tempat, kelas = kelas WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
+        UPDATE ekstrakurikulers SET nama = nama, hari = hari, waktu_mulai = waktu_mulai, waktu_akhir = waktu_akhir, tempat = tempat, kelas = kelas WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
 
         INSERT INTO log_activities(actor, action, at, created_at)
         VALUES(admin, "update", "ekstrakurikulers", NOW());
@@ -1058,7 +1058,7 @@ CREATE PROCEDURE delete_ekstrakurikuler(
 
             END
         ');
-
+/*
         DB::unprepared('
 CREATE PROCEDURE add_roster(
     IN mapel INT,
@@ -1159,12 +1159,14 @@ BEGIN
         DB::unprepared("DROP PROCEDURE delete_permission");
         DB::unprepared("DROP PROCEDURE add_admin");
         DB::unprepared("DROP PROCEDURE update_admin");
+        DB::unprepared("DROP PROCEDURE delete_admin");
         DB::unprepared("DROP PROCEDURE inactive_admin");
         DB::unprepared("DROP PROCEDURE restore_admin");
         DB::unprepared("DROP PROCEDURE add_siswa");
         DB::unprepared("DROP PROCEDURE update_siswa");
         DB::unprepared("DROP PROCEDURE inactive_siswa");
-        // DB::unprepared("DROP PROCEDURE delete_admin");
+        // DB::unprepared("DROP PROCEDURE inactive_admin");
+        // DB::unprepared("DROP PROCEDURE restore_admin");
         // DB::unprepared("DROP PROCEDURE add_guru");
         // DB::unprepared("DROP PROCEDURE update_guru");
         // DB::unprepared("DROP PROCEDURE inactive_guru");
@@ -1184,9 +1186,9 @@ BEGIN
         // DB::unprepared("DROP PROCEDURE update_prestasi");
         // DB::unprepared("DROP PROCEDURE add_nilai");
         // DB::unprepared("DROP PROCEDURE add_sesi");
-        // DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
-        // DB::unprepared("DROP PROCEDURE update_ekstrakurikuler");
-        // DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
+        DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
+        DB::unprepared("DROP PROCEDURE update_ekstrakurikuler");
+        DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
         // DB::unprepared("DROP PROCEDURE add_roster");
         // DB::unprepared("DROP PROCEDURE update_roster");
         // DB::unprepared("DROP PROCEDURE delete_roster");
