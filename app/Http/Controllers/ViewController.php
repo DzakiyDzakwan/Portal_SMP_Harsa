@@ -102,8 +102,7 @@ class ViewController extends Controller
     public function ekstrakurikulerSiswa()
     {
         $menu = 'sekolah';
-        dd('ekstrakurikuler siswa');
-        return view('sekolah.ekskul_siswa', compact('menu'));
+        return view('sekolah.ekskulsiswa', compact('menu'));
     }
 
     public function nilaiEkstrakurikuler()

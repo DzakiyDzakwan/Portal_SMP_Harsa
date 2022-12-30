@@ -1,7 +1,7 @@
 @extends('master.main')
 
 @section('title')
-    <title>Ekstrakulikuler</title>
+    <title>Ekstrakulikuler Siswa</title>
 @endsection
 
 @section('style')
@@ -30,63 +30,62 @@
                 </li>
 
                 <li class="breadcrumb-item active" aria-current="page">
-                    Ekstrakurikuler
+                    Ekstrakulikuler Siswa
                 </li>
             </ol>
         </nav>
     </div>
 </div>
 {{-- Info Card --}}
-@livewire('info-card-ekskul')
+@livewire('info-card-ekskul-siswa')
 
 <div class="card">
     <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-        <h5>List Ekstrakulikuler</h5>
+        <h5>List Ekstrakulikuler Siswa</h5>
         <div class="form-group">
-            @livewire('create-modal-ekskul') 
         </div>
     </div>
     <div class="card-body">
-        @livewire('list-ekskul')
+        @livewire('list-ekskul-siswa')
     </div>
 </div>
 
-@livewire('alert-ekskul')
+@livewire('alert-ekskul-siswa')
 
 
 {{-- Modal Edit --}}
-@livewire('edit-modal-ekskul')
+{{-- @livewire('edit-modal-ekskul') --}}
 
 @endsection
 
 @section('script')
 <script>
     //Modal
-    const createModal = new bootstrap.Modal('#createModal', {
-        keyboard: false
-    })
-    const editModal = new bootstrap.Modal('#editModal', {
-        keyboard: false
-    })
+    // const createModal = new bootstrap.Modal('#createModal', {
+    //     keyboard: false
+    // })
+    // const editModal = new bootstrap.Modal('#editModal', {
+    //     keyboard: false
+    // })
     // const infoModal = new bootstrap.Modal('#infoModal', {
     //     keyboard: false
     // })
-    /* const deleteModal = new bootstrap.Modal('#deleteModal', {
+    const deleteModal = new bootstrap.Modal('#deleteModal', {
         keyboard: false
-    }) */
+    }) 
 
-    window.addEventListener('close-create-modal', event => {
-        createModal.hide();
-    });
-    window.addEventListener('edit-modal', event => {
-        editModal.toggle();
-    });
+    // window.addEventListener('close-create-modal', event => {
+    //     createModal.hide();
+    // });
+    // window.addEventListener('edit-modal', event => {
+    //     editModal.toggle();
+    // });
     // window.addEventListener('info-modal', event => {
     //     infoModal.toggle();
     // })
-    /* window.addEventListener('delete-modal', event => {
+    window.addEventListener('delete-modal', event => {
         deleteModal.toggle();
-    }) */
+    })
 
     //Toast
     const insertToast = new bootstrap.Toast('#insertToast')

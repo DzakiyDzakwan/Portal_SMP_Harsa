@@ -1062,7 +1062,34 @@ CREATE PROCEDURE delete_ekstrakurikuler(
 
             END
         ');
-        /*
+
+        DB::unprepared('
+    CREATE PROCEDURE delete_ekstrakurikuler_siswa(
+    IN admin CHAR(36),
+    IN ekstrakurikuler CHAR(5)
+    )
+    BEGIN
+    
+        DECLARE errno INT;
+        DECLARE admin CHAR(36);
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        BEGIN
+            ROLLBACK;
+        END;
+    
+        SET admin = UUID();
+    
+        START TRANSACTION;
+        DELETE FROM ekstrakurikuler_siswas WHERE ekstrakurikuler_siswa_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
+
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "delete", "ekstrakurikuler_siswas", NOW());
+        
+        COMMIT;
+
+            END
+        ');
+/*
         DB::unprepared('
 CREATE PROCEDURE add_roster(
     IN mapel INT,
