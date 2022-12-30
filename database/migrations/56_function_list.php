@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -55,7 +56,7 @@ return new class extends Migration
         ');
 
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE FUNCTION waktu_akhir(
             waktu_awal TIME,
             durasi INT 
@@ -65,6 +66,19 @@ return new class extends Migration
             DECLARE waktu_akhir TIME;
             SET waktu_akhir = ADDTIME(waktu_awal, SEC_TO_TIME(durasi*60));
         return (waktu_akhir);
+        END
+        '); */
+
+        DB::unprepared('
+        CREATE FUNCTION durasi(
+            waktu_awal TIME,
+            waktu_akhir TIME 
+        )
+        RETURNS INT
+        BEGIN
+            DECLARE durasi INT;
+            SET durasi = TIMEDIFF(waktu_akhir, waktu_awal)*0.006;
+            return durasi;
         END
         ');
 
@@ -183,7 +197,7 @@ return new class extends Migration
         DB::unprepared('DROP FUNCTION umur');
         DB::unprepared('DROP FUNCTION masa_mengajar');
         DB::unprepared('DROP FUNCTION time_status');
-        // DB::unprepared('DROP FUNCTION waktu_akhir');
+        DB::unprepared('DROP FUNCTION durasi');
         // DB::unprepared('DROP FUNCTION get_sesi');
         // DB::unprepared('DROP FUNCTION indeks');
         // DB::unprepared('DROP FUNCTION is_nilai_exists');

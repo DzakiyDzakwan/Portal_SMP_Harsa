@@ -76,25 +76,30 @@ class GuruTableSeeder extends Seeder
 
 
         //Guru
-        User::create([
-            'uuid' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
-            'username' => '3333333333333333',
-            'password' => Hash::make('3333333333333333')
-        ])->assignRole('guru');
+        // User::create([
+        //     'uuid' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
+        //     'username' => '3333333333333333',
+        //     'password' => Hash::make('3333333333333333')
+        // ])->assignRole('guru');
 
-        Guru::create([
-            'NUPTK' => '3333333333333333',
-            'user' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
-            'jabatan' => 'guru',
-            'tanggal_masuk' => '2022-01-12',
-            'status' => 'aktif'
-        ]);
+        // Guru::create([
+        //     'NUPTK' => '3333333333333333',
+        //     'user' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
+        //     'jabatan' => 'guru',
+        //     'tanggal_masuk' => '2022-01-12',
+        //     'status' => 'aktif'
+        // ]);
 
-        UserProfile::Create([
-            'user' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
-            'nama' => 'Guru Satu',
-            'jenis_kelamin' => 'PR'
-        ]);
-
+        // UserProfile::Create([
+        //     'user' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
+        //     'nama' => 'Guru Satu',
+        //     'jenis_kelamin' => 'PR'
+        // ]);
+        DB::select('CALL add_guru(?, ?, ?, ?, ?, ?)', ["Guru Satu", '3333333333333333', Hash::make('3333333333333333'), '2022-01-12', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_guru(?, ?, ?, ?, ?, ?)', ["Guru Dua", '4444444444444444', Hash::make('4444444444444444'), '2022-01-12', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_guru(?, ?, ?, ?, ?, ?)', ["Guru Tiga", '5555555555555555', Hash::make('5555555555555555'), '2022-01-12', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_guru(?, ?, ?, ?, ?, ?)', ["Guru Empat", '6666666666666666', Hash::make('6666666666666666'), '2022-01-12', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_guru(?, ?, ?, ?, ?, ?)', ["Guru Lima", '7777777777777777', Hash::make('7777777777777777'), '2022-01-12', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_guru(?, ?, ?, ?, ?, ?)', ["Guru Enam", '8888888888888888', Hash::make('8888888888888888'), '2022-01-12', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }

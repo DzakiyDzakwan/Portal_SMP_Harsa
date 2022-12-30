@@ -14,7 +14,7 @@
         >
             <div class="modal-content">
                 <div class="modal-header bg-warning justify-content-center">
-                    <h4 class="modal-title white " id="myModalLabel33">Tambah Roster Kelas</h4>
+                    <h4 class="modal-title white " id="myModalLabel33">Edit Roster Kelas</h4>
                 </div>
                 <form class="form form-vertical" wire:submit.prevent="update">
                     @csrf
@@ -44,17 +44,17 @@
 
                             <div class="col-6">
                                 <div class="form-group has-icon-left">
-                                <label for="end">Durasi</label>
+                                <label for="start">Waktu Akhir</label>
                                 <div class="position-relative">
                                     <input
-                                    name="durasi"
-                                    type="number"
+                                    name="waktu_akhir"
+                                    type="time"
                                     class="form-control"
-                                    id="durasi"
-                                    wire:model.defer="durasi"
+                                    id="waktu_akhir"
+                                    wire:model.defer="waktu_akhir"
                                     />
                                     <div class="form-control-icon">
-                                        <i class="bi bi-hourglass-bottom"></i>
+                                        <i class="bi bi-clock-fill"></i>
                                     </div>
                                     <div class="invalid-feedback">
                                         <i class="bx bx-radio-circle"></i>
@@ -63,7 +63,7 @@
                                 </div>
                                 </div>
                             </div>
-                            {{-- Jadwal Ekskul --}}
+                            
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="hari">Hari</label>

@@ -41,9 +41,11 @@
                 </div>
                 <div class="form-group">
                     {{-- Button Cetak --}}
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-                        <i class="bi bi-printer"></i> &nbspCetak Daftar Siswa
-                    </button>
+                    <a href="/guru/siswa/cetak">
+                        <button type="button" class="btn btn-sm btn-primary">
+                            <i class="bi bi-printer"></i> &nbspCetak Daftar Siswa
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
