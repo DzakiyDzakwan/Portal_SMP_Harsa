@@ -20,15 +20,15 @@
                 @else
                     <td>Guru</td>
                 @endif
-                @if ($item->status == 'aktif')
+                {{-- @if ($item->status == 'aktif') --}}
                     <td>
                         <span class="badge bg-success">Active</span>
                     </td>
-                @else
+                {{-- @else
                     <td>
                         <span class="badge bg-danger">Inactive</span>
                     </td>
-                @endif
+                @endif --}}
                 <td>
                     {{-- Preview Button --}}
                     <div class="modal-info me-1 mb-1 d-inline-block">
@@ -39,7 +39,7 @@
 
                         </button>
                     </div>
-                    @if ($item->status == 'aktif')
+                    {{-- @if ($item->status == 'aktif') --}}
                         {{-- Update Button --}}
                         {{-- <div class="modal-success me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-warning"
@@ -89,9 +89,9 @@
                                 </div>
                             </div>
                         </div>
-                    @else
+                    {{-- @else --}}
                         {{-- Restore Button --}}
-                        <div class="modal-success me-1 mb-1 d-inline-block">
+                        {{-- <div class="modal-success me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                 data-bs-target="#restore{{ $item->user }}">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Restore">
@@ -125,7 +125,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- Delete Button --}}
                         {{-- <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
@@ -162,7 +162,7 @@
                                 </div>
                             </div>
                         </div> --}}
-                    @endif
+                    {{-- @endif --}}
                 </td>
             </tr>
         @endforeach

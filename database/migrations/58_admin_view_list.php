@@ -47,12 +47,22 @@ return new class extends Migration
         ');*/
 
         DB::unprepared('
-        CREATE VIEW list_guru AS
+        CREATE VIEW list_guru_active AS
         SELECT gurus.NUPTK, gurus.jabatan, gurus.status, gurus.user, user_profiles.nama
         FROM gurus
         LEFT JOIN users ON users.uuid = gurus.user
         LEFT JOIN user_profiles ON user_profiles.user = users.uuid
-        WHERE gurus.jabatan = "guru"
+        WHERE gurus.jabatan = "guru" AND gurus.status = "aktif"
+        ORDER BY gurus.created_at DESC
+        '); 
+
+        DB::unprepared('
+        CREATE VIEW list_guru_inactive AS
+        SELECT gurus.NUPTK, gurus.jabatan, gurus.status, gurus.user, user_profiles.nama
+        FROM gurus
+        LEFT JOIN users ON users.uuid = gurus.user
+        LEFT JOIN user_profiles ON user_profiles.user = users.uuid
+        WHERE gurus.jabatan = "guru" AND gurus.status = "inaktif"
         ORDER BY gurus.created_at DESC
         ');
 
@@ -85,7 +95,7 @@ return new class extends Migration
         FROM kelas
         LEFT JOIN gurus ON kelas.wali_kelas = gurus.NUPTK
         LEFT JOIN users ON gurus.user = users.uuid
-        INNER JOIN user_profiles ON users.uuid = user_profiles.user
+        LEFT JOIN user_profiles ON users.uuid = user_profiles.user
         LEFT JOIN kontrak_semesters ON kontrak_semesters.kelas = kelas.kelas_id
         LEFT JOIN siswas ON kontrak_semesters.siswa = siswas.NISN
         GROUP BY kelas.kelas_id;

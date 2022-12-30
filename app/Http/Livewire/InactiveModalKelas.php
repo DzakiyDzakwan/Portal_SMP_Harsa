@@ -26,7 +26,7 @@ class InactiveModalKelas extends Component
     public function render()
     {
         $this->gurus = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->get();
-        return view('livewire.inactive-modal-kelas');
+        return view('livewire.sekolah.manajemen-kelas.kelas.inactive-modal-kelas');
     }
 
     public function inactiveModal() {
@@ -34,7 +34,7 @@ class InactiveModalKelas extends Component
     }
 
     public function RestoreModal() {
-        $this->dispatchBrowserEvent('edit-modal');
+        $this->dispatchBrowserEvent('restore-modal');
     }
 
     public function getRestoreModal($id) {

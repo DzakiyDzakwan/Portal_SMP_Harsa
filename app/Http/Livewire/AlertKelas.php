@@ -8,6 +8,6 @@ class AlertKelas extends Component
 {
     public function render()
     {
-        return view('livewire.alert-kelas');
+        return view('livewire.sekolah.manajemen-kelas.kelas.alert-kelas');
     }
 }
