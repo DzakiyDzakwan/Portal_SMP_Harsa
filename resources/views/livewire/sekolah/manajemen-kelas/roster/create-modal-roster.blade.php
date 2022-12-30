@@ -62,6 +62,49 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- Tahun Ajaran --}}
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="kelas">Tahun Ajaran</label>
+                                    <div class="position-relative">
+                                        <input name="tahun_ajaran" type="text"
+                                            class="form-control"
+                                            id="tahun_ajaran" placeholder="{{ $tahunAktif }}" wire:model.defer="tahun_ajaran" disabled />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-calendar-week"></i>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            This is invalid state.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- Semester --}}
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="semester">Semester</label>
+                                    <div class="position-relative">
+                                        <input name="semester" type="text"
+                                            class="form-control"
+                                            id="semester" 
+                                            @if ($semesterAktif == 'ganjil')
+                                                placeholder="Ganjil"
+                                            @else 
+                                                placeholder="Genap"
+                                            @endif
+                                             wire:model.defer="semester" disabled />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-collection"></i>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            This is invalid state.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-6">
                                 <div class="form-group has-icon-left">
                                     <label for="start">Waktu Mulai</label>
@@ -81,12 +124,12 @@
 
                             <div class="col-6">
                                 <div class="form-group has-icon-left">
-                                    <label for="end">Durasi (Menit)</label>
+                                    <label for="start">Waktu Akhir</label>
                                     <div class="position-relative">
-                                        <input name="durasi" type="text" class="form-control" placeholder="Durasi"
-                                            id="end" wire:model.defer="durasi" />
+                                        <input name="waktu_akhir" type="time" class="form-control"
+                                            placeholder="Waktu Akhir" id="end" wire:model.defer="waktu_akhir" />
                                         <div class="form-control-icon">
-                                            <i class="bi bi-hourglass-bottom"></i>
+                                            <i class="bi bi-clock-fill"></i>
                                         </div>
                                         <div class="invalid-feedback">
                                             <i class="bx bx-radio-circle"></i>

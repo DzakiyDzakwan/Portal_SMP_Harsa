@@ -699,43 +699,48 @@ END?
 DELIMITER ;
 
 --Roster
---Add Roster
+--Add Roster (✅)
+DELIMITER ?
 CREATE PROCEDURE add_roster(
     IN mapel INT,
     IN kelas CHAR(3),
+    IN tahun_ajaran CHAR(9),
+    IN semester CHAR(6),
     IN waktu_mulai TIME,
-    IN durasi INT,
+    IN waktu_akhir TIME,
     IN hari CHAR(6),
-    IN admin CHAR(36)
+    IN actor CHAR(36)
 )
 BEGIN
     DECLARE errno INT;
-    DECLARE admin CHAR(36);
+    DECLARE actor CHAR(36);
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
     END;
 
-    SET admin = UUID();
+    SET actor = UUID();
 
     START TRANSACTION;
 
-    INSERT INTO roster_kelas(mapel, kelas, waktu_mulai, durasi, hari, created_at, updated_at) 
-    VALUES (mapel, kelas, waktu_mulai, durasi, hari, NOW(), NOW());
+    INSERT INTO rosters(mapel_guru, kelas, tahun_ajaran_aktif, semester_aktif, waktu_mulai, waktu_akhir, hari, created_at, updated_at) 
+    VALUES (mapel, kelas, tahun_ajaran, semester, waktu_mulai, waktu_akhir, hari, NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "insert", "roster_kelas", NOW());
+    VALUES(actor, "insert", "rosters", NOW());
     
     COMMIT;
-END
+END ?
+DELIMITER ;
 
---Update Roster
+--Update Roster (✅)
+DELIMITER ?
 CREATE PROCEDURE update_roster(
     IN roster INT,
     IN waktu_mulai TIME,
-    IN durasi INT,
+    IN waktu_akhir TIME,
     IN hari CHAR(6),
-    IN admin CHAR(36)
+    IN actor CHAR(36)
 )
 BEGIN
     DECLARE errno INT;
@@ -745,40 +750,43 @@ BEGIN
     END;
 
     START TRANSACTION;
-    UPDATE roster_kelas SET waktu_mulai = waktu_mulai, durasi = durasi, hari = hari WHERE roster_id = roster COLLATE utf8mb4_general_ci;
+    UPDATE rosters SET waktu_mulai = waktu_mulai, waktu_akhir = waktu_akhir, hari = hari WHERE roster_id = roster;
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "roster_kelas", NOW());
+    VALUES(actor, "update", "rosters", NOW());
 
     COMMIT;
-    
-END
+END ?
+DELIMITER ;
 
---Delete Roster
+--Delete Roster (✅)
+DELIMITER ?
 CREATE PROCEDURE delete_roster(
     IN roster INT,
-    IN admin CHAR(36)
+    IN actor CHAR(36)
 )
 BEGIN
     DECLARE errno INT;
-    DECLARE admin CHAR(36);
+    DECLARE actor CHAR(36);
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
     END;
 
-    SET admin = UUID();
+    SET actor = UUID();
 
     START TRANSACTION;
-    DELETE FROM roster_kelas WHERE roster_id = roster;
+    DELETE FROM rosters WHERE roster_id = roster;
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "delete", "roster_kelas", NOW());
+    VALUES(actor, "delete", "rosters", NOW());
     
     COMMIT;
 
-END
+END?
+DELIMITER ;
 
+--Ekskul
 -- Add Ekskul
 CREATE PROCEDURE add_ekstrakurikuler(
             IN admin CHAR(36),

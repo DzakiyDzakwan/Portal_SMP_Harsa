@@ -31,16 +31,7 @@ class ListRoster extends Component
 
     public function render()
     {
-        // $this->roster = DB::table('table_roster_kelas')->get();
-        /* $this->roster = DB::table('roster_kelas')
-        ->join('kelas', 'kelas.kelas_id', '=', 'roster_kelas.kelas')
-        ->join('mapel_gurus', 'mapel_gurus.mapel_guru_id', '=', 'roster_kelas.mapel')
-        ->join('mapels', 'mapels.mapel_id', '=', 'mapel_gurus.mapel')
-        ->join('gurus', 'gurus.NIP', '=', 'mapel_gurus.guru')
-        ->join('users', 'users.uuid', '=', 'gurus.user')
-        ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
-        ->get(); */
-        $this->roster = DB::table('list_roster_kelas')->get();
-        return view('livewire.list-roster');
+        $this->roster = DB::table('list_roster')->get();
+        return view('livewire.sekolah.manajemen-kelas.roster.list-roster');
     }
 }

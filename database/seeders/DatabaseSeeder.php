@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionTableSeeder::class);
         $this->call(GuruTableSeeder::class);
         $this->call(TahunAjaranTableSeeder::class);
-        /* $this->call(MapelTableSeeder::class);
         $this->call(KelasTableSeeder::class);
         $this->call(SiswaTableSeeder::class);
+        /* $this->call(MapelTableSeeder::class);
         $this->call(PrestasiTableSeeder::class);
         $this->call(SesiTableSeeder::class); */
     }

@@ -737,6 +737,92 @@ return new class extends Migration
                 COMMIT;
             END
         ');
+
+        DB::unprepared('
+            CREATE PROCEDURE add_roster(
+                IN mapel INT,
+                IN kelas CHAR(3),
+                IN tahun_ajaran CHAR(9),
+                IN semester CHAR(6),
+                IN waktu_mulai TIME,
+                IN waktu_akhir TIME,
+                IN hari CHAR(6),
+                IN actor CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE actor CHAR(36);
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+
+                SET actor = UUID();
+
+                START TRANSACTION;
+
+                INSERT INTO rosters(mapel_guru, kelas, tahun_ajaran_aktif, semester_aktif, waktu_mulai, waktu_akhir, hari, created_at, updated_at) 
+                VALUES (mapel, kelas, tahun_ajaran, semester, waktu_mulai, waktu_akhir, hari, NOW(), NOW());
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "insert", "rosters", NOW());
+                
+                COMMIT;
+            END
+
+        ');
+
+        DB::unprepared('
+            CREATE PROCEDURE delete_roster(
+                IN roster INT,
+                IN actor CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE actor CHAR(36);
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+
+                SET actor = UUID();
+
+                START TRANSACTION;
+                DELETE FROM rosters WHERE roster_id = roster;
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "delete", "rosters", NOW());
+                
+                COMMIT;
+
+            END
+        '); 
+
+        DB::unprepared('
+            CREATE PROCEDURE update_roster(
+                IN roster INT,
+                IN waktu_mulai TIME,
+                IN waktu_akhir TIME,
+                IN hari CHAR(6),
+                IN actor CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+
+                START TRANSACTION;
+                UPDATE rosters SET waktu_mulai = waktu_mulai, waktu_akhir = waktu_akhir, hari = hari WHERE roster_id = roster;
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "update", "rosters", NOW());
+
+                COMMIT;
+            END
+        ');
+
         /*
         DB::unprepared('
         CREATE PROCEDURE update_kelas(
@@ -1089,7 +1175,7 @@ CREATE PROCEDURE delete_ekstrakurikuler(
 
             END
         ');
-/*
+        /*
         DB::unprepared('
 CREATE PROCEDURE add_roster(
     IN mapel INT,
@@ -1220,8 +1306,9 @@ BEGIN
         DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE update_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
-        // DB::unprepared("DROP PROCEDURE add_roster");
-        // DB::unprepared("DROP PROCEDURE update_roster");
-        // DB::unprepared("DROP PROCEDURE delete_roster");
+        DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler_siswa");
+        DB::unprepared("DROP PROCEDURE add_roster");
+        DB::unprepared("DROP PROCEDURE update_roster");
+        DB::unprepared("DROP PROCEDURE delete_roster");
     }
 };
