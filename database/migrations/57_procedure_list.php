@@ -399,7 +399,7 @@ return new class extends Migration
             END
         ');
 
-        
+
         DB::unprepared('
         CREATE PROCEDURE restore_guru (
             IN guru CHAR(36),
@@ -473,7 +473,7 @@ return new class extends Migration
         
         END
         ');
-        
+
         /*
         DB::unprepared('
         CREATE PROCEDURE delete_guru (
@@ -502,13 +502,13 @@ return new class extends Migration
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(admin, "delete", "users", NOW());
             END
-        ');
-
+        '); */
         DB::unprepared('
         CREATE PROCEDURE add_mapel(
-            IN mapel CHAR(3),
+            IN mapel CHAR(5),
             IN nama VARCHAR(255),
             IN kelompok CHAR(1),
+            IN kkm integer,
             IN krklm VARCHAR(255),
             IN admin CHAR(36)
             )
@@ -521,8 +521,8 @@ return new class extends Migration
                 END;
                 START TRANSACTION;
             
-                INSERT INTO mapels(mapel_id, nama_mapel, kelompok_mapel, kurikulum, created_at, updated_at)
-                VALUES (mapel, nama, kelompok, krklm, NOW(), NOW());
+                INSERT INTO mapels(mapel_id, nama_mapel, kelompok_mapel, kkm, kurikulum, created_at, updated_at)
+                VALUES (mapel, nama, kelompok, kkm, krklm, NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(admin, "insert", "mapels", NOW());
@@ -534,7 +534,7 @@ return new class extends Migration
 
         DB::unprepared('
             CREATE PROCEDURE inactive_mapel(
-                IN mapel CHAR(3),
+                IN mapel CHAR(5),
                 admin CHAR(36)
             )
             BEGIN
@@ -546,41 +546,36 @@ return new class extends Migration
                     END;
                 START TRANSACTION;
                 UPDATE mapels SET deleted_at = NOW() WHERE mapel_id = mapel COLLATE utf8mb4_general_ci;
-            
+
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(admin, "update", "mapels", NOW());
-            
+
                 UPDATE mapel_gurus SET deleted_at = NOW() WHERE mapel = mapel COLLATE utf8mb4_general_ci;
 
                 COMMIT;
-                
+
             END
         ');
 
         DB::unprepared('
-        CREATE PROCEDURE inactive_mapel_guru(
-            IN mapelguru CHAR(3),
+        CREATE PROCEDURE restore_mapel(
+            IN mapel CHAR(5),
             IN admin CHAR(36)
         )
         BEGIN
-
-            DECLARE errno INT;
-            DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
-            START TRANSACTION;
-            UPDATE mapel_gurus SET deleted_at = NOW() WHERE mapel_guru_id = mapelguru COLLATE utf8mb4_general_ci;
+        
+            UPDATE users SET deleted_at = NULL WHERE uuid = admin COLLATE utf8mb4_general_ci;
+            UPDATE mapels SET deleted_at = NULL WHERE mapel_id = mapel COLLATE utf8mb4_general_ci;
         
             INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "mapels", NOW());
-            COMMIT;
+            VALUES(admin, "update", "mapel", NOW());
+            
         END
         ');
 
         DB::unprepared('
             CREATE PROCEDURE delete_mapel(
-                IN mapel CHAR(3),
+                IN mapel CHAR(5),
                 IN admin CHAR(36)
             )
             BEGIN
@@ -593,7 +588,7 @@ return new class extends Migration
                 START TRANSACTION;
 
                 DELETE FROM mapels WHERE mapel_id = mapel COLLATE utf8mb4_general_ci;
-            
+
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(admin, "update", "mapels", NOW());
 
@@ -601,7 +596,7 @@ return new class extends Migration
 
             END
         ');
-        */
+
         DB::unprepared('
             CREATE PROCEDURE add_kelas(
                 IN kelas CHAR(3),
@@ -913,12 +908,14 @@ return new class extends Migration
                 
                 COMMIT;
             END
-        ');
+        '); */
 
         DB::unprepared('
         CREATE PROCEDURE add_sesi(
+            IN sesi_id VARCHAR(3),
             IN sesi VARCHAR(3),
-            IN ta YEAR,
+            IN ta VARCHAR(9),
+            IN sem VARCHAR(6),
             IN start DATETIME,
             IN end DATETIME,
             IN admin CHAR(36)
@@ -929,13 +926,13 @@ return new class extends Migration
             
             SELECT username INTO uname FROM users WHERE uuid = admin COLLATE utf8mb4_general_ci;
             
-            INSERT INTO sesi_penilaians(nama_sesi, tahun_ajaran, tanggal_mulai, tanggal_berakhir, created_by)
-            VALUES(sesi, ta, start, end, uname);
+            INSERT INTO sesi_penilaians(sesi_id, nama_sesi, tahun_ajaran_aktif, semester_aktif, tanggal_mulai,tanggal_berakhir)
+            VALUES(sesi_id, ta, sem, start, end, uname);
         
         END
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
             CREATE PROCEDURE add_nilai(
                 IN sesi INT,
                 IN jenis CHAR(5),
@@ -1031,7 +1028,7 @@ CREATE PROCEDURE update_ekstrakurikuler(
                 
             END
         ');
-        
+
         DB::unprepared('
 CREATE PROCEDURE delete_ekstrakurikuler(
     IN admin CHAR(36),
@@ -1058,7 +1055,7 @@ CREATE PROCEDURE delete_ekstrakurikuler(
 
             END
         ');
-/*
+        /*
         DB::unprepared('
 CREATE PROCEDURE add_roster(
     IN mapel INT,
@@ -1141,7 +1138,6 @@ BEGIN
 
         END
         '); */
-        
     }
 
     /**
@@ -1172,9 +1168,10 @@ BEGIN
         // DB::unprepared("DROP PROCEDURE inactive_guru");
         // DB::unprepared("DROP PROCEDURE restore_guru");
         // DB::unprepared("DROP PROCEDURE delete_guru");
-        // DB::unprepared("DROP PROCEDURE add_mapel");
-        // DB::unprepared("DROP PROCEDURE inactive_mapel");
-        // DB::unprepared("DROP PROCEDURE delete_mapel");
+        DB::unprepared("DROP PROCEDURE add_mapel");
+        DB::unprepared("DROP PROCEDURE inactive_mapel");
+        DB::unprepared("DROP PROCEDURE restore_mapel");
+        DB::unprepared("DROP PROCEDURE delete_mapel");
         // DB::unprepared("DROP PROCEDURE add_kelas");
         // DB::unprepared("DROP PROCEDURE update_kelas");
         // DB::unprepared("DROP PROCEDURE restore_kelas");

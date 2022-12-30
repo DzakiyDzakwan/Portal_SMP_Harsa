@@ -18,6 +18,6 @@ class InfoCardMapel extends Component
     {
         $this->totalMapel = Mapel::count();
         $this->totalMapelGuru = MapelGuru::count();
-        return view('livewire.info-card-mapel');
+        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran.info-card-mapel');
     }
 }

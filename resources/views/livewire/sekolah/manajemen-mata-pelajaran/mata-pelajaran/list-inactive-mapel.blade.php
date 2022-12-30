@@ -6,6 +6,7 @@
                 <th>Kode Mapel</th>
                 <th>Nama Mapel</th>
                 <th>Kelompok Mapel</th>
+                <th>KKM</th>
                 <th>Kurikulum</th>
                 <th>Deleted_at</th>
                 <th>Action</th>
@@ -19,7 +20,9 @@
                         <td>{{ $item->mapel_id }}</td>
                         <td>{{ $item->nama_mapel }}</td>
                         <td>{{ $item->kelompok_mapel }}</td>
+                        <td>{{ $item->kkm }}</td>
                         <td>{{ $item->kurikulum }}</td>
+                        <td>{{ $item->deleted_at }}</td>
                         <td>
                             <div class="modal-danger me-1 mb-1 d-inline-block">
                                 <button type="button" class="btn btn-sm btn-success"

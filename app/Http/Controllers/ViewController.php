@@ -6,92 +6,108 @@ use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
-    public function user() {
-       $menu = 'manajemenuser';
+    public function user()
+    {
+        $menu = 'manajemenuser';
         return view('user.user', compact('menu'));
     }
 
-    public function role() {
+    public function role()
+    {
         $menu = 'manajemenuser';
         return view('user.role', compact('menu'));
     }
 
-    public function  permission() {
+    public function  permission()
+    {
         $menu = 'manajemenuser';
         return view('user.permission', compact('menu'));
     }
 
-    public function admin() {
-        $menu = 'akun';
+    public function admin()
+    {
+        $menu = 'manajemenakun';
         $submenus = 'admin';
 
         // dd('admin');
         return view('user.admin', compact('menu'));
     }
 
-    public function guru() {
+    public function guru()
+    {
         $menu = 'manajemenakun';
         return view('user.guru', compact('menu'));
     }
 
-    public function siswa() {
-        $menu = 'akun';
-        // dd('siswa');
+    public function siswa()
+    {
+        $menu = 'manajemenakun';
+        dd('siswa');
         return view('user.siswa', compact('menu'));
     }
 
-    public function tahunAkademik() {
+    public function tahunAkademik()
+    {
         $menu = 'tahunakademik';
         return view('sekolah.tahunakademik', compact('menu'));
     }
 
-    public function kelasSaya() {
+    public function kelasSaya()
+    {
         $menu = 'walikelas';
         dd('Kelas Saya');
         return view('sekolah.walikelas', compact('menu'));
     }
 
-    public function mapel() {
+    public function mapel()
+    {
         $menu = 'manajemenmapel';
-        dd('mata pelajaran');
+        //dd('mata pelajaran');
         return view('sekolah.mapel', compact('menu'));
     }
 
-    public function mapelGuru() {
+    public function mapelGuru()
+    {
         $menu = 'manajemenmapel';
-        dd('mata pelajaran guru');
+        //dd('mata pelajaran guru');
         return view('sekolah.mapelguru', compact('menu'));
     }
 
-    public function kelas() {
+    public function kelas()
+    {
         $menu = 'sekolah';
         return view('sekolah.kelas', compact('menu'));
     }
 
-    public function roster() {
+    public function roster()
+    {
         $menu = 'sekolah';
         dd('roster');
         return view('sekolah.roster', compact('menu'));
     }
 
-    public function sesiPenilaian() {
+    public function sesiPenilaian()
+    {
         $menu = 'sekolah';
-        dd('sesi Penilaian');
+        //dd('sesi Penilaian');
         return view('sekolah.sesinilai', compact('menu'));
     }
 
-    public function ekstrakurikuler() {
+    public function ekstrakurikuler()
+    {
         $menu = 'sekolah';
         return view('sekolah.ekskul', compact('menu'));
     }
 
-    public function ekstrakurikulerSiswa() {
+    public function ekstrakurikulerSiswa()
+    {
         $menu = 'sekolah';
         dd('ekstrakurikuler siswa');
         return view('sekolah.ekskul_siswa', compact('menu'));
     }
 
-    public function nilaiEkstrakurikuler() {
+    public function nilaiEkstrakurikuler()
+    {
         $menu = 'sekolah';
         dd('nilai Ekstrakurikuler');
         return view('sekolah.nilai_ekskul', compact('menu'));

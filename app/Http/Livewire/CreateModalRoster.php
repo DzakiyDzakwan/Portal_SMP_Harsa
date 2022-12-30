@@ -9,7 +9,7 @@ use App\Models\LogActivity;
 
 class CreateModalRoster extends Component
 {
-    public $kelass, $mapels, $mapel, $kelas, $waktu_mulai, $durasi, $hari; 
+    public $kelass, $mapels, $mapel, $kelas, $waktu_mulai, $durasi, $hari;
 
     public function store()
     {
@@ -24,7 +24,7 @@ class CreateModalRoster extends Component
 
     public function render()
     {
-        $this->mapels = DB::table('mapel_gurus')->join('gurus', 'gurus.NIP', '=', 'mapel_gurus.guru')->join('user_profiles', 'user_profiles.user', '=', 'gurus.user')->join('mapels', 'mapel_gurus.mapel', '=', 'mapels.mapel_id')->get();
+        $this->mapels = DB::table('mapel_gurus')->join('gurus', 'gurus.NUPTK', '=', 'mapel_gurus.guru')->join('user_profiles', 'user_profiles.user', '=', 'gurus.user')->join('mapels', 'mapel_gurus.mapel', '=', 'mapels.mapel_id')->get();
         $this->kelass = DB::table('kelas')->get();
         return view('livewire.create-modal-roster');
     }

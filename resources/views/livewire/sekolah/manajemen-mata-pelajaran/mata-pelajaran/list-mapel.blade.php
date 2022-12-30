@@ -5,6 +5,7 @@
             <th>Kode Mapel</th>
             <th>Nama Mapel</th>
             <th>Kelompok Mapel</th>
+            <th>KKM</th>
             <th>Kurikulum</th>
             <th>Action</th>
         </tr>
@@ -22,6 +23,7 @@
                         {{ 'Wajib' }}
                     @endif
                 </td>
+                <td>{{ $pel->kkm }}</td>
                 <td>{{ $pel->kurikulum }}</td>
                 <td>
                     {{-- Update Button --}}

@@ -4,7 +4,7 @@
         aria-labelledby="myModalLabel33" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-warning">
+                <div class="modal-header bg-success justify-content-center">
                     <h4 class="modal-title white" id="myModalLabel33">
                         Tambah Mata Pelajaran Guru
                     </h4>
@@ -12,14 +12,14 @@
                 <form class="form form-vertical" wire:submit.prevent="update">
                     @csrf
                     <div class="modal-body">
-                        {{-- pilih mapel --}}
                         <div class="col-12">
                             <div class="form-group has-icon-left">
                                 <label for="mapel">Mata Pelajaran</label>
                                 <div class="position-relative">
-                                    <select name="mapel" class="form-select form-control" id="basicSelect"
-                                        wire:model.defer="mapel">
+                                    <select wire:model.defer="mapel" name="mapel" class="form-select form-control"
+                                        id="basicSelect">
                                         <option>Pilih Mata Pelajaran</option>
+                                        <option value="uh1">Ujian Harian 1</option>
                                         @foreach ($pelajaran as $p)
                                             <option value="{{ $p->mapel_id }}">{{ $p->nama_mapel }}
                                                 @if ($p->kelompok_mapel = 'A')
@@ -31,7 +31,7 @@
                                         @endforeach
                                     </select>
                                     <div class="form-control-icon">
-                                        <i class="bi bi-book-half"></i></i>
+                                        <i class="bi bi-tags-fill"></i>
                                     </div>
                                     <div class="invalid-feedback">
                                         <i class="bx bx-radio-circle"></i>
@@ -40,6 +40,9 @@
                                 </div>
                             </div>
                         </div>
+                        <input hidden name="mapel_guru_id" type="text"
+                            class="form-control @error('nama_mapel') is-invalid @enderror "
+                            placeholder="Nama Mata Pelajaran" id="mapel_guru_id" wire:model.defer="nama_mapel" />
                         <div class="col-12">
                             <div class="form-group has-icon-left">
                                 <label for="guru">Guru</label>
@@ -48,7 +51,7 @@
                                         wire:model.defer="guru">
                                         <option>Pilih Guru</option>
                                         @foreach ($guruu as $g)
-                                            <option value="{{ $g->NIP }}">{{ $g->nama }}</option>
+                                            <option value="{{ $g->NUPTK }}">{{ $g->nama }}</option>
                                         @endforeach
                                     </select>
                                     <div class="form-control-icon">

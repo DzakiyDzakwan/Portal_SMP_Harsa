@@ -44,6 +44,9 @@
                                 </div>
                             </div>
                         </div>
+                        <input hidden name="mapel_guru_id" type="text"
+                            class="form-control @error('nama_mapel') is-invalid @enderror "
+                            placeholder="Nama Mata Pelajaran" id="mapel_guru_id" wire:model.defer="nama_mapel" />
                         <div class="col-12">
                             <div class="form-group has-icon-left">
                                 <label for="guru">Guru</label>
@@ -52,7 +55,7 @@
                                         wire:model.defer="guru">
                                         <option>Pilih Guru</option>
                                         @foreach ($guruu as $g)
-                                            <option value="{{ $g->NIP }}">{{ $g->nama }}</option>
+                                            <option value="{{ $g->NUPTK }}">{{ $g->nama }}</option>
                                         @endforeach
                                     </select>
                                     <div class="form-control-icon">
