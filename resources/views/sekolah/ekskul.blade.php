@@ -30,7 +30,7 @@
                 </li>
 
                 <li class="breadcrumb-item active" aria-current="page">
-                    Ekskul
+                    Ekstrakurikuler
                 </li>
             </ol>
         </nav>

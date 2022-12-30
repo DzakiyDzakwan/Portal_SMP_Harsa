@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -85,7 +86,7 @@ return new class extends Migration
         DB::unprepared('
         CREATE VIEW table_log_ekstrakurikuler_siswas AS
         SELECT *
-        FROM ekstrakurikuler_siswas
+        FROM log_ekstrakurikuler_siswas
         ');
     }
 
