@@ -1,7 +1,7 @@
 @extends('master.main')
 
 @section('title')
-    <title>Penilaian</title>
+    <title>Sesi Penilaian</title>
 @endsection
 
 @section('style')
@@ -22,7 +22,7 @@
                         <a href="/">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Kelas
+                        sesi-penilaian
                     </li>
                 </ol>
             </nav>
@@ -31,6 +31,7 @@
 
     {{-- Info Card --}}
     @livewire('info-card-nilai')
+    @livewire('info-card-tahun-akademik')
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
             <h5>List Konfirmasi Nilai</h5>

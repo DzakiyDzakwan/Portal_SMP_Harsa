@@ -540,26 +540,7 @@ END?
 DELIMITER ;
 
 /* Sesi Penilaian */
---add sesi (✅)
-DELIMITER ?
-CREATE PROCEDURE add_sesi(
-    IN sesi VARCHAR(3),
-    IN ta YEAR,
-    IN start DATETIME,
-    IN end DATETIME,
-    IN admin CHAR(36)
-)
-BEGIN
 
-DECLARE uname VARCHAR(255);
-
-SELECT username INTO uname FROM users WHERE uuid = admin COLLATE utf8mb4_general_ci;
-
-INSERT INTO sesi_penilaians(nama_sesi, tahun_ajaran, tanggal_mulai, tanggal_berakhir, created_by)
-VALUES(sesi, ta, start, end, uname);
-
-END?
-DELIMITER ;
 
 /* Nilai */
 --Input Nilai(✅)

@@ -402,7 +402,7 @@ DELIMITER;
 
 
 /* Tahun Ajaran */
---Add Tahun Ajaran (✅)()
+--Add Tahun Ajaran (✅)(📄)
 DELIMITER ?
 CREATE PROCEDURE add_tahun_ajaran(
     IN tahun_ajaran CHAR(9),
@@ -425,14 +425,14 @@ BEGIN
     VALUES(UUID(), tahun_ajaran, semester, start, end, NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "update", "tahun_ajarans", NOW());
+    VALUES(admin, "insert", "tahun_ajarans", NOW());
 
     COMMIT;
 
 END?
 DELIMITER ;
 
---Update Tahun Ajaran(✅)()
+--Update Tahun Ajaran()()
 DELIMITER ?
 CREATE PROCEDURE update_tahun_ajaran(
     IN tahun_ajaran CHAR(36),
@@ -450,10 +450,10 @@ DECLARE errno INT;
 
     START TRANSACTION;
 
-    UPDATE tahun_ajarans SET tanggal_mulai = start, tanggal_berakhir = end, updated_at = NOW() wHERE tahun_ajaran_id = tahun_ajaran;
+    UPDATE tahun_ajarans SET tanggal_mulai = start, tanggal_berakhir = end, updated_at = NOW() wHERE tahun_ajaran_id = tahun_ajaran COLLATE utf8mb4_general_ci;;
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(admin, "insert", "tahun_ajarans", NOW());
+    VALUES(admin, "update", "tahun_ajarans", NOW());
 
     COMMIT;
 
@@ -473,5 +473,24 @@ DELIMITER ;
 
 
 /* Manajemen Nilai */
+--add sesi ()()
+DELIMITER ?
+CREATE PROCEDURE add_sesi(
+    IN sesi CHAR(3),
+    IN ta CHAR(9),
+    IN semester CHAR(6),
+    IN start DATETIME,
+    IN end DATETIME,
+    IN admin CHAR(36)
+)
+BEGIN
 
+INSERT INTO sesi_penilaians(sesi_id ,nama_sesi, tahun_ajaran_aktif, semester_aktif, tanggal_mulai, tanggal_berakhir, created_at, updated_at)
+VALUES(UUID(), sesi, ta, semester, start, end, NOW(), NOW());
+
+INSERT INTO log_activities(actor, action, at, created_at)
+VALUES(admin, "insert", "sesi_penilaians", NOW());
+
+END?
+DELIMITER ;
 /* Manajemen Nilai */

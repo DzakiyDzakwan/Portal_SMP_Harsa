@@ -181,7 +181,7 @@ return new class extends Migration
                 VALUES(actor, "insert", "users", NOW());
 
                 INSERT INTO model_has_roles(role_id, model_type, model_id)
-                VALUES ("3", "App\Models\User", uuid);
+                VALUES ("3", "App\\Models\\User", uuid);
 
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "model_has_roles", NOW());
@@ -440,7 +440,7 @@ return new class extends Migration
             VALUES(UUID(), tahun_ajaran, semester, start, end, NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "tahun_ajarans", NOW());
+            VALUES(admin, "insert", "tahun_ajarans", NOW());
         
             COMMIT;
         
@@ -467,7 +467,7 @@ return new class extends Migration
             UPDATE tahun_ajarans SET tanggal_mulai = start, tanggal_berakhir = end, updated_at = NOW() wHERE tahun_ajaran_id = tahun_ajaran COLLATE utf8mb4_general_ci;
         
             INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "insert", "tahun_ajarans", NOW());
+            VALUES(admin, "update", "tahun_ajarans", NOW());
         
             COMMIT;
         
@@ -713,7 +713,7 @@ return new class extends Migration
             VALUES(actor, "insert", "users", NOW());
 
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("5", "App\Models\User", uuid);
+            VALUES ("6", "App\\Models\\User", uuid);
 
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "model_has_roles", NOW());
@@ -1061,22 +1061,20 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE PROCEDURE add_sesi(
-            IN sesi_id VARCHAR(3),
-            IN sesi VARCHAR(3),
-            IN ta VARCHAR(9),
-            IN sem VARCHAR(6),
+            IN sesi CHAR(3),
+            IN ta CHAR(9),
+            IN semester CHAR(6),
             IN start DATETIME,
             IN end DATETIME,
             IN admin CHAR(36)
         )
         BEGIN
-            
-            DECLARE uname VARCHAR(255);
-            
-            SELECT username INTO uname FROM users WHERE uuid = admin COLLATE utf8mb4_general_ci;
-            
-            INSERT INTO sesi_penilaians(sesi_id, nama_sesi, tahun_ajaran_aktif, semester_aktif, tanggal_mulai,tanggal_berakhir)
-            VALUES(sesi_id, ta, sem, start, end, uname);
+        
+        INSERT INTO sesi_penilaians(sesi_id ,nama_sesi, tahun_ajaran_aktif, semester_aktif, tanggal_mulai, tanggal_berakhir, created_at, updated_at)
+        VALUES(UUID(), sesi, ta, semester, start, end, NOW(), NOW());
+        
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(admin, "insert", "sesi_penilaians", NOW());
         
         END
         ');
@@ -1334,12 +1332,12 @@ BEGIN
         DB::unprepared("DROP PROCEDURE delete_admin");
         DB::unprepared("DROP PROCEDURE inactive_admin");
         DB::unprepared("DROP PROCEDURE restore_admin");
+        DB::unprepared("DROP PROCEDURE add_guru");
         DB::unprepared("DROP PROCEDURE add_siswa");
         DB::unprepared("DROP PROCEDURE update_siswa");
         DB::unprepared("DROP PROCEDURE inactive_siswa");
         // DB::unprepared("DROP PROCEDURE inactive_admin");
         // DB::unprepared("DROP PROCEDURE restore_admin");
-        // DB::unprepared("DROP PROCEDURE add_guru");
         // DB::unprepared("DROP PROCEDURE update_guru");
         // DB::unprepared("DROP PROCEDURE inactive_guru");
         // DB::unprepared("DROP PROCEDURE restore_guru");

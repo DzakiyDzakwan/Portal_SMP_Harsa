@@ -18,14 +18,14 @@
                     <div class="modal-body">
                         <div class="col-12">
                             <div class="form-group has-icon-left">
-                                <label for="nama_sesi">Nama Sesi Pelajaran</label>
+                                <label for="nama_sesi">Sesi Pelajaran</label>
                                 <div class="position-relative">
                                     <select wire:model.defer="nama_sesi" name="nama_sesi"
                                         class="form-select form-control" id="basicSelect">
-                                        <option value="">Pilih Nama Sesi</option>
-                                        <option value="uh1">Ujian Harian 1</option>
-                                        <option value="uh2">Ujian Harian 2</option>
-                                        <option value="uh3">Ujian Harian 3</option>
+                                        <option value="">Pilih Sesi</option>
+                                        <option value="uh1">Ulangan Harian 1</option>
+                                        <option value="uh2">Ulangan Harian 2</option>
+                                        <option value="uh3">Ulangan Harian 3</option>
                                         <option value="uts">Ujian Tengah Semestrer</option>
                                         <option value="uas">Ujian Akhir Semestrer</option>
                                     </select>
@@ -46,7 +46,7 @@
                                     <input name="tahun_ajaran_aktif" type="text"
                                         class="form-control @error('tahun_ajaran_aktif') is-invalid @enderror "
                                         placeholder="Tahun Ajaran" id="tahun_ajaran_aktif"
-                                        wire:model.defer="tahun_ajaran_aktif" />
+                                        wire:model.defer="tahun_ajaran_aktif" disabled />
                                     <div class="form-control-icon">
                                         <i class="bi bi-calendar-week"></i>
                                     </div>
@@ -64,10 +64,10 @@
                                 <label for="semester_aktif">Semester</label>
                                 <div class="position-relative">
                                     <select wire:model.defer="semester_aktif" name="semester_aktif"
-                                        class="form-select form-control" id="basicSelect">
+                                        class="form-select form-control" id="basicSelect" disabled>
                                         <option value="">Pilih Semester</option>
-                                        <option value="Ganjil">Ganjil</option>
-                                        <option value="Genap">Genap</option>
+                                        <option value="ganjil">Ganjil</option>
+                                        <option value="genap">Genap</option>
                                     </select>
                                     <div class="form-control-icon">
                                         <i class="bi bi-diagram-2"></i>

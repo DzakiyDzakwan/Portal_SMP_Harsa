@@ -31,27 +31,31 @@
                 </td>
                 <td>{{ $s->tahun_ajaran_aktif }}</td>
                 <td>{{ $s->semester_aktif }}</td>
-                <td>{{ $s->waktu_mulai }}</td>
-                <td>{{ $s->waktu_selesai }}</td>
-                <td>{{ $s->jumlah_hari }}</td>
+                <td>{{ $s->tanggal_mulai }}</td>
+                <td>{{ $s->tanggal_berakhir }}</td>
+                <td>{{ $s->jumlah_hari }} Hari</td>
                 {{-- <td>{{ $s->status }}</td> --}}
                 <td>
-                    @if ($s->status == 'Inaktif')
-                        <span class="badge bg-danger">Inaktif</span>
-                    @else
+                    @if ($s->status == 'aktif')
                         <span class="badge bg-success">Aktif</span>
+                    @elseif($s->status == 'selesai')
+                        <span class="badge bg-danger">Selesai</span>
+                    @else
+                        <span class="badge bg-warning">Inaktif</span>
                     @endif
                 </td>
-                <td>
-                    {{-- Update Button --}}
-                    <div class="modal-warning me-1 mb-1 d-inline-block">
-                        <button class="btn btn-sm btn-warning" wire:click="editSesi('{{ $s->sesi_id }}')">
-                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User">
-                                <i class="bi bi-pencil"></i></a>
-                            </div>
-                        </button>
-                    </div>
-                </td>
+                @if ($s->status !== 'selesai')
+                    <td>
+                        {{-- Update Button --}}
+                        <div class="modal-warning me-1 mb-1 d-inline-block">
+                            <button class="btn btn-sm btn-warning" wire:click="editSesi('{{ $s->id }}')">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User">
+                                    <i class="bi bi-pencil"></i></a>
+                                </div>
+                            </button>
+                        </div>
+                    </td>
+                @endif
             </tr>
         @endforeach
     </tbody>

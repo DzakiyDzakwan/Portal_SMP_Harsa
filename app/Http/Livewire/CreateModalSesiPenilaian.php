@@ -31,23 +31,13 @@ class CreateModalSesiPenilaian extends Component
         //     'tanggal_berakhir' => 'required'
         // ]);
 
-        SesiPenilaian::create([
-            'nama_sesi' => $this->nama_sesi,
-            'tahun_ajaran_aktif' => $this->tahun_ajaran_aktif,
-            'semester_aktif' => $this->semester_aktif,
-            'tanggal_mulai' => $this->tanggal_mulai,
-            'tanggal_berakhir' => $this->tanggal_berakhir
-        ]);
+        $start = date("Y-m-d H:i:s", strtotime($this->tanggal_mulai));
+        $end = date("Y-m-d H:i:s", strtotime($this->tanggal_berakhir));
+        
+        DB::select('CALL add_sesi(?, ?, ?, ?, ?, ?)', [ $this->nama_sesi, $this->tahun_ajaran_aktif, $this->semester_aktif, $start, $end, auth()->user()->uuid]);
 
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'insert',
-            'at' => 'sesi_penilaians'
-        ]);
-
-        //DB::select('CALL add_sesi(?, ?, ?, ?, ?, ?, ?)', [$this->sesi_id, $this->nama_sesi, $this->tahun_ajaran_aktif, $this->semester_aktif, $this->tanggal_mulai, $this->tanggal_berakhir, auth()->user()->uuid]);
-
-        $this->reset();
+        $this->tanggal_mulai = null;
+        $this->tanggal_berakhir = null;
         $this->emit('sesiStore');
         $this->dispatchBrowserEvent('close-create-modal');
         $this->dispatchBrowserEvent('insert-alert');
@@ -55,6 +45,9 @@ class CreateModalSesiPenilaian extends Component
 
     public function render()
     {
+        $data = DB::table('list_tahun_ajaran')->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
+        $this->tahun_ajaran_aktif = $data->tahun_ajaran;
+        $this->semester_aktif = $data->semester;
         return view('livewire.sekolah.manajemen-nilai.create-modal-sesi-penilaian');
     }
 }

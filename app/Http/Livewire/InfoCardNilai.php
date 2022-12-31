@@ -15,7 +15,7 @@ class InfoCardNilai extends Component
 
     public function render()
     {
-        $sesi = DB::table("list_sesi_penilaian")->where('status', "Aktif")->first();
+        $sesi = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
         /* dd(is_null($sesi)); */
         return view('livewire.sekolah.manajemen-nilai.info-card-nilai', compact('sesi'));
     }

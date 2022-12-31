@@ -109,6 +109,9 @@ ORDER BY status;
 
 /* List Sesi penilaian */
 CREATE VIEW list_sesi_penilaian AS
+SELECT sesi_id AS id , nama_sesi, tahun_ajaran_aktif, semester_aktif, DATE_FORMAT(tanggal_mulai, "%d %M %Y") AS tanggal_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y") AS tanggal_berakhir, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, time_status(tanggal_mulai, tanggal_berakhir) AS status
+FROM sesi_penilaians
+ORDER BY status;
 
 
 /* List pending nilai */

@@ -23,9 +23,9 @@
                             @elseif($sesi->nama_sesi == 'uh3')
                                 <h6 class="font-extrabold mb-0">Ulangan Harian 3</h6>
                             @elseif($sesi->nama_sesi == 'uts')
-                                <h6 class="font-extrabold mb-0">Ulangan Tengah Semester</h6>
+                                <h6 class="font-extrabold mb-0">Ujian Tengah Semester</h6>
                             @else
-                                <h6 class="font-extrabold mb-0">Ulangan Akhir Semester</h6>
+                                <h6 class="font-extrabold mb-0">Ujian Akhir Semester</h6>
                             @endif
                         @endif
                     </div>
@@ -50,7 +50,7 @@
                         @if (is_null($sesi))
                             <h6 class="font-extrabold mb-0">-</h6>
                         @else
-                            <h6 class="font-extrabold mb-0">{{ $sesi->waktu_mulai }}</h6>
+                            <h6 class="font-extrabold mb-0">{{ $sesi->tanggal_mulai }}</h6>
                         @endif
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                         @if (is_null($sesi))
                             <h6 class="font-extrabold mb-0">-</h6>
                         @else
-                            <h6 class="font-extrabold mb-0 ">{{ $sesi->waktu_selesai }}</h6>
+                            <h6 class="font-extrabold mb-0 ">{{ $sesi->tanggal_berakhir }}</h6>
                         @endif
                     </div>
                 </div>
