@@ -26,6 +26,14 @@ class CreateModalMapel extends Component
 
     public function store()
     {
+        $this->validate([
+            'mapel_id' => 'required',
+            'nama_mapel' => 'required',
+            'kelompok_mapel' => 'required|min:1',
+            'kkm' => 'required',
+            'kurikulum' => 'required'
+        ]);
+
         DB::select('CALL add_mapel(?, ?, ?, ?, ?, ?)', [$this->mapel_id, $this->nama_mapel, $this->kelompok_mapel, $this->kkm, $this->kurikulum, auth()->user()->uuid]);
 
         $this->reset();
