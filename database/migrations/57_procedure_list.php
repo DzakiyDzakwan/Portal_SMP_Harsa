@@ -597,6 +597,62 @@ return new class extends Migration
             END
         ');
 
+
+        DB::unprepared('
+        CREATE PROCEDURE add_mapelGuru(
+            IN mapel CHAR(5),
+            IN guru CHAR(16),
+            IN actor CHAR(36)
+        )
+        BEGIN
+            DECLARE errno INT;
+            DECLARE actor CHAR(36);
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+
+            SET actor = UUID();
+
+            START TRANSACTION;
+
+            INSERT INTO mapel_gurus(mapel, guru, created_at, updated_at) 
+            VALUES (mapel, guru, NOW(), NOW());
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "insert", "mapel_gurus", NOW());
+            
+            COMMIT;
+        END
+
+    ');
+
+        DB::unprepared('
+        CREATE PROCEDURE delete_mapelGuru(
+            IN mapelguru INT,
+            IN actor CHAR(36)
+        )
+        BEGIN
+            DECLARE errno INT;
+            DECLARE actor CHAR(36);
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+
+            SET actor = UUID();
+
+            START TRANSACTION;
+            DELETE FROM mapel_gurus WHERE mapel_guru_id = mapelguru;
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "delete", "mapel_gurus", NOW());
+            
+            COMMIT;
+
+        END
+    ');
+
         DB::unprepared('
             CREATE PROCEDURE add_kelas(
                 IN kelas CHAR(3),
@@ -796,7 +852,7 @@ return new class extends Migration
                 COMMIT;
 
             END
-        '); 
+        ');
 
         DB::unprepared('
             CREATE PROCEDURE update_roster(
@@ -1292,6 +1348,8 @@ BEGIN
         DB::unprepared("DROP PROCEDURE inactive_mapel");
         DB::unprepared("DROP PROCEDURE restore_mapel");
         DB::unprepared("DROP PROCEDURE delete_mapel");
+        DB::unprepared("DROP PROCEDURE add_mapelGuru");
+        DB::unprepared("DROP PROCEDURE delete_mapelGuru");
         // DB::unprepared("DROP PROCEDURE add_kelas");
         // DB::unprepared("DROP PROCEDURE update_kelas");
         // DB::unprepared("DROP PROCEDURE restore_kelas");

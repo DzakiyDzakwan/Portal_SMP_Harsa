@@ -36,13 +36,13 @@
                         </button>
                     </div>
                     {{-- Modal Delete --}}
-                    {{-- <div class="modal fade text-left" id="delete{{ $pel->mapel_id }}" tabindex="-1" role="dialog"
+                    <div class="modal fade text-left" id="delete{{ $mg->mapel_guru_id }}" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel130" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                             <div class="modal-content">
                                 <div class="modal-header justify-content-center bg-danger">
                                     <h5 class="modal-title white" id="myModalLabel130">
-                                        Nonaktifkan Mata Pelajaran {{ $pel->nama_mapel }}
+                                        Nonaktifkan Mata Pelajaran {{ $mg->nama_mapel }}-{{ $mg->nama }}
                                     </h5>
                                 </div>
                                 <div class="modal-body">Apakah yakin menonaktifkan mata pelajaran ini?</div>
@@ -52,14 +52,14 @@
                                         <span class="d-none d-sm-block">Close</span>
                                     </button>
                                     <button class="btn btn-danger ml-1" data-bs-dismiss="modal"
-                                        wire:click="inactiveMapel('{{ $pel->mapel_id }}')">
+                                        wire:click="delete('{{ $mg->mapel_guru_id }}')">
                                         <i class="bx bx-check d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Hapus</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </td>
             </tr>
         @endforeach

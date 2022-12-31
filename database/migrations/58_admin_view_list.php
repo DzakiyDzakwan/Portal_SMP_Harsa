@@ -54,7 +54,7 @@ return new class extends Migration
         LEFT JOIN user_profiles ON user_profiles.user = users.uuid
         WHERE gurus.jabatan = "guru" AND gurus.status = "aktif"
         ORDER BY gurus.created_at DESC
-        '); 
+        ');
 
         DB::unprepared('
         CREATE VIEW list_guru_inactive AS
@@ -162,12 +162,12 @@ return new class extends Migration
         GROUP BY r.mapel, r.kelas;
         '); */
 
-        // DB::unprepared('
-        // CREATE VIEW list_sesi_penilaian AS
-        // SELECT sesi_id, nama_sesi, tahun_ajaran_aktif, semester_aktif, DATE_FORMAT(tanggal_mulai, "%d %M %Y %H:%i:%s") AS waktu_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y %H:%i:%s") AS waktu_selesai, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, IF(cek_sesi(tanggal_mulai, tanggal_berakhir) = 1 , "Aktif", "Inaktif") AS status 
-        // FROM sesi_penilaians
-        // ORDER BY status;
-        // ');
+        DB::unprepared('
+        CREATE VIEW list_sesi_penilaian AS
+        SELECT sesi_id, nama_sesi, tahun_ajaran_aktif, semester_aktif, DATE_FORMAT(tanggal_mulai, "%d %M %Y %H:%i:%s") AS waktu_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y %H:%i:%s") AS waktu_selesai, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, IF(cek_sesi(tanggal_mulai, tanggal_berakhir) = 1 , "Aktif", "Inaktif") AS status 
+        FROM sesi_penilaians
+        ORDER BY status;
+        ');
 
         /* DB::unprepared('
         CREATE VIEW list_nilai AS
@@ -221,7 +221,7 @@ return new class extends Migration
         JOIN user_profiles as u ON s.user = u.user;
         ');
 
-       /*  DB::unprepared('
+        /*  DB::unprepared('
         CREATE VIEW list_siswa_kelas AS
         SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester, s.kelas 
         FROM siswas AS s

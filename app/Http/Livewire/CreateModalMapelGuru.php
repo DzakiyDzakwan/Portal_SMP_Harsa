@@ -23,18 +23,18 @@ class CreateModalMapelGuru extends Component
 
     public function store()
     {
-        MapelGuru::create([
-            'mapel' => $this->mapel,
-            'guru' => $this->guru
-        ]);
+        // MapelGuru::create([
+        //     'mapel' => $this->mapel,
+        //     'guru' => $this->guru
+        // ]);
 
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'insert',
-            'at' => 'mapel'
-        ]);
+        // LogActivity::create([
+        //     'actor' => auth()->user()->uuid,
+        //     'action' => 'insert',
+        //     'at' => 'mapel'
+        // ]);
 
-        //DB::select('CALL add_mapelguru(?, ?, ?)', [$this->mapel, $this->guru, auth()->user()->uuid]);
+        DB::select('CALL add_mapelGuru(?, ?, ?)', [$this->mapel, $this->guru, auth()->user()->uuid]);
 
 
         $this->reset();
@@ -48,6 +48,6 @@ class CreateModalMapelGuru extends Component
     {
         $this->pelajaran = DB::table('mapels')->get();
         $this->guruu = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->get();
-        return view('livewire.create-modal-mapel-guru');
+        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran-guru.create-modal-mapel-guru');
     }
 }

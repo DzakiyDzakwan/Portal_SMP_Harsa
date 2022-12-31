@@ -19,7 +19,6 @@
                                     <select wire:model.defer="mapel" name="mapel" class="form-select form-control"
                                         id="basicSelect">
                                         <option>Pilih Mata Pelajaran</option>
-                                        <option value="uh1">Ujian Harian 1</option>
                                         @foreach ($pelajaran as $p)
                                             <option value="{{ $p->mapel_id }}">{{ $p->nama_mapel }}
                                                 @if ($p->kelompok_mapel = 'A')

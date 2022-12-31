@@ -38,7 +38,7 @@ class EditModalMapelGuru extends Component
     {
         $this->pelajaran = DB::table('mapels')->get();
         $this->guruu = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->get();
-        return view('livewire.edit-modal-mapel-guru');
+        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran-guru.edit-modal-mapel-guru');
     }
 
     public function update()

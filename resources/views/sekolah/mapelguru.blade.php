@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Data Mata Pelajaran</h3>
+            <h3>Data Mata Pelajaran Guru</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -22,7 +22,7 @@
                         <a href="/">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Mata Pelajaran
+                        Mata Pelajaran Guru
                     </li>
                 </ol>
             </nav>
@@ -34,7 +34,7 @@
 
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-            <h5>List Mata Pelajaran</h5>
+            <h5>List Mata Pelajaran Guru</h5>
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
                     {{-- Button Tambah mapel --}}
@@ -78,20 +78,20 @@
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
         const updateToast = new bootstrap.Toast('#updateToast')
-        // const deleteToast = new bootstrap.Toast('#deleteToast')
+        const deleteToast = new bootstrap.Toast('#deleteToast')
 
 
-        // window.addEventListener('insert-alert', e => {
-        //     insertToast.show()
-        // })
+        window.addEventListener('insert-alert', e => {
+            insertToast.show()
+        })
 
-        // window.addEventListener('update-alert', e => {
-        //     updateToast.show()
-        // })
+        window.addEventListener('update-alert', e => {
+            updateToast.show()
+        })
 
-        // window.addEventListener('delete-alert', e => {
-        //     deleteToast.show()
-        // })
+        window.addEventListener('delete-alert', e => {
+            deleteToast.show()
+        })
     </script>
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
