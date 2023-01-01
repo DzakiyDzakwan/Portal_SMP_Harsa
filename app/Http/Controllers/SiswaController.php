@@ -19,23 +19,10 @@ class SiswaController extends Controller
      */
     public function index()
     {
+        $siswa = Siswa::where('user', auth()->user()->uuid);
         $pages = 'user';
-        $totalSiswa = Siswa::count();
-        $siswaActive = Siswa::where('status', 'Aktif')->count();
-        $siswaLulus = Siswa::where('status', 'Lulus')->count();
-        $siswaPindah = Siswa::where('status', 'Pindah')->count();
-        $siswaDO = Siswa::where('status', 'Drop Out')->count();
-        $kelas = Kelas::all();
-        $siswaInactive = $siswaLulus + $siswaPindah + $siswaDO;
-        
-        // $siswas = DB::table('siswas')
-        //             ->join('users', 'users.uuid', '=', 'siswas.user')
-        //             ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
-        //             ->join('prestasis', 'prestasis.siswa', '=', 'siswas.NISN')
-        //             ->get();
-        $siswas = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('siswas.created_at', 'DESC')->get();
-        return view('admin.siswa', compact('totalSiswa', 'pages', 'siswas', 'siswaActive', 'siswaInactive', 'kelas'));
-        
+        $subpages = 'siswa';
+        return view('admin.siswa', compact('siswa', 'pages', 'subpages'));
     }
 
     /**
@@ -58,15 +45,7 @@ class SiswaController extends Controller
     {
         // dd($request->all());
 
-        $validatedData = $request->validate([
-            'nama' => 'required|min:5|max:255',
-            'nisn' => 'required|min:10|max:10',
-        ]);
-
-        $password = Hash::make($validatedData['nisn']);
-
-        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', [$validatedData["nama"], $validatedData["nisn"], $request->NIS, $password, $request->tanggal_masuk, $request->kelas_id, $request->jenis_kelamin, auth()->user()->uuid]);
-        return back()->with('success', "Siswa berhasil dibuat");
+        
     }
 
     /**
@@ -86,19 +65,9 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $nisn)
+    public function edit(Request $request)
     {
-        DB::beginTransaction();
-        try {
-            Siswa::where('NISN', $nisn)->update([
-                'NISN'=>$request->nisn,
-                'nama' => $request->nama
-            ]);
-            DB::commit();
-            return back()->with('success', "Berhasil mengubah data");
-        } catch (\Throwable $th) {
-            DB::rollback();
-        }
+        
     }
 
     /**
@@ -119,10 +88,8 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, $user)
+    public function delete(Request $request)
     {
-        DB::select('CALL inactive_siswa(?, ?, ?)', [$user, $request->status, auth()->user()->uuid]);
-
-        return back()->with('succes', 'Siswa berhasil di non-aktif kan');
+ 
     }
 }

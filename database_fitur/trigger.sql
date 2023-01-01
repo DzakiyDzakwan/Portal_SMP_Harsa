@@ -294,6 +294,8 @@ END?
 DELIMITER ;
 
 --Nilai--
+
+
 --Log Insert prestasi
 DELIMTER ?
 CREATE TRIGGER log_insert_prestasi

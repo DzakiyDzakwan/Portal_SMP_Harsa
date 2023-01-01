@@ -18,11 +18,8 @@ class GuruController extends Controller
     public function index()
     {
         $pages = 'user';
-        /* $guru = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->orderBy('gurus.created_at', 'DESC')->get(); */
-        /* dd($gurus); */
-        $guru = DB::table('table_guru')
-        ->get();
-        return view('admin.guru', compact('pages'));
+        $subpages = 'guru';
+        return view('admin.guru', compact('pages', 'subpages'));
     }
 
     public function store(Request $request)

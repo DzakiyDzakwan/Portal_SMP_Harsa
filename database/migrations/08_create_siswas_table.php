@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->char('NISN', 10)->primary();
-            $table->char('kelas', 3);
             $table->uuid('user');
             $table->char('NIS', 4);
             $table->date('tanggal_masuk');
@@ -30,9 +29,8 @@ return new class extends Migration
             $table->string('nama_wali')->nullable();
             $table->string('pekerjaan_wali')->nullable();
             $table->char('telepon_wali', 13)->nullable();
-            $table->enum('status', ['Aktif', 'Lulus', 'Pindah', 'Drop Out'])->default('Aktif');
-            $table->foreign('kelas')->references('kelas_id')->on('kelas');
-            $table->foreign('user')->references('uuid')->on('users')->onUpdate('cascade');
+            $table->enum('status', ['aktif', 'lulus', 'pindah', 'dropout'])->default('aktif');
+            $table->foreign('user')->references('uuid')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

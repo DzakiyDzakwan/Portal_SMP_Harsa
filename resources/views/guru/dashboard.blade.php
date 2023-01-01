@@ -1,67 +1,344 @@
-@extends('guru.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Dashboard</title>
 @endsection
 
 @section('style')
-<link rel="stylesheet" href="{{asset('assets/css/shared/iconly.css')}}">  
+    <link rel="stylesheet" href="{{ asset('assets/css/shared/iconly.css') }}">
 @endsection
 
 @section('content')
-<div class="page-heading">
-    <div class="page-title">
-        <div class="row">
-            <div
-                class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Dashboard</h3>
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Dashboard</h3>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="page-content">
-        <section class="row">
-            <div class="col-12">
-                <div class="row mb-3">
+        <div class="page-content">
+            <section class="row">
+                <div class="col-12">
+
+                    {{-- TA dan Sesi Row --}}
+                    <div class="row">
+                        {{-- Tahun Ajaran Aktif --}}
+                        <div class="col-4 col-lg-4 col-md-4">
+                            <div class="card">
+                                <div class="card-body px-4 py-4-5">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
+                                            <h6 class="text-muted font-semibold">Tahun Ajaran Aktif</h6>
+                                            <h6 class="font-extrabold mb-0">
+                                                {{ $tahunAkademik == null ? '-' : $tahunAkademik->tahun_ajaran }}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Semester Aktif --}}
+                        <div class="col-4 col-lg-4 col-md-4">
+                            <div class="card">
+                                <div class="card-body px-4 py-4-5">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
+                                            <h6 class="text-muted font-semibold">Semester Aktif</h6>
+                                            <h6 class="font-extrabold mb-0">
+                                                {{ $tahunAkademik == null ? '-' : strtoupper(substr($tahunAkademik->semester, 0, 1)) . substr($tahunAkademik->semester, 1) }}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Sesi Penilaian Aktif --}}
+                        <div class="col-4 col-lg-4 col-md-4">
+                            <div class="card">
+                                <div class="card-body px-4 py-4-5">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
+                                            <h6 class="text-muted font-semibold">Sesi Penilaian Aktif</h6>
+                                            <h6 class="font-extrabold mb-0">
+                                                @if ($sesi != null)
+                                                    @if ($sesi->nama_sesi === 'uh1')
+                                                        Ulangan Harian 1
+                                                    @elseif($sesi->nama_sesi === 'uh2')
+                                                        Ulangan Harian 2
+                                                    @elseif($sesi->nama_sesi === 'uh3')
+                                                        Ulangan Harian 3
+                                                    @elseif($sesi->nama_sesi === 'uts')
+                                                        Ujian Tengah Semester
+                                                    @else
+                                                        Ujian Akhir Semester
+                                                    @endif
+                                                @else
+                                                    -
+                                                @endif
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                @hasanyrole('kepsek|wakepsek|admin')
+                    {{-- Info Row --}}
+                    <div class="row">
+                        {{-- Total User --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/guru/user">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon red mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total User">
+                                                        <i class="bi bi-person-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">User</h6>
+                                                <h6 class="font-extrabold mb-0">{{ $jumlah['user'] }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Total Admin --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/guru/admin">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon bg-warning mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Admin">
+                                                        <i class="bi bi-person-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Admin</h6>
+                                                <h6 class="font-extrabold mb-0">{{ $jumlah['admin'] }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Total Guru --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/guru/guru">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon blue mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Guru">
+                                                        <i class="bi bi-people-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Guru</h6>
+                                                <h6 class="font-extrabold mb-0">{{ $jumlah['guru'] }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Total Siswa --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/siswa">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon purple mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Total Siswa">
+                                                        <i class="bi bi-people-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Siswa</h6>
+                                                <h6 class="font-extrabold mb-0">{{ $jumlah['siswa'] }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Total Role --}}
+                        {{-- <div class="col-6 col-lg-3 col-md-6">
+                                <a href="/guru/role">
+                                    <div class="card">
+                                        <div class="card-body px-4 py-4-5">
+                                            <div class="row">
+                                                <div
+                                                    class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                    <div class="stats-icon red mb-2">
+                                                        <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            title="Total Role">
+                                                            <i class="bi bi-person-bounding-box"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                    <h6 class="text-muted font-semibold">Roles</h6>
+                                                    <h6 class="font-extrabold mb-0">0</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div> --}}
+                        {{-- Total Mata Pelajaran --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/guru/mata-pelajaran">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon red mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Total Mata Pelajaran">
+                                                        <i class="bi bi-book-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Mata Pelajaran</h6>
+                                                <h6 class="font-extrabold mb-0">{{ $jumlah['mapel'] }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Total Kelas --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/guru/kelas">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon bg-warning mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Total Kelas">
+                                                        <i class="bi bi-house-door-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Kelas</h6>
+                                                <h6 class="font-extrabold mb-0">{{ $jumlah['kelas'] }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{-- Total Ekstrakulikuler --}}
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <a href="/guru/ekstrakurikuler">
+                                <div class="card">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-center md-justify-content-start">
+                                                <div class="stats-icon blue mb-2">
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Total Ekstrakulikuler">
+                                                        <i class="bi bi-clipboard2-pulse-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
+                                                <h6 class="text-muted font-semibold">Ekstrakurikuler</h6>
+                                                <h6 class="font-extrabold mb-0">{{ $jumlah['ekskul'] }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                @endhasanyrole
+
+
+                {{-- Profil Row --}}
+                <div class="row">
                     {{-- Profil Singkat --}}
-                    <div class="col-lg-8 col-md-12">
-                        <div class="card">
+                    <div class="@hasrole('guru') col-lg-6 @endhasrole col-md-12 mb-4">
+                        <div class="card h-full">
                             <div class="card-body">
                                 <h4>Profil Singkat</h4>
-                                <div class="row">
+                                <div class="row align-items-center">
                                     <div class="col-lg-3 col-md-12">
                                         <div class="pt-3">
-                                            <img src="assets/images/Abby.jpg" class="rounded mx-auto d-block" alt="..." width="130">
+                                            @if (Auth::user()->profiles->foto == null)
+                                                <img src="{{ asset('assets/images/faces/2.jpg') }}"
+                                                    class="rounded @hasrole('guru') w-100 @else w-75 @endhasrole d-block"
+                                                    alt="...">
+                                            @else
+                                                <img src="{{ asset('storages/' . Auth::user()->profiles->foto) }}"
+                                                    class="rounded w-100 d-block" alt="...">
+                                            @endif
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-9 col-md-12">
+                                    <div class="col-lg-8 col-md-12">
                                         <div class="pt-3">
                                             <table class="table mb-0">
                                                 <tbody>
                                                     <tr>
                                                         <td>Nama</td>
                                                         <td>:</td>
-                                                        <td>Abby Syafiyah</td>
+                                                        <td>{{ Auth::user()->profiles->nama }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>NIS</td>
+                                                        <td>NUPTK</td>
                                                         <td>:</td>
-                                                        <td>211402018</td>
+                                                        <td>{{ Auth::user()->gurus->NUPTK }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Jenis Kelamin</td>
+                                                        <td>Jabatan</td>
                                                         <td>:</td>
-                                                        <td>Perempuan</td>
+                                                        @if (Auth::user()->gurus->jabatan === 'ks')
+                                                            <td>Kepala Sekolah</td>
+                                                        @elseif(Auth::user()->gurus->jabatan === 'wks')
+                                                            <td>Wakil Kepala Sekolah</td>
+                                                        @elseif(Auth::user()->gurus->jabatan === 'tu')
+                                                            <td>Admin</td>
+                                                        @else
+                                                            <td>Guru</td>
+                                                        @endif
                                                     </tr>
                                                     <tr>
-                                                        <td>Tanggal Lahir</td>
+                                                        <td>Tempat/Tanggal Lahir</td>
                                                         <td>:</td>
-                                                        <td>11/12/2003</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Tempat Lahir</td>
-                                                        <td>:</td>
-                                                        <td>Medan</td>
+                                                        @if (Auth::user()->profiles->tgl_lahir == null || Auth::user()->profiles->tempat_lahir == null)
+                                                            <td>-</td>
+                                                        @else
+                                                            <td>
+                                                                {{ Auth::user()->profiles->tempat_lahir }}/{{ date('d M Y', strtotime(Auth::user()->profiles->tgl_lahir)) }}
+                                                            </td>
+                                                        @endif
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -71,184 +348,84 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Prestasi</h4>
+                    @hasrole('guru')
+                        {{-- Kelas yang dimasuki --}}
+                        <div class="col-lg-6 col-md-12 mb-4">
+                            <div class="card h-full">
+                                <div class="card-header ">
+                                    <h4>Kelas Saya</h4>
+                                </div>
+                                <div class="card-body" style="max-height: 240px; overflow:auto;">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Kelas</th>
+                                                    <th>Mata Pelajaran</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="4" class="text-center">Tidak Ada kelas yang terdaftar
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Mata Pelajaran</th>
-                                                <th>Kelas</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Olimpiade Matematika</td>
-                                                <td>Medali Perak</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Olimpiade Fisika</td>
-                                                <td>Medali Emas</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Olimpiade Kimia</td>
-                                                <td>Medali Perunggu</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        </div>
+                    @endhasrole
+                </div>
+
+                @hasrole('guru')
+                    {{-- Roster Row --}}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Roster Pelajaran</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Hari</th>
+                                                    <th>Kelas</th>
+                                                    <th>Mata Pelajaran</th>
+                                                    <th>Kelompok Mata Pelajaran</th>
+                                                    <th>Jam Masuk</th>
+                                                    <th>Jam Keluar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Senin</td>
+                                                    <td>Ibnu Sina</td>
+                                                    <td>Bahasa Indonesia</td>
+                                                    <th>Wajib</th>
+                                                    <td>13:00</td>
+                                                    <td>15:00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Roster Pelajaran</h4>
-                                <h6>Kelas VII</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Hari</th>
-                                                <th>Jam Ke-</th>
-                                                <th>Mata Pelajaran</th>
-                                                <th>Jam Masuk</th>
-                                                <th>Jam Keluar</th>
-                                                <th>Nama Guru</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td rowspan="8">Senin</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Kimia</td>
-                                                <td>07.15</td>
-                                                <td>08.00</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Matematika</td>
-                                                <td>08.15</td>
-                                                <td>08.55</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Fisika</td>
-                                                <td>08.55</td>
-                                                <td>09.35</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Sejarah</td>
-                                                <td>09.35</td>
-                                                <td>10.15</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Sosiologi</td>
-                                                <td>10.15</td>
-                                                <td>10.35</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Seni Budaya</td>
-                                                <td>10.35</td>
-                                                <td>11.15</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>Ekonomi</td>
-                                                <td>11.15</td>
-                                                <td>11.55</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            {{-- Selasa --}}
-                                            <tr>
-                                                <td rowspan="8">Selasa</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Kimia</td>
-                                                <td>07.15</td>
-                                                <td>08.00</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Matematika</td>
-                                                <td>08.15</td>
-                                                <td>08.55</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Fisika</td>
-                                                <td>08.55</td>
-                                                <td>09.35</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Sejarah</td>
-                                                <td>09.35</td>
-                                                <td>10.15</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Sosiologi</td>
-                                                <td>10.15</td>
-                                                <td>10.35</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Seni Budaya</td>
-                                                <td>10.35</td>
-                                                <td>11.15</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>Ekonomi</td>
-                                                <td>11.15</td>
-                                                <td>11.55</td>
-                                                <td>Ali Akbar Sikumbang</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @endhasrole
+
+        </div>
         </section>
     </div>
-</div>
+    </div>
 @endsection
 
 @section('script')
-<script src="{{asset('assets/extensions/apexcharts/apexcharts.min.js')}}"></script>
-<script src="{{asset('assets/js/pages/dashboard.js')}}"></script>
+    <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
 @endsection

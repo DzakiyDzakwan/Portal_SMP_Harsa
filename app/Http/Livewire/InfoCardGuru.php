@@ -12,14 +12,15 @@ class InfoCardGuru extends Component
 
     protected $listeners = [
         'storeGuru' => 'render',
-        'inactiveGuru' => 'render'
+        'inactiveGuru' => 'render',
+        'deleteGuru' => 'render'
     ];
 
     public function render()
     {
-        $this->totalGuru = Guru::count();
-        $this->guruActive = Guru::where('status', 'Aktif')->count();
-        $this->guruInactive = Guru::where('status', 'Inaktif')->count();
-        return view('admin.components.livewire.info-card-guru');
+        $this->totalGuru = Guru::where('jabatan', 'guru')->count();
+        $this->guruActive = Guru::where('status', 'aktif')->where('jabatan', 'guru')->count();
+        $this->guruInactive = Guru::where('status', 'inaktif')->where('jabatan', 'guru')->count();
+        return view('livewire.user.manajemen-akun.guru.info-card-guru');
     }
 }

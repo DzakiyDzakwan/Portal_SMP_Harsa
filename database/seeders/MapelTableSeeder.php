@@ -15,6 +15,19 @@ class MapelTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::select('CALL add_mapel(?, ?, ?, ?, ?)', ['M01', 'Bahasa Indonesia', 'A', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['BI001', 'Bahasa Indonesia', 'A', '75', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MTK01', 'Matematika', 'A', '80', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['FIS01', 'Fisika', 'A', '80', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['KIM01', 'Kimia', 'A', '75', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['BIO01', 'Biologi', 'A', '75', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MTK02', 'Matematika', 'B', '80', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['SEJ01', 'Sejarah', 'B', '70', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }

@@ -9,6 +9,8 @@ class Siswa extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'NISN';
+
     protected $guarded = [
         'created_at',
         'updated_at'
@@ -19,16 +21,14 @@ class Siswa extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users(): BelongsTo
+    public function users()
     {
         return $this->belongsTo(User::class, 'user', 'uuid');
     }
 
-    public function kelas(): BelongsTo
-    {
-        return $this->belongsTo(Kelas::class, 'ruang_kelas', 'kelas_id');
+    public function profiles(){
+        return $this->hasOne(UserProfile::class, 'user', 'user');
     }
-
     /**
      * Get all of the prestasi for the Siswa
      *
@@ -39,8 +39,14 @@ class Siswa extends Model
         return $this->hasMany(Prestasi::class, 'siswa', 'NISN');
     }
 
-    public function kontrak_semesters()
+    public function kontraks()
     {
         return $this->hasMany(KontrakSemester::class, 'siswa', 'NISN');
     }
+
+    public function ekstrakurikulers()
+    {
+        return $this->belongsToMany(Ekstrakurikuler::class, 'ekstrakurikuler_siswas', 'ekstrakurikuler_id', 'NISN');
+    }
+
 }

@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class EditModalUser extends Component
 {
@@ -27,7 +28,15 @@ class EditModalUser extends Component
 
     public function render()
     {
-        return view('admin.components.livewire.edit-modal-user');
+        return view('livewire.user.manajemen-user.user.edit-modal-user');
+    }
+
+    public function showUser($user) {
+        $data = User::where('uuid', $user)->first();
+        $this->uuid = $user;
+        $this->username = $data->username;
+        $this->dispatchBrowserEvent('update-modal');
+        
     }
 
     public function update() 
@@ -39,28 +48,15 @@ class EditModalUser extends Component
 
         $this->password = Hash::make($this->password);
 
-        User::where('uuid', $this->uuid)->update([
-            'username' => $this->username,
-            'password' => $this->password
-        ]);
-
-        LogActivity::create([
-            'actor' => auth()->user()->uuid,
-            'action' => 'update',
-            'at' => 'users'
-        ]);
-
-        $this->emit('userUpdate');
-        $this->reset();
-        $this->dispatchBrowserEvent('update-modal');
-        $this->dispatchBrowserEvent('update-alert');
-    }
-
-    public function showUser($user) {
-        $data = User::where('uuid', $user)->first();
-        $this->uuid = $data->uuid;
-        $this->username = $data->username;
-        $this->dispatchBrowserEvent('update-modal');
-        
+        try {
+            DB::select('CALL update_user(?, ?, ?)', [auth()->user()->uuid, $this->uuid, $this->password]);
+    
+            $this->emit('userUpdate');
+            $this->reset();
+            $this->dispatchBrowserEvent('update-modal');
+            $this->dispatchBrowserEvent('update-alert');
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
     }
 }

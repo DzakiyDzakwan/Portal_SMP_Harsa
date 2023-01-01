@@ -18,9 +18,10 @@ class MapelController extends Controller
 
     public function index()
     {
-        $pages = 'mapel';
+        $pages = 'manajemenKelas';
+        $subpages = 'mapel';
         $mapel = Mapel::all();
-        return view('admin.mapel', compact('pages', 'mapel'));
+        return view('admin.mapel', compact('pages', 'subpages', 'mapel'));
     }
     // public function mapel()
     // {

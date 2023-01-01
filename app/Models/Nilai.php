@@ -9,6 +9,8 @@ class Nilai extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'nilai_id';
+
     protected $guarded = [
         "nilai_id",
         "created_at",
@@ -33,6 +35,11 @@ class Nilai extends Model
     public function sesi()
     {
         return $this->belongsTo(SesiPenilaian::class, 'sesi', 'sesi_id');
+    }
+
+    public function pemeriksa()
+    {
+        return $this->belongsTo(User::class, 'pemeriksa', 'uuid');
     }
     
 }

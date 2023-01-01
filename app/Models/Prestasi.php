@@ -9,6 +9,8 @@ class Prestasi extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'prestasi_id';
+
     protected $guarded = [
         "prestasi_id",
         "created_at",
@@ -20,7 +22,7 @@ class Prestasi extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function siswas(): BelongsTo
+    public function siswas()
     {
         return $this->belongsTo(Siswa::class, 'siswa', 'NISN');
     }

@@ -18,10 +18,10 @@ class InfoCardUser extends Component
 
     public function render()
     {
-        $this->totalUser = User::withTrashed()->where('role', 'admin')->count();
-        $this->totalActiveUser = User::withoutTrashed()->where('role', 'admin')->count();
-        $this->totalInactiveUser = User::onlyTrashed()->where('role', 'admin')->count();
+        $this->totalUser = User::withTrashed()->count();
+        $this->totalActiveUser = User::withoutTrashed()->count();
+        $this->totalInactiveUser = User::onlyTrashed()->count();
 
-        return view('admin.components.livewire.info-card-user');
+        return view('livewire.user.manajemen-user.user.info-card-user');
     }
 }

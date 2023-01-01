@@ -10,17 +10,14 @@ class UserProfile extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'user_profile_id';
+
     protected $guarded = [
-        'profile_id',
+        'user_profile_id',
         'created_at',
         'updated_at'
     ];
-
-    protected $fillable = [
-        'user',
-        'nama',
-        'jenis_kelamin',
-    ];
+    
     /**
      * Get the user that owns the UserProfile
      *

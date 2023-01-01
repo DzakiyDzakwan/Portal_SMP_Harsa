@@ -4,20 +4,29 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Kelas;
+use App\Models\Guru;
+use Illuminate\Support\Facades\DB;
 
 class InactiveModalKelas extends Component
 {
 
-    public $kelas_id;
+    public $kelas_id, $wali_kelas, $gurus;
 
     protected $listeners = [
         'getRestoreModal',
         'getDeleteModal'
     ];
 
+    // public function mount() {
+    //     if(Guru::where('is_wali_kelas', 'tidak')->first() != null) {
+    //         $this->wali_kelas = Guru::where('is_wali_kelas', 'tidak')->first()->NIP;
+    //     }
+    // }
+
     public function render()
     {
-        return view('admin.components.livewire.inactive-modal-kelas');
+        $this->gurus = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->get();
+        return view('livewire.sekolah.manajemen-kelas.kelas.inactive-modal-kelas');
     }
 
     public function inactiveModal() {
@@ -40,9 +49,11 @@ class InactiveModalKelas extends Component
     }
 
     public function restoreUser() {
-        Kelas::where('kelas_id', $this->kelas_id)->restore();
-        $this->closeRestoreModal();
-        $this->emit('restoreUser');
+        DB::select('CALL restore_kelas(?, ?, ?)', [$this->kelas_id, $this->wali_kelas, auth()->user()->uuid]);
+        // $this->dispatchBrowserEvent('restore-alert');
+        // $this->closeRestoreModal();
+        $this->dispatchBrowserEvent('restore-alert');
+        $this->emit('restoreKelas');
     }
 
     public function deleteModal() {
@@ -63,6 +74,7 @@ class InactiveModalKelas extends Component
     public function deleteUser() {
         Kelas::where('kelas_id', $this->kelas_id)->forceDelete();
         $this->closeDeleteModal();
-        $this->emit('deleteUser');
+        $this->dispatchBrowserEvent('delete-alert');
+        $this->emit('deleteKelas');
     }
 }

@@ -12,13 +12,14 @@ class ListKelas extends Component
 
     protected $listeners = [
         'storeKelas' => 'render',
-        'updateKelas' => 'render'
+        'updateKelas' => 'render',
+        'restoreKelas' => 'render'
     ];
 
     public function render()
     {
-        $this->kelas = DB::table('table_kelas')->get();
-        return view('admin.components.livewire.list-kelas');
+        $this->kelas = DB::table('list_kelas')->get();
+        return view('livewire.sekolah.manajemen-kelas.kelas.list-kelas');
     }
 
     public function inactiveKelas($id) {
@@ -29,6 +30,6 @@ class ListKelas extends Component
     }
 
     public function editKelas($id) {
-        $this->emit('editUser', $id);
+        $this->emit('editKelas', $id);
     }
 }

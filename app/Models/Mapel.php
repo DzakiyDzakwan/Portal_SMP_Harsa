@@ -10,7 +10,7 @@ class Mapel extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $primaryKey = 'kelas_id';
+    protected $primaryKey = 'mapel_id';
 
     protected $guarded = [
         'created_at',
@@ -23,7 +23,7 @@ class Mapel extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function nilais(): HasMany
+    public function nilais()
     {
         return $this->hasMany(Nilai::class, 'mapel', 'mapel_id');
     }
@@ -33,7 +33,7 @@ class Mapel extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function gurus(): BelongsToMany
+    public function gurus()
     {
         return $this->belongsToMany(Guru::class, 'mapel_gurus', 'mapel_id', 'NIP');
     }

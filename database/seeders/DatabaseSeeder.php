@@ -14,16 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserTableSeeder::class);
+        $this->call(RoleTableSeeder::class);
+        $this->call(PermissionTableSeeder::class);
+        $this->call(KepsekTableSeeder::class);
         $this->call(GuruTableSeeder::class);
+        $this->call(TahunAjaranTableSeeder::class);
         $this->call(MapelTableSeeder::class);
+        $this->call(MapelGuruTableSeeder::class);
         $this->call(KelasTableSeeder::class);
+        $this->call(EskstrakurikulerTableSeeder::class);
         $this->call(SiswaTableSeeder::class);
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        /* $this->call(PrestasiTableSeeder::class);
+        $this->call(SesiTableSeeder::class); */
     }
 }

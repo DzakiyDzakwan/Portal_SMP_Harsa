@@ -9,7 +9,10 @@ class Roster extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'roster_id';
+
     protected $guarded = [
+        "roster_id",
         "created_at",
         "updated_at"
     ];
@@ -19,7 +22,7 @@ class Roster extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function mapel_gurus()
+    public function mapels()
     {
         return $this->belongsTo(MapelGuru::class, 'mapel', 'mapel_guru_id');
     }

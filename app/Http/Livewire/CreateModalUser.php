@@ -38,7 +38,7 @@ class CreateModalUser extends Component
 
     public function render()
     {
-        return view('admin.components.livewire.create-modal-user');
+        return view('livewire.create-modal-user');
     }
 
     

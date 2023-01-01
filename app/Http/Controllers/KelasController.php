@@ -20,9 +20,8 @@ class KelasController extends Controller
     public function index()
     {
         $pages = 'manajemenKelas';
+        $subpages = 'kelas';
 
-        return  view('admin.kelas', [
-            'pages' => $pages,
-        ]);
+        return  view('admin.kelas', compact('pages', 'subpages'));
     }
 }

@@ -12,7 +12,8 @@ class UserController extends Controller
 {
     public function index() {
         $pages = 'user';
+        $subpages = 'admin';
 
-        return view('admin.users', compact('pages'));
+        return view('admin.users', compact('pages', 'subpages'));
     }
 }

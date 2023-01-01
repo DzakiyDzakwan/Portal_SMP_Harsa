@@ -1,41 +1,51 @@
---Function Nilai Rapot Tengah Semester--
-/* Stored Function untuk mendapatkan nilai rapot tengah semester siswa */
+--Umur-- ()()
+/* Stored Function untuk mendapatkan umur user */
 DELIMTER ?
-CREATE function nilai_uts(
-    ph1 FLOAT,
-    ph2 FLOAT,
-    ph3 FLOAT,
-    uts FLOAT
+CREATE function umur(
+    tgl_lahir DATE
 )
-RETURNS FLOAT
+RETURNS INT
 BEGIN
-    DECLARE nilai FLOAT;
-    SET nilai = FLOOR((ph1 + ph2 + ph3 + uts)/4);
-    RETURN (nilai);
+    DECLARE umur INT;
+    SET umur = YEAR(curdate())-YEAR(tgl_lahir) - (RIGHT(curdate(),5) < RIGHT(tgl_lahir,5));
+    RETURN(umur);
 END?
 DELIMITER ;
 
---Function Nilai Rapot Semester--
-/* Stored Function untuk mendapatkan nilai rapot semester siswa */
-DELIMTER ?
-CREATE function nilai_uas(
-    ph1 FLOAT,
-    ph2 FLOAT,
-    ph3 FLOAT,
-    uts FLOAT,
-    uas FLOAT
+--Masa Mengajar-- ()()
+/* Stored Function untuk mendapatkan lama bekerja guru di sekolah */
+DELIMITER ?
+CREATE function masa_mengajar(
+    tanggal_masuk DATE
 )
-RETURNS FLOAT
+RETURNS INT
 BEGIN
-    DECLARE nilai FLOAT;
-    DECLARE rts FLOAT;
-    SELECT nilai_uts(ph1, ph2, ph3, uts) INTO rts;
-    SET nilai = FLOOR((rts + uas)/2);
-    RETURN (nilai);
+    RETURN(DATEDIFF(NOW(), tanggal_masuk));
 END?
 DELIMITER ;
 
---Function Indeks Rapot--
+--time status-- ()()
+/* Function untuk menentukan status dari tahun ajaran dan sesi penilaian */
+DELIMITER ?
+CREATE FUNCTION time_status(
+    start DATETIME,
+    end DATETIME
+)
+RETURNS CHAR(7)
+BEGIN
+    DECLARE status CHAR(7);
+    IF start > NOW()
+        SET status = "inaktif";
+    ELSE IF start < NOW() AND end > NOW() THEN
+        SET status = "aktif";
+    ELSE
+        SET status = "selesai";
+    END IF;
+    RETURN(status);
+END?
+DELIMITER;
+
+--Indeks-- ()()
 /* Stored Function untuk mendapatkan indeks penilaian siswa */
 DELIMITER ?
 CREATE function indeks(
@@ -98,28 +108,82 @@ DECLARE i CHAR(1);
 END?
 DELIMITER ;
 
---Masa Mengajar--
-/* Stored Function untuk mendapatkan lama bekerja guru di sekolah */
-DELIMTER ?
-CREATE function masa_mengajar(
-    tanggal_masuk DATE
+DELIMITER ?
+CREATE FUNCTION waktu_akhir(
+    waktu_awal TIME,
+    durasi INT 
 )
-RETURNS INT
+RETURNS TIME
 BEGIN
-    RETURN(DATEDIFF(NOW(), tanggal_masuk));
+    DECLARE waktu_akhir TIME;
+    SET waktu_akhir = ADDTIME(waktu_awal, SEC_TO_TIME(durasi*60));
+RETURN (waktu_akhir);
 END?
 DELIMITER ;
 
---Umur--
-/* Stored Function untuk mendapatkan umur user */
-DELIMTER ?
-CREATE function umur(
-    tgl_lahir DATE
+--get Sesi Aktif--
+DELIMITER ?
+CREATE FUNCTION sesi_aktif(
+    waktu_awal DATETIME,
+    waktu_akhir DATETIME
 )
 RETURNS INT
 BEGIN
-    DECLARE umur INT;
-    SET umur = YEAR(curdate())-YEAR(tgl_lahir) - (RIGHT(curdate(),5) < RIGHT(tgl_lahir,5));
-    RETURN(umur);
+    DECLARE id INT;
+    SELECT sesi_id INTO id WHERE cek_sesi(waktu_awal, waktu_akhir) = 1;
+    RETURN(id);
+END?
+DELIMITER;
+
+--Cek Nilai Tersedia--
+/* Stored Function untuk memeriksa nilai yang tersedia */
+/* DELIMITER ?
+CREATE FUNCTION is_nilai_exists(
+    sesi INT,
+    mapel CHAR(3),
+    kontrak INT,
+    jenis CHAR(3)
+)
+RETURNS INT
+BEGIN
+    RETURN (SELECT EXISTS(SELECT 1 FROM nilais WHERE sesi = sesi AND mapel = mapel AND kontrak_siswa = kontrak AND jenis= jenis));
+END?
+DELIMITER ; */
+
+
+--Function Nilai Rapot Tengah Semester--
+/* Stored Function untuk mendapatkan nilai rapot tengah semester siswa */
+DELIMTER ?
+CREATE function nilai_uts(
+    ph1 FLOAT,
+    ph2 FLOAT,
+    ph3 FLOAT,
+    uts FLOAT
+)
+RETURNS FLOAT
+BEGIN
+    DECLARE nilai FLOAT;
+    SET nilai = FLOOR((ph1 + ph2 + ph3 + uts)/4);
+    RETURN (nilai);
+END?
+DELIMITER ;
+
+--Function Nilai Rapot Semester--
+/* Stored Function untuk mendapatkan nilai rapot semester siswa */
+DELIMTER ?
+CREATE function nilai_uas(
+    ph1 FLOAT,
+    ph2 FLOAT,
+    ph3 FLOAT,
+    uts FLOAT,
+    uas FLOAT
+)
+RETURNS FLOAT
+BEGIN
+    DECLARE nilai FLOAT;
+    DECLARE rts FLOAT;
+    SELECT nilai_uts(ph1, ph2, ph3, uts) INTO rts;
+    SET nilai = FLOOR((rts + uas)/2);
+    RETURN (nilai);
 END?
 DELIMITER ;

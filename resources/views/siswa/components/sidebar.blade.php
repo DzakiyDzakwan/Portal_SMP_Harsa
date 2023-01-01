@@ -3,7 +3,8 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex flex-column align-items-center">
                 <div class="logo">
-                    <a href="/dashboard-siswa"><img src="assets/images/logo/logo-harapan.png" alt="Logo" srcset=""/></a>
+                    <a href="/dashboard-siswa"><img src="{{ asset('assets/images/logo/logo-harapan.png') }}" alt="Logo"
+                            srcset="" /></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -21,7 +22,7 @@
                             </g>
                         </g>
                     </svg>
-                    <div class="form-check form-switch fs-6">
+                    <div class="fPorm-check form-switch fs-6">
                         <input class="form-check-input me-0" type="checkbox" id="toggle-dark" />
                         <label class="form-check-label"></label>
                     </div>
@@ -49,21 +50,34 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                {{-- SPP --}}
+                {{--
                 <li class="sidebar-title">SPP</li>
                 <li class="sidebar-item @if ($pages === 'tagihanSPP') active @endif">
                     <a href="/tagihan-spp" class="sidebar-link">
                         <i class="bi bi-hexagon-fill"></i>
                         <span>Daftar Tagihan SPP</span>
                     </a>
-                </li>
+                </li> --}}
                 {{-- Rapor --}}
                 <li class="sidebar-title">Hasil Pembelajaran</li>
-                <li class="sidebar-item @if ($pages === 'rapor' || $pages === 'pilih-rapor-ganjil-7' || $pages === 'pilih-rapor-genap-7' || $pages === 'rapor-bulanan' || $pages === 'rapor-semester') active @endif">
-                    <a href="/rapor" class="sidebar-link">
-                        <i class="bi bi-file-ruled-fill"></i>
+                <li class="sidebar-item has-sub @if ($pages === 'rapor') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                         <span>Rapor</span>
                     </a>
+                    @php
+                        $kelas = DB::table('siswas')
+                            ->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
+                            ->where('user', Auth::user()->uuid)
+                            ->get();
+                    @endphp
+                    <ul class="submenu @if ($pages === 'rapor') active @endif">
+                        @foreach ($kelas as $k)
+                            <li class="submenu-item">
+                                <a href="/rapor/{{ $k->grade }}">Kelas {{ $k->grade }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </li>
             </ul>
         </div>
