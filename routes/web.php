@@ -179,5 +179,3 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     //Rekapitulasi-Absen
     Route::get('/rekap-absen', [guru\InputController::class, 'rekapAbsen'])->name('rekapAbsen');
 }); */
-
-
