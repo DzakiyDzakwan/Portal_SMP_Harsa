@@ -34,7 +34,7 @@
     @livewire('info-card-tahun-akademik')
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-            <h5>List Konfirmasi Nilai</h5>
+            <h5>List Sesi</h5>
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
                     {{-- Button Tambah sesi --}}

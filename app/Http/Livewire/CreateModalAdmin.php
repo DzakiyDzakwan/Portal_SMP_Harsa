@@ -8,13 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class CreateModalAdmin extends Component
 {
-    public $NUPTK, $password, $tanggal_masuk;
+    public $NUPTK, $nama, $tgl_masuk, $jenis_kelamin;
 
     protected $rules = [
-        'NUPTK' => 'required|min:16',
-        'password' => 'required',
-        'tanggal_masuk' => 'required' 
+        'nama' => 'required|max:255',
+        'NUPTK' => 'required|min:16|max:18|unique:gurus',
+        'tgl_masuk' => 'required'
     ];
+
+    public function mount() {
+        $this->jenis_kelamin = 'LK';
+    }
 
     public function updated($fields) {
         $this->validateOnly($fields);
@@ -23,14 +27,15 @@ class CreateModalAdmin extends Component
     public function store() {
 
         $this->validate([
-            'NUPTK' => 'required|min:16',
-            'password' => 'required',
-            'tanggal_masuk' => 'required'  
+            'nama' => 'required|max:255',
+            'NUPTK' => 'required|min:16|max:18',
+            'tgl_masuk' => 'required'
         ]);
 
-        $this->password = Hash::make($this->password);
+        $password = Hash::make($this->NUPTK);
 
-        DB::select('CALL add_admin(?, ?, ?, ?)', [$this->NUPTK, $this->password, $this->tanggal_masuk, auth()->user()->uuid]);
+        DB::select('CALL add_admin(?, ?, ?, ?, ?, ?)', [$this->nama, $this->NUPTK, $password, $this->tgl_masuk, $this->jenis_kelamin, auth()->user()->uuid]);
+
         $this->reset();
         $this->emit('adminStore');
         $this->dispatchBrowserEvent('close-create-modal');

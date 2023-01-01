@@ -10,7 +10,7 @@ class InfoCardNilai extends Component
 {
 
     protected $listeners = [
-        'storeSesi' => 'render'
+        'sesiStore' => 'render'
     ];
 
     public function render()

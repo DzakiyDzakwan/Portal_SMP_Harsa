@@ -157,43 +157,55 @@ return new class extends Migration
         ');
 
         DB::unprepared('
-            CREATE PROCEDURE add_admin(
-                IN NUPTK CHAR(36),
-                IN pass VARCHAR(255),
-                IN tgl_masuk DATE,
-                IN actor CHAR(36)
-            )
+        CREATE PROCEDURE add_admin(
+            IN nama VARCHAR(255),
+            IN NUPTK CHAR(18),
+            IN pass VARCHAR(255),
+            IN tgl_masuk DATE,
+            IN jk CHAR(2),
+            IN admin CHAR(36)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE uuid CHAR(36);
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
             BEGIN
-                DECLARE errno INT;
-                DECLARE uuid CHAR(36);
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
-            
-                SET uuid = UUID();
-            
-                START TRANSACTION;
-                INSERT INTO users(uuid, username, password, created_at, updated_at) 
-                VALUES (uuid, NUPTK, pass, NOW(), NOW());
-
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(actor, "insert", "users", NOW());
-
-                INSERT INTO model_has_roles(role_id, model_type, model_id)
-                VALUES ("3", "App\\Models\\User", uuid);
-
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(actor, "insert", "model_has_roles", NOW());
-
-                INSERT INTO gurus(NUPTK, user, jabatan, tanggal_masuk, status, created_at, updated_at)
-                VALUES(NUPTK, uuid, "tu", tgl_masuk, "aktif", NOW(), NOW());
-
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(actor, "insert", "gurus", NOW());
-                
-                COMMIT;
-            END
+                ROLLBACK;
+            END;
+            DECLARE EXIT HANDLER for SQLWARNING
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            SET uuid = UUID();
+        
+            START TRANSACTION;
+            INSERT INTO users(uuid, username, password, created_at, updated_at) 
+            VALUES (uuid, NUPTK, pass, NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "insert", "users", NOW());
+        
+            INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
+            VALUES (uuid, nama, jk, NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "insert", "user_profiles", NOW());
+        
+            INSERT INTO gurus(NUPTK, user, jabatan, tanggal_masuk, status, created_at, updated_at)
+            VALUES(NUPTK, uuid, "tu", tgl_masuk, "aktif", NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "insert", "gurus", NOW());
+        
+            INSERT INTO model_has_roles(role_id, model_type, model_id)
+            VALUES ("3", "App\\Models\\User", uuid);
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "insert", "model_has_roles", NOW());
+            COMMIT;
+        END
         ');
 
         DB::unprepared('
@@ -655,7 +667,7 @@ return new class extends Migration
 
         DB::unprepared('
             CREATE PROCEDURE add_kelas(
-                IN kelas CHAR(3),
+                IN kelas CHAR(6),
                 IN nama VARCHAR(255),
                 IN urutan CHAR(1),
                 IN kelompok CHAR(1),
@@ -697,7 +709,9 @@ return new class extends Migration
             IN nis CHAR(4),
             IN pass VARCHAR(255),
             IN tgl_masuk DATE,
-            IN kelas_id CHAR(3),
+            IN kelas_id CHAR(6),
+            IN ta CHAR(9),
+            IN semester CHAR(6),
             IN jk CHAR(2),
             IN actor CHAR(36)
         )
@@ -705,34 +719,34 @@ return new class extends Migration
         
             DECLARE uuid CHAR(36);
             SET uuid = UUID();
-
+        
             INSERT INTO users(uuid, username, password, created_at, updated_at) 
             VALUES (uuid, nis, pass, NOW(), NOW());
-
+        
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "users", NOW());
-
+        
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("6", "App\\Models\\User", uuid);
-
+            VALUES ("5", "App\\Models\\User", uuid);
+        
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "model_has_roles", NOW());
-
+        
             INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
             VALUES (uuid, nama, jk, NOW(), NOW());
-
+        
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "user_profiles", NOW());
-
+        
             INSERT INTO siswas(nisn, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
             VALUES(nisn, uuid, nis, tgl_masuk, kelas_id, "Aktif",  NOW(), NOW());
-
+        
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "siswas", NOW());
-
-            INSERT INTO kontrak_semesters(siswa, kelas, grade, semester, tahun_ajaran, status, created_at, updated_at)
-            VALUES(nisn, kelas_id, "7", "Ganjil", YEAR(NOW()), "ongoing", NOW(), NOW());
-
+        
+            INSERT INTO kontrak_semesters(siswa, kelas, grade, semester_aktif, tahun_ajaran_aktif, status, created_at, updated_at)
+            VALUES(nisn, kelas_id, "7", semester, ta, "ongoing", NOW(), NOW());
+        
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "kontrak_semesters", NOW());
         END
@@ -1348,7 +1362,7 @@ BEGIN
         DB::unprepared("DROP PROCEDURE delete_mapel");
         DB::unprepared("DROP PROCEDURE add_mapelGuru");
         DB::unprepared("DROP PROCEDURE delete_mapelGuru");
-        // DB::unprepared("DROP PROCEDURE add_kelas");
+        DB::unprepared("DROP PROCEDURE add_kelas");
         // DB::unprepared("DROP PROCEDURE update_kelas");
         // DB::unprepared("DROP PROCEDURE restore_kelas");
         // DB::unprepared("DROP PROCEDURE inactive_kelas");

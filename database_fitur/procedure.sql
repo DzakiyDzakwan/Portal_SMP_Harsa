@@ -1,4 +1,25 @@
 /* Admin */
+DELIMITER ?
+CREATE PROCEDURE add_admin(
+    IN nama VARCHAR(255),
+    IN NUPTK CHAR(18),
+    IN pass VARCHAR(255),
+    IN tgl_masuk DATE,
+    IN jk CHAR(2),
+    IN admin CHAR(36)
+)
+BEGIN
+
+    DECLARE errno INT;
+    DECLARE uuid CHAR(36);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    DECLARE EXIT HANDLER for SQLWARNING
+    BEGIN
+        ROLLBACK;
+    END;
 
     SET uuid = UUID();
 
@@ -7,20 +28,25 @@
     VALUES (uuid, NUPTK, pass, NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "users", NOW());
+    VALUES(admin, "insert", "users", NOW());
 
-    INSERT INTO model_has_roles(role_id, model_type, model_id)
-    VALUES ("3", "App\Models\User", uuid);
+    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
+    VALUES (uuid, nama, jk, NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "model_has_roles", NOW());
+    VALUES(admin, "insert", "user_profiles", NOW());
 
     INSERT INTO gurus(NUPTK, user, jabatan, tanggal_masuk, status, created_at, updated_at)
     VALUES(NUPTK, uuid, "tu", tgl_masuk, "aktif", NOW(), NOW());
 
     INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "gurus", NOW());
-    
+    VALUES(admin, "insert", "gurus", NOW());
+
+    INSERT INTO model_has_roles(role_id, model_type, model_id)
+    VALUES ("3", "App\\Models\\User", uuid);
+
+    INSERT INTO log_activities(actor, action, at, created_at)
+    VALUES(admin, "insert", "model_has_roles", NOW());
     COMMIT;
 END?
 DELIMITER ;
@@ -158,112 +184,7 @@ DELIMITER;
 
 
 /* Siswa */
---Registrasi Siswa (✅)
-DELIMITER ?
-CREATE PROCEDURE add_siswa(
-    IN nama VARCHAR(255),
-    IN nisn CHAR(10),
-    IN nis CHAR(4),
-    IN pass VARCHAR(255),
-    IN tgl_masuk DATE,
-    IN kelas_id CHAR(3),
-    IN jk CHAR(2),
-    IN actor CHAR(36)
-)
-BEGIN
 
-    DECLARE uuid CHAR(36);
-    SET uuid = UUID();
-
-    INSERT INTO users(uuid, username, password, created_at, updated_at) 
-    VALUES (uuid, nis, pass, NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "users", NOW());
-
-    INSERT INTO model_has_roles(role_id, model_type, model_id)
-    VALUES ("5", "App\Models\User", uuid);
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "model_has_roles", NOW());
-
-    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
-    VALUES (uuid, nama, jk, NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "user_profiles", NOW());
-
-    INSERT INTO siswas(nisn, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
-    VALUES(nisn, uuid, nis, tgl_masuk, kelas_id, "Aktif",  NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "siswas", NOW());
-
-    INSERT INTO kontrak_semesters(siswa, kelas, grade, semester, tahun_ajaran, status, created_at, updated_at)
-    VALUES(nisn, kelas_id, "7", "Ganjil", YEAR(NOW()), "ongoing", NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "kontrak_semesters", NOW());
-END?
-DELIMITER ;
-
---Update Siswa (✅)
-DELIMITER ?
-CREATE PROCEDURE update_siswa(
-    IN oldnis CHAR(4),
-    IN newnis CHAR(4),
-    IN nama VARCHAR(255),
-    IN actor CHAR(36)
-)
-BEGIN
-    DECLARE siswa CHAR(36);
-    DECLARE errno INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-        ROLLBACK;
-    END;
-    SELECT user INTO siswa FROM siswas WHERE NIS = oldnis COLLATE utf8mb4_general_ci;
-        
-    UPDATE siswas SET NIS = newnis WHERE NIS = oldnis COLLATE utf8mb4_general_ci;
-        
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "update", "siswas", NOW());
-
-    UPDATE user_profiles SET nama = nama WHERE user = siswa COLLATE utf8mb4_general_ci;
-        
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "update", "user_profiles", NOW());
-    
-    UPDATE users SET username = newnis WHERE uuid = siswa COLLATE utf8mb4_general_ci;
-    
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "update", "users", NOW());
-END?
-DELIMITER ;
-
---Non Aktifkan Siswa (✅)
-DELIMITER ?
-CREATE PROCEDURE inactive_siswa (
-    IN siswa CHAR(36),
-    IN status VARCHAR(10),
-    IN actor CHAR(36)
-)
-BEGIN
-    DECLARE errno INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-        BEGIN
-            ROLLBACK;
-        END;
-    START TRANSACTION;
-    UPDATE siswas SET status = status, updated_at = NOW() WHERE user = siswa COLLATE utf8mb4_general_ci;
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "update", "siswas", NOW());
-    
-    UPDATE users SET deleted_at = NOW() WHERE uuid = siswa COLLATE utf8mb4_general_ci; 
-    COMMIT;
-END?
-DELIMITER;
 
 -- Delete siswa permanen (❌)
 -- DELIMITER ?
@@ -377,7 +298,7 @@ DELIMITER ;
 --Insert Kelas (✅)
 DELIMITER ?
 CREATE PROCEDURE add_kelas(
-    IN kelas CHAR(3),
+    IN kelas CHAR(6),
     IN wali CHAR(18),
     IN urutan CHAR(1),
     IN kelompok CHAR(1),

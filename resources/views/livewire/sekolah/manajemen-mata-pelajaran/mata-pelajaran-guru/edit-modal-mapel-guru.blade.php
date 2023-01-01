@@ -1,12 +1,12 @@
 <div>
-    {{-- modal create mapel --}}
+    {{-- modal edit mapel guru --}}
     <div wire:ignore.self class="modal fade text-left" id="editModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel33" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-success justify-content-center">
+                <div class="modal-header bg-warning justify-content-center">
                     <h4 class="modal-title white" id="myModalLabel33">
-                        Tambah Mata Pelajaran Guru
+                        Edit Mata Pelajaran Guru
                     </h4>
                 </div>
                 <form class="form form-vertical" wire:submit.prevent="update">
@@ -19,7 +19,7 @@
                                     <select wire:model.defer="mapel" name="mapel" class="form-select form-control"
                                         id="basicSelect">
                                         <option>Pilih Mata Pelajaran</option>
-                                        @foreach ($pelajaran as $p)
+                                        @foreach ($listMapel as $p)
                                             <option value="{{ $p->mapel_id }}">{{ $p->nama_mapel }}
                                                 @if ($p->kelompok_mapel = 'A')
                                                     {{ 'Wajib' }}
@@ -49,7 +49,7 @@
                                     <select name="guru" class="form-select form-control" id="basicSelect"
                                         wire:model.defer="guru">
                                         <option>Pilih Guru</option>
-                                        @foreach ($guruu as $g)
+                                        @foreach ($listGuru as $g)
                                             <option value="{{ $g->NUPTK }}">{{ $g->nama }}</option>
                                         @endforeach
                                     </select>

@@ -8,14 +8,28 @@ use Illuminate\Support\Facades\DB;
 
 class ListSiswa extends Component
 {
-    public $siswas, $user, $status;
+    public $siswas, $user, $status, $tahun_ajaran_aktif, $semester_aktif;
 
     protected $listeners = [
         'siswaStore'=> 'render',
         'siswaUpdate'=> 'render',
         'siswaNonaktif' => 'render',
         'siswaDelete' => 'render',
+        'filter'
     ];
+
+    public function mount() {
+        $data = DB::table('list_tahun_ajaran')->whereRaw('status <> "inaktif" COLLATE utf8mb4_general_ci')->first();
+        if($data != null) {
+            $this->tahun_ajaran_aktif = $data->tahun_ajaran;
+            $this->semester_aktif = $data->semester;
+        }
+    }
+
+    public function filter($data) {
+        $this->tahun_ajaran_aktif = $data["tahun_ajaran_aktif"];
+        $this->semester_aktif = $data["semester_aktif"];
+    }
 
     public function render()
     {
@@ -23,7 +37,7 @@ class ListSiswa extends Component
         ->join('siswas', 'siswas.user', '=', 'users.uuid')
         ->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')
         ->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
-        ->join('kelas', 'kelas.kelas_id', '=', 'kontrak_semesters.kelas')
+        ->join('kelas', 'kelas.kelas_id', '=', 'kontrak_semesters.kelas')->where('kontrak_semesters.tahun_ajaran_aktif', $this->tahun_ajaran_aktif)->where('kontrak_semesters.semester_aktif', $this->semester_aktif)
         ->orderBy('siswas.created_at', 'DESC')
         ->get();
 

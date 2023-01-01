@@ -10,6 +10,8 @@ class MapelGuru extends Model
 {
     use HasFactory, softDeletes;
 
+    protected $primaryKey = 'mapel_guru_id';
+
     protected $guarded = [
         'created_at',
         'updated_at'

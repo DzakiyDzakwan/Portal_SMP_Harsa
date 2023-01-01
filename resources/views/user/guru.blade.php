@@ -72,6 +72,9 @@
         const restoreModal = new bootstrap.Modal('#restoreModal', {
             keyboard: false
         })
+        const infoModal = new bootstrap.Modal('#infoModal', {
+            keyboard: false
+        })
 
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
@@ -127,4 +130,3 @@
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
 @endsection
-

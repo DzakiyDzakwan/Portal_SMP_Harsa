@@ -45,9 +45,13 @@ class CreateModalSesiPenilaian extends Component
 
     public function render()
     {
+        $this->tahun_ajaran_aktif = null;
+        $this->semester_aktif = null;
         $data = DB::table('list_tahun_ajaran')->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
-        $this->tahun_ajaran_aktif = $data->tahun_ajaran;
-        $this->semester_aktif = $data->semester;
+        if($data != null) {
+            $this->tahun_ajaran_aktif = $data->tahun_ajaran;
+            $this->semester_aktif = $data->semester;
+        }
         return view('livewire.sekolah.manajemen-nilai.create-modal-sesi-penilaian');
     }
 }

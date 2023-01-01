@@ -12,6 +12,8 @@ class InfoCardMapel extends Component
 
     protected $listeners = [
         'mapelStore' => 'render',
+        'restoreMapel' => 'render',
+        'inactiveMapel' => 'render'
     ];
 
     public function render()
