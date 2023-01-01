@@ -9,7 +9,7 @@ class ListInactiveGuru extends Component
 {
     public $gurus;
     protected $listeners = [
-        'guruInactive' => 'render',
+        'inactiveGuru' => 'render',
         'guruRestore' => 'render'
     ];
     public function render()

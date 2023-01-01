@@ -13,7 +13,8 @@ class ListMapel extends Component
     protected $listeners = [
         'mapelStore' => 'render',
         'mapelUpdate' => 'render',
-        'mapelRestore' => 'render',
+        'restoreMapel' => 'render',
+        'updateMapel' => 'render'
     ];
 
     public function editMapel($id)

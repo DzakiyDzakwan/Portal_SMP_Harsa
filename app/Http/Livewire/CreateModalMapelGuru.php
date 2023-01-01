@@ -5,12 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Guru;
 use Livewire\Component;
 use App\Models\MapelGuru;
+use App\Models\Mapel;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\DB;
 
 class CreateModalMapelGuru extends Component
 {
-    public  $mapel_guru_id, $mapel, $guru, $guruu, $pelajaran;
+    public  $mapel, $guru;
 
     protected $listeners = [
         'inactiveMapelGuru' => 'render'
@@ -33,12 +34,9 @@ class CreateModalMapelGuru extends Component
         //     'action' => 'insert',
         //     'at' => 'mapel'
         // ]);
-
         DB::select('CALL add_mapelGuru(?, ?, ?)', [$this->mapel, $this->guru, auth()->user()->uuid]);
-
-
         $this->reset();
-        $this->emit('mapelGuruStore');
+        $this->emit('storeMapelGuru');
         $this->dispatchBrowserEvent('insert-alert');
         $this->dispatchBrowserEvent('close-create-modal');
     }
@@ -46,8 +44,10 @@ class CreateModalMapelGuru extends Component
 
     public function render()
     {
-        $this->pelajaran = DB::table('mapels')->get();
-        $this->guruu = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->get();
-        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran-guru.create-modal-mapel-guru');
+        /* $this->pelajaran = Mapel::get();
+        $this->guruu = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->where('jabatan', '<>', 'ks')->where('jabatan', '<>', 'tu')->get(); */
+        $listMapel = DB::table('mapels')->get();
+        $listGuru = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->where('jabatan', '<>', 'ks')->where('jabatan', '<>', 'tu')->get();
+        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran-guru.create-modal-mapel-guru', compact('listMapel', 'listGuru'));
     }
 }

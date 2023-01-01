@@ -2,10 +2,8 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>uuid</th>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Created_at</th>
+            <th>Nama</th>
+            <th>Jabatan</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -13,10 +11,8 @@
         @foreach ($admin as $item)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->uuid }}</td>
-                <td>{{ $item->username }}</td>
-                <td>{{ $item->name }}</td>
-                <td>{{ $item->created_at }}</td>
+                <td>{{ $item->profiles->nama }}</td>
+                <td>{{ $item->gurus->jabatan === 'tu' ? 'Tata Usaha' : 'Guru' }}</td>
                 <td>
                     {{-- Preview Button --}}
                     {{-- <div class="modal-info me-1 mb-1 d-inline-block">
@@ -25,12 +21,12 @@
                         </button>
                     </div> --}}
                     {{-- Update Button --}}
-                    <div class="modal-warning me-1 mb-1 d-inline-block">
+                    {{-- <div class="modal-warning me-1 mb-1 d-inline-block">
                         <button type="button" class="btn btn-sm btn-warning"
                             wire:click="editAdmin('{{ $item->uuid }}')">
                             <i class="bi bi-pencil"></i>
                         </button>
-                    </div>
+                    </div> --}}
                     {{-- Inactive Button --}}
                     <div class="modal-danger me-1 mb-1 d-inline-block">
                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
@@ -104,6 +100,6 @@
                     </div> --}}
                 </td>
             </tr>
-          @endforeach
+        @endforeach
     </tbody>
 </table>

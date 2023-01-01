@@ -5,12 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Guru;
 use Livewire\Component;
 use App\Models\MapelGuru;
+use App\Models\Mapel;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\DB;
 
 class EditModalMapelGuru extends Component
 {
-    public $mapel_guru_id, $mapel, $guru, $pelajaran, $guruu;
+    public $mapel_guru_id, $mapel, $guru;
 
     protected $rules = [
         'mapel' => 'required',
@@ -26,19 +27,20 @@ class EditModalMapelGuru extends Component
         $this->validateOnly($fields);
     }
 
-    public function showModal($mapel_guru_id)
+    public function showModal($id)
     {
-        //dd($mapel_guru_id);
-        $data =  MapelGuru::where('mapel_guru_id', $mapel_guru_id)->first();
-        $this->mapel_guru_id = $mapel_guru_id;
+        $data =  MapelGuru::where('mapel_guru_id', $id)->first();
+        $this->mapel_guru_id = $id;
         $this->dispatchBrowserEvent('edit-modal');
     }
 
     public function render()
     {
-        $this->pelajaran = DB::table('mapels')->get();
-        $this->guruu = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->get();
-        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran-guru.edit-modal-mapel-guru');
+        /* $this->pelajaran = Mapel::get();
+        $this->guruu = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->get(); */
+        $listMapel = Mapel::get();
+        $listGuru = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->where('jabatan', '<>', 'ks')->where('jabatan', '<>', 'tu')->get();
+        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran-guru.edit-modal-mapel-guru', compact('listMapel', 'listGuru'));
     }
 
     public function update()

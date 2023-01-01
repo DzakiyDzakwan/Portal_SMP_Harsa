@@ -16,6 +16,27 @@
                 <form class="form form-vertical" wire:submit.prevent="store">
                     @csrf
                     <div class="modal-body">
+                        <div class="col-12">
+                            <div class="form-group has-icon-left">
+                                <label for="guru">Guru</label>
+                                <div class="position-relative">
+                                    <select name="guru" class="form-select form-control" id="basicSelect"
+                                        wire:model.defer="guru">
+                                        <option>Pilih Guru</option>
+                                        @foreach ($listGuru as $g)
+                                            <option value="{{ $g->NUPTK }}">{{ $g->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person-video3"></i>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        This is invalid state.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {{-- pilih mapel --}}
                         <div class="col-12">
                             <div class="form-group has-icon-left">
@@ -24,7 +45,7 @@
                                     <select name="mapel" class="form-select form-control" id="basicSelect"
                                         wire:model.defer="mapel">
                                         <option>Pilih Mata Pelajaran</option>
-                                        @foreach ($pelajaran as $p)
+                                        @foreach ($listMapel as $p)
                                             <option value="{{ $p->mapel_id }}">{{ $p->nama_mapel }}
                                                 @if ($p->kelompok_mapel = 'A')
                                                     {{ 'Wajib' }}
@@ -36,30 +57,6 @@
                                     </select>
                                     <div class="form-control-icon">
                                         <i class="bi bi-book-half"></i></i>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <i class="bx bx-radio-circle"></i>
-                                        This is invalid state.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <input hidden name="mapel_guru_id" type="text"
-                            class="form-control @error('nama_mapel') is-invalid @enderror "
-                            placeholder="Nama Mata Pelajaran" id="mapel_guru_id" wire:model.defer="nama_mapel" />
-                        <div class="col-12">
-                            <div class="form-group has-icon-left">
-                                <label for="guru">Guru</label>
-                                <div class="position-relative">
-                                    <select name="guru" class="form-select form-control" id="basicSelect"
-                                        wire:model.defer="guru">
-                                        <option>Pilih Guru</option>
-                                        @foreach ($guruu as $g)
-                                            <option value="{{ $g->NUPTK }}">{{ $g->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="form-control-icon">
-                                        <i class="bi bi-person-video3"></i>
                                     </div>
                                     <div class="invalid-feedback">
                                         <i class="bx bx-radio-circle"></i>

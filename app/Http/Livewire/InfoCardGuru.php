@@ -18,9 +18,9 @@ class InfoCardGuru extends Component
 
     public function render()
     {
-        $this->totalGuru = Guru::count();
-        $this->guruActive = Guru::where('status', 'Aktif')->count();
-        $this->guruInactive = Guru::where('status', 'Inaktif')->count();
+        $this->totalGuru = Guru::where('jabatan', 'guru')->count();
+        $this->guruActive = Guru::where('status', 'aktif')->where('jabatan', 'guru')->count();
+        $this->guruInactive = Guru::where('status', 'inaktif')->where('jabatan', 'guru')->count();
         return view('livewire.user.manajemen-akun.guru.info-card-guru');
     }
 }
