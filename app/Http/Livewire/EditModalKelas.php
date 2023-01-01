@@ -25,10 +25,7 @@ class EditModalKelas extends Component
     public function updated($fields) {
         $this->validateOnly($fields);
     }
-
-    public function mount() {
-    }
-
+    
     public function render()
     {
         $this->gurus = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->get();

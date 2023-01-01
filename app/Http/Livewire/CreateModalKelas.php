@@ -9,10 +9,10 @@ use App\Models\Kelas;
 
 class CreateModalKelas extends Component
 {
-    public $gurus, $kelas_id, $grade, $nama_kelas, $kelompok_kelas, $wali_kelas, $uuid;
+    public $gurus, $kelas_id, $grade, $nama_kelas, $kelompok_kelas, $wali_kelas;
 
     protected $rules = [
-        'kelas_id' => 'required|max:3|unique:kelas',
+        'kelas_id' => 'required|max:6|unique:kelas',
         'nama_kelas' => 'required|unique:kelas',
         'kelompok_kelas' => 'required|min:1',
         'wali_kelas' => 'required'
@@ -27,9 +27,7 @@ class CreateModalKelas extends Component
     }
 
     public function mount() {
-        // if(Guru::where('is_wali_kelas', 'tidak')->first() != null) {
-        //     $this->wali_kelas = Guru::where('is_wali_kelas', 'tidak')->first()->NIP;
-        // }
+        $this->grade = "7";
     }
 
     
@@ -46,16 +44,17 @@ class CreateModalKelas extends Component
 
     public function store() {
         $this->validate([
-            'kelas_id' => 'required|max:3|unique:kelas',
+            'kelas_id' => 'required|max:6|unique:kelas',
             'nama_kelas' => 'required|unique:kelas',
             'kelompok_kelas' => 'required|min:1'
         ]);
 
-        $this->uuid = Guru::select('gurus.user')
+        $guru = Guru::select('gurus.user')
         ->where('gurus.NUPTK', $this->wali_kelas)
         ->first();
+        $user = $guru->user;
 
-        DB::select('CALL add_kelas(?, ?, ?, ?, ?, ?, ?)', [$this->kelas_id, $this->nama_kelas, $this->grade, $this->kelompok_kelas, $this->wali_kelas, $this->uuid, auth()->user()->uuid]);
+        DB::select('CALL add_kelas(?, ?, ?, ?, ?, ?, ?)', [$this->kelas_id, $this->nama_kelas, $this->grade, $this->kelompok_kelas, $this->wali_kelas, $user, auth()->user()->uuid]);
 
         $this->reset();
         $this->emit('storeKelas');
