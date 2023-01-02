@@ -50,7 +50,6 @@
             @livewire('list-kelas')
         </div>
     </div>
-
     @livewire('edit-modal-kelas')
 
     @livewire('alert-kelas')
@@ -65,12 +64,15 @@
         const editModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        // const infoModal = new bootstrap.Modal('#infoModal', {
-        //     keyboard: false
-        // })
-        /* const deleteModal = new bootstrap.Modal('#deleteModal', {
+        const inactiveModal = new bootstrap.Modal('#inactiveModal', {
             keyboard: false
-        }) */
+        })
+        const restoreModal = new bootstrap.Modal('#restoreModal', {
+            keyboard: false
+        })
+        const deleteModal = new bootstrap.Modal('#deleteModal', {
+            keyboard: false
+        })
 
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
@@ -78,17 +80,19 @@
         window.addEventListener('edit-modal', event => {
             editModal.toggle();
         });
-        // window.addEventListener('info-modal', event => {
-        //     infoModal.toggle();
-        // })
-        /* window.addEventListener('delete-modal', event => {
+        window.addEventListener('inactive-modal', event => {
+            inactiveModal.toggle();
+        })
+        window.addEventListener('restore-modal', event => {
+            restoreModal.toggle();
+        })
+        window.addEventListener('delete-modal', event => {
             deleteModal.toggle();
-        }) */
+        })
 
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
         const inactiveToast = new bootstrap.Toast('#inactiveToast')
-        const nonInactiveToast = new bootstrap.Toast('#nonInactiveToast')
         const updateToast = new bootstrap.Toast('#updateToast')
         const restoreToast = new bootstrap.Toast('#restoreToast')
         const deleteToast = new bootstrap.Toast('#deleteToast')
@@ -100,10 +104,6 @@
 
         window.addEventListener('inactive-alert', e => {
             inactiveToast.show()
-        })
-
-        window.addEventListener('nonInactive-alert', e => {
-            nonInactiveToast.show()
         })
 
         window.addEventListener('update-alert', e => {
@@ -118,7 +118,6 @@
             deleteToast.show()
         })
     </script>
-
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
