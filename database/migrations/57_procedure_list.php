@@ -727,7 +727,7 @@ return new class extends Migration
             VALUES(actor, "insert", "users", NOW());
         
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("5", "App\\Models\\User", uuid);
+            VALUES ("6", "App\\Models\\User", uuid);
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "model_has_roles", NOW());
