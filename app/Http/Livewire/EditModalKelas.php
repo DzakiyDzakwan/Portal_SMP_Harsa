@@ -48,7 +48,18 @@ class EditModalKelas extends Component
             'nama_kelas' => 'required',
             'wali_kelas' => 'required'
         ]);
-        DB::select('CALL update_kelas(?, ?, ?, ?)', [$this->kelas_id, $this->nama_kelas, $this->wali_kelas, auth()->user()->uuid]);
+
+        $wali = Guru::select('gurus.user')
+        ->where('gurus.NUPTK', $this->wali_kelas )
+        ->first();
+        $user = $wali->user;
+
+        $old_wali = Guru::select('gurus.user')
+        ->where('gurus.NUPTK', $this->old_wali_kelas )
+        ->first();
+        $old_user = $old_wali->user;
+
+        DB::select('CALL update_kelas(?, ?, ?, ?, ?, ?)', [$this->kelas_id, $this->nama_kelas, $this->wali_kelas, $user, $old_user, auth()->user()->uuid]);
 
         // Kelas::where('kelas_id', $this->kelas_id)->update([
         //     'nama_kelas' => $this->nama_kelas,

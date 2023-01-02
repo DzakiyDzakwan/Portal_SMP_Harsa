@@ -703,6 +703,113 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+            CREATE PROCEDURE inactive_kelas(
+                IN kelas CHAR(6),
+                IN guru CHAR(36),
+                IN actor CHAR(36)
+            )
+            BEGIN
+                UPDATE kelas SET wali_kelas = NULL, deleted_at = NOW() WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+            
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "update", "kelas", NOW());
+                
+                DELETE FROM model_has_roles WHERE role_id = "5" AND model_id = guru COLLATE utf8mb4_general_ci;
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "delete", "model_has_roles", NOW());
+            END
+        ');
+
+        DB::unprepared('
+            CREATE PROCEDURE delete_kelas(
+                IN kelas CHAR(6),
+                IN actor CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                    BEGIN
+                        ROLLBACK;
+                    END;
+
+                START TRANSACTION;
+            
+                DELETE FROM kelas WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+            
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "delete", "kelas", NOW());
+
+                COMMIT;
+                
+            END
+        ');
+        
+        DB::unprepared('
+        CREATE PROCEDURE restore_kelas(
+            IN kelas CHAR(6),
+            IN wali CHAR(18),
+            IN user CHAR(36),
+            IN actor CHAR(36)
+        )
+        BEGIN
+        
+            UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "update", "kelas", NOW());
+            
+            INSERT INTO model_has_roles(role_id, model_type, model_id)
+            VALUES (5, "App\\Models\\User", user);
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "insert", "model_has_roles", NOW());
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE update_kelas(
+            IN kelas CHAR(3),
+            IN nama VARCHAR(255),
+            IN wali CHAR(18),
+            IN user CHAR(36),
+            IN guru CHAR(36),
+            actor CHAR(36)
+        )
+        BEGIN
+
+        DECLARE old_wali CHAR(18);
+        DECLARE errno INT;
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+    
+        SELECT wali_kelas INTO old_wali FROM kelas WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+        START TRANSACTION;
+    
+        IF EXISTs( SELECT * FROM gurus WHERE NUPTK = old_wali  COLLATE utf8mb4_general_ci) THEN
+            DELETE FROM model_has_roles WHERE role_id = "5" AND model_id = guru COLLATE utf8mb4_general_ci;
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "delete", "model_has_roles", NOW());
+        END IF;
+    
+        UPDATE kelas SET wali_kelas = wali, nama_kelas = nama WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+    
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(actor, "update", "kelas", NOW());
+    
+        INSERT INTO model_has_roles(role_id, model_type, model_id)
+        VALUES (5, "App\\Models\\User", user);
+    
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(actor, "insert", "model_has_roles", NOW());
+    
+        COMMIT;
+        END
+        ');
+
+        DB::unprepared('
         CREATE PROCEDURE add_siswa(
             IN nama VARCHAR(255),
             IN nisn CHAR(10),
@@ -911,37 +1018,6 @@ return new class extends Migration
         END
         ');
     
-        DB::unprepared('
-            CREATE PROCEDURE inactive_kelas(
-                IN kelas CHAR(6),
-                IN admin CHAR(36)
-            )
-            BEGIN
-            
-                UPDATE kelas SET wali_kelas = NULL, deleted_at = NOW() WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
-            
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "update", "kelas", NOW());
-            
-            END
-        ');
-        
-        DB::unprepared('
-        CREATE PROCEDURE restore_kelas(
-            IN kelas CHAR(3),
-            IN wali CHAR(18),
-            IN admin CHAR(36)
-        )
-        BEGIN
-        
-            UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
-        
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "kelas", NOW());
-            
-        END
-        ');
-        /*
         DB::unprepared('
             CREATE PROCEDURE delete_kelas(
                 IN kelas CHAR(3),
