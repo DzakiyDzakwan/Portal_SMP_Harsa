@@ -8,6 +8,6 @@ class AlertRoster extends Component
 {
     public function render()
     {
-        return view('livewire.sekolah.manajemen-kelas.roster.alert-roster');
+        return view('livewire.alert-roster');
     }
 }

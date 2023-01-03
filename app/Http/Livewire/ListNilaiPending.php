@@ -10,7 +10,7 @@ class ListNilaiPending extends Component
 {
     public function render()
     {
-        $nilai_pending = DB::table('list_nilai_pending')->get();
+        $nilai_pending = DB::table('nilais')->get();
         return view('livewire.list-nilai-pending', compact('nilai_pending'));
     }
 

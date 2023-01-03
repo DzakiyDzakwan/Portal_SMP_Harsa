@@ -16,6 +16,7 @@ class EditModalAdmin extends Component
     ];
 
     protected $rules = [
+        'username' => 'required',
         'password' => 'required'
     ];
 
@@ -25,7 +26,7 @@ class EditModalAdmin extends Component
 
     public function render()
     {
-        return view('livewire.user.manajemen-akun.admin.edit-modal-admin');
+        return view('livewire.edit-modal-admin');
     }
 
     public function showModal($uuid) {
@@ -40,12 +41,13 @@ class EditModalAdmin extends Component
     public function update()
     {
         $this->validate([
+            'username' => 'required',
             'password' => 'required'
         ]);
 
         $this->password = Hash::make($this->password);
 
-        DB::select('CALL update_admin(?, ?, ?)', [auth()->user()->uuid, $this->uuid, $this->password]);
+        DB::select('CALL update_admin(?, ?, ?, ?)', [auth()->user()->uuid, $this->uuid, $this->username, $this->password]);
 
         $this->emit('adminUpdate');
         $this->reset();

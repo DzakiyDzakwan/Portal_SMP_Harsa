@@ -10,13 +10,13 @@ class InfoCardNilai extends Component
 {
 
     protected $listeners = [
-        'sesiStore' => 'render'
+        'storeSesi'=>'render'
     ];
 
     public function render()
     {
-        $sesi = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
+        $sesi = DB::table("list_sesi_penilaian")->where('status', "Aktif")->first();
         /* dd(is_null($sesi)); */
-        return view('livewire.sekolah.manajemen-nilai.info-card-nilai', compact('sesi'));
+        return view('livewire.info-card-nilai', compact('sesi'));
     }
 }

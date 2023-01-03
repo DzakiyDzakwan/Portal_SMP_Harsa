@@ -12,13 +12,12 @@ class InfoCardAdmin extends Component
 
     protected $listeners = [
         'adminStore'=> 'render',
-        'adminInactive'=> 'render',
-        'adminRestore' => 'render'
+        'adminDelete'=> 'render'
     ];
 
     public function render()
     {
         $this->totalAdmin = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.uuid')->join('roles', 'roles.id', '=', 'model_has_roles.role_id')->where('roles.id', '3')->count();
-        return view('livewire.user.manajemen-akun.admin.info-card-admin');
+        return view('livewire.info-card-admin');
     }
 }

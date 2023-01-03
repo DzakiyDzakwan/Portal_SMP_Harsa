@@ -20,7 +20,7 @@ class ListUser extends Component
     public function render()
     {
         $this->users = User::oldest()->get();
-        return view('livewire.user.manajemen-user.user.list-user');
+        return view('livewire.user.user.list-user');
     }
 
     public function editUser($uuid) {

@@ -8,6 +8,6 @@ class AlertSiswa extends Component
 {
     public function render()
     {
-        return view('livewire.user.manajemen-akun.siswa.alert-siswa');
+        return view('livewire.alert-siswa');
     }
 }

@@ -37,7 +37,7 @@
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
                     {{-- Button Tambah Permission --}}
-                    @livewire('create-modal-permission')
+                    {{-- @livewire('create-modal-permission') --}}
                 </div>
             </div>
         </div>
@@ -55,9 +55,9 @@
 @section('script')
     <script>
         //Modal
-        const createModal = new bootstrap.Modal('#createModal', {
+        /* const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
-        })
+        }) */
         /* const updateModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         }) */
@@ -65,9 +65,9 @@
             keyboard: false
         }) */
 
-        window.addEventListener('create-modal', event => {
+        /* window.addEventListener('create-modal', event => {
             createModal.hide();
-        })
+        }) */
         /* window.addEventListener('edit-modal', event => {
             updateModal.toggle();
         }) */

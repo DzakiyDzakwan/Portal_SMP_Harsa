@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->char('user', 36);
             $table->char('NUPTK', 16);
-            $table->enum('jabatan', ['guru', 'wks', 'ks', 'tu']);
+            $table->enum('jabatan', ['guru', 'wks', 'ks']);
             $table->string('pendidikan')->nullable();
             $table->year('tahun_ijazah')->nullable();
             $table->enum('status_perkawinan', ['kawin', 'tidak kawin'])->nullable();

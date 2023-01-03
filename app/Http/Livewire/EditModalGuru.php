@@ -27,7 +27,7 @@ class EditModalGuru extends Component
 
     public function render()
     {
-        return view('livewire.user.manajemen-akun.guru.edit-modal-guru');
+        return view('livewire.edit-modal-guru');
     }
 
     public function showModal($id) {

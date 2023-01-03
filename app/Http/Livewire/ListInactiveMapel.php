@@ -17,8 +17,8 @@ class ListInactiveMapel extends Component
 
     public function render()
     {
-        $this->inactiveMapel = DB::table('list_inactive_mapel')->where('deleted_at', '<>', null)->get();
-        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran.list-inactive-mapel');
+        $this->inactiveMapel = DB::table('mapels')->where('deleted_at', '<>', null)->get();
+        return view('livewire.list-inactive-mapel');
     }
 
     public function getRestoreModal($id)

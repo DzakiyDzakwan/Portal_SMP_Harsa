@@ -36,14 +36,15 @@
                     <tr>
                         <th>No</th>
                         <th>Ekskul Id</th>
+                        <th>Penanggung Jawab</th>
                         <th>Nama Ekskul</th>
                         <th>Hari</th>
                         <th>Waktu Mulai</th>
-                        <th>Durasi</th>
+                        <th>Waktu Akhir</th>
                         <th>Tempat</th>
                         <th>Kelas</th>
                         <th>Action</th>
-                        <th>Tanggal Kegiatan</th>
+                        <th>Tanggal Dibuat</th>
 
                     </tr>
                 </thead>
@@ -52,10 +53,11 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->ekstrakurikuler_id }}</td>
+                            <td>{{ $item->penanggung_jawab }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->hari }}</td>
                             <td>{{ $item->waktu_mulai }}</td>
-                            <td>{{ $item->durasi }}</td>
+                            <td>{{ $item->waktu_akhir }}</td>
                             <td>{{ $item->tempat }}</td>
                             <td>{{ $item->kelas }}</td>
                             <td>{{ $item->action }}</td>

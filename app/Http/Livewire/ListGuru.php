@@ -16,21 +16,19 @@ class ListGuru extends Component
 
     protected $listeners = [
         'storeGuru' => 'render',
-        'updateGuru' => 'render',
-        'guruRestore' => 'render'
+        'updateGuru' => 'render'
     ];
 
     public function render()
     {
-        $this->gurus = DB::table('list_guru_active')
+        $this->gurus = DB::table('list_guru')
         ->get();
-        return view('livewire.user.manajemen-akun.guru.list-guru');
+        return view('livewire.list-guru');
     }
 
     public function inactiveGuru($user) {
         $guru = Guru::where('user', $user)->first()->NUPTK;
         DB::select('CALL inactive_guru(?, ?)', [$user, auth()->user()->uuid]);
-        $this->emit('inactiveGuru');
         $this->dispatchBrowserEvent('inactive-alert');
         // if(Kelas::where('wali_kelas', $guru)->get()->isEmpty()){
             

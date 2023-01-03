@@ -33,17 +33,17 @@ return new class extends Migration
         END
         ');
 
-        // DB::unprepared('
-        // CREATE TRIGGER disable_update_sesi
-        // BEFORE UPDATE ON sesi_penilaians
-        // FOR EACH ROW
-        // BEGIN
-        //     IF (OLD.sesi_id <> NEW.sesi_id OR OLD.nama_sesi <> NEW.nama_sesi OR OLD.semester_aktif <> NEW.semester_aktif OR OLD.tahun_ajaran_aktif <> NEW.tahun_ajaran_aktif) THEN
-        //         SIGNAL SQLSTATE "45000"
-        //         SET MESSAGE_TEXT = "Tidak dapat mengubah data";
-        //     END IF;
-        // END
-        // ');
+        DB::unprepared('
+        CREATE TRIGGER disable_update_sesi
+        BEFORE UPDATE ON sesi_penilaians
+        FOR EACH ROW
+        BEGIN
+            IF (OLD.sesi_id <> NEW.sesi_id OR OLD.nama_sesi <> NEW.nama_sesi OR OLD.semester_aktif <> NEW.semester_aktif OR OLD.tahun_ajaran_aktif <> NEW.tahun_ajaran_aktif) THEN
+                SIGNAL SQLSTATE "45000"
+                SET MESSAGE_TEXT = "Tidak dapat mengubah data";
+            END IF;
+        END
+        ');
 
         DB::unprepared('
         CREATE TRIGGER disable_delete_sesi
