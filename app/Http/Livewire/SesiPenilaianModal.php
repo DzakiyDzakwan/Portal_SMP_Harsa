@@ -22,6 +22,6 @@ class SesiPenilaianModal extends Component
         $this->reset();
         $this->emit('storeSesi');
         $this->dispatchBrowserEvent('insert-alert');
-        
+
     }
 }

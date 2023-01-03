@@ -82,7 +82,7 @@ class ViewController extends Controller
     public function sesiPenilaian() {
         $menu = 'sekolah';
         // dd('sesi Penilaian');
-        return view('sekolah.sesinilai', compact('menu'));
+        return view('user.nilai', compact('menu'));
     }
 
     public function ekstrakurikuler() {

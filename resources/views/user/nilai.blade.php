@@ -35,7 +35,7 @@
             <h5>List Nilai Yang Pending</h5>
         </div>
         <div class="card-body">
-            @livewire('sesi-penilaian-modal')
+            @livewire('list-inactive-sesi-penilaian')
         </div>
     </div>
 
@@ -44,7 +44,7 @@
 @endsection
 
 @section('script')
-    <script>
+    {{-- <script>
         //Modal
         const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
@@ -70,7 +70,7 @@
         });
          window.addEventListener('delete-modal', event => {
             deleteModal.toggle();
-        }) 
+        })
 
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
@@ -104,7 +104,7 @@
         window.addEventListener('delete-alert', e => {
             deleteToast.show()
         })
-    </script>
+    </script> --}}
 
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>

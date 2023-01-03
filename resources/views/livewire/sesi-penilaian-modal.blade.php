@@ -138,10 +138,10 @@
                                         <th>No</th>
                                         <th>Sesi</th>
                                         <th>Tahun Ajaran</th>
-                                        <th>Semester</th>
-                                        <th>Tanggal mulai</th>
-                                        <th>Tanggal berakhir</th>
-                            
+                                        <th>Waktu mulai</th>
+                                        <th>waktu selesai</th>
+                                        <th>status</th>
+
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -155,12 +155,12 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->nama_sesi }}</td>
-                                                <td>{{ $item->tahun_ajaran }}</td>
-                                                <td>{{ $item->semester_aktif }}</td>
-                                                <td>{{ $item->tanggal_mulai }}</td>
-                                                <td>{{ $item->tanggal_berakhir }}</td>
-                                                <td>{{ $item->created_at }}</td>
-                                               
+                                                <td>{{ $item->tahun_ajaran_aktif }}</td>
+                                                <td>{{ $item->waktu_mulai }}</td>
+                                                <td>{{ $item->waktu_selesai }}</td>
+                                                <td>{{ $item->jumlah_hari }}</td>
+                                                <td>{{ $item->status }}</td>
+
                                             </tr>
                                         @endforeach
                                     @endif

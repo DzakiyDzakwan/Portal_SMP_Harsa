@@ -30,26 +30,7 @@
                     <td>
                         <span class="badge bg-secondary">{{ $item->status }}</span>
                     </td>
-                    <td>
-                        {{-- Accept Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-success"
-                                wire:click="accept('{{ $item->nilai_id }}')">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
-                                    <i class="bi bi-check-lg"></i>
-                                </div>
-                            </button>
-                        </div>
-                        {{-- Reject Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-danger"
-                                wire:click="decline('{{ $item->nilai_id }}')">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Reject">
-                                    <i class="bi bi-x-lg"></i>
-                                </div>
-                            </button>
-                        </div>
-                    </td>
+                    {{-- <td> --}}
                 </tr>
             @endforeach
         @endif
