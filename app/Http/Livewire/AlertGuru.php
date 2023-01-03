@@ -8,6 +8,6 @@ class AlertGuru extends Component
 {
     public function render()
     {
-        return view('livewire.alert-guru');
+        return view('livewire.user.manajemen-akun.guru.alert-guru');
     }
 }

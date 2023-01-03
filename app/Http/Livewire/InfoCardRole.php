@@ -16,6 +16,6 @@ class InfoCardRole extends Component
     public function render()
     {
         $totalRole = Role::count();
-        return view('livewire.user.role.info-card-role', compact('totalRole'));
+        return view('livewire.user.manajemen-user.role.info-card-role', compact('totalRole'));
     }
 }

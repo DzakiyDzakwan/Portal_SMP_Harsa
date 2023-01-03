@@ -35,12 +35,11 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Prestasi id</th>
                         <th>Nama Siswa</th>
+                        <th>NISN</th>
                         <th>Jenis Prestasi</th>
                         <th>Keterangan</th>
                         <th>Tanggal Prestasi</th>
-                        <th>action</th>
                         <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
@@ -48,12 +47,11 @@
                     @foreach ($logPrestasi as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $loop->prestasi_id }}</td>
+                            <td>{{ $item->nama }}</td>
                             <td>{{ $item->siswa }}</td>
                             <td>{{ $item->jenis_prestasi }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td>{{ $item->tanggal_prestasi }}</td>
-                            <td>{{ $item->action }}</td>
                             <td>{{ $item->created_at }}</td>
                         </tr>
                     @endforeach

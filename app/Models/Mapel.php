@@ -10,7 +10,7 @@ class Mapel extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $primaryKey = 'kelas_id';
+    protected $primaryKey = 'mapel_id';
 
     protected $guarded = [
         'created_at',

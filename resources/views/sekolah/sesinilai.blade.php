@@ -1,7 +1,7 @@
-@extends('admin.master.main')
+@extends('master.main')
 
 @section('title')
-    <title>Penilaian</title>
+    <title>Sesi Penilaian</title>
 @endsection
 
 @section('style')
@@ -22,7 +22,7 @@
                         <a href="/">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Kelas
+                        sesi-penilaian
                     </li>
                 </ol>
             </nav>
@@ -31,44 +31,32 @@
 
     {{-- Info Card --}}
     @livewire('info-card-nilai')
+    @livewire('info-card-tahun-akademik')
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-            <h5>List Konfirmasi Nilai</h5>
+            <h5>List Sesi</h5>
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
-                    {{-- Button Inactive Kelas --}}
-                    @livewire('sesi-penilaian-modal')
-                </div>
-                <div class="form-group">
-                    {{-- Button Inactive Kelas --}}
-                    @livewire('history-konfirmasi-modal')
+                    {{-- Button Tambah sesi --}}
+                    @livewire('create-modal-sesi-penilaian')
                 </div>
             </div>
         </div>
         <div class="card-body">
-            @livewire('list-nilai-pending')
+            @livewire('list-sesi-penilaian')
         </div>
     </div>
-
-    @livewire('alert-nilai')
+    @livewire('edit-modal-sesi-penilaian')
+    @livewire('alert-sesi-penilaian')
 @endsection
 
 @section('script')
     <script>
         //Modal
-        /* const createModal = new bootstrap.Modal('#createModal', {
+        const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
         })
         const editModal = new bootstrap.Modal('#editModal', {
-            keyboard: false
-        })
-        const inactiveModal = new bootstrap.Modal('#inactiveModal', {
-            keyboard: false
-        })
-        const restoreModal = new bootstrap.Modal('#restoreModal', {
-            keyboard: false
-        })
-        const deleteModal = new bootstrap.Modal('#deleteModal', {
             keyboard: false
         })
 
@@ -78,44 +66,18 @@
         window.addEventListener('edit-modal', event => {
             editModal.toggle();
         });
-        window.addEventListener('inactive-modal', event => {
-            inactiveModal.toggle();
-        })
-        window.addEventListener('restore-modal', event => {
-            restoreModal.toggle();
-        })
-        window.addEventListener('delete-modal', event => {
-            deleteModal.toggle();
-        }) */
 
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
-        /* const inactiveToast = new bootstrap.Toast('#inactiveToast')
         const updateToast = new bootstrap.Toast('#updateToast')
-        const restoreToast = new bootstrap.Toast('#restoreToast')
-        const deleteToast = new bootstrap.Toast('#deleteToast') */
-
 
         window.addEventListener('insert-alert', e => {
             insertToast.show()
         })
 
-        w
-        /* indow.addEventListener('inactive-alert', e => {
-                    inactiveToast.show()
-                })
-
-                window.addEventListener('update-alert', e => {
-                    updateToast.show()
-                })
-
-                window.addEventListener('restore-alert', e => {
-                    restoreToast.show()
-                })
-
-                window.addEventListener('delete-alert', e => {
-                    deleteToast.show()
-                }) */
+        window.addEventListener('update-alert', e => {
+            updateToast.show()
+        })
     </script>
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>

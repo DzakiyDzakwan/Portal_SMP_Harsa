@@ -101,9 +101,18 @@ JOIN mapels AS m ON mg.mapel = m.mapel_id
 JOIN kelas AS k ON r.kelas = k.kelas_id
 GROUP BY r.mapel, r.kelas;
 
+/* List Tahun Ajaran */ (✅)
+CREATE VIEW list_tahun_ajaran AS
+SELECT tahun_ajaran_id AS id , tahun_ajaran, semester, DATE_FORMAT(tanggal_mulai, "%d %M %Y") AS tanggal_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y") AS tanggal_berakhir, time_status(tanggal_mulai, tanggal_berakhir) AS status
+FROM tahun_ajarans
+ORDER BY status;
+
 /* List Sesi penilaian */
 CREATE VIEW list_sesi_penilaian AS
-SELECT sesi_id, nama_sesi, tahun_ajaran, DATE_FORMAT(tanggal_mulai, "%d %M %Y %H:%i:%s") AS waktu_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y %H:%i:%s") AS waktu_selesai, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, created_by AS admin , IF(cek_sesi(tanggal_mulai, tanggal_berakhir) = 1 , "Aktif", "Inaktif") AS status FROM sesi_penilaians;
+SELECT sesi_id AS id , nama_sesi, tahun_ajaran_aktif, semester_aktif, DATE_FORMAT(tanggal_mulai, "%d %M %Y") AS tanggal_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y") AS tanggal_berakhir, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, time_status(tanggal_mulai, tanggal_berakhir) AS status
+FROM sesi_penilaians
+ORDER BY status;
+
 
 /* List pending nilai */
 CREATE VIEW list_nilai_pending AS

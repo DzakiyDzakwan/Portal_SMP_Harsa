@@ -36,11 +36,11 @@
                     <tr>
                         <th>No</th>
                         <th>Ekstrakurikuler</th>
-                        <th>Siswa</th>
-                        <th>Tahun Ajaran</th>
-                        <th>Action</th>
-                        <th>Tanggal Dibuat</th>
-                        <th>Tanggal DiUpdate</th>
+                        <th>Guru</th>
+                        <th>KOntrak Siswa</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal Prestasi</th>
+                        <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,11 +48,11 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->ekstrakulikuler }}</td>
-                            <td>{{ $item->siswa }}</td>
-                            <td>{{ $item->tahun_ajaran_aktif }}</td>
-                            <td>{{ $item->action }}</td>
+                            <td>{{ $item->guru }}</td>
+                            <td>{{ $item->kontrak_siswa }}</td>
+                            <td>{{ $item->nilai }}</td>
+                            <td>{{ $item->keterangan }}</td>
                             <td>{{ $item->created_at }}</td>
-                            <td>{{ $item->updated_at }}</td>
                         </tr>
                     @endforeach
                 </tbody>

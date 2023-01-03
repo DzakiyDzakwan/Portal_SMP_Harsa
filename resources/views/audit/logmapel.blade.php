@@ -38,9 +38,8 @@
                         <th>Mapel Id</th>
                         <th>Nama</th>
                         <th>Kelompok</th>
-                        <th>KKM</th>
                         <th>Kurikulum</th>
-                        <th>Action</th>
+                        <th>Keterangan</th>
                         <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
@@ -51,7 +50,6 @@
                             <td>{{ $item->mapel_id }}</td>
                             <td>{{ $item->nama_mapel }}</td>
                             <td>{{ $item->kelompok_mapel }}</td>
-                            <td>{{ $item->kkm }}</td>
                             <td>{{ $item->kurikulum }}</td>
                             <td>{{ $item->action }}</td>
                             <td>{{ $item->created_at }}</td>

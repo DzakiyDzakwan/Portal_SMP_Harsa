@@ -17,7 +17,7 @@ class InfoModalSiswa extends Component
         'infoSiswa' => 'showSiswa'
     ];
     protected $rules = [
-        'jenis_prestasi' => 'required',
+        'jenis' => 'required',
         'keterangan' => 'required|max:255' ,
         'tgl_prestasi' => 'required'
     ];
@@ -28,17 +28,25 @@ class InfoModalSiswa extends Component
 
     public function render()
     {
-        $this->prestasi = Prestasi::where('siswa', $this->nisn)->get();
+        $this->prestasi = Prestasi::join('siswas', 'siswas.NISN', '=', 'prestasis.siswa')
+        ->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
+        ->join('kelas', 'kelas.kelas_id', '=', 'kontrak_semesters.kelas')
+        ->where('siswas.NISN', $this->nisn)->get();
 
-        return view('livewire.info-modal-siswa');
+        return view('livewire.user.manajemen-akun.siswa.info-modal-siswa');
     }
 
     public function showSiswa($id)
     {
-        $data = User::withTrashed()->join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('siswas.user', $id)->first();
+        $data = User::withTrashed()
+        ->join('siswas', 'siswas.user', '=', 'users.uuid')
+        ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
+        ->where('siswas.user', $id)->first();
 
         
-        $data1 = Siswa::join('kelas', 'kelas.kelas_id', '=', 'siswas.kelas')->where('siswas.user', $id)->first();
+        $data1 = Siswa::join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
+        ->join('kelas', 'kelas.kelas_id', '=', 'kontrak_semesters.kelas')
+        ->where('siswas.user', $id)->first();
 
         //profil
         $this->user = $id;
@@ -76,7 +84,7 @@ class InfoModalSiswa extends Component
 
     public function update() {
         $this->validate([
-            'jenis_prestasi' => 'required',
+            'jenis' => 'required',
             'keterangan' => 'required|max:255' ,
             'tgl_prestasi' => 'required'
         ]);

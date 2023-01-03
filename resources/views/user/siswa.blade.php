@@ -1,4 +1,4 @@
-@extends('admin.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Siswa</title>
@@ -30,13 +30,24 @@
     </div>
     {{-- Info Card Siswa --}}
     @livewire('info-card-siswa')
+    @livewire('filter-card-tahun')
 
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
             <h5>List Siswa</h5>
-            <div class="form-group">
-                {{-- Button Tambah User --}}
-                @livewire('create-modal-siswa')
+            <div class="d-flex align-items-center justify-content-between gap-2">
+                <div class="form-group">
+                    {{-- Button Tambah User --}}
+                    @livewire('create-modal-siswa')
+                </div>
+                <div class="form-group">
+                    {{-- Button Cetak --}}
+                    <a href="/guru/siswa/cetak">
+                        <button type="button" class="btn btn-sm btn-primary">
+                            <i class="bi bi-printer"></i> &nbspCetak Daftar Siswa
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="card-body">

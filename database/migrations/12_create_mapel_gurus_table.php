@@ -19,7 +19,7 @@ return new class extends Migration
             $table->char('guru', 16);
             $table->foreign('mapel')->references('mapel_id')->on('mapels')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('guru')->references('NUPTK')->on('gurus')->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamp('created_at');
+            $table->timestamps();
             $table->softDeletes();
         });
     }

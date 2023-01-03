@@ -1,4 +1,4 @@
-@extends('admin.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Roster Kelas</title>

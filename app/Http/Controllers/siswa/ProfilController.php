@@ -39,5 +39,4 @@ class ProfilController extends Controller
     {   
         
     }
-
 }

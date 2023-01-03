@@ -13,7 +13,8 @@ class ListMapel extends Component
     protected $listeners = [
         'mapelStore' => 'render',
         'mapelUpdate' => 'render',
-        'mapelRestore' => 'render',
+        'restoreMapel' => 'render',
+        'updateMapel' => 'render'
     ];
 
     public function editMapel($id)
@@ -32,6 +33,6 @@ class ListMapel extends Component
     public function render()
     {
         $this->mapel = DB::table('list_mapel')->get();
-        return view('livewire.list-mapel');
+        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran.list-mapel');
     }
 }

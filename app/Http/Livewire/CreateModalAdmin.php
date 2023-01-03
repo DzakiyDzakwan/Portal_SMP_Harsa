@@ -8,12 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class CreateModalAdmin extends Component
 {
-    public $username, $password;
+    public $NUPTK, $nama, $tgl_masuk, $jenis_kelamin;
 
     protected $rules = [
-        'username' => 'required|min:5',
-        'password' => 'required'  
+        'nama' => 'required|max:255',
+        'NUPTK' => 'required|min:16|max:18|unique:gurus',
+        'tgl_masuk' => 'required'
     ];
+
+    public function mount() {
+        $this->jenis_kelamin = 'LK';
+    }
 
     public function updated($fields) {
         $this->validateOnly($fields);
@@ -22,13 +27,15 @@ class CreateModalAdmin extends Component
     public function store() {
 
         $this->validate([
-            'username' => 'required|min:5',
-            'password' => 'required'  
+            'nama' => 'required|max:255',
+            'NUPTK' => 'required|min:16|max:18',
+            'tgl_masuk' => 'required'
         ]);
 
-        $this->password = Hash::make($this->password);
+        $password = Hash::make($this->NUPTK);
 
-        DB::select('CALL add_admin(?, ?, ?)', [$this->username, $this->password, auth()->user()->uuid]);
+        DB::select('CALL add_admin(?, ?, ?, ?, ?, ?)', [$this->nama, $this->NUPTK, $password, $this->tgl_masuk, $this->jenis_kelamin, auth()->user()->uuid]);
+
         $this->reset();
         $this->emit('adminStore');
         $this->dispatchBrowserEvent('close-create-modal');
@@ -37,6 +44,6 @@ class CreateModalAdmin extends Component
 
     public function render()
     {
-        return view('livewire.create-modal-admin');
+        return view('livewire.user.manajemen-akun.admin.create-modal-admin');
     }
 }

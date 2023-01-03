@@ -30,13 +30,28 @@
     </div>
 
     @livewire('info-card-guru')
+    @livewire('filter-card-tahun')
 
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
             <h5>List Guru</h5>
-            <div class="form-group">
-                {{-- Button Tambah Guru --}}
-                @livewire('create-modal-guru')
+            <div class="d-flex align-items-center justify-content-between gap-2">
+                <div class="form-group">
+                    {{-- Button Tambah User --}}
+                    @livewire('create-modal-guru')
+                </div>
+                <div class="form-group">
+                    {{-- Button Inactive --}}
+                    @livewire('inactive-modal-guru')
+                </div>
+                <div class="form-group">
+                    {{-- Button Cetak --}}
+                    <a href="/guru/guru/cetak">
+                        <button type="button" class="btn btn-sm btn-primary">
+                            <i class="bi bi-printer"></i> &nbspCetak Daftar Guru
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -60,12 +75,15 @@
         const editModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
+        const inactiveModal = new bootstrap.Modal('#trashedUser', {
+            keyboard: false
+        })
+        const restoreModal = new bootstrap.Modal('#restoreModal', {
+            keyboard: false
+        })
         const infoModal = new bootstrap.Modal('#infoModal', {
             keyboard: false
         })
-        /* const deleteModal = new bootstrap.Modal('#deleteModal', {
-            keyboard: false
-        }) */
 
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
@@ -73,21 +91,29 @@
         window.addEventListener('edit-modal', event => {
             editModal.toggle();
         });
+        window.addEventListener('restore-modal', event => {
+            restoreModal.toggle();
+        })
+        window.addEventListener('inactive-modal', event => {
+            inactiveModal.toggle();
+        })
         window.addEventListener('info-modal', event => {
             infoModal.toggle();
         });
-        /* window.addEventListener('delete-modal', event => {
+        /*
+        window.addEventListener('edit-prestasi-modal', event => {
+            restoreModal.toggle();
+        })
+        window.addEventListener('delete-prestasi-modal', event => {
             deleteModal.toggle();
         }) */
 
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
         const inactiveToast = new bootstrap.Toast('#inactiveToast')
-        const nonInactiveToast = new bootstrap.Toast('#nonInactiveToast')
         const updateToast = new bootstrap.Toast('#updateToast')
         const restoreToast = new bootstrap.Toast('#restoreToast')
         const deleteToast = new bootstrap.Toast('#deleteToast')
-
 
         window.addEventListener('insert-alert', e => {
             insertToast.show()
@@ -95,10 +121,6 @@
 
         window.addEventListener('inactive-alert', e => {
             inactiveToast.show()
-        })
-
-        window.addEventListener('nonInactive-alert', e => {
-            nonInactiveToast.show()
         })
 
         window.addEventListener('update-alert', e => {
@@ -113,7 +135,6 @@
             deleteToast.show()
         })
     </script>
-
     @livewireScripts
     <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>

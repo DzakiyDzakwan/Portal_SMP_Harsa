@@ -63,7 +63,7 @@
                             <td>{{ $item->user }}</td>
                             <td>{{ $item->NISN }}</td>
                             <td>{{ $item->NIS }}</td>
-                            <td>{{ $item->kelas_awal }}</td>
+                            <td>{{ $item->kelas }}</td>
                             <td>{{ $item->tanggal_masuk }}</td>
                             <td>{{ $item->kelas_awal }}</td>
                             <td>{{ $item->anak_ke }}</td>

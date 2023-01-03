@@ -5,21 +5,21 @@ namespace App\Http\Livewire;
 use App\Models\Guru;
 use Livewire\Component;
 use App\Models\MapelGuru;
+use App\Models\Mapel;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\DB;
 
 class EditModalMapelGuru extends Component
 {
-    public $mapel_guru_id, $mapel_id, $nama, $mapel, $guru;
+    public $mapel_guru_id, $mapel, $guru;
+
+    protected $rules = [
+        'mapel' => 'required',
+        'guru' => 'required'
+    ];
 
     protected $listeners = [
         'editUser' => 'showModal'
-    ];
-
-    protected $rules = [
-        'mapel_guru_id' => 'required|max:4',
-        'mapel' => 'required',
-        'guru' => 'required'
     ];
 
     public function updated($fields)
@@ -27,33 +27,27 @@ class EditModalMapelGuru extends Component
         $this->validateOnly($fields);
     }
 
-    public function render()
-    {
-        $this->pelajaran = DB::table('mapels')->get();
-        $this->guruu = Guru::select('gurus.NIP', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->get();
-        return view('livewire.edit-modal-mapel-guru');
-    }
-
     public function showModal($id)
     {
-        // dd($id);
         $data =  MapelGuru::where('mapel_guru_id', $id)->first();
         $this->mapel_guru_id = $id;
-        $this->mapel = $data->mapel;
-        $this->guru = $data->guru;
         $this->dispatchBrowserEvent('edit-modal');
+    }
+
+    public function render()
+    {
+        /* $this->pelajaran = Mapel::get();
+        $this->guruu = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->get(); */
+        $listMapel = Mapel::get();
+        $listGuru = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('status', 'aktif')->where('jabatan', '<>', 'ks')->where('jabatan', '<>', 'tu')->get();
+        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran-guru.edit-modal-mapel-guru', compact('listMapel', 'listGuru'));
     }
 
     public function update()
     {
-        $this->validate([
-            'mapel_id' => 'required',
-            'mapel' => 'required',
-            'guru' => 'required'
-        ]);
 
         MapelGuru::where('mapel_guru_id', $this->mapel_guru_id)->update([
-            'mapel_guru_id' => $this->mapel_guru_id,
+
             'mapel' => $this->mapel,
             'guru' => $this->guru
         ]);
@@ -64,8 +58,13 @@ class EditModalMapelGuru extends Component
             'at' => 'mapel_gurus'
         ]);
 
-        $this->emit('updateMapelGuru');
-        $this->dispatchBrowserEvent('edit-modal');
+
+
+        //DB::select('CALL update_admin(?, ?, ?)', [auth()->user()->uuid, $this->uuid, $this->password]);
+
+        $this->emit('mapelGuruUpdate');
         $this->dispatchBrowserEvent('update-alert');
+        $this->dispatchBrowserEvent('edit-modal');
+        $this->render();
     }
 }

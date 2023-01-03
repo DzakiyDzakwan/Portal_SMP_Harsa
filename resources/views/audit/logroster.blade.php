@@ -35,30 +35,25 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Roster ID</th>
-                        <th>Guru Mapel</th>
+                        <th>Mata Pelajaran</th>
                         <th>Kelas</th>
-                        <th>Semester</th>
-                        <th>Tahun Ajaran</th>
                         <th>Waktu Mulai</th>
                         <th>Waktu Akhir</th>
+                        <th>Durasi</th>
                         <th>Hari</th>
-                        <th>Action</th>
-                        <th>Waktu Dilakukan</th>
+                        <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($logRoster as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->mapel_guru }}</td>
+                            <td>{{ $item->mapel }}</td>
                             <td>{{ $item->kelas }}</td>
-                            <td>{{ $item->semester_aktif }}</td>
-                            <td>{{ $item->tahun_ajaran_aktif }}</td>
                             <td>{{ $item->waktu_mulai }}</td>
                             <td>{{ $item->waktu_akhir }}</td>
+                            <td>{{ $item->durasi }}</td>
                             <td>{{ $item->hari }}</td>
-                            <td>{{ $item->action }}</td>
                             <td>{{ $item->created_at }}</td>
                         </tr>
                     @endforeach

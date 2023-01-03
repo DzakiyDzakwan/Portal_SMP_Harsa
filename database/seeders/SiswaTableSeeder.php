@@ -16,16 +16,12 @@ class SiswaTableSeeder extends Seeder
      */
     public function run()
     {
-        /* DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', ['Donny Adithya', '2114020001', '1111', Hash::make('1234'), '2022-12-01', 'K01', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', ['Siswa Dummy 1', '1111111111', '1111', Hash::make('1111'), '2022-12-01', 'KLS001', '2022/2023', 'ganjil', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', ['Siswa Dummy 2', '2222222222', '2222', Hash::make('2222'), '2022-12-01', 'KLS002', '2022/2023', 'ganjil', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', ['Siswa Dummy 3', '3333333333', '3333', Hash::make('3333'), '2022-12-01', 'KLS001', '2022/2023', 'ganjil', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', ['Siswa Dummy 4', '4444444444', '4444', Hash::make('4444'), '2022-12-01', 'KLS001', '2022/2023', 'ganjil', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', ['Siswa Dummy 5', '5555555555', '5555', Hash::make('5555'), '2022-12-01', 'KLS002', '2022/2023', 'ganjil', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', ['Siswa Dummy 6', '6666666666', '6666', Hash::make('6666'), '2022-12-01', 'KLS002', '2022/2023', 'ganjil', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', ['Mutia Rahmah', '2114020002', '2222', Hash::make('2222'), '2022-12-01', 'K01', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
-
-        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', ['Talitha Syafiyah', '2114020003', '3333', Hash::make('3333'), '2022-12-01', 'K01', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
-
-        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', ['Fatma Ananta Sari', '2114020036', '4444', Hash::make('4444'), '2022-12-01', 'K01', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
-
-        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', ['Dzakiy Dzakwan', '2114020075', '5555', Hash::make('5555'), '2022-12-01', 'K01', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
-
-        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?)', ['Deni Putra Sitanggang', '2114020150', '666', Hash::make('6666'), '2022-12-01', 'K01', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']); */
     }
 }
