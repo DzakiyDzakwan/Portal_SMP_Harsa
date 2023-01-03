@@ -8,16 +8,10 @@ use Spatie\Permission\Models\Permission;
 
 class ListPermission extends Component
 {
-
-    protected $listeners = [
-        'createPermission' => 'render',
-        'deletePermission' => 'render'
-    ];
-
     public function render()
     {
         $permission = Permission::all();
-        return view('livewire.user.manajemen-user.permission.list-permission', compact('permission'));
+        return view('livewire.user.permission.list-permission', compact('permission'));
     }
 
     public function delete($id) {

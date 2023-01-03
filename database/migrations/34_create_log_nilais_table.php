@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('log_nilais', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nilai_id');
-            $table->char('sesi', 36);
+            $table->unsignedBigInteger('sesi');
             $table->char('mapel', 3);
             $table->char('guru', 16);
             $table->char('pemeriksa', 36)->nullable();

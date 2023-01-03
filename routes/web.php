@@ -6,7 +6,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\LogController;
-use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -69,6 +68,7 @@ Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'cekle
             Route::get('/guru/role', 'role')->name('role');
             Route::get('/guru/permission', 'permission')->name('permission');
             Route::get('/guru/admin', 'admin')->name('admin');
+            Route::get('/guru/konfirmasi-nilai', 'nilai')->name('nilai');
         });
     });
 
@@ -86,8 +86,8 @@ Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'cekle
             Route::get('/guru/ekstrakurikuler-siswa', 'ekstrakurikulerSiswa')->name('ekstrakurikuler-siswa');
             Route::get('/guru/nilai-ekstrakurikuler', 'nilaiEkstrakurikuler')->name('nilai-ekstrakurikuler');
             Route::get('/guru/sesi-penilaian', 'sesiPenilaian')->name('sesi-penilaian');
+            
         });
-        Route::get('/guru/siswa/cetak', [ReportController::class, 'index'])->name('cetak-siswa');
     });
 
     //Guru
@@ -179,3 +179,5 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
     //Rekapitulasi-Absen
     Route::get('/rekap-absen', [guru\InputController::class, 'rekapAbsen'])->name('rekapAbsen');
 }); */
+
+

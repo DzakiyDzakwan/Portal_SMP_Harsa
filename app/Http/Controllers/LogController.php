@@ -78,7 +78,7 @@ class LogController extends Controller
     public function roster() {
         $menu = 'history';
         $subpages = 'logRoster';
-        $logRoster = DB::table('table_log_rosters')
+        $logRoster = DB::table('log_rosters')
         ->latest()
         ->get();
         return view('audit.logroster', compact('menu', 'subpages', 'logRoster'));

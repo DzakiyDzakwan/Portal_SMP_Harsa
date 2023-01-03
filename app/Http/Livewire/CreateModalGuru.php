@@ -29,7 +29,7 @@ class CreateModalGuru extends Component
 
     public function render()
     {
-        return view('livewire.user.manajemen-akun.guru.create-modal-guru');
+        return view('livewire.create-modal-guru');
     }
 
     public function store() {

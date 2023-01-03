@@ -16,15 +16,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleTableSeeder::class);
         $this->call(PermissionTableSeeder::class);
-        $this->call(KepsekTableSeeder::class);
         $this->call(GuruTableSeeder::class);
-        $this->call(TahunAjaranTableSeeder::class);
-        $this->call(MapelTableSeeder::class);
-        $this->call(MapelGuruTableSeeder::class);
+        /* $this->call(MapelTableSeeder::class);
         $this->call(KelasTableSeeder::class);
-        $this->call(EskstrakurikulerTableSeeder::class);
         $this->call(SiswaTableSeeder::class);
-        /* $this->call(PrestasiTableSeeder::class);
+        $this->call(PrestasiTableSeeder::class);
         $this->call(SesiTableSeeder::class); */
     }
 }

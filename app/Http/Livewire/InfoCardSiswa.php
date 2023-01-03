@@ -19,11 +19,11 @@ class InfoCardSiswa extends Component
     public function render()
     {
         $this->totalSiswa = Siswa::count();
-        $this->siswaActive = Siswa::where('status', 'aktif')->count();
-        $this->siswaLulus = Siswa::where('status', 'lulus')->count();
-        $this->siswaPindah = Siswa::where('status', 'pindah')->count();
-        $this->siswaDO = Siswa::where('status', 'dropout')->count();
+        $this->siswaActive = Siswa::where('status', 'Aktif')->count();
+        $this->siswaLulus = Siswa::where('status', 'Lulus')->count();
+        $this->siswaPindah = Siswa::where('status', 'Pindah')->count();
+        $this->siswaDO = Siswa::where('status', 'Drop Out')->count();
 
-        return view('livewire.user.manajemen-akun.siswa.info-card-siswa');
+        return view('livewire.info-card-siswa');
     }
 }

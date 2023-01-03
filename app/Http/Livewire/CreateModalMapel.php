@@ -5,11 +5,10 @@ namespace App\Http\Livewire;
 use App\Models\Mapel;
 use Livewire\Component;
 use App\Models\LogActivity;
-use Illuminate\Support\Facades\DB;
 
 class CreateModalMapel extends Component
 {
-    public $mapel_id, $nama_mapel, $kelompok_mapel, $kkm, $kurikulum;
+    public $mapel_id, $nama_mapel, $kelompok_mapel, $kurikulum;
 
     protected $listeners = [
         'inactiveMapel' => 'render'
@@ -19,22 +18,24 @@ class CreateModalMapel extends Component
         'mapel_id' => 'required|max:3|unique:mapel',
         'nama_mapel' => 'required',
         'kelompok_mapel' => 'required|min:1',
-        'kkm' => 'required',
         'kurikulum' => 'required'
     ];
 
 
     public function store()
     {
-        $this->validate([
-            'mapel_id' => 'required',
-            'nama_mapel' => 'required',
-            'kelompok_mapel' => 'required|min:1',
-            'kkm' => 'required',
-            'kurikulum' => 'required'
+        Mapel::create([
+            'mapel_id' => $this->mapel_id,
+            'nama_mapel' => $this->nama_mapel,
+            'kelompok_mapel' => $this->kelompok_mapel,
+            'kurikulum' => $this->kurikulum
         ]);
 
-        DB::select('CALL add_mapel(?, ?, ?, ?, ?, ?)', [$this->mapel_id, $this->nama_mapel, $this->kelompok_mapel, $this->kkm, $this->kurikulum, auth()->user()->uuid]);
+        LogActivity::create([
+            'actor' => auth()->user()->uuid,
+            'action' => 'insert',
+            'at' => 'mapel'
+        ]);
 
         $this->reset();
         $this->emit('mapelStore');
@@ -44,6 +45,6 @@ class CreateModalMapel extends Component
 
     public function render()
     {
-        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran.create-modal-mapel');
+        return view('livewire.create-modal-mapel');
     }
 }

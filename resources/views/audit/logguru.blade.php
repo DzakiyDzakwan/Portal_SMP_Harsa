@@ -53,14 +53,13 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->user }}</td>
-                            <td>{{ $item->NIP }}</td>
+                            <td>{{ $item->NUPTK }}</td>
                             <td>{{ $item->jabatan }}</td>
                             <td>{{ $item->pendidikan }}</td>
                             <td>{{ $item->tahun_ijazah }}</td>
                             <td>{{ $item->status_perkawinan }}</td>
                             <td>{{ $item->tanggal_masuk }}</td>
                             <td>{{ $item->status }}</td>
-                            <td>{{ $item->is_wali_kelas }}</td>
                             <td>{{ $item->action }}</td>
                             <td>{{ $item->created_at }}</td>
                         </tr>

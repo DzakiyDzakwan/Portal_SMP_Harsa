@@ -38,13 +38,17 @@
                         <th>Sesi</th>
                         <th>Mata Pelajaran</th>
                         <th>Guru</th>
+                        <th>Pemeriksa</th>
                         <th>Kontrak Siswa</th>
+                        <th>Jenis</th>
                         <th>KKM</th>
                         <th>Nilai Pengetahuan</th>
                         <th>Deskripsi Keterampilan</th>
                         <th>Nilai Keterampilan</th>
                         <th>Deskripsi Keterampilan</th>
                         <th>Status</th>
+                        <th>Keterangan</th>
+                        <th>Action</th>
                         <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
@@ -55,13 +59,17 @@
                             <td>{{ $item->sesi }}</td>
                             <td>{{ $item->mapel }}</td>
                             <td>{{ $item->guru }}</td>
+                            <td>{{ $item->pemeriksa }}</td>
                             <td>{{ $item->kontrak_siswa }}</td>
+                            <td>{{ $item->jenis }}</td>
                             <td>{{ $item->kkm }}</td>
                             <td>{{ $item->nilai_pengetahuan }}</td>
                             <td>{{ $item->deskripsi_pengetahuan }}</td>
                             <td>{{ $item->nilai_keterampilan }}</td>
                             <td>{{ $item->deskripsi_keterampilan }}</td>
                             <td>{{ $item->status }}</td>
+                            <td>{{ $item->keterangan }}</td>
+                            <td>{{ $item->action }}</td>
                             <td>{{ $item->created_at }}</td>
                         </tr>
                     @endforeach

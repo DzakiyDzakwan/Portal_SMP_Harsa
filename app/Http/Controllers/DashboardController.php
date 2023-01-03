@@ -16,8 +16,6 @@ class DashboardController extends Controller
 
     public function indexguru()
     {
-        $tahunAjaranAktif = "";
-        $semesterAktif = "";
         $menu = 'dashboard';
         $jumlah= [
             'user' => User::withTrashed()->count(),
@@ -28,14 +26,8 @@ class DashboardController extends Controller
             'kelas' => Kelas::withTrashed()->count(),
             'ekskul' => Ekstrakurikuler::count(),
         ];
-        $tahunAkademik = DB::table('list_tahun_ajaran')->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
-        if($tahunAkademik != null) {
-            $tahunAjaranAktif = $tahunAkademik->tahun_ajaran;
-            $semesterAktif = $tahunAkademik->semester;
-        }
-        $sesi = DB::table("list_sesi_penilaian")->select("nama_sesi")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci AND tahun_ajaran_aktif = "'.$tahunAjaranAktif .'" AND semester_aktif = "'.$semesterAktif .'"')->first();
 
-        return view('guru.dashboard', compact("menu", "jumlah", "tahunAkademik", "sesi"));
+        return view('guru.dashboard', compact("menu", "jumlah"));
     }
 
     public function siswa() {

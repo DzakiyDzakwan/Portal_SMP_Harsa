@@ -34,15 +34,9 @@
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
             <h5>List Admin</h5>
-            <div class="d-flex align-items-center justify-content-between gap-2">
-                <div class="form-group">
-                    {{-- Button Tambah User --}}
-                    @livewire('create-modal-admin')
-                </div>
-                <div class="form-group">
-                    {{-- Button Inactive --}}
-                    @livewire('inactive-modal-admin')
-                </div>
+            <div class="form-group">
+                {{-- Button Tambah User --}}
+                @livewire('create-modal-admin')
             </div>
         </div>
         <div class="card-body">
@@ -70,12 +64,15 @@
         const editModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        const inactiveModal = new bootstrap.Modal('#trashedUser', {
+        /*const infoModal = new bootstrap.Modal('#infoModal', {
             keyboard: false
         })
-        const restoreModal = new bootstrap.Modal('#restoreModal', {
+        const restoreModal = new bootstrap.Modal('#editModalPrestasi', {
             keyboard: false
         })
+        const deleteModal = new bootstrap.Modal('#deleteModalPrestasi', {
+            keyboard: false
+        }) */
 
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
@@ -83,12 +80,6 @@
         window.addEventListener('edit-modal', event => {
             editModal.toggle();
         });
-        window.addEventListener('restore-modal', event => {
-            restoreModal.toggle();
-        })
-        window.addEventListener('inactive-modal', event => {
-            inactiveModal.toggle();
-        })
         /*window.addEventListener('info-modal', event => {
             infoModal.toggle();
         });

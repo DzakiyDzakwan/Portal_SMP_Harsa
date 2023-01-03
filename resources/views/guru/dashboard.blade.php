@@ -26,16 +26,24 @@
                         {{-- Tahun Ajaran Aktif --}}
                         <div class="col-4 col-lg-4 col-md-4">
                             <div class="card">
+                                {{-- <div class="card-header py-1 px-2 d-flex justify-content-end">
+                                    <button class="btn btn-success btn-sm">
+                                        <i class="bi bi-box-arrow-in-down-right"></i>
+                                    </button>
+                                </div> --}}
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row justify-content-center">
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
                                             <h6 class="text-muted font-semibold">Tahun Ajaran Aktif</h6>
-                                            <h6 class="font-extrabold mb-0">
-                                                {{ $tahunAkademik == null ? '-' : $tahunAkademik->tahun_ajaran }}
-                                            </h6>
+                                            <h6 class="font-extrabold mb-0">2022/2023</h6>
                                         </div>
                                     </div>
                                 </div>
+                                {{-- <div class="card-footer py-1 px-2 text-end">
+                                    <button class="btn btn-success btn-sm">
+                                        <i class="bi bi-box-arrow-in-down-right"></i>
+                                    </button>
+                                </div> --}}
                             </div>
                         </div>
                         {{-- Semester Aktif --}}
@@ -45,9 +53,7 @@
                                     <div class="row justify-content-center">
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
                                             <h6 class="text-muted font-semibold">Semester Aktif</h6>
-                                            <h6 class="font-extrabold mb-0">
-                                                {{ $tahunAkademik == null ? '-' : strtoupper(substr($tahunAkademik->semester, 0, 1)) . substr($tahunAkademik->semester, 1) }}
-                                            </h6>
+                                            <h6 class="font-extrabold mb-0">Genap</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -60,23 +66,7 @@
                                     <div class="row justify-content-center">
                                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
                                             <h6 class="text-muted font-semibold">Sesi Penilaian Aktif</h6>
-                                            <h6 class="font-extrabold mb-0">
-                                                @if ($sesi != null)
-                                                    @if ($sesi->nama_sesi === 'uh1')
-                                                        Ulangan Harian 1
-                                                    @elseif($sesi->nama_sesi === 'uh2')
-                                                        Ulangan Harian 2
-                                                    @elseif($sesi->nama_sesi === 'uh3')
-                                                        Ulangan Harian 3
-                                                    @elseif($sesi->nama_sesi === 'uts')
-                                                        Ujian Tengah Semester
-                                                    @else
-                                                        Ujian Akhir Semester
-                                                    @endif
-                                                @else
-                                                    -
-                                                @endif
-                                            </h6>
+                                            <h6 class="font-extrabold mb-0">Tidak Ada</h6>
                                         </div>
                                     </div>
                                 </div>

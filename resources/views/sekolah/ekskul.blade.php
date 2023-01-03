@@ -1,4 +1,4 @@
-@extends('master.main')
+@extends('admin.master.main')
 
 @section('title')
     <title>Ekstrakulikuler</title>
@@ -30,7 +30,7 @@
                 </li>
 
                 <li class="breadcrumb-item active" aria-current="page">
-                    Ekstrakurikuler
+                    Ekskul
                 </li>
             </ol>
         </nav>

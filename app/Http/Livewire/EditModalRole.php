@@ -17,7 +17,7 @@ class EditModalRole extends Component
 
     public function render()
     {
-        return view('livewire.user.manajemen-user.role.edit-modal-role');
+        return view('livewire.edit-modal-role');
     }
 
     public function showModal($id) {

@@ -15,6 +15,6 @@ class InfoCardPermission extends Component
     public function render()
     {
         $totalPermission = Permission::count();
-        return view('livewire.user.manajemen-user.permission.info-card-permission', compact('totalPermission'));
+        return view('livewire.user.permission.info-card-permission', compact('totalPermission'));
     }
 }

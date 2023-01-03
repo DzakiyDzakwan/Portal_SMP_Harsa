@@ -8,6 +8,6 @@ class AlertPermission extends Component
 {
     public function render()
     {
-        return view('livewire.user.manajemen-user.permission.alert-permission');
+        return view('livewire.user.permission.alert-permission');
     }
 }

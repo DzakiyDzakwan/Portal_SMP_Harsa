@@ -11,7 +11,7 @@ class CreateModalRole extends Component
 
     public function render()
     {
-        return view('livewire.user.manajemen-user.role.create-modal-role');
+        return view('livewire.user.role.create-modal-role');
     }
 
     public function store() {

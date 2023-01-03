@@ -18,7 +18,7 @@
                 <td>{{ $e->nama }}</td>
                 <td>{{ $e->hari }}</td>
                 <td>{{ $e->waktu_mulai }}</td>
-                <td>{{ $e->waktu_akhir }}</td>
+                <td>{{ $e->durasi }}</td>
                 <td>{{ $e->tempat }}</td>
                 <td>{{ $e->kelas }}</td>
                 <td>

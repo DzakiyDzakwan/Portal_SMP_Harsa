@@ -8,6 +8,6 @@ class AlertMapel extends Component
 {
     public function render()
     {
-        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran.alert-mapel');
+        return view('livewire.alert-mapel');
     }
 }

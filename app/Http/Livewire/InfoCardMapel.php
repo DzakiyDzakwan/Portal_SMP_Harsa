@@ -12,14 +12,12 @@ class InfoCardMapel extends Component
 
     protected $listeners = [
         'mapelStore' => 'render',
-        'restoreMapel' => 'render',
-        'inactiveMapel' => 'render'
     ];
 
     public function render()
     {
         $this->totalMapel = Mapel::count();
         $this->totalMapelGuru = MapelGuru::count();
-        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran.info-card-mapel');
+        return view('livewire.info-card-mapel');
     }
 }

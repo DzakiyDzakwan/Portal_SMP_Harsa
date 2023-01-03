@@ -43,6 +43,7 @@
                         <th>Izin</th>
                         <th>Alpa</th>
                         <th>Status</th>
+                        <th>Action</th>
                         <th>Tanggal Kegiatan</th>
                     </tr>
                 </thead>
@@ -51,13 +52,14 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->siswa }}</td>
-                            <td>{{ $item->grade }}</td>
+                            <td>{{ $item->kelas }}</td>
                             <td>{{ $item->semester }}</td>
                             <td>{{ $item->tahun_ajaran }}</td>
                             <td>{{ $item->sakit }}</td>
                             <td>{{ $item->izin }}</td>
                             <td>{{ $item->alpa }}</td>
                             <td>{{ $item->status }}</td>
+                            <td>{{ $item->action }}</td>
                             <td>{{ $item->created_at }}</td>
                         </tr>
                     @endforeach

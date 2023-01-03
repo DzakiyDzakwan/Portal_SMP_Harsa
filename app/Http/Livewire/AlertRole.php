@@ -8,6 +8,6 @@ class AlertRole extends Component
 {
     public function render()
     {
-        return view('livewire.user.manajemen-user.role.alert-role');
+        return view('livewire.user.role.alert-role');
     }
 }

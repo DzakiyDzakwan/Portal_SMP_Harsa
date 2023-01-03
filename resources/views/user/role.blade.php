@@ -49,7 +49,7 @@
 
     @livewire('edit-modal-role')
     @livewire('alert-role')
-    @livewire('permission-modal-role')
+    {{-- @livewire('role-modal-role') --}}
 @endsection
 
 @section('script')
@@ -60,9 +60,9 @@
         const updateModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        const permissionModal = new bootstrap.Modal('#permissionModal', {
+        /* const permissionModal = new bootstrap.Modal('#permissionModal', {
             keyboard: false
-        })
+        }) */
 
         window.addEventListener('create-modal', event => {
             createModal.hide();
@@ -70,13 +70,13 @@
         window.addEventListener('edit-modal', event => {
             updateModal.toggle();
         })
-        window.addEventListener('permission-modal', event => {
-            permissionModal.toggle();
-        });
+        /*  window.addEventListener('permission-modal', event => {
+             permissionModal.toggle();
+         }); */
 
         //Toast
         const createToast = new bootstrap.Toast('#createToast')
-        const permissionToast = new bootstrap.Toast('#permissionToast')
+        const inactiveToast = new bootstrap.Toast('#inactiveToast')
         const updateToast = new bootstrap.Toast('#updateToast')
         const restoreToast = new bootstrap.Toast('#restoreToast')
         const deleteToast = new bootstrap.Toast('#deleteToast')
@@ -85,8 +85,8 @@
             createToast.show()
         })
 
-        window.addEventListener('permission-alert', e => {
-            permissionToast.show()
+        window.addEventListener('inactive-alert', e => {
+            inactiveToast.show()
         })
 
         window.addEventListener('update-alert', e => {

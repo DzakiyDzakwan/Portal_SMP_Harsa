@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('log_sesis', function (Blueprint $table) {
             $table->id();
-            $table->char('sesi_id', 36);
             $table->enum('nama_sesi', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
             $table->char('tahun_ajaran_aktif', 9);
             $table->enum('semester_aktif', ["ganjil", "genap"]);
