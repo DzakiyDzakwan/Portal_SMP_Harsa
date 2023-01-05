@@ -5,47 +5,58 @@
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/pages/simple-datatables.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/pages/simple-datatables.css')}}">
     @livewireStyles
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Data Kelas Aktif</h3>
-        </div>
-        <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="/">Dashboard</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        Kelas Aktif
-                    </li>
-                </ol>
-            </nav>
+<div class="row">
+    <div class="col-12 col-md-6 order-md-1 order-last">
+        <h3>Data Kelas Aktif</h3>
+    </div>
+    <div class="col-12 col-md-6 order-md-2 order-first">
+        <nav
+            aria-label="breadcrumb"
+            class="breadcrumb-header float-start float-lg-end"
+        >
+            <ol class="breadcrumb">
+
+                    <a href="/">Dashboard </a>
+                </li>
+                
+                <li class="breadcrumb-item active" aria-current="page">
+                    
+                </li>
+
+                <li class="breadcrumb-item active" aria-current="page">
+                    Kelas Aktif
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+@livewire('filter-card-tahun')
+
+{{-- List Kelas Aktif --}}
+<div class="card">
+    <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+        <h5>List Kelas Aktif</h5>
+        <div class="form-group">
+            @livewire('create-modal-kelas-aktif')
         </div>
     </div>
-
-    <div class="card">
-        <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-            <h5>List Kelas</h5>
-            <div class="d-flex align-items-center justify-content-between gap-2">
-                <div class="form-group">
-                    {{-- Button Tambah Kelas --}}
-                    @livewire('create-modal-kelas-aktif')
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-            @livewire('list-kelas-aktif')
-        </div>
+    <div class="card-body">
+        @livewire('list-kelas-aktif')
     </div>
-    {{-- @livewire('edit-modal-kelas') --}}
+</div>
 
-    @livewire('alert-kelas')
+@livewire('edit-modal-kelas-aktif')
+
+@livewire('alert-kelas')
+
+
 @endsection
 
 @section('script')
@@ -54,7 +65,10 @@
         const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
         })
-        // const editModal = new bootstrap.Modal('#editModal', {
+        const editModal = new bootstrap.Modal('#editModal', {
+            keyboard: false
+        })
+        // const infoModal = new bootstrap.Modal('#infoModal', {
         //     keyboard: false
         // })
         // const inactiveModal = new bootstrap.Modal('#inactiveModal', {
@@ -70,12 +84,15 @@
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
         });
-        // window.addEventListener('edit-modal', event => {
-        //     editModal.toggle();
+        window.addEventListener('edit-modal', event => {
+            editModal.toggle();
+        });
+        // window.addEventListener('info-modal', event => {
+        //     infoModal.toggle();
         // });
-        // window.addEventListener('inactive-modal', event => {
-        //     inactiveModal.toggle();
-        // })
+        /* window.addEventListener('inactive-modal', event => {
+            inactiveModal.toggle();
+        }); */
         // window.addEventListener('restore-modal', event => {
         //     restoreModal.toggle();
         // })
@@ -111,7 +128,7 @@
             deleteToast.show()
         })
     </script>
-@livewireScripts
-    <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
+    @livewireScripts
+    <script src="{{asset('assets/extensions/simple-datatables/umd/simple-datatables.js')}}"></script>
+    <script src="{{asset('assets/js/pages/simple-datatables.js')}}"></script>
 @endsection
