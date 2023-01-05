@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ViewController extends Controller
 {
@@ -55,8 +56,9 @@ class ViewController extends Controller
     public function kelasSaya()
     {
         $menu = 'walikelas';
-        dd('Kelas Saya');
-        return view('sekolah.walikelas', compact('menu'));
+        $kelas = DB::table('list_kelas')->where('NUPTK', auth()->user()->gurus->NUPTK)->first();
+
+        return view('sekolah.walikelas', compact('menu', 'kelas'));
     }
 
     public function mapel()
