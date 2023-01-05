@@ -107,12 +107,14 @@ return new class extends Migration
         // FROM kelas WHERE deleted_at IS NOT NULL;
         // ');
 
-//         CREATE VIEW list_kelas_aktif AS
-// SELECT kelas_aktifs.kelas_aktif_id, kelas_aktifs.nama_kelas_aktif, kelas_aktifs.tahun_ajaran_aktif, user_profiles.nama
-// FROM kelas_aktifs
-// LEFT JOIN gurus ON gurus.NUPTK = kelas_aktifs.wali_kelas
-// LEFT JOIN user_profiles ON user_profiles.user = gurus.user
-// GROUP BY kelas_aktifs.kelas_aktif_id
+        DB::unprepared('
+        CREATE VIEW list_kelas_aktif AS
+        SELECT kelas_aktifs.kelas_aktif_id, kelas_aktifs.nama_kelas_aktif, kelas_aktifs.tahun_ajaran_aktif, user_profiles.nama
+        FROM kelas_aktifs
+        LEFT JOIN gurus ON gurus.NUPTK = kelas_aktifs.wali_kelas
+        LEFT JOIN user_profiles ON user_profiles.user = gurus.user
+        GROUP BY kelas_aktifs.kelas_aktif_id
+        ');
 
         DB::unprepared('
         CREATE VIEW list_kelas AS
