@@ -20,6 +20,16 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        CREATE VIEW table_log_roles AS 
+        SELECT * FROM log_roles
+        ');
+
+        DB::unprepared('
+        CREATE VIEW table_log_permissions AS 
+        SELECT * FROM log_permissions
+        ');
+
+        DB::unprepared('
         CREATE VIEW table_log_users AS 
         SELECT * FROM log_users
         ');
@@ -54,12 +64,12 @@ return new class extends Migration
         SELECT * FROM log_ekstrakurikulers
         ');
 
-        /* DB::unprepared('
+        DB::unprepared('
         CREATE VIEW table_log_rosters AS
-        SELECT mapel, kelas, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, waktu_akhir(waktu_mulai, durasi) AS waktu_akhir, SEC_TO_TIME(durasi*60) AS durasi, hari, created_at
-        FROM rosters;
+        SELECT mapel_guru, kelas, semester_aktif, tahun_ajaran_aktif, TIME_FORMAT(waktu_mulai, "%H:%i") AS waktu_mulai, TIME_FORMAT(waktu_akhir, "%H:%i") AS waktu_akhir, hari, created_at
+        FROM log_rosters;
         ');
- */
+
         DB::unprepared('
         CREATE VIEW table_log_profiles AS 
         SELECT * FROM user_profiles

@@ -200,7 +200,7 @@ return new class extends Migration
             VALUES(admin, "insert", "gurus", NOW());
         
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("3", "App\\Models\\User", uuid);
+            VALUES ("3", "App\\\\Models\\\\User", uuid);
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "insert", "model_has_roles", NOW());
@@ -347,7 +347,7 @@ return new class extends Migration
             VALUES(actor, "insert", "gurus", NOW());
 
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("4", "App\\Models\\User", uuid);
+            VALUES ("4", "App\\\\Models\\\\User", uuid);
 
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "model_has_roles", NOW());
@@ -689,6 +689,12 @@ return new class extends Migration
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "kelas", NOW());
 
+                INSERT INTO model_has_roles(role_id, model_type, model_id)
+                VALUES (5, "App\\\\Models\\\\User", user);
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "insert", "model_has_roles", NOW());
+
                 COMMIT;
             
             END
@@ -766,6 +772,31 @@ return new class extends Migration
         CREATE PROCEDURE update_kelasAktif(
             IN kelas CHAR(6),
             IN wali CHAR(18),
+            IN user CHAR(36),
+            IN actor CHAR(36)
+        )
+        BEGIN
+        
+            UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "update", "kelas", NOW());
+            
+            INSERT INTO model_has_roles(role_id, model_type, model_id)
+            VALUES (5, "App\\\\Models\\\\User", user);
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "insert", "model_has_roles", NOW());
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE update_kelas(
+            IN kelas CHAR(3),
+            IN nama VARCHAR(255),
+            IN wali CHAR(18),
+            IN user CHAR(36),
+            IN guru CHAR(36),
             actor CHAR(36)
         )
         BEGIN
@@ -784,6 +815,13 @@ return new class extends Migration
     
         INSERT INTO log_activities(actor, action, at, created_at)
         VALUES(actor, "update", "kelas", NOW());
+    
+        INSERT INTO model_has_roles(role_id, model_type, model_id)
+        VALUES (5, "App\\\\Models\\\\User", user);
+    
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(actor, "insert", "model_has_roles", NOW());
+    
         COMMIT;
         END
         ');
@@ -854,7 +892,7 @@ return new class extends Migration
             VALUES(actor, "insert", "users", NOW());
         
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("6", "App\\Models\\User", uuid);
+            VALUES ("6", "App\\\\Models\\\\User", uuid);
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "model_has_roles", NOW());

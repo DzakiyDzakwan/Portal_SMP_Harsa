@@ -37,7 +37,7 @@
                         <th>No</th>
                         <th>Ekstrakurikuler</th>
                         <th>Guru</th>
-                        <th>KOntrak Siswa</th>
+                        <th>Kontrak Siswa</th>
                         <th>Keterangan</th>
                         <th>Tanggal Prestasi</th>
                         <th>Tanggal Kegiatan</th>

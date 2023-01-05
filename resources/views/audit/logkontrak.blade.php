@@ -52,8 +52,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->siswa }}</td>
                             <td>{{ $item->grade }}</td>
-                            <td>{{ $item->semester }}</td>
-                            <td>{{ $item->tahun_ajaran }}</td>
+                            <td>{{ $item->semester_aktif }}</td>
+                            <td>{{ $item->tahun_ajaran_aktif }}</td>
                             <td>{{ $item->sakit }}</td>
                             <td>{{ $item->izin }}</td>
                             <td>{{ $item->alpa }}</td>

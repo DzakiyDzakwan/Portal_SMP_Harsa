@@ -38,7 +38,6 @@
                         <th>User_id</th>
                         <th>NISN</th>
                         <th>NIS</th>
-                        <th>Kelas</th>
                         <th>Tanggal Masuk</th>
                         <th>Kelas Awal</th>
                         <th>Anak Ke</th>
@@ -63,7 +62,6 @@
                             <td>{{ $item->user }}</td>
                             <td>{{ $item->NISN }}</td>
                             <td>{{ $item->NIS }}</td>
-                            <td>{{ $item->kelas }}</td>
                             <td>{{ $item->tanggal_masuk }}</td>
                             <td>{{ $item->kelas_awal }}</td>
                             <td>{{ $item->anak_ke }}</td>
