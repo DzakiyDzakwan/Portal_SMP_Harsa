@@ -64,6 +64,7 @@ class CreateModalPrestasi extends Component
                 'at' => 'prestasis'
             ]);
             DB::commit();
+            $this->reset();
             $this->dispatchBrowserEvent('insert-prestasi-alert');
         } catch (\Throwable $th) {
             DB::rollback();

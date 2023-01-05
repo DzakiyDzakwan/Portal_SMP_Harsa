@@ -28,9 +28,9 @@ class ListSiswaWaliKelas extends Component
 
     public function sakitIncrease($id) {
         /* dd($id); */
-        $sakit = KontrakSemester::select('sakit')->where('siswa', $id)->where('status', 'On Going')->first()->sakit;
+        $sakit = KontrakSemester::select('sakit')->where('siswa', $id)->where('status', 'ongoing')->first()->sakit;
         $sakit++;
-        $kontrak = KontrakSemester::select('sakit')->where('siswa', $id)->where('status', 'On Going');
+        $kontrak = KontrakSemester::select('sakit')->where('siswa', $id)->where('status', 'ongoing');
         $kontrak->update([
             'sakit' => $sakit
         ]);
@@ -38,12 +38,12 @@ class ListSiswaWaliKelas extends Component
     }
 
     public function sakitDecrease($id) {
-        $sakit = KontrakSemester::select('sakit')->where('siswa', $id)->where('status', 'On Going')->first()->sakit;
+        $sakit = KontrakSemester::select('sakit')->where('siswa', $id)->where('status', 'ongoing')->first()->sakit;
         if($sakit == 0) {
             return;
         } else {
             $sakit--;
-            $kontrak = KontrakSemester::select('sakit')->where('siswa', $id)->where('status', 'On Going');
+            $kontrak = KontrakSemester::select('sakit')->where('siswa', $id)->where('status', 'ongoing');
             $kontrak->update([
                 'sakit' => $sakit
             ]);
@@ -52,9 +52,9 @@ class ListSiswaWaliKelas extends Component
     }
 
     public function izinIncrease($id) {
-        $izin = KontrakSemester::select('izin')->where('siswa', $id)->where('status', 'On Going')->first()->izin;
+        $izin = KontrakSemester::select('izin')->where('siswa', $id)->where('status', 'ongoing')->first()->izin;
         $izin++;
-        $kontrak = KontrakSemester::select('izin')->where('siswa', $id)->where('status', 'On Going');
+        $kontrak = KontrakSemester::select('izin')->where('siswa', $id)->where('status', 'ongoing');
         $kontrak->update([
             'izin' => $izin
         ]);
@@ -62,12 +62,12 @@ class ListSiswaWaliKelas extends Component
     }
 
     public function izinDecrease($id) {
-        $izin = KontrakSemester::select('izin')->where('siswa', $id)->where('status', 'On Going')->first()->izin;
+        $izin = KontrakSemester::select('izin')->where('siswa', $id)->where('status', 'ongoing')->first()->izin;
         if($izin == 0) {
             return;
         } else {
             $izin--;
-            $kontrak = KontrakSemester::select('izin')->where('siswa', $id)->where('status', 'On Going');
+            $kontrak = KontrakSemester::select('izin')->where('siswa', $id)->where('status', 'ongoing');
             $kontrak->update([
                 'izin' => $izin
             ]);
@@ -76,9 +76,9 @@ class ListSiswaWaliKelas extends Component
     }
 
     public function alpaIncrease($id) {
-        $alpa = KontrakSemester::select('alpa')->where('siswa', $id)->where('status', 'On Going')->first()->alpa;
+        $alpa = KontrakSemester::select('alpa')->where('siswa', $id)->where('status', 'ongoing')->first()->alpa;
         $alpa++;
-        $kontrak = KontrakSemester::select('alpa')->where('siswa', $id)->where('status', 'On Going');
+        $kontrak = KontrakSemester::select('alpa')->where('siswa', $id)->where('status', 'ongoing');
         $kontrak->update([
             'alpa' => $alpa
         ]);
@@ -86,12 +86,12 @@ class ListSiswaWaliKelas extends Component
     }
 
     public function alpaDecrease($id) {
-        $alpa = KontrakSemester::select('alpa')->where('siswa', $id)->where('status', 'On Going')->first()->alpa;
+        $alpa = KontrakSemester::select('alpa')->where('siswa', $id)->where('status', 'ongoing')->first()->alpa;
         if($alpa == 0) {
             return;
         } else {
             $alpa--;
-            $kontrak = KontrakSemester::select('alpa')->where('siswa', $id)->where('status', 'On Going');
+            $kontrak = KontrakSemester::select('alpa')->where('siswa', $id)->where('status', 'ongoing');
             $kontrak->update([
                 'alpa' => $alpa
             ]);

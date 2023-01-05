@@ -20,20 +20,20 @@ class ProfilController extends Controller
     //Guru
     public function profilGuru()
     {
-        $pages = 'profilGuru';
+        $menu = 'profilGuru';
         $gurus = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('gurus.user', Auth::user()->uuid)->first();
         return view('guru.profile', [
-            'pages' => $pages,
+            'menu' => $menu,
             'gurus' => $gurus
         ]);
     }
 
     public function editProfilGuru($id)
     {   
-        $pages = 'profilGuru';
+        $menu = 'profilGuru';
         // $dt = UserProfile::findorfail($id);
         $data = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('gurus.user', Auth::user()->uuid)->find($id);
-        return view('guru.editprofile',compact('pages', 'data'));
+        return view('guru.editprofile',compact('menu', 'data'));
     }
 
     public function updateProfilGuru(Request $request)
@@ -141,25 +141,25 @@ class ProfilController extends Controller
     //Siswa
     public function profilSiswa()
     {
-        $pages = 'profilSiswa';
+        $menu = 'profilSiswa';
         return view('siswa.profil', [
-            'pages' => $pages
+            'menu' => $menu
         ]);
     }
 
     public function editProfilSiswa()
     {
-        $pages = 'editProfilSiswa';
+        $menu = 'editProfilSiswa';
         return view('siswa.editProfil', [
-            'pages' => $pages
+            'menu' => $menu
         ]);
     }
 
     public function changePassword()
     {
-        $pages = 'changePassword';
+        $menu = 'changePassword';
         return view('siswa.change-password', [
-            'pages' => $pages
+            'menu' => $menu
         ]);
     }
 
@@ -212,7 +212,7 @@ class ProfilController extends Controller
         // }
         // $gurus = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('gurus.user', Auth::user()->uuid)->first();
         // return view('guru.editprofile', [
-        //     'pages' => $pages,
+        //     'menu' => $menu,
         // ]);
     // } */
     

@@ -1,4 +1,4 @@
-@extends('guru.master.main')
+@extends('master.main')
 
 @section('title')
     <title>{{ $kelas->grade }}{{ $kelas->kelompok_kelas }} {{ $kelas->nama_kelas }}</title>
