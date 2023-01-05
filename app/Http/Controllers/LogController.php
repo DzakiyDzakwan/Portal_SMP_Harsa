@@ -30,6 +30,24 @@ class LogController extends Controller
         return  view('audit.logusers',compact('menu', 'subpages', 'logUser'));
     }
 
+    public function role() {
+        $menu = 'history';
+        $subpages = 'logRole';
+        $logRole = DB::table('table_log_roles')
+        ->latest()
+        ->get();
+        return  view('audit.logrole', compact('menu', 'subpages', 'logRole'));
+    }
+
+    public function permission() {
+        $menu = 'history';
+        $subpages = 'logPermission';
+        $logPermission = DB::table('table_log_permissions')
+        ->latest()
+        ->get();
+        return  view('audit.logpermission', compact('menu', 'subpages', 'logPermission'));
+    }
+
     public function siswa() {
         $menu = 'history';
         $subpages = 'logSiswa';

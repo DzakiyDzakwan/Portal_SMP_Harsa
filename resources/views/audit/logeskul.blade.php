@@ -39,7 +39,7 @@
                         <th>Nama Ekskul</th>
                         <th>Hari</th>
                         <th>Waktu Mulai</th>
-                        <th>Durasi</th>
+                        <th>Waktu Akhir</th>
                         <th>Tempat</th>
                         <th>Kelas</th>
                         <th>Action</th>
@@ -55,7 +55,7 @@
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->hari }}</td>
                             <td>{{ $item->waktu_mulai }}</td>
-                            <td>{{ $item->durasi }}</td>
+                            <td>{{ $item->waktu_akhir }}</td>
                             <td>{{ $item->tempat }}</td>
                             <td>{{ $item->kelas }}</td>
                             <td>{{ $item->action }}</td>

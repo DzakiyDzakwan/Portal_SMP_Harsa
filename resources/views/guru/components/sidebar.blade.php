@@ -233,6 +233,12 @@
                                 <a href="/guru/log-activities">Log Aktivitas</a>
                             </li>
                             <li class="submenu-item">
+                                <a href="/guru/log-roles">Log Role</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/guru/log-permissions">Log Permission</a>
+                            </li>
+                            <li class="submenu-item">
                                 <a href="/guru/log-users">Log User</a>
                             </li>
                             <li class="submenu-item">

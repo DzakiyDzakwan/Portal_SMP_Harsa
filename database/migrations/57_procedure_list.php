@@ -200,7 +200,7 @@ return new class extends Migration
             VALUES(admin, "insert", "gurus", NOW());
         
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("3", "App\\Models\\User", uuid);
+            VALUES ("3", "App\\\\Models\\\\User", uuid);
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "insert", "model_has_roles", NOW());
@@ -347,7 +347,7 @@ return new class extends Migration
             VALUES(actor, "insert", "gurus", NOW());
 
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("4", "App\\Models\\User", uuid);
+            VALUES ("4", "App\\\\Models\\\\User", uuid);
 
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "model_has_roles", NOW());
@@ -692,7 +692,7 @@ return new class extends Migration
                 VALUES(actor, "insert", "kelas", NOW());
 
                 INSERT INTO model_has_roles(role_id, model_type, model_id)
-                VALUES (5, "App\\Models\\User", user);
+                VALUES (5, "App\\\\Models\\\\User", user);
 
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "model_has_roles", NOW());
@@ -760,7 +760,7 @@ return new class extends Migration
             VALUES(actor, "update", "kelas", NOW());
             
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES (5, "App\\Models\\User", user);
+            VALUES (5, "App\\\\Models\\\\User", user);
 
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "model_has_roles", NOW());
@@ -800,7 +800,7 @@ return new class extends Migration
         VALUES(actor, "update", "kelas", NOW());
     
         INSERT INTO model_has_roles(role_id, model_type, model_id)
-        VALUES (5, "App\\Models\\User", user);
+        VALUES (5, "App\\\\Models\\\\User", user);
     
         INSERT INTO log_activities(actor, action, at, created_at)
         VALUES(actor, "insert", "model_has_roles", NOW());
@@ -834,7 +834,7 @@ return new class extends Migration
             VALUES(actor, "insert", "users", NOW());
         
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("6", "App\\Models\\User", uuid);
+            VALUES ("6", "App\\\\Models\\\\User", uuid);
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "model_has_roles", NOW());

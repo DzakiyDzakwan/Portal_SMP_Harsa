@@ -36,14 +36,13 @@
                     <tr>
                         <th>No</th>
                         <th>User_id</th>
-                        <th>NIP</th>
+                        <th>NUPTK</th>
                         <th>Jabatan</th>
                         <th>Pendidikan</th>
                         <th>Tahun Ijazah</th>
                         <th>Status Perkawinan</th>
                         <th>Tanggal Masuk</th>
                         <th>Status</th>
-                        <th>Wali Kelas</th>
                         <th>Keterangan</th>
                         <th>Tanggal Kegiatan</th>
                     </tr>
@@ -53,14 +52,23 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->user }}</td>
-                            <td>{{ $item->NIP }}</td>
-                            <td>{{ $item->jabatan }}</td>
+                            <td>{{ $item->NUPTK }}</td>
+                            <td>
+                                @if ($item->jabatan === 'ks')
+                                    Kepala Sekolah
+                                @elseif($item->jabatan === 'wks')
+                                    Wakil Kepala Sekolah
+                                @elseif($item->jabatan === 'tu')
+                                    Tata Usaha
+                                @else
+                                    Guru
+                                @endif
+                            </td>
                             <td>{{ $item->pendidikan }}</td>
                             <td>{{ $item->tahun_ijazah }}</td>
                             <td>{{ $item->status_perkawinan }}</td>
                             <td>{{ $item->tanggal_masuk }}</td>
                             <td>{{ $item->status }}</td>
-                            <td>{{ $item->is_wali_kelas }}</td>
                             <td>{{ $item->action }}</td>
                             <td>{{ $item->created_at }}</td>
                         </tr>

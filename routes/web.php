@@ -34,32 +34,23 @@ Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'cekle
 
     //Kepala Sekolah
     Route::group(['middleware'=> ['role:kepsek']], function(){
-        //Log-Activity
-        Route::get('/guru/log-activities', [LogController::class, 'activity'])->name('log-activities');
-        //Log-Users
-        Route::get('/guru/log-users', [LogController::class, 'user'])->name('log-user');
-        //Log-Profile
-        Route::get('/guru/log-profiles', [LogController::class, 'profiles'])->name('log-profiles');
-        //Log-Siswa
-        Route::get('/guru/log-siswa', [LogController::class, 'siswa'])->name('log-siswa');
-        //Log-Prestasi
-        Route::get('/guru/log-prestasi', [LogController::class, 'prestasi'])->name('log-prestasi');
-        //Log-Nilai
-        Route::get('/guru/log-nilai', [LogController::class, 'nilai'])->name('log-nilai');
-        //Log-Guru
-        Route::get('/guru/log-guru', [LogController::class, 'guru'])->name('log-guru');
-        //Log-Kelas
-        Route::get('/guru/log-kelas', [LogController::class, 'kelas'])->name('log-kelas');
-        //Log-Mapel
-        Route::get('/guru/log-mapel', [LogController::class, 'mapel'])->name('log-mapel');
-        //Log-Ekstrakurikuler
-        Route::get('/guru/log-ekstrakulikuler', [LogController::class, 'ekskul'])->name('log-ekskul');
-        //Log-Roster
-        Route::get('/guru/log-roster', [LogController::class, 'roster'])->name('log-roster');
-        //Log-Ekstrakurikuler-Siswa
-        Route::get('/guru/log-ekstrakurikuler-siswa', [LogController::class, 'ekskulSiswa'])->name('log-ekskul-siswa');
-        //Log-Kontrak
-        Route::get('/guru/log-kontrak', [LogController::class, 'kontrak'])->name('log-kontrak');
+        Route::controller(LogController::class)->group(function(){
+            Route::get('/guru/log-activities', 'activity')->name('log-activities');
+            Route::get('/guru/log-roles', 'role')->name('log-roles');
+            Route::get('/guru/log-permissions', 'permission')->name('log-permissions');
+            Route::get('/guru/log-users', 'user')->name('log-user');
+            Route::get('/guru/log-profiles', 'profiles')->name('log-profiles');
+            Route::get('/guru/log-siswa', 'siswa')->name('log-siswa');
+            Route::get('/guru/log-prestasi', 'prestasi')->name('log-prestasi');
+            Route::get('/guru/log-nilai', 'nilai')->name('log-nilai');
+            Route::get('/guru/log-guru', 'guru')->name('log-guru');
+            Route::get('/guru/log-kelas', 'kelas')->name('log-kelas');
+            Route::get('/guru/log-mapel', 'mapel')->name('log-mapel');
+            Route::get('/guru/log-ekstrakulikuler', 'ekskul')->name('log-ekskul');
+            Route::get('/guru/log-roster', 'roster')->name('log-roster');
+            Route::get('/guru/log-ekstrakurikuler-siswa', 'ekskulSiswa')->name('log-ekskul-siswa');
+            Route::get('/guru/log-kontrak', 'kontrak')->name('log-kontrak');
+        });
     });
 
     //Wakil Kepala Sekolah
