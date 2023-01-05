@@ -89,23 +89,35 @@ return new class extends Migration
         ORDER BY status;
         ');
 
+        // DB::unprepared('
+        // CREATE VIEW list_kelas AS
+        // SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NUPTK, user_profiles.nama AS 		Wali_Kelas, COUNT(siswas.NIS) AS jumlah
+        // FROM kelas
+        // LEFT JOIN gurus ON kelas.wali_kelas = gurus.NUPTK
+        // LEFT JOIN users ON gurus.user = users.uuid
+        // LEFT JOIN user_profiles ON users.uuid = user_profiles.user
+        // LEFT JOIN kontrak_semesters ON kontrak_semesters.kelas = kelas.kelas_id
+        // LEFT JOIN siswas ON kontrak_semesters.siswa = siswas.NISN
+        // GROUP BY kelas.kelas_id;
+        // ');
+
+        // DB::unprepared('
+        // CREATE VIEW list_inactive_kelas AS
+        // SELECT kelas_id, nama_kelas, deleted_at 
+        // FROM kelas WHERE deleted_at IS NOT NULL;
+        // ');
+
+//         CREATE VIEW list_kelas_aktif AS
+// SELECT kelas_aktifs.kelas_aktif_id, kelas_aktifs.nama_kelas_aktif, kelas_aktifs.tahun_ajaran_aktif, user_profiles.nama
+// FROM kelas_aktifs
+// LEFT JOIN gurus ON gurus.NUPTK = kelas_aktifs.wali_kelas
+// LEFT JOIN user_profiles ON user_profiles.user = gurus.user
+// GROUP BY kelas_aktifs.kelas_aktif_id
+
         DB::unprepared('
         CREATE VIEW list_kelas AS
-        SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NUPTK, user_profiles.nama AS 		Wali_Kelas, COUNT(siswas.NIS) AS jumlah
-        FROM kelas
-        LEFT JOIN gurus ON kelas.wali_kelas = gurus.NUPTK
-        LEFT JOIN users ON gurus.user = users.uuid
-        LEFT JOIN user_profiles ON users.uuid = user_profiles.user
-        LEFT JOIN kontrak_semesters ON kontrak_semesters.kelas = kelas.kelas_id
-        LEFT JOIN siswas ON kontrak_semesters.siswa = siswas.NISN
-        GROUP BY kelas.kelas_id;
-        ');
-
-
-        DB::unprepared('
-        CREATE VIEW list_inactive_kelas AS
-        SELECT kelas_id, nama_kelas, deleted_at 
-        FROM kelas WHERE deleted_at IS NOT NULL;
+        SELECT kelas_id, nama_kelas, grade, kelompok_kelas
+        FROM kelas;
         ');
 
         DB::unprepared('

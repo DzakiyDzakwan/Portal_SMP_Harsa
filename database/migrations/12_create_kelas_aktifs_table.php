@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kelas', function (Blueprint $table) {
-            $table->char('kelas_id', 6)->primary();
-            $table->enum('grade', ['7', '8', '9']);
-            $table->char('kelompok_kelas', 1);
-            $table->string('nama_kelas')->unique();
+        Schema::create('kelas_aktifs', function (Blueprint $table) {
+            $table->char('kelas_aktif_id', 6)->primary();
+            $table->char('wali_kelas', 16);
+            $table->char('tahun_ajaran_aktif', 9);
+            $table->string('nama_kelas_aktif')->unique();
+            $table->foreign('wali_kelas')->references('NUPTK')->on('gurus')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelas');
+        Schema::dropIfExists('kelas_aktifs');
     }
 };

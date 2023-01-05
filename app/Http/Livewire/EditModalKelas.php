@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class EditModalKelas extends Component
 {
 
-    public $gurus, $kelas_id, $nama_kelas, $old_wali_kelas, $wali_kelas, $nama_wali;
+    public $kelas_id, $nama_kelas;
 
     protected $listeners = [
         'editKelas' => 'showModal'
@@ -19,7 +19,6 @@ class EditModalKelas extends Component
 
     protected $rules = [
         'nama_kelas' => 'required|unique:kelas',
-        'wali_kelas' => 'required'
     ];
 
     public function updated($fields) {
@@ -28,7 +27,7 @@ class EditModalKelas extends Component
     
     public function render()
     {
-        $this->gurus = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->get();
+        //$this->gurus = Guru::select('gurus.NUPTK', 'user_profiles.nama')->join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->get();
         return view('livewire.sekolah.manajemen-kelas.kelas.edit-modal-kelas');
     }
 
@@ -36,30 +35,29 @@ class EditModalKelas extends Component
         
         $data = Kelas::where('kelas_id', $id)->first();
         $this->kelas_id = $id;
-        $this->wali_kelas = $data->wali_kelas;
-        $this->old_wali_kelas = $data->wali_kelas;
-        $this->nama_wali = Guru::join('user_profiles', 'user_profiles.user', 'gurus.user')->where('gurus.NUPTK', $data->wali_kelas)->first()->nama;
+        // $this->wali_kelas = $data->wali_kelas;
+        // $this->old_wali_kelas = $data->wali_kelas;
+        // $this->nama_wali = Guru::join('user_profiles', 'user_profiles.user', 'gurus.user')->where('gurus.NUPTK', $data->wali_kelas)->first()->nama;
         $this->nama_kelas = $data->nama_kelas;
         $this->dispatchBrowserEvent('edit-modal');
     }
 
     public function update() {
         $this->validate([
-            'nama_kelas' => 'required',
-            'wali_kelas' => 'required'
+            'nama_kelas' => 'required'
         ]);
 
-        $wali = Guru::select('gurus.user')
-        ->where('gurus.NUPTK', $this->wali_kelas )
-        ->first();
-        $user = $wali->user;
+        // $wali = Guru::select('gurus.user')
+        // ->where('gurus.NUPTK', $this->wali_kelas )
+        // ->first();
+        // $user = $wali->user;
 
-        $old_wali = Guru::select('gurus.user')
-        ->where('gurus.NUPTK', $this->old_wali_kelas )
-        ->first();
-        $old_user = $old_wali->user;
+        // $old_wali = Guru::select('gurus.user')
+        // ->where('gurus.NUPTK', $this->old_wali_kelas )
+        // ->first();
+        // $old_user = $old_wali->user;
 
-        DB::select('CALL update_kelas(?, ?, ?, ?, ?, ?)', [$this->kelas_id, $this->nama_kelas, $this->wali_kelas, $user, $old_user, auth()->user()->uuid]);
+        DB::select('CALL update_kelas(?, ?, ?)', [$this->kelas_id, $this->nama_kelas, auth()->user()->uuid]);
 
         // Kelas::where('kelas_id', $this->kelas_id)->update([
         //     'nama_kelas' => $this->nama_kelas,

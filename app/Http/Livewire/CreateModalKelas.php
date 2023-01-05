@@ -9,17 +9,16 @@ use App\Models\Kelas;
 
 class CreateModalKelas extends Component
 {
-    public $gurus, $kelas_id, $grade, $nama_kelas, $kelompok_kelas, $wali_kelas;
+    public $gurus, $kelas_id, $grade, $nama_kelas, $kelompok_kelas;
 
     protected $rules = [
         'kelas_id' => 'required|max:6|unique:kelas',
         'nama_kelas' => 'required|unique:kelas',
         'kelompok_kelas' => 'required|min:1',
-        'wali_kelas' => 'required'
     ];
 
     protected $listeners = [
-        'inactiveKelas' => 'render'
+        'deleteKelas' => 'render'
     ];
 
     public function updated($fields) {
@@ -49,18 +48,12 @@ class CreateModalKelas extends Component
             'kelompok_kelas' => 'required|min:1'
         ]);
 
-        $guru = Guru::select('gurus.user')
-        ->where('gurus.NUPTK', $this->wali_kelas)
-        ->first();
-        $user = $guru->user;
-
-        DB::select('CALL add_kelas(?, ?, ?, ?, ?, ?, ?)', [$this->kelas_id, $this->nama_kelas, $this->grade, $this->kelompok_kelas, $this->wali_kelas, $user, auth()->user()->uuid]);
+        DB::select('CALL add_kelas(?, ?, ?, ?, ?)', [$this->kelas_id, $this->nama_kelas, $this->grade, $this->kelompok_kelas, auth()->user()->uuid]);
 
         $this->reset();
         $this->emit('storeKelas');
-        $this->dispatchBrowserEvent('close-create-modal');
         $this->dispatchBrowserEvent('insert-alert');
-        // session()->flash('message', 'Kelas Berhasil dibuat');
+        $this->dispatchBrowserEvent('close-create-modal');
     }
     
 }

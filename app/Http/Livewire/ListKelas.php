@@ -19,23 +19,29 @@ class ListKelas extends Component
     public function render()
     {
         $this->kelas = DB::table('list_kelas')
-        ->where('list_kelas.NUPTK', '!=', NULL)
         ->get();
         return view('livewire.sekolah.manajemen-kelas.kelas.list-kelas');
     }
 
-    public function inactiveKelas($id) {
-        $wk = Kelas::select('kelas.wali_kelas', 'gurus.user')
-        ->join('gurus', 'gurus.NUPTK', '=', 'kelas.wali_kelas')
-        ->where('kelas_id', $id)
-        ->first();
+    // public function inactiveKelas($id) {
+    //     $wk = Kelas::select('kelas.wali_kelas', 'gurus.user')
+    //     ->join('gurus', 'gurus.NUPTK', '=', 'kelas.wali_kelas')
+    //     ->where('kelas_id', $id)
+    //     ->first();
 
-        $user = $wk->user;
+    //     $user = $wk->user;
 
-        DB::select('call inactive_kelas(?, ?, ?)', [$id, $user, auth()->user()->uuid]);
+    //     DB::select('call inactive_kelas(?, ?, ?)', [$id, $user, auth()->user()->uuid]);
+    //     $this->render();
+    //     $this->emit('inactiveKelas');
+    //     $this->dispatchBrowserEvent('inactive-alert');
+    // }
+
+    public function deleteKelas($id) {
+        DB::select('call delete_kelas(?, ?)', [$id, auth()->user()->uuid]);
         $this->render();
-        $this->emit('inactiveKelas');
-        $this->dispatchBrowserEvent('inactive-alert');
+        $this->emit('deleteKelas');
+        $this->dispatchBrowserEvent('delete-alert');
     }
 
     public function editKelas($id) {

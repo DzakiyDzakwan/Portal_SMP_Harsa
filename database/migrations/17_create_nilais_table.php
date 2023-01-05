@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('nilais', function (Blueprint $table) {
             $table->id('nilai_id');
-            $table->uuid('sesi');
+            $table->unsignedBigInteger('sesi');
             $table->char('mapel', 5);
             $table->char('guru', 16)->nullable();
             $table->uuid('pemeriksa')->nullable();
