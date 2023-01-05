@@ -1,7 +1,7 @@
 @extends('master.main')
 
 @section('title')
-    <title>Kelas</title>
+    <title>Kelas Aktif</title>
 @endsection
 
 @section('style')
@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Data Kelas</h3>
+            <h3>Data Kelas Aktif</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -22,15 +22,12 @@
                         <a href="/">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Kelas
+                        Kelas Aktif
                     </li>
                 </ol>
             </nav>
         </div>
     </div>
-
-    {{-- Info Card --}}
-    @livewire('info-card-kelas')
 
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
@@ -38,19 +35,15 @@
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
                     {{-- Button Tambah Kelas --}}
-                    @livewire('create-modal-kelas')
+                    @livewire('create-modal-kelas-aktif')
                 </div>
-                {{-- <div class="form-group"> --}}
-                    {{-- Button Inactive Kelas --}}
-                    {{-- @livewire('inactive-modal-kelas')
-                </div> --}}
             </div>
         </div>
         <div class="card-body">
-            @livewire('list-kelas')
+            @livewire('list-kelas-aktif')
         </div>
     </div>
-    @livewire('edit-modal-kelas')
+    {{-- @livewire('edit-modal-kelas') --}}
 
     @livewire('alert-kelas')
 @endsection
@@ -61,9 +54,9 @@
         const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
         })
-        const editModal = new bootstrap.Modal('#editModal', {
-            keyboard: false
-        })
+        // const editModal = new bootstrap.Modal('#editModal', {
+        //     keyboard: false
+        // })
         // const inactiveModal = new bootstrap.Modal('#inactiveModal', {
         //     keyboard: false
         // })
@@ -77,9 +70,9 @@
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
         });
-        window.addEventListener('edit-modal', event => {
-            editModal.toggle();
-        });
+        // window.addEventListener('edit-modal', event => {
+        //     editModal.toggle();
+        // });
         // window.addEventListener('inactive-modal', event => {
         //     inactiveModal.toggle();
         // })

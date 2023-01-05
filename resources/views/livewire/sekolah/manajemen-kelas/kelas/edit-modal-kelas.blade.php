@@ -100,7 +100,7 @@
                         </div> --}}
 
                         {{-- Wali kelas --}}
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <div class="form-group has-icon-left">
                                 <label for="wali">Wali Kelas</label>
                                 <div class="position-relative">
@@ -126,7 +126,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-12 d-flex justify-content-end">
                             <button type="button" class="btn btn-light-secondary me-1 mb-1"
                                 data-bs-dismiss="modal">

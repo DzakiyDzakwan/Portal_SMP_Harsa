@@ -21,7 +21,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_kontraks(kontrak_semester_id, siswa, kelas, semester_aktif, tahun_ajaran_aktif, sakit, izin, alpa, status, action, created_at)
-        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, NEW.semester_aktif, NEW.tahun_ajaran_aktif, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "insert", NOW());
+        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, semester_aktif, tahun_ajaran_aktif, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "insert", NOW());
         END
         ');
 
@@ -31,7 +31,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_kontraks(kontrak_semester_id, siswa, kelas, semester_aktif, tahun_ajaran_aktif, sakit, izin, alpa, status, action, created_at)
-        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, NEW.semester_aktif, NEW.tahun_ajaran_aktif, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "update", NOW());
+        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, semester_aktif, tahun_ajaran_aktif, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "update", NOW());
         END
         ');
 
@@ -40,7 +40,7 @@ return new class extends Migration
         BEFORE UPDATE ON kontrak_semesters
         FOR EACH ROW
         BEGIN
-            IF(NEW.kontrak_semester_id <> OLD.kontrak_semester_id OR NEW.siswa <> OLD.siswa OR NEW.kelas <> OLD.kelas OR NEW.semester_aktif <> OLD.semester_aktif OR NEW.tahun_ajaran_aktif <> OLD.tahun_ajaran_aktif)THEN
+            IF(NEW.kontrak_semester_id <> OLD.kontrak_semester_id OR NEW.siswa <> OLD.siswa OR NEW.kelas <> OLD.kelas) THEN
                 SIGNAL SQLSTATE "45000"
                 SET MESSAGE_TEXT = "Tidak dapat mengubah data";
             END IF;
