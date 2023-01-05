@@ -671,8 +671,6 @@ return new class extends Migration
                 IN nama VARCHAR(255),
                 IN urutan CHAR(1),
                 IN kelompok CHAR(1),
-                IN wali CHAR(18),
-                IN user CHAR(36),
                 actor CHAR(36)
             )
             BEGIN
@@ -685,8 +683,8 @@ return new class extends Migration
 
                 START TRANSACTION;
             
-                INSERT INTO kelas(kelas_id, nama_kelas, grade, kelompok_kelas, wali_kelas, created_at, updated_at)
-                VALUES(kelas, nama, urutan, kelompok, wali, NOW(), NOW());
+                INSERT INTO kelas(kelas_id, nama_kelas, grade, kelompok_kelas, created_at, updated_at)
+                VALUES(kelas, nama, urutan, kelompok, NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "kelas", NOW());
@@ -701,26 +699,6 @@ return new class extends Migration
             
             END
         ');
-
-        DB::unprepared('
-            CREATE PROCEDURE inactive_kelas(
-                IN kelas CHAR(6),
-                IN guru CHAR(36),
-                IN actor CHAR(36)
-            )
-            BEGIN
-                UPDATE kelas SET wali_kelas = NULL, deleted_at = NOW() WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
-            
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(actor, "update", "kelas", NOW());
-                
-                DELETE FROM model_has_roles WHERE role_id = "5" AND model_id = guru COLLATE utf8mb4_general_ci;
-
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(actor, "delete", "model_has_roles", NOW());
-            END
-        ');
-
         DB::unprepared('
             CREATE PROCEDURE delete_kelas(
                 IN kelas CHAR(6),
@@ -744,9 +722,54 @@ return new class extends Migration
                 
             END
         ');
-        
         DB::unprepared('
-        CREATE PROCEDURE restore_kelas(
+        CREATE PROCEDURE update_kelas(
+            IN kelas CHAR(3),
+            IN nama VARCHAR(255),
+            actor CHAR(36)
+        )
+        BEGIN
+        START TRANSACTION;
+    
+        UPDATE kelas SET nama_kelas = nama WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+    
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(actor, "update", "kelas", NOW());
+    
+        COMMIT;
+        END
+        ');
+
+        DB::unprepared('
+            CREATE PROCEDURE add_kelasAktif(
+                IN kelas CHAR(6),
+                IN wali CHAR(18),
+                IN tak CHAR(9),
+                IN nama VARCHAR(255),
+                actor CHAR(36)
+            )
+            BEGIN
+
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                    BEGIN
+                        ROLLBACK;
+                    END;
+
+                START TRANSACTION;
+            
+                INSERT INTO kelas_aktifs(kelas_aktif_id, wali_kelas, tahun_ajaran_aktif, nama_kelas_aktif, created_at, updated_at)
+                VALUES(kelas, wali, tak, nama, NOW(), NOW());
+            
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(actor, "insert", "kelas_aktifs", NOW());
+
+                COMMIT;
+            
+            END
+        ');
+        DB::unprepared('
+        CREATE PROCEDURE update_kelasAktif(
             IN kelas CHAR(6),
             IN wali CHAR(18),
             IN user CHAR(36),
@@ -785,16 +808,10 @@ return new class extends Migration
                 ROLLBACK;
             END;
     
-        SELECT wali_kelas INTO old_wali FROM kelas WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+        SELECT wali_kelas INTO old_wali FROM kelas_aktifs WHERE kelas_aktif_id = kelas COLLATE utf8mb4_general_ci;
         START TRANSACTION;
-    
-        IF EXISTs( SELECT * FROM gurus WHERE NUPTK = old_wali  COLLATE utf8mb4_general_ci) THEN
-            DELETE FROM model_has_roles WHERE role_id = "5" AND model_id = guru COLLATE utf8mb4_general_ci;
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(actor, "delete", "model_has_roles", NOW());
-        END IF;
-    
-        UPDATE kelas SET wali_kelas = wali, nama_kelas = nama WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+
+        UPDATE kelas_aktifs SET wali_kelas = wali WHERE kelas_aktif_id = kelas COLLATE utf8mb4_general_ci;
     
         INSERT INTO log_activities(actor, action, at, created_at)
         VALUES(actor, "update", "kelas", NOW());
@@ -808,6 +825,47 @@ return new class extends Migration
         COMMIT;
         END
         ');
+        // DB::unprepared('
+        //     CREATE PROCEDURE inactive_kelas(
+        //         IN kelas CHAR(6),
+        //         IN guru CHAR(36),
+        //         IN actor CHAR(36)
+        //     )
+        //     BEGIN
+        //         UPDATE kelas SET wali_kelas = NULL, deleted_at = NOW() WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+            
+        //         INSERT INTO log_activities(actor, action, at, created_at)
+        //         VALUES(actor, "update", "kelas", NOW());
+                
+        //         DELETE FROM model_has_roles WHERE role_id = "5" AND model_id = guru COLLATE utf8mb4_general_ci;
+
+        //         INSERT INTO log_activities(actor, action, at, created_at)
+        //         VALUES(actor, "delete", "model_has_roles", NOW());
+        //     END
+        // ');
+
+        // DB::unprepared('
+        // CREATE PROCEDURE restore_kelas(
+        //     IN kelas CHAR(6),
+        //     IN wali CHAR(18),
+        //     IN user CHAR(36),
+        //     IN actor CHAR(36)
+        // )
+        // BEGIN
+        
+        //     UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+        
+        //     INSERT INTO log_activities(actor, action, at, created_at)
+        //     VALUES(actor, "update", "kelas", NOW());
+            
+        //     INSERT INTO model_has_roles(role_id, model_type, model_id)
+        //     VALUES (5, "App\\Models\\User", user);
+
+        //     INSERT INTO log_activities(actor, action, at, created_at)
+        //     VALUES(actor, "insert", "model_has_roles", NOW());
+        // END
+        // ');
+        
 
         DB::unprepared('
         CREATE PROCEDURE add_siswa(

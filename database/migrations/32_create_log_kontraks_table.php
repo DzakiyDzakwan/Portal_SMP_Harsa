@@ -19,7 +19,7 @@ return new class extends Migration
             $table->char('siswa',10);
             $table->char('kelas',6);
             $table->char('tahun_ajaran_aktif',9);
-            $table->enum('semester_aktif',['Ganjil', 'Genap']);
+            $table->enum('semester_aktif',['ganjil', 'genap']);
             $table->integer('sakit')->unsigned()->default(0);
             $table->integer('izin')->unsigned()->default(0);
             $table->integer('alpa')->unsigned()->default(0);

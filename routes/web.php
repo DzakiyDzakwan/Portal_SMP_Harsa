@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'cekle
             Route::get('/guru/mata-pelajaran', 'mapel')->name('mata-pelajaran');
             Route::get('/guru/mata-pelajaran-guru', 'mapelGuru')->name('mata-pelajaran-guru');
             Route::get('/guru/kelas', 'kelas')->name('kelas');
+            Route::get('/guru/kelas-aktif', 'kelasAktif')->name('kelas-aktif');
             Route::get('/guru/roster', 'roster')->name('roster');
             Route::get('/guru/ekstrakurikuler', 'ekstrakurikuler')->name('ekstrakurikuler');
             Route::get('/guru/ekstrakurikuler-siswa', 'ekstrakurikulerSiswa')->name('ekstrakurikuler-siswa');
