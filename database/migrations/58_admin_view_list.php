@@ -235,6 +235,14 @@ return new class extends Migration
         JOIN user_profiles as u ON s.user = u.user;
         ');
 
+        DB::unprepared('
+        CREATE VIEW list_pembina_ekstrakurikuler AS
+        SELECT e.ekstrakurikuler_id AS id, e.nama AS nama_ekskul, u.nama AS nama_guru
+        FROM ekstrakurikulers as e
+        JOIN gurus as g ON e.penanggung_jawab = g.NUPTK
+        JOIN user_profiles as u ON g.user = u.user;
+        ');
+
         /*  DB::unprepared('
         CREATE VIEW list_siswa_kelas AS
         SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester, s.kelas 

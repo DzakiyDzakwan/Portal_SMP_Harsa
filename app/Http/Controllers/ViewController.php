@@ -113,6 +113,12 @@ class ViewController extends Controller
         return view('sekolah.ekskulsiswa', compact('menu'));
     }
 
+    public function pembinaEkstrakurikuler()
+    {
+        $menu = 'sekolah';
+        return view('sekolah.pembina_ekskul', compact('menu'));
+    }
+
     public function nilaiEkstrakurikuler()
     {
         $menu = 'sekolah';
