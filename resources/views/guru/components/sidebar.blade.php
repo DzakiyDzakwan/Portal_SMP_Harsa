@@ -160,6 +160,9 @@
                                 <a href="/guru/kelas-aktif">Kelas Aktif</a>
                             </li>
                             <li class="submenu-item">
+                                <a href="/guru/wali-kelas">Wali Kelas</a>
+                            </li>
+                            <li class="submenu-item">
                                 <a href="/guru/roster">Roster</a>
                             </li>
                         </ul>

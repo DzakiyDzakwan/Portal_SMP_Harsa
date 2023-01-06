@@ -1,7 +1,7 @@
 @extends('master.main')
 
 @section('title')
-    <title>Mata Pelajaran Guru</title>
+    <title>Kelas</title>
 @endsection
 
 @section('style')
@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Data Mata Pelajaran Guru</h3>
+            <h3>Data Wali Kelas</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -22,7 +22,7 @@
                         <a href="/">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Mata Pelajaran Guru
+                        Wali Kelas
                     </li>
                 </ol>
             </nav>
@@ -30,63 +30,50 @@
     </div>
 
     {{-- Info Card --}}
-    @livewire('info-card-mapel')
+    @livewire('info-card-wali-kelas')
 
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-            <h5>List Mata Pelajaran Guru</h5>
+            <h5>List Wali Kelas</h5>
             <div class="d-flex align-items-center justify-content-between gap-2">
                 <div class="form-group">
-                    {{-- Button Tambah mapel --}}
-                    @livewire('create-modal-mapel-guru')
+                    {{-- Button Tambah Wali Kelas --}}
+                    @livewire('create-modal-wali-kelas')
                 </div>
             </div>
         </div>
         <div class="card-body">
-            @livewire('list-mapel-guru')
+            @livewire('list-wali-kelas')
         </div>
     </div>
+    @livewire('edit-modal-kelas')
 
-    @livewire('edit-modal-mapel-guru')
-
-    @livewire('alert-mapel-guru')
+    @livewire('alert-wali-kelas')
 @endsection
+
 @section('script')
     <script>
         //Modal
         const createModal = new bootstrap.Modal('#createModal', {
             keyboard: false
         })
-        // const editModal = new bootstrap.Modal('#editModal', {
-        //     keyboard: false
-        // })
-        // const deleteModal = new bootstrap.Modal('#deleteModal', {
-        //     keyboard: false
-        // })
+
 
         window.addEventListener('close-create-modal', event => {
             createModal.hide();
         });
-        // window.addEventListener('edit-modal', event => {
-        //     editModal.toggle();
-        // });
         window.addEventListener('delete-modal', event => {
             deleteModal.toggle();
         })
 
         //Toast
         const insertToast = new bootstrap.Toast('#insertToast')
-        // const updateToast = new bootstrap.Toast('#updateToast')
         const deleteToast = new bootstrap.Toast('#deleteToast')
 
 
         window.addEventListener('insert-alert', e => {
             insertToast.show()
         })
-
-        // window.addEventListener('update-alert', e => {
-        //     updateToast.show()
-        // })
 
         window.addEventListener('delete-alert', e => {
             deleteToast.show()

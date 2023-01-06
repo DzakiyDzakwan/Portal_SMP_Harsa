@@ -122,6 +122,24 @@ return new class extends Migration
         FROM kelas;
         ');
 
+        // DB::unprepared('
+        // CREATE VIEW list_assign_wali AS
+        // SELECT
+        // `model_has_roles`.`model_id`,
+        // `model_has_roles`.`role_id`,
+        // `gurus`.`USER`,
+        // `gurus`.`NUPTK`,
+        // `gurus`.`jabatan`,
+        // `gurus`.`status`,
+        // `user_profiles`.`nama`
+        // FROM
+        // `users`
+        // INNER JOIN `gurus` ON `gurus`.`USER` = `users`.`uuid`
+        // INNER JOIN `user_profiles` ON `users`.`uuid` = `user_profiles`.`USER`
+        // LEFT JOIN `model_has_roles` ON `model_has_roles`.`model_id` = `user_profiles`.`user`
+        // WHERE role_id != "5" ;
+        // ');
+
         DB::unprepared('
         CREATE VIEW list_mapel AS
         SELECT mapel_id, nama_mapel, kelompok_mapel, kkm, kurikulum

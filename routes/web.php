@@ -25,7 +25,7 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ['auth', 'ceklevel']], function(){
+Route::group(['middleware' => ['auth', 'ceklevel']], function () {
 
     Route::get('/guru/dashboard', [DashboardController::class, 'indexguru'])->name('dashboardGuru');
     Route::get('/profil-guru', [ProfilController::class, 'profilGuru'])->name('profilGuru');
@@ -33,8 +33,8 @@ Route::group(['middleware' => ['auth', 'ceklevel']], function(){
     Route::put('/edit-profil-guru', [ProfilController::class, 'updateProfilGuru'])->name('updateProfilGuru');
 
     //Kepala Sekolah
-    Route::group(['middleware'=> ['role:kepsek']], function(){
-        Route::controller(LogController::class)->group(function(){
+    Route::group(['middleware' => ['role:kepsek']], function () {
+        Route::controller(LogController::class)->group(function () {
             Route::get('/guru/log-activities', 'activity')->name('log-activities');
             Route::get('/guru/log-roles', 'role')->name('log-roles');
             Route::get('/guru/log-permissions', 'permission')->name('log-permissions');
@@ -54,8 +54,8 @@ Route::group(['middleware' => ['auth', 'ceklevel']], function(){
     });
 
     //Wakil Kepala Sekolah
-    Route::group(['middleware'=> ['role:kepsek|wakepsek']], function(){
-        Route::controller(ViewController::class)->group(function(){
+    Route::group(['middleware' => ['role:kepsek|wakepsek']], function () {
+        Route::controller(ViewController::class)->group(function () {
             Route::get('/guru/user', 'user')->name('user');
             Route::get('/guru/role', 'role')->name('role');
             Route::get('/guru/permission', 'permission')->name('permission');
@@ -64,8 +64,8 @@ Route::group(['middleware' => ['auth', 'ceklevel']], function(){
     });
 
     //Admin
-    Route::group(['middleware'=> ['role:kepsek|wakepsek|admin']], function(){
-        Route::controller(ViewController::class)->group(function(){
+    Route::group(['middleware' => ['role:kepsek|wakepsek|admin']], function () {
+        Route::controller(ViewController::class)->group(function () {
             Route::get('/guru/guru', 'guru')->name('guru');
             Route::get('/guru/siswa', 'siswa')->name('siswa');
             Route::get('/guru/tahun-akademik', 'tahunAkademik')->name('tahun-akademik');
@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth', 'ceklevel']], function(){
             Route::get('/guru/mata-pelajaran-guru', 'mapelGuru')->name('mata-pelajaran-guru');
             Route::get('/guru/kelas', 'kelas')->name('kelas');
             Route::get('/guru/kelas-aktif', 'kelasAktif')->name('kelas-aktif');
+            Route::get('/guru/wali-kelas', 'waliKelas')->name('wali-kelas');
             Route::get('/guru/roster', 'roster')->name('roster');
             Route::get('/guru/ekstrakurikuler', 'ekstrakurikuler')->name('ekstrakurikuler');
             Route::get('/guru/pembina-ekstrakurikuler', 'pembinaEkstrakurikuler')->name('pembina-ekstrakurikuler');
@@ -84,21 +85,18 @@ Route::group(['middleware' => ['auth', 'ceklevel']], function(){
     });
 
     //Guru
-    Route::group(['middleware'=> ['role:kepsek|wakepsek']], function(){
-
+    Route::group(['middleware' => ['role:kepsek|wakepsek']], function () {
     });
 
     //Wali Kelas
-    Route::group(['middleware'=> ['role:wali']], function(){
-        Route::controller(ViewController::class)->group(function(){
-            Route::get('/guru/kelas-saya', 'kelasSaya')->name('kelas-saya');           
+    Route::group(['middleware' => ['role:wali']], function () {
+        Route::controller(ViewController::class)->group(function () {
+            Route::get('/guru/kelas-saya', 'kelasSaya')->name('kelas-saya');
         });
     });
-    
-
 });
 
-Route::group(['middleware' => ['auth', 'role:siswa']], function(){
+Route::group(['middleware' => ['auth', 'role:siswa']], function () {
     Route::get('/siswa/dashboard', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
     Route::get('/profil-siswa', [ProfilController::class, 'profilSiswa'])->name('profilSiswa');
     Route::get('/edit-profil-siswa', [ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');

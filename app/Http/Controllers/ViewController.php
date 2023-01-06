@@ -87,6 +87,12 @@ class ViewController extends Controller
         return view('sekolah.kelasaktif', compact('menu'));
     }
 
+    public function waliKelas()
+    {
+        $menu = 'sekolah';
+        return view('sekolah.wali', compact('menu'));
+    }
+
     public function roster()
     {
         $menu = 'kelas';
