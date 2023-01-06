@@ -11,6 +11,10 @@ use Livewire\Component;
 class CreateModalKelasAktif extends Component
 {
     public $gurus, $kelasAktif, $kelas_aktif_id, $wali_kelas, $tahun_ajaran_aktif, $kelas;
+    protected $rules = [
+        'kelas' => 'required|unique:kelas_aktifs',
+        'wali_kelas' => 'required|unique:kelas_aktifs'
+    ];
     public function render()
     {
         $this->gurus = Guru::select('gurus.NUPTK', 'user_profiles.nama')
@@ -27,13 +31,17 @@ class CreateModalKelasAktif extends Component
     }
     public function store()
     {
+        $this->validate([
+            'kelas' => 'required|unique:kelas_aktifs',
+            'wali_kelas' => 'required|unique:kelas_aktifs'
+        ]);
         $nama_kelas = Kelas::select('nama_kelas', 'grade', 'kelompok_kelas')
         ->where('kelas_id', '=', $this->kelas)
         ->first();
 
         $nama_kelas_aktif = $nama_kelas->nama_kelas;
 
-        DB::select('CALL add_kelasAktif(?, ?, ?, ?, ?, ?)', [$this->kelas_aktif_id, $this->kelas, $this->wali_kelas, $this->tahun_ajaran_aktif, $nama_kelas_aktif , auth()->user()->uuid]);
+        DB::select('CALL add_kelasAktif(?, ?, ?, ?, ?, ?)', [$this->kelas_aktif_id, $this->kelas, $this->wali_kelas, $this->tahun_ajaran_aktif, $nama_kelas_aktif, auth()->user()->uuid]);
         
         // KelasAktif::create([
         //     'kelas_aktif_id' => $this->kelas_aktif_id,
