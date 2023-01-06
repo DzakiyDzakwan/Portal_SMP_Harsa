@@ -24,8 +24,8 @@
                                         <select name="model_id" class="form-select form-control" id="basicSelect"
                                             wire:model.defer="model_id">
                                             <option>Pilih Guru</option>
-                                            @foreach ($guru as $list)
-                                                <option value="{{ $list->model_id }}">{{ $list->nama }}</option>
+                                            @foreach ($listWali as $list)
+                                                <option value="{{ $list['uuid'] }}">{{ $list['nama'] }}</option>
                                             @endforeach
                                         </select>
                                         <div class="form-control-icon">

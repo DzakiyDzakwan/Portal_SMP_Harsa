@@ -12,17 +12,14 @@ class ListWaliKelas extends Component
     public $walis;
 
     protected $listeners = [
-        'waliKelasStore' => 'render',
-        'waliKelasDelete' => 'render'
+        'storeWaliKelas' => 'render',
     ];
 
     public function delete($id)
     {
-        //dd($id);
-        //DB::select('CALL unassigned_wali(?, ?)', [$id, auth()->user()->uuid]);
         DB::table('model_has_roles')->where('model_id', $id)->where('role_id', '=', 5)->delete();
         $this->render();
-        $this->emit('deleteWali');
+        $this->emit('deleteWaliKelas');
         $this->dispatchBrowserEvent('delete-alert');
     }
 

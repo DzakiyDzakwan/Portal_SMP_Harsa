@@ -852,7 +852,7 @@ return new class extends Migration
             START TRANSACTION;
         
             INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES ("5", "App\\\Models\\\User", model_id);
+            VALUES ("5", "App\\\\Models\\\\User", model_id);
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "model_has_roles", NOW());

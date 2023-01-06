@@ -154,13 +154,13 @@
                         </a>
                         <ul class="submenu @if ($menu === 'kelas') active @endif">
                             <li class="submenu-item">
+                                <a href="/guru/wali-kelas">Wali Kelas</a>
+                            </li>
+                            <li class="submenu-item">
                                 <a href="/guru/kelas">Kelas</a>
                             </li>
                             <li class="submenu-item">
                                 <a href="/guru/kelas-aktif">Kelas Aktif</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/wali-kelas">Wali Kelas</a>
                             </li>
                             <li class="submenu-item">
                                 <a href="/guru/roster">Roster</a>
@@ -211,10 +211,10 @@
                         <ul class="submenu @if ($menu === 'ekskul') active @endif">
                             @hasanyrole('kepsek|wakepsek|admin')
                                 <li class="submenu-item">
-                                    <a href="/guru/ekstrakurikuler">Ekstrakurikuler</a>
+                                    <a href="/guru/pembina-ekstrakurikuler">Pembina Ekstrakurikuler</a>
                                 </li>
                                 <li class="submenu-item">
-                                    <a href="/guru/pembina-ekstrakurikuler">Pembina Ekstrakurikuler</a>
+                                    <a href="/guru/ekstrakurikuler">Ekstrakurikuler</a>
                                 </li>
                             @endhasanyrole
                             <li class="submenu-item">
