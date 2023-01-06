@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('alpa')->unsigned()->default(0);
             $table->enum('status', ['lulus', 'gagal', 'ongoing']);
             $table->foreign('siswa')->references('NISN')->on('siswas')->onUpdate('cascade')->onUpdate('cascade');
-            $table->foreign('kelas')->references('kelas_aktif_id')->on('kelas_aktifs')->onUpdate('cascade')->onUpdate('cascade');
+            $table->foreign('kelas')->references('kelas_aktif_id')->on('kelas_aktifs')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -38,6 +38,30 @@
                                 </div>
                             </div>
 
+                             {{-- Nama Kelas --}}
+                             <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="kelas">Nama Kelas</label>
+                                    <div class="position-relative">
+                                        <select name="kelas" class="form-select form-control" id="basicSelect"
+                                            wire:model.defer="kelas">
+                                            <option>Pilih Kelas</option>
+                                            @foreach ($kelasAktif as $k)
+                                                <option value="{{ $k->kelas_id}}">{{ $k->nama_kelas }} - {{ $k->grade }}{{ $k->kelompok_kelas }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-book-fill"></i>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            This is invalid state.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
                             {{-- Wali Kelas --}}
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
@@ -86,17 +110,14 @@
                             </div>
 
                              {{-- Nama Kelas --}}
-                             <div class="col-12">
+                             {{-- <div class="col-12">
                                 <div class="form-group has-icon-left">
-                                    <label for="nama_kelas_aktif">Mata Pelajaran</label>
+                                    <label for="nama_kelas_aktif">Nama Kelas Aktif</label>
                                     <div class="position-relative">
-                                        <select name="nama_kelas_aktif" class="form-select form-control" id="basicSelect"
-                                            wire:model.defer="nama_kelas_aktif">
-                                            <option>Pilih Kelas</option>
-                                            @foreach ($kelasAktif as $k)
-                                                <option value="{{ $k->nama_kelas }} - {{ $k->grade }}{{ $k->kelompok_kelas }}">{{ $k->nama_kelas }} - {{ $k->grade }}{{ $k->kelompok_kelas }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input name="nama_kelas_aktif" type="text"
+                                            class="form-control"
+                                            id="nama_kelas_aktif"
+                                            wire:model.defer="nama_kelas_aktif" disabled/>
                                         <div class="form-control-icon">
                                             <i class="bi bi-book-fill"></i>
                                         </div>
@@ -107,7 +128,7 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> --}}
 
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="button" class="btn btn-light-secondary me-1 mb-1"

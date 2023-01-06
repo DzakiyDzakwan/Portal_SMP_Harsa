@@ -29,7 +29,7 @@ class DashboardController extends Controller
             'ekskul' => Ekstrakurikuler::count(),
         ];
 
-        dd($jumlah);
+        // dd($jumlah);
         $tahunAkademik = DB::table('list_tahun_ajaran')->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
         if($tahunAkademik != null) {
             $tahunAjaranAktif = $tahunAkademik->tahun_ajaran;

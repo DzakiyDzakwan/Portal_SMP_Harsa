@@ -16,7 +16,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $siswa->NISN }}</td>
                 <td>{{ $siswa->nama }}</td>
-                <td>{{ $siswa->nama_kelas }}</td>
+                <td>{{ $siswa->nama_kelas_aktif }}</td>
                 <td>{{ date('d M Y', strtotime($siswa->tanggal_masuk)) }}</td>
                 <td>
                     @if ($siswa->status == 'aktif')

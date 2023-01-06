@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class InfoModalSiswa extends Component
 {
-    public $nama, $nisn, $foto, $nis, $jk, $kelas, $status, $anak_ke, $n_ayah, $p_ayah, $n_ibu, $p_ibu, $alamat_ortu, $telp_ortu, $n_wali, $p_wali, $telp_wali, $prestasi, $prestasi_id, $jenis, $keterangan, $tgl_prestasi;
+    public $user, $nama, $nisn, $foto, $nis, $jk, $kelas, $status, $anak_ke, $n_ayah, $p_ayah, $n_ibu, $p_ibu, $alamat_ortu, $telp_ortu, $n_wali, $p_wali, $telp_wali, $prestasi, $prestasi_id, $jenis, $keterangan, $tgl_prestasi;
 
     protected $listeners = [
         'infoSiswa' => 'showSiswa'
@@ -45,7 +45,7 @@ class InfoModalSiswa extends Component
 
         
         $data1 = Siswa::join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
-        ->join('kelas', 'kelas.kelas_id', '=', 'kontrak_semesters.kelas')
+        ->join('kelas_aktifs', 'kelas_aktifs.kelas_aktif_id', '=', 'kontrak_semesters.kelas')
         ->where('siswas.user', $id)->first();
 
         //profil
@@ -54,7 +54,7 @@ class InfoModalSiswa extends Component
         $this->nisn = $data->NISN;
         $this->nis = $data->NIS;
         $this->jk = $data->jenis_kelamin;
-        $this->kelas = $data1->nama_kelas;
+        $this->kelas = $data1->kelas_awal;
         $this->status = $data->status;
 
         //profil pribadi

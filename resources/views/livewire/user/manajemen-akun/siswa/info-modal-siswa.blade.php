@@ -212,7 +212,7 @@
                                                 <td>{{ $item->keterangan }}</td>
                                                 <td>{{ $item->jenis_prestasi }}</td>
                                                 <td>{{ $item->tanggal_prestasi }}</td>
-                                                <td>{{ $item->nama_kelas }}</td>
+                                                <td>{{ $item->nama_kelas_aktif }}</td>
                                                 <td>
                                                     <div class="modal-danger me-1 mb-1 d-inline-block">
                                                         <button type="button" class="btn btn-sm btn-warning"

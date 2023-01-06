@@ -33,11 +33,11 @@ class ListSiswa extends Component
 
     public function render()
     {
-        $this->siswas = User::withTrashed()->select('siswas.user', 'siswas.NISN', 'siswas.tanggal_masuk', 'siswas.status', 'user_profiles.nama', 'kontrak_semesters.kelas', 'kelas.nama_kelas')
+        $this->siswas = User::withTrashed()->select('siswas.user', 'siswas.NISN', 'siswas.tanggal_masuk', 'siswas.status', 'user_profiles.nama', 'kontrak_semesters.kelas', 'kelas_aktifs.nama_kelas_aktif')
         ->join('siswas', 'siswas.user', '=', 'users.uuid')
         ->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')
         ->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
-        ->join('kelas', 'kelas.kelas_id', '=', 'kontrak_semesters.kelas')->where('kontrak_semesters.tahun_ajaran_aktif', $this->tahun_ajaran_aktif)->where('kontrak_semesters.semester_aktif', $this->semester_aktif)
+        ->join('kelas_aktifs', 'kelas_aktifs.kelas_aktif_id', '=', 'kontrak_semesters.kelas')->where('kontrak_semesters.tahun_ajaran_aktif', $this->tahun_ajaran_aktif)->where('kontrak_semesters.semester_aktif', $this->semester_aktif)
         ->orderBy('siswas.created_at', 'DESC')
         ->get();
 
