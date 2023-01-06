@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth', 'ceklevel']], function(){
             Route::get('/guru/kelas-aktif', 'kelasAktif')->name('kelas-aktif');
             Route::get('/guru/roster', 'roster')->name('roster');
             Route::get('/guru/ekstrakurikuler', 'ekstrakurikuler')->name('ekstrakurikuler');
+            Route::get('/guru/pembina-ekstrakurikuler', 'pembinaEkstrakurikuler')->name('pembina-ekstrakurikuler');
             Route::get('/guru/ekstrakurikuler-siswa', 'ekstrakurikulerSiswa')->name('ekstrakurikuler-siswa');
             Route::get('/guru/nilai-ekstrakurikuler', 'nilaiEkstrakurikuler')->name('nilai-ekstrakurikuler');
             Route::get('/guru/sesi-penilaian', 'sesiPenilaian')->name('sesi-penilaian');

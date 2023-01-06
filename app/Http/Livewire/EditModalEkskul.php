@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class EditModalEkskul extends Component
 {
-    public $data, $nama, $hari, $waktu_mulai, $waktu_akhir, $tempat, $kelas;
+    public $data, $nama, $hari, $waktu_mulai, $waktu_akhir, $tempat, $kelas, $ekstrakurikuler_id;
 
     protected $rules = [
         'nama' => 'required'
