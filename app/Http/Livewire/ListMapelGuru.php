@@ -18,7 +18,7 @@ class ListMapelGuru extends Component
     public function render()
     {
         $this->mapelguru = DB::table('list_mapel_guru')->get();
-        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran-guru..list-mapel-guru');
+        return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran-guru.list-mapel-guru');
     }
 
     public function delete($id)
@@ -27,7 +27,7 @@ class ListMapelGuru extends Component
 
         $this->render();
         $this->emit('deleteMapelGuru');
-        $this->dispatchBrowserEvent('inactive-alert');
+        $this->dispatchBrowserEvent('delete-alert');
     }
 
     public function editMapelGuru($id)

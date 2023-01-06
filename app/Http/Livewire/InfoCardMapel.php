@@ -8,7 +8,7 @@ use App\Models\MapelGuru;
 
 class InfoCardMapel extends Component
 {
-    public $totalMapel, $siswaMapelGuru;
+    public $totalMapel, $totalMapelGuru;
 
     protected $listeners = [
         'mapelStore' => 'render',

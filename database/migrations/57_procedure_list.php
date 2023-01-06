@@ -797,10 +797,10 @@ return new class extends Migration
         //     )
         //     BEGIN
         //         UPDATE kelas SET wali_kelas = NULL, deleted_at = NOW() WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
-            
+
         //         INSERT INTO log_activities(actor, action, at, created_at)
         //         VALUES(actor, "update", "kelas", NOW());
-                
+
         //         DELETE FROM model_has_roles WHERE role_id = "5" AND model_id = guru COLLATE utf8mb4_general_ci;
 
         //         INSERT INTO log_activities(actor, action, at, created_at)
@@ -816,12 +816,12 @@ return new class extends Migration
         //     IN actor CHAR(36)
         // )
         // BEGIN
-        
+
         //     UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
-        
+
         //     INSERT INTO log_activities(actor, action, at, created_at)
         //     VALUES(actor, "update", "kelas", NOW());
-            
+
         //     INSERT INTO model_has_roles(role_id, model_type, model_id)
         //     VALUES (5, "App\\Models\\User", user);
 
@@ -829,7 +829,60 @@ return new class extends Migration
         //     VALUES(actor, "insert", "model_has_roles", NOW());
         // END
         // ');
+
+        DB::unprepared('
+        CREATE PROCEDURE add_walikelas(
+            IN model_id CHAR(36),
+            IN actor CHAR(36)
+        )
+        BEGIN
         
+            DECLARE errno INT;
+            DECLARE uuid CHAR(36);
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+            DECLARE EXIT HANDLER for SQLWARNING
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+        
+            INSERT INTO model_has_roles(role_id, model_type, model_id)
+            VALUES ("5", "App\\\Models\\\User", model_id);
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "insert", "model_has_roles", NOW());
+            COMMIT;
+        END
+        ');
+
+        // DB::unprepared('
+        // CREATE PROCEDURE unassigned_wali(
+        //     IN user INT,
+        //     IN actor CHAR(36)
+        // )
+        // BEGIN
+        //     DECLARE errno INT;
+        //     DECLARE actor CHAR(36);
+        //     DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        //     BEGIN
+        //         ROLLBACK;
+        //     END;
+
+        //     SET actor = UUID();
+
+        //     START TRANSACTION;
+        //     DELETE FROM model_has_roles WHERE modal_id = user and role_id = "5";
+
+        //     INSERT INTO log_activities(actor, action, at, created_at)
+        //     VALUES(actor, "delete", "model_has_roles", NOW());
+
+        //     COMMIT;
+        // END
+        // ');
 
         DB::unprepared('
         CREATE PROCEDURE add_siswa(
@@ -1515,6 +1568,7 @@ BEGIN
         DB::unprepared("DROP PROCEDURE delete_mapelGuru");
         DB::unprepared("DROP PROCEDURE add_kelas");
         DB::unprepared("DROP PROCEDURE update_kelas");
+        DB::unprepared("DROP PROCEDURE add_walikelas");
         // DB::unprepared("DROP PROCEDURE restore_kelas");
         // DB::unprepared("DROP PROCEDURE inactive_kelas");
         // DB::unprepared("DROP PROCEDURE delete_kelas");
