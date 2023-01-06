@@ -17,12 +17,12 @@
                     {{-- Delete Button --}}
                     <div class="modal-danger me-1 mb-1 d-inline-block">
                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#restore{{ $e->id }}">
+                            data-bs-target="#delete{{ $e->id }}">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
                     {{-- Delete Modal --}}
-                    <div class="modal fade text-left" id="restore{{ $e->id }}" tabindex="-1" role="dialog"
+                    <div class="modal fade text-left" id="delete{{ $e->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel130" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                             <div class="modal-content">
@@ -42,7 +42,7 @@
                                         <span class="d-none d-sm-block">Close</span>
                                     </button>
                                     <button class="btn btn-danger ml-1" data-bs-dismiss="modal"
-                                        wire:click="restorePembina('{{ $e->id }}')">
+                                        wire:click="deletePembina('{{ $e->id }}','{{ $e->NUPTK }}')">
                                         <i class="bx bx-check d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Yes</span>
                                     </button>

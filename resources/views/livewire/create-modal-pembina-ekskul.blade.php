@@ -65,9 +65,9 @@
                                         <select name="nama_guru"
                                             class="form-select form-control @error('nama_guru') is-invalid @enderror"
                                             id="basicSelect" wire:model.defer="nama_guru">
-                                            @if (!$guru->isEmpty())
-                                                @foreach ($guru as $gr)
-                                                    <option value="{{ $gr->NUPTK }}">{{ $gr->nama }}</option>
+                                            @if ($listPembina != null)
+                                                @foreach ($listPembina as $gr)
+                                                    <option value="{{ $gr['NUPTK'] }}">{{ $gr['nama'] }}</option>
                                                 @endforeach
                                             @else
                                                 <option>Tidak ada guru yang tersedia</option>

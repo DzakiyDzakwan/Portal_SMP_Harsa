@@ -26,9 +26,8 @@ class ListPembinaEkskul extends Component
     //     $this->emit('editEkskul', $id);
     // }
 
-    public function restorePembina($id) {
-        $pembina = Ekstrakurikuler::where('ekstrakurikuler_id', $id);
-        DB::select('CALL restore_pembina_ekskul(?, ?)', [$id, auth()->user()->uuid]);
+    public function deletePembina($ekskul, $guru) {
+        DB::select('CALL unassign_pembina(?, ?, ?)', [$ekskul, $guru, auth()->user()->uuid]);
         $this->dispatchBrowserEvent('restore-alert');
         $this->dispatchBrowserEvent('restore-modal');
     }
