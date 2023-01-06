@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('kelas_aktifs', function (Blueprint $table) {
             $table->char('kelas_aktif_id', 6)->primary();
-            $table->char('kelas', 6)->nullable();
-            $table->char('wali_kelas', 18)->references('NUPTK')->on('gurus')->onUpdate('cascade')->onDelete('set null');;
+            $table->unsignedBigInteger('kelas')->nullable();
+            $table->char('wali_kelas', 18);
             $table->char('tahun_ajaran_aktif', 9);
             $table->string('nama_kelas_aktif')->unique();
             $table->foreign('kelas')->references('kelas_id')->on('kelas')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('wali_kelas')->references('NUPTK')->on('gurus')->onUpdate('cascade');
             $table->timestamps();
         });
     }

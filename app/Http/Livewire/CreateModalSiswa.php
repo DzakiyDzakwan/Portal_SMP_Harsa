@@ -9,7 +9,7 @@ use App\Models\Kelas;
 
 class CreateModalSiswa extends Component
 {
-    public $kelas, $password, $nama, $nisn, $nis, $tanggal_masuk, $kelas_id, $jenis_kelamin, $tahun_ajaran_aktif, $semester_aktif;
+    public $kelas, $password, $nama, $nisn, $nis, $kelas_awal, $tanggal_masuk, $kelas_aktif, $jenis_kelamin, $tahun_ajaran_aktif, $semester_aktif;
 
     public function store()
     {
@@ -20,8 +20,15 @@ class CreateModalSiswa extends Component
             'tanggal_masuk' => 'required',
         ]);
 
+        $grade = Kelas::select('kelas.grade')
+        ->join('kelas_aktifs', 'kelas_aktifs.kelas', '=', 'kelas.kelas_id')
+        ->where('kelas_aktifs.kelas_aktif_id', '=', $this->kelas_aktif)
+        ->first();
+
+        $g = $grade->grade;
+
         $this->password = Hash::make($this->nis);
-        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$this->nama, $this->nisn, $this->nis, $this->password, $this->tanggal_masuk, $this->kelas_id, $this->tahun_ajaran_aktif, $this->semester_aktif, $this->jenis_kelamin, auth()->user()->uuid]);
+        DB::select('CALL add_siswa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$this->nama, $this->nisn, $this->nis, $this->password, $this->kelas_awal, $this->tanggal_masuk, $this->kelas_aktif, $g, $this->tahun_ajaran_aktif, $this->semester_aktif, $this->jenis_kelamin, auth()->user()->uuid]);
 
         $this->reset();
         $this->emit('siswaStore');
@@ -38,7 +45,7 @@ class CreateModalSiswa extends Component
             $this->tahun_ajaran_aktif = $data->tahun_ajaran;
             $this->semester_aktif = $data->semester;
         }
-        $this->kelas = DB::table('kelas')->get();
+        $this->kelas = DB::table('kelas_aktifs')->get();
         return view('livewire.user.manajemen-akun.siswa.create-modal-siswa');
     }
 }

@@ -667,7 +667,6 @@ return new class extends Migration
 
         DB::unprepared('
             CREATE PROCEDURE add_kelas(
-                IN kelas CHAR(6),
                 IN nama VARCHAR(255),
                 IN urutan CHAR(1),
                 IN kelompok CHAR(1),
@@ -683,8 +682,8 @@ return new class extends Migration
 
                 START TRANSACTION;
             
-                INSERT INTO kelas(kelas_id, nama_kelas, grade, kelompok_kelas, created_at, updated_at)
-                VALUES(kelas, nama, urutan, kelompok, NOW(), NOW());
+                INSERT INTO kelas(nama_kelas, grade, kelompok_kelas, created_at, updated_at)
+                VALUES(nama, urutan, kelompok, NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "kelas", NOW());
@@ -695,7 +694,7 @@ return new class extends Migration
         ');
         DB::unprepared('
             CREATE PROCEDURE delete_kelas(
-                IN kelas CHAR(6),
+                IN kelas INT,
                 IN actor CHAR(36)
             )
             BEGIN
@@ -718,14 +717,14 @@ return new class extends Migration
         ');
         DB::unprepared('
         CREATE PROCEDURE update_kelas(
-            IN kelas CHAR(3),
+            IN kelas INT,
             IN nama VARCHAR(255),
             actor CHAR(36)
         )
         BEGIN
         START TRANSACTION;
     
-        UPDATE kelas SET nama_kelas = nama WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
+        UPDATE kelas SET nama_kelas = nama WHERE kelas_id = kelas;
     
         INSERT INTO log_activities(actor, action, at, created_at)
         VALUES(actor, "update", "kelas", NOW());
@@ -737,6 +736,7 @@ return new class extends Migration
         DB::unprepared('
             CREATE PROCEDURE add_kelasAktif(
                 IN kelas CHAR(6),
+                IN kelas_id INT,
                 IN wali CHAR(18),
                 IN tak CHAR(9),
                 IN nama VARCHAR(255),
@@ -752,8 +752,8 @@ return new class extends Migration
 
                 START TRANSACTION;
             
-                INSERT INTO kelas_aktifs(kelas_aktif_id, wali_kelas, tahun_ajaran_aktif, nama_kelas_aktif, created_at, updated_at)
-                VALUES(kelas, wali, tak, nama, NOW(), NOW());
+                INSERT INTO kelas_aktifs(kelas_aktif_id, kelas, wali_kelas, tahun_ajaran_aktif, nama_kelas_aktif, created_at, updated_at)
+                VALUES(kelas, kelas_id, wali, tak, nama, NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "kelas_aktifs", NOW());
@@ -765,6 +765,7 @@ return new class extends Migration
         DB::unprepared('
         CREATE PROCEDURE update_kelasAktif(
             IN kelas CHAR(6),
+            IN wali CHAR(18),
             actor CHAR(36)
         )
         BEGIN
@@ -782,7 +783,7 @@ return new class extends Migration
         UPDATE kelas_aktifs SET wali_kelas = wali WHERE kelas_aktif_id = kelas COLLATE utf8mb4_general_ci;
     
         INSERT INTO log_activities(actor, action, at, created_at)
-        VALUES(actor, "update", "kelas", NOW());
+        VALUES(actor, "update", "kelas_aktifs", NOW());
     
         COMMIT;
         END
@@ -890,8 +891,10 @@ return new class extends Migration
             IN nisn CHAR(10),
             IN nis CHAR(4),
             IN pass VARCHAR(255),
+            IN kelas_awal CHAR(1),
             IN tgl_masuk DATE,
-            IN kelas_id CHAR(6),
+            IN kelas_aktif CHAR(6),
+            IN grade CHAR(1),
             IN ta CHAR(9),
             IN semester CHAR(6),
             IN jk CHAR(2),
@@ -921,13 +924,13 @@ return new class extends Migration
             VALUES(actor, "insert", "user_profiles", NOW());
         
             INSERT INTO siswas(nisn, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
-            VALUES(nisn, uuid, nis, tgl_masuk, kelas_id, "Aktif",  NOW(), NOW());
+            VALUES(nisn, uuid, nis, tgl_masuk, kelas_awal, "Aktif",  NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "siswas", NOW());
         
             INSERT INTO kontrak_semesters(siswa, kelas, grade, semester_aktif, tahun_ajaran_aktif, status, created_at, updated_at)
-            VALUES(nisn, kelas_id, "7", semester, ta, "ongoing", NOW(), NOW());
+            VALUES(nisn, kelas_aktif, grade, semester, ta, "ongoing", NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "kontrak_semesters", NOW());

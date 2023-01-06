@@ -16,7 +16,7 @@
                     @csrf
                     <div class="form-body modal-body">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="form-group has-icon-left">
                                     <label for="tahun_ajaran_aktif">Tahun Ajaran</label>
                                     <div class="position-relative">
@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="form-group has-icon-left">
                                     <label for="semester_aktif">Semester</label>
                                     <div class="position-relative">
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="form-group has-icon-left">
                                     <label for="password-id-icon">NISN</label>
                                     <div class="position-relative">
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="form-group has-icon-left">
                                     <label for="password-id-icon">NIS</label>
                                     <div class="position-relative">
@@ -113,7 +113,33 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
+                                <div class="form-group has-icon-left">
+                                    <label for="password-id-icon">Kelas Awal</label>
+                                    <div class="position-relative">
+                                        <select name="kelas_awal"
+                                            class="form-select form-control"
+                                            id="basicSelect" wire:model.defer="kelas_awal">
+                                            <option value="">Pilih Kelas</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>
+                                        {{-- <input name="kelas_id" type="text" class="form-control @error('kelas_id') is-invalid @enderror "
+                                            placeholder="Kelas" id="kelas_id" wire:model.defer="kelas_id" /> --}}
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person-video3"></i>
+                                        </div>
+                                        @error('kelas_awal')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
                                 <div class="form-group has-icon-left">
                                     <label for="password-id-icon">Tanggal Masuk</label>
                                     <div class="position-relative">
@@ -135,14 +161,14 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
-                                    <label for="password-id-icon">Kelas</label>
+                                    <label for="password-id-icon">Kelas Aktif</label>
                                     <div class="position-relative">
-                                        <select name="kelas_id"
-                                            class="form-select form-control  @error('kelas_id') is-invalid @enderror"
-                                            id="basicSelect" wire:model.defer="kelas_id">
+                                        <select name="kelas_aktif"
+                                            class="form-select form-control  @error('kelas_aktif') is-invalid @enderror"
+                                            id="basicSelect" wire:model.defer="kelas_aktif">
                                             <option>Pilih Kelas</option>
                                             @foreach ($kelas as $k)
-                                                <option value="{{ $k->kelas_id }}">{{ $k->nama_kelas }}</option>
+                                                <option value="{{ $k->kelas_aktif_id }}">{{ $k->nama_kelas_aktif }}</option>
                                             @endforeach
                                         </select>
                                         {{-- <input name="kelas_id" type="text" class="form-control @error('kelas_id') is-invalid @enderror "
@@ -150,7 +176,7 @@
                                         <div class="form-control-icon">
                                             <i class="bi bi-person-video3"></i>
                                         </div>
-                                        @error('kelas_id')
+                                        @error('kelas_aktif')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}
