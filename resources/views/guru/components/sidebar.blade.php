@@ -210,6 +210,9 @@
                                 <li class="submenu-item">
                                     <a href="/guru/ekstrakurikuler">Ekstrakurikuler</a>
                                 </li>
+                                <li class="submenu-item">
+                                    <a href="/guru/pembina-ekstrakurikuler">Pembina Ekstrakurikuler</a>
+                                </li>
                             @endhasanyrole
                             <li class="submenu-item">
                                 <a href="/guru/ekstrakurikuler-siswa">Ekstrakurikuler Siswa</a>
