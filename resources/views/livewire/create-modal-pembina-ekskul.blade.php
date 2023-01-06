@@ -16,7 +16,7 @@
                     <div class="form-body modal-body">
                         <div class="row">
                             {{-- ID Ekstrakulikuler --}}
-                                        {{-- <input name="id" type="hidden"
+                            {{-- <input name="id" type="hidden"
                                             class="form-control @error('id') is-invalid @enderror "
                                             placeholder="id" id="id" wire:model.defer="id" />
                                         @error('id')
@@ -29,7 +29,7 @@
                             {{-- Nama Ekstrakulikuler --}}
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
-                                    <label for="nama_ekskul">Nama Ekstrakurikuler</label>
+                                    <label for="nama_ekskul">Ekstrakurikuler</label>
                                     <div class="position-relative">
                                         <select name="nama_ekskul"
                                             class="form-select form-control  @error('nama_ekskul') is-invalid
@@ -37,7 +37,8 @@
                                             id="basicSelect" wire:model.defer="nama_ekskul">
                                             @if (!$ekstrakurikuler->isEmpty())
                                                 @foreach ($ekstrakurikuler as $e)
-                                                    <option value="{{ $e->ekstrakurikuler_id }}">{{ $e->nama }}</option>
+                                                    <option value="{{ $e->ekstrakurikuler_id }}">{{ $e->nama }}
+                                                    </option>
                                                 @endforeach
                                             @else
                                                 <option>Tidak ada ekskul yang tersedia</option>
@@ -59,7 +60,7 @@
                             {{-- Nama Guru --}}
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
-                                    <label for="wali">Wali Kelas</label>
+                                    <label for="wali">Pembina</label>
                                     <div class="position-relative">
                                         <select name="nama_guru"
                                             class="form-select form-control @error('nama_guru') is-invalid @enderror"

@@ -255,7 +255,7 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_pembina_ekstrakurikuler AS
-        SELECT e.ekstrakurikuler_id AS id, e.nama AS nama_ekskul, u.nama AS nama_guru
+        SELECT e.ekstrakurikuler_id AS id, e.nama AS ekskul, g.NUPTK, u.nama AS guru
         FROM ekstrakurikulers as e
         JOIN gurus as g ON e.penanggung_jawab = g.NUPTK
         JOIN user_profiles as u ON g.user = u.user;
