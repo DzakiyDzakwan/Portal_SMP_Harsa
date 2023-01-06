@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(KelasAktifTableSeeder::class);
         $this->call(EskstrakurikulerTableSeeder::class);
         $this->call(SiswaTableSeeder::class);
-        /* $this->call(PrestasiTableSeeder::class);
-        $this->call(SesiTableSeeder::class); */
+        // $this->call(PrestasiTableSeeder::class);
+        // $this->call(SesiTableSeeder::class);
     }
 }

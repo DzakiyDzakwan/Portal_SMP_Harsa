@@ -1345,11 +1345,11 @@ CREATE PROCEDURE update_ekstrakurikuler(
         ');
 
         DB::unprepared('
-CREATE PROCEDURE delete_ekstrakurikuler(
-    IN admin CHAR(36),
-    IN ekstrakurikuler CHAR(5)
-    )
-    BEGIN
+        CREATE PROCEDURE delete_ekstrakurikuler(
+        IN admin CHAR(36),
+        IN ekstrakurikuler CHAR(5)
+        )
+        BEGIN
     
         DECLARE errno INT;
         DECLARE admin CHAR(36);
@@ -1368,87 +1368,102 @@ CREATE PROCEDURE delete_ekstrakurikuler(
         
         COMMIT;
 
-            END
+        END
         ');
 
         DB::unprepared('
-        CREATE PROCEDURE add_pembina_ekstrakurikuler(
+        CREATE PROCEDURE assign_pembina(
             IN admin CHAR(36),
-            IN id CHAR(6),
-            IN nama_guru VARCHAR(30)
+            IN ekskul CHAR(6),
+            IN guru CHAR(16)
             )
-            BEGIN
-                DECLARE errno INT;
-                DECLARE uuid CHAR(36);
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
-            
-                SET uuid = UUID();
-            
-                START TRANSACTION;
-                UPDATE ekstrakurikulers SET penanggung_jawab = nama_guru WHERE ekstrakurikuler_id = id COLLATE utf8mb4_general_ci;
-
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "insertpembina", "ekstrakurikulers", NOW());
-
-                INSERT INTO model_has_roles(role_id, model_type, model_id)
-                VALUES ("7", "App\\\\Models\\\\User", uuid);
-
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(actor, "insert", "model_has_roles", NOW());
-                
-                COMMIT;
-            END
-        ');
-        DB::unprepared('
-            CREATE PROCEDURE restore_pembina_ekskul(
-                IN ekstrakurikuler CHAR(36),
-                IN actor CHAR(36)
-            )
-            BEGIN
-                DECLARE errno INT;
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
-                START TRANSACTION;
-
-                UPDATE ekstrakurikulers SET penanggung_jawab = NULL WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
-
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(actor, "delete", "ekstrakurikulers", NOW());
-
-                COMMIT;
-            END
-        ');
-
-        DB::unprepared('
-    CREATE PROCEDURE delete_ekstrakurikuler_siswa(
-    IN admin CHAR(36),
-    IN ekstrakurikuler CHAR(5)
-    )
-    BEGIN
-    
-        DECLARE errno INT;
-        DECLARE admin CHAR(36);
-        DECLARE EXIT HANDLER FOR SQLEXCEPTION
         BEGIN
-            ROLLBACK;
-        END;
-    
-        SET admin = UUID();
-    
-        START TRANSACTION;
-        DELETE FROM ekstrakurikuler_siswas WHERE ekstrakurikuler_siswa_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
 
-        INSERT INTO log_activities(actor, action, at, created_at)
-        VALUES(admin, "delete", "ekstrakurikuler_siswas", NOW());
+            DECLARE uuid_guru CHAR(36);
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+
+            START TRANSACTION;
+
+            SELECT user INTO uuid_guru FROM gurus 
+            WHERE NUPTK = guru COLLATE utf8mb4_general_ci;
+
+            UPDATE ekstrakurikulers SET penanggung_jawab = guru 
+            WHERE ekstrakurikuler_id = ekskul COLLATE utf8mb4_general_ci;
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "ekstrakurikulers", NOW());
+
+            INSERT INTO model_has_roles(role_id, model_type, model_id)
+            VALUES ("7", "App\\\\Models\\\\User", uuid_guru);
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "insert", "model_has_roles", NOW());
+                
+            COMMIT;
+        END
+        ');
+
+
+        DB::unprepared('
+        CREATE PROCEDURE unassign_pembina(
+            IN ekstrakurikuler CHAR(6),
+            IN guru CHAR(16),
+            IN admin CHAR(36)
+        )
+        BEGIN
+            DECLARE errno INT;
+            DECLARE uuid_guru CHAR(36);
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+            START TRANSACTION;
+
+            SELECT user INTO uuid_guru FROM gurus 
+            WHERE NUPTK = guru COLLATE utf8mb4_general_ci;
+
+            UPDATE ekstrakurikulers SET penanggung_jawab = NULL 
+            WHERE ekstrakurikuler_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
+
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "delete", "ekstrakurikulers", NOW());
+
+            DELETE FROM model_has_roles 
+            WHERE model_id = uuid_guru COLLATE utf8mb4_general_ci AND role_id = 7;
+
+            COMMIT;
+         END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE delete_ekstrakurikuler_siswa(
+        IN admin CHAR(36),
+        IN ekstrakurikuler CHAR(5)
+        )
+        BEGIN
         
-        COMMIT;
+            DECLARE errno INT;
+            DECLARE admin CHAR(36);
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            SET admin = UUID();
+        
+            START TRANSACTION;
+            DELETE FROM ekstrakurikuler_siswas WHERE ekstrakurikuler_siswa_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
 
-            END
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "delete", "ekstrakurikuler_siswas", NOW());
+            
+            COMMIT;
+
+        END
         ');
         /*
         DB::unprepared('
@@ -1584,6 +1599,8 @@ BEGIN
         DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE update_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
+        DB::unprepared("DROP PROCEDURE assign_pembina");
+        // DB::unprepared("DROP PROCEDURE unassign_pembina");
         DB::unprepared("DROP PROCEDURE add_pembina_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler_siswa");
         DB::unprepared("DROP PROCEDURE add_roster");

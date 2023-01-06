@@ -20,7 +20,7 @@ class KelasAktif extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function gurus(): BelongsTo
+    public function gurus()
     {
         return $this->belongsTo(Guru::class, 'wali_kelas', 'NUPTK');
     }

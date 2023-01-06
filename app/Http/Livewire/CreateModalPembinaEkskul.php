@@ -4,47 +4,48 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-use App\Models\Guru;
+use App\Models\User;
 use App\Models\Ekstrakurikuler;
 
 class CreateModalPembinaEkskul extends Component
 {
     public $nama_guru, $nama_ekskul;
-
-    protected $rules = [
-        'nama_guru' => 'required'
-    ];
-
-    protected $listeners = [
-        'editPembina' => 'showModal'
-    ];
-
-    public function updated($fields) {
-        $this->validateOnly($fields);
-    }
-
-
     
     public function render()
     {
-        $guru = Guru::select('gurus.NUPTK', 'user_profiles.nama')
-        ->join('users', 'gurus.user', '=', 'users.uuid')
-        ->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')
-        ->join('model_has_roles', 'model_has_roles.model_id', '=', 'user_profiles.user')
-        ->where('model_has_roles.role_id', '=', '4', 'AND', 'model_has_roles.role_id', '!=', '7')
+        $guru = User::join('gurus', 'gurus.user', '=', 'users.uuid')
+        ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
+        ->where('gurus.jabatan', 'guru')
         ->get();
+
+        $listPembina = [];
+
+        foreach ($guru as $item) {
+            if($item->hasRole('guru') && !$item->hasRole('pembina') && !$item->hasRole('wali')) {
+                $listPembina[] = [
+                    "NUPTK" => $item->NUPTK,
+                    "nama" => $item->nama
+                ];
+            }
+        }
         $ekstrakurikuler = DB::table('ekstrakurikulers')->select('ekstrakurikuler_id', 'nama', 'penanggung_jawab' )
-        // ->where('penanggung_jawab', '=', NULL)
+        ->where('penanggung_jawab', NULL)
         ->get();
-        // dd($ekstrakurikuler);
-        // dd($guru, $ekstrakurikuler);
-        return view('livewire.create-modal-pembina-ekskul', compact('guru', 'ekstrakurikuler'));
+
+        if($listPembina != null) {
+            $this->nama_guru = $listPembina[0]["NUPTK"];
+        }
+
+        if (!$ekstrakurikuler->isEmpty()) {
+            $this->nama_ekskul = $ekstrakurikuler[0]->ekstrakurikuler_id;
+        }
+        
+        return view('livewire.create-modal-pembina-ekskul', compact('listPembina', 'ekstrakurikuler'));
     }
 
 
     public function update() {
-        // dd($this);
-        DB::select('CALL add_pembina_ekstrakurikuler(?, ?, ?)', [auth()->user()->uuid, $this->nama_ekskul, $this->nama_guru]);
+        DB::select('CALL assign_pembina(?, ?, ?)', [auth()->user()->uuid, $this->nama_ekskul, $this->nama_guru]);
         $this->render();
         $this->emit('updatePembinaEkskul');
         $this->dispatchBrowserEvent('insert-alert');
