@@ -689,12 +689,6 @@ return new class extends Migration
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "kelas", NOW());
 
-                INSERT INTO model_has_roles(role_id, model_type, model_id)
-                VALUES (5, "App\\\\Models\\\\User", user);
-
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(actor, "insert", "model_has_roles", NOW());
-
                 COMMIT;
             
             END
@@ -771,32 +765,6 @@ return new class extends Migration
         DB::unprepared('
         CREATE PROCEDURE update_kelasAktif(
             IN kelas CHAR(6),
-            IN wali CHAR(18),
-            IN user CHAR(36),
-            IN actor CHAR(36)
-        )
-        BEGIN
-        
-            UPDATE kelas SET deleted_at = NULL, wali_kelas = wali WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
-        
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(actor, "update", "kelas", NOW());
-            
-            INSERT INTO model_has_roles(role_id, model_type, model_id)
-            VALUES (5, "App\\\\Models\\\\User", user);
-
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(actor, "insert", "model_has_roles", NOW());
-        END
-        ');
-
-        DB::unprepared('
-        CREATE PROCEDURE update_kelas(
-            IN kelas CHAR(3),
-            IN nama VARCHAR(255),
-            IN wali CHAR(18),
-            IN user CHAR(36),
-            IN guru CHAR(36),
             actor CHAR(36)
         )
         BEGIN
@@ -816,15 +784,11 @@ return new class extends Migration
         INSERT INTO log_activities(actor, action, at, created_at)
         VALUES(actor, "update", "kelas", NOW());
     
-        INSERT INTO model_has_roles(role_id, model_type, model_id)
-        VALUES (5, "App\\\\Models\\\\User", user);
-    
-        INSERT INTO log_activities(actor, action, at, created_at)
-        VALUES(actor, "insert", "model_has_roles", NOW());
-    
         COMMIT;
         END
         ');
+
+
         // DB::unprepared('
         //     CREATE PROCEDURE inactive_kelas(
         //         IN kelas CHAR(6),
@@ -1497,7 +1461,7 @@ BEGIN
         DB::unprepared("DROP PROCEDURE add_mapelGuru");
         DB::unprepared("DROP PROCEDURE delete_mapelGuru");
         DB::unprepared("DROP PROCEDURE add_kelas");
-        // DB::unprepared("DROP PROCEDURE update_kelas");
+        DB::unprepared("DROP PROCEDURE update_kelas");
         // DB::unprepared("DROP PROCEDURE restore_kelas");
         // DB::unprepared("DROP PROCEDURE inactive_kelas");
         // DB::unprepared("DROP PROCEDURE delete_kelas");

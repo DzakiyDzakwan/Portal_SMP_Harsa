@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class CekLevel
 {
@@ -17,24 +17,9 @@ class CekLevel
      */
     public function handle(Request $request, Closure $next, $guard = null)
     {
-        /* if (Auth::user()->role == $role) {
-            return $next($request);
-        } else {
-            if(Auth::user()->role == 'admin'){
-                return redirect('/');
-            } elseif(Auth::user()->role == 'siswa') {
-                return redirect('/dashboard-siswa');
-            } else {
-                return redirect('/dashboard-guru');
-            }
-        } */
-
-        if(Auth::user()->hasRole(['kepsek', 'wakepsek', 'admin', 'guru'])) {
-            return $next($request);
-        } else {
-            return redirect('/siswa/dashboard');
-        }
-
-        return redirect('/');
+        if(Auth::user()->hasRole('siswa')) {
+            return redirect('/siswa/dashboard');      
+        } 
+        return $next($request);
     }
 }

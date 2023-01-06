@@ -21,7 +21,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_kontraks(kontrak_semester_id, siswa, kelas, semester_aktif, tahun_ajaran_aktif, sakit, izin, alpa, status, action, created_at)
-        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, semester_aktif, tahun_ajaran_aktif, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "insert", NOW());
+        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, NEW.semester_aktif, NEW.tahun_ajaran_aktif, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "insert", NOW());
         END
         ');
 
@@ -31,7 +31,7 @@ return new class extends Migration
         FOR EACH ROW
         BEGIN
         INSERT INTO log_kontraks(kontrak_semester_id, siswa, kelas, semester_aktif, tahun_ajaran_aktif, sakit, izin, alpa, status, action, created_at)
-        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, semester_aktif, tahun_ajaran_aktif, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "update", NOW());
+        VALUES (NEW.kontrak_semester_id, NEW.siswa, NEW.kelas, NEW.semester_aktif, NEW.tahun_ajaran_aktif, NEW.sakit, NEW.izin, NEW.alpa, NEW.status, "update", NOW());
         END
         ');
 

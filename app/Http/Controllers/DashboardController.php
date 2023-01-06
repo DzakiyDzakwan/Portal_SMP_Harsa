@@ -25,9 +25,11 @@ class DashboardController extends Controller
             'guru' => User::withTrashed()->role('guru')->count(),
             'siswa' => User::withTrashed()->role('siswa')->count(),
             'mapel' => Mapel::withTrashed()->count(),
-            'kelas' => Kelas::withTrashed()->count(),
+            'kelas' => Kelas::count(),
             'ekskul' => Ekstrakurikuler::count(),
         ];
+
+        dd($jumlah);
         $tahunAkademik = DB::table('list_tahun_ajaran')->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
         if($tahunAkademik != null) {
             $tahunAjaranAktif = $tahunAkademik->tahun_ajaran;

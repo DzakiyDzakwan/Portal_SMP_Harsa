@@ -25,7 +25,7 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'ceklevel']], function(){
+Route::group(['middleware' => ['auth', 'ceklevel']], function(){
 
     Route::get('/guru/dashboard', [DashboardController::class, 'indexguru'])->name('dashboardGuru');
     Route::get('/profil-guru', [ProfilController::class, 'profilGuru'])->name('profilGuru');
@@ -97,8 +97,8 @@ Route::group(['middleware' => ['auth', 'role:kepsek|wakepsek|admin|guru', 'cekle
 
 });
 
-Route::group(['middleware' => ['auth', 'role:siswa', 'ceklevel']], function(){
-    Route::get('siswa/dashboard', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
+Route::group(['middleware' => ['auth', 'role:siswa']], function(){
+    Route::get('/siswa/dashboard', [DashboardController::class, 'siswa'])->name('dashboardSiswa');
     Route::get('/profil-siswa', [ProfilController::class, 'profilSiswa'])->name('profilSiswa');
     Route::get('/edit-profil-siswa', [ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
     Route::get('/change-password', [ProfilController::class, 'changePassword'])->name('changePassword');
