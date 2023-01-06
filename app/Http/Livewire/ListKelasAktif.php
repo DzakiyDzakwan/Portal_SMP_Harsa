@@ -8,25 +8,23 @@ use Livewire\Component;
 
 class ListKelasAktif extends Component
 {
-    public $kelasAktif;
+    public $kelasAktif, $tahun_ajaran_aktif;
     protected $listeners = [
         'storeKelasAktif' => 'render',
         'updateKelasAktif' => 'render',
         'filter'
     ];
 
-    // public function mount() {
-    //     $data = DB::table('list_tahun_ajaran')->whereRaw('status <> "inaktif" COLLATE utf8mb4_general_ci')->first();
-    //     if($data != null) {
-    //         $this->tahun_ajaran_aktif = $data->tahun_ajaran;
-    //         $this->semester_aktif = $data->semester;
-    //     }
-    // }
+    public function mount() {
+        $data = DB::table('list_tahun_ajaran')->whereRaw('status <> "inaktif" COLLATE utf8mb4_general_ci')->first();
+        if($data != null) {
+            $this->tahun_ajaran_aktif = $data->tahun_ajaran;
+        }
+    }
 
-    // public function filter($data) {
-    //     $this->tahun_ajaran_aktif = $data["tahun_ajaran_aktif"];
-    //     $this->semester_aktif = $data["semester_aktif"];
-    // }
+    public function filter($data) {
+        $this->tahun_ajaran_aktif = $data["tahun_ajaran_aktif"];
+    }
     public function render()
     {
         $this->kelasAktif = DB::table('list_kelas_aktif')

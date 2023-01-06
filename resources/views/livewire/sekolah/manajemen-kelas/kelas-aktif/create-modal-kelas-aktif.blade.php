@@ -43,7 +43,9 @@
                                 <div class="form-group has-icon-left">
                                     <label for="kelas">Nama Kelas</label>
                                     <div class="position-relative">
-                                        <select name="kelas" class="form-select form-control" id="basicSelect"
+                                        <select name="kelas" 
+                                        class="form-select form-control @error('kelas') is-invalid
+                                        @enderror" id="basicSelect"
                                             wire:model.defer="kelas">
                                             <option>Pilih Kelas</option>
                                             @foreach ($kelasAktif as $k)
@@ -53,10 +55,12 @@
                                         <div class="form-control-icon">
                                             <i class="bi bi-book-fill"></i>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            This is invalid state.
-                                        </div>
+                                        @error('kelas')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -67,7 +71,8 @@
                                 <div class="form-group has-icon-left">
                                     <label for="wali_kelas">Wali Kelas</label>
                                     <div class="position-relative">
-                                        <select name="wali_kelas" class="form-select form-control" id="basicSelect"
+                                        <select name="wali_kelas" class="form-select form-control @error('wali_kelas') is-invalid
+                                        @enderror" id="basicSelect"
                                             wire:model.defer="wali_kelas">
                                             <option>Pilih Wali Kelas</option>
                                             @foreach ($gurus as $g)
@@ -77,10 +82,12 @@
                                         <div class="form-control-icon">
                                             <i class="bi bi-book-fill"></i>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            This is invalid state.
-                                        </div>
+                                        @error('wali_kelas')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 

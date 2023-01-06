@@ -16,7 +16,7 @@
                 <td>{{ $r->kelas_aktif_id }}</td>
                 <td>{{ $r->nama }}</td>
                 <td>{{ $r->tahun_ajaran_aktif }}</td>
-                <td>{{ $r->nama_kelas_aktif }}</td>
+                <td>{{ $r->nama_kelas_aktif }} - {{ $r->grade }}{{ $r->kelompok_kelas }}</td>
                 <td>
                     {{-- Update Button --}}
                     <div class="modal-warning me-1 mb-1 d-inline-block">
