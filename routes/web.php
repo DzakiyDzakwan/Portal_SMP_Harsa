@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
             Route::get('/guru/nilai-ekstrakurikuler', 'nilaiEkstrakurikuler')->name('nilai-ekstrakurikuler');
             Route::get('/guru/sesi-penilaian', 'sesiPenilaian')->name('sesi-penilaian');
         });
+
         Route::get('/guru/guru/cetak', [ReportController::class, 'exportGuru'])->name('export-guru');
         Route::get('/guru/siswa/{ta}/{sem}/cetak/', [ReportController::class, 'exportSiswa'])->name('export-siswa');
         Route::get('/guru/kelas-aktif/{ta}/cetak', [ReportController::class, 'exportWaliKelas'])->name('export-wali-kelas');
@@ -89,7 +90,10 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
     });
 
     //Guru
-    Route::group(['middleware' => ['role:kepsek|wakepsek']], function () {
+    Route::group(['middleware' => ['role:guru']], function () {
+        Route::controller(ViewController::class)->group(function () {
+            Route::get('/guru/kelas/{id}', 'kelasGuru')->name('kelas-saya');
+        });
     });
 
     //Wali Kelas

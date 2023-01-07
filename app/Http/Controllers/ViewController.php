@@ -55,14 +55,6 @@ class ViewController extends Controller
         return view('sekolah.tahunakademik', compact('menu'));
     }
 
-    public function kelasSaya()
-    {
-        $menu = 'walikelas';
-        $kelas = DB::table('list_kelas')->where('NUPTK', auth()->user()->gurus->NUPTK)->first();
-
-        return view('sekolah.walikelas', compact('menu', 'kelas'));
-    }
-
     public function mapel()
     {
         $menu = 'manajemenmapel';
@@ -77,6 +69,12 @@ class ViewController extends Controller
         return view('sekolah.mapelguru', compact('menu'));
     }
 
+    public function waliKelas()
+    {
+        $menu = 'sekolah';
+        return view('sekolah.wali', compact('menu'));
+    }
+
     public function kelas()
     {
         $menu = 'sekolah';
@@ -89,24 +87,30 @@ class ViewController extends Controller
         return view('sekolah.kelasaktif', compact('menu'));
     }
 
-    public function waliKelas()
-    {
-        $menu = 'sekolah';
-        return view('sekolah.wali', compact('menu'));
-    }
-
     public function roster()
     {
         $menu = 'kelas';
         //dd('roster');
         return view('sekolah.roster', compact('menu'));
     }
-
+    
     public function sesiPenilaian()
     {
         $menu = 'sekolah';
         //dd('sesi Penilaian');
         return view('sekolah.sesinilai', compact('menu'));
+    }
+
+    public function kelasSaya()
+    {
+        $menu = 'walikelas';
+        $kelas = DB::table('list_kelas')->where('NUPTK', auth()->user()->gurus->NUPTK)->first();
+
+        return view('sekolah.walikelas', compact('menu', 'kelas'));
+    }
+
+    public function kelasGuru($id) {
+        dd($id);
     }
 
     public function ekstrakurikuler()

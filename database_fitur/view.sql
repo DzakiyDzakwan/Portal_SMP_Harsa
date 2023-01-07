@@ -94,12 +94,15 @@ ORDER BY r.hari;
 
 /* List Kelas Guru */
 CREATE VIEW list_kelas_guru AS
-SELECT mg.guru, k.kelas_id, k.grade, k.kelompok_kelas, k.nama_kelas, m.mapel_id, m.nama_mapel
-FROM roster_kelas AS r
-JOIN mapel_gurus AS mg ON r.mapel = mg.mapel_guru_id
+SELECT mg.guru, ka.kelas, ka.nama_kelas_aktif, k.grade, k.kelompok_kelas, m.mapel_id, m.nama_mapel
+FROM rosters AS r
+JOIN mapel_gurus AS mg ON r.mapel_guru = mg.mapel_guru_id
 JOIN mapels AS m ON mg.mapel = m.mapel_id
-JOIN kelas AS k ON r.kelas = k.kelas_id
-GROUP BY r.mapel, r.kelas;
+JOIN kelas_aktifs AS ka ON ka.kelas_aktif_id = r.kelas
+JOIN kelas AS k ON ka.kelas = k.kelas_id
+GROUP BY r.mapel_guru, r.kelas;
+
+SELECT * FROM list_kelas_guru WHERE guru = "3333333333333333";
 
 /* List Tahun Ajaran */ (✅)
 CREATE VIEW list_tahun_ajaran AS

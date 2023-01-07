@@ -32,5 +32,7 @@ class MapelTableSeeder extends Seeder
         DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MP001', 'Seni Budaya', 'B', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
         DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MP002', 'Pendidikan Jasmani, Olahraga dan Kesenian', 'B', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MP003', 'Sejarah', 'B', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }
