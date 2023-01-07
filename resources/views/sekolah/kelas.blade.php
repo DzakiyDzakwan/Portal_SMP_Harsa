@@ -40,10 +40,10 @@
                     {{-- Button Tambah Kelas --}}
                     @livewire('create-modal-kelas')
                 </div>
-                {{-- <div class="form-group"> --}}
+                <div class="form-group">
                     {{-- Button Inactive Kelas --}}
-                    {{-- @livewire('inactive-modal-kelas')
-                </div> --}}
+                    @livewire('inactive-modal-kelas')
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -64,12 +64,12 @@
         const editModal = new bootstrap.Modal('#editModal', {
             keyboard: false
         })
-        // const inactiveModal = new bootstrap.Modal('#inactiveModal', {
-        //     keyboard: false
-        // })
-        // const restoreModal = new bootstrap.Modal('#restoreModal', {
-        //     keyboard: false
-        // })
+        const inactiveModal = new bootstrap.Modal('#inactiveModal', {
+            keyboard: false
+        })
+        const restoreModal = new bootstrap.Modal('#restoreModal', {
+            keyboard: false
+        })
         // const deleteModal = new bootstrap.Modal('#deleteModal', {
         //     keyboard: false
         // })
@@ -80,12 +80,12 @@
         window.addEventListener('edit-modal', event => {
             editModal.toggle();
         });
-        // window.addEventListener('inactive-modal', event => {
-        //     inactiveModal.toggle();
-        // })
-        // window.addEventListener('restore-modal', event => {
-        //     restoreModal.toggle();
-        // })
+        window.addEventListener('inactive-modal', event => {
+            inactiveModal.toggle();
+        })
+        window.addEventListener('restore-modal', event => {
+            restoreModal.toggle();
+        })
         // window.addEventListener('delete-modal', event => {
         //     deleteModal.toggle();
         // })

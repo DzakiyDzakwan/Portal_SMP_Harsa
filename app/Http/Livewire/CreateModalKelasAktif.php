@@ -25,7 +25,8 @@ class CreateModalKelasAktif extends Component
         ->get();
         $data = DB::table('list_tahun_ajaran')->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
         $this->tahun_ajaran_aktif = $data->tahun_ajaran;
-        $this->kelasAktif = DB::table('list_kelas')
+        $this->kelasAktif = DB::table('kelas')
+        ->where('deleted_at', '=', null)
         ->get();
         return view('livewire.sekolah.manajemen-kelas.kelas-aktif.create-modal-kelas-aktif');
     }
@@ -35,13 +36,13 @@ class CreateModalKelasAktif extends Component
             'kelas' => 'required',
             'wali_kelas' => 'required'
         ]);
-        $nama_kelas = Kelas::select('nama_kelas', 'grade', 'kelompok_kelas')
-        ->where('kelas_id', '=', $this->kelas)
-        ->first();
+        // $nama_kelas = Kelas::select('nama_kelas', 'grade', 'kelompok_kelas')
+        // ->where('kelas_id', '=', $this->kelas)
+        // ->first();
 
-        $nama_kelas_aktif = $nama_kelas->nama_kelas;
+        // $nama_kelas_aktif = $nama_kelas->nama_kelas;
 
-        DB::select('CALL add_kelasAktif(?, ?, ?, ?, ?, ?)', [$this->kelas_aktif_id, $this->kelas, $this->wali_kelas, $this->tahun_ajaran_aktif, $nama_kelas_aktif, auth()->user()->uuid]);
+        DB::select('CALL add_kelas_aktif(?, ?, ?, ?)', [$this->kelas, $this->wali_kelas, $this->tahun_ajaran_aktif, auth()->user()->uuid]);
         
         // KelasAktif::create([
         //     'kelas_aktif_id' => $this->kelas_aktif_id,

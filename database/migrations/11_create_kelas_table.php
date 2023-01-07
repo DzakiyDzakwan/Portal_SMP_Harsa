@@ -19,6 +19,7 @@ return new class extends Migration
             $table->char('kelompok_kelas', 1);
             $table->string('nama_kelas')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

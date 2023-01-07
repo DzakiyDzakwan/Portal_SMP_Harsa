@@ -9,9 +9,10 @@ use App\Models\Kelas;
 
 class CreateModalKelas extends Component
 {
-    public $gurus, $grade, $nama_kelas, $kelompok_kelas;
+    public $gurus, $kelas_id, $grade, $nama_kelas, $kelompok_kelas;
 
     protected $rules = [
+        'kelas_id' => 'required|max:6|unique:kelas',
         'nama_kelas' => 'required|unique:kelas',
         'kelompok_kelas' => 'required|min:1',
     ];
@@ -42,11 +43,12 @@ class CreateModalKelas extends Component
 
     public function store() {
         $this->validate([
+            'kelas_id' => 'required|max:6|unique:kelas',
             'nama_kelas' => 'required|unique:kelas',
             'kelompok_kelas' => 'required|min:1'
         ]);
 
-        DB::select('CALL add_kelas(?, ?, ?, ?)', [$this->nama_kelas, $this->grade, $this->kelompok_kelas, auth()->user()->uuid]);
+        DB::select('CALL add_kelas(?, ?, ?, ?, ?)', [$this->kelas_id, $this->nama_kelas, $this->grade, $this->kelompok_kelas, auth()->user()->uuid]);
 
         $this->reset();
         $this->emit('storeKelas');
