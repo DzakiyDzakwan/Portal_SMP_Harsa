@@ -43,7 +43,7 @@ class EditModalKelasAktif extends Component
     }
 
     public function update() {
-        DB::select('CALL update_kelasAktif(?, ?, ?)', [$this->kelas_aktif_id, $this->wali_kelas, auth()->user()->uuid]);
+        DB::select('CALL update_kelas_aktif(?, ?, ?)', [$this->kelas_aktif_id, $this->wali_kelas, auth()->user()->uuid]);
 
         $this->emit('updateKelasAktif');
         $this->dispatchBrowserEvent('update-alert');

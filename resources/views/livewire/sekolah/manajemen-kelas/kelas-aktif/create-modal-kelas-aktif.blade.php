@@ -53,7 +53,7 @@
                                             @endforeach
                                         </select>
                                         <div class="form-control-icon">
-                                            <i class="bi bi-book-fill"></i>
+                                            <i class="bi bi-house-fill"></i>
                                         </div>
                                         @error('kelas')
                                             <div class="invalid-feedback">
@@ -80,7 +80,7 @@
                                             @endforeach
                                         </select>
                                         <div class="form-control-icon">
-                                            <i class="bi bi-book-fill"></i>
+                                            <i class="bi bi-person-workspace"></i>
                                         </div>
                                         @error('wali_kelas')
                                             <div class="invalid-feedback">
@@ -104,7 +104,7 @@
                                             placeholder="Masukkan ID Kelas Aktif" id="tahun_ajaran_aktif"
                                             wire:model.defer="tahun_ajaran_aktif" disabled/>
                                         <div class="form-control-icon">
-                                            <i class="bi bi-gear-wide-connected"></i>
+                                            <i class="bi bi-calendar"></i>
                                         </div>
                                         @error('tahun_ajaran_aktif')
                                             <div class="invalid-feedback">

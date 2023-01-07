@@ -25,14 +25,14 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="modal-danger me-1 mb-1 d-inline-block">
+                        {{-- <div class="modal-danger me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-danger"
                                 wire:click="getDeleteModal('{{ $item->kelas_id }}')">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus">
                                     <i class="bi bi-trash-fill"></i></i>
                                 </div>
                             </button>
-                        </div>
+                        </div> --}}
                     </td>
                 </tr>
             @endforeach

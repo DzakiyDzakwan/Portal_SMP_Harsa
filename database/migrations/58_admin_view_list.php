@@ -116,13 +116,6 @@ return new class extends Migration
         LEFT JOIN user_profiles ON user_profiles.user = gurus.user
         GROUP BY kelas_aktifs.kelas_aktif_id
         ');
-
-        DB::unprepared('
-        CREATE VIEW list_kelas AS
-        SELECT kelas_id, nama_kelas, grade, kelompok_kelas
-        FROM kelas;
-        ');
-
         // DB::unprepared('
         // CREATE VIEW list_assign_wali AS
         // SELECT

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Kelas;
+use Illuminate\Support\Facades\DB;
 
 class InfoCardKelas extends Component
 {
@@ -17,7 +18,9 @@ class InfoCardKelas extends Component
     public function render()
     {
         
-        $this->totalKelas = Kelas::count();
+        $this->totalKelas = DB::table('kelas')
+        ->where('deleted_at', '=', null)
+        ->count();
         return view('livewire.sekolah.manajemen-kelas.kelas.info-card-kelas');
     }
 }
