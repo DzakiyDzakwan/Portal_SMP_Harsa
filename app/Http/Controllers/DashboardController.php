@@ -8,7 +8,6 @@ use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\Prestasi;
 use App\Models\Ekstrakurikuler;
-use App\Models\Prestasi;
 
 
 use Illuminate\Http\Request;
