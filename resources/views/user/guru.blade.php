@@ -43,6 +43,14 @@
                     {{-- Button Inactive --}}
                     @livewire('inactive-modal-guru')
                 </div>
+                <div class="form-group">
+                    {{-- Button Cetak PDF --}}
+                    <a href="{{ route('export-guru') }}">
+                        <button type="button" class="btn btn-sm btn-primary" wire.click="export()">
+                            <i class="bi bi-printer"></i> &nbspPDF
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="card-body">

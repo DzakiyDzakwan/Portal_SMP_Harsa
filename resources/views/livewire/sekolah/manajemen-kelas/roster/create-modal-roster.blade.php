@@ -21,7 +21,7 @@
                                 <div class="form-group has-icon-left">
                                     <label for="kelas">Mata Pelajaran</label>
                                     <div class="position-relative">
-                                        <select name="mapel" class="form-select form-control" id="basicSelect"
+                                        <select name="mapel" class="form-select form-control @error('mapel') is-invalid @enderror " id="basicSelect"
                                             wire:model.defer="mapel">
                                             <option>Pilih mata pelajaran</option>
                                             @foreach ($mapels as $m)
@@ -32,10 +32,6 @@
                                         <div class="form-control-icon">
                                             <i class="bi bi-book-fill"></i>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            This is invalid state.
-                                        </div>
                                     </div>
                                 </div>
 
@@ -45,19 +41,15 @@
                                 <div class="form-group has-icon-left">
                                     <label for="kelas">Kelas</label>
                                     <div class="position-relative">
-                                        <select name="kelas" class="form-select form-control" id="basicSelect"
+                                        <select name="kelas" class="form-select form-control @error('kelas') is-invalid @enderror " id="basicSelect"
                                             wire:model.defer="kelas">
                                             <option>Pilih kelas</option>
                                             @foreach ($kelass as $k)
-                                                <option value="{{ $k->kelas_id }}">{{ $k->nama_kelas }}</option>
+                                                <option value="{{ $k->kelas_aktif_id }}">{{ $k->nama_kelas_aktif }}</option>
                                             @endforeach
                                         </select>
                                         <div class="form-control-icon">
                                             <i class="bi bi-person-video3"></i>
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            This is invalid state.
                                         </div>
                                     </div>
                                 </div>
@@ -68,15 +60,23 @@
                                     <label for="kelas">Tahun Ajaran</label>
                                     <div class="position-relative">
                                         <input name="tahun_ajaran" type="text"
-                                            class="form-control"
-                                            id="tahun_ajaran" placeholder="{{ $tahunAktif }}" wire:model.defer="tahun_ajaran" disabled />
+                                            class="form-control "
+                                            id="tahun_ajaran"
+                                            @if (is_null($data))
+                                                placeholder="-"
+                                            @else
+                                                placeholder="{{ $data->tahun_ajaran }}"
+                                            @endif
+                                            wire:model.defer="tahun_ajaran" disabled />
                                         <div class="form-control-icon">
                                             <i class="bi bi-calendar-week"></i>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            This is invalid state.
-                                        </div>
+                                        @error('tahun_ajaran')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -86,21 +86,23 @@
                                     <label for="semester">Semester</label>
                                     <div class="position-relative">
                                         <input name="semester" type="text"
-                                            class="form-control"
+                                            class="form-control "
                                             id="semester" 
-                                            @if ($semesterAktif == 'ganjil')
-                                                placeholder="Ganjil"
-                                            @else 
-                                                placeholder="Genap"
+                                            @if (is_null($data))
+                                                placeholder="-"
+                                            @else
+                                                placeholder="{{ $data->semester }}"
                                             @endif
                                              wire:model.defer="semester" disabled />
                                         <div class="form-control-icon">
                                             <i class="bi bi-collection"></i>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            This is invalid state.
-                                        </div>
+                                        @error('semester')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -109,15 +111,17 @@
                                 <div class="form-group has-icon-left">
                                     <label for="start">Waktu Mulai</label>
                                     <div class="position-relative">
-                                        <input name="waktu_mulai" type="time" class="form-control"
+                                        <input name="waktu_mulai" type="time" class="form-control @error('waktu_mulai') is-invalid @enderror "
                                             placeholder="Waktu Mulai" id="start" wire:model.defer="waktu_mulai" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-clock-fill"></i>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            This is invalid state.
-                                        </div>
+                                        @error('waktu_mulai')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -126,15 +130,17 @@
                                 <div class="form-group has-icon-left">
                                     <label for="start">Waktu Akhir</label>
                                     <div class="position-relative">
-                                        <input name="waktu_akhir" type="time" class="form-control"
+                                        <input name="waktu_akhir" type="time" class="form-control @error('waktu_akhir') is-invalid @enderror "
                                             placeholder="Waktu Akhir" id="end" wire:model.defer="waktu_akhir" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-clock-fill"></i>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            This is invalid state.
-                                        </div>
+                                        @error('waktu_akhir')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +149,7 @@
                                 <div class="form-group has-icon-left">
                                     <label for="hari">Hari</label>
                                     <div class="position-relative">
-                                        <select name="hari" class="form-select form-control" id="basicSelect"
+                                        <select name="hari" class="form-select form-control @error('hari') is-invalid @enderror " id="basicSelect"
                                             wire:model.defer="hari">
                                             <option value="">Pilih Hari</option>
                                             <option value="senin">Senin</option>
@@ -156,10 +162,6 @@
                                         <div class="form-control-icon">
                                             <i class="bi bi-calendar2-day"></i>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            This is invalid state.
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +172,7 @@
                                     <i class="bx bx-x d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Close</span>
                                 </button>
-                                <button type="submit" class="btn btn-success me-1 mb-1" data-bs-dismiss="modal">
+                                <button type="submit" class="btn btn-success me-1 mb-1">
                                     Simpan
                                 </button>
                             </div>
