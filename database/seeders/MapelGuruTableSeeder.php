@@ -15,8 +15,12 @@ class MapelGuruTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::select('CALL add_mapelGuru(?, ?, ?)', ['MTK01', '3333333333333333', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
-        DB::select('CALL add_mapelGuru(?, ?, ?)', ['BIO01', '4444444444444444', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
-        DB::select('CALL add_mapelGuru(?, ?, ?)', ['SEJ01', '5555555555555555', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapelGuru(?, ?, ?)', ['MW001', '3333333333333333', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapelGuru(?, ?, ?)', ['MW002', '4444444444444444', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapelGuru(?, ?, ?)', ['MW003', '5555555555555555', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapelGuru(?, ?, ?)', ['MW004', '6666666666666666', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapelGuru(?, ?, ?)', ['MW005', '7777777777777777', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapelGuru(?, ?, ?)', ['MP001', '8888888888888888', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapelGuru(?, ?, ?)', ['MP002', '8888888888888888', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }

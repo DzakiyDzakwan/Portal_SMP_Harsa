@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kontrak_semesters', function (Blueprint $table) {
             $table->id('kontrak_semester_id');
             $table->char('siswa', 10);
-            $table->char('kelas', 6);
+            $table->uuid('kelas');
             $table->char('grade', 1);
             $table->enum('semester_aktif', ['Ganjil', 'Genap']);
             $table->char('tahun_ajaran_aktif', 9);

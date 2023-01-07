@@ -22,5 +22,7 @@ class TahunAjaranTableSeeder extends Seeder
         DB::select('CALL add_tahun_ajaran(?, ?, ?, ?, ?)', ['2021/2022', 'genap', '2022-01-03 00:00:00', '2022-05-28 23:59:00', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
         DB::select('CALL add_tahun_ajaran(?, ?, ?, ?, ?)', ['2022/2023', 'ganjil', '2022-06-06 00:00:00', '2022-12-31 23:59:00', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_tahun_ajaran(?, ?, ?, ?, ?)', ['2022/2023', 'genap', '2023-01-01 00:00:00', '2023-06-01 23:59:00', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }

@@ -15,19 +15,22 @@ class MapelTableSeeder extends Seeder
      */
     public function run()
     {
+        //Mata Pelajaran Wajib (MW)
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MW001', 'Pendidikan Agama dan Budi Pekerti', 'A', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['BI001', 'Bahasa Indonesia', 'A', '75', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MW002', 'Pendidikan Pancasila dan Kewarganegaraan', 'A', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MTK01', 'Matematika', 'A', '80', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MW003', 'Bahasa Indonesia', 'A', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['FIS01', 'Fisika', 'A', '80', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MW004', 'Matematika', 'A', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['KIM01', 'Kimia', 'A', '75', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MW005', 'IPA', 'A', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['BIO01', 'Biologi', 'A', '75', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MW006', 'IPS', 'A', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MTK02', 'Matematika', 'B', '80', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        //Mata Pelajaran Peminatan (MP)
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MP', 'Seni Budaya', 'B', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['SEJ01', 'Sejarah', 'B', '70', 'KKN 2006', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_mapel(?, ?, ?, ?, ? ,?)', ['MP', 'Pendidikan Jasmani, Olahraga dan Kesenian', 'B', '81', 'Kurikulum Merdeka', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
     }
 }

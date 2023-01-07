@@ -15,22 +15,23 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-        //Show
-        Permission::create(['name' => 'show users']);
-        Permission::create(['name' => 'show inactive users']);
-        Permission::create(['name' => 'show roles']);
-        Permission::create(['name' => 'show permissions']);
-        Permission::create(['name' => 'show admins']);
-        Permission::create(['name' => 'show siswas']);
-        Permission::create(['name' => 'show gurus']);
-        Permission::create(['name' => 'show tahuns']);
-        Permission::create(['name' => 'show mapels']);
-        Permission::create(['name' => 'show mapel gurus']);
-        Permission::create(['name' => 'show kelas']);
-        Permission::create(['name' => 'show rosters']);
-        Permission::create(['name' => 'show ekstrakurikulers']);
-        Permission::create(['name' => 'show ekstrakurikuler siswas']);
-        Permission::create(['name' => 'show sesi penilaian']);
+        //Menu
+        Permission::create(['name' => 'menu users']);
+        Permission::create(['name' => 'menu inactive users']);
+        Permission::create(['name' => 'menu roles']);
+        Permission::create(['name' => 'menu permissions']);
+        Permission::create(['name' => 'menu admins']);
+        Permission::create(['name' => 'menu siswas']);
+        Permission::create(['name' => 'menu gurus']);
+        Permission::create(['name' => 'menu tahuns']);
+        Permission::create(['name' => 'menu mapels']);
+        Permission::create(['name' => 'menu mapel gurus']);
+        Permission::create(['name' => 'menu kelas']);
+        Permission::create(['name' => 'menu rosters']);
+        Permission::create(['name' => 'menu ekstrakurikulers']);
+        Permission::create(['name' => 'menu ekstrakurikuler siswas']);
+        Permission::create(['name' => 'menu sesi penilaian']);
+        Permission::create(['name' => 'menu log']);
 
         //Create
         Permission::create(['name' => 'create roles']);
@@ -41,8 +42,11 @@ class PermissionTableSeeder extends Seeder
         Permission::create(['name' => 'create tahuns']);
         Permission::create(['name' => 'create mapelss']);
         Permission::create(['name' => 'create mapel gurus']);
-        Permission::create(['name' => 'create kelass']);
+        Permission::create(['name' => 'create kelas']);
+        Permission::create(['name' => 'create wali']);
+        Permission::create(['name' => 'create kelas aktif']);
         Permission::create(['name' => 'create rosters']);
+        Permission::create(['name' => 'create pembina']);
         Permission::create(['name' => 'create ekstrakurikulers']);
         Permission::create(['name' => 'create ekstrakurikuler siswas']);
         Permission::create(['name' => 'create sesi penilaians']);

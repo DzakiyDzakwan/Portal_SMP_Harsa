@@ -402,52 +402,54 @@ DELIMITER;
 --Registrasi Siswa (✅)
 DELIMITER ?
 CREATE PROCEDURE add_siswa(
-    IN nama VARCHAR(255),
-    IN nisn CHAR(10),
-    IN nis CHAR(4),
-    IN pass VARCHAR(255),
-    IN tgl_masuk DATE,
-    IN kelas_id CHAR(6),
-    IN ta CHAR(9),
-    IN semester CHAR(6),
-    IN jk CHAR(2),
-    IN actor CHAR(36)
-)
-BEGIN
-
-    DECLARE uuid CHAR(36);
-    SET uuid = UUID();
-
-    INSERT INTO users(uuid, username, password, created_at, updated_at) 
-    VALUES (uuid, nis, pass, NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "users", NOW());
-
-    INSERT INTO model_has_roles(role_id, model_type, model_id)
-    VALUES ("5", "App\\Models\\User", uuid);
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "model_has_roles", NOW());
-
-    INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
-    VALUES (uuid, nama, jk, NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "user_profiles", NOW());
-
-    INSERT INTO siswas(nisn, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
-    VALUES(nisn, uuid, nis, tgl_masuk, kelas_id, "Aktif",  NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "siswas", NOW());
-
-    INSERT INTO kontrak_semesters(siswa, kelas, grade, semester_aktif, tahun_ajaran_aktif, status, created_at, updated_at)
-    VALUES(nisn, kelas_id, "7", semester, ta, "ongoing", NOW(), NOW());
-
-    INSERT INTO log_activities(actor, action, at, created_at)
-    VALUES(actor, "insert", "kontrak_semesters", NOW());
-END?
+            IN nama VARCHAR(255),
+            IN nisn CHAR(10),
+            IN nis CHAR(4),
+            IN pass VARCHAR(255),
+            IN kelas_awal CHAR(1),
+            IN tgl_masuk DATE,
+            IN kelas_aktif CHAR(6),
+            IN grade CHAR(1),
+            IN ta CHAR(9),
+            IN semester CHAR(6),
+            IN jk CHAR(2),
+            IN actor CHAR(36)
+        )
+        BEGIN
+        
+            DECLARE uuid CHAR(36);
+            SET uuid = UUID();
+        
+            INSERT INTO users(uuid, username, password, created_at, updated_at) 
+            VALUES (uuid, nis, pass, NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "insert", "users", NOW());
+        
+            INSERT INTO model_has_roles(role_id, model_type, model_id)
+            VALUES ("6", "App\\\\Models\\\\User", uuid);
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "insert", "model_has_roles", NOW());
+        
+            INSERT INTO user_profiles(user, nama, jenis_kelamin, created_at, updated_at)
+            VALUES (uuid, nama, jk, NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "insert", "user_profiles", NOW());
+        
+            INSERT INTO siswas(nisn, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
+            VALUES(nisn, uuid, nis, tgl_masuk, kelas_awal, "Aktif",  NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "insert", "siswas", NOW());
+        
+            INSERT INTO kontrak_semesters(siswa, kelas, grade, semester_aktif, tahun_ajaran_aktif, status, created_at, updated_at)
+            VALUES(nisn, kelas_aktif, grade, semester, ta, "ongoing", NOW(), NOW());
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(actor, "insert", "kontrak_semesters", NOW());
+        END?
 DELIMITER ;
 
 --Update Siswa (✅)

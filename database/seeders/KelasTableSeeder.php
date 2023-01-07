@@ -15,9 +15,11 @@ class KelasTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::select('CALL add_kelas(?, ?, ?, ?)', ['Ibnu Sina', '7', 'A', '10afab12-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_kelas(?, ?, ?, ?, ?)', ['KLS001', 'Ibnu Sina', '7', 'A', '10afab12-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_kelas(?, ?, ?, ?)', ['Ibnu Rusyd', '7', 'B', '10afab12-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_kelas(?, ?, ?, ?, ?)', ['KLS002', 'Salman Alfarizi', '7', 'B', '10afab12-75d2-11ed-9489-f875a4fd08d6']);
+
+        DB::select('CALL add_kelas(?, ?, ?, ?, ?)', ['KLS003', 'Abu Bakar', '7', 'C', '10afab12-75d2-11ed-9489-f875a4fd08d6']);
 
     }
 }

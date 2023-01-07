@@ -12,8 +12,8 @@ class CreateModalKelasAktif extends Component
 {
     public $gurus, $kelasAktif, $kelas_aktif_id, $wali_kelas, $tahun_ajaran_aktif, $kelas;
     protected $rules = [
-        'kelas' => 'required|unique:kelas_aktifs',
-        'wali_kelas' => 'required|unique:kelas_aktifs'
+        'kelas' => 'required',
+        'wali_kelas' => 'required'
     ];
     public function render()
     {
@@ -32,8 +32,8 @@ class CreateModalKelasAktif extends Component
     public function store()
     {
         $this->validate([
-            'kelas' => 'required|unique:kelas_aktifs',
-            'wali_kelas' => 'required|unique:kelas_aktifs'
+            'kelas' => 'required',
+            'wali_kelas' => 'required'
         ]);
         $nama_kelas = Kelas::select('nama_kelas', 'grade', 'kelompok_kelas')
         ->where('kelas_id', '=', $this->kelas)

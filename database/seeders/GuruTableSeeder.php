@@ -48,7 +48,7 @@ class GuruTableSeeder extends Seeder
             'uuid' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
             'username' => '3333333333333333',
             'password' => Hash::make('3333333333333333')
-        ])->assignRole('guru');
+        ])->assignRole(['guru', 'wali']);
 
         Guru::create([
             'NUPTK' => '3333333333333333',
@@ -68,7 +68,7 @@ class GuruTableSeeder extends Seeder
             'uuid' => '58f5ab31-75d2-11ed-9489-g907a4fd08d6',
             'username' => '4444444444444444',
             'password' => Hash::make('4444444444444444')
-        ])->assignRole('guru');
+        ])->assignRole(['guru', 'wali']);
 
         Guru::create([
             'NUPTK' => '4444444444444444',

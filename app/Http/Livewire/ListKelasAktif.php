@@ -23,11 +23,11 @@ class ListKelasAktif extends Component
     }
 
     public function filter($data) {
-        $this->tahun_ajaran_aktif = $data["tahun_ajaran_aktif"];
+        $this->tahun_ajaran_aktif = $data;
     }
     public function render()
     {
-        $this->kelasAktif = DB::table('list_kelas_aktif')
+        $this->kelasAktif = DB::table('list_kelas_aktif')->where('tahun_ajaran_aktif', $this->tahun_ajaran_aktif)
         ->get();
         return view('livewire.sekolah.manajemen-kelas.kelas-aktif.list-kelas-aktif');
     }

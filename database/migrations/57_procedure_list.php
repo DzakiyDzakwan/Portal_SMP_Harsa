@@ -667,6 +667,7 @@ return new class extends Migration
 
         DB::unprepared('
             CREATE PROCEDURE add_kelas(
+                IN kelas_id CHAR(6),
                 IN nama VARCHAR(255),
                 IN urutan CHAR(1),
                 IN kelompok CHAR(1),
@@ -682,8 +683,8 @@ return new class extends Migration
 
                 START TRANSACTION;
             
-                INSERT INTO kelas(nama_kelas, grade, kelompok_kelas, created_at, updated_at)
-                VALUES(nama, urutan, kelompok, NOW(), NOW());
+                INSERT INTO kelas(kelas_id, nama_kelas, grade, kelompok_kelas, created_at, updated_at)
+                VALUES(kelas_id, nama, urutan, kelompok, NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "kelas", NOW());
@@ -734,26 +735,27 @@ return new class extends Migration
         ');
 
         DB::unprepared('
-            CREATE PROCEDURE add_kelasAktif(
+            CREATE PROCEDURE add_kelas_aktif(
                 IN kelas CHAR(6),
-                IN kelas_id INT,
                 IN wali CHAR(18),
-                IN tak CHAR(9),
-                IN nama VARCHAR(255),
-                actor CHAR(36)
+                IN ta CHAR(9),
+                IN admin CHAR(36)
             )
             BEGIN
 
                 DECLARE errno INT;
+                DECLARE nama_kelas_aktif VARCHAR(255);
                 DECLARE EXIT HANDLER FOR SQLEXCEPTION
                     BEGIN
                         ROLLBACK;
                     END;
 
                 START TRANSACTION;
+
+                SELECT nama_kelas INTO nama_kelas_aktif FROM kelas WHERE kelas_id = kelas COLLATE utf8mb4_general_ci;
             
                 INSERT INTO kelas_aktifs(kelas_aktif_id, kelas, wali_kelas, tahun_ajaran_aktif, nama_kelas_aktif, created_at, updated_at)
-                VALUES(kelas, kelas_id, wali, tak, nama, NOW(), NOW());
+                VALUES(UUID(), kelas, wali, ta, nama_kelas_aktif, NOW(), NOW());
             
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "kelas_aktifs", NOW());
@@ -763,7 +765,7 @@ return new class extends Migration
             END
         ');
         DB::unprepared('
-        CREATE PROCEDURE update_kelasAktif(
+        CREATE PROCEDURE update_kelas_aktif(
             IN kelas CHAR(6),
             IN wali CHAR(18),
             actor CHAR(36)
@@ -891,18 +893,18 @@ return new class extends Migration
             IN nisn CHAR(10),
             IN nis CHAR(4),
             IN pass VARCHAR(255),
-            IN kelas_awal CHAR(1),
             IN tgl_masuk DATE,
-            IN kelas_aktif CHAR(6),
-            IN grade CHAR(1),
             IN ta CHAR(9),
+            IN kelas_aktif CHAR(36),
+            IN kelas_awal CHAR(2),
             IN semester CHAR(6),
             IN jk CHAR(2),
             IN actor CHAR(36)
         )
         BEGIN
-        
+
             DECLARE uuid CHAR(36);
+
             SET uuid = UUID();
         
             INSERT INTO users(uuid, username, password, created_at, updated_at) 
@@ -924,7 +926,7 @@ return new class extends Migration
             VALUES(actor, "insert", "user_profiles", NOW());
         
             INSERT INTO siswas(nisn, user, nis, tanggal_masuk, kelas_awal, status, created_at, updated_at)
-            VALUES(nisn, uuid, nis, tgl_masuk, kelas_awal, "Aktif",  NOW(), NOW());
+            VALUES(nisn, uuid, nis, tgl_masuk, kelas_awal, "aktif",  NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "siswas", NOW());
@@ -996,7 +998,7 @@ return new class extends Migration
         DB::unprepared('
             CREATE PROCEDURE add_roster(
                 IN mapel INT,
-                IN kelas CHAR(3),
+                IN kelas_aktif CHAR(36),
                 IN tahun_ajaran CHAR(9),
                 IN semester CHAR(6),
                 IN waktu_mulai TIME,
@@ -1078,6 +1080,78 @@ return new class extends Migration
             END
         ');
 
+        DB::unprepared('
+        CREATE PROCEDURE add_prestasi(
+            IN nisn CHAR(10),
+            IN jenis VARCHAR(12),
+            IN ket TEXT,
+            IN tgl DATE,
+            IN admin CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+            
+                START TRANSACTION;
+                INSERT INTO prestasis(siswa, jenis_prestasi, keterangan, tanggal_prestasi)
+                VALUES(nisn, jenis, ket, tgl);
+            
+                 INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "insert", "prestasis", NOW());
+                COMMIT;
+            END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE update_prestasi(
+            IN prestasi INT,
+            IN jenis VARCHAR(12),
+            IN ket TEXT,
+            IN tgl DATE,
+            IN admin CHAR(36)
+        )
+        BEGIN
+            DECLARE errno INT;
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            START TRANSACTION;
+            UPDATE prestasis SET jenis_prestasi = jenis, keterangan = ket, tanggal_prestasi = tgl WHERE prestasi_id = prestasi;
+        
+            INSERT INTO log_activities(actor, action, at, created_at)
+            VALUES(admin, "update", "prestasis", NOW());
+        
+            COMMIT;
+        END
+        ');
+
+        DB::unprepared('
+        CREATE PROCEDURE delete_prestasi(
+            IN prestasi INT,
+            IN admin CHAR(36)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+            
+                START TRANSACTION;
+                DELETE FROM prestasis WHERE prestasi_id = prestasi;
+            
+                 INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "delete", "prestasis", NOW());
+                
+                COMMIT;
+            END
+        ');
+
         /*
         DB::unprepared('
         CREATE PROCEDURE update_kelas(
@@ -1155,77 +1229,9 @@ return new class extends Migration
             END
         ');
 
-        DB::unprepared('
-        CREATE PROCEDURE add_prestasi(
-            IN nisn CHAR(10),
-            IN jenis VARCHAR(12),
-            IN ket TEXT,
-            IN tgl DATE,
-            IN admin CHAR(36)
-            )
-            BEGIN
-                DECLARE errno INT;
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
-            
-                START TRANSACTION;
-                INSERT INTO prestasis(siswa, jenis_prestasi, keterangan, tanggal_prestasi)
-                VALUES(nisn, jenis, ket, tgl);
-            
-                 INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "insert", "prestasis", NOW());
-                COMMIT;
-            END
-        ');
+        
 
-        DB::unprepared('
-        CREATE PROCEDURE update_prestasi(
-            IN prestasi INT,
-            IN jenis VARCHAR(12),
-            IN ket TEXT,
-            IN tgl DATE,
-            IN admin CHAR(36)
-        )
-        BEGIN
-            DECLARE errno INT;
-            DECLARE EXIT HANDLER FOR SQLEXCEPTION
-            BEGIN
-                ROLLBACK;
-            END;
-        
-            START TRANSACTION;
-            UPDATE prestasis SET jenis_prestasi = jenis, keterangan = ket, tanggal_prestasi = tgl WHERE prestasi_id = prestasi;
-        
-            INSERT INTO log_activities(actor, action, at, created_at)
-            VALUES(admin, "update", "prestasis", NOW());
-        
-            COMMIT;
-        END
-        ');
-
-        DB::unprepared('
-        CREATE PROCEDURE delete_prestasi(
-            IN prestasi INT,
-            IN admin CHAR(36)
-            )
-            BEGIN
-                DECLARE errno INT;
-                DECLARE EXIT HANDLER FOR SQLEXCEPTION
-                BEGIN
-                    ROLLBACK;
-                END;
-            
-                START TRANSACTION;
-                DELETE FROM prestasis WHERE prestasi_id = prestasi;
-            
-                 INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(admin, "delete", "prestasis", NOW());
-                
-                COMMIT;
-            END
-        '); */
+         */
 
         DB::unprepared('
         CREATE PROCEDURE add_sesi(
@@ -1591,9 +1597,6 @@ BEGIN
         // DB::unprepared("DROP PROCEDURE inactive_kelas");
         // DB::unprepared("DROP PROCEDURE delete_kelas");
         // DB::unprepared("DROP PROCEDURE delete_siswa");
-        // DB::unprepared("DROP PROCEDURE add_prestasi");
-        // DB::unprepared("DROP PROCEDURE delete_prestasi");
-        // DB::unprepared("DROP PROCEDURE update_prestasi");
         // DB::unprepared("DROP PROCEDURE add_nilai");
         // DB::unprepared("DROP PROCEDURE add_sesi");
         DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
@@ -1601,10 +1604,12 @@ BEGIN
         DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE assign_pembina");
         // DB::unprepared("DROP PROCEDURE unassign_pembina");
-        DB::unprepared("DROP PROCEDURE add_pembina_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler_siswa");
         DB::unprepared("DROP PROCEDURE add_roster");
         DB::unprepared("DROP PROCEDURE update_roster");
         DB::unprepared("DROP PROCEDURE delete_roster");
+        DB::unprepared("DROP PROCEDURE add_prestasi");
+        DB::unprepared("DROP PROCEDURE delete_prestasi");
+        DB::unprepared("DROP PROCEDURE update_prestasi");
     }
 };

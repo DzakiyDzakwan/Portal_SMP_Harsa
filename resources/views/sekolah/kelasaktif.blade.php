@@ -5,58 +5,53 @@
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{asset('assets/extensions/simple-datatables/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/pages/simple-datatables.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/simple-datatables.css') }}">
     @livewireStyles
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>Data Kelas Aktif</h3>
-    </div>
-    <div class="col-12 col-md-6 order-md-2 order-first">
-        <nav
-            aria-label="breadcrumb"
-            class="breadcrumb-header float-start float-lg-end"
-        >
-            <ol class="breadcrumb">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h3>Data Kelas Aktif</h3>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                <ol class="breadcrumb">
 
                     <a href="/">Dashboard </a>
-                </li>
-                
-                <li class="breadcrumb-item active" aria-current="page">
-                    
-                </li>
+                    </li>
 
-                <li class="breadcrumb-item active" aria-current="page">
-                    Kelas Aktif
-                </li>
-            </ol>
-        </nav>
-    </div>
-</div>
+                    <li class="breadcrumb-item active" aria-current="page">
 
-@livewire('filter-card-tahun')
+                    </li>
 
-{{-- List Kelas Aktif --}}
-<div class="card">
-    <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-        <h5>List Kelas Aktif</h5>
-        <div class="form-group">
-            @livewire('create-modal-kelas-aktif')
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Kelas Aktif
+                    </li>
+                </ol>
+            </nav>
         </div>
     </div>
-    <div class="card-body">
-        @livewire('list-kelas-aktif')
+
+    @livewire('filter-kelas-aktif')
+
+    {{-- List Kelas Aktif --}}
+    <div class="card">
+        <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+            <h5>List Kelas Aktif</h5>
+            <div class="form-group">
+                @livewire('create-modal-kelas-aktif')
+            </div>
+        </div>
+        <div class="card-body">
+            @livewire('list-kelas-aktif')
+        </div>
     </div>
-</div>
 
-@livewire('edit-modal-kelas-aktif')
+    @livewire('edit-modal-kelas-aktif')
 
-@livewire('alert-kelas')
-
-
+    @livewire('alert-kelas')
 @endsection
 
 @section('script')
@@ -129,6 +124,6 @@
         })
     </script>
     @livewireScripts
-    <script src="{{asset('assets/extensions/simple-datatables/umd/simple-datatables.js')}}"></script>
-    <script src="{{asset('assets/js/pages/simple-datatables.js')}}"></script>
+    <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/simple-datatables.js') }}"></script>
 @endsection

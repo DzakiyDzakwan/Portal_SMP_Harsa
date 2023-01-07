@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('rosters', function (Blueprint $table) {
             $table->id('roster_id');
             $table->unsignedBigInteger('mapel_guru');
-            $table->char('kelas', 6);
+            $table->uuid('kelas');
             $table->char('tahun_ajaran_aktif', 9);
             $table->enum('semester_aktif', ['ganjil', 'genap']);
             $table->time('waktu_mulai');
