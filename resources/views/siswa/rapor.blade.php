@@ -1,4 +1,4 @@
-@extends('siswa.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Laporan Hasil Pembelajaran</title>
@@ -37,10 +37,10 @@
 
     <div class="row">
         {{-- Pengetahuan --}}
-        @livewire('list-table-pengetahuan', ['grade' => $grade])
+        {{-- @livewire('list-table-pengetahuan', ['grade' => $grade]) --}}
 
         {{-- Keterampilan --}}
-        @livewire('list-table-keterampilan', ['grade' => $grade])
+        {{-- @livewire('list-table-keterampilan', ['grade' => $grade]) --}}
     </div>
 @endsection
 

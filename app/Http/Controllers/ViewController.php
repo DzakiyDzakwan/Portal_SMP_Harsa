@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\KontrakSemester;
+use Illuminate\Support\Facades\Auth;
 
 class ViewController extends Controller
 {
@@ -130,5 +132,20 @@ class ViewController extends Controller
         $menu = 'sekolah';
         dd('nilai Ekstrakurikuler');
         return view('sekolah.nilai_ekskul', compact('menu'));
+    }
+
+    public function rapotSiswa($grade)
+    {
+        $kontrak = KontrakSemester::where('grade', $grade)->where('siswa', Auth::user()->siswas->NISN)->get();
+        /* $kontrak = DB::table('kontrak_semesters')
+            ->join('siswas', 'siswas.NISN', '=', 'kontrak_semesters.siswa')
+            ->join('nilais', 'nilais.kontrak_siswa', '=', 'kontrak_semesters.kontrak_semester_id')
+            ->join('sesi_penilaians', 'sesi_penilaians.sesi_id', '=', 'nilais.sesi')
+            ->join('mapels', 'mapels.mapel_id', '=', 'nilais.mapel')
+            ->where('siswas.user', Auth::user()->uuid)
+            ->get(); */
+        // dd($kontrak);
+        $menu = 'rapor';
+        return view('siswa.rapor', compact('menu', 'kontrak', 'grade'));
     }
 }
