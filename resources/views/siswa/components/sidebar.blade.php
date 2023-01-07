@@ -45,7 +45,7 @@
 
                 {{-- Dashboard --}}
                 <li class="sidebar-item @if ($menu === 'dashboard') active @endif">
-                    <a href="/dashboard-siswa" class="sidebar-link">
+                    <a href="/siswa/dashboard" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
