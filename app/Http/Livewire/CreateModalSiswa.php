@@ -15,7 +15,7 @@ class CreateModalSiswa extends Component
     {
         $this->validate([
             'nama' => 'required',
-            'nisn' => 'required|max:10',
+            'nisn' => 'required|max:16',
             'nis' => 'required|max:4',
             'tanggal_masuk' => 'required',
         ]);
