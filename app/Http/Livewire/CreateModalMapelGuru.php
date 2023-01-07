@@ -34,7 +34,7 @@ class CreateModalMapelGuru extends Component
         //     'action' => 'insert',
         //     'at' => 'mapel'
         // ]);
-        DB::select('CALL add_mapelGuru(?, ?, ?)', [$this->mapel, $this->guru, auth()->user()->uuid]);
+        DB::select('CALL add_mapel_guru(?, ?, ?)', [$this->mapel, $this->guru, auth()->user()->uuid]);
         $this->reset();
         $this->emit('storeMapelGuru');
         $this->dispatchBrowserEvent('insert-alert');

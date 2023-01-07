@@ -611,25 +611,22 @@ return new class extends Migration
 
 
         DB::unprepared('
-        CREATE PROCEDURE add_mapelGuru(
+        CREATE PROCEDURE add_mapel_guru(
             IN mapel CHAR(5),
             IN guru CHAR(16),
             IN actor CHAR(36)
         )
         BEGIN
             DECLARE errno INT;
-            DECLARE actor CHAR(36);
             DECLARE EXIT HANDLER FOR SQLEXCEPTION
             BEGIN
                 ROLLBACK;
             END;
 
-            SET actor = UUID();
-
             START TRANSACTION;
 
-            INSERT INTO mapel_gurus(mapel, guru, created_at, updated_at) 
-            VALUES (mapel, guru, NOW(), NOW());
+            INSERT INTO mapel_gurus(mapel, guru, created_at) 
+            VALUES (mapel, guru, NOW());
 
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "mapel_gurus", NOW());
@@ -640,19 +637,16 @@ return new class extends Migration
     ');
 
         DB::unprepared('
-        CREATE PROCEDURE delete_mapelGuru(
+        CREATE PROCEDURE delete_mapel_guru(
             IN mapelguru INT,
             IN actor CHAR(36)
         )
         BEGIN
             DECLARE errno INT;
-            DECLARE actor CHAR(36);
             DECLARE EXIT HANDLER FOR SQLEXCEPTION
             BEGIN
                 ROLLBACK;
             END;
-
-            SET actor = UUID();
 
             START TRANSACTION;
             DELETE FROM mapel_gurus WHERE mapel_guru_id = mapelguru;
@@ -904,8 +898,10 @@ return new class extends Migration
         BEGIN
 
             DECLARE uuid CHAR(36);
+            DECLARE grade_kelas CHAR(1);
 
             SET uuid = UUID();
+            SELECT kelas.grade INTO grade_kelas FROM kelas JOIN kelas_aktifs ON kelas.kelas_id = kelas_aktifs.kelas WHERE kelas_aktifs.kelas_aktif_id = kelas_aktif COLLATE utf8mb4_general_ci;
         
             INSERT INTO users(uuid, username, password, created_at, updated_at) 
             VALUES (uuid, nis, pass, NOW(), NOW());
@@ -932,7 +928,7 @@ return new class extends Migration
             VALUES(actor, "insert", "siswas", NOW());
         
             INSERT INTO kontrak_semesters(siswa, kelas, grade, semester_aktif, tahun_ajaran_aktif, status, created_at, updated_at)
-            VALUES(nisn, kelas_aktif, grade, semester, ta, "ongoing", NOW(), NOW());
+            VALUES(nisn, kelas_aktif, grade_kelas, semester, ta, "ongoing", NOW(), NOW());
         
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(actor, "insert", "kontrak_semesters", NOW());
@@ -1588,8 +1584,8 @@ BEGIN
         DB::unprepared("DROP PROCEDURE inactive_mapel");
         DB::unprepared("DROP PROCEDURE restore_mapel");
         DB::unprepared("DROP PROCEDURE delete_mapel");
-        DB::unprepared("DROP PROCEDURE add_mapelGuru");
-        DB::unprepared("DROP PROCEDURE delete_mapelGuru");
+        DB::unprepared("DROP PROCEDURE add_mapel_guru");
+        DB::unprepared("DROP PROCEDURE delete_mapel_guru");
         DB::unprepared("DROP PROCEDURE add_kelas");
         DB::unprepared("DROP PROCEDURE update_kelas");
         DB::unprepared("DROP PROCEDURE add_walikelas");

@@ -23,7 +23,7 @@ class ListMapelGuru extends Component
 
     public function delete($id)
     {
-        DB::select('CALL delete_mapelGuru(?, ?)', [$id, auth()->user()->uuid]);
+        DB::select('CALL delete_mapel_guru(?, ?)', [$id, auth()->user()->uuid]);
 
         $this->render();
         $this->emit('deleteMapelGuru');

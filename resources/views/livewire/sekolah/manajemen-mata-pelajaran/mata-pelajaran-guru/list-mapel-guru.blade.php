@@ -4,6 +4,7 @@
             <th>No</th>
             <th>Guru</th>
             <th>Mata Pelajaran</th>
+            <th>Kelompok</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -13,21 +14,24 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $mg->nama }}</td>
                 <td>{{ $mg->nama_mapel }}
+                <td>
                     @if ($mg->kelompok_mapel == 'B')
-                        {{ 'Peminatan' }}
+                        {{ $mg->kelompok_mapel }}( Peminatan )
                     @else
-                        {{ 'Wajib' }}
+                        {{ $mg->kelompok_mapel }}( Wajib )
                     @endif
+                </td>
+
                 </td>
                 <td>
                     {{-- Update Button --}}
-                    <div class="modal-warning me-1 mb-1 d-inline-block">
+                    {{-- <div class="modal-warning me-1 mb-1 d-inline-block">
                         <button type="button" data-bs-target="#createModal" class="btn btn-sm btn-warning"
                             wire:click="editMapelGuru('{{ $mg->mapel_guru_id }}')">
                             <i class="bi
                             bi-pencil"></i>
                         </button>
-                    </div>
+                    </div> --}}
                     {{-- Delete Button --}}
                     <div class="modal-danger me-1 mb-1 d-inline-block">
                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
