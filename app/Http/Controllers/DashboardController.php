@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Mapel;
 use App\Models\Kelas;
+use App\Models\Siswa;
+use App\Models\Prestasi;
 use App\Models\Ekstrakurikuler;
 use App\Models\Prestasi;
 

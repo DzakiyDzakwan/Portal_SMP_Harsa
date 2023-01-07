@@ -1015,7 +1015,7 @@ return new class extends Migration
                 START TRANSACTION;
 
                 INSERT INTO rosters(mapel_guru, kelas, tahun_ajaran_aktif, semester_aktif, waktu_mulai, waktu_akhir, hari, created_at, updated_at) 
-                VALUES (mapel, kelas, tahun_ajaran, semester, waktu_mulai, waktu_akhir, hari, NOW(), NOW());
+                VALUES (mapel, kelas_aktif, tahun_ajaran, semester, waktu_mulai, waktu_akhir, hari, NOW(), NOW());
 
                 INSERT INTO log_activities(actor, action, at, created_at)
                 VALUES(actor, "insert", "rosters", NOW());

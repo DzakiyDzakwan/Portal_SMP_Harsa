@@ -38,13 +38,24 @@
 </div>
 {{-- Total Roster --}}
 @livewire('info-card-roster')
+@livewire('filter-card-tahun')
 
 {{-- List Roster --}}
 <div class="card">
     <div class="card-header d-flex gap-2 align-items-center justify-content-between">
         <h5>List Jadwal Mata Pelajaran</h5>
-        <div class="form-group">
-            @livewire('create-modal-roster')
+        <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="form-group">
+                @livewire('create-modal-roster')
+            </div>
+            <div class="form-group">
+                {{-- Button Cetak PDF --}}
+                <a href="{{ route('export-roster') }}">
+                    <button type="button" class="btn btn-sm btn-primary" wire.click="export()">
+                        <i class="bi bi-printer"></i> &nbspPDF
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
     <div class="card-body">

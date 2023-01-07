@@ -2,7 +2,7 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama Ekstrakulikuler</th>
+                <th>Nama Ekstrakurikuler</th>
                 <th>Hari</th>
                 <th>Waktu Mulai</th>
                 <th>Waktu Akhir</th>

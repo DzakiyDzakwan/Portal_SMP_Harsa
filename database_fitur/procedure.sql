@@ -605,7 +605,7 @@ DELIMITER ;
 DELIMITER ?
 CREATE PROCEDURE add_roster(
     IN mapel INT,
-    IN kelas CHAR(3),
+    IN kelas CHAR(6),
     IN tahun_ajaran CHAR(9),
     IN semester CHAR(6),
     IN waktu_mulai TIME,
