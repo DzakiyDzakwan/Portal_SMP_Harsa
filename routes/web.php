@@ -81,7 +81,11 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
             Route::get('/guru/nilai-ekstrakurikuler', 'nilaiEkstrakurikuler')->name('nilai-ekstrakurikuler');
             Route::get('/guru/sesi-penilaian', 'sesiPenilaian')->name('sesi-penilaian');
         });
-        Route::get('/guru/siswa/cetak', [ReportController::class, 'index'])->name('cetak-siswa');
+        Route::get('/guru/guru/cetak', [ReportController::class, 'exportGuru'])->name('export-guru');
+        Route::get('/guru/siswa/{ta}/{sem}/cetak/', [ReportController::class, 'exportSiswa'])->name('export-siswa');
+        Route::get('/guru/kelas-aktif/{ta}/cetak', [ReportController::class, 'exportWaliKelas'])->name('export-wali-kelas');
+        Route::get('/guru/roster/cetak', [ReportController::class, 'exportRoster'])->name('export-roster');
+        Route::get('/guru/ekstrakurikuler/cetak', [ReportController::class, 'exportEkskul'])->name('export-ekskul');
     });
 
     //Guru

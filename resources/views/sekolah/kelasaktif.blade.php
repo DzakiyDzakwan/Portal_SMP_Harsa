@@ -40,8 +40,19 @@
     <div class="card">
         <div class="card-header d-flex gap-2 align-items-center justify-content-between">
             <h5>List Kelas Aktif</h5>
-            <div class="form-group">
-                @livewire('create-modal-kelas-aktif')
+            <div class="d-flex align-items-center justify-content-between gap-2">
+                <div class="form-group">
+                    @livewire('create-modal-kelas-aktif')
+                </div>
+                <div class="form-group">
+                    {{-- Button Cetak PDF --}}
+                    {{-- <a href="{{ route('export-wali-kelas') }}">
+                        <button type="button" class="btn btn-sm btn-primary" wire.click="export()">
+                            <i class="bi bi-printer"></i> &nbspPDF
+                        </button>
+                    </a> --}}
+                    @livewire('button-export-wali-kelas')
+                </div>
             </div>
         </div>
         <div class="card-body">
