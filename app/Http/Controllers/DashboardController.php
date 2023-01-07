@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Mapel;
 use App\Models\Kelas;
 use App\Models\Ekstrakurikuler;
+use App\Models\EkstrakurikulerSiswa;
 use App\Models\Prestasi;
 
 
@@ -46,6 +47,9 @@ class DashboardController extends Controller
         // ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
         // ->where('siswas.user', Auth::user()->uuid)->first();
         $prestasi = Prestasi::where('siswa',Auth::user()->siswas->NISN)->get();
-        return view('siswa.dashboard', compact('menu', 'prestasi'));
+        $ekskul = EkstrakurikulerSiswa::join('ekstrakurikulers', 'ekstrakurikuler_id', '=', 'ekstrakurikuler_siswas.ekstrakurikuler')
+        ->where('siswa',Auth::user()->siswas->NISN)
+        ->get();
+        return view('siswa.dashboard', compact('menu', 'prestasi', 'ekskul'));
     }
 }

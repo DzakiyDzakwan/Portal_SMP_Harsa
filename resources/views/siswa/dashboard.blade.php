@@ -89,7 +89,7 @@
                         </div> --}}
 
                         {{-- Profil Singkat --}}
-                        <div class=" col-lg-6 mb-4">
+                        <div class=" col-lg-12 mb-4">
                             <div class="card h-full">
                                 <div class="card-body">
                                     <h4>Profil Singkat</h4>
@@ -225,7 +225,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="col-lg-6 col-md-12">
+                        <div class="col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4>Ekstrakurikuler</h4>
@@ -237,9 +237,9 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama Ekskul</th>
+                                                    <th>Tahun Ajaran</th>
+                                                    <th>Penanggung Jawab</th>
                                                     <th>Hari</th>
-                                                    <th>Waktu Mulai</th>
-                                                    <th>Durasi</th>
                                                     <th>Tempat</th>
                                                 </tr>
                                             </thead>
@@ -248,9 +248,9 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $e->nama }}</td>
+                                                    <td>{{ $e->tahun_ajaran_aktif }}</td>
+                                                    <td>{{ $e->penganggung_jawab }}</td>
                                                     <td>{{ $e->hari }}</td>
-                                                    <td>{{ $e->waktu_mulai }}</td>
-                                                    <td>{{ $e->durasi }} menit</td>
                                                     <td>{{ $e->tempat }}</td>
                                                 </tr>
                                                 @endforeach
@@ -259,7 +259,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </section>
