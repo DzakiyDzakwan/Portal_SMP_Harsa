@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MapelGuruTableSeeder::class);
         $this->call(KelasTableSeeder::class);
         $this->call(KelasAktifTableSeeder::class);
+        $this->call(RosterTableSeeder::class);
         $this->call(EskstrakurikulerTableSeeder::class);
         $this->call(SiswaTableSeeder::class);
         $this->call(PrestasiTableSeeder::class);

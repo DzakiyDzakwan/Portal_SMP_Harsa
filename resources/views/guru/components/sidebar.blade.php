@@ -198,6 +198,19 @@
                                 <a href="/guru/nilai/uas">Ujian Akhir Semester</a>
                             </li>
                         @endhasanyrole --}}
+                        @hasrole('guru')
+                            @php
+                                $kelasGuru = DB::table('list_kelas_guru')
+                                    ->where('guru', Auth::user()->gurus->NUPTK)
+                                    ->get();
+                            @endphp
+                            @foreach ($kelasGuru as $item)
+                                <li class="submenu-item">
+                                    <a href="/guru/kelas/{{ $item->kelas }}">{{ $item->grade }}{{ $item->kelompok_kelas }}
+                                        {{ $item->nama_mapel }}</a>
+                                </li>
+                            @endforeach
+                        @endhasrole
                     </ul>
                 </li>
 
