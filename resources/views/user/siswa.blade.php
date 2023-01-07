@@ -41,12 +41,13 @@
                     @livewire('create-modal-siswa')
                 </div>
                 <div class="form-group">
-                    {{-- Button Cetak --}}
-                    <a href="/guru/siswa/cetak">
-                        <button type="button" class="btn btn-sm btn-primary">
-                            <i class="bi bi-printer"></i> &nbspCetak Daftar Siswa
+                    {{-- Button Cetak PDF --}}
+                    {{-- <a href="{{ route('export-siswa') }}">
+                        <button type="button" class="btn btn-sm btn-primary" wire.click="export()">
+                            <i class="bi bi-printer"></i> &nbspPDF
                         </button>
-                    </a>
+                    </a> --}}
+                    @livewire('button-export-siswa')
                 </div>
             </div>
         </div>

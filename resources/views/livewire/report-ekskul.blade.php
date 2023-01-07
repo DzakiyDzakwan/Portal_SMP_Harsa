@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cetak Siswa</title>
+    <title>Cetak Ekstrakurikuler</title>
     <style>
         table.table {
         border: 1px solid #1C6EA4;
@@ -44,28 +44,47 @@
         }
     </style>
 </head>
-
 <body>
+    <h3 align="center">JADWAL KEGIATAN EKSTRAKURIKULER <br> SMP HARAPAN 1 MEDAN  </h3>
+    <br>
     <table class="table">
         <thead>
             <tr>
                 <th>No</th>
-                <th>NIS</th>
-                <th>NISN</th>
-                <th>Nama</th>
-                <th>Tanggal Masuk</th>
+                <th>Ekstrakurikuler</th>
+                <th>Hari</th>
+                <th>Waktu</th>
+                <th>Kelas</th>
+                <th>Tempat</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $item)
+            @foreach ($ekskul as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->NISN }}</td>
-                    <td>{{ $item->NIS }}</td>
                     <td>{{ $item->nama }}</td>
-                    <td>{{ $item->tanggal_masuk }}</td>
+                    <td>{{ $item->hari }}</td>
+                    <td>{{ $item->waktu_mulai }} - {{ $item->waktu_akhir }}</td>
+                    <td>{{ $item->kelas }}</td>
+                    <td>{{ $item->tempat }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <br>
+    <table>
+        <tr>
+            <td width="350"></td>
+            <td align="center">
+                <?php
+                    $date = date('d M Y');
+                ?>
+                <p>Medan, {{ $date }} M<br> Kepala SMP Harapan 1 Medan</p>
+                <br>
+                <br>
+                <p><b>Drs. Idris Ginting</b></p>
+            </td>
+        </tr>
+    </table>
 </body>
+

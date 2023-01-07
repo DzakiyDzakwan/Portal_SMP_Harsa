@@ -104,7 +104,7 @@
                                             placeholder="Masukkan ID Kelas Aktif" id="tahun_ajaran_aktif"
                                             wire:model.defer="tahun_ajaran_aktif" disabled/>
                                         <div class="form-control-icon">
-                                            <i class="bi bi-gear-wide-connected"></i>
+                                            <i class="bi bi-calendar-week"></i>
                                         </div>
                                         @error('tahun_ajaran_aktif')
                                             <div class="invalid-feedback">

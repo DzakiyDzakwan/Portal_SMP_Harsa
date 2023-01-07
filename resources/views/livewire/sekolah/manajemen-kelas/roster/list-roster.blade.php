@@ -18,7 +18,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $r->nama_mapel }}</td>
                 <td>{{ $r->nama }}</td>
-                <td>{{ $r->nama_kelas }}</td>
+                <td>{{ $r->nama_kelas_aktif }}</td>
                 <td>{{ $r->waktu_mulai }}</td>
                 <td>{{ $r->waktu_akhir }}</td>
                 <td>{{ $r->durasi }}</td>

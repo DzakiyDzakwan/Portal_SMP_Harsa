@@ -7,8 +7,8 @@
     {{-- modal tambah siswa --}}
     <div wire:ignore.self class="modal fade text-left" id="createModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel130" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-dialog modal-dialog-scrollable">
                 <div class="modal-header bg-success justify-content-center">
                     <h4 class="modal-title white " id="myModalLabel33">Tambah Siswa</h4>
                 </div>
@@ -174,6 +174,26 @@
                                             <i class="bi bi-person-video3"></i>
                                         </div>
                                         @error('kelas_aktif')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="password-id-icon">Tanggal Masuk</label>
+                                    <div class="position-relative">
+                                        <input name="tanggal_masuk" type="date"
+                                            class="form-control @error('tanggal_masuk') is-invalid @enderror "
+                                            placeholder="Tanggal Masuk" id="tanggal_masuk"
+                                            wire:model.defer="tanggal_masuk" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-calendar"></i>
+                                        </div>
+                                        @error('tanggal_masuk')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}
