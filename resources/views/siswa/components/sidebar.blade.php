@@ -44,7 +44,7 @@
                 <li class="sidebar-title">Menu</li>
 
                 {{-- Dashboard --}}
-                <li class="sidebar-item @if ($pages === 'dashboardSiswa') active @endif">
+                <li class="sidebar-item @if ($menu === 'dashboard') active @endif">
                     <a href="/dashboard-siswa" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
@@ -60,7 +60,7 @@
                 </li> --}}
                 {{-- Rapor --}}
                 <li class="sidebar-title">Hasil Pembelajaran</li>
-                <li class="sidebar-item has-sub @if ($pages === 'rapor') active @endif">
+                <li class="sidebar-item has-sub @if ($menu === 'rapor') active @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                         <span>Rapor</span>
@@ -71,7 +71,7 @@
                             ->where('user', Auth::user()->uuid)
                             ->get();
                     @endphp
-                    <ul class="submenu @if ($pages === 'rapor') active @endif">
+                    <ul class="submenu @if ($menu === 'rapor') active @endif">
                         @foreach ($kelas as $k)
                             <li class="submenu-item">
                                 <a href="/rapor/{{ $k->grade }}">Kelas {{ $k->grade }}</a>

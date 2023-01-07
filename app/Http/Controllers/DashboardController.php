@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Mapel;
 use App\Models\Kelas;
 use App\Models\Ekstrakurikuler;
+use App\Models\Prestasi;
 
 
 use Illuminate\Http\Request;
@@ -38,18 +39,13 @@ class DashboardController extends Controller
         return view('guru.dashboard', compact("menu", "jumlah", "tahunAkademik", "sesi"));
     }
 
-    public function siswa() {
-        $pages = 'dashboardSiswa';
-        $roster = DB::table('list_roster_siswa')->where('kelas', Auth::user()->siswas->kelas)->get();
-        $siswa = Siswa::join('users', 'siswas.user', '=', 'users.uuid')
-        ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
-        ->where('siswas.user', Auth::user()->uuid)->first();
+    public function indexsiswa() {
+        $menu = 'dashboard';
+        // $roster = DB::table('list_roster_siswa')->where('kelas', Auth::user()->siswas->kelas)->get();
+        // $siswa = Siswa::join('users', 'siswas.user', '=', 'users.uuid')
+        // ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
+        // ->where('siswas.user', Auth::user()->uuid)->first();
         $prestasi = Prestasi::where('siswa',Auth::user()->siswas->NISN)->get();
-        return view('siswa.dashboard', [
-            'pages'=>$pages,
-            'siswa' => $siswa,
-            'roster' => $roster,
-            'prestasi' => $prestasi
-        ]);
+        return view('siswa.dashboard', compact('menu', 'prestasi'));
     }
 }

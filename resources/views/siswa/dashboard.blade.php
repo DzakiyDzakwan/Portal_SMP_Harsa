@@ -1,7 +1,7 @@
-@extends('siswa.master.main')
+@extends('master.main')
 
 @section('title')
-    <title>Dashboard</title>
+    <title>Dashboard Siswa</title>
 @endsection
 
 @section('style')
@@ -86,51 +86,55 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        Profil Singkat --}}
-                        <div class="col-lg-12 col-md-12">
-                            <div class="card">
+                        </div> --}}
+
+                        {{-- Profil Singkat --}}
+                        <div class=" col-lg-6 mb-4">
+                            <div class="card h-full">
                                 <div class="card-body">
                                     <h4>Profil Singkat</h4>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4">
                                             <div class="pt-3">
-                                                <img src="{{ asset('storage/' . $siswa->foto) }}"
-                                                    class="rounded mx-auto d-block" alt="..." width="130">
+                                                @if (Auth::user()->profiles->foto == null)
+                                                    <img src="{{ asset('assets/images/faces/2.jpg') }}"
+                                                        class="rounded w-100 d-block" alt="...">
+                                                @else
+                                                    <img src="{{ asset('storages/' . Auth::user()->profiles->foto) }}"
+                                                        class="rounded w-100 d-block" alt="...">
+                                                @endif
                                             </div>
                                         </div>
-                                        <div class="col-lg-9 col-md-12">
+
+                                        <div class="col-lg-8 col-md-12">
                                             <div class="pt-3">
                                                 <table class="table mb-0">
                                                     <tbody>
                                                         <tr>
                                                             <td>Nama</td>
                                                             <td>:</td>
-                                                            <td>{{ $siswa->nama }}</td>
+                                                            <td>{{ Auth::user()->profiles->nama }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>NISN</td>
+                                                            <td>:</td>
+                                                            <td>{{ Auth::user()->siswas->NISN }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>NIS</td>
                                                             <td>:</td>
-                                                            <td>{{ $siswa->NIS }}</td>
+                                                            <td>{{ Auth::user()->siswas->NIS }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Jenis Kelamin</td>
+                                                            <td>Tempat/Tanggal Lahir</td>
                                                             <td>:</td>
-                                                            @if ($siswa->jenis_kelamin = 'LK')
-                                                                <td>Laki - laki</td>
+                                                            @if (Auth::user()->profiles->tgl_lahir == null || Auth::user()->profiles->tempat_lahir == null)
+                                                                <td>-</td>
                                                             @else
-                                                                <td>Perempuan</td>
+                                                                <td>
+                                                                    {{ Auth::user()->profiles->tempat_lahir }}/{{ date('d M Y', strtotime(Auth::user()->profiles->tgl_lahir)) }}
+                                                                </td>
                                                             @endif
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Tanggal Lahir</td>
-                                                            <td>:</td>
-                                                            <td>{{ $siswa->tgl_lahir }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Tempat Lahir</td>
-                                                            <td>:</td>
-                                                            <td>{{ $siswa->tempat_lahir }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -141,6 +145,8 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- Roster --}}
                     {{-- <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -177,6 +183,8 @@
                             </div>
                         </div> --}}
                     {{-- </div> --}}
+
+                    {{-- Prestasi --}}
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
@@ -195,20 +203,28 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($prestasi as $item)
+                                                @if ($prestasi->isEmpty())
                                                     <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $item->keterangan }}</td>
-                                                        <td>{{ $item->jenis_prestasi }}</td>
-                                                        <td>{{ date('d M Y'), strtotime($item->tanggal_prestasi) }}</td>
+                                                        <td class="text-center" colspan="4">Tidak Ada List</td>
                                                     </tr>
-                                                @endforeach
+                                                @else
+                                                    @foreach ($prestasi as $item)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $item->keterangan }}</td>
+                                                            <td>{{ $item->jenis_prestasi }}</td>
+                                                            <td>{{ date('d M Y'), strtotime($item->tanggal_prestasi) }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         {{-- <div class="col-lg-6 col-md-12">
                             <div class="card">
                                 <div class="card-header">

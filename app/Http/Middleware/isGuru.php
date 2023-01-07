@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CekLevel
+class isGuru
 {
     /**
      * Handle an incoming request.
