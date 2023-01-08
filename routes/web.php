@@ -93,7 +93,7 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
     //Guru
     Route::group(['middleware' => ['role:guru']], function () {
         Route::controller(ViewController::class)->group(function () {
-            Route::get('/guru/kelas/{id}', 'kelasGuru')->name('kelas-saya');
+            Route::get('/guru/kelas/{id}', 'kelasGuru')->name('kelas-guru');
         });
     });
 
@@ -111,6 +111,7 @@ Route::group(['middleware' => ['auth', 'isSiswa', 'role:siswa']], function () {
     Route::get('/edit-profil-siswa', [ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
     Route::get('/change-password', [ProfilController::class, 'changePassword'])->name('changePassword');
     Route::get('/rapor/{grade}', [ViewController::class,  'rapotSiswa'])->name('rapor');
+    Route::get('/rapor/{kontrak}/{jenis}/cetak', [ReportController::class,  'exportRapor'])->name('export-rapor');
 });
 
 /* //Dashboard

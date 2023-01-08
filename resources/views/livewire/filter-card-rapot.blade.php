@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="col-8 col-lg-8 col-md-6">
+    <div class="col-12 col-lg-12 col-md-6">
         <div class="card">
             <div class="card-body px-4 py-4-5">
                 <div class="row">
                     <div class="col-md-12 flex-col text-left md-text-start">
-                        <h5>Filter Raport</h5>
+                        <h5>Filter Rapor</h5>
                         <div class="row align-items-center">
                             <form class="form form-vertical" wire:submit.prevent="search">
                                 @csrf
@@ -22,7 +22,11 @@
                                                         <option value="">Pilih Semester</option>
                                                         @foreach ($kontrak as $item)
                                                             <option value="{{ $item->kontrak_semester_id }}">
-                                                                {{ $item->semester }}
+                                                                @if ($item->semester_aktif == 'ganjil')
+                                                                    Ganjil
+                                                                @else
+                                                                    Genap
+                                                                @endif
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -47,7 +51,7 @@
                                                     <select name="jenis"
                                                         class="form-select form-control @error('jenis') is-invalid @enderror"
                                                         id="basicSelect" wire:model="jenis">
-                                                        <option value="">Jenis Raport</option>
+                                                        <option value="">Jenis Rapor</option>
                                                         <option value="uh1">Ulangan Harian 1</option>
                                                         <option value="uh2">Ulangan Harian 2</option>
                                                         <option value="uh3">Ulangan Harian 3</option>
