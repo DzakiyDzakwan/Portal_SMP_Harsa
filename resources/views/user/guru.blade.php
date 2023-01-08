@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group">
                     {{-- Button Cetak PDF --}}
-                    <a href="{{ route('export-guru') }}">
+                    <a href="/guru/guru/cetak">
                         <button type="button" class="btn btn-sm btn-primary" wire.click="export()">
                             <i class="bi bi-printer"></i> &nbspPDF
                         </button>
