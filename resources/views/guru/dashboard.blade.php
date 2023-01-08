@@ -296,7 +296,7 @@
                                                     class="rounded @hasrole('guru') w-100 @else w-75 @endhasrole d-block"
                                                     alt="...">
                                             @else
-                                                <img src="{{ asset('storages/' . Auth::user()->profiles->foto) }}"
+                                                <img src="{{ asset('storage/fotoprofil/' . Auth::user()->profiles->foto) }}"
                                                     class="rounded w-100 d-block" alt="...">
                                             @endif
                                         </div>

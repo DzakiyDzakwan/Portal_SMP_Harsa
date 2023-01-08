@@ -1,4 +1,4 @@
-@extends('siswa.master.main')
+@extends('master.main')
 
 @section('title')
     <title>Ubah Password</title>

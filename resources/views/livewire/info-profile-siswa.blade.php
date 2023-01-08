@@ -55,8 +55,13 @@
                             <label>Jenis Kelamin</label>
                         </div>
                         <div class="col-md-9 form-group">
-                            <input type="text" id="jenis_kelamin" class="form-control"
-                                name="{{ $siswa->jenis_kelamin }}" value="Perempuan" placeholder="Jenis Kelamin" readonly>
+                            @if ($siswa->jenis_kelamin == "LK")
+                                <input type="text" id="jenis_kelamin" class="form-control"
+                                value="Laki - laki" name="jenis_kelamin" placeholder="Jenis Kelamin" readonly>
+                            @else
+                                <input type="text" id="jenis_kelamin" class="form-control"
+                                value="Perempuan" name="jenis_kelamin" placeholder="Jenis Kelamin" readonly>
+                            @endif
                         </div>
                         <div class="col-md-3">
                             <label>Tanggal Lahir</label>
@@ -141,8 +146,7 @@
                         </div>
                         <div class="col-md-9 form-group">
                             <input type="text" id="tempat" class="form-control" name="tempat"
-                                value="{{ $siswa->alamat_orangtua }} "
-                                placeholder="Alamat Orangtua" readonly>
+                                value="{{ $siswa->alamat_orangtua }}" placeholder="Alamat Orangtua" readonly>
                         </div>
                         <div class="col-md-3">
                             <label>Telepon Orangtua</label>

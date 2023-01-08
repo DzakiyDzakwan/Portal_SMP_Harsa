@@ -100,7 +100,7 @@
                                                     <img src="{{ asset('assets/images/faces/2.jpg') }}"
                                                         class="rounded w-100 d-block" alt="...">
                                                 @else
-                                                    <img src="{{ asset('storages/' . Auth::user()->profiles->foto) }}"
+                                                    <img src="{{ asset('storage/fotoprofil/' . Auth::user()->profiles->foto) }}"
                                                         class="rounded w-100 d-block" alt="...">
                                                 @endif
                                             </div>
