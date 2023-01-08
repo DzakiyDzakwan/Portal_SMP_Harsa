@@ -25,7 +25,19 @@
                     <td>{{ $item->nama_mapel }}</td>
                     <td>{{ $item->nilai_pengetahuan }}</td>
                     <td>{{ $item->nilai_keterampilan }}</td>
-                    <td>{{ $item->sesi }}</td>
+                    <td>
+                        @if ($item->sesi == 'uh1')
+                            {{ 'Ujian Harian 1' }}
+                        @elseif ($item->sesi == 'uh2')
+                            {{ 'Ujian Harian 2' }}
+                        @elseif ($item->sesi == 'uh3')
+                            {{ 'Ujian Harian 3' }}
+                        @elseif ($item->sesi == 'uts')
+                            {{ 'Ujian Tengah Semester' }}
+                        @else
+                            {{ 'Ujian Akhir Semester' }}
+                        @endif
+                    </td>
                     <td>{{ $item->guru }}</td>
                     <td>
                         <span class="badge bg-secondary">{{ $item->status }}</span>
@@ -37,15 +49,6 @@
                                 wire:click="accept('{{ $item->nilai_id }}')">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Accept">
                                     <i class="bi bi-check-lg"></i>
-                                </div>
-                            </button>
-                        </div>
-                        {{-- Reject Button --}}
-                        <div class="modal-info me-1 mb-1 d-inline-block">
-                            <button type="button" class="btn btn-sm btn-danger"
-                                wire:click="decline('{{ $item->nilai_id }}')">
-                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Reject">
-                                    <i class="bi bi-x-lg"></i>
                                 </div>
                             </button>
                         </div>

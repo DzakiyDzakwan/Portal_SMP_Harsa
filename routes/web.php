@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
             Route::get('/guru/role', 'role')->name('role');
             Route::get('/guru/permission', 'permission')->name('permission');
             Route::get('/guru/admin', 'admin')->name('admin');
+            Route::get('/guru/konfirmasi-nilai', 'konfirmasiNilai')->name('konfirmasi-nilai');
         });
     });
 
@@ -99,7 +100,7 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
     //Wali Kelas
     Route::group(['middleware' => ['role:wali']], function () {
         Route::controller(ViewController::class)->group(function () {
-            Route::get('/guru/kelas-saya', 'kelasSaya')->name('kelas-saya');
+            Route::get('/guru/kelas-saya', 'kelasSaya')->name('kelas-saya-wali');
         });
     });
 });
