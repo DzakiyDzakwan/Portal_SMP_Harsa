@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Ekstrakurikuler;
+use App\Models\KontrakSemester;
 use PDF;
+use Auth;
 
 class ReportController extends Controller
 {
@@ -61,6 +63,23 @@ class ReportController extends Controller
 
         $pdf = PDF::loadView('livewire.sekolah.manajemen-kelas.roster.report-roster', array('roster' => $roster, 'ta' => $ta, 'kelas' => $kelas, 'row' => $row))
         ->setPaper('a4', 'landscape');
+        return $pdf->stream();
+    }
+
+    public function exportRapor($kontrak, $jenis)
+    {
+        $pengetahuanA = DB::table('rapor_nilai_pengetahuan')->where('kontrak_siswa', $kontrak)->where('jenis', $jenis)->where('kelompok_mapel', "A")->where('siswa', Auth::user()->siswas->NISN)->get();
+        $pengetahuanB = DB::table('rapor_nilai_pengetahuan')->where('kontrak_siswa', $kontrak)->where('jenis', $jenis)->where('kelompok_mapel', "B")->where('siswa', Auth::user()->siswas->NISN)->get();
+        
+        $keterampilanA = DB::table('rapor_nilai_keterampilan')->where('kontrak_siswa', $kontrak)->where('jenis', $jenis)->where('kelompok_mapel', "A")->where('siswa', Auth::user()->siswas->NISN)->get();
+        $keterampilanB = DB::table('rapor_nilai_keterampilan')->where('kontrak_siswa', $kontrak)->where('jenis', $jenis)->where('kelompok_mapel', "B")->where('siswa', Auth::user()->siswas->NISN)->get();
+
+        $siswa = User::join('siswas', 'siswas.user', '=', 'users.uuid')->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')->where('siswas.NISN', Auth::user()->siswas->NISN)->get();
+
+        $kontrak = DB::table('kontrak_semesters')->join('kelas_aktifs', 'kelas_aktifs.kelas_aktif_id', '=', 'kontrak_semesters.kelas')->join('gurus', 'gurus.NUPTK', '=', 'kelas_aktifs.wali_kelas')->join('user_profiles', 'user_profiles.user', '=', 'gurus.user')->where('kontrak_semesters.siswa', Auth::user()->siswas->NISN)->get();
+
+        $pdf = PDF::loadView('siswa.report-rapor', array('pengetahuanA' => $pengetahuanA, 'pengetahuanB' => $pengetahuanB, 'keterampilanA' => $keterampilanA, 'keterampilanB' => $keterampilanB, 'siswa' => $siswa, 'kontrak' => $kontrak))
+        ->setPaper('a4', 'potrait');
         return $pdf->stream();
     }
 }

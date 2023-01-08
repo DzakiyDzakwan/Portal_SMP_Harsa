@@ -36,11 +36,13 @@
     @livewire('filter-card-rapot', ['grade' => $grade])
 
     <div class="row">
+        @livewire('button-export-rapor')
+
         {{-- Pengetahuan --}}
-        {{-- @livewire('list-table-pengetahuan', ['grade' => $grade]) --}}
+        @livewire('list-table-pengetahuan', ['grade' => $grade])
 
         {{-- Keterampilan --}}
-        {{-- @livewire('list-table-keterampilan', ['grade' => $grade]) --}}
+        @livewire('list-table-keterampilan', ['grade' => $grade])
     </div>
 @endsection
 
