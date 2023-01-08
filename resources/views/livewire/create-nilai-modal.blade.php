@@ -13,27 +13,27 @@
                     @csrf
                     <div class="form-body modal-body">
                         <div class="row">
+                            {{-- Siswa  --}}
+                            <div class="col-6">
+                                <div class="form-group has-icon-left">
+                                    <label for="siswa">Siswa</label>
+                                    <div class="position-relative">
+                                        <input name="siswa" type="text"
+                                            class="form-control @error('siswa')is-invalid @enderror"
+                                            placeholder="Tidak ada siswa yang tersedia" id="siswa"
+                                            wire:model="siswa" disabled />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-clock"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             {{-- Sesi  --}}
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="form-group has-icon-left">
                                     <label for="sesi">Sesi</label>
                                     <div class="position-relative">
-                                        {{-- <select name="sesi"
-                                        class="form-select form-control @error('sesi') is-invalid @enderror"
-                                        id="basicSelect" wire:model.defer="sesi" disabled>
-                                        <option value="">Tidak ada sesi yang tersedia</option>
-                                        <option value="">Pilih Sesi</option>
-                                        <option value="uh1">Ulangan Harian 1
-                                        </option>
-                                        <option value="uh2">Ulangan Harian 2
-                                        </option>
-                                        <option value="uh3">Ulangan Harian 3
-                                        </option>
-                                        <option value="uts">Ulangan Tengah
-                                            Semester</option>
-                                        <option value="uas">Ulangan Akhir
-                                            Semester</option>
-                                    </select> --}}
                                         <input name="sesi" type="text"
                                             class="form-control @error('sesi')is-invalid @enderror"
                                             placeholder="Tidak ada sesi yang tersedia" id="sesi"
@@ -44,30 +44,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            {{-- KKM  --}}
-                            {{-- <div class="col-6">
-                                <div class="form-group has-icon-left">
-                                    <label for="kkm">Kriteria Ketuntasan
-                                        Minimum</label>
-                                    <div class="position-relative">
-                                        <input name="kkm" type="number"
-                                            class="form-control @error('kkm') is-invalid @enderror"
-                                            placeholder="Masukkan Nilai KKM" id="kkm"
-                                            wire:model.defer="kkm" />
-                                        <div class="form-control-icon">
-                                            <i class="bi bi-clock"></i>
-                                        </div>
-                                        @error('kkm')
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-
-                                    </div>
-                                </div>
-                            </div> --}}
 
                             {{-- Nilai Pengetahuan --}}
                             <div class="col-6">
