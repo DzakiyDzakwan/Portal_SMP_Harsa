@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class CreateNilaiModal extends Component
 {
 
-    public $nilai, $mapel, $kontrak_id, $sesi, $sesi_id, $kkm, $nilai_p, $nilai_k, $deskripsi_p, $deskripsi_k;
+    public $nilai, $mapel, $kontrak_id, $nama_sesi ,$sesi, $sesi_id, $nilai_p, $nilai_k, $deskripsi_p, $deskripsi_k;
 
     /* protected $rules = [
         'sesi' => 'required',
@@ -36,19 +36,30 @@ class CreateNilaiModal extends Component
     public function render()
     {
         
-        $this->nilai = Nilai::where('kontrak_siswa', 2)->get();
+        $nilai = Nilai::where('kontrak_siswa', 2)->get();
         return view('livewire.create-nilai-modal');
     }
 
     public function showModal($id) {
         $this->kontrak_id = $id;
-        $cekSesi = DB::table("list_sesi_penilaian")->where('status', "Aktif")->get();
-        if($cekSesi->isEmpty()) {
-            $this->sesi = "Tidak ada sesi yang tersedia";
+        $sesiPenilaian = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
+
+        if($sesiPenilaian == null) {
+            $this->nama_sesi = "Tidak ada sesi yang tersedia";
         } else {
-            $sesiAktif = DB::table("list_sesi_penilaian")->where('status', "Aktif")->first();
-            $this->sesi = $sesiAktif->nama_sesi;
-            $this->sesi_id = $sesiAktif->sesi_id;
+            $this->sesi = $sesiPenilaian->nama_sesi;
+            if($sesiPenilaian->nama_sesi === "uh1") {
+                $this->nama_sesi = "Ulangan Harian 1";
+            } elseif($sesiPenilaian->nama_sesi === "uh2") {
+                $this->nama_sesi = "Ulangan Harian 2";
+            }elseif($sesiPenilaian->nama_sesi === "uh3") {
+                $this->nama_sesi = "Ulangan Harian 3";
+            }elseif($sesiPenilaian->nama_sesi === "uts") {
+                $this->nama_sesi = "Ujian Tengah Semester";
+            } else {
+                $this->nama_sesi = "Ujian Akhir Semester";
+            }
+            $this->sesi_id = $sesiPenilaian->id;
         }
         $this->dispatchBrowserEvent('nilai-modal');
     }
@@ -63,9 +74,10 @@ class CreateNilaiModal extends Component
             'deskripsi_k' => 'required'
         ]); */
         try {
-            DB::select('CALL add_nilai(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$this->sesi_id, $this->sesi, $this->mapel, auth()->user()->gurus->NIP, $this->kontrak, $this->kkm, $this->nilai_p, $this->deskripsi_p, $this->nilai_k, $this->deskripsi_k, auth()->user()->uuid]);
+            DB::select('CALL add_nilai(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$this->sesi_id, $this->sesi, $this->mapel, auth()->user()->gurus->NUPTK, $this->kontrak_id, $this->nilai_p, $this->deskripsi_p, $this->nilai_k, $this->deskripsi_k, auth()->user()->uuid]);
             $this->reset();
             $this->dispatchBrowserEvent('insert-alert');
+            $this->dispatchBrowserEvent('nilai-modal');
         } catch (\Throwable $th) {
             dd($th);
         }

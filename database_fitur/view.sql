@@ -50,7 +50,7 @@ WHERE is_wali_kelas = "tidak";
 
 /* List Kelas */
 CREATE VIEW list_kelas AS
-SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NUPTK, user_profiles.nama AS 		Wali_Kelas, COUNT(siswas.NIS) AS jumlah
+SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, gurus.NUPTK, user_profiles.nama AS 	Wali_Kelas, COUNT(siswas.NIS) AS jumlah
 FROM kelas
 LEFT JOIN gurus ON kelas.wali_kelas = gurus.NUPTK
 LEFT JOIN users ON gurus.user = users.uuid
@@ -157,11 +157,11 @@ JOIN kontrak_semesters AS ktk ON ktk.siswa = s.NISN;
 
 /* List Siswa Kelas */
 CREATE VIEW list_siswa_kelas AS
-SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester, s.kelas 
+SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester_aktif, k.kelas 
 FROM siswas AS s
 JOIN user_profiles AS p ON s.user = p.user
 JOIN kontrak_semesters AS k ON s.NISN = k.siswa 
-WHERE k.status = "On Going"
+WHERE k.status = "ongoing"
 ORDER BY p.nama;
 
 CREATE VIEW list_roster_siswa AS

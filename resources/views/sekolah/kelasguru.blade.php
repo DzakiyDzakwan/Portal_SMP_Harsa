@@ -1,4 +1,4 @@
-@extends('guru.master.main')
+@extends('master.main')
 
 @section('title')
     <title>{{ $kelas->nama_mapel }} {{ $kelas->grade }}{{ $kelas->kelompok_kelas }}</title>
@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>{{ $kelas->grade }}{{ $kelas->kelompok_kelas }} {{ $kelas->nama_kelas }}</h3>
+            <h3>{{ $kelas->grade }}{{ $kelas->kelompok_kelas }} {{ $kelas->nama_kelas_aktif }}</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -25,7 +25,7 @@
                         Kelas
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        {{ $kelas->kelas_id }}
+                        {{ $kelas->nama_kelas_aktif }}
                     </li>
                 </ol>
             </nav>
@@ -135,11 +135,12 @@
             <h5>List Siswa</h5>
         </div>
         <div class="card-body">
-            @livewire('list-siswa-kelas', ['kelas_id' => $kelas->kelas_id])
+            @livewire('list-siswa-kelas', ['kelas_id' => $kelas->kelas])
         </div>
     </div>
 
     @livewire('create-nilai-modal', ['mapel' => $kelas->mapel_id])
+
     @livewire('alert-nilai')
 
 @endsection

@@ -119,7 +119,7 @@
 
                 {{-- Kelas Saya --}}
                 @hasrole('wali')
-                    <li class="sidebar-item @if ($menu === 'tahunakademik') active @endif">
+                    <li class="sidebar-item @if ($menu === 'walikelas') active @endif">
                         <a href="/guru/kelas-saya" class="sidebar-link">
                             <i class="bi bi-person-workspace"></i>
                             <span>Kelas Saya</span>
@@ -170,7 +170,7 @@
                 @endhasanyrole
 
                 {{-- Manajemen Nilai --}}
-                <li class="sidebar-item has-sub @if ($menu === 'inputNilai') active @endif">
+                <li class="sidebar-item has-sub @if ($menu === 'nilai') active @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-clipboard-plus-fill"></i>
                         <span>Manajemen Nilai</span>
