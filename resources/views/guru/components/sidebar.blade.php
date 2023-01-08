@@ -180,6 +180,9 @@
                             <li class="submenu-item">
                                 <a href="/guru/sesi-penilaian">Sesi Penilaian</a>
                             </li>
+                            <li class="submenu-item">
+                                <a href="/guru/konfirmasi-nilai">Konfirmasi Nilai</a>
+                            </li>
                         @endhasanyrole
                         {{-- @hasanyrole('kepsek|wakepsek')
                             <li class="submenu-item">

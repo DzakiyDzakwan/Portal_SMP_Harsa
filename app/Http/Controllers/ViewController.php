@@ -93,12 +93,19 @@ class ViewController extends Controller
         //dd('roster');
         return view('sekolah.roster', compact('menu'));
     }
-    
+
     public function sesiPenilaian()
     {
         $menu = 'sekolah';
         //dd('sesi Penilaian');
         return view('sekolah.sesinilai', compact('menu'));
+    }
+
+    public function konfirmasiNilai()
+    {
+        $menu = 'sekolah';
+        //dd('sesi Penilaian');
+        return view('sekolah.konfirmasinilai', compact('menu'));
     }
 
     public function kelasSaya()
@@ -109,12 +116,12 @@ class ViewController extends Controller
         return view('sekolah.walikelas', compact('menu', 'kelas'));
     }
 
-    public function kelasGuru($id) {
+    public function kelasGuru($id)
+    {
         $menu = "nilai";
         $kelas = DB::table('list_kelas_guru')->where('guru', auth()->user()->gurus->NUPTK)->where('kelas', $id)->first();
         $sesi = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
         return view('sekolah.kelasguru', compact('menu', 'kelas', 'sesi'));
-
     }
 
     public function ekstrakurikuler()

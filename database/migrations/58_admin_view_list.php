@@ -210,23 +210,23 @@ return new class extends Migration
         JOIN mapels AS m ON m.mapel_id = n.mapel
         WHERE n.status <> "pending"
         ORDER BY n.mapel;
-        ');
+        '); */
 
         DB::unprepared('
         CREATE VIEW list_nilai_pending AS
-        SELECT n.nilai_id, p.nama AS siswa, m.nama_mapel, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NIP AS guru, n.status 
+        SELECT n.nilai_id, p.nama AS siswa, m.nama_mapel, n.nilai_pengetahuan, n.nilai_keterampilan, sp.nama_sesi AS sesi, g.NUPTK AS guru, n.status 
         FROM nilais AS n
         JOIN sesi_penilaians AS sp ON n.sesi = sp.sesi_id
         JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
         JOIN siswas AS s ON k.siswa = s.NISN
         JOIN user_profiles AS p ON p.user = s.user
-        JOIN gurus AS g ON n.guru = g.NIP
+        JOIN gurus AS g ON n.guru = g.NUPTK
         JOIN mapels AS m ON m.mapel_id = n.mapel
         WHERE n.status = "pending"
         ORDER BY n.mapel;
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW list_prestasi AS
         SELECT p.keterangan, p.jenis_prestasi, DATE_FORMAT(p.tanggal_prestasi, "%d %M %Y") AS tanggal_prestasi, ktk.grade AS kelas
         FROM prestasis AS p
@@ -258,7 +258,7 @@ return new class extends Migration
         JOIN user_profiles as u ON g.user = u.user;
         ');
 
-         DB::unprepared('
+        DB::unprepared('
         CREATE VIEW list_siswa_kelas AS
         SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester_aktif, k.kelas 
         FROM siswas AS s
@@ -332,6 +332,5 @@ return new class extends Migration
         // DB::unprepared('DROP VIEW list_prestasi');
         // DB::unprepared('DROP VIEW list_ekstrakurikuler');
         DB::unprepared('DROP VIEW list_siswa_kelas');
-
     }
 };
