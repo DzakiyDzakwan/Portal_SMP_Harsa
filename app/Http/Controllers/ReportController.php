@@ -52,17 +52,15 @@ class ReportController extends Controller
         return $pdf->stream();
     }
 
-    public function exportRoster()
+    public function exportRoster($ta, $sem, $kls)
     {
-        $siswa = User::withTrashed()->join('siswas', 'siswas.user', '=', 'users.uuid')
-        ->join('user_profiles', 'users.uuid', '=', 'user_profiles.user')
-        ->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
-        ->join('kelas_aktifs', 'kelas_aktifs.kelas_aktif_id', '=', 'kontrak_semesters.kelas')->where('kontrak_semesters.tahun_ajaran_aktif', '2022/2023')->where('kontrak_semesters.semester_aktif', 'ganjil')
-        ->orderBy('siswas.created_at', 'DESC')
-        ->get();
+        $roster = DB::table('list_roster')->where('tahun_ajaran_aktif', $ta)->where('semester_aktif', $sem)->where('kelas_aktif_id', $kls)->orderBy('hari')->get();
+        $kelas = DB::table('list_kelas_aktif')->select('nama_kelas_aktif')->distinct()->where('kelas_aktif_id', $kls)->first();
+        $row = DB::table('list_roster')->select('hari')->distinct()->where('tahun_ajaran_aktif', $ta)->where('semester_aktif', $sem)->where('kelas_aktif_id', $kls)->get();
+        // dd($row);
 
-        $pdf = PDF::loadView('livewire.sekolah.manajemen-kelas.roster.report-roster', array('siswa' => $siswa))
-        ->setPaper('a3', 'landscape');
+        $pdf = PDF::loadView('livewire.sekolah.manajemen-kelas.roster.report-roster', array('roster' => $roster, 'ta' => $ta, 'kelas' => $kelas, 'row' => $row))
+        ->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
 }
