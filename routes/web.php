@@ -101,7 +101,6 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
     Route::group(['middleware' => ['role:wali']], function () {
         Route::controller(ViewController::class)->group(function () {
             Route::get('/guru/kelas-saya', 'kelasSaya')->name('kelas-saya-wali');
-            Route::get('/guru/kelas/{id}', 'kelasSaya')->name('kelas-saya');
         });
     });
 });
