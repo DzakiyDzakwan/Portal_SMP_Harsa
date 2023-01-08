@@ -1232,42 +1232,41 @@ return new class extends Migration
         END
         ');
 
-        /* DB::unprepared('
+        DB::unprepared('
             CREATE PROCEDURE add_nilai(
-                IN sesi INT,
-                IN jenis CHAR(5),
-                IN mapel CHAR(3),
-                IN guru CHAR(18),
-                IN kontrak INT,
-                IN kkm INT,
-                IN nilai_p FLOAT,
-                IN deskripsi_p TEXT,
-                IN nilai_k FLOAT,
-                IN deskripsi_k TEXT,
-                IN user CHAR(36)
+            IN sesi INT,
+            IN jenis CHAR(3),
+            IN mapel CHAR(5),
+            IN guru CHAR(16),
+            IN kontrak INT,
+            IN nilai_p FLOAT,
+            IN deskripsi_p TEXT,
+            IN nilai_k FLOAT,
+            IN deskripsi_k TEXT,
+            IN user CHAR(36)
             )
             BEGIN
-            
-            DECLARE start DATETIME;
-            DECLARE end DATETIME;
-            
-            SELECT tanggal_mulai INTO start FROM sesi_penilaians WHERE sesi_id = sesi;
-            SELECT tanggal_berakhir INTO end FROM sesi_penilaians WHERE sesi_id = sesi;
-            
-            IF cek_sesi(start, end) = 1 THEN
-                INSERT INTO nilais(sesi, mapel, guru, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, created_at, updated_at)
-                VALUES(sesi, mapel, guru, kontrak, jenis, kkm, nilai_p, deskripsi_p, nilai_k, deskripsi_k, "pending", NOW(), NOW());
-            
-                INSERT INTO log_activities(actor, action, at, created_at)
-                VALUES(user, "insert", "prestasis", NOW());
-                COMMIT;
-            ELSE
-            SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT ="Sesi tidak tersedia";
-            END IF;
-            
+
+                DECLARE kkm_nilai INT;
+                DECLARE start DATETIME;
+                DECLARE end DATETIME;
+
+                SELECT kkm INTO kkm_nilai FROM mapels WHERE mapel_id = mapel COLLATE utf8mb4_general_ci ;
+                SELECT tanggal_mulai INTO start FROM sesi_penilaians WHERE sesi_id = sesi;
+                SELECT tanggal_berakhir INTO end FROM sesi_penilaians WHERE sesi_id = sesi;
+
+                IF cek_sesi(start, end) = 1 THEN
+                    INSERT INTO nilais(sesi, mapel, guru, kontrak_siswa, jenis, kkm, nilai_pengetahuan, deskripsi_pengetahuan, nilai_keterampilan, deskripsi_keterampilan, status, created_at, updated_at)
+                    VALUES(sesi, mapel, guru, kontrak, jenis, kkm_nilai, nilai_p, deskripsi_p, nilai_k, deskripsi_k, "pending", NOW(), NOW());
+                    INSERT INTO log_activities(actor, action, at, created_at)
+                    VALUES(user, "insert", "prestasis", NOW());
+                ELSE
+                    SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT ="Sesi tidak tersedia";
+                END IF;
+
             END
         ');
-        */
+       
         DB::unprepared('
         CREATE PROCEDURE add_ekstrakurikuler(
             IN admin CHAR(36),
@@ -1576,7 +1575,7 @@ BEGIN
         // DB::unprepared("DROP PROCEDURE inactive_kelas");
         // DB::unprepared("DROP PROCEDURE delete_kelas");
         // DB::unprepared("DROP PROCEDURE delete_siswa");
-        // DB::unprepared("DROP PROCEDURE add_nilai");
+        DB::unprepared("DROP PROCEDURE add_nilai");
         // DB::unprepared("DROP PROCEDURE add_sesi");
         DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE update_ekstrakurikuler");

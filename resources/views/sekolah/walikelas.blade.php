@@ -1,7 +1,7 @@
 @extends('master.main')
 
 @section('title')
-    <title>{{ $kelas->grade }}{{ $kelas->kelompok_kelas }} {{ $kelas->nama_kelas }}</title>
+    <title>{{ $kelas->grade }}{{ $kelas->kelompok_kelas }} {{ $kelas->nama_kelas_aktif }}</title>
 @endsection
 
 @section('style')
@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>{{ $kelas->grade }}{{ $kelas->kelompok_kelas }} {{ $kelas->nama_kelas }}</h3>
+            <h3>{{ $kelas->grade }}{{ $kelas->kelompok_kelas }} {{ $kelas->nama_kelas_aktif }}</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                             <h6 class="text-muted font-semibold">Total Siswa</h6>
-                            <h6 class="font-extrabold mb-0">{{ $kelas->jumlah }}</h6>
+                            <h6 class="font-extrabold mb-0">{{ $kelas->jumlah_siswa }}</h6>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
             <h5>List Siswa</h5>
         </div>
         <div class="card-body">
-            @livewire('list-siswa-wali-kelas', ['kelas' => $kelas->kelas_id])
+            @livewire('list-siswa-wali-kelas', ['kelas' => $kelas->kelas_aktif_id])
         </div>
     </div>
 

@@ -14,7 +14,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->nama }}</td>
-                    <td>{{ $item->semester }}</td>
+                    <td>{{ $item->semester_aktif }}</td>
                     <td>
                         <div class="modal-info me-1 mb-1 d-inline-block">
                             <button type="button" class="btn btn-sm btn-success"

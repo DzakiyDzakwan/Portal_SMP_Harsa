@@ -2,10 +2,9 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Kelas Aktif Id</th>
-            <th>Wali Kelas</th>
-            <th>Tahun Ajaran</th>
             <th>Nama Kelas</th>
+            <th>Wali Kelas</th>
+            <th>Jumlah Siswa</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -13,10 +12,9 @@
         @foreach ($kelasAktif as $r)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $r->kelas_aktif_id }}</td>
-                <td>{{ $r->nama }}</td>
-                <td>{{ $r->tahun_ajaran_aktif }}</td>
-                <td>{{ $r->nama_kelas_aktif }} - {{ $r->grade }}{{ $r->kelompok_kelas }}</td>
+                <td>{{ $r->grade }}{{ $r->kelompok_kelas }} - {{ $r->nama_kelas_aktif }}</td>
+                <td>{{ $r->wali_kelas }}</td>
+                <td>{{ $r->jumlah_siswa }}</td>
                 <td>
                     {{-- Update Button --}}
                     <div class="modal-warning me-1 mb-1 d-inline-block">

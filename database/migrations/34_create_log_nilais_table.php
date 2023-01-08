@@ -22,7 +22,7 @@ return new class extends Migration
             $table->char('pemeriksa', 36)->nullable();
             $table->unsignedBigInteger('kontrak_siswa');
             $table->enum('jenis', ['uh1', 'uh2', 'uh3', 'uts', 'uas']);
-            $table->integer('kkm');
+            $table->integer('kkm_aktif');
             $table->float('nilai_pengetahuan', 8, 2);
             $table->text('deskripsi_pengetahuan');
             $table->float('nilai_keterampilan', 8, 2);

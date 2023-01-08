@@ -109,11 +109,13 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_kelas_aktif AS
-        SELECT kelas_aktifs.kelas_aktif_id, kelas_aktifs.nama_kelas_aktif, kelas.grade, kelas.kelompok_kelas,  kelas_aktifs.tahun_ajaran_aktif, user_profiles.nama
+        SELECT kelas_aktifs.kelas_aktif_id, kelas_aktifs.nama_kelas_aktif, kelas.grade, kelas.kelompok_kelas,  kelas_aktifs.tahun_ajaran_aktif, gurus.NUPTK, user_profiles.nama AS wali_kelas, COUNT(siswas.NIS) AS jumlah_siswa
         FROM kelas_aktifs
         LEFT JOIN kelas ON kelas.kelas_id = kelas_aktifs.kelas
         LEFT JOIN gurus ON gurus.NUPTK = kelas_aktifs.wali_kelas
         LEFT JOIN user_profiles ON user_profiles.user = gurus.user
+        LEFT JOIN kontrak_semesters ON kontrak_semesters.kelas = kelas_aktifs.kelas_aktif_id
+        LEFT JOIN siswas ON kontrak_semesters.siswa = siswas.NISN
         GROUP BY kelas_aktifs.kelas_aktif_id
         ');
         // DB::unprepared('
@@ -180,7 +182,7 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_kelas_guru AS
-        SELECT mg.guru, r.kelas, ka.nama_kelas_aktif, k.grade, k.kelompok_kelas, m.mapel_id, m.nama_mapel
+        SELECT r.tahun_ajaran_aktif, mg.guru, r.kelas, ka.nama_kelas_aktif, k.grade, k.kelompok_kelas, m.mapel_id, m.nama_mapel
         FROM rosters AS r
         JOIN mapel_gurus AS mg ON r.mapel_guru = mg.mapel_guru_id
         JOIN mapels AS m ON mg.mapel = m.mapel_id
@@ -256,15 +258,15 @@ return new class extends Migration
         JOIN user_profiles as u ON g.user = u.user;
         ');
 
-        /*  DB::unprepared('
+         DB::unprepared('
         CREATE VIEW list_siswa_kelas AS
-        SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester, s.kelas 
+        SELECT s.NISN, k.kontrak_semester_id, p.nama, k.semester_aktif, k.kelas 
         FROM siswas AS s
         JOIN user_profiles AS p ON s.user = p.user
         JOIN kontrak_semesters AS k ON s.NISN = k.siswa 
-        WHERE k.status = "On Going"
+        WHERE k.status = "ongoing"
         ORDER BY p.nama;
-        '); */
+        ');
 
         /* DB::unprepared('
         CREATE VIEW list_roster_siswa AS
@@ -329,7 +331,7 @@ return new class extends Migration
         // DB::unprepared('DROP VIEW list_nilai_pending');
         // DB::unprepared('DROP VIEW list_prestasi');
         // DB::unprepared('DROP VIEW list_ekstrakurikuler');
-        // DB::unprepared('DROP VIEW list_siswa_kelas');
+        DB::unprepared('DROP VIEW list_siswa_kelas');
 
     }
 };

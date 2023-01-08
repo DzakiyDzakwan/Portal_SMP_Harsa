@@ -23,7 +23,7 @@ class KelasAktifTableSeeder extends Seeder
 
         DB::select('CALL add_kelas_aktif(?, ?, ?, ?)', ['KLS001', '3333333333333333', '2021-2022', '10afab12-75d2-11ed-9489-f875a4fd08d6']);
 
-        DB::select('CALL add_kelas_aktif(?, ?, ?, ?)', ['KLS002', '4444444444444444', '2020-2021', '10afab12-75d2-11ed-9489-f875a4fd08d6']);
+        DB::select('CALL add_kelas_aktif(?, ?, ?, ?)', ['KLS002', '4444444444444444', '2021-2022', '10afab12-75d2-11ed-9489-f875a4fd08d6']);
 
         KelasAktif::create([
             "kelas_aktif_id" => "2a18b5be-8df3-11ed-86b2-f875a4fd08d6",
