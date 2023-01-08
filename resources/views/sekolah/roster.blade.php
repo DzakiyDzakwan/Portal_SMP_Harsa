@@ -35,7 +35,7 @@
     </div>
     {{-- Total Roster --}}
     @livewire('info-card-roster')
-    @livewire('filter-card-tahun')
+    @livewire('filter-card-roster')
 
     {{-- List Roster --}}
     <div class="card">
@@ -46,12 +46,7 @@
                     @livewire('create-modal-roster')
                 </div>
                 <div class="form-group">
-                    {{-- Button Cetak PDF --}}
-                    <a href="{{ route('export-roster') }}">
-                        <button type="button" class="btn btn-sm btn-primary" wire.click="export()">
-                            <i class="bi bi-printer"></i> &nbspPDF
-                        </button>
-                    </a>
+                    @livewire('button-export-roster')
                 </div>
             </div>
         </div>

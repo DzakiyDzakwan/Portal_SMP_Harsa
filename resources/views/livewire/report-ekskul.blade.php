@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cetak Ekstrakurikuler</title>
+    <title>Data Ekstrakurikuler</title>
     <style>
         table.table {
         border: 1px solid #1C6EA4;
