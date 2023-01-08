@@ -243,13 +243,14 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_ekstrakurikuler_siswa AS
-        SELECT es.ekstrakurikuler_siswa_id AS id, e.nama AS nama_ekskul, u.nama AS nama_siswa, es.tahun_ajaran_aktif AS tahun_ajaran
+        SELECT es.ekstrakurikuler_siswa_id AS id, e.nama AS nama_ekskul, u.nama AS nama_siswa, es.tahun_ajaran_aktif AS tahun_ajaran, n.nilai AS nilai_ekskul
         FROM ekstrakurikuler_siswas as es
         JOIN ekstrakurikulers AS e ON es.ekstrakurikuler = e.ekstrakurikuler_id
         JOIN siswas as s ON es.siswa = s.NISN
-        JOIN user_profiles as u ON s.user = u.user;
+        JOIN user_profiles as u ON s.user = u.user
+        JOIN kontrak_semesters as k ON es.siswa =  k.siswa
+        JOIN nilai_ekstrakurikulers as n ON k.kontrak_semester_id = n.kontrak_siswa ;
         ');
-
         DB::unprepared('
         CREATE VIEW list_pembina_ekstrakurikuler AS
         SELECT e.ekstrakurikuler_id AS id, e.nama AS ekskul, g.NUPTK, u.nama AS guru
