@@ -29,7 +29,7 @@
                                     <td>{{ $item->nama_mapel }}</td>
                                     <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_keterampilan }}</td>
-                                    <td>{{ $item->indeks }}</td>
+                                    <td>{{ $item->indeks_keterampilan }}</td>
                                     <td>{{ $item->deskripsi_keterampilan }}</td>
                                 </tr>
                             @endforeach
@@ -66,7 +66,7 @@
                                     <td>{{ $item->nama_mapel }}</td>
                                     <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_keterampilan }}</td>
-                                    <td>{{ $item->indeks }}</td>
+                                    <td>{{ $item->indeks_keterampilan }}</td>
                                     <td>{{ $item->deskripsi_keterampilan }}</td>
                                 </tr>
                             @endforeach
