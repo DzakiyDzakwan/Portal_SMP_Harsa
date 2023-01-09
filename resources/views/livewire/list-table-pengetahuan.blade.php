@@ -30,7 +30,7 @@
                                     <td>{{ $item->nama_mapel }}</td>
                                     <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_pengetahuan }}</td>
-                                    <td>{{ $item->indeks }}</td>
+                                    <td>{{ $item->indeks_pengetahuan }}</td>
                                     <td>{{ $item->deskripsi_pengetahuan }}</td>
                                 </tr>
                             @endforeach
@@ -67,7 +67,7 @@
                                     <td>{{ $item->nama_mapel }}</td>
                                     <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_pengetahuan }}</td>
-                                    <td>{{ $item->indeks }}</td>
+                                    <td>{{ $item->indeks_pengetahuan }}</td>
                                     <td>{{ $item->deskripsi_pengetahuan }}</td>
                                 </tr>
                             @endforeach

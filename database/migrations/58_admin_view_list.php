@@ -284,7 +284,7 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_rekap_nilai AS
-        SELECT k.tahun_ajaran_aktif, s.NISN, p.nama, m.nama_mapel, 
+        SELECT k.tahun_ajaran_aktif, s.NISN, p.nama, m.kelompok_mapel, m.nama_mapel, n.kkm_aktif, n.deskripsi_pengetahuan, n.deskripsi_keterampilan, n.kontrak_siswa,
         (SELECT nilai_pengetahuan FROM nilais WHERE jenis = "uh1" AND kontrak_siswa = n.kontrak_siswa AND mapel = n.mapel) AS uh1_p,
         (SELECT nilai_keterampilan FROM nilais WHERE jenis = "uh1" AND kontrak_siswa = n.kontrak_siswa AND mapel = n.mapel) AS uh1_k,
         (SELECT nilai_pengetahuan FROM nilais WHERE jenis = "uh2" AND kontrak_siswa = n.kontrak_siswa AND mapel = n.mapel) AS uh2_p,
@@ -304,7 +304,7 @@ return new class extends Migration
         ORDER BY n.kontrak_siswa;
         ');
 
-        DB::unprepared('
+        /* DB::unprepared('
         CREATE VIEW rapor_nilai_pengetahuan AS
         SELECT n.jenis, n.kontrak_siswa, k.siswa, m.kelompok_mapel, m.nama_mapel, n.kkm_aktif, n.nilai_pengetahuan, n.deskripsi_pengetahuan, indeks(n.kkm_aktif, n.nilai_pengetahuan) AS indeks
         FROM nilais AS n 
@@ -320,11 +320,11 @@ return new class extends Migration
         JOIN mapels AS m ON n.mapel = m.mapel_id
         JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
         WHERE n.status = "confirmed" AND n.jenis = "uh1" OR n.jenis = "uh2" OR n.jenis = "uh3"
-        ');
+        '); */
 
         DB::unprepared('
         CREATE VIEW rapor_tengah_semester AS
-        SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, nama, nama_mapel AS mapel, kkm_aktif AS kkm,
+        SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, kontrak_siswa, nama, kelompok_mapel, nama_mapel, kkm_aktif, uas_p, uas_k, deskripsi_pengetahuan, deskripsi_keterampilan,
         nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p) AS nilai_pengetahuan,
         indeks(kkm_aktif, nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p)) AS indeks_pengetahuan,
         nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k) AS nilai_keterampilan,
@@ -333,14 +333,23 @@ return new class extends Migration
         ');
 
         DB::unprepared('
-        CREATE VIEW rapor_akhir_semester AS
-        SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, nama, nama_mapel AS mapel, kkm_aktif AS kkm,
-        nilai_akhir_semester(nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p), uas_p) AS nilai_pengetahuan,
-        indeks(kkm_aktif, nilai_akhir_semester(nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p), uas_p)) AS indeks_pengetahuan,
-        nilai_akhir_semester(nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k), uas_k) AS nilai_keterampilan
-        FROM list_rekap_nilai
+        CREATE VIEW rapor_akhir_semester AS SELECT tahun_ajaran, NISN, kontrak_siswa, nama, kelompok_mapel, nama_mapel, kkm_aktif, deskripsi_pengetahuan, deskripsi_keterampilan,
+        nilai_akhir_semester(nilai_pengetahuan, uas_p) AS nilai_pengetahuan,
+        nilai_akhir_semester(nilai_keterampilan, uas_k) AS nilai_keterampilan
+        FROM rapor_tengah_semester
+        GROUP BY nama_mapel
+        ORDER BY NISN
         ');
 
+        DB::unprepared('
+        CREATE VIEW rapor_ulangan_harian AS SELECT n.jenis, n.kontrak_siswa, k.siswa, m.kelompok_mapel, m.nama_mapel, n.kkm_aktif, n.nilai_pengetahuan, n.nilai_keterampilan, n.deskripsi_pengetahuan, n.deskripsi_keterampilan, indeks(n.kkm_aktif, n.nilai_pengetahuan) AS indeks_pengetahuan, indeks(n.kkm_aktif, n.nilai_keterampilan) AS indeks_keterampilan
+        FROM nilais AS n 
+        JOIN mapels AS m ON n.mapel = m.mapel_id
+        JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
+        WHERE n.status = "confirmed" AND n.jenis = "uh1" OR n.jenis = "uh2" OR n.jenis = "uh3"
+        GROUP BY m.nama_mapel
+        ORDER BY k.siswa
+        ')
         /* DB::unprepared('
         CREATE VIEW detail_kelas AS
         SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.jenis_kelamin, SUM(if(user_profiles.jenis_kelamin = "PR", 1, 0)) AS jumlah_PR, SUM(if(user_profiles.jenis_kelamin = "LK", 1, 0)) AS jumlah_LK
@@ -385,7 +394,10 @@ return new class extends Migration
         DB::unprepared('DROP VIEW list_ekstrakurikuler_siswa');
         DB::unprepared('DROP VIEW list_siswa_kelas');
         DB::unprepared('DROP VIEW list_rekap_nilai');
-        DB::unprepared('DROP VIEW rapor_nilai_pengetahuan');
-        DB::unprepared('DROP VIEW rapor_nilai_keterampilan');
+        // DB::unprepared('DROP VIEW rapor_nilai_pengetahuan');
+        // DB::unprepared('DROP VIEW rapor_nilai_keterampilan');
+        DB::unprepared('DROP VIEW rapor_ulangan_harian');
+        DB::unprepared('DROP VIEW rapor_tengah_semester');
+        DB::unprepared('DROP VIEW rapor_akhir_semester');
     }
 };
