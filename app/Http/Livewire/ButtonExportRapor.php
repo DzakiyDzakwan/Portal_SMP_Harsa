@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,11 @@ class ButtonExportRapor extends Component
 
     public function render()
     {
-        $nilai = DB::table('rapor_nilai_pengetahuan')->where('kontrak_siswa', $this->kontrak)->where('jenis', $this->jenis)->count();
+        $nilai = DB::table('rapor_nilai_pengetahuan')
+        ->where('kontrak_siswa', $this->kontrak)
+        ->where('jenis', $this->jenis)
+        ->where('siswa', Auth::user()->siswas->NISN)
+        ->count();
         //$kelompokB = DB::table('rapor_nilai_pengetahuan')->where('kontrak_siswa', $this->kontrak)->where('jenis', $this->jenis)->where('kelompok_mapel', "B")->get();
         $mapel = DB::table('mapels')->count();
         return view('livewire.button-export-rapor', compact('mapel', 'nilai'));
