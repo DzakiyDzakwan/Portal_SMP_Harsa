@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class InactiveModalGuru extends Component
 {
-    public $user;
+    public $user, $uuid;
     protected $listeners = [
         'adminInactive' => 'render',
         'getRestoreModal'

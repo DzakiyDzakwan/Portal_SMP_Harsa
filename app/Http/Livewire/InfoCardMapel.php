@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Mapel;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use App\Models\MapelGuru;
+
 
 class InfoCardMapel extends Component
 {
@@ -18,8 +18,8 @@ class InfoCardMapel extends Component
 
     public function render()
     {
-        $this->totalMapel = Mapel::count();
-        $this->totalMapelGuru = MapelGuru::count();
+        $this->totalMapel = DB::table('mapels')->count();
+        $this->totalMapelGuru = DB::table('mapel_gurus')->count();
         return view('livewire.sekolah.manajemen-mata-pelajaran.mata-pelajaran.info-card-mapel');
     }
 }

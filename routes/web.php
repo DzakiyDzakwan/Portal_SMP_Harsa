@@ -29,8 +29,8 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
 
     Route::get('/guru/dashboard', [DashboardController::class, 'indexguru'])->name('dashboardGuru');
     Route::get('/profil-guru', [ProfilController::class, 'profilGuru'])->name('profilGuru');
-    Route::get('/edit-profil-guru/{id}/edit', [ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
-    Route::put('/edit-profil-guru', [ProfilController::class, 'updateProfilGuru'])->name('updateProfilGuru');
+    Route::get('/edit-profil-guru', [ProfilController::class, 'editProfilGuru'])->name('editProfilGuru');
+    Route::get('/password-guru', [ProfilController::class, 'passwordGuru'])->name('passwordGuru');
 
     //Kepala Sekolah
     Route::group(['middleware' => ['role:kepsek']], function () {

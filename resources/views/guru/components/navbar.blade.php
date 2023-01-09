@@ -100,7 +100,7 @@
                                     @if (Auth::user()->profiles->foto == null)
                                         <img src="{{ asset('/assets/images/faces/2.jpg') }}" />
                                     @else
-                                        <img src="{{ asset('/storages/' . Auth::user()->profiles->foto) }}" />
+                                        <img src="{{ asset('storage/fotoprofil/' . Auth::user()->profiles->foto) }}" />
                                     @endif
                                 </div>
                             </div>
@@ -111,6 +111,10 @@
                         <li>
                             <a class="dropdown-item" href="/profil-guru"><i class="icon-mid bi bi-person me-2"></i>
                                 My Profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/password-guru"><i class="icon-mid bi bi-key me-2"></i>
+                                Change Password</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
