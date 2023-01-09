@@ -154,36 +154,31 @@ DELIMITER ; */
 --Function Nilai Rapot Tengah Semester--
 /* Stored Function untuk mendapatkan nilai rapot tengah semester siswa */
 DELIMTER ?
-CREATE function nilai_uts(
-    ph1 FLOAT,
-    ph2 FLOAT,
-    ph3 FLOAT,
-    uts FLOAT
+CREATE FUNCTION nilai_tengah_semester(
+    uh1 float,
+    uh2 float,
+    uh3 float,
+    uts float
 )
 RETURNS FLOAT
 BEGIN
     DECLARE nilai FLOAT;
-    SET nilai = FLOOR((ph1 + ph2 + ph3 + uts)/4);
-    RETURN (nilai);
+    SET nilai = CEILING((uh1 + uh2 + uh3 + uts)/4);
+    return nilai;
 END?
 DELIMITER ;
 
---Function Nilai Rapot Semester--
+--Function Nilai Rapot Akhir Semester--
 /* Stored Function untuk mendapatkan nilai rapot semester siswa */
 DELIMTER ?
-CREATE function nilai_uas(
-    ph1 FLOAT,
-    ph2 FLOAT,
-    ph3 FLOAT,
-    uts FLOAT,
-    uas FLOAT
+CREATE FUNCTION nilai_akhir_semester(
+    nilai_tengah_semester float,
+    uas float
 )
 RETURNS FLOAT
 BEGIN
     DECLARE nilai FLOAT;
-    DECLARE rts FLOAT;
-    SELECT nilai_uts(ph1, ph2, ph3, uts) INTO rts;
-    SET nilai = FLOOR((rts + uas)/2);
-    RETURN (nilai);
+    SET nilai = CEILING((nilai_tengah_semester + uas)/2);
+    return nilai;
 END?
 DELIMITER ;
