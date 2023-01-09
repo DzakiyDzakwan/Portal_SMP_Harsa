@@ -283,7 +283,7 @@ return new class extends Migration
         FROM nilais AS n 
         JOIN mapels AS m ON n.mapel = m.mapel_id
         JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
-        WHERE n.status = "confirmed"
+        WHERE n.status = "confirmed" AND n.jenis = "uh1" OR n.jenis = "uh2" OR n.jenis = "uh3"
         ');
 
         DB::unprepared('
@@ -292,7 +292,7 @@ return new class extends Migration
         FROM nilais AS n
         JOIN mapels AS m ON n.mapel = m.mapel_id
         JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
-        WHERE n.status = "confirmed"
+        WHERE n.status = "confirmed" AND n.jenis = "uh1" OR n.jenis = "uh2" OR n.jenis = "uh3"
         ');
 
         /* DB::unprepared('

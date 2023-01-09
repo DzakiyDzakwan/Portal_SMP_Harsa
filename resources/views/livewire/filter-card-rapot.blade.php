@@ -55,8 +55,8 @@
                                                         <option value="uh1">Ulangan Harian 1</option>
                                                         <option value="uh2">Ulangan Harian 2</option>
                                                         <option value="uh3">Ulangan Harian 3</option>
-                                                        <option value="uts">Ulangan Tengah Semester</option>
-                                                        <option value="uas">Ulangan Akhir Semester</option>
+                                                        <option value="uts">Rapor Tengah Semester</option>
+                                                        <option value="uas">Rapor Akhir Semester</option>
                                                     </select>
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-clipboard-data"></i>

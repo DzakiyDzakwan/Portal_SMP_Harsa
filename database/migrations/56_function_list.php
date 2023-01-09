@@ -185,6 +185,34 @@ return new class extends Migration
             RETURN (SELECT EXISTS(SELECT 1 FROM nilais WHERE sesi = sesi AND mapel = mapel AND kontrak_siswa = kontrak AND jenis= jenis));
         END
         '); */
+
+        DB::unprepared('
+        CREATE FUNCTION nilai_tengah_semester(
+            uh1 float,
+            uh2 float,
+    		uh3 float,
+    		uts float
+        )
+        RETURNS FLOAT
+        BEGIN
+            DECLARE nilai FLOAT;
+            SET nilai = (uh1 + uh2 + uh3 + uts)/4;
+            return nilai;
+        END
+        ');
+
+        DB::unprepared('
+        CREATE FUNCTION nilai_akhir_semester(
+            nilai_tengah_semester float,
+            uas float
+        )
+        RETURNS FLOAT
+        BEGIN
+            DECLARE nilai FLOAT;
+            SET nilai = (nilai_tengah_semester + uas)/2;
+            return nilai;
+        END
+        ');
     }
 
     /**
@@ -198,6 +226,8 @@ return new class extends Migration
         DB::unprepared('DROP FUNCTION masa_mengajar');
         DB::unprepared('DROP FUNCTION time_status');
         DB::unprepared('DROP FUNCTION durasi');
+        DB::unprepared('DROP FUNCTION nilai_tengah_semester');
+        DB::unprepared('DROP FUNCTION nilai_akhir_semester');
         // DB::unprepared('DROP FUNCTION get_sesi');
         // DB::unprepared('DROP FUNCTION indeks');
         // DB::unprepared('DROP FUNCTION is_nilai_exists');
