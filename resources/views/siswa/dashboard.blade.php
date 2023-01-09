@@ -98,10 +98,10 @@
                                             <div class="pt-3">
                                                 @if (Auth::user()->profiles->foto == null)
                                                     <img src="{{ asset('assets/images/faces/2.jpg') }}"
-                                                        class="rounded w-100 d-block" alt="...">
+                                                        class="rounded w-75 d-block" alt="...">
                                                 @else
                                                     <img src="{{ asset('storage/fotoprofil/' . Auth::user()->profiles->foto) }}"
-                                                        class="rounded w-100 d-block" alt="...">
+                                                        class="rounded w-75 d-block" alt="...">
                                                 @endif
                                             </div>
                                         </div>
@@ -245,14 +245,14 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($ekskul as $e)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $e->nama }}</td>
-                                                    <td>{{ $e->tahun_ajaran_aktif }}</td>
-                                                    <td>{{ $e->penganggung_jawab }}</td>
-                                                    <td>{{ $e->hari }}</td>
-                                                    <td>{{ $e->tempat }}</td>
-                                                </tr>
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $e->nama }}</td>
+                                                        <td>{{ $e->tahun_ajaran_aktif }}</td>
+                                                        <td>{{ $e->penganggung_jawab }}</td>
+                                                        <td>{{ $e->hari }}</td>
+                                                        <td>{{ $e->tempat }}</td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>

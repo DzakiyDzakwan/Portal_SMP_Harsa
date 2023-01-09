@@ -1388,7 +1388,10 @@ CREATE PROCEDURE update_ekstrakurikuler(
 
         DB::unprepared('
         CREATE PROCEDURE assign_pembina(
+        CREATE PROCEDURE assign_pembina(
             IN admin CHAR(36),
+            IN ekskul CHAR(6),
+            IN guru CHAR(18)
             IN ekskul CHAR(6),
             IN guru CHAR(16)
             )
@@ -1483,6 +1486,23 @@ CREATE PROCEDURE update_ekstrakurikuler(
         ');
 
         DB::unprepared('
+        CREATE PROCEDURE delete_ekstrakurikuler_siswa(
+        IN admin CHAR(36),
+        IN ekstrakurikuler CHAR(5)
+        )
+        BEGIN
+        
+            DECLARE errno INT;
+            DECLARE admin CHAR(36);
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION
+            BEGIN
+                ROLLBACK;
+            END;
+        
+            SET admin = UUID();
+        
+            START TRANSACTION;
+            DELETE FROM ekstrakurikuler_siswas WHERE ekstrakurikuler_siswa_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
         CREATE PROCEDURE delete_ekstrakurikuler_siswa(
         IN admin CHAR(36),
         IN ekstrakurikuler CHAR(5)

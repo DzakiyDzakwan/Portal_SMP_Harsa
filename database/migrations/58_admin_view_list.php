@@ -247,7 +247,7 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_ekstrakurikuler_siswa AS
-        SELECT e.ekstrakurikuler_id AS id, e.nama AS nama_ekskul, p.nama AS nama_siswa, k.grade AS kelas, es.tahun_ajaran_aktif AS tahun_ajaran, n.nilai AS nilai_ekskul
+        SELECT e.ekstrakurikuler_id AS id, e.nama AS nama_ekskul, s.NISN, p.nama AS nama_siswa, k.grade AS kelas, es.tahun_ajaran_aktif AS tahun_ajaran, n.nilai AS nilai_ekskul
         FROM ekstrakurikuler_siswas as es
         LEFT JOIN ekstrakurikulers AS e ON es.ekstrakurikuler = e.ekstrakurikuler_id
         LEFT JOIN siswas as s ON es.siswa = s.NISN
@@ -382,6 +382,7 @@ return new class extends Migration
         // DB::unprepared('DROP VIEW list_nilai_pending');
         // DB::unprepared('DROP VIEW list_prestasi');
         DB::unprepared('DROP VIEW list_ekstrakurikuler');
+        DB::unprepared('DROP VIEW list_ekstrakurikuler_siswa');
         DB::unprepared('DROP VIEW list_siswa_kelas');
         DB::unprepared('DROP VIEW list_rekap_nilai');
         DB::unprepared('DROP VIEW rapor_nilai_pengetahuan');

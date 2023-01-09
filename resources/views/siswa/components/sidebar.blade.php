@@ -50,16 +50,28 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                {{--
-                <li class="sidebar-title">SPP</li>
-                <li class="sidebar-item @if ($pages === 'tagihanSPP') active @endif">
-                    <a href="/tagihan-spp" class="sidebar-link">
-                        <i class="bi bi-hexagon-fill"></i>
-                        <span>Daftar Tagihan SPP</span>
+
+                <li class="sidebar-item @if ($menu === 'ekstrakurikuler') active @endif">
+                    <a href="/siswa/ekstrakurikuler" class="sidebar-link">
+                        <i class="bi bi-command"></i>
+                        <span>Ekstrakurikuler</span>
                     </a>
+                </li>
+
+                {{-- <li class="sidebar-item has-sub @if ($menu === 'ekstrakurikuler-siswa') active @endif">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-command"></i>
+                        <span>Ekstrakurikuler</span>
+                    </a>
+                    <ul class="submenu @if ($menu === 'ekstrakurikuler-siswa') active @endif">
+                        @foreach (Auth::user()->siswas->ekstrakurikulers as $item)
+                            <li class="submenu-item">
+                                <a href="/siswa/ekstrakurikuler/{{ $item->ekstrakurikuler_id }}">{{ $item->nama }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </li> --}}
-                {{-- Rapor --}}
-                <li class="sidebar-title">Hasil Pembelajaran</li>
+
                 <li class="sidebar-item has-sub @if ($menu === 'rapor') active @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
@@ -74,19 +86,11 @@
                     <ul class="submenu @if ($menu === 'rapor') active @endif">
                         @foreach ($kelas as $k)
                             <li class="submenu-item">
-                                <a href="/rapor/{{ $k->grade }}">Kelas {{ $k->grade }}</a>
+                                <a href="/siswa/rapor/{{ $k->grade }}">Kelas {{ $k->grade }}</a>
                             </li>
                         @endforeach
                     </ul>
                 </li>
-                {{-- Ekstrakurikuler --}}
-                {{-- <li class="sidebar-title">Ekstrakurikuler Saya</li>
-                <li class="sidebar-item @if ($menu === 'ekstrakurikuler') active @endif">
-                    <a href="/siswa/ekstrakurikuler" class="sidebar-link">
-                        <i class="bi bi-command"></i>
-                        <span>Ekstrakurikuler</span>
-                    </a>
-                </li> --}}
             </ul>
         </div>
     </div>

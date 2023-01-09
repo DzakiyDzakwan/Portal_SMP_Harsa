@@ -44,9 +44,14 @@ class Siswa extends Model
         return $this->hasMany(KontrakSemester::class, 'siswa', 'NISN');
     }
 
+    /**
+     * The ekstrakurikulers that belong to the Siswa
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function ekstrakurikulers()
     {
-        return $this->belongsToMany(Ekstrakurikuler::class, 'ekstrakurikuler_siswas', 'ekstrakurikuler_id', 'NISN');
+        return $this->belongsToMany(Ekstrakurikuler::class, 'ekstrakurikuler_siswas', 'siswa', 'ekstrakurikuler');
     }
 
 }

@@ -117,7 +117,8 @@ Route::group(['middleware' => ['auth', 'isSiswa', 'role:siswa']], function () {
     Route::get('/profil-siswa', [ProfilController::class, 'profilSiswa'])->name('profilSiswa');
     Route::get('/edit-profil-siswa', [ProfilController::class, 'editProfilSiswa'])->name('editProfilSiswa');
     Route::get('/change-password', [ProfilController::class, 'changePassword'])->name('changePassword');
-    Route::get('/rapor/{grade}', [ViewController::class,  'rapotSiswa'])->name('rapor');
+    Route::get('/siswa/rapor/{grade}', [ViewController::class,  'rapotSiswa'])->name('rapor');
+    Route::get('/siswa/ekstrakurikuler', [ViewController::class,  'ekstrakurikulerSiswa'])->name('ekstrakurikuler-siswa');
     Route::get('/rapor/{kontrak}/{jenis}/cetak', [ReportController::class,  'exportRapor'])->name('export-rapor');
 });
 

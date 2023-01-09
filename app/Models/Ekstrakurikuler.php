@@ -10,6 +10,8 @@ class Ekstrakurikuler extends Model
     use HasFactory;
 
     protected $primaryKey = 'ekstrakurikuler_id';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $guarded = [
         "created_at",

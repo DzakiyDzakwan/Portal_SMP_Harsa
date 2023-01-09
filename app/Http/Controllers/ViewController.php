@@ -132,25 +132,31 @@ class ViewController extends Controller
 
     public function ekstrakurikuler()
     {
-        $menu = 'sekolah';
+        $menu = 'ekstrakurikuler';
         return view('sekolah.ekskul', compact('menu'));
     }
 
     public function ekstrakurikulerSiswaAdmin()
     {
-        $menu = 'sekolah';
+        $menu = 'sekolah-siswa';
         return view('sekolah.ekskulsiswaadmin', compact('menu'));
     }
     
     public function ekstrakurikulerSiswaPembina()
     {
-        $menu = 'sekolah';
+        $menu = 'sekolah-siswa';
         return view('sekolah.ekskulsiswapembina', compact('menu'));
+    }
+
+    public function ekstrakurikulerSiswa()
+    {
+        $menu = 'sekolah-siswa';
+        return view('sekolah.ekskulsiswa', compact('menu'));
     }
 
     public function nilaiEkstrakurikuler()
     {
-        $menu = 'sekolah';
+        $menu = 'sekolah-siswa';
         dd('nilai Ekstrakurikuler');
         return view('sekolah.nilai_ekskul', compact('menu'));
     }
