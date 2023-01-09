@@ -305,6 +305,24 @@ return new class extends Migration
         ');
 
         DB::unprepared('
+        CREATE VIEW rapor_nilai_pengetahuan AS
+        SELECT n.jenis, n.kontrak_siswa, k.siswa, m.kelompok_mapel, m.nama_mapel, n.kkm_aktif, n.nilai_pengetahuan, n.deskripsi_pengetahuan, indeks(n.kkm_aktif, n.nilai_pengetahuan) AS indeks
+        FROM nilais AS n 
+        JOIN mapels AS m ON n.mapel = m.mapel_id
+        JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
+        WHERE n.status = "confirmed" AND n.jenis = "uh1" OR n.jenis = "uh2" OR n.jenis = "uh3"
+        ');
+
+        DB::unprepared('
+        CREATE VIEW rapor_nilai_keterampilan AS
+        SELECT n.jenis, n.kontrak_siswa, k.siswa, m.kelompok_mapel, m.nama_mapel, n.kkm_aktif, n.nilai_keterampilan, n.deskripsi_keterampilan, indeks(n.kkm_aktif, n.nilai_keterampilan) AS indeks  
+        FROM nilais AS n 
+        JOIN mapels AS m ON n.mapel = m.mapel_id
+        JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
+        WHERE n.status = "confirmed" AND n.jenis = "uh1" OR n.jenis = "uh2" OR n.jenis = "uh3"
+        ');
+
+        DB::unprepared('
         CREATE VIEW rapor_tengah_semester AS
         SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, nama, nama_mapel AS mapel, kkm_aktif AS kkm,
         nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p) AS nilai_pengetahuan,
