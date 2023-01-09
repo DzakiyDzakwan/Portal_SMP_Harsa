@@ -232,10 +232,15 @@
                                 <li class="submenu-item">
                                     <a href="/guru/ekstrakurikuler">Ekstrakurikuler</a>
                                 </li>
+                                <li class="submenu-item">
+                                    <a href="/guru/ekstrakurikuler-siswa-admin">Ekstrakurikuler Siswa</a>
+                                </li>
                             @endhasanyrole
-                            <li class="submenu-item">
-                                <a href="/guru/ekstrakurikuler-siswa">Ekstrakurikuler Siswa</a>
-                            </li>
+                            @hasrole('pembina')
+                                <li class="submenu-item">
+                                    <a href="/guru/ekstrakurikuler-siswa-pembina">Ekstrakurikuler Siswa</a>
+                                </li>
+                            @endhasrole
                             <li class="submenu-item">
                                 <a href="/guru/nilai-ekstrakurikuler">Nilai Ekstrakurikuler</a>
                             </li>

@@ -43,6 +43,7 @@ class CreateModalEkskulSiswa extends Component
         }
         $ekstrakurikuler = DB::table('ekstrakurikulers')->select('ekstrakurikuler_id', 'nama')
         ->get();
+        $this->nama_ekstrakurikuler = DB::table('list_ekstrakurikuler')->where('NUPTK', auth()->user()->gurus->NUPTK)->first()->id;
         // $semester = DB::table('kontrak_semesters')->select('siswa', 'tahun_ajaran_aktif')
         // ->get();
 
@@ -64,6 +65,7 @@ class CreateModalEkskulSiswa extends Component
 
 
     public function store() {
+        // dd($this);
         $this->validate([
             'nama_ekskul' => 'required',
             'nama_siswa' => 'required',
@@ -72,7 +74,7 @@ class CreateModalEkskulSiswa extends Component
         ]);
         DB::select('CALL add_ekstrakurikuler_siswa(?, ?, ?, ?)', [auth()->user()->uuid, $this->nama_ekskul, $this->nama_siswa, $this->ta_semester]);
         $this->render();
-        $this->emit('insertEkskulSiswa');
+        $this->emit('assignSiswa');
         $this->dispatchBrowserEvent('insert-alert');
         $this->dispatchBrowserEvent('close-create-modal');
         // session()->flash('message', 'Kelas Berhasil dibuat');

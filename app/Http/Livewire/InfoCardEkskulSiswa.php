@@ -2,27 +2,31 @@
 
 namespace App\Http\Livewire;
 
+
+use Livewire\Component;
+
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Ekstrakurikuler;
 use App\Models\Siswa;
-use Livewire\Component;
 
 class InfoCardEkskulSiswa extends Component
 {
-    public $totalEkskul, $totalSiswa;
 
     protected $listeners = [
-        'storeEkskul'=> 'render',
-        'deleteEkskul' => 'render',
-        'siswaStore'=> 'render',
-        'siswaNonaktif' => 'render',
-        'siswaUpdate' => 'render',
-        'siswaDelete' => 'render'
+        'assignSiswa'=> 'render',
+        'unassignSiswa' => 'render',
     ];
 
     public function render()
     {
-        $this->totalEkskul = Ekstrakurikuler::count();
-        $this->totalSiswa = Siswa::count();
-        return view('livewire.info-card-ekskul-siswa');
+        $data = DB::table('list_ekstrakurikuler')->where('NUPTK', auth()->user()->gurus->NUPTK)->first();
+        $anggota = $data->anggota;
+        $jadwal = [
+            'hari' => $data->hari,
+            'waktu_mulai' => $data->waktu_mulai,
+            'waktu_akhir' => $data->waktu_akhir
+        ];
+        return view('livewire.info-card-ekskul-siswa', compact('anggota', 'jadwal'));
     }
 }

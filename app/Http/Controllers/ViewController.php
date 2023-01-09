@@ -123,6 +123,12 @@ class ViewController extends Controller
         $sesi = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
         return view('sekolah.kelasguru', compact('menu', 'kelas', 'sesi'));
     }
+    
+    public function pembinaEkstrakurikuler()
+    {
+        $menu = 'sekolah';
+        return view('sekolah.pembina_ekskul', compact('menu'));
+    }
 
     public function ekstrakurikuler()
     {
@@ -130,16 +136,16 @@ class ViewController extends Controller
         return view('sekolah.ekskul', compact('menu'));
     }
 
-    public function ekstrakurikulerSiswa()
+    public function ekstrakurikulerSiswaAdmin()
     {
         $menu = 'sekolah';
-        return view('sekolah.ekskulsiswa', compact('menu'));
+        return view('sekolah.ekskulsiswaadmin', compact('menu'));
     }
-
-    public function pembinaEkstrakurikuler()
+    
+    public function ekstrakurikulerSiswaPembina()
     {
         $menu = 'sekolah';
-        return view('sekolah.pembina_ekskul', compact('menu'));
+        return view('sekolah.ekskulsiswapembina', compact('menu'));
     }
 
     public function nilaiEkstrakurikuler()
@@ -148,6 +154,8 @@ class ViewController extends Controller
         dd('nilai Ekstrakurikuler');
         return view('sekolah.nilai_ekskul', compact('menu'));
     }
+
+
 
     public function rapotSiswa($grade)
     {

@@ -78,8 +78,8 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
             Route::get('/guru/roster', 'roster')->name('roster');
             Route::get('/guru/ekstrakurikuler', 'ekstrakurikuler')->name('ekstrakurikuler');
             Route::get('/guru/pembina-ekstrakurikuler', 'pembinaEkstrakurikuler')->name('pembina-ekstrakurikuler');
-            Route::get('/guru/ekstrakurikuler-siswa', 'ekstrakurikulerSiswa')->name('ekstrakurikuler-siswa');
-            Route::get('/guru/nilai-ekstrakurikuler', 'nilaiEkstrakurikuler')->name('nilai-ekstrakurikuler');
+            Route::get('/guru/ekstrakurikuler-siswa-admin', 'ekstrakurikulerSiswaAdmin')->name('ekstrakurikuler-siswa-admin');
+            // Route::get('/guru/nilai-ekstrakurikuler', 'nilaiEkstrakurikuler')->name('nilai-ekstrakurikuler');
             Route::get('/guru/sesi-penilaian', 'sesiPenilaian')->name('sesi-penilaian');
         });
 
@@ -101,6 +101,13 @@ Route::group(['middleware' => ['auth', 'isGuru', 'role:guru|kepsek|wakepsek|admi
     Route::group(['middleware' => ['role:wali']], function () {
         Route::controller(ViewController::class)->group(function () {
             Route::get('/guru/kelas-saya', 'kelasSaya')->name('kelas-saya-wali');
+        });
+    });
+
+    Route::group(['middleware' => ['role:kepsek|wakepsek|admin|pembina']], function () {
+        Route::controller(ViewController::class)->group(function () {
+            Route::get('/guru/ekstrakurikuler-siswa-pembina', 'ekstrakurikulerSiswaPembina')->name('ekstrakurikuler-siswa-pembina');
+            Route::get('/guru/nilai-ekstrakurikuler', 'nilaiEkstrakurikuler')->name('nilai-ekstrakurikuler');
         });
     });
 });

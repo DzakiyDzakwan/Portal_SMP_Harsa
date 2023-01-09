@@ -18,9 +18,10 @@ class ListEkskulSiswa extends Component
 
     public function render()
     {
-        $this->ekskul_siswa = DB::table('list_ekstrakurikuler_siswa')
+        $ekskul = auth()->user()->gurus->ekstrakurikulers->ekstrakurikuler_id;
+        $siswa = DB::table('list_ekstrakurikuler_siswa')->where('id', $ekskul)->where('tahun_ajaran', '2022-2023')
         ->get();
-        return view('livewire.list-ekskul-siswa');
+        return view('livewire.list-ekskul-siswa', compact('siswa'));
     }
 
     // public function editEkskul($id) {

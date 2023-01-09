@@ -33,8 +33,8 @@
                                     <div class="position-relative">
                                         <select name="nama_ekskul"
                                             class="form-select form-control  @error('nama_ekskul') is-invalid
-                                    @enderror"
-                                            id="basicSelect" wire:model.defer="nama_ekskul">
+                                            @enderror"
+                                            id="basicSelect" wire:model.defer="nama_ekskul" disabled>
                                             @if (!$ekstrakurikuler->isEmpty())
                                                 @foreach ($ekstrakurikuler as $e)
                                                     <option value="{{ $e->ekstrakurikuler_id }}">{{ $e->nama }}

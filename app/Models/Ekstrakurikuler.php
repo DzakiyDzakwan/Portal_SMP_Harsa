@@ -21,7 +21,7 @@ class Ekstrakurikuler extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function penanggungJawab(): BelongsTo
+    public function penanggungJawab()
     {
         return $this->belongsTo(Guru::class, 'penanggung_jawab', 'NUPTK');
     }

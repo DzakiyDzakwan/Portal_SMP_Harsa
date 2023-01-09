@@ -4,52 +4,7 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Ekstrakurikuler Siswa Berhasil dibuat
-            </div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
-
-    {{-- Inaktif Guru --}}
-    <div id="inactiveToast" class="toast align-items-center  text-bg-danger" role="alert" aria-live="assertive"
-        aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                Ekstrakurikuler Berhasil di Non Aktifkan
-            </div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
-
-    {{-- Not Inaktif Guru --}}
-    <div id="nonInactiveToast" class="toast align-items-center  text-bg-danger" role="alert" aria-live="assertive"
-        aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                <p class="m-0">Tidak bisa menonaktifkan guru</p>
-                <p class="m-0">Guru merupakan wali kelas</p>
-            </div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
-
-    {{-- Update Guru --}}
-    <div id="updateToast" class="toast align-items-center  text-bg-warning" role="alert" aria-live="assertive"
-        aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                Ekstrakurikuler berhasil diubah
-            </div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
-
-    {{-- Restore Guru --}}
-    <div id="restoreToast" class="toast align-items-center  text-bg-success" role="alert" aria-live="assertive"
-        aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                Guru berhasil dipulihkan
+                Siswa berhasil ditambahkan
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -60,10 +15,9 @@
         aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-                Siswa berhasil dihapus dari Ekstrakulikuler
+                Siswa berhasil dikeluarkan
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
 </div>
-

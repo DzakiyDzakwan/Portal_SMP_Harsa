@@ -180,5 +180,12 @@ SELECT n.jenis, n.kontrak_siswa, m.kelompok_mapel, m.nama_mapel, n.kkm, n.nilai_
 FROM nilais AS n
 JOIN mapels AS m ON n.mapel = m.mapel_id;
 
-
-
+CREATE VIEW list_kelas_aktif AS
+        SELECT kelas_aktifs.kelas_aktif_id, kelas_aktifs.nama_kelas_aktif, kelas.grade, kelas.kelompok_kelas,  kelas_aktifs.tahun_ajaran_aktif, gurus.NUPTK, user_profiles.nama AS wali_kelas, COUNT(siswas.NIS) AS jumlah_siswa
+        FROM kelas_aktifs
+        LEFT JOIN kelas ON kelas.kelas_id = kelas_aktifs.kelas
+        LEFT JOIN gurus ON gurus.NUPTK = kelas_aktifs.wali_kelas
+        LEFT JOIN user_profiles ON user_profiles.user = gurus.user
+        LEFT JOIN kontrak_semesters ON kontrak_semesters.kelas = kelas_aktifs.kelas_aktif_id
+        LEFT JOIN siswas ON kontrak_semesters.siswa = siswas.NISN
+        GROUP BY kelas_aktifs.kelas_aktif_id

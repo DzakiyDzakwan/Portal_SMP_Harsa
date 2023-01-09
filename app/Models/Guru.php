@@ -47,7 +47,7 @@ class Guru extends Model
         return $this->hasOne(Kelas::class, 'wali_kelas', 'NUPTK');
     }
 
-    public function ekstrakurikuler()
+    public function ekstrakurikulers()
     {
         return $this->hasOne(Ekstrakurikuler::class, 'penanggung_jawab', 'NUPTK');
     }
