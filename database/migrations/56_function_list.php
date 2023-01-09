@@ -196,7 +196,7 @@ return new class extends Migration
         RETURNS FLOAT
         BEGIN
             DECLARE nilai FLOAT;
-            SET nilai = (uh1 + uh2 + uh3 + uts)/4;
+            SET nilai = CEILING((uh1 + uh2 + uh3 + uts)/4);
             return nilai;
         END
         ');
@@ -209,7 +209,7 @@ return new class extends Migration
         RETURNS FLOAT
         BEGIN
             DECLARE nilai FLOAT;
-            SET nilai = (nilai_tengah_semester + uas)/2;
+            SET nilai = CEILING((nilai_tengah_semester + uas)/2);
             return nilai;
         END
         ');
