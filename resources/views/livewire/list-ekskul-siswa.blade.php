@@ -5,6 +5,7 @@
             <th>Nama Ekstrakulikuler</th>
             <th>Nama Siswa</th>
             <th>Tahun Ajaran Aktif</th>
+            <th>Nilai</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -15,6 +16,7 @@
             <td>{{ $e->nama_ekskul }}</td>
             <td>{{ $e->nama_siswa }}</td>
             <td>{{ $e->tahun_ajaran }}</td>
+            <td>{{ $e->nilai_ekskul }}</td>
             <td>
                 {{-- Delete Button --}}
                 <div class="modal-danger me-1 mb-1 d-inline-block">

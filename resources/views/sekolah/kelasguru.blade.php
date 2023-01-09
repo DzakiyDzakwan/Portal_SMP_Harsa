@@ -135,7 +135,7 @@
             <h5>List Siswa</h5>
         </div>
         <div class="card-body">
-            @livewire('list-siswa-kelas', ['kelas_id' => $kelas->kelas])
+            @livewire('list-siswa-kelas', ['kelas' => $kelas->kelas, 'mapel' => $kelas->mapel_id])
         </div>
     </div>
 
@@ -160,6 +160,7 @@
 
         //Toast
         const insertToast = new bootstrap.Toast('#insertNilaiToast')
+
         window.addEventListener('insert-alert', e => {
             insertToast.show()
         })

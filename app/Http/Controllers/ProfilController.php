@@ -34,7 +34,7 @@ class ProfilController extends Controller
             'menu' => $menu
         ]);
     }
-
+    
     public function editProfilGuru()
     {
         $menu = 'profilGuru';

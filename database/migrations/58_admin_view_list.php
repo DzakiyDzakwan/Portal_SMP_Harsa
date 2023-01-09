@@ -243,13 +243,14 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_ekstrakurikuler_siswa AS
-        SELECT es.ekstrakurikuler_siswa_id AS id, e.nama AS nama_ekskul, u.nama AS nama_siswa, es.tahun_ajaran_aktif AS tahun_ajaran
+        SELECT es.ekstrakurikuler_siswa_id AS id, e.nama AS nama_ekskul, u.nama AS nama_siswa, es.tahun_ajaran_aktif AS tahun_ajaran, n.nilai AS nilai_ekskul
         FROM ekstrakurikuler_siswas as es
         JOIN ekstrakurikulers AS e ON es.ekstrakurikuler = e.ekstrakurikuler_id
         JOIN siswas as s ON es.siswa = s.NISN
-        JOIN user_profiles as u ON s.user = u.user;
+        JOIN user_profiles as u ON s.user = u.user
+        JOIN kontrak_semesters as k ON es.siswa =  k.siswa
+        JOIN nilai_ekstrakurikulers as n ON k.kontrak_semester_id = n.kontrak_siswa ;
         ');
-
         DB::unprepared('
         CREATE VIEW list_pembina_ekstrakurikuler AS
         SELECT e.ekstrakurikuler_id AS id, e.nama AS ekskul, g.NUPTK, u.nama AS guru
@@ -276,19 +277,23 @@ return new class extends Migration
         JOIN mapels AS m ON m.mapel_id = mg.mapel
         '); */
 
-        /* DB::unprepared('
-        CREATE VIEW rapot_nilai_pengetahuan AS
-        SELECT n.jenis, n.kontrak_siswa, m.kelompok_mapel, m.nama_mapel, n.kkm, n.nilai_pengetahuan, n.deskripsi_pengetahuan, indeks(n.kkm, n.nilai_pengetahuan) AS indeks  
+        DB::unprepared('
+        CREATE VIEW rapor_nilai_pengetahuan AS
+        SELECT n.jenis, n.kontrak_siswa, k.siswa, m.kelompok_mapel, m.nama_mapel, n.kkm_aktif, n.nilai_pengetahuan, n.deskripsi_pengetahuan, indeks(n.kkm_aktif, n.nilai_pengetahuan) AS indeks
+        FROM nilais AS n 
+        JOIN mapels AS m ON n.mapel = m.mapel_id
+        JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
+        WHERE n.status = "confirmed"
+        ');
+
+        DB::unprepared('
+        CREATE VIEW rapor_nilai_keterampilan AS
+        SELECT n.jenis, n.kontrak_siswa, k.siswa, m.kelompok_mapel, m.nama_mapel, n.kkm_aktif, n.nilai_keterampilan, n.deskripsi_keterampilan, indeks(n.kkm_aktif, n.nilai_keterampilan) AS indeks  
         FROM nilais AS n
         JOIN mapels AS m ON n.mapel = m.mapel_id
-        '); */
-
-        /* DB::unprepared('
-        CREATE VIEW rapot_nilai_keterampilan AS
-        SELECT n.jenis, n.kontrak_siswa, m.kelompok_mapel, m.nama_mapel, n.kkm, n.nilai_keterampilan, n.deskripsi_keterampilan, indeks(n.kkm, n.nilai_pengetahuan) AS indeks  
-        FROM nilais AS n
-        JOIN mapels AS m ON n.mapel = m.mapel_id;
-        '); */
+        JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
+        WHERE n.status = "confirmed"
+        ');
 
         /* DB::unprepared('
         CREATE VIEW detail_kelas AS

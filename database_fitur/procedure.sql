@@ -501,6 +501,39 @@ END?
 DELIMITER ;
 /* Input Nilai END */
 
+--Update Nilai(✅)
+DELIMITER ?
+CREATE PROCEDURE update_nilai(
+    IN nilai INT,
+    IN sesi INT,
+    IN nilai_p FLOAT,
+    IN deskripsi_p TEXT,
+    IN nilai_k FLOAT,
+    IN deskripsi_k TEXT,
+    IN user CHAR(36)
+)
+BEGIN
+
+    DECLARE start DATETIME;
+    DECLARE end DATETIME;
+
+    SELECT tanggal_mulai INTO start FROM sesi_penilaians WHERE sesi_id = sesi;
+    SELECT tanggal_berakhir INTO end FROM sesi_penilaians WHERE sesi_id = sesi;
+
+    IF cek_sesi(start, end) = 1 THEN
+        
+        UPDATE nilais SET nilai_pengetahuan = nilai_p, deskripsi_pengetahuan = deskripsi_p, nilai_keterampilan = nilai_k, deskripsi_keterampilan = deskripsi_k, status = "pending" WHERE nilai_id = nilai;
+
+        INSERT INTO log_activities(actor, action, at, created_at)
+        VALUES(user, "insert", "nilais", NOW());
+    ELSE
+        SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT ="Sesi tidak tersedia";
+    END IF;
+
+END?
+DELIMITER ;
+/* Input Nilai END */
+
 --Prestasi Siswa Akademik--
 --Add Prestasi (✅)
 DELIMITER ?

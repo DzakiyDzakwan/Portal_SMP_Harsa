@@ -11,10 +11,10 @@ class ListEkskulSiswa extends Component
 {
     public $ekskul_siswa;
 
-    // protected $listeners = [
-    //     'storeEkskul'=> 'render',
-    //     'updateEkskul'=> 'render'
-    // ];
+    protected $listeners = [
+        'insertEkskulSiswa'=> 'render'
+        // 'updateEkskul'=> 'render'
+    ];
 
     public function render()
     {

@@ -79,6 +79,14 @@
                         @endforeach
                     </ul>
                 </li>
+                {{-- Ekstrakurikuler --}}
+                {{-- <li class="sidebar-title">Ekstrakurikuler Saya</li>
+                <li class="sidebar-item @if ($menu === 'ekstrakurikuler') active @endif">
+                    <a href="/siswa/ekstrakurikuler" class="sidebar-link">
+                        <i class="bi bi-command"></i>
+                        <span>Ekstrakurikuler</span>
+                    </a>
+                </li> --}}
             </ul>
         </div>
     </div>

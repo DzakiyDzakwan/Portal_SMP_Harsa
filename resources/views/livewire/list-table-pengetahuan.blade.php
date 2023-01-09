@@ -28,7 +28,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->nama_mapel }}</td>
-                                    <td>{{ $item->kkm }}</td>
+                                    <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_pengetahuan }}</td>
                                     <td>{{ $item->indeks }}</td>
                                     <td>{{ $item->deskripsi_pengetahuan }}</td>
@@ -65,7 +65,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->nama_mapel }}</td>
-                                    <td>{{ $item->kkm }}</td>
+                                    <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_pengetahuan }}</td>
                                     <td>{{ $item->indeks }}</td>
                                     <td>{{ $item->deskripsi_pengetahuan }}</td>
