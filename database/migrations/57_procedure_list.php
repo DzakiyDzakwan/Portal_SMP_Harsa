@@ -1453,6 +1453,34 @@ CREATE PROCEDURE update_ekstrakurikuler(
             COMMIT;
          END
         ');
+        
+        DB::unprepared('
+        CREATE PROCEDURE add_ekstrakurikuler_siswa(
+            IN admin CHAR(36),
+            IN ekstrakurikuler CHAR(5),
+            IN siswa VARCHAR(10),
+            IN ta CHAR(9)
+            )
+            BEGIN
+                DECLARE errno INT;
+                DECLARE uuid CHAR(36);
+                DECLARE EXIT HANDLER FOR SQLEXCEPTION
+                BEGIN
+                    ROLLBACK;
+                END;
+            
+                SET uuid = UUID();
+            
+                START TRANSACTION;
+                INSERT INTO ekstrakurikuler_siswas(ekstrakurikuler, siswa, tahun_ajaran_aktif, created_at) 
+                VALUES (ekstrakurikuler, siswa, ta, NOW());
+
+                INSERT INTO log_activities(actor, action, at, created_at)
+                VALUES(admin, "insert", "ekstrakurikuler_siswas", NOW());
+                
+                COMMIT;
+            END
+        ');
 
         DB::unprepared('
         CREATE PROCEDURE delete_ekstrakurikuler_siswa(

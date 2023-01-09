@@ -43,6 +43,7 @@
     <div class="card-header d-flex gap-2 align-items-center justify-content-between">
         <h5>List Ekstrakulikuler Siswa</h5>
         <div class="form-group">
+            @livewire('create-modal-ekskul-siswa') 
         </div>
     </div>
     <div class="card-body">
@@ -61,31 +62,31 @@
 @section('script')
 <script>
     //Modal
-    // const createModal = new bootstrap.Modal('#createModal', {
-    //     keyboard: false
-    // })
+    const createModal = new bootstrap.Modal('#createModal', {
+        keyboard: false
+    })
     // const editModal = new bootstrap.Modal('#editModal', {
     //     keyboard: false
     // })
     // const infoModal = new bootstrap.Modal('#infoModal', {
     //     keyboard: false
     // })
-    const deleteModal = new bootstrap.Modal('#deleteModal', {
-        keyboard: false
-    }) 
+    // const deleteModal = new bootstrap.Modal('#deleteModal', {
+    //     keyboard: false
+    // }) 
 
-    // window.addEventListener('close-create-modal', event => {
-    //     createModal.hide();
-    // });
+    window.addEventListener('close-create-modal', event => {
+        createModal.hide();
+    });
     // window.addEventListener('edit-modal', event => {
     //     editModal.toggle();
     // });
     // window.addEventListener('info-modal', event => {
     //     infoModal.toggle();
     // })
-    window.addEventListener('delete-modal', event => {
-        deleteModal.toggle();
-    })
+    // window.addEventListener('delete-modal', event => {
+    //     deleteModal.toggle();
+    // })
 
     //Toast
     const insertToast = new bootstrap.Toast('#insertToast')
