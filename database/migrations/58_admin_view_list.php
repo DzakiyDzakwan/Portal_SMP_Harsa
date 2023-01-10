@@ -247,7 +247,7 @@ return new class extends Migration
 
         DB::unprepared('
         CREATE VIEW list_ekstrakurikuler_siswa AS
-        SELECT e.ekstrakurikuler_id AS id, e.nama AS nama_ekskul, s.NISN, p.nama AS nama_siswa, k.grade AS kelas, es.tahun_ajaran_aktif AS tahun_ajaran, n.nilai AS nilai_ekskul
+        SELECT e.ekstrakurikuler_id AS id, k.kontrak_semester_id, e.nama AS nama_ekskul, p.nama AS nama_siswa, k.grade AS kelas, es.tahun_ajaran_aktif AS tahun_ajaran, n.nilai AS nilai_ekskul
         FROM ekstrakurikuler_siswas as es
         LEFT JOIN ekstrakurikulers AS e ON es.ekstrakurikuler = e.ekstrakurikuler_id
         LEFT JOIN siswas as s ON es.siswa = s.NISN
@@ -322,24 +322,24 @@ return new class extends Migration
         WHERE n.status = "confirmed" AND n.jenis = "uh1" OR n.jenis = "uh2" OR n.jenis = "uh3"
         '); */
 
-        DB::unprepared('
-        CREATE VIEW rapor_tengah_semester AS
-        SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, kontrak_siswa, nama, kelompok_mapel, nama_mapel, kkm_aktif, uas_p, uas_k, deskripsi_pengetahuan, deskripsi_keterampilan,
-        nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p) AS nilai_pengetahuan,
-        indeks(kkm_aktif, nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p)) AS indeks_pengetahuan,
-        nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k) AS nilai_keterampilan,
-        indeks(kkm_aktif, nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k)) AS indeks_keterampilan
-        FROM list_rekap_nilai
-        ');
+        // DB::unprepared('
+        // CREATE VIEW rapor_tengah_semester AS
+        // SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, nama, nama_mapel AS mapel, kkm_aktif AS kkm,
+        // nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p) AS nilai_pengetahuan,
+        // indeks(kkm_aktif, nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p)) AS indeks_pengetahuan,
+        // nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k) AS nilai_keterampilan,
+        // indeks(kkm_aktif, nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k)) AS indeks_keterampilan
+        // FROM list_rekap_nilai
+        // ');
 
-        DB::unprepared('
-        CREATE VIEW rapor_akhir_semester AS SELECT tahun_ajaran, NISN, kontrak_siswa, nama, kelompok_mapel, nama_mapel, kkm_aktif, deskripsi_pengetahuan, deskripsi_keterampilan,
-        nilai_akhir_semester(nilai_pengetahuan, uas_p) AS nilai_pengetahuan,
-        nilai_akhir_semester(nilai_keterampilan, uas_k) AS nilai_keterampilan
-        FROM rapor_tengah_semester
-        GROUP BY nama_mapel
-        ORDER BY NISN
-        ');
+        // DB::unprepared('
+        // CREATE VIEW rapor_akhir_semester AS
+        // SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, nama, nama_mapel AS mapel, kkm_aktif AS kkm,
+        // nilai_akhir_semester(nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p), uas_p) AS nilai_pengetahuan,
+        // indeks(kkm_aktif, nilai_akhir_semester(nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p), uas_p)) AS indeks_pengetahuan,
+        // nilai_akhir_semester(nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k), uas_k) AS nilai_keterampilan
+        // FROM list_rekap_nilai
+        // ');
 
         DB::unprepared('
         CREATE VIEW rapor_ulangan_harian AS SELECT n.jenis, n.kontrak_siswa, k.siswa, m.kelompok_mapel, m.nama_mapel, n.kkm_aktif, n.nilai_pengetahuan, n.nilai_keterampilan, n.deskripsi_pengetahuan, n.deskripsi_keterampilan, indeks(n.kkm_aktif, n.nilai_pengetahuan) AS indeks_pengetahuan, indeks(n.kkm_aktif, n.nilai_keterampilan) AS indeks_keterampilan

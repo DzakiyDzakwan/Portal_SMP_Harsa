@@ -123,7 +123,7 @@ class ViewController extends Controller
         $sesi = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
         return view('sekolah.kelasguru', compact('menu', 'kelas', 'sesi'));
     }
-    
+
     public function pembinaEkstrakurikuler()
     {
         $menu = 'sekolah';
@@ -141,7 +141,7 @@ class ViewController extends Controller
         $menu = 'sekolah-siswa';
         return view('sekolah.ekskulsiswaadmin', compact('menu'));
     }
-    
+
     public function ekstrakurikulerSiswaPembina()
     {
         $menu = 'sekolah-siswa';
@@ -156,9 +156,10 @@ class ViewController extends Controller
 
     public function nilaiEkstrakurikuler()
     {
-        $menu = 'sekolah-siswa';
-        dd('nilai Ekstrakurikuler');
-        return view('sekolah.nilai_ekskul', compact('menu'));
+        $menu = 'nilai-siswa';
+        $kelas = DB::table('list_ekstrakurikuler')->where('penanggung_jawab', auth()->user()->gurus->NUPTK)->where('id', $id)->first();
+        $sesi = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
+        return view('sekolah.kelasekskul', compact('menu', 'kelas', 'sesi'));
     }
 
 

@@ -26,7 +26,8 @@
                 <td>
                     {{-- Nilai Ekskull --}}
                     <div class="modal-info me-1 mb-1 d-inline-block ">
-                        <button type="button" class="btn btn-sm btn-success" wire:click="showModal()">
+                        <button type="button" class="btn btn-sm btn-success"
+                            wire:click="showModal('{{ $e->kontrak_semester_id }}')">
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Nilai">
                                 <i class="bi bi-clipboard-check-fill"></i>
                             </div>
