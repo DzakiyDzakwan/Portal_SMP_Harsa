@@ -16,7 +16,7 @@
                     <div class="form-body modal-body">
                         <div class="row">
                             {{-- ID Kelas Aktif --}}
-                            <div class="col-12">
+                            {{-- <div class="col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="kelas_aktif_id">ID Kelas Aktif</label>
                                     <div class="position-relative">
@@ -36,7 +36,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                              {{-- Nama Kelas --}}
                              <div class="col-12">
