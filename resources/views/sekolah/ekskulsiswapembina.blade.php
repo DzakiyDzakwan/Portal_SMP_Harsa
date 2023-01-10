@@ -52,15 +52,19 @@
 
 
     {{-- Modal Edit --}}
-    {{-- @livewire('edit-modal-ekskul') --}}
+    @livewire('create-modal-nilai-ekskul')
 @endsection
 
 @section('script')
     <script>
         //Modal
-        const createModal = new bootstrap.Modal('#createModal', {
+        const modalNilai = new bootstrap.Modal('#modalNilai', {
             keyboard: false
         })
+        window.addEventListener('nilai-modal', event => {
+            modalNilai.toggle();
+        });
+
         // const editModal = new bootstrap.Modal('#editModal', {
         //     keyboard: false
         // })
