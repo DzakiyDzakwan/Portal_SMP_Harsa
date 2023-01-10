@@ -14,137 +14,137 @@ class LogController extends Controller
 
     public function activity() {
         $menu = 'history';
-        $subpages = 'logActivity';
+        $submenu = 'log-aktifitas';
         $logActivities = DB::table('table_log_activities')
         ->latest()
         ->get();
-        return view('audit.logactivity', compact('menu', 'logActivities', 'subpages'));
+        return view('audit.logactivity', compact('menu', 'logActivities', 'submenu'));
     }
 
     public function user() {
         $menu = 'history';
-        $subpages = 'logUser';
+        $submenu = 'log-user';
         $logUser = DB::table('table_log_users')
         ->latest()
         ->get();
-        return  view('audit.logusers',compact('menu', 'subpages', 'logUser'));
+        return  view('audit.logusers',compact('menu', 'submenu', 'logUser'));
     }
 
     public function role() {
         $menu = 'history';
-        $subpages = 'logRole';
+        $submenu = 'log-role';
         $logRole = DB::table('table_log_roles')
         ->latest()
         ->get();
-        return  view('audit.logrole', compact('menu', 'subpages', 'logRole'));
+        return  view('audit.logrole', compact('menu', 'submenu', 'logRole'));
     }
 
     public function permission() {
         $menu = 'history';
-        $subpages = 'logPermission';
+        $submenu = 'log-permission';
         $logPermission = DB::table('table_log_permissions')
         ->latest()
         ->get();
-        return  view('audit.logpermission', compact('menu', 'subpages', 'logPermission'));
+        return  view('audit.logpermission', compact('menu', 'submenu', 'logPermission'));
     }
 
     public function siswa() {
         $menu = 'history';
-        $subpages = 'logSiswa';
+        $submenu = 'log-siswa';
         $logSiswa = DB::table('table_log_siswas')
         ->latest()
         ->get();
-        return  view('audit.logsiswa', compact('menu', 'subpages', 'logSiswa'));
+        return  view('audit.logsiswa', compact('menu', 'submenu', 'logSiswa'));
     }
 
     public function guru() {
         $menu = 'history';
-        $subpages = 'logGuru';
+        $submenu = 'log-guru';
         $logGuru = DB::table('table_log_gurus')
         ->latest()
         ->get();
-        return  view('audit.logguru', compact('menu', 'subpages', 'logGuru'));
+        return  view('audit.logguru', compact('menu', 'submenu', 'logGuru'));
     }
 
     public function kelas() {
         $menu = 'history';
-        $subpages = 'logKelas';
+        $submenu = 'log-kelas';
         $logKelas = DB::table('table_log_Kelas')
         ->latest()
         ->get();
-        return  view('audit.logkelas', compact('menu', 'subpages', 'logKelas'));
+        return  view('audit.logkelas', compact('menu', 'submenu', 'logKelas'));
     }
 
     public function mapel() {
         $menu = 'history';
-        $subpages = 'logMapel';
+        $submenu = 'log-mapel';
         $logMapel = DB::table('table_log_Mapels')
         ->latest()
         ->get();
-        return  view('audit.logmapel', compact('menu', 'subpages', 'logMapel'));
+        return  view('audit.logmapel', compact('menu', 'submenu', 'logMapel'));
     }
     
     public function ekskul() {
         $menu = 'history';
-        $subpages = 'logEkskul';
+        $submenu = 'log-ekstrakurikuler';
         $logEkskul = DB::table('table_log_ekstrakurikulers')
         ->latest()
         ->get();
-        return view('audit.logeskul', compact('menu', 'subpages', 'logEkskul'));
+        return view('audit.logeskul', compact('menu', 'submenu', 'logEkskul'));
     }
 
     public function roster() {
         $menu = 'history';
-        $subpages = 'logRoster';
+        $submenu = 'log-roster';
         $logRoster = DB::table('table_log_rosters')
         ->latest()
         ->get();
-        return view('audit.logroster', compact('menu', 'subpages', 'logRoster'));
+        return view('audit.logroster', compact('menu', 'submenu', 'logRoster'));
     }
 
     public function profiles() {
         $menu = 'history';
-        $subpages = 'logProfiles';
+        $submenu = 'log-profil';
         $logProfiles = DB::table('table_log_profiles')
         ->latest()
         ->get();
-        return view('audit.logprofiles', compact('menu', 'subpages', 'logProfiles'));
+        return view('audit.logprofiles', compact('menu', 'submenu', 'logProfiles'));
     }
 
     public function nilai() {
         $menu = 'history';
-        $subpages = 'logNilai';
+        $submenu = 'log-nilai';
         $logNilai = DB::table('table_log_nilais')
         ->latest()
         ->get();
-        return view('audit.lognilai', compact('menu', 'subpages', 'logNilai'));
+        return view('audit.lognilai', compact('menu', 'submenu', 'logNilai'));
     }
 
     public function prestasi() {
         $menu = 'history';
-        $subpages = 'logPrestasi';
+        $submenu = 'log-prestasi';
         $logPrestasi = DB::table('table_log_prestasis')
         ->latest()
         ->get();
-        return view('audit.logprestasi', compact('menu', 'subpages', 'logPrestasi'));
+        return view('audit.logprestasi', compact('menu', 'submenu', 'logPrestasi'));
     }
 
     public function ekskulSiswa() {
         $menu = 'history';
-        $subpages = 'logEkskulSiswa';
+        $submenu = 'log-ekstrakurikuler-siswa';
         $logEkskulSiswa = DB::table('table_log_ekstrakurikuler_siswas')
         ->latest()
         ->get();
-        return view('audit.logekskulsiswa', compact('menu', 'subpages', 'logEkskulSiswa'));
+        return view('audit.logekskulsiswa', compact('menu', 'submenu', 'logEkskulSiswa'));
     }
 
     public function kontrak() {
         $menu = 'history';
-        $subpages = 'logKontrak';
+        $submenu = 'log-kontrak';
         $logKontrak = DB::table('table_log_kontraks')
         ->latest()
         ->get();
-        return view('audit.logkontrak', compact('menu', 'subpages', 'logKontrak'));
+        return view('audit.logkontrak', compact('menu', 'submenu', 'logKontrak'));
     }
 
 }

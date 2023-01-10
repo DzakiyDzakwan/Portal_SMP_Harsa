@@ -62,15 +62,21 @@
                                 <span>Manajemen User</span>
                             </a>
                             <ul class="submenu @if ($menu === 'manajemenuser') active @endif">
-                                <li class="submenu-item">
-                                    <a href="/guru/user">User</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="/guru/role">Role</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="/guru/permission">Permission</a>
-                                </li>
+                                @can('view-user')
+                                    <li class="submenu-item  @if ($submenu === 'user') active @endif">
+                                        <a href="/guru/user">User</a>
+                                    </li>
+                                @endcan
+                                @can('view-role')
+                                    <li class="submenu-item @if ($submenu === 'role') active @endif">
+                                        <a href="/guru/role">Role</a>
+                                    </li>
+                                @endcan
+                                @can('view-permission')
+                                    <li class="submenu-item @if ($submenu === 'permission') active @endif">
+                                        <a href="/guru/permission">Permission</a>
+                                    </li>
+                                @endcan
                             </ul>
                         </li>
                     @endhasanyrole
@@ -82,17 +88,21 @@
                             <span>Manajemen Akun</span>
                         </a>
                         <ul class="submenu @if ($menu === 'akun') active @endif">
-                            @hasanyrole('kepsek|wakepsek')
-                                <li class="submenu-item">
+                            @can('view-admin')
+                                <li class="submenu-item @if ($submenu === 'user') active @endif">
                                     <a href="/guru/admin">Admin</a>
                                 </li>
-                            @endhasanyrole
-                            <li class="submenu-item">
-                                <a href="/guru/guru">Guru</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/siswa">Siswa</a>
-                            </li>
+                            @endcan
+                            @can('view-guru')
+                                <li class="submenu-item @if ($submenu === 'user') active @endif">
+                                    <a href="/guru/guru">Guru</a>
+                                </li>
+                            @endcan
+                            @can('view-siswa')
+                                <li class="submenu-item @if ($submenu === 'user') active @endif">
+                                    <a href="/guru/siswa">Siswa</a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 @endhasanyrole
@@ -108,142 +118,141 @@
                 </li> --}}
 
                 {{-- Tahun Akademik --}}
-                @hasanyrole('kepsek|wakepsek|admin')
+                @can('view-tahun-akademik')
                     <li class="sidebar-item @if ($menu === 'tahunakademik') active @endif">
                         <a href="/guru/tahun-akademik" class="sidebar-link">
                             <i class="bi bi-calendar-date-fill"></i>
                             <span>Tahun Akademik</span>
                         </a>
                     </li>
-                @endhasanyrole
+                @endcan
 
                 {{-- Kelas Saya --}}
-                @hasrole('wali')
-                    <li class="sidebar-item @if ($menu === 'walikelas') active @endif">
+                @can('view-kelas-saya')
+                    <li class="sidebar-item @if ($menu === 'kelassaya') active @endif">
                         <a href="/guru/kelas-saya" class="sidebar-link">
                             <i class="bi bi-person-workspace"></i>
                             <span>Kelas Saya</span>
                         </a>
                     </li>
-                @endhasrole
-
+                @endcan
 
                 {{--  Mata Pelajaran & Kelas --}}
                 @hasanyrole('kepsek|wakepsek|admin')
                     {{-- Manajemen Mata Pelajaran --}}
-                    <li class="sidebar-item has-sub @if ($menu === 'mapel') active @endif">
+                    <li class="sidebar-item has-sub @if ($menu === 'manajemenmapel') active @endif">
                         <a href="#" class="sidebar-link">
                             <i class="bi bi-book-fill"></i>
                             <span>Manajemen Mata Pelajaran</span>
                         </a>
-                        <ul class="submenu @if ($menu === 'mapel') active @endif">
-                            <li class="submenu-item">
-                                <a href="/guru/mata-pelajaran">Mata Pelajaran</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/mata-pelajaran-guru">Mata Pelajaran Guru</a>
-                            </li>
+                        <ul class="submenu @if ($menu === 'manajemenmapel') active @endif">
+                            @can('view-mapel')
+                                <li class="submenu-item @if ($submenu === 'mapel') active @endif">
+                                    <a href="/guru/mata-pelajaran">Mata Pelajaran</a>
+                                </li>
+                            @endcan
+
+                            @can('view-mapel-guru')
+                                <li class="submenu-item @if ($submenu === 'mapel-guru') active @endif">
+                                    <a href="/guru/mata-pelajaran-guru">Mata Pelajaran Guru</a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
 
                     {{-- Manajemen Kelas --}}
-                    <li class="sidebar-item has-sub @if ($menu === 'kelas') active @endif">
+                    <li class="sidebar-item has-sub @if ($menu === 'manajemenkelas') active @endif">
                         <a href="#" class="sidebar-link">
                             <i class="bi bi-house-door-fill"></i>
                             <span>Manajemen Kelas</span>
                         </a>
-                        <ul class="submenu @if ($menu === 'kelas') active @endif">
-                            <li class="submenu-item">
-                                <a href="/guru/wali-kelas">Wali Kelas</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/kelas">Kelas</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/kelas-aktif">Kelas Aktif</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/roster">Roster</a>
-                            </li>
+                        <ul class="submenu @if ($menu === 'manajemenkelas') active @endif">
+                            @can('view-wali-kelas')
+                                <li class="submenu-item @if ($submenu === 'wali-kelas') active @endif">
+                                    <a href="/guru/wali-kelas">Wali Kelas</a>
+                                </li>
+                            @endcan
+                            @can('view-kelas')
+                                <li class="submenu-item @if ($submenu === 'kelas') active @endif">
+                                    <a href="/guru/kelas">Kelas</a>
+                                </li>
+                            @endcan
+                            @can('view-kelas-aktif')
+                                <li class="submenu-item @if ($submenu === 'kelas-aktif') active @endif">
+                                    <a href="/guru/kelas-aktif">Kelas Aktif</a>
+                                </li>
+                            @endcan
+                            @can('view-roster')
+                                <li class="submenu-item @if ($submenu === 'roster') active @endif">
+                                    <a href="/guru/roster">Roster</a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 @endhasanyrole
 
                 {{-- Manajemen Nilai --}}
-                <li class="sidebar-item has-sub @if ($menu === 'nilai') active @endif">
+                <li class="sidebar-item has-sub @if ($menu === 'manajemennilai') active @endif">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-clipboard-plus-fill"></i>
                         <span>Manajemen Nilai</span>
                     </a>
-                    <ul class="submenu @if ($menu === 'user') active @endif">
-                        @hasanyrole('kepsek|wakepsek|admin')
-                            <li class="submenu-item">
+                    <ul class="submenu @if ($menu === 'manajemennilai') active @endif">
+                        @can('view-sesi-penilaian')
+                            <li class="submenu-item @if ($submenu === 'sesi') active @endif">
                                 <a href="/guru/sesi-penilaian">Sesi Penilaian</a>
                             </li>
-                            <li class="submenu-item">
+                        @endcan
+                        @can('view-konfirmasi')
+                            <li class="submenu-item @if ($submenu === 'konfirmasi')  @endif ">
                                 <a href="/guru/konfirmasi-nilai">Konfirmasi Nilai</a>
                             </li>
-                        @endhasanyrole
-                        {{-- @hasanyrole('kepsek|wakepsek')
-                            <li class="submenu-item">
-                                <a href="/guru/nilai/uh1">Ulangan Harian 1</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/nilai/uh2">Ulangan Harian 2</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/nilai/uh3">Ulangan Harian 3</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/nilai/uts">Ujian Tengah Semester</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="/guru/nilai/uas">Ujian Akhir Semester</a>
-                            </li>
-                        @endhasanyrole --}}
-                        @hasrole('guru')
+                        @endcan
+                        @can('view-kelas-guru')
                             @php
                                 $kelasGuru = DB::table('list_kelas_guru')
                                     ->where('guru', Auth::user()->gurus->NUPTK)
                                     ->get();
                             @endphp
                             @foreach ($kelasGuru as $item)
-                                <li class="submenu-item">
+                                <li class="submenu-item @if ($submenu === 'kelas-guru-{{ $item->kelas }}')  @endif">
                                     <a href="/guru/kelas/{{ $item->kelas }}">{{ $item->grade }}{{ $item->kelompok_kelas }}
                                         {{ $item->nama_mapel }}</a>
                                 </li>
                             @endforeach
-                        @endhasrole
+                        @endcan
                     </ul>
                 </li>
 
                 {{-- Manajemen Ekstrakurikuler --}}
                 @hasanyrole('kepsek|wakepsek|admin|pembina')
-                    <li class="sidebar-item has-sub @if ($menu === 'ekskul') active @endif">
+                    <li class="sidebar-item has-sub @if ($menu === 'manajemenekskul') active @endif">
                         <a href="#" class="sidebar-link">
                             <i class="bi bi-clipboard2-pulse-fill"></i>
                             <span>Manajemen Ekstrakurikuler</span>
                         </a>
-                        <ul class="submenu @if ($menu === 'ekskul') active @endif">
-                            @hasanyrole('kepsek|wakepsek|admin')
-                                <li class="submenu-item">
+                        <ul class="submenu @if ($menu === 'manajemenekskul') active @endif">
+                            @can('view-pembina-ekstrakurikuler')
+                                <li class="submenu-item @if ($submenu === 'pembina') active @endif">
                                     <a href="/guru/pembina-ekstrakurikuler">Pembina Ekstrakurikuler</a>
                                 </li>
-                                <li class="submenu-item">
+                            @endcan
+                            @can('view-ekstrakurikuler')
+                                <li class="submenu-item @if ($submenu === 'ekstrakurikuler') active @endif">
                                     <a href="/guru/ekstrakurikuler">Ekstrakurikuler</a>
                                 </li>
-                            @endhasanyrole
-                            @hasrole('pembina')
-                                <li class="submenu-item">
+                            @endcan
+                            @can('view-ekstrakurikuler-pembina')
+                                <li class="submenu-item @if ($submenu === 'ekstrakurikuler-pembina') active @endif">
                                     <a href="/guru/ekstrakurikuler-siswa-pembina">Ekstrakurikuler Siswa</a>
                                 </li>
-                            @endhasrole
+                            @endcan
                         </ul>
                     </li>
                 @endhasanyrole
 
                 {{-- Audit Section --}}
-                @hasrole('kepsek')
+                @can('view-log')
                     <li class="sidebar-title">Audit</li>
 
                     {{-- History Log --}}
@@ -253,54 +262,55 @@
                             <span>History Log</span>
                         </a>
                         <ul class="submenu @if ($menu == 'history') active @endif">
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-aktifitas') active @endif">
                                 <a href="/guru/log-activities">Log Aktivitas</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-role') active @endif">
                                 <a href="/guru/log-roles">Log Role</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-permission') active @endif">
                                 <a href="/guru/log-permissions">Log Permission</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-user') active @endif">
                                 <a href="/guru/log-users">Log User</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-profile') active @endif">
                                 <a href="/guru/log-profiles">Log Profile</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-guru') active @endif">
                                 <a href="/guru/log-guru">Log Guru</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-siswa') active @endif">
                                 <a href="/guru/log-siswa">Log Siswa</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-mapel') active @endif">
                                 <a href="/guru/log-mapel">Log Mata-Pelajaran</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-kelas') active @endif">
                                 <a href="/guru/log-kelas">Log Kelas</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-roster') active @endif">
                                 <a href="/guru/log-roster">Log Roster</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-kontrak') active @endif">
                                 <a href="/guru/log-kontrak">Log Kontrak Siswa</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-nilai') active @endif">
                                 <a href="/guru/log-nilai">Log Nilai</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-prestasi') active @endif">
                                 <a href="/guru/log-prestasi">Log Prestasi</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-ekstrakurikuler') active @endif">
                                 <a href="/guru/log-ekstrakulikuler">Log Ekstrakulikuler</a>
                             </li>
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'log-ekstrakurikuler-siswa') active @endif">
                                 <a href="/guru/log-ekstrakurikuler-siswa">Log Ekstrakulikuler Siswa</a>
                             </li>
                         </ul>
                     </li>
-                @endhasrole
+                @endcan
+
 
 
             </ul>

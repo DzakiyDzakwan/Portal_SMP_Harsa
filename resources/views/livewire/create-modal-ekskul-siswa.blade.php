@@ -29,12 +29,12 @@
                             {{-- Nama Ekstrakulikuler --}}
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
-                                    <label for="nama_ekskul">Ekstrakurikuler</label>
+                                    <label for="nama_ekstrakurikuler">Ekstrakurikuler</label>
                                     <div class="position-relative">
-                                        <select name="nama_ekskul"
-                                            class="form-select form-control  @error('nama_ekskul') is-invalid
+                                        <select name="nama_ekstrakurikuler"
+                                            class="form-select form-control  @error('nama_ekstrakurikuler') is-invalid
                                             @enderror"
-                                            id="basicSelect" wire:model.defer="nama_ekskul" disabled>
+                                            id="basicSelect" wire:model.defer="nama_ekstrakurikuler" disabled>
                                             @if (!$ekstrakurikuler->isEmpty())
                                                 @foreach ($ekstrakurikuler as $e)
                                                     <option value="{{ $e->ekstrakurikuler_id }}">{{ $e->nama }}
@@ -47,7 +47,7 @@
                                         <div class="form-control-icon">
                                             <i class="bi bi-command"></i>
                                         </div>
-                                        @error('nama_ekskul')
+                                        @error('nama_ekstrakurikuler')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}

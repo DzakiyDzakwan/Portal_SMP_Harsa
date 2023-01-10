@@ -11,7 +11,7 @@ use App\Models\NilaiEkstrakurikuler;
 
 class CreateModalNilaiEkskul extends Component
 {
-    public $siswa, $kontrak_id, $nama_sesi, $sesi, $sesi_id, $ekstrakurikuler, $nilai, $nilai_e, $keterangan_e, $kontrak_siswa;
+    public $siswa, $kontrak, $sesi, $nilai_e, $keterangan_e, $ekstrakurikuler;
 
     public $mode = "create";
 
@@ -25,33 +25,23 @@ class CreateModalNilaiEkskul extends Component
     ];
 
     protected $rules = [
-        'ekstrakurikuler' => 'required',
-        'nilai' => 'required',
         'nilai_e' => 'required',
         'keterangan_e' => 'required'
     ];
 
-    public function showModal($id)
+    public function showModal($kontrak)
     {
-        //dd($id);
-        $this->kontrak_id = $id;
-        $this->siswa = DB::table('list_ekstrakurikuler_siswa')->where('kontrak_semester_id', $id)->first()->nama_siswa;
-        $sesiPenilaian = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
+        $this->kontrak = $kontrak;
+        $this->siswa = DB::table('list_ekstrakurikuler_siswa')->where('kontrak_semester_id', $kontrak)->first()->nama_siswa;
 
-        if ($sesiPenilaian == null) {
-            $this->nama_sesi = "Tidak ada sesi yang tersedia";
-        } else {
-            $this->sesi = $sesiPenilaian->nama_sesi;
-            if ($sesiPenilaian->nama_sesi === "Ujian Akhir Semester") {
-                $this->nama_sesi = "Ulangan Harian 1";
-            }
-            $this->sesi_id = $sesiPenilaian->id;
+        $sesi = DB::table("list_sesi_penilaian")->whereRaw('nama_sesi = "uas" COLLATE utf8mb4_general_ci AND status = "aktif" COLLATE utf8mb4_general_ci')->first();
+        if($sesi != null) {
+            $this->sesi = $sesi->id;
         }
 
-        $nilai = NilaiEkstrakurikuler::where('kontrak_siswa', $id)->where('ekstrakurikuler', $this->ekstrakurikuler)->where('sesi', $this->sesi_id)->first();
+        $nilai = NilaiEkstrakurikuler::where('kontrak_siswa', $kontrak)->where('ekstrakurikuler', $this->ekstrakurikuler)->where('sesi', $this->sesi)->first();
         if ($nilai != null) {
             $this->mode = "update";
-            $this->nilai = $nilai->nilai_id;
             $this->nilai_e = $nilai->nilai;
             $this->keterangan_e = $nilai->keterangan;
         }
@@ -74,7 +64,7 @@ class CreateModalNilaiEkskul extends Component
             try {
                 NilaiEkstrakurikuler::create([
                     'ekstrakurikuler' => $this->ekstrakurikuler,
-                    'kontrak_siswa' => $this->kontrak_siswa,
+                    'kontrak_siswa' => $this->kontrak,
                     'sesi' => $this->sesi,
                     'nilai' => $this->nilai_e,
                     'keterangan' => $this->keterangan_e
@@ -94,8 +84,6 @@ class CreateModalNilaiEkskul extends Component
             }
         } else {
             try {
-                DB::select('CALL update_nilai(?, ?, ?, ?, ?, ?, ?)', [$this->nilai, $this->sesi_id, $this->nilai_p, $this->deskripsi_p, $this->nilai_k, $this->deskripsi_k, auth()->user()->uuid]);
-                $this->reset();
                 $this->emit('store-nilai');
                 $this->dispatchBrowserEvent('update-alert');
                 $this->dispatchBrowserEvent('nilai-modal');
@@ -107,6 +95,7 @@ class CreateModalNilaiEkskul extends Component
 
     public function render()
     {
+        $this->ekstrakurikuler = auth()->user()->gurus->ekstrakurikulers->ekstrakurikuler_id;
         return view('livewire.sekolah.manajemen-ekstrakurikuler.create-modal-nilai-ekskul');
     }
 }

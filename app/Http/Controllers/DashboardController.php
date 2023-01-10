@@ -22,6 +22,7 @@ class DashboardController extends Controller
         $tahunAjaranAktif = "";
         $semesterAktif = "";
         $menu = 'dashboard';
+        $submenu = 'dashboard';
         $jumlah= [
             'user' => User::withTrashed()->count(),
             'admin' => User::withTrashed()->role(['kepsek', 'wakepsek', 'admin'])->count(),
@@ -40,7 +41,7 @@ class DashboardController extends Controller
         $kelas = DB::table('list_kelas_guru')->where('guru', auth()->user()->gurus->NUPTK)->get();
         $roster = DB::table('list_roster_guru')->where('guru', auth()->user()->gurus->NUPTK)->get();
 
-        return view('guru.dashboard', compact("menu", "jumlah", "tahunAkademik", "sesi", "kelas", "roster"));
+        return view('guru.dashboard', compact("menu", "submenu", "jumlah", "tahunAkademik", "sesi", "kelas", "roster"));
     }
 
     public function indexsiswa() {

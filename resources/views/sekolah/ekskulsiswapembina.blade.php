@@ -75,9 +75,9 @@
         //     keyboard: false
         // }) 
 
-        window.addEventListener('close-create-modal', event => {
-            createModal.hide();
-        });
+        // window.addEventListener('close-create-modal', event => {
+        //     createModal.hide();
+        // });
         // window.addEventListener('edit-modal', event => {
         //     editModal.toggle();
         // });

@@ -12,151 +12,172 @@ class ViewController extends Controller
     public function user()
     {
         $menu = 'manajemenuser';
-        return view('user.user', compact('menu'));
+        $submenu = 'user';
+        return view('user.user', compact('menu', 'submenu'));
     }
 
     public function role()
     {
         $menu = 'manajemenuser';
-        return view('user.role', compact('menu'));
+        $submenu = 'role';
+        return view('user.role', compact('menu', 'submenu'));
     }
 
     public function  permission()
     {
         $menu = 'manajemenuser';
-        return view('user.permission', compact('menu'));
+        $submenu = 'permission';
+        return view('user.permission', compact('menu', 'submenu'));
     }
 
     public function admin()
     {
         $menu = 'manajemenakun';
-        $submenus = 'admin';
+        $submenu = 'admin';
 
-        // dd('admin');
-        return view('user.admin', compact('menu'));
+        return view('user.admin', compact('menu', 'submenu'));
     }
 
     public function guru()
     {
         $menu = 'manajemenakun';
-        return view('user.guru', compact('menu'));
+        $submenu = 'guru';
+        return view('user.guru', compact('menu', 'submenu'));
     }
 
     public function siswa()
     {
         $menu = 'manajemenakun';
-        // dd('siswa');
-        return view('user.siswa', compact('menu'));
+        $submenu = 'siswa';
+        return view('user.siswa', compact('menu', 'submenu'));
     }
 
     public function tahunAkademik()
     {
         $menu = 'tahunakademik';
-        return view('sekolah.tahunakademik', compact('menu'));
+        $submenu = 'tahun-akademik';
+        return view('sekolah.tahunakademik', compact('menu', 'submenu'));
+    }
+
+    public function kelasSaya()
+    {
+        $menu = 'kelassaya';
+        $submenu = 'kelas-saya';
+
+        $kelas = DB::table('list_kelas_aktif')->where('NUPTK', auth()->user()->gurus->NUPTK)->first();
+
+        return view('sekolah.walikelas', compact('menu', 'submenu' ,'kelas'));
     }
 
     public function mapel()
     {
         $menu = 'manajemenmapel';
-        //dd('mata pelajaran');
-        return view('sekolah.mapel', compact('menu'));
+        $submenu = 'mapel';
+        return view('sekolah.mapel', compact('menu', 'submenu'));
     }
 
     public function mapelGuru()
     {
         $menu = 'manajemenmapel';
-        //dd('mata pelajaran guru');
-        return view('sekolah.mapelguru', compact('menu'));
+        $submenu = 'mapel-guru';
+        return view('sekolah.mapelguru', compact('menu', 'submenu'));
     }
 
     public function waliKelas()
     {
-        $menu = 'sekolah';
-        return view('sekolah.wali', compact('menu'));
+        $menu = 'manajemenkelas';
+        $submenu = 'wali';
+        return view('sekolah.wali', compact('menu', 'submenu'));
     }
 
     public function kelas()
     {
-        $menu = 'sekolah';
-        return view('sekolah.kelas', compact('menu'));
+        $menu = 'manajemenkelas';
+        $submenu = 'kelas';
+        return view('sekolah.kelas', compact('menu', 'submenu'));
     }
 
     public function kelasAktif()
     {
-        $menu = 'sekolah';
-        return view('sekolah.kelasaktif', compact('menu'));
+        $menu = 'manajemenkelas';
+        $submenu = 'kelas-aktif';
+        return view('sekolah.kelasaktif', compact('menu', 'submenu'));
     }
 
     public function roster()
     {
-        $menu = 'kelas';
-        //dd('roster');
-        return view('sekolah.roster', compact('menu'));
+        $menu = 'manajemenkelas';
+        $submenu = 'roster';
+        return view('sekolah.roster', compact('menu', 'submenu'));
     }
 
     public function sesiPenilaian()
     {
-        $menu = 'sekolah';
-        //dd('sesi Penilaian');
-        return view('sekolah.sesinilai', compact('menu'));
+        $menu = 'manajemennilai';
+        $submenu = 'sesi';
+        return view('sekolah.sesinilai', compact('menu', 'submenu'));
     }
 
     public function konfirmasiNilai()
     {
-        $menu = 'sekolah';
-        //dd('sesi Penilaian');
-        return view('sekolah.konfirmasinilai', compact('menu'));
-    }
+        $menu = 'manajemennilai';
+        $submenu = 'konfirmasi';
 
-    public function kelasSaya()
-    {
-        $menu = 'walikelas';
-        $kelas = DB::table('list_kelas_aktif')->where('NUPTK', auth()->user()->gurus->NUPTK)->first();
-
-        return view('sekolah.walikelas', compact('menu', 'kelas'));
+        return view('sekolah.konfirmasinilai', compact('menu', 'submenu'));
     }
 
     public function kelasGuru($id)
     {
-        $menu = "nilai";
+        $menu = "manajemennilai";
+        $submenu = 'kelas-guru-'.$id;
+
         $kelas = DB::table('list_kelas_guru')->where('guru', auth()->user()->gurus->NUPTK)->where('kelas', $id)->first();
         $sesi = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
-        return view('sekolah.kelasguru', compact('menu', 'kelas', 'sesi'));
+        return view('sekolah.kelasguru', compact('menu', 'submenu', 'kelas', 'sesi'));
     }
 
     public function pembinaEkstrakurikuler()
     {
-        $menu = 'sekolah';
-        return view('sekolah.pembina_ekskul', compact('menu'));
+        $menu = 'manajemenekskul';
+        $submenu = 'pembina';
+
+        return view('sekolah.pembina_ekskul', compact('menu', 'submenu'));
     }
 
     public function ekstrakurikuler()
     {
-        $menu = 'ekstrakurikuler';
-        return view('sekolah.ekskul', compact('menu'));
+        $menu = 'manajemenekskul';
+        $submenu = 'ekstrakurikuler';
+
+        return view('sekolah.ekskul', compact('menu', 'submenu'));
     }
 
     public function ekstrakurikulerSiswaAdmin()
     {
-        $menu = 'sekolah-siswa';
-        return view('sekolah.ekskulsiswaadmin', compact('menu'));
+        $menu = 'manajemenekskul';
+        $submenu = 'ekstrakurikuler-siswa';
+
+        return view('sekolah.ekskulsiswaadmin', compact('menu', 'submenu'));
     }
 
     public function ekstrakurikulerSiswaPembina()
     {
-        $menu = 'sekolah-siswa';
-        return view('sekolah.ekskulsiswapembina', compact('menu'));
+        $menu = 'manajemenekskul';
+        $submenu = 'ekstrakurikuler-pembina';
+
+        return view('sekolah.ekskulsiswapembina', compact('menu', 'submenu'));
     }
 
     public function ekstrakurikulerSiswa()
     {
         $menu = 'sekolah-siswa';
-        return view('sekolah.ekskulsiswa', compact('menu'));
+        return view('sekolah.ekskulsiswa', compact('menu', 'submenu'));
     }
 
     public function nilaiEkstrakurikuler()
     {
-        $menu = 'nilai-siswa';
+        $menu = 'manajemenekskul';
+        $submenu = 'nilai-ekskul';
         $kelas = DB::table('list_ekstrakurikuler')->where('penanggung_jawab', auth()->user()->gurus->NUPTK)->where('id', $id)->first();
         $sesi = DB::table("list_sesi_penilaian")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci')->first();
         return view('sekolah.kelasekskul', compact('menu', 'kelas', 'sesi'));
