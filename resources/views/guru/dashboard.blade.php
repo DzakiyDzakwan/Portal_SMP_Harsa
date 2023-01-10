@@ -367,10 +367,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td colspan="4" class="text-center">Tidak Ada kelas yang terdaftar
-                                                    </td>
-                                                </tr>
+                                                @foreach ($kelas as $item)
+                                                    @if ($kelas == null)
+                                                        <tr>
+                                                            <td colspan="4" class="text-center">Tidak Ada kelas yang terdaftar</td>
+                                                        </tr>
+                                                    @else
+                                                        <tr>
+                                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                                            <td>{{ $item->nama_kelas_aktif }}</td>
+                                                            <td class="text-center">{{ $item->nama_mapel }}</td>
+                                                            <td class="text-center">
+                                                                <div class="modal-info me-1 mb-1 d-inline-block">
+                                                                    <button type="button" class="btn btn-sm btn-primary">
+                                                                        <i class="bi bi-box-arrow-in-right"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -402,14 +418,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Senin</td>
-                                                    <td>Ibnu Sina</td>
-                                                    <td>Bahasa Indonesia</td>
-                                                    <th>Wajib</th>
-                                                    <td>13:00</td>
-                                                    <td>15:00</td>
-                                                </tr>
+                                                @foreach ($roster as $item)
+                                                    <tr>
+                                                        <td>{{ $item->hari }}</td>
+                                                        <td>{{ $item->nama_kelas_aktif }}</td>
+                                                        <td>{{ $item->nama_mapel }}</td>
+                                                        @if ($item->kelompok_mapel == "A")
+                                                            <td>Wajib</td>
+                                                        @else
+                                                            <td>Peminatan</td>
+                                                        @endif
+                                                        <td>{{ $item->waktu_mulai }}</td>
+                                                        <td>{{ $item->waktu_mulai }}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

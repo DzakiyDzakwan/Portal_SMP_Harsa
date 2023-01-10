@@ -37,8 +37,10 @@ class DashboardController extends Controller
             $semesterAktif = $tahunAkademik->semester;
         }
         $sesi = DB::table("list_sesi_penilaian")->select("nama_sesi")->whereRaw('status = "aktif" COLLATE utf8mb4_general_ci AND tahun_ajaran_aktif = "'.$tahunAjaranAktif .'" AND semester_aktif = "'.$semesterAktif .'"')->first();
+        $kelas = DB::table('list_kelas_guru')->where('guru', auth()->user()->gurus->NUPTK)->get();
+        $roster = DB::table('list_roster_guru')->where('guru', auth()->user()->gurus->NUPTK)->get();
 
-        return view('guru.dashboard', compact("menu", "jumlah", "tahunAkademik", "sesi"));
+        return view('guru.dashboard', compact("menu", "jumlah", "tahunAkademik", "sesi", "kelas", "roster"));
     }
 
     public function indexsiswa() {
@@ -51,6 +53,7 @@ class DashboardController extends Controller
         $ekskul = EkstrakurikulerSiswa::join('ekstrakurikulers', 'ekstrakurikuler_id', '=', 'ekstrakurikuler_siswas.ekstrakurikuler')
         ->where('siswa',Auth::user()->siswas->NISN)
         ->get();
-        return view('siswa.dashboard', compact('menu', 'prestasi', 'ekskul'));
+        $roster = DB::table('list_roster_guru')->join('list_siswa_kelas', 'list_siswa_kelas.kelas', '=', 'list_roster_guru.kelas')->where('list_siswa_kelas.NISN', auth()->user()->siswas->NISN)->get();
+        return view('siswa.dashboard', compact('menu', 'prestasi', 'ekskul', 'roster'));
     }
 }

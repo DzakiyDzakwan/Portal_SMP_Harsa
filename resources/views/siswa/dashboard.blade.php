@@ -183,7 +183,43 @@
                             </div>
                         </div> --}}
                     {{-- </div> --}}
-
+                    
+                    {{-- Roster --}}
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Roster Kelas</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Hari</th>
+                                                    <th>Kelas</th>
+                                                    <th>Mata Pelajaran</th>
+                                                    <th>Kelompok Mata Pelajaran</th>
+                                                    <th>Jam Masuk</th>
+                                                    <th>Jam Keluar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($roster as $item)
+                                                    <tr>
+                                                        <td>{{ $item->hari }}</td>
+                                                        <td>{{ $item->nama_kelas_aktif }}</td>
+                                                        <td>{{ $item->nama_mapel }}</td>
+                                                        <td>{{ $item->kelompok_mapel }}</td>
+                                                        <td>{{ $item->waktu_mulai }}</td>
+                                                        <td>{{ $item->waktu_akhir }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     {{-- Prestasi --}}
                     <div class="row">
                         <div class="col-lg-12 col-md-12">

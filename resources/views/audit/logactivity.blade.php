@@ -1,7 +1,7 @@
 @extends('master.main')
 
 @section('title')
-    <title>Log Aktifitas</title>
+    <title>Log Aktivitas</title>
 @endsection
 
 @section('style')
@@ -12,7 +12,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Log Aktifitass</h3>
+            <h3>Log Aktivitas</h3>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -21,7 +21,7 @@
                         <a href="/">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Log-Aktifitas
+                        Log-Aktivitas
                     </li>
                 </ol>
             </nav>
