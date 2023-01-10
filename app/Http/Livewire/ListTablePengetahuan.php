@@ -19,8 +19,8 @@ class ListTablePengetahuan extends Component
     public function render()
     {
         if ($this->jenis == "uts") {
-            $kelompokA = DB::table('rapor_tengah_semester')->select('NISN', 'nama', 'kelompok_mapel', 'nama_mapel', 'kkm_aktif', 'nilai_pengetahuan', 'indeks_pengetahuan', 'deskripsi_pengetahuan')->where('kontrak_siswa', $this->kontrak)->where('kelompok_mapel', "A")->where('NISN', Auth::user()->siswas->NISN)->get();
-            $kelompokB = DB::table('rapor_tengah_semester')->select('NISN', 'nama', 'kelompok_mapel', 'nama_mapel', 'kkm_aktif', 'nilai_pengetahuan', 'indeks_pengetahuan', 'deskripsi_pengetahuan')->where('kontrak_siswa', $this->kontrak)->where('kelompok_mapel', "B")->where('NISN', Auth::user()->siswas->NISN)->get();
+            $kelompokA = DB::table('rapor_tengah_semester')->select('NISN', 'nama', 'kelompok_mapel', 'nama_mapel', 'kkm_aktif', 'nilai_pengetahuan', 'deskripsi_pengetahuan')->where('kontrak_siswa', $this->kontrak)->where('kelompok_mapel', "A")->where('NISN', Auth::user()->siswas->NISN)->get();
+            $kelompokB = DB::table('rapor_tengah_semester')->select('NISN', 'nama', 'kelompok_mapel', 'nama_mapel', 'kkm_aktif', 'nilai_pengetahuan', 'deskripsi_pengetahuan')->where('kontrak_siswa', $this->kontrak)->where('kelompok_mapel', "B")->where('NISN', Auth::user()->siswas->NISN)->get();
         } elseif ($this->jenis == "uas") {
             $kelompokA = DB::table('rapor_akhir_semester')->select('NISN', 'nama', 'kelompok_mapel', 'nama_mapel', 'kkm_aktif', 'nilai_pengetahuan', 'deskripsi_pengetahuan')->where('kontrak_siswa', $this->kontrak)->where('kelompok_mapel', "A")->where('NISN', Auth::user()->siswas->NISN)->get();
             $kelompokB = DB::table('rapor_akhir_semester')->select('NISN', 'nama', 'kelompok_mapel', 'nama_mapel', 'kkm_aktif', 'nilai_pengetahuan', 'deskripsi_pengetahuan')->where('kontrak_siswa', $this->kontrak)->where('kelompok_mapel', "B")->where('NISN', Auth::user()->siswas->NISN)->get();
