@@ -10,10 +10,10 @@ use App\Models\KontrakSemester;
 
 class CreateModalEkskulSiswa extends Component
 {
-    public $nama_siswa, $nama_ekskul, $ta_semester;
+    public $nama_siswa, $nama_ekstrakurikuler, $ta_semester;
     
     protected $rules = [
-        'nama_ekskul' => 'required',
+        'nama_ekstrakurikuler' => 'required',
         'nama_siswa' => 'required',
         'ta_semester' => 'required',
         // 'semester_id' => 'required'
@@ -53,9 +53,9 @@ class CreateModalEkskulSiswa extends Component
             // $this->semester_id = $listSiswa[0]["semester_id"];
         }
 
-        if (!$ekstrakurikuler->isEmpty()) {
-            $this->nama_ekskul = $ekstrakurikuler[0]->ekstrakurikuler_id;
-        }
+        /* if (!$ekstrakurikuler->isEmpty()) {
+            $this->nama_ekstrakurikuler = $ekstrakurikuler[0]->ekstrakurikuler_id;
+        } */
         // if (!$semester->isEmpty()) {
         //     $this->ta_semester = $semester[0]->tahun_ajaran_aktif;
         // }
@@ -67,14 +67,14 @@ class CreateModalEkskulSiswa extends Component
     public function store() {
         // dd($this);
         $this->validate([
-            'nama_ekskul' => 'required',
+            'nama_ekstrakurikuler' => 'required',
             'nama_siswa' => 'required',
             'ta_semester' => 'required',
             // 'semester_id' => 'required'
         ]);
-        DB::select('CALL add_ekstrakurikuler_siswa(?, ?, ?, ?)', [auth()->user()->uuid, $this->nama_ekskul, $this->nama_siswa, $this->ta_semester]);
+        DB::select('CALL add_ekstrakurikuler_siswa(?, ?, ?, ?)', [auth()->user()->uuid, $this->nama_ekstrakurikuler, $this->nama_siswa, $this->ta_semester]);
         $this->render();
-        $this->emit('assignSiswa');
+        $this->emit('assign-ekskul-siswa');
         $this->dispatchBrowserEvent('insert-alert');
         $this->dispatchBrowserEvent('close-create-modal');
         // session()->flash('message', 'Kelas Berhasil dibuat');

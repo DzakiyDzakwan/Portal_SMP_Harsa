@@ -22,6 +22,7 @@ class DashboardController extends Controller
         $tahunAjaranAktif = "";
         $semesterAktif = "";
         $menu = 'dashboard';
+        $submenu = 'dashboard';
         $jumlah= [
             'user' => User::withTrashed()->count(),
             'admin' => User::withTrashed()->role(['kepsek', 'wakepsek', 'admin'])->count(),

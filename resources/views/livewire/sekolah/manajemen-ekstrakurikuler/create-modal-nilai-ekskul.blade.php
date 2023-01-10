@@ -1,5 +1,5 @@
 {{-- modal create mapel --}}
-<div class="modal modal-lg fade text-left" id="modalNilai" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+<div class="modal fade text-left" id="modalNilai" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -50,7 +50,7 @@
                             <label for="keterangan_e">Deskripsi</label>
                             <div class="position-relative">
                                 <textarea class="form-control @error('keterangan_e')is-invalid @enderror" placeholder="Masukkan Deskripsi Keterampilan"
-                                    id="floatingTextarea" wire:model.defer=""></textarea>
+                                    id="floatingTextarea" wire:model.defer="keterangan_e"></textarea>
                                 <div class="form-control-icon">
                                     <i class="bi bi-card-text"></i>
                                 </div>
@@ -70,7 +70,7 @@
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Close</span>
                     </button>
-                    <button type="submit" class="btn btn-success me-1 mb-1" data-bs-dismiss="modal">
+                    <button type="submit" class="btn btn-success me-1 mb-1">
                         Simpan
                     </button>
                 </div>

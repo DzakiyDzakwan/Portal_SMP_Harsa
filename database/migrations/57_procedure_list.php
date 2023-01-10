@@ -1484,22 +1484,23 @@ CREATE PROCEDURE update_ekstrakurikuler(
 
         DB::unprepared('
         CREATE PROCEDURE delete_ekstrakurikuler_siswa(
-        IN admin CHAR(36),
-        IN ekstrakurikuler CHAR(5)
+        IN ekstrakurikuler_id CHAR(5),
+        IN siswa_id CHAR(10),
+        IN tahun_ajaran CHAR(9),
+        IN admin CHAR(36)
         )
         BEGIN
         
             DECLARE errno INT;
-            DECLARE admin CHAR(36);
             DECLARE EXIT HANDLER FOR SQLEXCEPTION
             BEGIN
                 ROLLBACK;
             END;
         
-            SET admin = UUID();
-        
             START TRANSACTION;
-            DELETE FROM ekstrakurikuler_siswas WHERE ekstrakurikuler_siswa_id = ekstrakurikuler COLLATE utf8mb4_general_ci;
+            DELETE FROM ekstrakurikuler_siswas WHERE ekstrakurikuler = ekstrakurikuler_id COLLATE utf8mb4_general_ci 
+            AND siswa = siswa_id COLLATE utf8mb4_general_ci
+            AND tahun_ajaran_aktif = tahun_ajaran COLLATE utf8mb4_general_ci;
 
             INSERT INTO log_activities(actor, action, at, created_at)
             VALUES(admin, "delete", "ekstrakurikuler_siswas", NOW());
@@ -1641,6 +1642,7 @@ BEGIN
         DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE assign_pembina");
         // DB::unprepared("DROP PROCEDURE unassign_pembina");
+        DB::unprepared("DROP PROCEDURE add_ekstrakurikuler_siswa");
         DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler_siswa");
         DB::unprepared("DROP PROCEDURE add_roster");
         DB::unprepared("DROP PROCEDURE update_roster");

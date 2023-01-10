@@ -14,8 +14,8 @@ class InfoCardEkskulSiswa extends Component
 {
 
     protected $listeners = [
-        'assignSiswa'=> 'render',
-        'unassignSiswa' => 'render',
+        'assign-ekskul-siswa'=> 'render',
+        'unassign-ekskul-siswa' => 'render',
     ];
 
     public function render()
