@@ -17,7 +17,7 @@ class ButtonExportRapor extends Component
 
     public function render()
     {
-        $nilai = DB::table('rapor_nilai_pengetahuan')
+        $nilai = DB::table('rapor_ulangan_harian')
         ->where('kontrak_siswa', $this->kontrak)
         ->where('jenis', $this->jenis)
         ->where('siswa', Auth::user()->siswas->NISN)

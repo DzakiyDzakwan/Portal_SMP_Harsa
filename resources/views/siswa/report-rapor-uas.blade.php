@@ -113,13 +113,13 @@
                     <td align="center">{{ $item->kkm_aktif }}</td>
                     <td align="center">{{ $item->nilai_pengetahuan }}</td>
                     @if ($item->nilai_pengetahuan >= 0 && $item->nilai_pengetahuan < 81)
-                        <td align="center" align="center" align="center" align="center">D</td>
+                        <td align="center">D</td>
                     @elseif ($item->nilai_pengetahuan >= 81 && $item->nilai_pengetahuan <= 86)
-                        <td align="center" align="center" align="center" align="center">C</td>
+                        <td align="center">C</td>
                     @elseif ($item->nilai_pengetahuan > 86 && $item->nilai_pengetahuan <= 92)
-                        <td align="center" align="center" align="center" align="center">B</td>
+                        <td align="center">B</td>
                     @elseif ($item->nilai_pengetahuan > 92 && $item->nilai_pengetahuan <= 100)
-                        <td align="center" align="center" align="center" align="center">A</td>
+                        <td align="center">A</td>
                     @endif
                     <td>{{ $item->deskripsi_pengetahuan }}</td>
                 </tr>
@@ -150,13 +150,13 @@
                     <td align="center" align="center">{{ $item->kkm_aktif }}</td>
                     <td align="center" align="center">{{ $item->nilai_pengetahuan }}</td>
                     @if ($item->nilai_pengetahuan >= 0 && $item->nilai_pengetahuan < 81)
-                        <td align="center" align="center" align="center">D</td>
+                        <td align="center">D</td>
                     @elseif ($item->nilai_pengetahuan >= 81 && $item->nilai_pengetahuan <= 86)
-                        <td align="center" align="center" align="center">C</td>
+                        <td align="center">C</td>
                     @elseif ($item->nilai_pengetahuan > 86 && $item->nilai_pengetahuan <= 92)
-                        <td align="center" align="center" align="center">B</td>
+                        <td align="center">B</td>
                     @elseif ($item->nilai_pengetahuan > 92 && $item->nilai_pengetahuan <= 100)
-                        <td align="center" align="center" align="center">A</td>
+                        <td align="center">A</td>
                     @endif
                     <td>{{ $item->deskripsi_pengetahuan }}</td>
                 </tr>
@@ -189,13 +189,13 @@
                     <td align="center">{{ $item->kkm_aktif }}</td>
                     <td align="center">{{ $item->nilai_keterampilan }}</td>
                     @if ($item->nilai_keterampilan >= 0 && $item->nilai_keterampilan < 81)
-                        <td align="center" align="center">D</td>
+                        <td align="center">D</td>
                     @elseif ($item->nilai_keterampilan >= 81 && $item->nilai_keterampilan <= 86)
-                        <td align="center" align="center">C</td>
+                        <td align="center">C</td>
                     @elseif ($item->nilai_keterampilan > 86 && $item->nilai_keterampilan <= 92)
-                        <td align="center" align="center">B</td>
+                        <td align="center">B</td>
                     @elseif ($item->nilai_keterampilan > 92 && $item->nilai_keterampilan <= 100)
-                        <td align="center" align="center">A</td>
+                        <td align="center">A</td>
                     @endif
                     <td>{{ $item->deskripsi_keterampilan }}</td>
                 </tr>
