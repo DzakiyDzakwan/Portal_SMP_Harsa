@@ -29,7 +29,15 @@
                                     <td>{{ $item->nama_mapel }}</td>
                                     <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_keterampilan }}</td>
-                                    <td>{{ $item->indeks_keterampilan }}</td>
+                                    @if ($item->nilai_keterampilan >= 0 && $item->nilai_keterampilan < 81)
+                                        <td>D</td>
+                                    @elseif ($item->nilai_keterampilan >= 81 && $item->nilai_keterampilan <= 86)
+                                        <td>C</td>
+                                    @elseif ($item->nilai_keterampilan > 86 && $item->nilai_keterampilan <= 92)
+                                        <td>B</td>
+                                    @elseif ($item->nilai_keterampilan > 92 && $item->nilai_keterampilan <= 100)
+                                        <td>A</td>
+                                    @endif
                                     <td>{{ $item->deskripsi_keterampilan }}</td>
                                 </tr>
                             @endforeach
@@ -66,7 +74,15 @@
                                     <td>{{ $item->nama_mapel }}</td>
                                     <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_keterampilan }}</td>
-                                    <td>{{ $item->indeks_keterampilan }}</td>
+                                    @if ($item->nilai_keterampilan >= 0 && $item->nilai_keterampilan < 81)
+                                        <td>D</td>
+                                    @elseif ($item->nilai_keterampilan >= 81 && $item->nilai_keterampilan <= 86)
+                                        <td>C</td>
+                                    @elseif ($item->nilai_keterampilan > 86 && $item->nilai_keterampilan <= 92)
+                                        <td>B</td>
+                                    @elseif ($item->nilai_keterampilan > 92 && $item->nilai_keterampilan <= 100)
+                                        <td>A</td>
+                                    @endif
                                     <td>{{ $item->deskripsi_keterampilan }}</td>
                                 </tr>
                             @endforeach

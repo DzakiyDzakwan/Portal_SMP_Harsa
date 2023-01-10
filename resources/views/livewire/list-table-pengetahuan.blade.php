@@ -30,7 +30,15 @@
                                     <td>{{ $item->nama_mapel }}</td>
                                     <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_pengetahuan }}</td>
-                                    <td>{{ $item->indeks_pengetahuan }}</td>
+                                    @if ($item->nilai_pengetahuan >= 0 && $item->nilai_pengetahuan < 81)
+                                        <td>D</td>
+                                    @elseif ($item->nilai_pengetahuan >= 81 && $item->nilai_pengetahuan <= 86)
+                                        <td>C</td>
+                                    @elseif ($item->nilai_pengetahuan > 86 && $item->nilai_pengetahuan <= 92)
+                                        <td>B</td>
+                                    @elseif ($item->nilai_pengetahuan > 92 && $item->nilai_pengetahuan <= 100)
+                                        <td>A</td>
+                                    @endif
                                     <td>{{ $item->deskripsi_pengetahuan }}</td>
                                 </tr>
                             @endforeach
@@ -67,7 +75,15 @@
                                     <td>{{ $item->nama_mapel }}</td>
                                     <td>{{ $item->kkm_aktif }}</td>
                                     <td>{{ $item->nilai_pengetahuan }}</td>
-                                    <td>{{ $item->indeks_pengetahuan }}</td>
+                                    @if ($item->nilai_pengetahuan >= 0 && $item->nilai_pengetahuan < 81)
+                                        <td>D</td>
+                                    @elseif ($item->nilai_pengetahuan >= 81 && $item->nilai_pengetahuan <= 86)
+                                        <td>C</td>
+                                    @elseif ($item->nilai_pengetahuan > 86 && $item->nilai_pengetahuan <= 92)
+                                        <td>B</td>
+                                    @elseif ($item->nilai_pengetahuan > 92 && $item->nilai_pengetahuan <= 100)
+                                        <td>A</td>
+                                    @endif
                                     <td>{{ $item->deskripsi_pengetahuan }}</td>
                                 </tr>
                             @endforeach

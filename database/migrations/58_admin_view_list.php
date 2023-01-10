@@ -347,9 +347,9 @@ return new class extends Migration
         JOIN mapels AS m ON n.mapel = m.mapel_id
         JOIN kontrak_semesters AS k ON n.kontrak_siswa = k.kontrak_semester_id
         WHERE n.status = "confirmed" AND n.jenis = "uh1" OR n.jenis = "uh2" OR n.jenis = "uh3"
-        GROUP BY m.nama_mapel
-        ORDER BY k.siswa
-        ')
+        GROUP BY m.nama_mapel, n.jenis
+        ORDER BY k.siswa, n.jenis
+        ');
         /* DB::unprepared('
         CREATE VIEW detail_kelas AS
         SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.jenis_kelamin, SUM(if(user_profiles.jenis_kelamin = "PR", 1, 0)) AS jumlah_PR, SUM(if(user_profiles.jenis_kelamin = "LK", 1, 0)) AS jumlah_LK
