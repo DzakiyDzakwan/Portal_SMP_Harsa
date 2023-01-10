@@ -20,7 +20,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '1',
             'mapel' => 'MW001',
-            'guru' => '4444444444444444',
+            'guru' => '3333333333333333',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh1',
@@ -34,7 +34,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '1',
             'mapel' => 'MW002',
-            'guru' => '5555555555555555',
+            'guru' => '4444444444444444',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh1',
@@ -48,7 +48,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '1',
             'mapel' => 'MW003',
-            'guru' => '8888888888888888',
+            'guru' => '5555555555555555',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh1',
@@ -61,8 +61,50 @@ class NilaiSiswa1TableSeeder extends Seeder
             ],
             [
             'sesi' => '1',
+            'mapel' => 'MW004',
+            'guru' => '6666666666666666',
+            'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
+            'kontrak_siswa' => '1',
+            'jenis' => 'uh1',
+            'kkm_aktif' => '81',
+            'nilai_pengetahuan' => '92',
+            'deskripsi_pengetahuan'=> 'Sangat baik dalam memahami materi',
+            'nilai_keterampilan'=> '94',
+            'deskripsi_keterampilan' => 'Sangat baik dalam praktik',
+            'status' => 'confirmed'
+            ],
+            [
+            'sesi' => '1',
+            'mapel' => 'MW005',
+            'guru' => '7777777777777777',
+            'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
+            'kontrak_siswa' => '1',
+            'jenis' => 'uh1',
+            'kkm_aktif' => '81',
+            'nilai_pengetahuan' => '96',
+            'deskripsi_pengetahuan'=> 'Sangat baik dalam memahami materi',
+            'nilai_keterampilan'=> '95',
+            'deskripsi_keterampilan' => 'Sangat baik dalam praktik',
+            'status' => 'confirmed'
+            ],
+            [
+            'sesi' => '1',
+            'mapel' => 'MW006',
+            'guru' => '8888888888888888',
+            'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
+            'kontrak_siswa' => '1',
+            'jenis' => 'uh1',
+            'kkm_aktif' => '81',
+            'nilai_pengetahuan' => '90',
+            'deskripsi_pengetahuan'=> 'Sangat baik dalam memahami materi',
+            'nilai_keterampilan'=> '89',
+            'deskripsi_keterampilan' => 'Sangat baik dalam praktik',
+            'status' => 'confirmed'
+            ],
+            [
+            'sesi' => '1',
             'mapel' => 'MP001',
-            'guru' => '3333333333333333',
+            'guru' => '9999999999999999',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh1',
@@ -76,7 +118,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '1',
             'mapel' => 'MP002',
-            'guru' => '6666666666666666',
+            'guru' => '1010101010101010',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh1',
@@ -105,7 +147,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '2',
             'mapel' => 'MW001',
-            'guru' => '4444444444444444',
+            'guru' => '3333333333333333',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh2',
@@ -119,7 +161,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '2',
             'mapel' => 'MW002',
-            'guru' => '5555555555555555',
+            'guru' => '4444444444444444',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh2',
@@ -133,7 +175,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '2',
             'mapel' => 'MW003',
-            'guru' => '8888888888888888',
+            'guru' => '5555555555555555',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh2',
@@ -147,7 +189,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '2',
             'mapel' => 'MP001',
-            'guru' => '3333333333333333',
+            'guru' => '9999999999999999',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh2',
@@ -161,7 +203,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '2',
             'mapel' => 'MP002',
-            'guru' => '6666666666666666',
+            'guru' => '1010101010101010',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh2',
@@ -190,7 +232,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '3',
             'mapel' => 'MW001',
-            'guru' => '4444444444444444',
+            'guru' => '9999999999999999',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh3',
@@ -204,7 +246,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '3',
             'mapel' => 'MW002',
-            'guru' => '5555555555555555',
+            'guru' => '4444444444444444',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh3',
@@ -218,7 +260,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '3',
             'mapel' => 'MW003',
-            'guru' => '8888888888888888',
+            'guru' => '5555555555555555',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh3',
@@ -232,7 +274,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '3',
             'mapel' => 'MP001',
-            'guru' => '3333333333333333',
+            'guru' => '9999999999999999',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh3',
@@ -246,7 +288,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '3',
             'mapel' => 'MP002',
-            'guru' => '6666666666666666',
+            'guru' => '1010101010101010',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uh3',
@@ -275,7 +317,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '4',
             'mapel' => 'MW001',
-            'guru' => '4444444444444444',
+            'guru' => '9999999999999999',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uts',
@@ -289,7 +331,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '4',
             'mapel' => 'MW002',
-            'guru' => '5555555555555555',
+            'guru' => '4444444444444444',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uts',
@@ -303,7 +345,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '4',
             'mapel' => 'MW003',
-            'guru' => '8888888888888888',
+            'guru' => '5555555555555555',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uts',
@@ -317,7 +359,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '4',
             'mapel' => 'MP001',
-            'guru' => '3333333333333333',
+            'guru' => '9999999999999999',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uts',
@@ -331,7 +373,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '4',
             'mapel' => 'MP002',
-            'guru' => '6666666666666666',
+            'guru' => '1010101010101010',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uts',
@@ -360,7 +402,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '5',
             'mapel' => 'MW001',
-            'guru' => '4444444444444444',
+            'guru' => '3333333333333333',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uas',
@@ -374,7 +416,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '5',
             'mapel' => 'MW002',
-            'guru' => '5555555555555555',
+            'guru' => '4444444444444444',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uas',
@@ -388,7 +430,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '5',
             'mapel' => 'MW003',
-            'guru' => '8888888888888888',
+            'guru' => '5555555555555555',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uas',
@@ -416,7 +458,7 @@ class NilaiSiswa1TableSeeder extends Seeder
             [
             'sesi' => '5',
             'mapel' => 'MP002',
-            'guru' => '6666666666666666',
+            'guru' => '1010101010101010',
             'pemeriksa' => '59f5ab12-75d2-11ed-9489-f875a4fd08d6',
             'kontrak_siswa' => '1',
             'jenis' => 'uas',
