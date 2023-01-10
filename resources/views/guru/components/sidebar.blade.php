@@ -238,9 +238,6 @@
                                     <a href="/guru/ekstrakurikuler-siswa-pembina">Ekstrakurikuler Siswa</a>
                                 </li>
                             @endhasrole
-                            <li class="submenu-item">
-                                <a href="/guru/nilai-ekstrakurikuler">Nilai Ekstrakurikuler</a>
-                            </li>
                         </ul>
                     </li>
                 @endhasanyrole

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionTableSeeder extends Seeder
 {
@@ -16,37 +17,56 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         //Menu
-        Permission::create(['name' => 'menu users']);
-        Permission::create(['name' => 'menu inactive users']);
-        Permission::create(['name' => 'menu roles']);
-        Permission::create(['name' => 'menu permissions']);
-        Permission::create(['name' => 'menu admins']);
-        Permission::create(['name' => 'menu siswas']);
-        Permission::create(['name' => 'menu gurus']);
-        Permission::create(['name' => 'menu tahuns']);
-        Permission::create(['name' => 'menu mapels']);
-        Permission::create(['name' => 'menu mapel gurus']);
-        Permission::create(['name' => 'menu kelas']);
-        Permission::create(['name' => 'menu rosters']);
-        Permission::create(['name' => 'menu ekstrakurikulers']);
-        Permission::create(['name' => 'menu ekstrakurikuler siswas']);
-        Permission::create(['name' => 'menu sesi penilaian']);
-        Permission::create(['name' => 'menu log']);
+        Permission::create(['name' => 'view-user'])->assignRole(["kepsek","wakepsek"]);
+        Permission::create(['name' => 'view-role'])->assignRole(["kepsek", "wakepsek"]);
+        Permission::create(['name' => 'view-permission'])->assignRole(["kepsek"]);
+        Permission::create(['name' => 'view-admin'])->assignRole("kepsek", "wakepsek");
+        Permission::create(['name' => 'view-guru'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-siswa'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-tahun-akademik'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-mapel'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-mapel-guru'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-wali-kelas'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-kelas-saya'])->assignRole(["wali"]);
+        Permission::create(['name' => 'view-kelas-guru'])->assignRole(["guru"]);
+        Permission::create(['name' => 'view-kelas'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-kelas-aktif'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-roster'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-sesi-penilaian'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-konfirmasi-nilai'])->assignRole(["kepsek", "wakepsek"]);
+        Permission::create(['name' => 'view-rapor'])->assignRole(["siswa"]);
+        Permission::create(['name' => 'view-pembina-ekstrakurikuler'])->assignRole(["kepsek", "wakepsek", "admin"]);
+        Permission::create(['name' => 'view-ekstrakurikuler-pembina'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'view-ekstrakurikuler-siswa'])->assignRole(["siswa"]);
+        Permission::create(['name' => 'view-log'])->assignRole(["kepsek"]);
+        
 
-        //Create
-        Permission::create(['name' => 'create roles']);
-        Permission::create(['name' => 'create permissions']);
-        Permission::create(['name' => 'create admins']);
-        Permission::create(['name' => 'create siswas']);
-        Permission::create(['name' => 'create gurus']);
-        Permission::create(['name' => 'create tahuns']);
-        Permission::create(['name' => 'create mapelss']);
-        Permission::create(['name' => 'create mapel gurus']);
-        Permission::create(['name' => 'create kelas']);
-        Permission::create(['name' => 'create wali']);
-        Permission::create(['name' => 'create kelas aktif']);
-        Permission::create(['name' => 'create rosters']);
-        Permission::create(['name' => 'create pembina']);
+        //User
+        Permission::create(['name' => 'assign-role-user'])->assignRole(["kepsek", "wakepsek"]);
+        Permission::create(['name' => 'delete-user'])->assignRole(["kepsek", "wakepsek"]);
+        Permission::create(['name' => 'update-user'])->assignRole(["kepsek", "wakepsek"]);
+
+        //Role
+        Permission::create(['name' => 'assign-permission-role'])->assignRole(["kepsek", "wakepsek"]);
+        Permission::create(['name' => 'create-role'])->assignRole(["kepsek", "wakepsek"]);
+        Permission::create(['name' => 'delete-role'])->assignRole(["kepsek", "wakepsek"]);
+        Permission::create(['name' => 'update-role'])->assignRole(["kepsek", "wakepsek"]);
+
+        //Permission
+        Permission::create(['name' => 'create-permission'])->assignRole(["kepsek"]);
+        Permission::create(['name' => 'delete-permission'])->assignRole(["kepsek"]);
+
+        Permission::create(['name' => 'create admins'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create siswas'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create gurus'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create tahuns'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create mapelss'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create mapel gurus'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create kelas'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create wali'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create kelas aktif'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create rosters'])->assignRole(["pembina"]);
+        Permission::create(['name' => 'create pembina'])->assignRole(["pembina"]);
         Permission::create(['name' => 'create ekstrakurikulers']);
         Permission::create(['name' => 'create ekstrakurikuler siswas']);
         Permission::create(['name' => 'create sesi penilaians']);
