@@ -350,6 +350,17 @@ return new class extends Migration
         GROUP BY m.nama_mapel, n.jenis
         ORDER BY k.siswa, n.jenis
         ');
+
+        DB::unprepared('
+        CREATE VIEW list_roster_guru AS SELECT r.tahun_ajaran_aktif, r.semester_aktif, mg.guru, r.kelas, ka.nama_kelas_aktif, k.grade, k.kelompok_kelas, m.mapel_id, m.nama_mapel, m.kelompok_mapel, r.waktu_mulai, r.waktu_akhir, r.hari
+        FROM rosters AS r
+        JOIN mapel_gurus AS mg ON r.mapel_guru = mg.mapel_guru_id
+        JOIN mapels AS m ON mg.mapel = m.mapel_id
+        JOIN kelas_aktifs AS ka ON ka.kelas_aktif_id = r.kelas
+        JOIN kelas AS k ON ka.kelas = k.kelas_id
+        GROUP BY r.mapel_guru, r.kelas;
+        ');
+
         /* DB::unprepared('
         CREATE VIEW detail_kelas AS
         SELECT kelas.kelas_id, kelas.nama_kelas, kelas.grade, kelas.kelompok_kelas, user_profiles.jenis_kelamin, SUM(if(user_profiles.jenis_kelamin = "PR", 1, 0)) AS jumlah_PR, SUM(if(user_profiles.jenis_kelamin = "LK", 1, 0)) AS jumlah_LK
@@ -379,6 +390,7 @@ return new class extends Migration
         DB::unprepared('DROP VIEW list_tahun_ajaran');
         DB::unprepared('DROP VIEW list_kelas');
         DB::unprepared('DROP VIEW list_roster');
+        DB::unprepared('DROP VIEW list_roster_guru');
         // DB::unprepared('DROP VIEW list_inactive_kelas');
         // DB::unprepared('DROP VIEW list_mapel');
         // DB::unprepared('DROP VIEW list_mapel_guru');
