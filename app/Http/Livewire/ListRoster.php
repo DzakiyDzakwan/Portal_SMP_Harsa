@@ -28,10 +28,13 @@ class ListRoster extends Component
         }
     }
 
-    public function filter($data, $data1) {
+    public function filter($data) {
         $this->tahun_ajaran_aktif = $data["tahun_ajaran_aktif"];
         $this->semester_aktif = $data["semester_aktif"];
-        $this->kelas = $data1["kelas_aktif_id"];
+        $this->kelas = $data["kelas_aktif_id"];
+        /* dd($data);
+        $this->roster = DB::table('list_roster')->where('list_roster.tahun_ajaran_aktif', $this->tahun_ajaran_aktif)->where('list_roster.semester_aktif', $this->semester_aktif)->where('list_roster.kelas_aktif_id', $this->kelas)->get();
+        dd($this->roster); */
     }
 
     public function editRoster($id) {

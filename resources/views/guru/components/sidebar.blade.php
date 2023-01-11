@@ -203,7 +203,7 @@
                                 <a href="/guru/sesi-penilaian">Sesi Penilaian</a>
                             </li>
                         @endcan
-                        @can('view-konfirmasi')
+                        @can('view-konfirmasi-nilai')
                             <li class="submenu-item @if ($submenu === 'konfirmasi')  @endif ">
                                 <a href="/guru/konfirmasi-nilai">Konfirmasi Nilai</a>
                             </li>

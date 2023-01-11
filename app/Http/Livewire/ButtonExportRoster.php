@@ -23,10 +23,10 @@ class ButtonExportRoster extends Component
         }
     }
 
-    public function filter($data, $data1) {
+    public function filter($data) {
         $this->tahun_ajaran_aktif = $data["tahun_ajaran_aktif"];
         $this->semester_aktif = $data["semester_aktif"];
-        $this->kelas = $data1["kelas_aktif_id"];
+        $this->kelas = $data["kelas_aktif_id"];
     }
 
     public function render()

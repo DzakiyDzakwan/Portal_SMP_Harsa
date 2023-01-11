@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionTableSeeder::class);
         $this->call(KepsekTableSeeder::class);
         $this->call(GuruTableSeeder::class);
+        $this->call(WaliTableSeeder::class);
         $this->call(TahunAjaranTableSeeder::class);
         $this->call(MapelTableSeeder::class);
         $this->call(MapelGuruTableSeeder::class);
@@ -30,5 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SesiTableSeeder::class);
         $this->call(NilaiSiswa1TableSeeder::class);
         $this->call(NilaiSiswa2TableSeeder::class);
+        $this->call(KontrakTableSeeder::class);
     }
 }

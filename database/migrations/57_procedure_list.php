@@ -1223,8 +1223,8 @@ return new class extends Migration
         )
         BEGIN
         
-        INSERT INTO sesi_penilaians(sesi_id ,nama_sesi, tahun_ajaran_aktif, semester_aktif, tanggal_mulai, tanggal_berakhir, created_at, updated_at)
-        VALUES(UUID(), sesi, ta, semester, start, end, NOW(), NOW());
+        INSERT INTO sesi_penilaians(nama_sesi, tahun_ajaran_aktif, semester_aktif, tanggal_mulai, tanggal_berakhir, created_at, updated_at)
+        VALUES(sesi, ta, semester, start, end, NOW(), NOW());
         
         INSERT INTO log_activities(actor, action, at, created_at)
         VALUES(admin, "insert", "sesi_penilaians", NOW());
@@ -1463,13 +1463,10 @@ CREATE PROCEDURE update_ekstrakurikuler(
             )
             BEGIN
                 DECLARE errno INT;
-                DECLARE uuid CHAR(36);
                 DECLARE EXIT HANDLER FOR SQLEXCEPTION
                 BEGIN
                     ROLLBACK;
                 END;
-            
-                SET uuid = UUID();
             
                 START TRANSACTION;
                 INSERT INTO ekstrakurikuler_siswas(ekstrakurikuler, siswa, tahun_ajaran_aktif, created_at) 
@@ -1636,7 +1633,7 @@ BEGIN
         // DB::unprepared("DROP PROCEDURE delete_kelas");
         // DB::unprepared("DROP PROCEDURE delete_siswa");
         DB::unprepared("DROP PROCEDURE add_nilai");
-        // DB::unprepared("DROP PROCEDURE add_sesi");
+        DB::unprepared("DROP PROCEDURE add_sesi");
         DB::unprepared("DROP PROCEDURE add_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE update_ekstrakurikuler");
         DB::unprepared("DROP PROCEDURE delete_ekstrakurikuler");

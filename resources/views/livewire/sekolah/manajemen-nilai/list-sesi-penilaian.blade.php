@@ -9,7 +9,6 @@
             <th>Waktu Berakhir</th>
             <th>Durasi</th>
             <th>Status</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -18,11 +17,11 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>
                     @if ($s->nama_sesi == 'uh1')
-                        {{ 'Ujian Harian 1' }}
+                        {{ 'Ulangan Harian 1' }}
                     @elseif ($s->nama_sesi == 'uh2')
-                        {{ 'Ujian Harian 2' }}
+                        {{ 'Ulangan Harian 2' }}
                     @elseif ($s->nama_sesi == 'uh3')
-                        {{ 'Ujian Harian 3' }}
+                        {{ 'Ulangan Harian 3' }}
                     @elseif ($s->nama_sesi == 'uts')
                         {{ 'Ujian Tengah Semester' }}
                     @else
@@ -44,9 +43,8 @@
                         <span class="badge bg-warning">Inaktif</span>
                     @endif
                 </td>
-                @if ($s->status !== 'selesai')
+                {{-- @if ($s->status !== 'selesai')
                     <td>
-                        {{-- Update Button --}}
                         <div class="modal-warning me-1 mb-1 d-inline-block">
                             <button class="btn btn-sm btn-warning" wire:click="editSesi('{{ $s->id }}')">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User">
@@ -55,7 +53,7 @@
                             </button>
                         </div>
                     </td>
-                @endif
+                @endif --}}
             </tr>
         @endforeach
     </tbody>

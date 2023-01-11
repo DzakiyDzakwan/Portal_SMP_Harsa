@@ -65,7 +65,7 @@ class CreateModalEkskulSiswa extends Component
 
 
     public function store() {
-        // dd($this);
+        
         $this->validate([
             'nama_ekstrakurikuler' => 'required',
             'nama_siswa' => 'required',
@@ -73,6 +73,7 @@ class CreateModalEkskulSiswa extends Component
             // 'semester_id' => 'required'
         ]);
         DB::select('CALL add_ekstrakurikuler_siswa(?, ?, ?, ?)', [auth()->user()->uuid, $this->nama_ekstrakurikuler, $this->nama_siswa, $this->ta_semester]);
+
         $this->render();
         $this->emit('assign-ekskul-siswa');
         $this->dispatchBrowserEvent('insert-alert');

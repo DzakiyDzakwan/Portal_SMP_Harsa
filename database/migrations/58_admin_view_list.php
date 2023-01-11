@@ -86,7 +86,7 @@ return new class extends Migration
         CREATE VIEW list_tahun_ajaran AS
         SELECT tahun_ajaran_id AS id , tahun_ajaran, semester, DATE_FORMAT(tanggal_mulai, "%d %M %Y") AS tanggal_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y") AS tanggal_berakhir, time_status(tanggal_mulai, tanggal_berakhir) AS status
         FROM tahun_ajarans
-        ORDER BY status;
+        ORDER BY tahun_ajaran DESC,status;
         ');
 
         // DB::unprepared('
@@ -165,7 +165,7 @@ return new class extends Migration
         JOIN mapels AS m ON mg.mapel = m.mapel_id 
         JOIN user_profiles AS p ON g.user = p.user
         JOIN kelas_aktifs AS k ON r.kelas = k.kelas_aktif_id
-        ORDER BY r.kelas, r.waktu_mulai, r.hari;
+        ORDER BY r.kelas, r.hari, r.waktu_mulai;
         ');
 
         /* DB::unprepared('
@@ -195,7 +195,7 @@ return new class extends Migration
         CREATE VIEW list_sesi_penilaian AS
         SELECT sesi_id AS id , nama_sesi, tahun_ajaran_aktif, semester_aktif, DATE_FORMAT(tanggal_mulai, "%d %M %Y") AS tanggal_mulai, DATE_FORMAT(tanggal_berakhir, "%d %M %Y") AS tanggal_berakhir, TIMESTAMPDIFF(DAY, tanggal_mulai, tanggal_berakhir) AS jumlah_hari, time_status(tanggal_mulai, tanggal_berakhir) AS status
         FROM sesi_penilaians
-        ORDER BY status;
+        ORDER BY sesi_id DESC, status;
         ');
 
         /* DB::unprepared('
@@ -322,24 +322,24 @@ return new class extends Migration
         WHERE n.status = "confirmed" AND n.jenis = "uh1" OR n.jenis = "uh2" OR n.jenis = "uh3"
         '); */
 
-        // DB::unprepared('
-        // CREATE VIEW rapor_tengah_semester AS
-        // SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, nama, nama_mapel AS mapel, kkm_aktif AS kkm,
-        // nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p) AS nilai_pengetahuan,
-        // indeks(kkm_aktif, nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p)) AS indeks_pengetahuan,
-        // nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k) AS nilai_keterampilan,
-        // indeks(kkm_aktif, nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k)) AS indeks_keterampilan
-        // FROM list_rekap_nilai
-        // ');
+        DB::unprepared('
+        CREATE VIEW rapor_tengah_semester AS
+        SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, nama, nama_mapel AS mapel, kkm_aktif AS kkm,
+        nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p) AS nilai_pengetahuan,
+        indeks(kkm_aktif, nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p)) AS indeks_pengetahuan,
+        nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k) AS nilai_keterampilan,
+        indeks(kkm_aktif, nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k)) AS indeks_keterampilan
+        FROM list_rekap_nilai
+        ');
 
-        // DB::unprepared('
-        // CREATE VIEW rapor_akhir_semester AS
-        // SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, nama, nama_mapel AS mapel, kkm_aktif AS kkm,
-        // nilai_akhir_semester(nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p), uas_p) AS nilai_pengetahuan,
-        // indeks(kkm_aktif, nilai_akhir_semester(nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p), uas_p)) AS indeks_pengetahuan,
-        // nilai_akhir_semester(nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k), uas_k) AS nilai_keterampilan
-        // FROM list_rekap_nilai
-        // ');
+        DB::unprepared('
+        CREATE VIEW rapor_akhir_semester AS
+        SELECT tahun_ajaran_aktif AS tahun_ajaran, NISN, nama, nama_mapel AS mapel, kkm_aktif AS kkm,
+        nilai_akhir_semester(nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p), uas_p) AS nilai_pengetahuan,
+        indeks(kkm_aktif, nilai_akhir_semester(nilai_tengah_semester(uh1_p, uh2_p, uh3_p, uts_p), uas_p)) AS indeks_pengetahuan,
+        nilai_akhir_semester(nilai_tengah_semester(uh1_k, uh2_k, uh3_k, uts_k), uas_k) AS nilai_keterampilan
+        FROM list_rekap_nilai
+        ');
 
         DB::unprepared('
         CREATE VIEW rapor_ulangan_harian AS SELECT n.jenis, n.kontrak_siswa, k.siswa, m.kelompok_mapel, m.nama_mapel, n.kkm_aktif, n.nilai_pengetahuan, n.nilai_keterampilan, n.deskripsi_pengetahuan, n.deskripsi_keterampilan, indeks(n.kkm_aktif, n.nilai_pengetahuan) AS indeks_pengetahuan, indeks(n.kkm_aktif, n.nilai_keterampilan) AS indeks_keterampilan

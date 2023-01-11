@@ -42,47 +42,6 @@ class GuruTableSeeder extends Seeder
             'nama' => 'Admin',
             'jenis_kelamin' => 'LK'
         ]);
-
-        // Guru
-        User::create([
-            'uuid' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
-            'username' => '3333333333333333',
-            'password' => Hash::make('3333333333333333')
-        ])->assignRole(['guru', 'wali']);
-
-        Guru::create([
-            'NUPTK' => '3333333333333333',
-            'user' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
-            'jabatan' => 'guru',
-            'tanggal_masuk' => '2022-01-12',
-            'status' => 'aktif'
-        ]);
-
-        UserProfile::Create([
-            'user' => '58f5ab31-75d2-11ed-9489-f875a4fd08d6',
-            'nama' => 'Wali Kelas Satu',
-            'jenis_kelamin' => 'PR'
-        ]);
-
-        User::create([
-            'uuid' => '58f5ab31-75d2-11ed-9489-g907a4fd08d6',
-            'username' => '4444444444444444',
-            'password' => Hash::make('4444444444444444')
-        ])->assignRole(['guru', 'wali']);
-
-        Guru::create([
-            'NUPTK' => '4444444444444444',
-            'user' => '58f5ab31-75d2-11ed-9489-g907a4fd08d6',
-            'jabatan' => 'guru',
-            'tanggal_masuk' => '2022-01-12',
-            'status' => 'aktif'
-        ]);
-
-        UserProfile::Create([
-            'user' => '58f5ab31-75d2-11ed-9489-g907a4fd08d6',
-            'nama' => 'Wali Kelas Dua',
-            'jenis_kelamin' => 'LK'
-        ]);
         
         DB::select('CALL add_guru(?, ?, ?, ?, ?, ?)', ["Wali Kelas Tiga", '5555555555555555', Hash::make('5555555555555555'), '2022-01-12', 'LK', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);
         DB::select('CALL add_guru(?, ?, ?, ?, ?, ?)', ["Guru Satu", '6666666666666666', Hash::make('6666666666666666'), '2022-01-12', 'PR', '58f5ab52-75d2-11ed-9489-f875a4fd08d6']);

@@ -58,9 +58,15 @@
 @section('script')
     <script>
         //Modal
+        const createModal = new bootstrap.Modal('#createModal', {
+            keyboard: false
+        })
         const modalNilai = new bootstrap.Modal('#modalNilai', {
             keyboard: false
         })
+        window.addEventListener('close-create-modal', event => {
+            createModal.hide();
+        });
         window.addEventListener('nilai-modal', event => {
             modalNilai.toggle();
         });
