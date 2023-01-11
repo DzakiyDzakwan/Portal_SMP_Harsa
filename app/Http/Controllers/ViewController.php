@@ -86,7 +86,7 @@ class ViewController extends Controller
     public function waliKelas()
     {
         $menu = 'manajemenkelas';
-        $submenu = 'wali';
+        $submenu = 'wali-kelas';
         return view('sekolah.wali', compact('menu', 'submenu'));
     }
 
@@ -170,7 +170,8 @@ class ViewController extends Controller
 
     public function ekstrakurikulerSiswa()
     {
-        $menu = 'sekolah-siswa';
+        $menu = 'ekstrakurikuler';
+        $submenu = 'ekstrakurikuler-siswa';
         return view('sekolah.ekskulsiswa', compact('menu', 'submenu'));
     }
 
@@ -197,6 +198,7 @@ class ViewController extends Controller
             ->get(); */
         // dd($kontrak);
         $menu = 'rapor';
-        return view('siswa.rapor', compact('menu', 'kontrak', 'grade'));
+        $submenu = 'rapor-'.$grade;
+        return view('siswa.rapor', compact('menu', 'submenu', 'kontrak', 'grade'));
     }
 }

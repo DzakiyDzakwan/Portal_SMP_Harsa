@@ -7,7 +7,7 @@
             <th>Tanggal Mulai</th>
             <th>Tanggal Akhir</th>
             <th>Status</th>
-            <th>Action</th>
+            {{-- <th>Action</th> --}}
         </tr>
     </thead>
     <tbody>
@@ -28,9 +28,8 @@
                             <span class="badge bg-warning">{{ $item->status }}</span>
                         @endif
                     </td>
-                    @if ($item->status === 'aktif' || $item->status === 'inaktif')
+                    {{-- @if ($item->status === 'aktif' || $item->status === 'inaktif')
                         <td>
-                            <!-- Update Button -->
                             <div class="modal-warning me-1 mb-1 d-inline-block">
                                 <button class="btn btn-sm btn-warning" wire:click="editTahun('{{ $item->id }}')">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Role">
@@ -39,7 +38,7 @@
                                 </button>
                             </div>
                         </td>
-                    @endif
+                    @endif --}}
                 </tr>
             @endforeach
         @endif

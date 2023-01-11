@@ -81,11 +81,12 @@
                         $kelas = DB::table('siswas')
                             ->join('kontrak_semesters', 'kontrak_semesters.siswa', '=', 'siswas.NISN')
                             ->where('user', Auth::user()->uuid)
+                            ->groupBy('grade')
                             ->get();
                     @endphp
                     <ul class="submenu @if ($menu === 'rapor') active @endif">
                         @foreach ($kelas as $k)
-                            <li class="submenu-item">
+                            <li class="submenu-item @if ($submenu === 'rapor-{{ $k->grade }}')  @endif">
                                 <a href="/siswa/rapor/{{ $k->grade }}">Kelas {{ $k->grade }}</a>
                             </li>
                         @endforeach

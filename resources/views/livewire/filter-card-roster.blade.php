@@ -41,10 +41,11 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center">
                         <h6 class="text-muted font-semibold">Kelas</h6>
-                        <select wire:model="kelas" name="kelas"
+                        <select wire:model="kelas_aktif" name="kelas"
                             class="form-select form-control text-center text-success font-extrabold" id="basicSelect">
                             @foreach ($kelas as $item)
-                                <option value="{{ $item->kelas_aktif_id }}">{{ $item->grade }}-{{ $item->kelompok_kelas }}</option>
+                                <option value="{{ $item->kelas_aktif_id }}">
+                                    {{ $item->grade }}-{{ $item->kelompok_kelas }}</option>
                             @endforeach
                         </select>
                     </div>

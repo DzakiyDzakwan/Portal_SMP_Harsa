@@ -46,6 +46,7 @@ class DashboardController extends Controller
 
     public function indexsiswa() {
         $menu = 'dashboard';
+        $submenu = 'dashboard';
         // $roster = DB::table('list_roster_siswa')->where('kelas', Auth::user()->siswas->kelas)->get();
         // $siswa = Siswa::join('users', 'siswas.user', '=', 'users.uuid')
         // ->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')
@@ -55,6 +56,6 @@ class DashboardController extends Controller
         ->where('siswa',Auth::user()->siswas->NISN)
         ->get();
         $roster = DB::table('list_roster_guru')->join('list_siswa_kelas', 'list_siswa_kelas.kelas', '=', 'list_roster_guru.kelas')->where('list_siswa_kelas.NISN', auth()->user()->siswas->NISN)->get();
-        return view('siswa.dashboard', compact('menu', 'prestasi', 'ekskul', 'roster'));
+        return view('siswa.dashboard', compact('menu', 'submenu', 'prestasi', 'ekskul', 'roster'));
     }
 }

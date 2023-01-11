@@ -56,7 +56,7 @@ class ReportController extends Controller
 
     public function exportRoster($ta, $sem, $kls)
     {
-        $roster = DB::table('list_roster')->where('tahun_ajaran_aktif', $ta)->where('semester_aktif', $sem)->where('kelas_aktif_id', $kls)->orderBy('hari')->get();
+        $roster = DB::table('list_roster')->where('tahun_ajaran_aktif', $ta)->where('semester_aktif', $sem)->where('kelas_aktif_id', $kls)->get();
         $kelas = DB::table('list_kelas_aktif')->select('nama_kelas_aktif')->distinct()->where('kelas_aktif_id', $kls)->first();
         $row = DB::table('list_roster')->select('hari')->distinct()->where('tahun_ajaran_aktif', $ta)->where('semester_aktif', $sem)->where('kelas_aktif_id', $kls)->get();
         // dd($row);

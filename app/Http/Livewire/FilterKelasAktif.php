@@ -27,7 +27,7 @@ class FilterKelasAktif extends Component
 
     public function render()
     {
-        $tahunAjaran = TahunAjaran::groupBy('tahun_ajaran')->get();
+        $tahunAjaran = DB::table('list_tahun_ajaran')->whereRaw('status <> "inaktif" COLLATE utf8mb4_general_ci')->groupBy('tahun_ajaran')->get();
         return view('livewire.filter-kelas-aktif', compact('tahunAjaran'));
     }
 }

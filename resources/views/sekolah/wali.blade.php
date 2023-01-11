@@ -1,7 +1,7 @@
 @extends('master.main')
 
 @section('title')
-    <title>Kelas</title>
+    <title>Wali Kelas</title>
 @endsection
 
 @section('style')
