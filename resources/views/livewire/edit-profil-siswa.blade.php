@@ -42,8 +42,8 @@
                         <div class="col-md-9 form-group">
                             <select class="form-select" id="basicSelect" name="jenis_kelamin" wire:model.defer="jenis_kelamin">
                                 <option value="{{ $jenis_kelamin }}">{{ $jenis_kelamin }}</option>
-                                <option value="LK">LK</option>
-                                <option value="PR">PR</option>
+                                <option value="LK">Laki-Laki</option>
+                                <option value="PR">Perempuan</option>
                             </select>
                         </div>
                         <div class="col-md-3">
