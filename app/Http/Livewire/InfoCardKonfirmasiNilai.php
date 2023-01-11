@@ -9,6 +9,10 @@ class InfoCardKonfirmasiNilai extends Component
 {
     public $totalNilaiPending;
 
+    protected $listeners = [
+        'validateNilai' => 'render'
+    ];
+
     public function render()
     {
         $this->totalNilaiPending = Nilai::where('status', 'pending')->count();

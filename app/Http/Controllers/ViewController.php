@@ -64,7 +64,13 @@ class ViewController extends Controller
         $menu = 'kelassaya';
         $submenu = 'kelas-saya';
 
-        $kelas = DB::table('list_kelas_aktif')->where('NUPTK', auth()->user()->gurus->NUPTK)->first();
+        $tahun_ajaran_aktif;
+        $data_tahun_ajaran = DB::table('list_tahun_ajaran')->whereRaw('status <> "inaktif" COLLATE utf8mb4_general_ci')->first();
+        if($data_tahun_ajaran !== null) {
+            $tahun_ajaran_aktif = $data_tahun_ajaran->tahun_ajaran;
+        }
+
+        $kelas = DB::table('list_kelas_aktif')->where('NUPTK', auth()->user()->gurus->NUPTK)->where('tahun_ajaran_aktif', $tahun_ajaran_aktif)->first();
 
         return view('sekolah.walikelas', compact('menu', 'submenu' ,'kelas'));
     }
