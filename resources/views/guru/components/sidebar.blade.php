@@ -82,24 +82,24 @@
                     @endhasanyrole
 
                     {{-- Manajemen Akun --}}
-                    <li class="sidebar-item has-sub @if ($menu === 'akun') active @endif">
+                    <li class="sidebar-item has-sub @if ($menu === 'manajemenakun') active @endif">
                         <a href="#" class="sidebar-link">
                             <i class="bi bi-people-fill"></i>
                             <span>Manajemen Akun</span>
                         </a>
-                        <ul class="submenu @if ($menu === 'akun') active @endif">
+                        <ul class="submenu @if ($menu === 'manajemenakun') active @endif">
                             @can('view-admin')
-                                <li class="submenu-item @if ($submenu === 'user') active @endif">
+                                <li class="submenu-item @if ($submenu === 'admin') active @endif">
                                     <a href="/guru/admin">Admin</a>
                                 </li>
                             @endcan
                             @can('view-guru')
-                                <li class="submenu-item @if ($submenu === 'user') active @endif">
+                                <li class="submenu-item @if ($submenu === 'guru') active @endif">
                                     <a href="/guru/guru">Guru</a>
                                 </li>
                             @endcan
                             @can('view-siswa')
-                                <li class="submenu-item @if ($submenu === 'user') active @endif">
+                                <li class="submenu-item @if ($submenu === 'siswa') active @endif">
                                     <a href="/guru/siswa">Siswa</a>
                                 </li>
                             @endcan
@@ -215,7 +215,7 @@
                                     ->get();
                             @endphp
                             @foreach ($kelasGuru as $item)
-                                <li class="submenu-item @if ($submenu === 'kelas-guru-{{ $item->kelas }}')  @endif">
+                                <li class="submenu-item @if ($kelasGuru === 'kelas-guru-{{ $item->kelas }}')  @endif">
                                     <a href="/guru/kelas/{{ $item->kelas }}">{{ $item->grade }}{{ $item->kelompok_kelas }}
                                         {{ $item->nama_mapel }}</a>
                                 </li>

@@ -98,14 +98,14 @@
                         </div>
                         <div class="col-md-9 form-group">
                             <input type="text" id="pendidikan" class="form-control" name="pendidikan"
-                                value="{{ $guru->pendidikan }}" placeholder="anak-ke" readonly>
+                                value="{{ $guru->pendidikan }}" placeholder="Pendidikan" readonly>
                         </div>
                         <div class="col-md-3">
                             <label>Tahun Ijazah</label>
                         </div>
                         <div class="col-md-9 form-group">
                             <input type="text" id="tahun_ijazah" class="form-control" name="tahun_ijazah"
-                                value="{{ $guru->tahun_ijazah }}" placeholder="anak-ke" readonly>
+                                value="{{ $guru->tahun_ijazah }}" placeholder="Tahun Ijazah" readonly>
                         </div>
                         <div class="col-md-3">
                             <label>Status Perkawinan</label>
@@ -116,7 +116,7 @@
                             value="Menikah" name="status" placeholder="status" readonly>
                         @else
                             <input type="text" id="status" class="form-control"
-                            value="Perempuan" name="status" placeholder="status" readonly>
+                            value="Belum Menikah" name="status" placeholder="status" readonly>
                         @endif
                         </div>
                         <div class="col-md-3">
