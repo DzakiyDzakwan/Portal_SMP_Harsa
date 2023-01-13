@@ -21,9 +21,11 @@ class ProfilController extends Controller
     public function profilGuru()
     {
         $menu = 'profilGuru';
+        $submenu = "profilGuru";
         $gurus = Guru::join('users', 'gurus.user', '=', 'users.uuid')->join('user_profiles', 'user_profiles.user', '=', 'users.uuid')->where('gurus.user', Auth::user()->uuid)->first();
         return view('guru.profile', [
             'menu' => $menu,
+            'submenu' => $submenu,
             'gurus' => $gurus
         ]);
     }
@@ -38,8 +40,10 @@ class ProfilController extends Controller
     public function editProfilGuru()
     {
         $menu = 'profilGuru';
+        $submenu = "profilGuru";
         return view('guru.editProfile', [
-            'menu' => $menu
+            'menu' => $menu,
+            'submenu' => $submenu
         ]);
     }
 

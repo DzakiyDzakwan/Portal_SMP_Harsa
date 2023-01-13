@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7 text-center md-text-start">
                             <h6 class="text-muted font-semibold">Total Siswa</h6>
-                            <h6 class="font-extrabold mb-0">{{ $kelas->jumlah_siswa }}</h6>
+                            <h6 class="font-extrabold mb-0">3</h6>
                         </div>
                     </div>
                 </div>
